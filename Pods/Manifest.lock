@@ -1,0 +1,28 @@
+PODS:
+  - Highlightr (2.0.1)
+  - NetUtils (4.0.2)
+  - PlainPing (0.5)
+  - ReachabilitySwift (4.1.0)
+
+DEPENDENCIES:
+  - Highlightr
+  - NetUtils
+  - PlainPing
+  - ReachabilitySwift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Highlightr
+    - NetUtils
+    - PlainPing
+    - ReachabilitySwift
+
+SPEC CHECKSUMS:
+  Highlightr: 65655134dd0d5e1320afdd8a9d880c9e9dc0b437
+  NetUtils: 3ae4058586b9574f8cbfa5b5d415a287f8179620
+  PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+
+PODFILE CHECKSUM: bd544635361a14252b462cabe2fb5be9c893fe5f
+
+COCOAPODS: 1.5.3
