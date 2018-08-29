@@ -74,10 +74,12 @@ class SourceViewController : UIViewController, UIScrollViewDelegate, UITextField
         
         barStack.addArrangedSubview(urlBar!)
         
-        let button = UIButton(frame: CGRect(x: 50, y: 50, width: 100, height: 50))
+        let button = UIButton(frame: CGRect(x: 50, y: 50, width: 120, height: 50))
         button.setTitle("View Source", for: .normal)
+        button.sizeToFit()
         button.addTarget(self, action: #selector(viewSource), for: .touchDown)
         barStack.addArrangedSubview(button)
+        button.widthAnchor.constraint(equalToConstant: button.frame.width).isActive = true
         barStack.addArrangedSubview(loader)
         
         let bar = UIToolbar()

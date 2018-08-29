@@ -9,9 +9,56 @@
 import Foundation
 import UIKit
 import Reachability
+import NetUtils
 
 extension Reachability {
     static let shared = Reachability()!
+}
+
+class InterfaceTable : UITableView, UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.interfaces.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+        let interface = self.interfaces[indexPath.row]
+        cell.textLabel?.text = interface.name
+        cell.detailTextLabel?.text = interface.address
+
+        return cell
+    }
+    
+    private var _cachedInterfaces = Interface.allInterfaces()
+    
+    private var cachedInterfaces : [Interface] {
+        var retVal = [Interface]()
+        for interface in self._cachedInterfaces {
+            if let _ = interface.address {
+                if interface.isUp {
+                    retVal.append(interface)
+                }
+            }
+        }
+        return retVal
+    }
+    
+    var interfaces : [Interface] {
+        return cachedInterfaces
+    }
+    
+    public func updateInterfaces() {
+        self._cachedInterfaces = Interface.allInterfaces()
+    }
+    
+    override func reloadData() {
+        self.updateInterfaces()
+        super.reloadData()
+    }
 }
 
 class ReachabilityViewController : UIViewController {
@@ -24,7 +71,8 @@ class ReachabilityViewController : UIViewController {
     let connectedCheck = UISwitch()
     let wifiCheck = UISwitch()
     let cellCheck = UISwitch()
-    // TODO: are you in airplane mode?
+    
+    let interfaceTable = InterfaceTable()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +91,11 @@ class ReachabilityViewController : UIViewController {
         self.view.addSubview(stack)
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
+        
+        
+        interfaceTable.delegate = interfaceTable
+        interfaceTable.dataSource = interfaceTable
+        self.stack.addArrangedSubview(interfaceTable)
         
         
         let connectedStack = UIStackView()
@@ -118,24 +171,22 @@ class ReachabilityViewController : UIViewController {
     }
     
     @objc
-    func update() {        
+    func update() {
         switch Reachability.shared.connection {
         case .wifi:
             connectedCheck.setOn(true, animated: true)
             wifiCheck.setOn(true, animated: true)
             cellCheck.setOn(false, animated: true)
-            print("Reachable via WiFi")
         case .cellular:
             connectedCheck.setOn(true, animated: true)
             wifiCheck.setOn(false, animated: true)
             cellCheck.setOn(true, animated: true)
-            print("Reachable via Cellular")
         case .none:
             connectedCheck.setOn(false, animated: true)
             wifiCheck.setOn(false, animated: true)
             cellCheck.setOn(false, animated: true)
-            print("Network not reachable")
         }
+        self.interfaceTable.reloadData()
     }
     
 }

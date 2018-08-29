@@ -86,13 +86,20 @@ class PingViewController : UIViewController, UIScrollViewDelegate, UITextFieldDe
         
         let button = UIButton(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
         button.setTitle("ping", for: .normal)
+        button.sizeToFit()
         button.addTarget(self, action: #selector(ping), for: .touchDown)
         barStack.addArrangedSubview(button)
+        button.widthAnchor.constraint(equalToConstant: button.frame.width).isActive = true
+        barStack.addArrangedSubview(loader)
         
         let bar = UIToolbar()
         bar.barStyle = .blackTranslucent
         bar.setItems([UIBarButtonItem(customView: barStack)], animated: false)
         self.stack.addArrangedSubview(bar)
+        
+        loader.hidesWhenStopped = true
+        let yConstraint = NSLayoutConstraint(item: self.loader, attribute: .centerY, relatedBy: .equal, toItem: barStack, attribute: .centerY, multiplier: 1, constant: 0)
+        NSLayoutConstraint.activate([yConstraint])
         
         self.startAvoidingKeyboard()
     }
@@ -107,11 +114,23 @@ class PingViewController : UIViewController, UIScrollViewDelegate, UITextFieldDe
         self.stopAvoidingKeyboard()
     }
     
-    // TODO: do this with constraints
-//    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-//        status?.contentInset = self.view.safeAreaInsets
-//        status?.contentInset.bottom = 0
-//    }
+    private var _isLoading = false
+    var isLoading : Bool {
+        get {
+            return _isLoading
+        }
+        set {
+            DispatchQueue.main.async {
+                if newValue {
+                    self.loader.startAnimating()
+                } else {
+                    self.loader.stopAnimating()
+                }
+            }
+            _isLoading = newValue
+        }
+    }
+    let loader = UIActivityIndicatorView()
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if(string == "\n" || string == "\r") {
@@ -124,26 +143,87 @@ class PingViewController : UIViewController, UIScrollViewDelegate, UITextFieldDe
         self.dismissKeyboard()
     }
     
-    @objc
-    func ping() {
-        var urlString = (urlBar?.text)!
-        if(urlString == "") {
-            urlString = (urlBar?.placeholder)!
-        }
-        if let url = URL(string: urlString) {
-            print("Going to ping", url)
-            PlainPing.ping(url.absoluteString, withTimeout: 3.0, completionBlock: { (timeElapsed:Double?, error:Error?) in
-                if let latency = timeElapsed {
-                    self.status?.insertText("latency (ms): \(latency)\n")
-                }
-                
-                if let error = error {
-                    self.status?.insertText(error.localizedDescription+"\n")
-                }
-            })
-        } else {
-            self.status?.insertText("Invalid URL\n")
-        }
+    public var pingCount: Int = 5
+    
+    private var latencySum : Double = 0.0
+    private var minLatency : Double = Double.greatestFiniteMagnitude
+    private var maxLatency : Double = Double.leastNormalMagnitude
+    private var errorCount = 0
+    
+    public func resetStats() {
+        self.latencySum = 0.0
+        self.minLatency = Double.greatestFiniteMagnitude
+        self.maxLatency = Double.leastNormalMagnitude
+        self.errorCount = 0
     }
     
+    func pingRepeated(_ url : URL, count : Int = 1) {
+        PlainPing.ping(url.absoluteString, withTimeout: 3.0, completionBlock: { (timeElapsed:Double?, error:Error?) in
+            if let latency = timeElapsed {
+                self.latencySum = self.latencySum + latency
+                if latency > self.maxLatency {
+                    self.maxLatency = latency
+                }
+                if latency < self.minLatency {
+                    self.minLatency = latency
+                }
+                self.status?.insertText(String(format: "latency=%0.3f ms\n", latency))
+            }
+            
+            if let error = error {
+                self.status?.insertText(error.localizedDescription+"\n")
+                self.errorCount = self.errorCount + 1
+            }
+            
+            if(count >= self.pingCount) {
+                if(count > 1) {
+                    self.status?.insertText("--- \(url.absoluteString) ping statistics ---\n")
+                    
+                    //5 packets transmitted, 5 packets received, 0.0% packet loss
+                    self.status?.insertText("\(count) packets transmitted, ")
+                    let received = count - self.errorCount
+                    self.status?.insertText("\(count - self.errorCount) received, ")
+                    if(count == received) {
+                        self.status?.insertText("0.0% packet loss\n")
+                    } else if(received == 0) {
+                        self.status?.insertText("100% packet loss\n")
+                    } else {
+                        self.status?.insertText(String(format: "%0.1f%% packet loss\n", Double(received)/Double(count)*100.0))
+                    }
+                    
+                    //round-trip min/avg/max/stddev = 14.063/21.031/28.887/4.718 ms
+                    self.status?.insertText("latency min/avg/max = ")
+                    if(self.errorCount == count) {
+                        self.status?.insertText("n/a\n")
+                    } else {
+                        let avg = self.latencySum/Double(count)
+                        self.status?.insertText(String(format: "%0.3f/%0.3f/%0.4f ms\n", self.minLatency, avg, self.maxLatency))
+                    }
+                    self.latencySum = 0.0
+                }
+                self.isLoading = false
+            } else {
+                self.pingRepeated(url, count: count+1)
+            }
+            self.status?.scrollToBottom()
+        })
+    }
+    
+    @objc
+    func ping() {
+        if !self.isLoading {
+            var urlString = (urlBar?.text)!
+            if(urlString == "") {
+                urlString = (urlBar?.placeholder)!
+            }
+            if let url = URL(string: urlString) {
+                self.status?.insertText("PING " + url.absoluteString + "\n")
+                self.isLoading = true
+                self.resetStats()
+                self.pingRepeated(url)
+            } else {
+                self.status?.insertText("Invalid URL\n")
+            }
+        }
+    }
 }

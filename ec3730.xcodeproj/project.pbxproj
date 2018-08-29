@@ -15,6 +15,7 @@
 		F63102752130C99D00F34E42 /* PingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63102742130C99D00F34E42 /* PingViewController.swift */; };
 		F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63102762130D76200F34E42 /* ReachabilityViewController.swift */; };
 		F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6310278213366BB00F34E42 /* SourceViewController.swift */; };
+		F67425DB21363FFF00A79492 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67425DA21363FFF00A79492 /* UITextView.swift */; };
 		F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C8D8A4212E5AE900309373 /* AppDelegate.swift */; };
 		F6C8D8AE212E5AEA00309373 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6C8D8AD212E5AEA00309373 /* Assets.xcassets */; };
 		F6C8D8B1212E5AEA00309373 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */; };
@@ -54,6 +55,7 @@
 		F63102742130C99D00F34E42 /* PingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingViewController.swift; sourceTree = "<group>"; };
 		F63102762130D76200F34E42 /* ReachabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityViewController.swift; sourceTree = "<group>"; };
 		F6310278213366BB00F34E42 /* SourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewController.swift; sourceTree = "<group>"; };
+		F67425DA21363FFF00A79492 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		F6C8D8A1212E5AE900309373 /* ec3730.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ec3730.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6C8D8A4212E5AE900309373 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6C8D8AD212E5AEA00309373 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */,
 				F6C8D8B2212E5AEA00309373 /* Info.plist */,
 				F60506732134B23F00DDF8A4 /* UIViewController.swift */,
+				F67425DA21363FFF00A79492 /* UITextView.swift */,
 			);
 			path = ec3730;
 			sourceTree = "<group>";
@@ -330,12 +333,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ec3730/Pods-ec3730-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/NetUtils/NetUtils.framework",
 				"${BUILT_PRODUCTS_DIR}/PlainPing/PlainPing.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetUtils.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PlainPing.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 			);
@@ -387,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F67425DB21363FFF00A79492 /* UITextView.swift in Sources */,
 				F6310273212FA66600F34E42 /* SRCTabBarController.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F60506742134B23F00DDF8A4 /* UIViewController.swift in Sources */,
@@ -561,6 +567,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				INFOPLIST_FILE = ec3730/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -580,6 +587,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				INFOPLIST_FILE = ec3730/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
