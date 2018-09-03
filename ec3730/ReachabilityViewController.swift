@@ -11,53 +11,87 @@ import UIKit
 import Reachability
 import NetUtils
 
-extension Reachability {
-    static let shared = Reachability()!
+class InterfaceNavigationController: UINavigationController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
 
-class InterfaceTable : UITableView, UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.interfaces.count
+class InterfaceTable : UITableViewController {
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.updateInterfaces()
+        if section == 0 {
+            return self.enabledInterfaces.count
+        } else {
+            return self.disabledInterfaces.count
+        }
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Enabled (On)"
+        }
+        return "Disabled (Off)"
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
-        let interface = self.interfaces[indexPath.row]
-        cell.textLabel?.text = interface.name
-        cell.detailTextLabel?.text = interface.address
-
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = UITableViewCell(style: .value1, reuseIdentifier: "enabled")
+        if indexPath.section == 0 {
+            let interface = self.enabledInterfaces[indexPath.row]
+            cell.textLabel?.text = interface.name
+            cell.detailTextLabel?.text = interface.address
+        } else {
+            cell = UITableViewCell(style: .value1, reuseIdentifier: "disabled")
+            let interface = self.disabledInterfaces[indexPath.row]
+            cell.textLabel?.text = interface.name
+            cell.textLabel?.textColor = UIColor.gray
+            cell.detailTextLabel?.text = interface.address
+        }
         return cell
     }
     
     private var _cachedInterfaces = Interface.allInterfaces()
     
+    private var _cachedDisabledInterfaces = [Interface]()
+    private var _cachedEnabledInterfaces = [Interface]()
+    
     private var cachedInterfaces : [Interface] {
-        var retVal = [Interface]()
-        for interface in self._cachedInterfaces {
-            if let _ = interface.address {
-                if interface.isUp {
-                    retVal.append(interface)
-                }
-            }
-        }
-        return retVal
+        return _cachedInterfaces
     }
     
-    var interfaces : [Interface] {
-        return cachedInterfaces
+    public var disabledInterfaces : [Interface] {
+        return _cachedDisabledInterfaces
+    }
+    
+    public var enabledInterfaces : [Interface] {
+        return _cachedEnabledInterfaces
     }
     
     public func updateInterfaces() {
         self._cachedInterfaces = Interface.allInterfaces()
+        _cachedEnabledInterfaces = [Interface]()
+        _cachedDisabledInterfaces = [Interface]()
+        
+        for interface in self._cachedInterfaces {
+            if let _ = interface.address {
+                if interface.isUp {
+                    _cachedEnabledInterfaces.append(interface)
+                } else {
+                    _cachedDisabledInterfaces.append(interface)
+                }
+            }
+        }
     }
     
-    override func reloadData() {
-        self.updateInterfaces()
-        super.reloadData()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.edgesForExtendedLayout = UIRectEdge() // https://stackoverflow.com/questions/20809164/uinavigationcontroller-bar-covers-its-uiviewcontrollers-content
+        self.title = "Interfaces"
     }
 }
 
@@ -68,11 +102,11 @@ class ReachabilityViewController : UIViewController {
     
     var stack : UIStackView! = nil
     
+    let connectedLabel = UILabel()
     let connectedCheck = UISwitch()
-    let wifiCheck = UISwitch()
-    let cellCheck = UISwitch()
     
     let interfaceTable = InterfaceTable()
+    let iNav = InterfaceNavigationController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,71 +114,39 @@ class ReachabilityViewController : UIViewController {
         urlBar = UITextField(frame: CGRect(x: 0, y: self.view.frame.midY, width: self.view.frame.width, height: 25))
         
         stack = UIStackView()
-        stack.backgroundColor = UIColor.black
         stack.axis = UILayoutConstraintAxis.vertical
-        //stack.alignment = UIStackViewAlignment.fill
-        //stack.alignment = .top
-        //stack.distribution = UIStackViewDistribution.fillEqually
-        stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
-        
+
         self.view.addSubview(stack)
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterX, metrics: nil, views: ["scrollview": stack]))
+
+        self.stack.addArrangedSubview(iNav.view)
+        iNav.setViewControllers([interfaceTable], animated: false)
+        interfaceTable.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(update))
         
-        
-        interfaceTable.delegate = interfaceTable
-        interfaceTable.dataSource = interfaceTable
-        self.stack.addArrangedSubview(interfaceTable)
-        
-        
+        interfaceTable.tableView.contentInsetAdjustmentBehavior = .never
+
+        let statusStack = UIStackView()
+        statusStack.axis = .vertical
+        statusStack.spacing = 10
+        statusStack.translatesAutoresizingMaskIntoConstraints = false
+
         let connectedStack = UIStackView()
         connectedStack.axis = .horizontal
         connectedStack.spacing = 10
         connectedStack.translatesAutoresizingMaskIntoConstraints = false
-        
-        let connectedLabel = UILabel()
+
         connectedLabel.text = "Connected"
         connectedStack.addArrangedSubview(connectedLabel)
         connectedCheck.isEnabled = false
         connectedStack.addArrangedSubview(connectedCheck)
-        stack.addArrangedSubview(connectedStack)
-        
-        let wifiStack = UIStackView()
-        wifiStack.axis = .horizontal
-        wifiStack.spacing = 10
-        wifiStack.translatesAutoresizingMaskIntoConstraints = false
-        
-        let wifiLabel = UILabel()
-        wifiLabel.text = "WiFi"
-        wifiStack.addArrangedSubview(wifiLabel)
-        wifiCheck.isEnabled = false
-        wifiStack.addArrangedSubview(wifiCheck)
-        stack.addArrangedSubview(wifiStack)
-        
-        let cellStack = UIStackView()
-        cellStack.axis = .horizontal
-        cellStack.spacing = 10
-        cellStack.translatesAutoresizingMaskIntoConstraints = false
-        
-        let cellLabel = UILabel()
-        cellLabel.text = "Cellular"
-        cellStack.addArrangedSubview(cellLabel)
-        cellCheck.isEnabled = false
-        cellStack.addArrangedSubview(cellCheck)
-        stack.addArrangedSubview(cellStack)
-        
-        //button = UIButton(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
-        //button?.buttonType = .roundedRect
-        button = UIButton(type: .system)
-        button?.frame = CGRect(x: 50, y: 50, width: 50, height: 50)
-        //button?.backgroundColor = UIColor.red
-        button?.isEnabled = true
-        //button?.layer.borderWidth = 1
-        button?.setTitle("Update", for: .normal)
-        button?.titleLabel?.textColor = UIColor.green
-        self.stack.addArrangedSubview(button!)
-        button?.addTarget(self, action: #selector(update), for: UIControlEvents.touchDown)
+        statusStack.addArrangedSubview(connectedStack)
+
+        let bar = UIToolbar()
+        bar.barStyle = .default
+        bar.setItems([UIBarButtonItem(customView: connectedStack)], animated: false)
+        self.stack.addArrangedSubview(bar)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -156,7 +158,6 @@ class ReachabilityViewController : UIViewController {
         }catch{
             print("could not start reachability notifier")
         }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -170,23 +171,30 @@ class ReachabilityViewController : UIViewController {
         self.update()
     }
     
+    private let connectedTabBarItem = UITabBarItem(title: "Connectivity", image: UIImage(named: "Connected"), tag: 1)
+    private let disconnectedTabBarItem = UITabBarItem(title: "Connectivity", image: UIImage(named: "Disconnected"), tag: 1)
+    
     @objc
     func update() {
         switch Reachability.shared.connection {
         case .wifi:
             connectedCheck.setOn(true, animated: true)
-            wifiCheck.setOn(true, animated: true)
-            cellCheck.setOn(false, animated: true)
+            self.tabBarItem = connectedTabBarItem
+            connectedLabel.text = "Connected via WiFi"
         case .cellular:
             connectedCheck.setOn(true, animated: true)
-            wifiCheck.setOn(false, animated: true)
-            cellCheck.setOn(true, animated: true)
+            connectedLabel.text = "Connected via Cellular"
+            self.tabBarItem = connectedTabBarItem
         case .none:
             connectedCheck.setOn(false, animated: true)
-            wifiCheck.setOn(false, animated: true)
-            cellCheck.setOn(false, animated: true)
+            connectedLabel.text = "Not Connected"
+            self.tabBarItem = disconnectedTabBarItem
         }
-        self.interfaceTable.reloadData()
+        self.interfaceTable.updateInterfaces()
+        self.interfaceTable.tableView.reloadData()
+        //self.iNav.updateViewConstraints()
+        
+        
+        
     }
-    
 }

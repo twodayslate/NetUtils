@@ -15,6 +15,7 @@
 		F63102752130C99D00F34E42 /* PingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63102742130C99D00F34E42 /* PingViewController.swift */; };
 		F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63102762130D76200F34E42 /* ReachabilityViewController.swift */; };
 		F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6310278213366BB00F34E42 /* SourceViewController.swift */; };
+		F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63540D4213DEBDD00605ABE /* Reachability.swift */; };
 		F67425DB21363FFF00A79492 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67425DA21363FFF00A79492 /* UITextView.swift */; };
 		F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C8D8A4212E5AE900309373 /* AppDelegate.swift */; };
 		F6C8D8AE212E5AEA00309373 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6C8D8AD212E5AEA00309373 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		F63102742130C99D00F34E42 /* PingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingViewController.swift; sourceTree = "<group>"; };
 		F63102762130D76200F34E42 /* ReachabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityViewController.swift; sourceTree = "<group>"; };
 		F6310278213366BB00F34E42 /* SourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewController.swift; sourceTree = "<group>"; };
+		F63540D4213DEBDD00605ABE /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		F67425DA21363FFF00A79492 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		F6C8D8A1212E5AE900309373 /* ec3730.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ec3730.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6C8D8A4212E5AE900309373 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				F6C8D8B2212E5AEA00309373 /* Info.plist */,
 				F60506732134B23F00DDF8A4 /* UIViewController.swift */,
 				F67425DA21363FFF00A79492 /* UITextView.swift */,
+				F63540D4213DEBDD00605ABE /* Reachability.swift */,
 			);
 			path = ec3730;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				F60506742134B23F00DDF8A4 /* UIViewController.swift in Sources */,
 				F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */,
 				F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */,
+				F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
