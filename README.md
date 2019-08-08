@@ -27,18 +27,12 @@ struct ApiKey {
 
 ## Features
 
+* A name lookup
+* WHOIS lookup
 * View network connectivity status
 * View network interfaces
 * ping
 * View Source
-
-## Future Work
-- [ ] GET/POST requests -> view source
-- [ ] VPN status
-- [ ] whois information
-- [ ] dig / nslookup
-- [ ] SSID information
-- [ ] Safari web extension
 
 ## Credits
 
