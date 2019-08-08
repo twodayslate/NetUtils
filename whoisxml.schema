@@ -1,0 +1,1513 @@
+{
+   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
+   "required": [
+     "WhoisRecord"
+   ],
+   "properties": {
+     "WhoisRecord": {
+       "$id": "#/properties/WhoisRecord",
+       "type": "object",
+       "required": [
+         "domainName",
+         "parseCode",
+         "audit",
+         "registrarName",
+         "registrarIANAID",
+         "registryData",
+         "domainAvailability",
+         "contactEmail",
+         "domainNameExt",
+         "estimatedDomainAge"
+       ],
+       "properties": {
+         "createdDate": {
+           "$id": "#/properties/WhoisRecord/properties/createdDate",
+           "type": "string",
+           "examples": [
+             "1997-09-15T00:00:00-0700"
+           ],
+           "format": "date-time"
+         },
+         "updatedDate": {
+           "$id": "#/properties/WhoisRecord/properties/updatedDate",
+           "type": "string",
+           "examples": [
+             "2018-02-21T10:45:07-0800"
+           ],
+           "format": "date-time"
+         },
+         "expiresDate": {
+           "$id": "#/properties/WhoisRecord/properties/expiresDate",
+           "type": "string",
+           "examples": [
+             "2020-09-13T21:00:00-0700"
+           ],
+           "format": "date-time"
+         },
+         "registrant": {
+           "$id": "#/properties/WhoisRecord/properties/registrant",
+           "type": "object",
+           "properties": {
+             "name": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/name",
+               "type": "string"
+             },
+             "organization": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/organization",
+               "type": "string",
+               "examples": [
+                 "Google LLC"
+               ]
+             },
+             "street1": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/street1",
+               "type": "string"
+             },
+             "street2": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/street2",
+               "type": "string"
+             },
+             "street3": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/street3",
+               "type": "string"
+             },
+             "street4": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/street4",
+               "type": "string"
+             },
+             "city": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/city",
+               "type": "string"
+             },
+             "state": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/state",
+               "type": "string",
+               "examples": [
+                 "CA"
+               ]
+             },
+             "postalCode": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/postalCode",
+               "type": "string",
+               "examples": [
+                 12555
+               ]
+             },
+             "country": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/country",
+               "type": "string",
+               "examples": [
+                 "UNITED STATES"
+               ]
+             },
+             "countryCode": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/countryCode",
+               "type": "string",
+               "examples": [
+                 "US"
+               ]
+             },
+             "email": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/email",
+               "type": "string",
+               "examples": [
+                 "admin@exmple.org"
+               ],
+               "format": "email"
+             },
+             "telephone": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/telephone",
+               "type": "string"
+             },
+             "telephoneExt": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/telephoneExt",
+               "type": "string"
+             },
+             "fax": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/fax",
+               "type": "string"
+             },
+             "faxExt": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/faxExt",
+               "type": "string"
+             },
+             "rawText": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/rawText",
+               "type": "string",
+               "examples": [
+                 "Registrant Organization: Google LLC [...]"
+               ]
+             },
+             "unparsable": {
+               "$id": "#/properties/WhoisRecord/properties/registrant/properties/unparsable",
+               "type": "string"
+             }
+           },
+           "required": [
+             "country",
+             "countryCode",
+             "rawText"
+           ]
+         },
+         "administrativeContact": {
+           "$id": "#/properties/WhoisRecord/properties/administrativeContact",
+           "type": "object",
+           "properties": {
+             "name": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/name",
+               "type": "string"
+             },
+             "organization": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/organization",
+               "type": "string",
+               "examples": [
+                 "Google LLC"
+               ]
+             },
+             "street1": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/street1",
+               "type": "string"
+             },
+             "street2": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/street2",
+               "type": "string"
+             },
+             "street3": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/street3",
+               "type": "string"
+             },
+             "street4": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/street4",
+               "type": "string"
+             },
+             "city": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/city",
+               "type": "string"
+             },
+             "state": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/state",
+               "type": "string",
+               "examples": [
+                 "CA"
+               ]
+             },
+             "postalCode": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/postalCode",
+               "type": "string",
+               "examples": [
+                 12555
+               ]
+             },
+             "country": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/country",
+               "type": "string",
+               "examples": [
+                 "UNITED STATES"
+               ]
+             },
+             "countryCode": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/countryCode",
+               "type": "string",
+               "examples": [
+                 "US"
+               ]
+             },
+             "email": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/email",
+               "type": "string",
+               "examples": [
+                 "admin@exmple.org"
+               ],
+               "format": "email"
+             },
+             "telephone": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/telephone",
+               "type": "string"
+             },
+             "telephoneExt": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/telephoneExt",
+               "type": "string"
+             },
+             "fax": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/fax",
+               "type": "string"
+             },
+             "faxExt": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/faxExt",
+               "type": "string"
+             },
+             "rawText": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/rawText",
+               "type": "string",
+               "examples": [
+                 "Admin Organization: Google LLC [...]"
+               ]
+             },
+             "unparsable": {
+               "$id": "#/properties/WhoisRecord/properties/administrativeContact/properties/unparsable",
+               "type": "string"
+             }
+           },
+           "required": [
+             "country",
+             "countryCode",
+             "rawText"
+           ]
+         },
+         "billingContact": {
+           "$id": "#/properties/WhoisRecord/properties/billingContact",
+           "type": "object",
+           "properties": {
+             "name": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/name",
+               "type": "string"
+             },
+             "organization": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/organization",
+               "type": "string"
+             },
+             "street1": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/street1",
+               "type": "string"
+             },
+             "street2": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/street2",
+               "type": "string"
+             },
+             "street3": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/street3",
+               "type": "string"
+             },
+             "street4": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/street4",
+               "type": "string"
+             },
+             "city": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/city",
+               "type": "string"
+             },
+             "state": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/state",
+               "type": "string",
+               "examples": [
+                 "CA"
+               ]
+             },
+             "postalCode": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/postalCode",
+               "type": "string",
+               "examples": [
+                 12555
+               ]
+             },
+             "country": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/country",
+               "type": "string",
+               "examples": [
+                 "UNITED STATES"
+               ]
+             },
+             "countryCode": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/countryCode",
+               "type": "string",
+               "examples": [
+                 "US"
+               ]
+             },
+             "email": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/email",
+               "type": "string",
+               "examples": [
+                 "admin@exmple.org"
+               ],
+               "format": "email"
+             },
+             "telephone": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/telephone",
+               "type": "string"
+             },
+             "telephoneExt": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/telephoneExt",
+               "type": "string"
+             },
+             "fax": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/fax",
+               "type": "string"
+             },
+             "faxExt": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/faxExt",
+               "type": "string"
+             },
+             "rawText": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/rawText",
+               "type": "string"
+             },
+             "unparsable": {
+               "$id": "#/properties/WhoisRecord/properties/billingContact/properties/unparsable",
+               "type": "string"
+             }
+           },
+           "required": [
+             "country",
+             "countryCode",
+             "rawText"
+           ]
+         },
+         "technicalContact": {
+           "$id": "#/properties/WhoisRecord/properties/technicalContact",
+           "type": "object",
+           "properties": {
+             "name": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/name",
+               "type": "string"
+             },
+             "organization": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/organization",
+               "type": "string",
+               "examples": [
+                 "Google LLC"
+               ]
+             },
+             "street1": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/street1",
+               "type": "string"
+             },
+             "street2": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/street2",
+               "type": "string"
+             },
+             "street3": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/street3",
+               "type": "string"
+             },
+             "street4": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/street4",
+               "type": "string"
+             },
+             "city": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/city",
+               "type": "string"
+             },
+             "postalCode": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/postalCode",
+               "type": "string",
+               "examples": [
+                 12555
+               ]
+             },
+             "state": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/state",
+               "type": "string",
+               "examples": [
+                 "CA"
+               ]
+             },
+             "country": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/country",
+               "type": "string",
+               "examples": [
+                 "UNITED STATES"
+               ]
+             },
+             "countryCode": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/countryCode",
+               "type": "string",
+               "examples": [
+                 "US"
+               ]
+             },
+             "email": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/email",
+               "type": "string",
+               "examples": [
+                 "admin@exmple.org"
+               ],
+               "format": "email"
+             },
+             "telephone": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/telephone",
+               "type": "string"
+             },
+             "telephoneExt": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/telephoneExt",
+               "type": "string"
+             },
+             "fax": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/fax",
+               "type": "string"
+             },
+             "faxExt": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/faxExt",
+               "type": "string"
+             },
+             "rawText": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/rawText",
+               "type": "string",
+               "examples": [
+                 "Tech Organization: Google LLC [...]"
+               ]
+             },
+             "unparsable": {
+               "$id": "#/properties/WhoisRecord/properties/technicalContact/properties/unparsable",
+               "type": "string"
+             }
+           },
+           "required": [
+             "country",
+             "countryCode",
+             "rawText"
+           ]
+         },
+         "zoneContact": {
+           "$id": "#/properties/WhoisRecord/properties/zoneContact",
+           "type": "object",
+           "properties": {
+             "name": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/name",
+               "type": "string"
+             },
+             "organization": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/organization",
+               "type": "string"
+             },
+             "street1": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/street1",
+               "type": "string"
+             },
+             "street2": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/street2",
+               "type": "string"
+             },
+             "street3": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/street3",
+               "type": "string"
+             },
+             "street4": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/street4",
+               "type": "string"
+             },
+             "city": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/city",
+               "type": "string"
+             },
+             "state": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/state",
+               "type": "string"
+             },
+             "postalCode": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/postalCode",
+               "type": "string",
+               "examples": [
+                 12555
+               ]
+             },
+             "country": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/country",
+               "type": "string",
+               "examples": [
+                 "UNITED STATES"
+               ]
+             },
+             "countryCode": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/countryCode",
+               "type": "string",
+               "examples": [
+                 "US"
+               ]
+             },
+             "email": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/email",
+               "type": "string",
+               "examples": [
+                 "admin@exmple.org"
+               ],
+               "format": "email"
+             },
+             "telephone": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/telephone",
+               "type": "string"
+             },
+             "telephoneExt": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/telephoneExt",
+               "type": "string"
+             },
+             "fax": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/fax",
+               "type": "string"
+             },
+             "faxExt": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/faxExt",
+               "type": "string"
+             },
+             "rawText": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/rawText",
+               "type": "string"
+             },
+             "unparsable": {
+               "$id": "#/properties/WhoisRecord/properties/zoneContact/properties/unparsable",
+               "type": "string"
+             }
+           },
+           "required": [
+             "country",
+             "countryCode",
+             "rawText"
+           ]
+         },
+         "domainName": {
+           "$id": "#/properties/WhoisRecord/properties/domainName",
+           "type": "string",
+           "examples": [
+             "google.com"
+           ],
+           "format": "hostname"
+         },
+         "nameServers": {
+           "$id": "#/properties/WhoisRecord/properties/nameServers",
+           "type": "object",
+           "required": [
+             "rawText",
+             "hostNames"
+           ],
+           "properties": {
+             "rawText": {
+               "$id": "#/properties/WhoisRecord/properties/nameServers/properties/rawText",
+               "type": "string",
+               "examples": [
+                 "ns2.google.com ns3.google.com ns1.google.com ns4.google.com"
+               ]
+             },
+             "hostNames": {
+               "$id": "#/properties/WhoisRecord/properties/nameServers/properties/hostNames",
+               "type": "array",
+               "items": {
+                 "$id": "#/properties/WhoisRecord/properties/nameServers/properties/hostNames/items",
+                 "type": "string",
+                 "examples": [
+                   "ns2.google.com",
+                   "ns3.google.com",
+                   "ns1.google.com",
+                   "ns4.google.com"
+                 ]
+               }
+             },
+             "ips": {
+               "$id": "#/properties/WhoisRecord/properties/nameServers/properties/ips",
+               "type": "array",
+               "contains": {
+                    "type": "string"
+                }
+             }
+           }
+         },
+         "status": {
+           "$id": "#/properties/WhoisRecord/properties/status",
+           "type": "string",
+           "examples": [
+             "clientUpdateProhibited [...]"
+           ]
+         },
+         "rawText": {
+           "$id": "#/properties/WhoisRecord/properties/rawText",
+           "type": "string",
+           "examples": [
+             "Domain Name: google.com [...]"
+           ]
+         },
+         "parseCode": {
+           "$id": "#/properties/WhoisRecord/properties/parseCode",
+           "type": "integer",
+           "examples": [
+             3579
+           ]
+         },
+         "header": {
+           "$id": "#/properties/WhoisRecord/properties/header",
+           "type": "string"
+         },
+         "strippedText": {
+           "$id": "#/properties/WhoisRecord/properties/strippedText",
+           "type": "string",
+           "examples": [
+             "Domain Name: google.com [...]"
+           ]
+         },
+         "footer": {
+           "$id": "#/properties/WhoisRecord/properties/footer",
+           "type": "string"
+         },
+         "audit": {
+           "$id": "#/properties/WhoisRecord/properties/audit",
+           "type": "object",
+           "required": [
+             "createdDate",
+             "updatedDate"
+           ],
+           "properties": {
+             "createdDate": {
+               "$id": "#/properties/WhoisRecord/properties/audit/properties/createdDate",
+               "type": "string",
+               "examples": [
+                 "2018-10-23 15:33:41.000 UTC"
+               ],
+               "format": "date-time"
+             },
+             "updatedDate": {
+               "$id": "#/properties/WhoisRecord/properties/audit/properties/updatedDate",
+               "type": "string",
+               "examples": [
+                 "2018-10-23 15:33:41.000 UTC"
+               ],
+               "format": "date-time"
+             }
+           }
+         },
+         "customField1Name": {
+           "$id": "#/properties/WhoisRecord/properties/customField1Name",
+           "type": "string",
+           "examples": [
+             "RegistrarContactEmail"
+           ]
+         },
+         "customField1Value": {
+           "$id": "#/properties/WhoisRecord/properties/customField1Value",
+           "type": "string",
+           "examples": [
+             "abusecomplaints@markmonitor.com"
+           ]
+         },
+         "customField2Name": {
+           "$id": "#/properties/WhoisRecord/properties/customField2Name",
+           "type": "string",
+           "examples": [
+             "RegistrarContactPhone"
+           ]
+         },
+         "customField3Name": {
+           "$id": "#/properties/WhoisRecord/properties/customField3Name",
+           "type": "string",
+           "examples": [
+             "RegistrarURL"
+           ]
+         },
+         "customField2Value": {
+           "$id": "#/properties/WhoisRecord/properties/customField2Value",
+           "type": "string",
+           "examples": [
+             "+1.2083895740"
+           ]
+         },
+         "customField3Value": {
+           "$id": "#/properties/WhoisRecord/properties/customField3Value",
+           "type": "string",
+           "examples": [
+             "http://www.markmonitor.com"
+           ]
+         },
+         "registrarName": {
+           "$id": "#/properties/WhoisRecord/properties/registrarName",
+           "type": "string",
+           "examples": [
+             "MarkMonitor, Inc."
+           ]
+         },
+         "registrarIANAID": {
+           "$id": "#/properties/WhoisRecord/properties/registrarIANAID",
+           "type": "string",
+           "examples": [
+             "292"
+           ]
+         },
+         "whoisServer": {
+           "$id": "#/properties/WhoisRecord/properties/whoisServer",
+           "type": "string",
+           "examples": [
+             "whois.markmonitor.com"
+           ]
+         },
+         "createdDateNormalized": {
+           "$id": "#/properties/WhoisRecord/properties/createdDateNormalized",
+           "type": "string",
+           "examples": [
+             "1997-09-15 07:00:00 UTC"
+           ],
+           "format": "date-time"
+         },
+         "updatedDateNormalized": {
+           "$id": "#/properties/WhoisRecord/properties/updatedDateNormalized",
+           "type": "string",
+           "examples": [
+             "2018-02-21 18:45:07 UTC"
+           ],
+           "format": "date-time"
+         },
+         "expiresDateNormalized": {
+           "$id": "#/properties/WhoisRecord/properties/expiresDateNormalized",
+           "type": "string",
+           "examples": [
+             "2020-09-14 04:00:00 UTC"
+           ],
+           "format": "date-time"
+         },
+         "registryData": {
+           "$id": "#/properties/WhoisRecord/properties/registryData",
+           "type": "object",
+           "required": [
+             "createdDate",
+             "updatedDate",
+             "expiresDate",
+             "domainName",
+             "nameServers",
+             "status",
+             "rawText",
+             "parseCode",
+             "strippedText",
+             "audit",
+             "registrarName",
+             "registrarIANAID",
+             "createdDateNormalized",
+             "updatedDateNormalized",
+             "expiresDateNormalized",
+             "whoisServer"
+           ],
+           "properties": {
+             "createdDate": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/createdDate",
+               "type": "string",
+               "examples": [
+                 "1997-09-15T04:00:00Z"
+               ],
+               "format": "date-time"
+             },
+             "updatedDate": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/updatedDate",
+               "type": "string",
+               "examples": [
+                 "2018-02-21T18:36:40Z"
+               ],
+               "format": "date-time"
+             },
+             "expiresDate": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/expiresDate",
+               "type": "string",
+               "examples": [
+                 "2020-09-14T04:00:00Z"
+               ],
+               "format": "date-time"
+             },
+             "domainName": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/domainName",
+               "type": "string",
+               "examples": [
+                 "google.com"
+               ],
+               "format": "hostname"
+             },
+             "nameServers": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/nameServers",
+               "type": "object",
+               "required": [
+                 "rawText",
+                 "hostNames"
+               ],
+               "properties": {
+                 "rawText": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/nameServers/properties/rawText",
+                   "type": "string",
+                   "examples": [
+                     "NS1.GOOGLE.COM NS2.GOOGLE.COM NS3.GOOGLE.COM NS4.GOOGLE.COM"
+                   ]
+                 },
+                 "hostNames": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/nameServers/properties/hostNames",
+                   "type": "array",
+                   "items": {
+                     "$id": "#/properties/WhoisRecord/properties/registryData/properties/nameServers/properties/hostNames/items",
+                     "type": "string",
+                     "examples": [
+                       "NS1.GOOGLE.COM",
+                       "NS2.GOOGLE.COM",
+                       "NS3.GOOGLE.COM",
+                       "NS4.GOOGLE.COM"
+                     ]
+                   }
+                 },
+                 "ips": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/nameServers/properties/ips",
+                   "type": "array"
+                 }
+               }
+             },
+             "regustrant": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant",
+               "type": "object",
+               "properties": {
+                 "name": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant/properties/name",
+                   "type": "string"
+                 },
+                 "organization": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant/properties/organization",
+                   "type": "string"
+                 },
+                 "street1": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant/properties/street1",
+                   "type": "string"
+                 },
+                 "street2": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant/properties/street2",
+                   "type": "string"
+                 },
+                 "street3": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant/properties/street3",
+                   "type": "string"
+                 },
+                 "street4": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant/properties/street4",
+                   "type": "string"
+                 },
+                 "city": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant/properties/city",
+                   "type": "string"
+                 },
+                 "state": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant/properties/state",
+                   "type": "string",
+                   "examples": [
+                     "CA"
+                   ]
+                 },
+                 "postalCode": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant/properties/postalCode",
+                   "type": "string",
+                   "examples": [
+                     12555
+                   ]
+                 },
+                 "rawText": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant/properties/rawText",
+                   "type": "string",
+                   "examples": [
+                     ""
+                   ]
+                 },
+                 "unparsable": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/regustrant/properties/unparsable",
+                   "type": "string",
+                   "examples": [
+                     ""
+                   ]
+                 }
+               },
+               "required": [
+                 "rawText",
+                 "unparsable"
+               ]
+             },
+             "administrativeContact": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact",
+               "type": "object",
+               "required": [
+                 "country",
+                 "countryCode",
+                 "rawText"
+               ],
+               "properties": {
+                 "name": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/name",
+                   "type": "string"
+                 },
+                 "organization": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/organization",
+                   "type": "string",
+                   "examples": [
+                     "Google LLC"
+                   ]
+                 },
+                 "street1": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/street1",
+                   "type": "string"
+                 },
+                 "street2": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/street2",
+                   "type": "string"
+                 },
+                 "street3": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/street3",
+                   "type": "string"
+                 },
+                 "street4": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/street4",
+                   "type": "string"
+                 },
+                 "city": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/city",
+                   "type": "string"
+                 },
+                 "state": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/state",
+                   "type": "string",
+                   "examples": [
+                     "CA"
+                   ]
+                 },
+                 "postalCode": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/postalCode",
+                   "type": "string",
+                   "examples": [
+                     12555
+                   ]
+                 },
+                 "country": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/country",
+                   "type": "string",
+                   "examples": [
+                     "UNITED STATES"
+                   ]
+                 },
+                 "countryCode": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/countryCode",
+                   "type": "string",
+                   "examples": [
+                     "US"
+                   ]
+                 },
+                 "email": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/email",
+                   "type": "string",
+                   "examples": [
+                     "admin@exmple.org"
+                   ],
+                   "format": "email"
+                 },
+                 "telephone": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/telephone",
+                   "type": "string"
+                 },
+                 "telephoneExt": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/telephoneExt",
+                   "type": "string"
+                 },
+                 "fax": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/fax",
+                   "type": "string"
+                 },
+                 "faxExt": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/faxExt",
+                   "type": "string"
+                 },
+                 "rawText": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/rawText",
+                   "type": "string",
+                   "examples": [
+                     "Admin Organization: Google LLC [...]"
+                   ]
+                 },
+                 "unparsable": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/administrativeContact/properties/unparsable",
+                   "type": "string"
+                 }
+               }
+             },
+             "billingContact": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact",
+               "type": "object",
+               "required": [
+                 "country",
+                 "countryCode",
+                 "rawText"
+               ],
+               "properties": {
+                 "name": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/name",
+                   "type": "string"
+                 },
+                 "organization": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/organization",
+                   "type": "string"
+                 },
+                 "street1": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/street1",
+                   "type": "string"
+                 },
+                 "street2": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/street2",
+                   "type": "string"
+                 },
+                 "street3": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/street3",
+                   "type": "string"
+                 },
+                 "street4": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/street4",
+                   "type": "string"
+                 },
+                 "city": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/city",
+                   "type": "string"
+                 },
+                 "state": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/state",
+                   "type": "string",
+                   "examples": [
+                     "CA"
+                   ]
+                 },
+                 "postalCode": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/postalCode",
+                   "type": "string",
+                   "examples": [
+                     12555
+                   ]
+                 },
+                 "country": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/country",
+                   "type": "string",
+                   "examples": [
+                     "UNITED STATES"
+                   ]
+                 },
+                 "countryCode": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/countryCode",
+                   "type": "string",
+                   "examples": [
+                     "US"
+                   ]
+                 },
+                 "email": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/email",
+                   "type": "string",
+                   "examples": [
+                     "admin@exmple.org"
+                   ],
+                   "format": "email"
+                 },
+                 "telephone": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/telephone",
+                   "type": "string"
+                 },
+                 "telephoneExt": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/telephoneExt",
+                   "type": "string"
+                 },
+                 "fax": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/fax",
+                   "type": "string"
+                 },
+                 "faxExt": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/faxExt",
+                   "type": "string"
+                 },
+                 "rawText": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/rawText",
+                   "type": "string"
+                 },
+                 "unparsable": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/billingContact/properties/unparsable",
+                   "type": "string"
+                 }
+               }
+             },
+             "technicalContact": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact",
+               "type": "object",
+               "required": [
+                 "country",
+                 "countryCode",
+                 "rawText"
+               ],
+               "properties": {
+                 "name": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/name",
+                   "type": "string"
+                 },
+                 "organization": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/organization",
+                   "type": "string",
+                   "examples": [
+                     "Google LLC"
+                   ]
+                 },
+                 "street1": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/street1",
+                   "type": "string"
+                 },
+                 "street2": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/street2",
+                   "type": "string"
+                 },
+                 "street3": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/street3",
+                   "type": "string"
+                 },
+                 "street4": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/street4",
+                   "type": "string"
+                 },
+                 "city": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/city",
+                   "type": "string"
+                 },
+                 "postalCode": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/postalCode",
+                   "type": "string",
+                   "examples": [
+                     1255
+                   ]
+                 },
+                 "state": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/state",
+                   "type": "string",
+                   "examples": [
+                     "CA"
+                   ]
+                 },
+                 "country": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/country",
+                   "type": "string",
+                   "examples": [
+                     "UNITED STATES"
+                   ]
+                 },
+                 "countryCode": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/countryCode",
+                   "type": "string",
+                   "examples": [
+                     "US"
+                   ]
+                 },
+                 "email": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/email",
+                   "type": "string",
+                   "examples": [
+                     "admin@exmple.org"
+                   ],
+                   "format": "email"
+                 },
+                 "telephone": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/telephone",
+                   "type": "string"
+                 },
+                 "telephoneExt": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/telephoneExt",
+                   "type": "string"
+                 },
+                 "fax": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/fax",
+                   "type": "string"
+                 },
+                 "faxExt": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/faxExt",
+                   "type": "string"
+                 },
+                 "rawText": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/rawText",
+                   "type": "string",
+                   "examples": [
+                     "Tech Organization: Google LLC [...]"
+                   ]
+                 },
+                 "unparsable": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/technicalContact/properties/unparsable",
+                   "type": "string"
+                 }
+               }
+             },
+             "zoneContact": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact",
+               "type": "object",
+               "required": [
+                 "country",
+                 "countryCode",
+                 "rawText"
+               ],
+               "properties": {
+                 "name": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/name",
+                   "type": "string"
+                 },
+                 "organization": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/organization",
+                   "type": "string"
+                 },
+                 "street1": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/street1",
+                   "type": "string"
+                 },
+                 "street2": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/street2",
+                   "type": "string"
+                 },
+                 "street3": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/street3",
+                   "type": "string"
+                 },
+                 "street4": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/street4",
+                   "type": "string"
+                 },
+                 "city": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/city",
+                   "type": "string"
+                 },
+                 "state": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/state",
+                   "type": "string",
+                   "examples": [
+                     "CA"
+                   ]
+                 },
+                 "postalCode": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/postalCode",
+                   "type": "string",
+                   "examples": [
+                     12555
+                   ]
+                 },
+                 "country": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/country",
+                   "type": "string",
+                   "examples": [
+                     "UNITED STATES"
+                   ]
+                 },
+                 "countryCode": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/countryCode",
+                   "type": "string",
+                   "examples": [
+                     "US"
+                   ]
+                 },
+                 "email": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/email",
+                   "type": "string",
+                   "examples": [
+                     "admin@exmple.org"
+                   ],
+                   "foramt": "email"
+                 },
+                 "telephone": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/telephone",
+                   "type": "string"
+                 },
+                 "telephoneExt": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/telephoneExt",
+                   "type": "string"
+                 },
+                 "fax": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/fax",
+                   "type": "string"
+                 },
+                 "faxExt": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/faxExt",
+                   "type": "string"
+                 },
+                 "rawText": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/rawText",
+                   "type": "string"
+                 },
+                 "unparsable": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/zoneContact/properties/unparsable",
+                   "type": "string"
+                 }
+               }
+             },
+             "status": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/status",
+               "type": "string",
+               "examples": [
+                 "clientDeleteProhibited [...]"
+               ]
+             },
+             "rawText": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/rawText",
+               "type": "string",
+               "examples": [
+                 "Domain Name: GOOGLE.COM [...]"
+               ]
+             },
+             "parseCode": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/parseCode",
+               "type": "integer",
+               "examples": [
+                 251
+               ]
+             },
+             "header": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/header",
+               "type": "string"
+             },
+             "strippedText": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/strippedText",
+               "type": "string",
+               "examples": [
+                 "Domain Name: GOOGLE.COM [...]"
+               ]
+             },
+             "footer": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/footer",
+               "type": "string"
+             },
+             "audit": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/audit",
+               "type": "object",
+               "required": [
+                 "createdDate",
+                 "updatedDate"
+               ],
+               "properties": {
+                 "createdDate": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/audit/properties/createdDate",
+                   "type": "string",
+                   "examples": [
+                     "2018-10-23 15:33:40.000 UTC"
+                   ],
+                       "format": "date-time"
+                 },
+                 "updatedDate": {
+                   "$id": "#/properties/WhoisRecord/properties/registryData/properties/audit/properties/updatedDate",
+                   "type": "string",
+                   "examples": [
+                     "2018-10-23 15:33:40.000 UTC"
+                   ],
+                       "format": "date-time"
+                 }
+               }
+             },
+             "customField1Name": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/customField1Name",
+               "type": "string",
+               "examples": [
+                 "RegistrarContactEmail"
+               ]
+             },
+             "customField1Value": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/customField1Value",
+               "type": "string",
+               "examples": [
+                 "abusecomplaints@markmonitor.com"
+               ]
+             },
+             "registrarName": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/registrarName",
+               "type": "string",
+               "examples": [
+                 "MarkMonitor Inc."
+               ]
+             },
+             "registrarIANAID": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/registrarIANAID",
+               "type": "string",
+               "examples": [
+                 "292"
+               ]
+             },
+             "createdDateNormalized": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/createdDateNormalized",
+               "type": "string",
+               "examples": [
+                 "1997-09-15 04:00:00 UTC"
+               ],
+                   "format": "date-time"
+             },
+             "updatedDateNormalized": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/updatedDateNormalized",
+               "type": "string",
+               "examples": [
+                 "2018-02-21 18:36:40 UTC"
+               ],
+                   "format": "date-time"
+             },
+             "expiresDateNormalized": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/expiresDateNormalized",
+               "type": "string",
+               "examples": [
+                 "2020-09-14 04:00:00 UTC"
+               ],
+                   "format": "date-time"
+             },
+             "customField2Name": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/customField2Name",
+               "type": "string",
+               "examples": [
+                 "RegistrarContactPhone"
+               ]
+             },
+             "customField3Name": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/customField3Name",
+               "type": "string",
+               "examples": [
+                 "RegistrarURL"
+               ]
+             },
+             "customField2Value": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/customField2Value",
+               "type": "string",
+               "examples": [
+                 "+1.2083895740"
+               ]
+             },
+             "customField3Value": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/customField3Value",
+               "type": "string",
+               "examples": [
+                 "http://www.markmonitor.com"
+               ]
+             },
+             "whoisServer": {
+               "$id": "#/properties/WhoisRecord/properties/registryData/properties/whoisServer",
+               "type": "string",
+               "examples": [
+                 "whois.markmonitor.com"
+               ]
+             }
+           }
+         },
+         "domainAvailability": {
+           "$id": "#/properties/WhoisRecord/properties/domainAvailability",
+           "type": "string",
+           "examples": [
+             "UNAVAILABLE"
+           ]
+         },
+         "contactEmail": {
+           "$id": "#/properties/WhoisRecord/properties/contactEmail",
+           "type": "string",
+           "examples": [
+             "abusecomplaints@markmonitor.com"
+           ],
+           "format": "email"
+         },
+         "domainNameExt": {
+           "$id": "#/properties/WhoisRecord/properties/domainNameExt",
+           "type": "string",
+           "examples": [
+             ".com"
+           ]
+         },
+         "estimatedDomainAge": {
+           "$id": "#/properties/WhoisRecord/properties/estimatedDomainAge",
+           "type": "integer",
+           "examples": [
+             7708
+           ]
+         },
+         "ips": {
+           "$id": "#/properties/WhoisRecord/properties/ips",
+           "type": "array",
+           "contains": {
+     "type": "string"
+   },
+           "items": {
+             "$id": "#/properties/WhoisRecord/properties/ips/items",
+             "type": "string",
+             "examples": [
+               "172.217.11.174"
+             ]
+           }
+         }
+       }
+     }
+   }
+ }
