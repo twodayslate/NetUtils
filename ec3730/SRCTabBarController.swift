@@ -22,8 +22,10 @@ class SRCTabBarController : UITabBarController, UITabBarControllerDelegate {
         let viewSource = SourceViewController()
         viewSource.tabBarItem = UITabBarItem(title: "View Source", image: UIImage(named: "Source"), tag: 2)
         
+        let host = HostViewController()
+        host.tabBarItem = UITabBarItem(title: "Host", image: UIImage(named: "Host"), tag: 3)
         // TODO: Host
         
-        self.viewControllers = [reachability, ping, viewSource]
+        self.viewControllers = [host, reachability, ping, viewSource]
     }
 }

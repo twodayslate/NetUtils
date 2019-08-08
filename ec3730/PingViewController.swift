@@ -31,7 +31,7 @@ class PingViewController : UIViewController, UIScrollViewDelegate, UITextFieldDe
         
         stack = UIStackView()
         stack.backgroundColor = UIColor.black
-        stack.axis = UILayoutConstraintAxis.vertical
+        stack.axis = NSLayoutConstraint.Axis.vertical
         //stack.alignment = UIStackViewAlignment.fill
         //stack.alignment = .top
         //stack.distribution = UIStackViewDistribution.fillProportionally
@@ -62,7 +62,7 @@ class PingViewController : UIViewController, UIScrollViewDelegate, UITextFieldDe
         self.stack.addArrangedSubview(statusView)
         
         let barStack = UIStackView()
-        barStack.axis = UILayoutConstraintAxis.horizontal
+        barStack.axis = NSLayoutConstraint.Axis.horizontal
         barStack.alignment = .leading
         //barStack.autoresizingMask = [.flexibleWidth]
         //stack.alignment = UIStackViewAlignment.Fill

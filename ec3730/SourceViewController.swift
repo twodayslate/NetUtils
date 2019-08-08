@@ -31,7 +31,7 @@ class SourceViewController : UIViewController, UIScrollViewDelegate, UITextField
         
         stack = UIStackView()
         stack.backgroundColor = UIColor.black
-        stack.axis = UILayoutConstraintAxis.vertical
+        stack.axis = NSLayoutConstraint.Axis.vertical
         //stack.alignment = UIStackViewAlignment.fill
         //stack.alignment = .top
         //stack.distribution = UIStackViewDistribution.fillProportionally
@@ -54,7 +54,7 @@ class SourceViewController : UIViewController, UIScrollViewDelegate, UITextField
         self.stack.addArrangedSubview(sourceView!)
         
         
-        barStack.axis = UILayoutConstraintAxis.horizontal
+        barStack.axis = NSLayoutConstraint.Axis.horizontal
         barStack.alignment = .leading
         //barStack.autoresizingMask = [.flexibleWidth]
         //stack.alignment = UIStackViewAlignment.Fill
@@ -69,6 +69,7 @@ class SourceViewController : UIViewController, UIScrollViewDelegate, UITextField
         urlBar?.textColor = UIColor.black
         urlBar?.textAlignment = .left
         urlBar?.borderStyle = .roundedRect
+        urlBar?.keyboardType = .URL
         urlBar?.placeholder = "https://google.com"
         urlBar?.delegate = self
         

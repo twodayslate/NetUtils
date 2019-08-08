@@ -114,7 +114,7 @@ class ReachabilityViewController : UIViewController {
         urlBar = UITextField(frame: CGRect(x: 0, y: self.view.frame.midY, width: self.view.frame.width, height: 25))
         
         stack = UIStackView()
-        stack.axis = UILayoutConstraintAxis.vertical
+        stack.axis = NSLayoutConstraint.Axis.vertical
         stack.translatesAutoresizingMaskIntoConstraints = false
 
         self.view.addSubview(stack)
