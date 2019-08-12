@@ -53,34 +53,43 @@ class WhoisXml {
     private static var _cachedExpirationDate: Date? = nil
     public class var isSubscribed: Bool {
         get {
-            if let _ = SwiftyStoreKit.localReceiptData {
-                let validator = AppleReceiptValidator(service: .production, sharedSecret: ApiKey.inApp.key)
-                SwiftyStoreKit.verifyReceipt(using: validator) { result in
-                    switch result {
-                    case .success(let receipt):
-                        // Verify the purchase of a Subscription
-                        let purchaseResult = SwiftyStoreKit.verifySubscriptions(productIds: Set([WhoisXml.subscriptions.monthly.identifier]), inReceipt: receipt)
+            verifySubscription()
+            
+            guard let expiration = _cachedExpirationDate else {
+                return false
+            }
+            
+            return expiration.timeIntervalSinceNow > 0
+        }
+    }
+    
+    class func verifySubscription(completion block: ((Error?, VerifySubscriptionResult?)->Void)? = nil) {
+        if let _ = SwiftyStoreKit.localReceiptData {
+            let validator = AppleReceiptValidator(service: .production, sharedSecret: ApiKey.inApp.key)
+            SwiftyStoreKit.verifyReceipt(using: validator) { result in
+                switch result {
+                case .success(let receipt):
+                    // Verify the purchase of a Subscription
+                    let purchaseResult = SwiftyStoreKit.verifySubscriptions(productIds: Set([WhoisXml.subscriptions.monthly.identifier]), inReceipt: receipt)
+                    
+                    block?(nil, purchaseResult)
+                    
+                    switch purchaseResult {
                         
-                        switch purchaseResult {
-                        case .purchased(let expiryDate, let items):
-                            print("subscription is valid until \(expiryDate)\n\(items)\n")
-                            _cachedExpirationDate = expiryDate
-                        case .expired(let expiryDate, let items):
-                            print("subscription is expired since \(expiryDate)\n\(items)\n")
-                        case .notPurchased:
-                            print("The user has never purchased subscription")
-                        }
-                        
-                    case .error(let error):
-                        print("Receipt verification failed: \(error)")
+                    case .purchased(let expiryDate, let items):
+                        print("subscription is valid until \(expiryDate)\n\(items)\n")
+                        _cachedExpirationDate = expiryDate
+                    case .expired(let expiryDate, let items):
+                        print("subscription is expired since \(expiryDate)\n\(items)\n")
+                    case .notPurchased:
+                        print("The user has never purchased subscription")
                     }
-                }
-                if let d = _cachedExpirationDate {
-                    print(d, d.timeIntervalSinceNow)
-                    return d.timeIntervalSinceNow > 0
+                    
+                case .error(let error):
+                    print("Receipt verification failed: \(error)")
+                    block?(error, nil)
                 }
             }
-            return false
         }
     }
 }

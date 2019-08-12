@@ -14,9 +14,24 @@ fileprivate var cachedPrice: String? = nil
 class WhoisLockedTableViewCell: UITableViewCell {
     var iapDelegate: InAppPurchaseUpdateDelegate? = nil
 
+    var isRestoring = false {
+        didSet {
+            DispatchQueue.main.async {
+                if self.isRestoring {
+                    self.restoringActivity.startAnimating()
+                } else {
+                    self.restoringActivity.stopAnimating()
+                }
+            }
+        }
+    }
+    var restoringActivity = UIActivityIndicatorView(style: .gray)
+    
     @objc
     func restore(_ sender: UIButton) {
         SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            self.isRestoring = false
+            
             if results.restoreFailedPurchases.count > 0 {
                 print("Restore Failed: \(results.restoreFailedPurchases)")
             }
@@ -26,6 +41,11 @@ class WhoisLockedTableViewCell: UITableViewCell {
             else {
                 print("Nothing to Restore")
             }
+            
+            // Update isSubscribed cache
+            let _ = WhoisXml.isSubscribed
+            
+            self.iapDelegate?.restoreInAppPurchase(results)
         }
     }
     
@@ -52,6 +72,8 @@ class WhoisLockedTableViewCell: UITableViewCell {
     convenience init(reuseIdentifier: String?) {
         self.init(style: .default, reuseIdentifier: reuseIdentifier)
         
+        
+        restoringActivity.hidesWhenStopped = true
         //self.heightAnchor.constraint(equalToConstant: self.frame.height * 3).isActive = true
         //self.backgroundColor = UIColor.green
         //self.contentView.backgroundColor = UIColor.red
@@ -142,6 +164,8 @@ class WhoisLockedTableViewCell: UITableViewCell {
         buttonStack.spacing = 8.0
         buttonStack.distribution = .fillProportionally
         stack.addArrangedSubview(buttonStack)
+        
+        buttonStack.addArrangedSubview(restoringActivity)
         
         let restore = UIButton(type: .system)
         restore.contentHorizontalAlignment = .center

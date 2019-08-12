@@ -7,9 +7,8 @@ func getSSID() -> String? {
     var ssid: String?
     if let interfaces = CNCopySupportedInterfaces() as NSArray? {
         for interface in interfaces {
-            print(interface)
             if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
-                print(interfaceInfo)
+                // Can also see BSSID and SSIDDATA
                 ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
                 break
             }

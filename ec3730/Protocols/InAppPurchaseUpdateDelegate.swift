@@ -11,4 +11,5 @@ import SwiftyStoreKit
 
 protocol InAppPurchaseUpdateDelegate {
     func updatedInAppPurchase(_ result: PurchaseResult)
+    func restoreInAppPurchase(_ results: RestoreResults)
 }

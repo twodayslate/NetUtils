@@ -212,12 +212,8 @@ class ReachabilityViewController : UIViewController {
         self.interfaceTable.updateInterfaces()
         self.interfaceTable.tableView.reloadData()
         //self.iNav.updateViewConstraints()
-        
-        
-        
     }
 }
-
 
 extension ReachabilityViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

@@ -145,10 +145,41 @@ class HostTable : UITableViewController {
 }
 
 extension HostTable: InAppPurchaseUpdateDelegate {
-    func updatedInAppPurchase(_ result: PurchaseResult) {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+    func verify() {
+        WhoisXml.verifySubscription { (error, result) in
+            guard error == nil else {
+                self.parent?.showError(message: error!.localizedDescription)
+                return
+            }
+            
+            guard let result = result else {
+                // TODO: show error
+                self.parent?.showError(message: "Unable to verify subscription")
+                return
+            }
+            
+            // TODO: show status if isn't subscribed
+            switch result {
+            case .purchased(_, _):
+                self.parent?.showError("❤", message: "Thank you for your purchase!")
+                DispatchQueue.main.async {
+                    self.whoisManger.configure(self.whoisRecord)
+                    self.tableView.reloadData()
+                }
+            case .expired(_, _):
+                self.parent?.showError("Subscription Expired", message: "Please purchase again or manage your subscription from inside the App Store")
+            case .notPurchased:
+                self.parent?.showError(message: "Subscription has not been purchased. Please try again laster.")
+            }
         }
+    }
+    
+    func restoreInAppPurchase(_ results: RestoreResults) {
+        self.verify()
+    }
+    
+    func updatedInAppPurchase(_ result: PurchaseResult) {
+        self.verify()
     }
 }
 
@@ -287,14 +318,6 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
         }
         return true
     }
-
-    func showError(_ title : String = "Error", message: String) {
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
     
     func getWhois(_ domain: String, completion block: ((Error?, WhoisRecord?) -> ())? = nil) {
         if let cached: WhoisRecord = self.whoisCache.value(for: domain) {
@@ -385,7 +408,7 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
                                 }.resume()
                             }
                         } else {
-                            error = WhoisError("WHOIS API balance low - please try again later and contact support.")
+                            error = WhoisError("WHOIS API balance low - please contact support and try again later.")
                         }
                     }
                 } else {

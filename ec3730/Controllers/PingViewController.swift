@@ -77,6 +77,7 @@ class PingViewController : UIViewController, UIScrollViewDelegate, UITextFieldDe
         //urlBar?.textColor = UIColor.black
         urlBar?.textAlignment = .left
         urlBar?.borderStyle = .roundedRect
+        urlBar?.keyboardType = .URL
         //urlBar?.autoresizingMask = [.flexibleWidth]
         urlBar?.placeholder = "google.com"
         urlBar?.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)

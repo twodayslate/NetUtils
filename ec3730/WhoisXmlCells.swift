@@ -21,11 +21,16 @@ class ContactCellRow: UIStackView {
         
         
         titleLabel.text = title
+        titleLabel.adjustsFontSizeToFitWidth = true
+        
         detailLabel.text = detail
         detailLabel.textAlignment = .right
+        detailLabel.adjustsFontSizeToFitWidth = true
         
         self.addArrangedSubview(titleLabel)
         self.addArrangedSubview(detailLabel)
+        
+        titleLabel.widthAnchor.constraint(greaterThanOrEqualTo: self.widthAnchor, multiplier: 0.25).isActive = true
     }
     
     required init(coder: NSCoder) {
@@ -149,6 +154,15 @@ class WhoisXmlCellManager {
         emailCell.textLabel?.text = "Contact Email"
         emailCell.detailTextLabel?.text = record.contactEmail
         cells.append(emailCell)
+        
+        let hostNames = record.nameServers?.hostNames ?? record.registryData.nameServers.hostNames
+        if hostNames.count > 0 {
+            let cell = ContactCell(reuseIdentifier: "hostnames", title: "Host Names")
+            for host in hostNames {
+                cell.addRow(ContactCellRow(title: "", detail: host))
+            }
+            cells.append(cell)
+        }
         
         var didAddRecord = false
         if let contact = record.registrant {
@@ -610,7 +624,9 @@ class WhoisXmlCellManager {
                 street.append(address)
             }
             if street.count > 0 {
-                cell.addRow(ContactCellRow(title: "Street", detail: street.joined(separator: "\n")))
+                let streetCell = ContactCellRow(title: "Street", detail: street.joined(separator: "\n"))
+                streetCell.detailLabel.numberOfLines = 0
+                cell.addRow(streetCell)
             }
             
             if let city = contact.city {
@@ -674,6 +690,14 @@ class WhoisXmlCellManager {
 }
 
 extension WhoisXmlCellManager: InAppPurchaseUpdateDelegate {
+    func restoreInAppPurchase(_ results: RestoreResults) {
+        if WhoisXml.isSubscribed {
+            cells.removeAll()
+        }
+        
+        self.iapDelegate?.restoreInAppPurchase(results)
+    }
+    
     func updatedInAppPurchase(_ result: PurchaseResult) {
         switch result {
         case .success(_):

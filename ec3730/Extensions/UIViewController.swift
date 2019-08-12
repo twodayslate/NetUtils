@@ -57,3 +57,14 @@ extension UIViewController {
         self.view.endEditing(false)
     }
 }
+
+extension UIViewController {
+    open func showError(_ title : String = "Error", message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+            alert.addActionSheetForiPad()
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+}
