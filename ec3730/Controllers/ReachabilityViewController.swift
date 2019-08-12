@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Reachability
 import NetUtils
+import CoreLocation
 
 class InterfaceNavigationController: UINavigationController {
     override func viewDidLoad() {
@@ -181,6 +182,24 @@ class ReachabilityViewController : UIViewController {
             connectedCheck.setOn(true, animated: true)
             self.tabBarItem = connectedTabBarItem
             connectedLabel.text = "Connected via WiFi"
+            
+            if #available(iOS 13.0, *) {
+                let status = CLLocationManager.authorizationStatus()
+                if status == .authorizedWhenInUse {
+                    if let ssid = getSSID() {
+                        connectedLabel.text = connectedLabel.text! + " (\(ssid))"
+                    }
+                } else {
+                    let locationManager = CLLocationManager()
+                    locationManager.delegate = self
+                    locationManager.requestWhenInUseAuthorization()
+                }
+            } else {
+                if let ssid = getSSID() {
+                    connectedLabel.text = connectedLabel.text! + " (\(ssid))"
+                }
+            }
+            
         case .cellular:
             connectedCheck.setOn(true, animated: true)
             connectedLabel.text = "Connected via Cellular"
@@ -196,5 +215,12 @@ class ReachabilityViewController : UIViewController {
         
         
         
+    }
+}
+
+
+extension ReachabilityViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        self.update()
     }
 }

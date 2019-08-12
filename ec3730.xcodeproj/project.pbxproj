@@ -24,6 +24,11 @@
 		F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63540DC213E1D1B00605ABE /* StoreKit.framework */; };
 		F67425DB21363FFF00A79492 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67425DA21363FFF00A79492 /* UITextView.swift */; };
 		F691B09A2147449200BDE0F4 /* WhoisXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = F691B0992147449200BDE0F4 /* WhoisXml.swift */; };
+		F6A4EB922301C5B800439562 /* InAppPurchaseUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB912301C5B800439562 /* InAppPurchaseUpdateDelegate.swift */; };
+		F6A4EB972301C70000439562 /* TimedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB962301C70000439562 /* TimedCache.swift */; };
+		F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB982301DFCC00439562 /* LoadingCell.swift */; };
+		F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB9A2301E78E00439562 /* DNSResolver.swift */; };
+		F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */; };
 		F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C8D8A4212E5AE900309373 /* AppDelegate.swift */; };
 		F6C8D8AE212E5AEA00309373 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6C8D8AD212E5AEA00309373 /* Assets.xcassets */; };
 		F6C8D8B1212E5AEA00309373 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */; };
@@ -76,6 +81,12 @@
 		F63540E4213E4F8400605ABE /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = ../../../../usr/lib/libresolv.9.dylib; sourceTree = "<group>"; };
 		F67425DA21363FFF00A79492 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		F691B0992147449200BDE0F4 /* WhoisXml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXml.swift; sourceTree = "<group>"; };
+		F6A4EB912301C5B800439562 /* InAppPurchaseUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseUpdateDelegate.swift; sourceTree = "<group>"; };
+		F6A4EB962301C70000439562 /* TimedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedCache.swift; sourceTree = "<group>"; };
+		F6A4EB982301DFCC00439562 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		F6A4EB9A2301E78E00439562 /* DNSResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
+		F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiSSID.swift; sourceTree = "<group>"; };
+		F6A4EB9E2301F31100439562 /* ec3730.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ec3730.entitlements; sourceTree = "<group>"; };
 		F6C8D8A1212E5AE900309373 /* ec3730.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ec3730.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6C8D8A4212E5AE900309373 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6C8D8AD212E5AEA00309373 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,6 +157,36 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F6A4EB932301C5CB00439562 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F6A4EB912301C5B800439562 /* InAppPurchaseUpdateDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		F6A4EB942301C5DD00439562 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F6310272212FA66600F34E42 /* SRCTabBarController.swift */,
+				F63102742130C99D00F34E42 /* PingViewController.swift */,
+				F6310278213366BB00F34E42 /* SourceViewController.swift */,
+				F63540DA213E05E000605ABE /* HostViewController.swift */,
+				F63102762130D76200F34E42 /* ReachabilityViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F6A4EB952301C5EF00439562 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F60506732134B23F00DDF8A4 /* UIViewController.swift */,
+				F67425DA21363FFF00A79492 /* UITextView.swift */,
+				F63540D4213DEBDD00605ABE /* Reachability.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F6C8D898212E5AE900309373 = {
 			isa = PBXGroup;
 			children = (
@@ -171,22 +212,22 @@
 		F6C8D8A3212E5AE900309373 /* ec3730 */ = {
 			isa = PBXGroup;
 			children = (
+				F6A4EB9E2301F31100439562 /* ec3730.entitlements */,
 				F6C8D8A4212E5AE900309373 /* AppDelegate.swift */,
-				F6310272212FA66600F34E42 /* SRCTabBarController.swift */,
-				F63102742130C99D00F34E42 /* PingViewController.swift */,
-				F6310278213366BB00F34E42 /* SourceViewController.swift */,
-				F63540DA213E05E000605ABE /* HostViewController.swift */,
+				F6A4EB942301C5DD00439562 /* Controllers */,
 				F691B0992147449200BDE0F4 /* WhoisXml.swift */,
 				F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */,
+				F6A4EB982301DFCC00439562 /* LoadingCell.swift */,
+				F6A4EB962301C70000439562 /* TimedCache.swift */,
+				F6A4EB9A2301E78E00439562 /* DNSResolver.swift */,
 				F619760A22FCA76200CE39A0 /* WhoisRecord.swift */,
+				F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */,
+				F6A4EB932301C5CB00439562 /* Protocols */,
 				F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */,
-				F63102762130D76200F34E42 /* ReachabilityViewController.swift */,
 				F6C8D8AD212E5AEA00309373 /* Assets.xcassets */,
 				F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */,
 				F6C8D8B2212E5AEA00309373 /* Info.plist */,
-				F60506732134B23F00DDF8A4 /* UIViewController.swift */,
-				F67425DA21363FFF00A79492 /* UITextView.swift */,
-				F63540D4213DEBDD00605ABE /* Reachability.swift */,
+				F6A4EB952301C5EF00439562 /* Extensions */,
 				F63540D8213DFE8300605ABE /* ApiKeys.swift */,
 			);
 			path = ec3730;
@@ -283,6 +324,9 @@
 					F6C8D8A0212E5AE900309373 = {
 						CreatedOnToolsVersion = 9.4.1;
 						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 1;
+							};
 							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
@@ -434,16 +478,21 @@
 			files = (
 				F67425DB21363FFF00A79492 /* UITextView.swift in Sources */,
 				F6310273212FA66600F34E42 /* SRCTabBarController.swift in Sources */,
+				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
 				F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F619760922FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift in Sources */,
 				F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */,
+				F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */,
 				F619760722FCA33B00CE39A0 /* WhoisXmlCells.swift in Sources */,
 				F60506742134B23F00DDF8A4 /* UIViewController.swift in Sources */,
 				F691B09A2147449200BDE0F4 /* WhoisXml.swift in Sources */,
 				F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */,
+				F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */,
 				F63540DB213E05E000605ABE /* HostViewController.swift in Sources */,
 				F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */,
+				F6A4EB922301C5B800439562 /* InAppPurchaseUpdateDelegate.swift in Sources */,
+				F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */,
 				F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
 			);
@@ -611,6 +660,7 @@
 			baseConfigurationReference = E0AC4E7BAE9A80E39D6813E5 /* Pods-ec3730.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -632,6 +682,7 @@
 			baseConfigurationReference = AE413E2D7C266E1FDDA68C0C /* Pods-ec3730.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				INFOPLIST_FILE = ec3730/Info.plist;

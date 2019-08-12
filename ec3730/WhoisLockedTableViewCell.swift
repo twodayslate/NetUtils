@@ -12,7 +12,8 @@ import SwiftyStoreKit
 
 fileprivate var cachedPrice: String? = nil
 class WhoisLockedTableViewCell: UITableViewCell {
-    
+    var iapDelegate: InAppPurchaseUpdateDelegate? = nil
+
     @objc
     func restore(_ sender: UIButton) {
         SwiftyStoreKit.restorePurchases(atomically: true) { results in
@@ -28,12 +29,30 @@ class WhoisLockedTableViewCell: UITableViewCell {
         }
     }
     
-    
+    @objc func buy(_ sender: UIButton) {
+        SwiftyStoreKit.purchaseProduct(WhoisXml.subscriptions.monthly.identifier, quantity: 1, atomically: true, simulatesAskToBuyInSandbox: false) { (result) in
+            
+            switch result {
+            case .success(let product):
+                if product.needsFinishTransaction {
+                    SwiftyStoreKit.finishTransaction(product.transaction)
+                }
+                break
+            default:
+                break
+            }
+            
+            // Update isSubscribed cache
+            let _ = WhoisXml.isSubscribed
+            
+            self.iapDelegate?.updatedInAppPurchase(result)
+        }
+    }
     
     convenience init(reuseIdentifier: String?) {
         self.init(style: .default, reuseIdentifier: reuseIdentifier)
         
-        self.heightAnchor.constraint(equalToConstant: self.frame.height * 3).isActive = true
+        //self.heightAnchor.constraint(equalToConstant: self.frame.height * 3).isActive = true
         //self.backgroundColor = UIColor.green
         //self.contentView.backgroundColor = UIColor.red
         
@@ -79,6 +98,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         stack.addArrangedSubview(mainStack)
         
         let iconWrap = UIView()
+        iconWrap.translatesAutoresizingMaskIntoConstraints = false
         mainStack.addArrangedSubview(iconWrap)
         iconWrap.widthAnchor.constraint(equalToConstant: self.frame.height * 2).isActive = true
         
@@ -119,8 +139,8 @@ class WhoisLockedTableViewCell: UITableViewCell {
         let buttonStack = UIStackView()
         buttonStack.axis = .horizontal
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
-        buttonStack.spacing = 10.0
-        buttonStack.distribution = .fillEqually
+        buttonStack.spacing = 8.0
+        buttonStack.distribution = .fillProportionally
         stack.addArrangedSubview(buttonStack)
         
         let restore = UIButton(type: .system)
@@ -134,6 +154,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         let buy = UIButton(type: .system)
         buy.tintColor = UIColor.white
         buy.setTitle("Purchase", for: .normal)
+        buy.addTarget(self, action: #selector(self.buy), for: .touchUpInside)
         buy.contentHorizontalAlignment = .center
         buy.backgroundColor = UIButton(type: .system).tintColor
         buy.layer.cornerRadius = 5.0
@@ -142,14 +163,32 @@ class WhoisLockedTableViewCell: UITableViewCell {
         if let price = cachedPrice {
             buy.setTitle((buy.titleLabel?.text)! + " - " + price, for: .normal)
         } else {
-            SwiftyStoreKit.retrieveProductsInfo(["whois.monthly.auto"]) { result in
+            SwiftyStoreKit.retrieveProductsInfo([WhoisXml.subscriptions.monthly.identifier]) { result in
                 if let product = result.retrievedProducts.first {
                     DispatchQueue.main.async {
                         guard let price = product.localizedPrice else {
                             return
                         }
+                        
                         cachedPrice = price
-                        buy.setTitle((buy.titleLabel?.text)! + " - " + price, for: .normal)
+                        
+                        if #available(iOS 11.2, *) {
+                            if let sub = product.subscriptionPeriod {
+                                switch sub.unit {
+                                case .month:
+                                    if sub.numberOfUnits == 1 {
+                                        cachedPrice = price + "/month"
+                                    } else {
+                                        cachedPrice = price + "/" + String(describing: sub.numberOfUnits) + " months"
+                                    }
+                                    break
+                                default:
+                                    break
+                                }
+                            }
+                        }
+                        
+                        buy.setTitle((buy.titleLabel?.text)! + " - " + cachedPrice!, for: .normal)
                     }
                 }
                 else if let invalidProductId = result.invalidProductIDs.first {
@@ -163,23 +202,55 @@ class WhoisLockedTableViewCell: UITableViewCell {
         
         buttonStack.addArrangedSubview(buy)
         
+        let termStack = UIStackView()
+        termStack.translatesAutoresizingMaskIntoConstraints = false
+        termStack.axis = .vertical
+        termStack.distribution = .equalCentering
+        termStack.spacing = 0.0
+        
         let smallText = UILabel()
-        smallText.text = "Purchasing results in a monthly subscription for WHOIS Lookup which can be canceled at any time"
+        // https://developer.apple.com/design/human-interface-guidelines/subscriptions/overview/
+        smallText.text = """
+Payment will be charged to your Apple ID account at the confirmation of purchase. The subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase.
+"""
         smallText.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        smallText.textColor = UIColor.gray
-        smallText.textAlignment = .center
+        smallText.textColor = UIColor.lightGray
+        smallText.textAlignment = .justified
         smallText.lineBreakMode = .byWordWrapping
         smallText.numberOfLines = 0
-        stack.addArrangedSubview(smallText)
+        termStack.addArrangedSubview(smallText)
+        
+        let termStackInner = UIStackView()
+        termStackInner.translatesAutoresizingMaskIntoConstraints = false
+        termStackInner.axis = .horizontal
+        termStackInner.distribution = .equalCentering
+        termStackInner.spacing = 16.0
+        termStack.addArrangedSubview(termStackInner)
+        
+        let privacy = UIButton()
+        privacy.setAttributedTitle(NSAttributedString(string: "Privacy Policy", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.foregroundColor: smallText.textColor as Any]), for: .normal)
+        privacy.titleLabel?.textAlignment = .center
+        privacy.titleLabel?.font = smallText.font
+        privacy.addTarget(self, action: #selector(clickPrivacy(_:)), for: .touchUpInside)
+        termStackInner.addArrangedSubview(privacy)
+        
+        let tos = UIButton()
+        tos.setAttributedTitle(NSAttributedString(string: "Terms of Use", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.foregroundColor: smallText.textColor as Any]), for: .normal)
+        tos.titleLabel?.textAlignment = .center
+        tos.titleLabel?.font = smallText.font
+        tos.addTarget(self, action: #selector(clickToS(_:)), for: .touchUpInside)
+        termStackInner.addArrangedSubview(tos)
+        
+        stack.addArrangedSubview(termStack)
         
         self.separatorInset.right = .greatestFiniteMagnitude
-        
-        
-        //        self.imageView?.image = UIImage(named: "Lock")
-        //        self.textLabel?.text = "test"
-        
-        
-        //self.contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
-        //self.contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
+    }
+    
+    @objc func clickPrivacy(_ sender: UIButton) {
+        UIApplication.shared.open(URL(string: "https://zac.gorak.us/ios/privacy.html")!, options: [:], completionHandler: nil)
+    }
+    
+    @objc func clickToS(_ sender: UIButton) {
+        UIApplication.shared.open(URL(string: "https://zac.gorak.us/ios/terms.html")!, options: [:], completionHandler: nil)
     }
 }

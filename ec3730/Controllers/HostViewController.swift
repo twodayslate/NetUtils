@@ -40,13 +40,22 @@ class HostTable : UITableViewController {
     
     let lockIcon = UIImage(named: "Lock")
     
-    public var dnsLookups = Set<String>() {
+    var isLoading = false {
         didSet {
+            if self.isLoading {
+                DispatchQueue.main.async {
+                    self.whoisManger.startLoading()
+                }
+            }
+            
             DispatchQueue.main.async {
-                self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                self.tableView.reloadData()
             }
         }
     }
+    
+    public var dnsLookups = Set<String>()
+    
     public var whoisRecord: WhoisRecord? = nil {
         didSet {
             DispatchQueue.main.async {
@@ -77,7 +86,8 @@ class HostTable : UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return self.dnsLookups.count
+            // show loading cell or the ip list
+            return self.isLoading ? 1 : self.dnsLookups.count
         } else {
             return whoisManger.cells.count // WHOIS
         }
@@ -98,19 +108,31 @@ class HostTable : UITableViewController {
         var cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
     
         if (indexPath.section == 1) {
-            print("is subscribed?", WhoisXml.isSubscribed)
             cell = self.whoisManger.cells[indexPath.row]
         } else {
-            cell.textLabel?.text = self.dnsLookups.sorted()[indexPath.row]
+            if self.isLoading || self.dnsLookups.count <= indexPath.row {
+                cell = LoadingCell(reuseIdentifier: "loading")
+            } else {
+               cell.textLabel?.text = self.dnsLookups.sorted()[indexPath.row]
+            }
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = UIRectEdge() // https://stackoverflow.com/questions/20809164/uinavigationcontroller-bar-covers-its-uiviewcontrollers-content
         self.title = self.host + " Information"
+        self.whoisManger.iapDelegate = self
         
         //self.tableView.register(WhoisTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(WhoisTableViewCell.self))
         
@@ -119,6 +141,14 @@ class HostTable : UITableViewController {
         //self.tableView.separatorInset.left =  self.view.frame.width
         self.tableView.tableFooterView = UIView() // hide sepeartor
         self.tableView.reloadData()
+    }
+}
+
+extension HostTable: InAppPurchaseUpdateDelegate {
+    func updatedInAppPurchase(_ result: PurchaseResult) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -134,6 +164,7 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
     
     let hostTable = HostTable()
     let iNav = HostNavigationController()
+    let whoisCache = TimedCache(expiresIn: 180)
     
     override func viewDidLoad() {
         let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: ApiKey.inApp.key)
@@ -171,8 +202,8 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         
         self.view.addSubview(stack)
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterX, metrics: nil, views: ["scrollview": stack]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack!]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterX, metrics: nil, views: ["scrollview": stack!]))
         
         self.stack.addArrangedSubview(iNav.view)
         iNav.setViewControllers([hostTable], animated: false)        
@@ -196,6 +227,7 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
         urlBar?.borderStyle = .roundedRect
         urlBar?.keyboardType = .URL
         urlBar?.placeholder = "google.com"
+        urlBar?.clearButtonMode = .whileEditing
         urlBar?.delegate = self
         
         barStack.addArrangedSubview(urlBar!)
@@ -203,7 +235,7 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
         let button = UIButton(frame: CGRect(x: 50, y: 50, width: 120, height: 50))
         button.setTitle("Lookup", for: .normal)
         button.sizeToFit()
-        button.addTarget(self, action: #selector(fetchData), for: .touchDown)
+        button.addTarget(self, action: #selector(fetchDataAndDisplayError), for: .touchDown)
         barStack.addArrangedSubview(button)
         button.widthAnchor.constraint(equalToConstant: button.frame.width).isActive = true
         barStack.addArrangedSubview(loader)
@@ -226,6 +258,7 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
         }
         set {
             DispatchQueue.main.async {
+                self.hostTable.isLoading = self.isLoading
                 if newValue {
                     self.loader.startAnimating()
                 } else {
@@ -249,32 +282,10 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if(string == "\n" || string == "\r") {
-            self.fetchData()
+            self.fetchDataAndDisplayError()
             return false
         }
         return true
-    }
-    
-    /**
-     * https://stackoverflow.com/questions/25890533/how-can-i-get-a-real-ip-address-from-dns-query-in-swift
-     */
-    func localDnsLookup(_ server: String) -> [String] {
-        var ans = [String]()
-        print(server)
-        let host = CFHostCreateWithName(nil,server as CFString).takeRetainedValue()
-        CFHostStartInfoResolution(host, .addresses, nil)
-        var success: DarwinBoolean = false
-        if let addresses = CFHostGetAddressing(host, &success)?.takeUnretainedValue() as NSArray? {
-            for case let theAddress as NSData in addresses {
-                var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
-                if getnameinfo(theAddress.bytes.assumingMemoryBound(to: sockaddr.self), socklen_t(theAddress.length),
-                               &hostname, socklen_t(hostname.count), nil, 0, NI_NUMERICHOST) == 0 {
-                    let numAddress = String(cString: hostname)
-                    ans.append(numAddress)
-                }
-            }
-        }
-        return ans
     }
 
     func showError(_ title : String = "Error", message: String) {
@@ -286,6 +297,11 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
     }
     
     func getWhois(_ domain: String, completion block: ((Error?, WhoisRecord?) -> ())? = nil) {
+        if let cached: WhoisRecord = self.whoisCache.value(for: domain) {
+            block?(nil, cached)
+            return
+        }
+        
         var error : Error? = nil
         let session = URLSession(configuration: .default)
         // check balance
@@ -329,7 +345,6 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
                                         let container = try decoder.singleValueContainer()
                                         let dateString = try container.decode(String.self)
                                         
-                                        print("dateString", dateString)
                                         let formatter = DateFormatter()
                                         let formats = [
                                             "yyyy-MM-dd HH:mm:ss",
@@ -359,11 +374,9 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
                                                                                debugDescription: "Cannot decode date string \(dateString)")
                                     }
                                     
-                                    let output = String(data: data, encoding: .utf8)
-                                    print(output) // TODO: remove
-                                    
                                     do {
                                         let c = try decoder.decode(Coordinate.self, from: data)
+                                        self.whoisCache.add(c.whoisRecord, for: domain)
                                         block?(nil, c.whoisRecord)
                                     } catch let decodeError {
                                         print(decodeError) // TODO: remove
@@ -392,78 +405,93 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
         self.dismissKeyboard()
     }
     
-    @objc
-    func fetchData() {
-        if(isLoading) { return }
-        
-        var urlString = (urlBar?.text)!
-        if(urlString == "") {
-            urlString = (urlBar?.placeholder)!
-        }
-        
-        var showError = true
-        print(urlString)
-        if let url = URL(string: urlString) {
-            var comps = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-            if(comps.scheme == nil && comps.host == nil && comps.path.contains(".")) {
-                comps.host = comps.path
-                comps.path = ""
-            }
-            if(comps.scheme == nil) {
-                comps.scheme = "http"
-            }
-            var newUrl = url
-            if let fixedUrl = comps.url {
-                if let tmpUrl = URL(string: fixedUrl.absoluteString) {
-                    newUrl = tmpUrl
-                }
-            }
-            
-            if(UIApplication.shared.canOpenURL(newUrl)) {
-                if let host = newUrl.host {
-                    showError = false
-                    self.isLoading = true
-                    
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        
-                        print("Host fetch for: ", host)
-                        // Reset values
-                        self.hostTable.host = host
-                        self.hostTable.dnsLookups.removeAll()
-                        if WhoisXml.isSubscribed {
-                            self.hostTable.whoisRecord = nil
-                        }
-                        
-                        for ip in self.localDnsLookup(host) {
-                            self.hostTable.dnsLookups.insert(ip)
-                        }
-                        DispatchQueue.main.async {
-                            self.hostTable.tableView.reloadData()
-                        }
-//                        if(self.canAccessWhois) {
-                        if true { // TODO: use actual value
-                            self.getWhois(host) { (error, response) in
-                                guard let response = response, error == nil else {
-                                    return
-                                }
-                                
-                                print(response)
-                                self.hostTable.whoisRecord = response
-                            }
-                        }
-                        
-                        self.isLoading = false
-                    } // async
-                } // does it have a host?
-            } // can I open it?
-        } // is string even a url?
-        
-        if(showError){
-            //self.status?.insertText("Invalid URL\n")
-            let alert = UIAlertController(title: "Error", message: "Invalid URL", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+    @objc func fetchDataAndDisplayError() {
+        do {
+            self.dismissKeyboard()
+            try fetchData()
+        } catch {
+            self.showError("Invalid URL", message: error.localizedDescription)
         }
     }
     
+    func fetchData() throws {
+        if(isLoading) { return }
+        
+        var preString = urlBar?.text
+        if preString?.isEmpty ?? true {
+            preString = urlBar?.placeholder
+        }
+        
+        guard var urlString = preString?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+            throw URLError(.badURL)
+        }
+        
+        if urlString.isEmpty {
+            throw URLError(.badURL)
+        }
+
+        guard var comps = URLComponents(string: urlString) else {
+            throw URLError(.badURL)
+        }
+        
+        if comps.scheme == nil && !urlString.contains("://") {
+            urlString = "https://" + urlString
+        }
+
+        guard let url = URL(string: urlString)?.standardized else {
+            throw URLError(.badURL)
+        }
+
+        guard UIApplication.shared.canOpenURL(url) else {
+            throw URLError(.badURL)
+        }
+        
+        guard let host = url.host else {
+            throw URLError(.badURL)
+        }
+        
+        self.isLoading = true
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            
+            print("Host fetch for: ", host)
+            // Reset values
+            self.hostTable.host = host
+            self.hostTable.dnsLookups.removeAll()
+            
+            DNSResolver.resolve(host: host) { (error, addresses) in
+                self.isLoading = false
+                
+                guard error == nil else {
+                    self.showError(message: error!.localizedDescription)
+                    return
+                }
+                guard let addresses = addresses else {
+                    return
+                }
+                
+                for ip in addresses {
+                    self.hostTable.dnsLookups.insert(ip)
+                }
+            }
+            
+            if WhoisXml.isSubscribed { // TODO: use actual value
+                self.getWhois(host) { (error, response) in
+                    guard error == nil else {
+                        self.showError("Error getting WHOIS", message: error!.localizedDescription)
+                        self.hostTable.whoisRecord = nil
+                        return
+                    }
+                    
+                    guard let response = response else {
+                        self.showError(message: "No Whois Data")
+                        self.hostTable.whoisRecord = nil
+                        return
+                    }
+
+                    self.hostTable.whoisRecord = response
+                }
+            }
+        }
+    }
 }

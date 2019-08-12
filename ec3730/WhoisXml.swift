@@ -83,6 +83,4 @@ class WhoisXml {
             return false
         }
     }
-    
-    
 }
