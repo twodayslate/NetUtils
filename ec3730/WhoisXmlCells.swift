@@ -12,10 +12,10 @@ import SwiftyStoreKit
 
 class ContactCellRow: UIStackView {
     var titleLabel: UILabel
-    var detailLabel: UILabel
+    var detailLabel: CopyLabel
     init(title: String, detail: String) {
         titleLabel = UILabel()
-        detailLabel = UILabel()
+        detailLabel = CopyLabel()
         
         super.init(frame: .zero)
         
@@ -31,6 +31,11 @@ class ContactCellRow: UIStackView {
         self.addArrangedSubview(detailLabel)
         
         titleLabel.widthAnchor.constraint(greaterThanOrEqualTo: self.widthAnchor, multiplier: 0.25).isActive = true
+        
+        let hold = UILongPressGestureRecognizer(target: detailLabel, action: #selector(detailLabel.copyAction(_:)))
+        hold.isEnabled = true
+        detailLabel.isUserInteractionEnabled = true
+        detailLabel.addGestureRecognizer(hold)
     }
     
     required init(coder: NSCoder) {
@@ -76,7 +81,9 @@ class WhoisXmlCellManager {
     var iapDelegate: InAppPurchaseUpdateDelegate? = nil
     
     init() {
-        self.askForMoney()
+        WhoisXml.verifySubscription { (error, results) in
+            self.verifyInAppSubscription(error: error, result: results)
+        }
     }
     
     func askForMoney() {
@@ -117,48 +124,36 @@ class WhoisXmlCellManager {
         
         currentRecord = record
         
-        let createdCell = UITableViewCell(style: .value1, reuseIdentifier: "created")
-        createdCell.textLabel?.text = "Created"
-        createdCell.detailTextLabel?.text = "\(record.createdDate ?? record.registryData.createdDate)"
+        let createdCell = CopyDetailCell(title: "Created", detail: "\(record.createdDate ?? record.registryData.createdDate)")
         cells.append(createdCell)
         
-        let updatedCell = UITableViewCell(style: .value1, reuseIdentifier: "updated")
-        updatedCell.textLabel?.text = "Updated"
-        updatedCell.detailTextLabel?.text = "\(record.updatedDate ?? record.registryData.updatedDate)"
+        let updatedCell = CopyDetailCell(title: "Updated", detail: "\(record.updatedDate ?? record.registryData.updatedDate)")
         cells.append(updatedCell)
         
-        let registrarCell = UITableViewCell(style: .value1, reuseIdentifier: "registrar")
-        registrarCell.textLabel?.text = "Registrar"
-        registrarCell.detailTextLabel?.text = record.registrarName
+        let expiresCell = CopyDetailCell(title: "Expires", detail: "\(record.expiresDate ?? record.registryData.expiresDate)")
+        cells.append(expiresCell)
+        
+        let registrarCell = CopyDetailCell(title: "Registrar", detail: record.registrarName)
         cells.append(registrarCell)
         
-        let idCell = UITableViewCell(style: .value1, reuseIdentifier: "id")
-        idCell.textLabel?.text = "IANAID"
-        idCell.detailTextLabel?.text = record.registrarIANAID
+        let idCell = CopyDetailCell(title: "IANAID", detail: record.registrarIANAID)
         cells.append(idCell)
         
-        
         if let whoisServer = record.whoisServer {
-            let whoisServerCell = UITableViewCell(style: .value1, reuseIdentifier: "whoisServer")
-            whoisServerCell.textLabel?.text = "WHOIS Server"
-            whoisServerCell.detailTextLabel?.text = whoisServer
+            let whoisServerCell = CopyDetailCell(title: "WHOIS Server", detail: whoisServer)
             cells.append(whoisServerCell)
         }
         
-        let ageCell = UITableViewCell(style: .value1, reuseIdentifier: "age")
-        ageCell.textLabel?.text = "Estimated Age"
-        ageCell.detailTextLabel?.text = "\(record.estimatedDomainAge) day(s)"
+        let ageCell = CopyDetailCell(title: "Estimated Age", detail: "\(record.estimatedDomainAge) day(s)")
         cells.append(ageCell)
         
-        let emailCell = UITableViewCell(style: .value1, reuseIdentifier: "email")
-        emailCell.textLabel?.text = "Contact Email"
-        emailCell.detailTextLabel?.text = record.contactEmail
+        let emailCell = CopyDetailCell(title: "Contact Email", detail: record.contactEmail)
         cells.append(emailCell)
         
         let hostNames = record.nameServers?.hostNames ?? record.registryData.nameServers.hostNames
         if hostNames.count > 0 {
             let cell = ContactCell(reuseIdentifier: "hostnames", title: "Host Names")
-            for host in hostNames {
+            for host in hostNames.sorted() {
                 cell.addRow(ContactCellRow(title: "", detail: host))
             }
             cells.append(cell)
@@ -666,24 +661,23 @@ class WhoisXmlCellManager {
             cells.append(cell)
         }
         
+        cells.append(CopyDetailCell(title: "Availability", detail: record.domainAvailability))
+        
+        let status = record.status ?? record.registryData.status
+        cells.append(CopyDetailCell(title: "Status", detail: status))
+        
         if let customFieldName = record.customField1Name, let customFieldValue = record.customField1Value {
-            let customCell = UITableViewCell(style: .value1, reuseIdentifier: "custom")
-            customCell.textLabel?.text = customFieldName
-            customCell.detailTextLabel?.text = customFieldValue
+            let customCell = CopyDetailCell(title: customFieldName, detail: customFieldValue)
             cells.append(customCell)
         }
         
         if let customFieldName = record.customField2Name, let customFieldValue = record.customField2Value {
-            let customCell = UITableViewCell(style: .value1, reuseIdentifier: "custom")
-            customCell.textLabel?.text = customFieldName
-            customCell.detailTextLabel?.text = customFieldValue
+            let customCell = CopyDetailCell(title: customFieldName, detail: customFieldValue)
             cells.append(customCell)
         }
         
         if let customFieldName = record.customField3Name, let customFieldValue = record.customField3Value {
-            let customCell = UITableViewCell(style: .value1, reuseIdentifier: "custom")
-            customCell.textLabel?.text = customFieldName
-            customCell.detailTextLabel?.text = customFieldValue
+            let customCell = CopyDetailCell(title: customFieldName, detail: customFieldValue)
             cells.append(customCell)
         }
     }
@@ -710,5 +704,15 @@ extension WhoisXmlCellManager: InAppPurchaseUpdateDelegate {
         }
         
         self.iapDelegate?.updatedInAppPurchase(result)
+    }
+    
+    func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?) {
+        if WhoisXml.isSubscribed {
+            cells.removeAll()
+        } else {
+            self.askForMoney()
+        }
+        
+        self.iapDelegate?.verifyInAppSubscription(error: error, result: result)
     }
 }

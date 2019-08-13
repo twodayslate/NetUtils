@@ -11,6 +11,7 @@ import UIKit
 import Reachability
 import NetUtils
 import CoreLocation
+import SystemConfiguration.CaptiveNetwork
 
 class InterfaceNavigationController: UINavigationController {
     override func viewDidLoad() {
@@ -18,7 +19,84 @@ class InterfaceNavigationController: UINavigationController {
     }
 }
 
-class InterfaceTable : UITableViewController {
+class InterfaceTable: UITableViewController {
+    let interface: Interface
+    let interfaceInfo: NSDictionary?
+    
+    init(_ interface: Interface, interfaceInfo: NSDictionary? = nil) {
+        self.interfaceInfo = interfaceInfo
+        self.interface = interface
+        super.init(style: .plain)
+        self.title = self.interface.name
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 9 + ((self.interfaceInfo != nil) ? 2 : 0)
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = CopyDetailCell(title: NSStringFromClass(InterfaceTable.self), detail: "")
+        switch indexPath.row {
+        case 0:
+            cell.titleLabel?.text = "Name"
+            cell.detailLabel?.text = self.interface.name
+            break
+        case 1:
+            cell.titleLabel?.text = "Address"
+            cell.detailLabel?.text = self.interface.address
+            break
+        case 2:
+            cell.titleLabel?.text = "Netmask"
+            cell.detailLabel?.text = self.interface.netmask
+            break
+        case 3:
+            cell.titleLabel?.text = "Broadcast Address"
+            cell.detailLabel?.text = self.interface.broadcastAddress
+            break
+        case 4:
+            cell.titleLabel?.text = "Family"
+            cell.detailLabel?.text = self.interface.family.toString()
+            break
+        case 5:
+            cell.titleLabel?.text = "Loopback"
+            cell.detailLabel?.text = self.interface.isLoopback ? "Yes" : "No"
+            break
+        case 6:
+            cell.titleLabel?.text = "Running"
+            cell.detailLabel?.text = self.interface.isRunning ? "Yes" : "No"
+            break
+        case 7:
+            cell.titleLabel?.text = "Up"
+            cell.detailLabel?.text = self.interface.isUp ? "Yes" : "No"
+            break
+        case 8:
+            cell.titleLabel?.text = "Supports Multicast"
+            cell.detailLabel?.text = self.interface.supportsMulticast ? "Yes" : "No"
+            break
+        case 9:
+            cell.titleLabel?.text = "SSID"
+            cell.detailLabel?.text = interfaceInfo?[kCNNetworkInfoKeySSID as String] as? String
+            break
+        case 10:
+            cell.titleLabel?.text = "BSSID"
+            cell.detailLabel?.text = interfaceInfo?[kCNNetworkInfoKeyBSSID as String] as? String
+            break
+        default:
+            break
+        }
+        return cell
+    }
+}
+
+class NetworkInterfacesTable : UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.updateInterfaces()
@@ -41,19 +119,43 @@ class InterfaceTable : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell(style: .value1, reuseIdentifier: "enabled")
+        let cell = CopyDetailCell(title: NSStringFromClass(NetworkInterfacesTable.self), detail: "")
         if indexPath.section == 0 {
             let interface = self.enabledInterfaces[indexPath.row]
-            cell.textLabel?.text = interface.name
-            cell.detailTextLabel?.text = interface.address
+            cell.titleLabel?.text = interface.name
+            cell.detailLabel?.text = interface.address
         } else {
-            cell = UITableViewCell(style: .value1, reuseIdentifier: "disabled")
             let interface = self.disabledInterfaces[indexPath.row]
-            cell.textLabel?.text = interface.name
-            cell.textLabel?.textColor = UIColor.gray
-            cell.detailTextLabel?.text = interface.address
+            cell.titleLabel?.text = interface.name
+            cell.titleLabel?.textColor = UIColor.gray
+            cell.detailLabel?.text = interface.address
         }
+        
+        cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var _interface: Interface?
+        if indexPath.section == 0 {
+            _interface = self.enabledInterfaces[indexPath.row]
+        } else {
+            _interface = self.disabledInterfaces[indexPath.row]
+        }
+        
+        _ = WiFi.ssid { (name, info) in
+            if let interface = _interface {
+                
+                var table = InterfaceTable(interface)
+                if name == interface.name {
+                    table = InterfaceTable(interface, interfaceInfo: info)
+                }
+                self.navigationController?.pushViewController(table, animated: true)
+            }
+        }
+        
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
     private var _cachedInterfaces = Interface.allInterfaces()
@@ -80,7 +182,7 @@ class InterfaceTable : UITableViewController {
         
         for interface in self._cachedInterfaces {
             if let _ = interface.address {
-                if interface.isUp {
+                if interface.isRunning {
                     _cachedEnabledInterfaces.append(interface)
                 } else {
                     _cachedDisabledInterfaces.append(interface)
@@ -106,7 +208,7 @@ class ReachabilityViewController : UIViewController {
     let connectedLabel = UILabel()
     let connectedCheck = UISwitch()
     
-    let interfaceTable = InterfaceTable()
+    let interfaceTable = NetworkInterfacesTable()
     let iNav = InterfaceNavigationController()
     
     override func viewDidLoad() {
@@ -119,8 +221,8 @@ class ReachabilityViewController : UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
 
         self.view.addSubview(stack)
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterX, metrics: nil, views: ["scrollview": stack]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack!]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterX, metrics: nil, views: ["scrollview": stack!]))
 
         self.stack.addArrangedSubview(iNav.view)
         iNav.setViewControllers([interfaceTable], animated: false)
@@ -139,6 +241,7 @@ class ReachabilityViewController : UIViewController {
         connectedStack.translatesAutoresizingMaskIntoConstraints = false
 
         connectedLabel.text = "Connected"
+        connectedLabel.adjustsFontSizeToFitWidth = true
         connectedStack.addArrangedSubview(connectedLabel)
         connectedCheck.isEnabled = false
         connectedStack.addArrangedSubview(connectedCheck)
@@ -169,7 +272,9 @@ class ReachabilityViewController : UIViewController {
     
     @objc
     func reachabilityChanged(note: Notification) {
-        self.update()
+        DispatchQueue.main.async {
+            self.update()
+        }
     }
     
     private let connectedTabBarItem = UITabBarItem(title: "Connectivity", image: UIImage(named: "Connected"), tag: 1)

@@ -105,7 +105,7 @@ class HostTable : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        var cell: UITableViewCell?
     
         if (indexPath.section == 1) {
             cell = self.whoisManger.cells[indexPath.row]
@@ -113,11 +113,11 @@ class HostTable : UITableViewController {
             if self.isLoading || self.dnsLookups.count <= indexPath.row {
                 cell = LoadingCell(reuseIdentifier: "loading")
             } else {
-               cell.textLabel?.text = self.dnsLookups.sorted()[indexPath.row]
+                cell = CopyCell(title: self.dnsLookups.sorted()[indexPath.row])
             }
         }
         
-        return cell
+        return cell!
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -145,31 +145,41 @@ class HostTable : UITableViewController {
 }
 
 extension HostTable: InAppPurchaseUpdateDelegate {
-    func verify() {
+    func verify(showErrors: Bool = true) {
         WhoisXml.verifySubscription { (error, result) in
             guard error == nil else {
-                self.parent?.showError(message: error!.localizedDescription)
+                if showErrors {
+                    self.parent?.showError(message: error!.localizedDescription)
+                }
                 return
             }
             
             guard let result = result else {
                 // TODO: show error
-                self.parent?.showError(message: "Unable to verify subscription")
+                if showErrors {
+                    self.parent?.showError(message: "Unable to verify subscription")
+                }
                 return
             }
             
             // TODO: show status if isn't subscribed
             switch result {
             case .purchased(_, _):
-                self.parent?.showError("❤", message: "Thank you for your purchase!")
+                if showErrors {
+                    self.parent?.showError("❤", message: "Thank you for your purchase!")
+                }
                 DispatchQueue.main.async {
                     self.whoisManger.configure(self.whoisRecord)
                     self.tableView.reloadData()
                 }
             case .expired(_, _):
-                self.parent?.showError("Subscription Expired", message: "Please purchase again or manage your subscription from inside the App Store")
+                if showErrors {
+                    self.parent?.showError("Subscription Expired", message: "Please purchase again or manage your subscription from inside the App Store")
+                }
             case .notPurchased:
-                self.parent?.showError(message: "Subscription has not been purchased. Please try again laster.")
+                if showErrors {
+                    self.parent?.showError(message: "Subscription has not been purchased. Please try again laster.")
+                }
             }
         }
     }
@@ -180,6 +190,13 @@ extension HostTable: InAppPurchaseUpdateDelegate {
     
     func updatedInAppPurchase(_ result: PurchaseResult) {
         self.verify()
+    }
+    
+    func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?) {
+        DispatchQueue.main.async {
+            self.whoisManger.configure(self.whoisRecord)
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -198,30 +215,7 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
     let whoisCache = TimedCache(expiresIn: 180)
     
     override func viewDidLoad() {
-        let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: ApiKey.inApp.key)
-        SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
-            switch result {
-            case .success(let receipt):
-                let productId = "whois.monthly.auto"
-                // Verify the purchase of a Subscription
-                let purchaseResult = SwiftyStoreKit.verifySubscription(
-                    ofType: .autoRenewable, // or .nonRenewing (see below)
-                    productId: productId,
-                    inReceipt: receipt)
-                
-                switch purchaseResult {
-                case .purchased(let expiryDate, let items):
-                    print("\(productId) is valid until \(expiryDate)\n\(items)\n")
-                case .expired(let expiryDate, let items):
-                    print("\(productId) is expired since \(expiryDate)\n\(items)\n")
-                case .notPurchased:
-                    print("The user has never purchased \(productId)")
-                }
-                
-            case .error(let error):
-                print("Receipt verification failed: \(error)")
-            }
-        }
+        self.hostTable.verify(showErrors: false)
         
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -498,7 +492,7 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
                 }
             }
             
-            if WhoisXml.isSubscribed { // TODO: use actual value
+            if WhoisXml.isSubscribed {
                 self.getWhois(host) { (error, response) in
                     guard error == nil else {
                         self.showError("Error getting WHOIS", message: error!.localizedDescription)

@@ -29,6 +29,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
     
     @objc
     func restore(_ sender: UIButton) {
+        self.isRestoring = true
         SwiftyStoreKit.restorePurchases(atomically: true) { results in
             self.isRestoring = false
             
@@ -50,7 +51,10 @@ class WhoisLockedTableViewCell: UITableViewCell {
     }
     
     @objc func buy(_ sender: UIButton) {
+        self.isRestoring = true
         SwiftyStoreKit.purchaseProduct(WhoisXml.subscriptions.monthly.identifier, quantity: 1, atomically: true, simulatesAskToBuyInSandbox: false) { (result) in
+            
+            self.isRestoring = false
             
             switch result {
             case .success(let product):
