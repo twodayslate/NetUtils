@@ -11,6 +11,7 @@ target 'ec3730' do
   pod 'ReachabilitySwift'
   pod 'PlainPing'
   pod 'NetUtils'
+  pod 'SwiftyStoreKit'
 
   target 'ec3730Tests' do
     inherit! :search_paths
