@@ -27,6 +27,9 @@
 		F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE55F23021AC70068D104 /* CopyLabel.swift */; };
 		F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE5612302203B0068D104 /* CopyDetailCell.swift */; };
 		F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE56323023F7E0068D104 /* CopyCell.swift */; };
+		F68CE56623031DA20068D104 /* WhoisErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE56523031DA20068D104 /* WhoisErrors.swift */; };
+		F68CE5682303291A0068D104 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE5672303291A0068D104 /* Error.swift */; };
+		F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE569230463A50068D104 /* InterfaceTableViewController.swift */; };
 		F691B09A2147449200BDE0F4 /* WhoisXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = F691B0992147449200BDE0F4 /* WhoisXml.swift */; };
 		F6A4EB922301C5B800439562 /* InAppPurchaseUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB912301C5B800439562 /* InAppPurchaseUpdateDelegate.swift */; };
 		F6A4EB972301C70000439562 /* TimedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB962301C70000439562 /* TimedCache.swift */; };
@@ -88,6 +91,9 @@
 		F68CE55F23021AC70068D104 /* CopyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyLabel.swift; sourceTree = "<group>"; };
 		F68CE5612302203B0068D104 /* CopyDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyDetailCell.swift; sourceTree = "<group>"; };
 		F68CE56323023F7E0068D104 /* CopyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCell.swift; sourceTree = "<group>"; };
+		F68CE56523031DA20068D104 /* WhoisErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisErrors.swift; sourceTree = "<group>"; };
+		F68CE5672303291A0068D104 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		F68CE569230463A50068D104 /* InterfaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceTableViewController.swift; sourceTree = "<group>"; };
 		F691B0992147449200BDE0F4 /* WhoisXml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXml.swift; sourceTree = "<group>"; };
 		F6A4EB912301C5B800439562 /* InAppPurchaseUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseUpdateDelegate.swift; sourceTree = "<group>"; };
 		F6A4EB962301C70000439562 /* TimedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedCache.swift; sourceTree = "<group>"; };
@@ -181,6 +187,7 @@
 				F6310278213366BB00F34E42 /* SourceViewController.swift */,
 				F63540DA213E05E000605ABE /* HostViewController.swift */,
 				F63102762130D76200F34E42 /* ReachabilityViewController.swift */,
+				F68CE569230463A50068D104 /* InterfaceTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -189,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				F60506732134B23F00DDF8A4 /* UIViewController.swift */,
+				F68CE5672303291A0068D104 /* Error.swift */,
 				F661A27F23020FCF0023FA50 /* UIAlertController.swift */,
 				F67425DA21363FFF00A79492 /* UITextView.swift */,
 				F63540D4213DEBDD00605ABE /* Reachability.swift */,
@@ -233,6 +241,7 @@
 				F6A4EB962301C70000439562 /* TimedCache.swift */,
 				F6A4EB9A2301E78E00439562 /* DNSResolver.swift */,
 				F619760A22FCA76200CE39A0 /* WhoisRecord.swift */,
+				F68CE56523031DA20068D104 /* WhoisErrors.swift */,
 				F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */,
 				F6A4EB932301C5CB00439562 /* Protocols */,
 				F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */,
@@ -491,7 +500,9 @@
 				F67425DB21363FFF00A79492 /* UITextView.swift in Sources */,
 				F6310273212FA66600F34E42 /* SRCTabBarController.swift in Sources */,
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
+				F68CE56623031DA20068D104 /* WhoisErrors.swift in Sources */,
 				F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */,
+				F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */,
 				F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F619760922FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift in Sources */,
@@ -510,6 +521,7 @@
 				F6A4EB922301C5B800439562 /* InAppPurchaseUpdateDelegate.swift in Sources */,
 				F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */,
 				F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */,
+				F68CE5682303291A0068D104 /* Error.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

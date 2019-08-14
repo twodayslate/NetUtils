@@ -1,5 +1,13 @@
 # NetUtils
 
+NetUtils is a Network Utility application that has the following features:
+* A name lookup
+* WHOIS lookup
+* View network connectivity status
+* View network interfaces
+* ping
+* View Source
+
 ## Requirements
 
 ### CocoaPods
@@ -25,15 +33,6 @@ struct ApiKey {
 }
 ```
 
-## Features
-
-* A name lookup
-* WHOIS lookup
-* View network connectivity status
-* View network interfaces
-* ping
-* View Source
-
 ## Credits
 
-Icons by [Icons8](https://icons8.com)
+Icons by [Icons8](https://icons8.com) and [Nucleo](https://nucleoapp.com/)

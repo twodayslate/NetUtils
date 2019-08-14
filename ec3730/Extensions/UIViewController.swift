@@ -67,4 +67,44 @@ extension UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    open func alert(with message: String, title: String? = nil, cancelTitle: String = "Okay") {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
+            alert.addActionSheetForiPad()
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    open func alert(with error: Error, cancelTitle: String = "Okay") {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: error.title, message: error.localizedDescription, preferredStyle: .alert)
+            
+            if let localized = error.localized {
+                if let helpAnchor = localized.helpAnchor {
+                    let help = UIAlertAction(title: "Help", style: .cancel) { action in
+                        self.alert(with: helpAnchor)
+                    }
+                    alert.addAction(help)
+                }
+                
+                if let recoverySuggestion = localized.recoverySuggestion {
+                    let recovery = UIAlertAction(title: "Recovery Suggestion", style: .cancel) { action in
+                        self.alert(with: recoverySuggestion)
+                        // Add
+                        
+                        if let _ = error as? RecoverableError {
+                            // TODO: add actions
+                        }
+                    }
+                    alert.addAction(recovery)
+                }
+            }
+            
+            alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
+            alert.addActionSheetForiPad()
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }

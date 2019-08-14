@@ -313,135 +313,35 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
         return true
     }
     
-    func getWhois(_ domain: String, completion block: ((Error?, WhoisRecord?) -> ())? = nil) {
-        if let cached: WhoisRecord = self.whoisCache.value(for: domain) {
-            block?(nil, cached)
-            return
-        }
-        
-        var error : Error? = nil
-        let session = URLSession(configuration: .default)
-        // check balance
-        var balanceString = "https://www.whoisxmlapi.com/accountServices.php?servicetype=accountbalance"
-        balanceString += "&apiKey=" + ApiKey.WhoisXML.key
-        balanceString += "&output_format=JSON"
-        // Example output: {"balance":497}
-        if let balanceUrl = URL(string: balanceString) {
-            do {
-                let d = try Data(contentsOf: balanceUrl)
-                if let json = try JSONSerialization.jsonObject(with: d, options: []) as? [String: Any]
-                {
-                    print(json)
-                    if let balance = json["balance"] as? Double { // why can't this be an Int?
-                        print(balance)
-                        if(balance > 100) {
-                            var queryString = "https://www.whoisxmlapi.com/whoisserver/WhoisService?"
-                            queryString += "domainName=" + domain // TODO: stripping and verification
-                            queryString += "&apiKey=" + ApiKey.WhoisXML.key
-                            queryString += "&outputFormat=JSON"
-                            queryString += "&da=2" // domain availability
-                            queryString += "&ip=1"
-                            //queryString += "&preferFresh=1" // get the latest (possibly incomplete data
-                            
-                            print(queryString)
-                            if let queryUrl = URL(string: queryString) {
-                                session.dataTask(with: queryUrl) {
-                                    (data, response, error) in
-                                    guard error == nil else {
-                                        block?(error, nil)
-                                        return
-                                    }
-                                    guard let data = data else {
-                                        block?(WhoisError("No data"), nil)
-                                        return
-                                    }
-                                    
-                                    let decoder = JSONDecoder()
-                                    decoder.dateDecodingStrategy = .custom {
-                                        decoder in
-                                        let container = try decoder.singleValueContainer()
-                                        let dateString = try container.decode(String.self)
-                                        
-                                        let formatter = DateFormatter()
-                                        let formats = [
-                                            "yyyy-MM-dd HH:mm:ss",
-                                            "yyyy-MM-dd",
-                                            "yyyy-MM-dd HH:mm:ss.SSS ZZZ",
-                                            "yyyy-MM-dd HH:mm:ss ZZZ" // 1997-09-15 07:00:00 UTC
-                                        ]
-                                        
-                                        for format in formats {
-                                            formatter.dateFormat = format
-                                            if let date = formatter.date(from: dateString) {
-                                                return date
-                                            }
-                                        }
-                                        
-                                        let iso = ISO8601DateFormatter()
-                                        iso.timeZone = TimeZone(abbreviation: "UTC")
-                                        if let date = iso.date(from: dateString) {
-                                            return date
-                                        }
-                                        
-                                        if let date = ISO8601DateFormatter().date(from: dateString) {
-                                            return date
-                                        }
-                                        
-                                        throw DecodingError.dataCorruptedError(in: container,
-                                                                               debugDescription: "Cannot decode date string \(dateString)")
-                                    }
-                                    
-                                    do {
-                                        let c = try decoder.decode(Coordinate.self, from: data)
-                                        self.whoisCache.add(c.whoisRecord, for: domain)
-                                        block?(nil, c.whoisRecord)
-                                    } catch let decodeError {
-                                        print(decodeError) // TODO: remove
-                                        block?(decodeError, nil)
-                                    }
-                                }.resume()
-                            }
-                        } else {
-                            error = WhoisError("WHOIS API balance low - please contact support and try again later.")
-                        }
-                    }
-                } else {
-                    error = WhoisError("Unable to parse WHOIS API balance - please try again later.")
-                }
-            } catch let c_error {
-                error = c_error
-            }
-        }
-        
-        if let error = error {
-            block?(error, nil)
-        }
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.dismissKeyboard()
     }
     
+    /// helper function to `fetchData()` to display the error that is thrown, if any
     @objc func fetchDataAndDisplayError() {
-        do {
-            self.dismissKeyboard()
-            try fetchData()
-        } catch {
-            self.showError("Invalid URL", message: error.localizedDescription)
-        }
-    }
-    
-    func fetchData() throws {
-        if(isLoading) { return }
+        self.dismissKeyboard()
         
         var preString = urlBar?.text
         if preString?.isEmpty ?? true {
             preString = urlBar?.placeholder
         }
         
-        guard var urlString = preString?.trimmingCharacters(in: .whitespacesAndNewlines) else {
-            throw URLError(.badURL)
+        guard let text = preString else {
+            self.showError(message: "Empty URL")
+            return
         }
+        
+        do {
+            try fetchData(with: text)
+        } catch {
+            self.showError("Invalid URL", message: error.localizedDescription)
+        }
+    }
+    
+    /// Gets the contents from urlBar
+    func fetchData(with text: String) throws {
+        if(isLoading) { return }
+        var urlString = text.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if urlString.isEmpty {
             throw URLError(.badURL)
@@ -455,15 +355,7 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
             urlString = "https://" + urlString
         }
 
-        guard let url = URL(string: urlString)?.standardized else {
-            throw URLError(.badURL)
-        }
-
-        guard UIApplication.shared.canOpenURL(url) else {
-            throw URLError(.badURL)
-        }
-        
-        guard let host = url.host else {
+        guard let url = URL(string: urlString)?.standardized, UIApplication.shared.canOpenURL(url), let host = url.host else {
             throw URLError(.badURL)
         }
         
@@ -493,7 +385,7 @@ class HostViewController : UIViewController, UITextFieldDelegate, UIScrollViewDe
             }
             
             if WhoisXml.isSubscribed {
-                self.getWhois(host) { (error, response) in
+                WhoisXml.query(host) { (error, response) in
                     guard error == nil else {
                         self.showError("Error getting WHOIS", message: error!.localizedDescription)
                         self.hostTable.whoisRecord = nil

@@ -19,83 +19,6 @@ class InterfaceNavigationController: UINavigationController {
     }
 }
 
-class InterfaceTable: UITableViewController {
-    let interface: Interface
-    let interfaceInfo: NSDictionary?
-    
-    init(_ interface: Interface, interfaceInfo: NSDictionary? = nil) {
-        self.interfaceInfo = interfaceInfo
-        self.interface = interface
-        super.init(style: .plain)
-        self.title = self.interface.name
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9 + ((self.interfaceInfo != nil) ? 2 : 0)
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = CopyDetailCell(title: NSStringFromClass(InterfaceTable.self), detail: "")
-        switch indexPath.row {
-        case 0:
-            cell.titleLabel?.text = "Name"
-            cell.detailLabel?.text = self.interface.name
-            break
-        case 1:
-            cell.titleLabel?.text = "Address"
-            cell.detailLabel?.text = self.interface.address
-            break
-        case 2:
-            cell.titleLabel?.text = "Netmask"
-            cell.detailLabel?.text = self.interface.netmask
-            break
-        case 3:
-            cell.titleLabel?.text = "Broadcast Address"
-            cell.detailLabel?.text = self.interface.broadcastAddress
-            break
-        case 4:
-            cell.titleLabel?.text = "Family"
-            cell.detailLabel?.text = self.interface.family.toString()
-            break
-        case 5:
-            cell.titleLabel?.text = "Loopback"
-            cell.detailLabel?.text = self.interface.isLoopback ? "Yes" : "No"
-            break
-        case 6:
-            cell.titleLabel?.text = "Running"
-            cell.detailLabel?.text = self.interface.isRunning ? "Yes" : "No"
-            break
-        case 7:
-            cell.titleLabel?.text = "Up"
-            cell.detailLabel?.text = self.interface.isUp ? "Yes" : "No"
-            break
-        case 8:
-            cell.titleLabel?.text = "Supports Multicast"
-            cell.detailLabel?.text = self.interface.supportsMulticast ? "Yes" : "No"
-            break
-        case 9:
-            cell.titleLabel?.text = "SSID"
-            cell.detailLabel?.text = interfaceInfo?[kCNNetworkInfoKeySSID as String] as? String
-            break
-        case 10:
-            cell.titleLabel?.text = "BSSID"
-            cell.detailLabel?.text = interfaceInfo?[kCNNetworkInfoKeyBSSID as String] as? String
-            break
-        default:
-            break
-        }
-        return cell
-    }
-}
-
 class NetworkInterfacesTable : UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,14 +31,14 @@ class NetworkInterfacesTable : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
+        if self.enabledInterfaces.count > 0 && section == 0 {
             return "Enabled (On)"
         }
         return "Disabled (Off)"
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return (self.enabledInterfaces.count > 0 ? 1 : 0) + (self.disabledInterfaces.count > 0 ? 1 : 0)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -144,13 +67,10 @@ class NetworkInterfacesTable : UITableViewController {
             _interface = self.disabledInterfaces[indexPath.row]
         }
         
-        _ = WiFi.ssid { (name, info) in
+        _ = WiFi.ssid { (name, ssid, info) in
             if let interface = _interface {
                 
-                var table = InterfaceTable(interface)
-                if name == interface.name {
-                    table = InterfaceTable(interface, interfaceInfo: info)
-                }
+                let table = InterfaceTable(interface, interfaceInfo: (name == interface.name ? info : nil), proxyInformation: WiFi.proxySettings(for: interface.name))
                 self.navigationController?.pushViewController(table, animated: true)
             }
         }
@@ -280,6 +200,22 @@ class ReachabilityViewController : UIViewController {
     private let connectedTabBarItem = UITabBarItem(title: "Connectivity", image: UIImage(named: "Connected"), tag: 1)
     private let disconnectedTabBarItem = UITabBarItem(title: "Connectivity", image: UIImage(named: "Disconnected"), tag: 1)
     
+    func vpn(completion block: ((String?, [String: Any?]?)->())? = nil) {
+        let cfDict = CFNetworkCopySystemProxySettings()
+        let nsDict = cfDict!.takeRetainedValue() as NSDictionary
+        let keys = nsDict["__SCOPED__"] as! NSDictionary
+        
+        print(keys)
+        
+        for key: String in keys.allKeys as! [String] {
+            if key.contains("tap") || key.contains("tun") || key.contains("ppp") || key.contains("ipsec") {
+                block?(key, keys.object(forKey: key) as? [String: Any?])
+                return
+            }
+        }
+        block?(nil, nil)
+    }
+    
     @objc
     func update() {
         switch Reachability.shared.connection {
@@ -291,8 +227,8 @@ class ReachabilityViewController : UIViewController {
             if #available(iOS 13.0, *) {
                 let status = CLLocationManager.authorizationStatus()
                 if status == .authorizedWhenInUse {
-                    if let ssid = getSSID() {
-                        connectedLabel.text = connectedLabel.text! + " (\(ssid))"
+                    if let (_interface, _ssid, _) = WiFi.ssidInfo(), let interface = _interface, let ssid = _ssid {
+                        self.connectedLabel.text = self.connectedLabel.text! + " (\(ssid)) on \(interface)"
                     }
                 } else {
                     let locationManager = CLLocationManager()
@@ -300,8 +236,8 @@ class ReachabilityViewController : UIViewController {
                     locationManager.requestWhenInUseAuthorization()
                 }
             } else {
-                if let ssid = getSSID() {
-                    connectedLabel.text = connectedLabel.text! + " (\(ssid))"
+                if let (_interface, _ssid, _) = WiFi.ssidInfo(), let interface = _interface, let ssid = _ssid {
+                    self.connectedLabel.text = self.connectedLabel.text! + " (\(ssid)) on \(interface)"
                 }
             }
             
