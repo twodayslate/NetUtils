@@ -41,6 +41,9 @@
 		F6C8D8B1212E5AEA00309373 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */; };
 		F6C8D8BC212E5AEB00309373 /* ec3730Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C8D8BB212E5AEB00309373 /* ec3730Tests.swift */; };
 		F6C8D8C7212E5AEB00309373 /* ec3730UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C8D8C6212E5AEB00309373 /* ec3730UITests.swift */; };
+		F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */; };
+		F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */; };
+		F6FDDFC82304803100FBF75E /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC72304803100FBF75E /* UserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +115,9 @@
 		F6C8D8C2212E5AEB00309373 /* ec3730UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ec3730UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6C8D8C6212E5AEB00309373 /* ec3730UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ec3730UITests.swift; sourceTree = "<group>"; };
 		F6C8D8C8212E5AEB00309373 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsSwitch.swift; sourceTree = "<group>"; };
+		F6FDDFC72304803100FBF75E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +194,7 @@
 				F63540DA213E05E000605ABE /* HostViewController.swift */,
 				F63102762130D76200F34E42 /* ReachabilityViewController.swift */,
 				F68CE569230463A50068D104 /* InterfaceTableViewController.swift */,
+				F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -196,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				F60506732134B23F00DDF8A4 /* UIViewController.swift */,
+				F6FDDFC72304803100FBF75E /* UserDefaults.swift */,
 				F68CE5672303291A0068D104 /* Error.swift */,
 				F661A27F23020FCF0023FA50 /* UIAlertController.swift */,
 				F67425DA21363FFF00A79492 /* UITextView.swift */,
@@ -234,6 +242,7 @@
 				F6A4EB942301C5DD00439562 /* Controllers */,
 				F691B0992147449200BDE0F4 /* WhoisXml.swift */,
 				F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */,
+				F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */,
 				F68CE5612302203B0068D104 /* CopyDetailCell.swift */,
 				F68CE56323023F7E0068D104 /* CopyCell.swift */,
 				F6A4EB982301DFCC00439562 /* LoadingCell.swift */,
@@ -509,6 +518,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6FDDFC82304803100FBF75E /* UserDefaults.swift in Sources */,
 				F67425DB21363FFF00A79492 /* UITextView.swift in Sources */,
 				F6310273212FA66600F34E42 /* SRCTabBarController.swift in Sources */,
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
@@ -518,6 +528,7 @@
 				F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F619760922FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift in Sources */,
+				F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */,
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
 				F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */,
 				F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */,
@@ -535,6 +546,7 @@
 				F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
+				F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

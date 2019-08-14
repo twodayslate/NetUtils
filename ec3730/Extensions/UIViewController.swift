@@ -56,6 +56,19 @@ extension UIViewController {
 }
 
 extension UIViewController {
+    /**
+     - seealso: https://stackoverflow.com/a/54932223/193772
+     */
+    public func addActionSheetForiPad(sourceView aView: UIView? = nil, sourceRect rect: CGRect? = nil, permittedArrowDirections arrowDirections: UIPopoverArrowDirection? = nil) {
+        let useView = (aView ?? view) as UIView
+        let useRect = (rect ?? CGRect(x: useView.bounds.midX, y: useView.bounds.midY, width: 0, height: 0)) as CGRect
+        let useArrows = (arrowDirections ?? []) as UIPopoverArrowDirection
+
+        popoverPresentationController?.sourceView = useView
+        popoverPresentationController?.sourceRect = useRect
+        popoverPresentationController?.permittedArrowDirections = useArrows
+    }
+
     open func showError(_ title: String = "Error", message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -102,6 +115,38 @@ extension UIViewController {
             alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
             alert.addActionSheetForiPad()
             self.present(alert, animated: true, completion: nil)
+        }
+    }
+}
+
+import SafariServices
+
+// MARK: - SFSafariViewControllerDelegate
+
+extension UIViewController: SFSafariViewControllerDelegate {
+    public func open(_ url: URL, title: String, completion block: ((Bool) -> Void)? = nil) {
+        switch UserDefaults.standard.integer(forKey: "open_browser") {
+        case 1:
+            UIApplication.shared.open(url, options: [:], completionHandler: block)
+        default:
+            let safari = SFSafariViewController(url: url)
+            safari.title = title
+            safari.delegate = self
+            if let navigationController = self.navigationController {
+                navigationController.pushViewController(safari, animated: true)
+            } else {
+                present(safari, animated: true, completion: {
+                    block?(true)
+                })
+            }
+        }
+    }
+
+    public func safariViewControllerDidFinish(_ safariController: SFSafariViewController) {
+        if let navigationController = self.navigationController {
+            navigationController.popToRootViewController(animated: true)
+        } else {
+            safariController.dismiss(animated: true, completion: nil)
         }
     }
 }

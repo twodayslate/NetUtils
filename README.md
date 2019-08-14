@@ -35,4 +35,4 @@ struct ApiKey {
 
 ## Credits
 
-Icons by [Icons8](https://icons8.com) and [Nucleo](https://nucleoapp.com/)
+Icons by [Nucleo](https://nucleoapp.com/)

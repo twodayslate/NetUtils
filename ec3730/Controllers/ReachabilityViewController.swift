@@ -199,8 +199,17 @@ class ReachabilityViewController: UIViewController {
         }
     }
 
-    private let connectedTabBarItem = UITabBarItem(title: "Connectivity", image: UIImage(named: "Connected"), tag: 1)
-    private let disconnectedTabBarItem = UITabBarItem(title: "Connectivity", image: UIImage(named: "Disconnected"), tag: 1)
+    private var connectedTabBarItem: UITabBarItem {
+        let item = UITabBarItem(title: "Connectivity", image: UIImage(named: "Connected"), tag: 1)
+        item.selectedImage = UIImage(named: "Connected_selected")
+        return item
+    }
+
+    private var disconnectedTabBarItem: UITabBarItem {
+        let item = UITabBarItem(title: "Connectivity", image: UIImage(named: "Disconnected"), tag: 1)
+        item.selectedImage = UIImage(named: "Disconnected_selected")
+        return item
+    }
 
     func vpn(completion block: ((String?, [String: Any?]?) -> Void)? = nil) {
         let cfDict = CFNetworkCopySystemProxySettings()

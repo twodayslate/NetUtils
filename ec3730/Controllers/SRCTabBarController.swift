@@ -15,17 +15,23 @@ class SRCTabBarController: UITabBarController, UITabBarControllerDelegate {
 
         let ping = PingViewController()
         ping.tabBarItem = UITabBarItem(title: "Ping", image: UIImage(named: "Ping"), tag: 0)
+        ping.tabBarItem.selectedImage = UIImage(named: "Ping_selected")
 
         let reachability = ReachabilityViewController()
         reachability.tabBarItem = UITabBarItem(title: "Connectivity", image: UIImage(named: "Connected"), tag: 1)
 
         let viewSource = SourceViewController()
         viewSource.tabBarItem = UITabBarItem(title: "View Source", image: UIImage(named: "Source"), tag: 2)
+        viewSource.tabBarItem.selectedImage = UIImage(named: "Source_selected")
 
         let host = HostViewController()
-        host.tabBarItem = UITabBarItem(title: "Host", image: UIImage(named: "Host"), tag: 3)
-        // TODO: Host
+        host.tabBarItem = UITabBarItem(title: "Host", image: UIImage(named: "Network"), tag: 3)
+        host.tabBarItem.selectedImage = UIImage(named: "Network_selected")
 
-        viewControllers = [host, reachability, ping, viewSource]
+        let settings = SettingsNavigationController()
+        settings.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "Settings"), tag: 4)
+        settings.tabBarItem.selectedImage = UIImage(named: "Settings_selected")
+
+        viewControllers = [host, reachability, ping, viewSource, settings]
     }
 }
