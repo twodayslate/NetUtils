@@ -298,6 +298,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
     }
 
     @objc func clickPrivacy(_: UIButton) {
+        // self.controller.open did not work with Safari
         UIApplication.shared.open(
             URL(string: "https://zac.gorak.us/ios/privacy.html")!,
             options: [:],
@@ -306,6 +307,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
     }
 
     @objc func clickToS(_: UIButton) {
+        // self.controller.open did not work with Safari
         UIApplication.shared.open(
             URL(string: "https://zac.gorak.us/ios/terms.html")!,
             options: [:],

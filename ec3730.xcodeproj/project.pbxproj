@@ -44,6 +44,7 @@
 		F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */; };
 		F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */; };
 		F6FDDFC82304803100FBF75E /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC72304803100FBF75E /* UserDefaults.swift */; };
+		F6FDDFCA23048DEF00FBF75E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC923048DEF00FBF75E /* UIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsSwitch.swift; sourceTree = "<group>"; };
 		F6FDDFC72304803100FBF75E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		F6FDDFC923048DEF00FBF75E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				F60506732134B23F00DDF8A4 /* UIViewController.swift */,
+				F6FDDFC923048DEF00FBF75E /* UIView.swift */,
 				F6FDDFC72304803100FBF75E /* UserDefaults.swift */,
 				F68CE5672303291A0068D104 /* Error.swift */,
 				F661A27F23020FCF0023FA50 /* UIAlertController.swift */,
@@ -528,6 +531,7 @@
 				F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F619760922FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift in Sources */,
+				F6FDDFCA23048DEF00FBF75E /* UIView.swift in Sources */,
 				F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */,
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
 				F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */,
