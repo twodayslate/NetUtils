@@ -15,9 +15,9 @@ enum WhoisXmlError: Error {
     case lowBalance(balance: Int)
     case parse // unable to parse data
     case `nil` // found and unexpected
-    
+
     case custom(description: String, reason: String?, suggestion: String?, help: String?)
-    
+
     init(_ with: WhoisXmlError) {
         self = with
     }
@@ -26,8 +26,8 @@ enum WhoisXmlError: Error {
 extension WhoisXmlError: LocalizedError {
     /// A localized message describing what error occurred.
     var errorDescription: String? {
-        switch  self {
-        case .invalidProduct(let id):
+        switch self {
+        case let .invalidProduct(id):
             return "Invalid product identifier \"\(id)\""
         case .custom(let desc, _, _, _):
             return desc
@@ -35,7 +35,7 @@ extension WhoisXmlError: LocalizedError {
             return nil
         }
     }
-    
+
     /// A localized message describing the reason for the failure.
     var failureReason: String? {
         switch self {
@@ -45,7 +45,7 @@ extension WhoisXmlError: LocalizedError {
             return nil
         }
     }
-    
+
     /// A localized message describing how one might recover from the failure.
     var recoverySuggestion: String? {
         switch self {
@@ -55,11 +55,11 @@ extension WhoisXmlError: LocalizedError {
             return nil
         }
     }
-    
+
     /// A localized message providing "help" text if the user requests help.
     var helpAnchor: String? {
         switch self {
-        case .custom(_, _, _, let help):
+        case let .custom(_, _, _, help):
             return help
         default:
             return nil
@@ -68,10 +68,10 @@ extension WhoisXmlError: LocalizedError {
 }
 
 extension WhoisXmlError: RecoverableError {
-    func attemptRecovery(optionIndex recoveryOptionIndex: Int) -> Bool {
+    func attemptRecovery(optionIndex _: Int) -> Bool {
         return false
     }
-    
+
     var recoveryOptions: [String] {
         return []
     }

@@ -25,7 +25,6 @@
 import StoreKit
 
 public class SwiftyStoreKit {
-
     private let productsInfoController: ProductsInfoController
 
     fileprivate let paymentQueueController: PaymentQueueController
@@ -35,26 +34,25 @@ public class SwiftyStoreKit {
     init(productsInfoController: ProductsInfoController = ProductsInfoController(),
          paymentQueueController: PaymentQueueController = PaymentQueueController(paymentQueue: SKPaymentQueue.default()),
          receiptVerificator: InAppReceiptVerificator = InAppReceiptVerificator()) {
-
         self.productsInfoController = productsInfoController
         self.paymentQueueController = paymentQueueController
         self.receiptVerificator = receiptVerificator
     }
 
     // MARK: private methods
+
     fileprivate func retrieveProductsInfo(_ productIds: Set<String>, completion: @escaping (RetrieveResults) -> Void) {
         return productsInfoController.retrieveProductsInfo(productIds, completion: completion)
     }
-    
-    fileprivate func purchaseProduct(_ productId: String, quantity: Int = 1, atomically: Bool = true, applicationUsername: String = "", simulatesAskToBuyInSandbox: Bool = false, completion: @escaping ( PurchaseResult) -> Void) {
 
+    fileprivate func purchaseProduct(_ productId: String, quantity: Int = 1, atomically: Bool = true, applicationUsername: String = "", simulatesAskToBuyInSandbox: Bool = false, completion: @escaping (PurchaseResult) -> Void) {
         retrieveProductsInfo(Set([productId])) { result -> Void in
             if let product = result.retrievedProducts.first {
                 self.purchase(product: product, quantity: quantity, atomically: atomically, applicationUsername: applicationUsername, simulatesAskToBuyInSandbox: simulatesAskToBuyInSandbox, completion: completion)
             } else if let error = result.error {
                 completion(.error(error: SKError(_nsError: error as NSError)))
             } else if let invalidProductId = result.invalidProductIDs.first {
-                let userInfo = [ NSLocalizedDescriptionKey: "Invalid product id: \(invalidProductId)" ]
+                let userInfo = [NSLocalizedDescriptionKey: "Invalid product id: \(invalidProductId)"]
                 let error = NSError(domain: SKErrorDomain, code: SKError.paymentInvalid.rawValue, userInfo: userInfo)
                 completion(.error(error: SKError(_nsError: error)))
             } else {
@@ -66,13 +64,12 @@ public class SwiftyStoreKit {
 
     fileprivate func purchase(product: SKProduct, quantity: Int, atomically: Bool, applicationUsername: String = "", simulatesAskToBuyInSandbox: Bool = false, completion: @escaping (PurchaseResult) -> Void) {
         paymentQueueController.startPayment(Payment(product: product, quantity: quantity, atomically: atomically, applicationUsername: applicationUsername, simulatesAskToBuyInSandbox: simulatesAskToBuyInSandbox) { result in
-            
+
             completion(self.processPurchaseResult(result))
         })
     }
 
     fileprivate func restorePurchases(atomically: Bool = true, applicationUsername: String = "", completion: @escaping (RestoreResults) -> Void) {
-
         paymentQueueController.restorePurchases(RestorePurchases(atomically: atomically, applicationUsername: applicationUsername) { results in
 
             let results = self.processRestoreResults(results)
@@ -81,22 +78,20 @@ public class SwiftyStoreKit {
     }
 
     fileprivate func completeTransactions(atomically: Bool = true, completion: @escaping ([Purchase]) -> Void) {
-
         paymentQueueController.completeTransactions(CompleteTransactions(atomically: atomically, callback: completion))
     }
 
     fileprivate func finishTransaction(_ transaction: PaymentTransaction) {
-
         paymentQueueController.finishTransaction(transaction)
     }
 
     private func processPurchaseResult(_ result: TransactionResult) -> PurchaseResult {
         switch result {
-        case .purchased(let purchase):
+        case let .purchased(purchase):
             return .success(purchase: purchase)
-        case .failed(let error):
+        case let .failed(error):
             return .error(error: error)
-        case .restored(let purchase):
+        case let .restored(purchase):
             return .error(error: storeInternalError(description: "Cannot restore product \(purchase.productId) from purchase path"))
         }
     }
@@ -106,12 +101,12 @@ public class SwiftyStoreKit {
         var restoreFailedPurchases: [(SKError, String?)] = []
         for result in results {
             switch result {
-            case .purchased(let purchase):
+            case let .purchased(purchase):
                 let error = storeInternalError(description: "Cannot purchase product \(purchase.productId) from restore purchases path")
                 restoreFailedPurchases.append((error, purchase.productId))
-            case .failed(let error):
+            case let .failed(error):
                 restoreFailedPurchases.append((error, nil))
-            case .restored(let purchase):
+            case let .restored(purchase):
                 restoredPurchases.append(purchase)
             }
         }
@@ -119,18 +114,18 @@ public class SwiftyStoreKit {
     }
 
     private func storeInternalError(code: SKError.Code = SKError.unknown, description: String = "") -> SKError {
-        let error = NSError(domain: SKErrorDomain, code: code.rawValue, userInfo: [ NSLocalizedDescriptionKey: description ])
+        let error = NSError(domain: SKErrorDomain, code: code.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
         return SKError(_nsError: error)
     }
 }
 
 extension SwiftyStoreKit {
-
     // MARK: Singleton
+
     fileprivate static let sharedInstance = SwiftyStoreKit()
 
     // MARK: Public methods - Purchases
-    
+
     /**
      * Return NO if this device is not able or allowed to make payments
      */
@@ -144,7 +139,6 @@ extension SwiftyStoreKit {
      *  - Parameter completion: handler for result
      */
     public class func retrieveProductsInfo(_ productIds: Set<String>, completion: @escaping (RetrieveResults) -> Void) {
-
         return sharedInstance.retrieveProductsInfo(productIds, completion: completion)
     }
 
@@ -157,10 +151,9 @@ extension SwiftyStoreKit {
      *  - Parameter completion: handler for result
      */
     public class func purchaseProduct(_ productId: String, quantity: Int = 1, atomically: Bool = true, applicationUsername: String = "", simulatesAskToBuyInSandbox: Bool = false, completion: @escaping (PurchaseResult) -> Void) {
-
         sharedInstance.purchaseProduct(productId, quantity: quantity, atomically: atomically, applicationUsername: applicationUsername, simulatesAskToBuyInSandbox: simulatesAskToBuyInSandbox, completion: completion)
     }
-    
+
     /**
      *  Purchase a product
      *  - Parameter product: product to be purchased
@@ -169,8 +162,7 @@ extension SwiftyStoreKit {
      *  - Parameter applicationUsername: an opaque identifier for the user’s account on your system
      *  - Parameter completion: handler for result
      */
-    public class func purchaseProduct(_ product: SKProduct, quantity: Int = 1, atomically: Bool = true, applicationUsername: String = "", simulatesAskToBuyInSandbox: Bool = false, completion: @escaping ( PurchaseResult) -> Void) {
-        
+    public class func purchaseProduct(_ product: SKProduct, quantity: Int = 1, atomically: Bool = true, applicationUsername: String = "", simulatesAskToBuyInSandbox: Bool = false, completion: @escaping (PurchaseResult) -> Void) {
         sharedInstance.purchase(product: product, quantity: quantity, atomically: atomically, applicationUsername: applicationUsername, simulatesAskToBuyInSandbox: simulatesAskToBuyInSandbox, completion: completion)
     }
 
@@ -181,7 +173,6 @@ extension SwiftyStoreKit {
      *  - Parameter completion: handler for result
      */
     public class func restorePurchases(atomically: Bool = true, applicationUsername: String = "", completion: @escaping (RestoreResults) -> Void) {
-
         sharedInstance.restorePurchases(atomically: atomically, applicationUsername: applicationUsername, completion: completion)
     }
 
@@ -191,7 +182,6 @@ extension SwiftyStoreKit {
      *  - Parameter completion: handler for result
      */
     public class func completeTransactions(atomically: Bool = true, completion: @escaping ([Purchase]) -> Void) {
-
         sharedInstance.completeTransactions(atomically: atomically, completion: completion)
     }
 
@@ -201,10 +191,9 @@ extension SwiftyStoreKit {
      *  - Parameter transaction: transaction to finish
      */
     public class func finishTransaction(_ transaction: PaymentTransaction) {
-
         sharedInstance.finishTransaction(transaction)
     }
-    
+
     /**
      * Register a handler for SKPaymentQueue.shouldAddStorePayment delegate method in iOS 11
      */
@@ -213,7 +202,7 @@ extension SwiftyStoreKit {
             sharedInstance.paymentQueueController.shouldAddStorePaymentHandler = shouldAddStorePaymentHandler
         }
     }
-    
+
     /**
      * Register a handler for paymentQueue(_:updatedDownloads:)
      */
@@ -222,23 +211,25 @@ extension SwiftyStoreKit {
             sharedInstance.paymentQueueController.updatedDownloadsHandler = updatedDownloadsHandler
         }
     }
-    
+
     public class func start(_ downloads: [SKDownload]) {
         sharedInstance.paymentQueueController.start(downloads)
     }
+
     public class func pause(_ downloads: [SKDownload]) {
         sharedInstance.paymentQueueController.pause(downloads)
     }
+
     public class func resume(_ downloads: [SKDownload]) {
         sharedInstance.paymentQueueController.resume(downloads)
     }
+
     public class func cancel(_ downloads: [SKDownload]) {
         sharedInstance.paymentQueueController.cancel(downloads)
     }
 }
 
 extension SwiftyStoreKit {
-
     // MARK: Public methods - Receipt verification
 
     /**
@@ -255,7 +246,6 @@ extension SwiftyStoreKit {
      *  - Parameter completion: handler for result
      */
     public class func verifyReceipt(using validator: ReceiptValidator, forceRefresh: Bool = false, completion: @escaping (VerifyReceiptResult) -> Void) {
-
         sharedInstance.receiptVerificator.verifyReceipt(using: validator, forceRefresh: forceRefresh, completion: completion)
     }
 
@@ -265,10 +255,9 @@ extension SwiftyStoreKit {
      *  - Parameter completion: handler for result
      */
     public class func fetchReceipt(forceRefresh: Bool, completion: @escaping (FetchReceiptResult) -> Void) {
-    
         sharedInstance.receiptVerificator.fetchReceipt(forceRefresh: forceRefresh, completion: completion)
     }
-    
+
     /**
      *  Verify the purchase of a Consumable or NonConsumable product in a receipt
      *  - Parameter productId: the product id of the purchase to verify
@@ -276,7 +265,6 @@ extension SwiftyStoreKit {
      *  - return: either notPurchased or purchased
      */
     public class func verifyPurchase(productId: String, inReceipt receipt: ReceiptInfo) -> VerifyPurchaseResult {
-
         return InAppReceipt.verifyPurchase(productId: productId, inReceipt: receipt)
     }
 
@@ -291,10 +279,9 @@ extension SwiftyStoreKit {
      *  - return: Either .notPurchased or .purchased / .expired with the expiry date found in the receipt.
      */
     public class func verifySubscription(ofType type: SubscriptionType, productId: String, inReceipt receipt: ReceiptInfo, validUntil date: Date = Date()) -> VerifySubscriptionResult {
-
         return InAppReceipt.verifySubscriptions(ofType: type, productIds: [productId], inReceipt: receipt, validUntil: date)
     }
-    
+
     /**
      *  Verify the validity of a set of subscriptions in a receipt.
      *
@@ -308,7 +295,6 @@ extension SwiftyStoreKit {
      *  - return: Either .notPurchased or .purchased / .expired with the expiry date found in the receipt.
      */
     public class func verifySubscriptions(ofType type: SubscriptionType = .autoRenewable, productIds: Set<String>, inReceipt receipt: ReceiptInfo, validUntil date: Date = Date()) -> VerifySubscriptionResult {
-
         return InAppReceipt.verifySubscriptions(ofType: type, productIds: productIds, inReceipt: receipt, validUntil: date)
     }
 }

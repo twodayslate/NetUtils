@@ -25,11 +25,12 @@
 import StoreKit
 
 // MARK: - missing SKMutablePayment init with product on OSX
+
 #if os(OSX)
     extension SKMutablePayment {
         convenience init(product: SKProduct) {
             self.init()
-            self.productIdentifier = product.productIdentifier
+            productIdentifier = product.productIdentifier
         }
     }
 #endif

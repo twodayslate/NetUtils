@@ -11,16 +11,14 @@ help:
 
 .PHONY: bootstrap
 bootstrap:
-	brew install swiftformat
-	brew install swiftlint
-	brew install carthage
+	sudo gem install cocoapods
 	pod install
 
 .PHONY: format lint
 lint: format
 format:
-	swiftformat .
-	swiftlint autocorrect "${SOURCE_ROOT}"
+	./Pods/SwiftFormat/CommandLineTool/swiftformat .
+	./Pods/SwiftLint/swiftlint autocorrect "${SOURCE_ROOT}"
 
 .PHONY: open
 open:

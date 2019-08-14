@@ -7,6 +7,7 @@ func getSSID() -> String? {
     var ssid: String?
     if let interfaces = CNCopySupportedInterfaces() as NSArray? {
         for interface in interfaces {
+            // swiftlint:disable:next force_cast
             if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
                 // Can also see BSSID and SSIDDATA
                 ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
@@ -18,11 +19,13 @@ func getSSID() -> String? {
 }
 
 open class WiFi {
+    // swiftlint:disable:next large_tuple
     public class func ssidInfo() -> (interface: String?, ssid: String?, info: [String: Any?]?)? {
         if let interfaces = CNCopySupportedInterfaces() as NSArray? {
-            for _interface in interfaces {
-                if let interfaceInfo = CNCopyCurrentNetworkInfo(_interface as! CFString) as NSDictionary? {
-                    let interface = _interface as? String
+            for interfaceKey in interfaces {
+                // swiftlint:disable:next force_cast
+                if let interfaceInfo = CNCopyCurrentNetworkInfo(interfaceKey as! CFString) as NSDictionary? {
+                    let interface = interfaceKey as? String
                     let ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
                     let info = interfaceInfo as? [String: Any?]
                     return (interface, ssid, info)
@@ -31,9 +34,9 @@ open class WiFi {
         }
         return nil
     }
-    
+
     // completion block wrapper for ssidInfo
-    public class func ssid(completion block: ((String?, String?, [String: Any?]?)->Void)? = nil) -> String? {
+    public class func ssid(completion block: ((String?, String?, [String: Any?]?) -> Void)? = nil) -> String? {
         if let (interface, ssid, info) = WiFi.ssidInfo() {
             block?(interface, ssid, info)
             return ssid
@@ -42,12 +45,14 @@ open class WiFi {
             return nil
         }
     }
-    
+
     public class func proxySettings(for interface: String) -> [String: Any?]? {
         let cfDict = CFNetworkCopySystemProxySettings()
         let nsDict = cfDict!.takeRetainedValue() as NSDictionary
-        let keys = nsDict["__SCOPED__"] as! NSDictionary
-        
+        guard let keys = nsDict["__SCOPED__"] as? NSDictionary else {
+            return nil
+        }
+
         return keys.object(forKey: interface) as? [String: Any?]
     }
 }

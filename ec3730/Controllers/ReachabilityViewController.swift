@@ -6,12 +6,12 @@
 //  Copyright © 2018 Zachary Gorak. All rights reserved.
 //
 
-import Foundation
-import UIKit
-import Reachability
-import NetUtils
 import CoreLocation
+import Foundation
+import NetUtils
+import Reachability
 import SystemConfiguration.CaptiveNetwork
+import UIKit
 
 class InterfaceNavigationController: UINavigationController {
     override func viewDidLoad() {
@@ -19,135 +19,137 @@ class InterfaceNavigationController: UINavigationController {
     }
 }
 
-class NetworkInterfacesTable : UITableViewController {
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.updateInterfaces()
+class NetworkInterfacesTable: UITableViewController {
+    override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+        updateInterfaces()
         if section == 0 {
-            return self.enabledInterfaces.count
+            return enabledInterfaces.count
         } else {
-            return self.disabledInterfaces.count
+            return disabledInterfaces.count
         }
     }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if self.enabledInterfaces.count > 0 && section == 0 {
-            return "Enabled (On)"
+
+    override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if enabledInterfaces.count > 0, section == 0 {
+            return "Enabled (Up)"
         }
-        return "Disabled (Off)"
+        return "Disabled (Down)"
     }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return (self.enabledInterfaces.count > 0 ? 1 : 0) + (self.disabledInterfaces.count > 0 ? 1 : 0)
+
+    override func numberOfSections(in _: UITableView) -> Int {
+        return (enabledInterfaces.count > 0 ? 1 : 0) + (disabledInterfaces.count > 0 ? 1 : 0)
     }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+    override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = CopyDetailCell(title: NSStringFromClass(NetworkInterfacesTable.self), detail: "")
         if indexPath.section == 0 {
-            let interface = self.enabledInterfaces[indexPath.row]
+            let interface = enabledInterfaces[indexPath.row]
             cell.titleLabel?.text = interface.name
             cell.detailLabel?.text = interface.address
         } else {
-            let interface = self.disabledInterfaces[indexPath.row]
+            let interface = disabledInterfaces[indexPath.row]
             cell.titleLabel?.text = interface.name
             cell.titleLabel?.textColor = UIColor.gray
             cell.detailLabel?.text = interface.address
         }
-        
+
         cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
-        
+
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var _interface: Interface?
+
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var currentInterface: Interface?
         if indexPath.section == 0 {
-            _interface = self.enabledInterfaces[indexPath.row]
+            currentInterface = enabledInterfaces[indexPath.row]
         } else {
-            _interface = self.disabledInterfaces[indexPath.row]
+            currentInterface = disabledInterfaces[indexPath.row]
         }
-        
-        _ = WiFi.ssid { (name, ssid, info) in
-            if let interface = _interface {
-                
-                let table = InterfaceTable(interface, interfaceInfo: (name == interface.name ? info : nil), proxyInformation: WiFi.proxySettings(for: interface.name))
-                self.navigationController?.pushViewController(table, animated: true)
-            }
+
+        guard let interface = currentInterface else {
+            tableView.deselectRow(at: indexPath, animated: true)
+            return
         }
-        
-        self.tableView.deselectRow(at: indexPath, animated: true)
+
+        _ = WiFi.ssid { name, _, info in
+            let table = InterfaceTable(
+                interface,
+                interfaceInfo: name == interface.name ? info : nil,
+                proxyInformation: WiFi.proxySettings(for: interface.name)
+            )
+            self.navigationController?.pushViewController(table, animated: true)
+        }
+
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    
+
     private var _cachedInterfaces = Interface.allInterfaces()
-    
+
     private var _cachedDisabledInterfaces = [Interface]()
     private var _cachedEnabledInterfaces = [Interface]()
-    
-    private var cachedInterfaces : [Interface] {
+
+    private var cachedInterfaces: [Interface] {
         return _cachedInterfaces
     }
-    
-    public var disabledInterfaces : [Interface] {
+
+    public var disabledInterfaces: [Interface] {
         return _cachedDisabledInterfaces
     }
-    
-    public var enabledInterfaces : [Interface] {
+
+    public var enabledInterfaces: [Interface] {
         return _cachedEnabledInterfaces
     }
-    
+
     public func updateInterfaces() {
-        self._cachedInterfaces = Interface.allInterfaces()
-        _cachedEnabledInterfaces = [Interface]()
-        _cachedDisabledInterfaces = [Interface]()
-        
-        for interface in self._cachedInterfaces {
-            if let _ = interface.address {
-                if interface.isRunning {
-                    _cachedEnabledInterfaces.append(interface)
-                } else {
-                    _cachedDisabledInterfaces.append(interface)
-                }
+        _cachedInterfaces = Interface.allInterfaces()
+        _cachedEnabledInterfaces.removeAll()
+        _cachedDisabledInterfaces.removeAll()
+
+        for interface in _cachedInterfaces {
+            if interface.isUp {
+                _cachedEnabledInterfaces.append(interface)
+            } else {
+                _cachedDisabledInterfaces.append(interface)
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.edgesForExtendedLayout = UIRectEdge() // https://stackoverflow.com/questions/20809164/uinavigationcontroller-bar-covers-its-uiviewcontrollers-content
-        self.title = "Interfaces"
+        edgesForExtendedLayout = UIRectEdge() // https://stackoverflow.com/questions/20809164/uinavigationcontroller-bar-covers-its-uiviewcontrollers-content
+        title = "Interfaces"
     }
 }
 
-class ReachabilityViewController : UIViewController {
-    
-    var urlBar : UITextField?
-    var button : UIButton?
-    
-    var stack : UIStackView! = nil
-    
+class ReachabilityViewController: UIViewController {
+    var urlBar: UITextField?
+    var button: UIButton?
+
+    var stack: UIStackView!
+
     let connectedLabel = UILabel()
     let connectedCheck = UISwitch()
-    
+
     let interfaceTable = NetworkInterfacesTable()
     let iNav = InterfaceNavigationController()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.white
-        urlBar = UITextField(frame: CGRect(x: 0, y: self.view.frame.midY, width: self.view.frame.width, height: 25))
-        
+        view.backgroundColor = UIColor.white
+        urlBar = UITextField(frame: CGRect(x: 0, y: view.frame.midY, width: view.frame.width, height: 25))
+
         stack = UIStackView()
         stack.axis = NSLayoutConstraint.Axis.vertical
         stack.translatesAutoresizingMaskIntoConstraints = false
 
-        self.view.addSubview(stack)
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack!]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterX, metrics: nil, views: ["scrollview": stack!]))
+        view.addSubview(stack)
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack!]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterX, metrics: nil, views: ["scrollview": stack!]))
 
-        self.stack.addArrangedSubview(iNav.view)
+        stack.addArrangedSubview(iNav.view)
         iNav.setViewControllers([interfaceTable], animated: false)
         interfaceTable.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(update))
-        
+
         interfaceTable.tableView.contentInsetAdjustmentBehavior = .never
 
         let statusStack = UIStackView()
@@ -170,64 +172,65 @@ class ReachabilityViewController : UIViewController {
         let bar = UIToolbar()
         bar.barStyle = .default
         bar.setItems([UIBarButtonItem(customView: connectedStack)], animated: false)
-        self.stack.addArrangedSubview(bar)
+        stack.addArrangedSubview(bar)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.update()
+        update()
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: Reachability.shared)
-        do{
+        do {
             try Reachability.shared.startNotifier()
-        }catch{
+        } catch {
             print("could not start reachability notifier")
         }
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         Reachability.shared.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: Reachability.shared)
     }
-    
+
     @objc
-    func reachabilityChanged(note: Notification) {
+    func reachabilityChanged(note _: Notification) {
         DispatchQueue.main.async {
             self.update()
         }
     }
-    
+
     private let connectedTabBarItem = UITabBarItem(title: "Connectivity", image: UIImage(named: "Connected"), tag: 1)
     private let disconnectedTabBarItem = UITabBarItem(title: "Connectivity", image: UIImage(named: "Disconnected"), tag: 1)
-    
-    func vpn(completion block: ((String?, [String: Any?]?)->())? = nil) {
+
+    func vpn(completion block: ((String?, [String: Any?]?) -> Void)? = nil) {
         let cfDict = CFNetworkCopySystemProxySettings()
         let nsDict = cfDict!.takeRetainedValue() as NSDictionary
+        // swiftlint:disable:next force_cast
         let keys = nsDict["__SCOPED__"] as! NSDictionary
-        
-        print(keys)
-        
-        for key: String in keys.allKeys as! [String] {
-            if key.contains("tap") || key.contains("tun") || key.contains("ppp") || key.contains("ipsec") {
-                block?(key, keys.object(forKey: key) as? [String: Any?])
-                return
+
+        if let allKeys = keys.allKeys as? [String] {
+            for key: String in allKeys {
+                if key.contains("tap") || key.contains("tun") || key.contains("ppp") || key.contains("ipsec") {
+                    block?(key, keys.object(forKey: key) as? [String: Any?])
+                    return
+                }
             }
         }
         block?(nil, nil)
     }
-    
+
     @objc
     func update() {
         switch Reachability.shared.connection {
         case .wifi:
             connectedCheck.setOn(true, animated: true)
-            self.tabBarItem = connectedTabBarItem
+            tabBarItem = connectedTabBarItem
             connectedLabel.text = "Connected via WiFi"
-            
+
             if #available(iOS 13.0, *) {
                 let status = CLLocationManager.authorizationStatus()
                 if status == .authorizedWhenInUse {
-                    if let (_interface, _ssid, _) = WiFi.ssidInfo(), let interface = _interface, let ssid = _ssid {
+                    if let (optionalInterface, optionalSsid, _) = WiFi.ssidInfo(), let interface = optionalInterface, let ssid = optionalSsid {
                         self.connectedLabel.text = self.connectedLabel.text! + " (\(ssid)) on \(interface)"
                     }
                 } else {
@@ -236,28 +239,28 @@ class ReachabilityViewController : UIViewController {
                     locationManager.requestWhenInUseAuthorization()
                 }
             } else {
-                if let (_interface, _ssid, _) = WiFi.ssidInfo(), let interface = _interface, let ssid = _ssid {
-                    self.connectedLabel.text = self.connectedLabel.text! + " (\(ssid)) on \(interface)"
+                if let (optionalInterface, optionalSsid, _) = WiFi.ssidInfo(), let interface = optionalInterface, let ssid = optionalSsid {
+                    connectedLabel.text = connectedLabel.text! + " (\(ssid)) on \(interface)"
                 }
             }
-            
+
         case .cellular:
             connectedCheck.setOn(true, animated: true)
             connectedLabel.text = "Connected via Cellular"
-            self.tabBarItem = connectedTabBarItem
+            tabBarItem = connectedTabBarItem
         case .none:
             connectedCheck.setOn(false, animated: true)
             connectedLabel.text = "Not Connected"
-            self.tabBarItem = disconnectedTabBarItem
+            tabBarItem = disconnectedTabBarItem
         }
-        self.interfaceTable.updateInterfaces()
-        self.interfaceTable.tableView.reloadData()
-        //self.iNav.updateViewConstraints()
+        interfaceTable.updateInterfaces()
+        interfaceTable.tableView.reloadData()
+        // self.iNav.updateViewConstraints()
     }
 }
 
 extension ReachabilityViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        self.update()
+    func locationManager(_: CLLocationManager, didChangeAuthorization _: CLAuthorizationStatus) {
+        update()
     }
 }

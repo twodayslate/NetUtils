@@ -25,37 +25,34 @@
 import Foundation
 import StoreKit
 
-protocol InAppProductRequestBuilder: class {
+protocol InAppProductRequestBuilder: AnyObject {
     func request(productIds: Set<String>, callback: @escaping InAppProductRequestCallback) -> InAppProductRequest
 }
 
 class InAppProductQueryRequestBuilder: InAppProductRequestBuilder {
-    
     func request(productIds: Set<String>, callback: @escaping InAppProductRequestCallback) -> InAppProductRequest {
         return InAppProductQueryRequest(productIds: productIds, callback: callback)
     }
 }
 
 class ProductsInfoController: NSObject {
-
     struct InAppProductQuery {
         let request: InAppProductRequest
         var completionHandlers: [InAppProductRequestCallback]
     }
-    
+
     let inAppProductRequestBuilder: InAppProductRequestBuilder
     init(inAppProductRequestBuilder: InAppProductRequestBuilder = InAppProductQueryRequestBuilder()) {
         self.inAppProductRequestBuilder = inAppProductRequestBuilder
     }
-    
+
     // As we can have multiple inflight requests, we store them in a dictionary by product ids
     private var inflightRequests: [Set<String>: InAppProductQuery] = [:]
 
     func retrieveProductsInfo(_ productIds: Set<String>, completion: @escaping (RetrieveResults) -> Void) {
-
         if inflightRequests[productIds] == nil {
             let request = inAppProductRequestBuilder.request(productIds: productIds) { results in
-                
+
                 if let query = self.inflightRequests[productIds] {
                     for completion in query.completionHandlers {
                         completion(results)

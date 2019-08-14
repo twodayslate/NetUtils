@@ -1,3 +1,5 @@
+// swiftlint:disable all
+
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
 //
@@ -16,9 +18,10 @@
 import Foundation
 
 // MARK: - Coordinate
+
 struct Coordinate: Codable {
     let whoisRecord: WhoisRecord
-    
+
     enum CodingKeys: String, CodingKey {
         case whoisRecord = "WhoisRecord"
     }
@@ -30,32 +33,32 @@ extension Coordinate {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Coordinate.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         whoisRecord: WhoisRecord? = nil
-        ) -> Coordinate {
+    ) -> Coordinate {
         return Coordinate(
             whoisRecord: whoisRecord ?? self.whoisRecord
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -70,6 +73,7 @@ extension Coordinate {
 //   task.resume()
 
 // MARK: - WhoisRecord
+
 struct WhoisRecord: Codable {
     let administrativeContact: WhoisRecordAdministrativeContact?
     let audit: WhoisRecordAudit
@@ -94,7 +98,7 @@ struct WhoisRecord: Codable {
     let updatedDate, updatedDateNormalized: Date?
     let whoisServer: String?
     let zoneContact: WhoisRecordZoneContact?
-    
+
     enum CodingKeys: String, CodingKey {
         case administrativeContact, audit, billingContact, contactEmail, createdDate, createdDateNormalized, customField1Name, customField1Value, customField2Name, customField2Value, customField3Name, customField3Value, domainAvailability, domainName
         case domainNameEXT = "domainNameExt"
@@ -108,18 +112,18 @@ extension WhoisRecord {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(WhoisRecord.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         administrativeContact: WhoisRecordAdministrativeContact?? = nil,
         audit: WhoisRecordAudit? = nil,
@@ -156,7 +160,7 @@ extension WhoisRecord {
         updatedDateNormalized: Date?? = nil,
         whoisServer: String?? = nil,
         zoneContact: WhoisRecordZoneContact?? = nil
-        ) -> WhoisRecord {
+    ) -> WhoisRecord {
         return WhoisRecord(
             administrativeContact: administrativeContact ?? self.administrativeContact,
             audit: audit ?? self.audit,
@@ -195,13 +199,13 @@ extension WhoisRecord {
             zoneContact: zoneContact ?? self.zoneContact
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -216,6 +220,7 @@ extension WhoisRecord {
 //   task.resume()
 
 // MARK: - WhoisRecordAdministrativeContact
+
 struct WhoisRecordAdministrativeContact: Codable {
     let city: String?
     let country, countryCode: String
@@ -224,7 +229,7 @@ struct WhoisRecordAdministrativeContact: Codable {
     let rawText: String
     let state, street1, street2, street3: String?
     let street4, telephone, telephoneEXT, unparsable: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case city, country, countryCode, email, fax
         case faxEXT = "faxExt"
@@ -240,18 +245,18 @@ extension WhoisRecordAdministrativeContact {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(WhoisRecordAdministrativeContact.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         city: String?? = nil,
         country: String? = nil,
@@ -271,7 +276,7 @@ extension WhoisRecordAdministrativeContact {
         telephone: String?? = nil,
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
-        ) -> WhoisRecordAdministrativeContact {
+    ) -> WhoisRecordAdministrativeContact {
         return WhoisRecordAdministrativeContact(
             city: city ?? self.city,
             country: country ?? self.country,
@@ -293,13 +298,13 @@ extension WhoisRecordAdministrativeContact {
             unparsable: unparsable ?? self.unparsable
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -314,6 +319,7 @@ extension WhoisRecordAdministrativeContact {
 //   task.resume()
 
 // MARK: - WhoisRecordAudit
+
 struct WhoisRecordAudit: Codable {
     let createdDate, updatedDate: Date
 }
@@ -324,34 +330,34 @@ extension WhoisRecordAudit {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(WhoisRecordAudit.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         createdDate: Date? = nil,
         updatedDate: Date? = nil
-        ) -> WhoisRecordAudit {
+    ) -> WhoisRecordAudit {
         return WhoisRecordAudit(
             createdDate: createdDate ?? self.createdDate,
             updatedDate: updatedDate ?? self.updatedDate
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -366,6 +372,7 @@ extension WhoisRecordAudit {
 //   task.resume()
 
 // MARK: - WhoisRecordBillingContact
+
 struct WhoisRecordBillingContact: Codable {
     let city: String?
     let country, countryCode: String
@@ -374,7 +381,7 @@ struct WhoisRecordBillingContact: Codable {
     let rawText: String
     let state, street1, street2, street3: String?
     let street4, telephone, telephoneEXT, unparsable: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case city, country, countryCode, email, fax
         case faxEXT = "faxExt"
@@ -390,18 +397,18 @@ extension WhoisRecordBillingContact {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(WhoisRecordBillingContact.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         city: String?? = nil,
         country: String? = nil,
@@ -421,7 +428,7 @@ extension WhoisRecordBillingContact {
         telephone: String?? = nil,
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
-        ) -> WhoisRecordBillingContact {
+    ) -> WhoisRecordBillingContact {
         return WhoisRecordBillingContact(
             city: city ?? self.city,
             country: country ?? self.country,
@@ -443,13 +450,13 @@ extension WhoisRecordBillingContact {
             unparsable: unparsable ?? self.unparsable
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -464,6 +471,7 @@ extension WhoisRecordBillingContact {
 //   task.resume()
 
 // MARK: - WhoisRecordNameServers
+
 struct WhoisRecordNameServers: Codable {
     let hostNames: [String]
     let ips: [JSONAny]?
@@ -476,36 +484,36 @@ extension WhoisRecordNameServers {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(WhoisRecordNameServers.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         hostNames: [String]? = nil,
         ips: [JSONAny]?? = nil,
         rawText: String? = nil
-        ) -> WhoisRecordNameServers {
+    ) -> WhoisRecordNameServers {
         return WhoisRecordNameServers(
             hostNames: hostNames ?? self.hostNames,
             ips: ips ?? self.ips,
             rawText: rawText ?? self.rawText
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -520,6 +528,7 @@ extension WhoisRecordNameServers {
 //   task.resume()
 
 // MARK: - Registrant
+
 struct Registrant: Codable {
     let city: String?
     let country, countryCode: String
@@ -528,7 +537,7 @@ struct Registrant: Codable {
     let rawText: String
     let state, street1, street2, street3: String?
     let street4, telephone, telephoneEXT, unparsable: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case city, country, countryCode, email, fax
         case faxEXT = "faxExt"
@@ -544,18 +553,18 @@ extension Registrant {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Registrant.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         city: String?? = nil,
         country: String? = nil,
@@ -575,7 +584,7 @@ extension Registrant {
         telephone: String?? = nil,
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
-        ) -> Registrant {
+    ) -> Registrant {
         return Registrant(
             city: city ?? self.city,
             country: country ?? self.country,
@@ -597,13 +606,13 @@ extension Registrant {
             unparsable: unparsable ?? self.unparsable
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -618,6 +627,7 @@ extension Registrant {
 //   task.resume()
 
 // MARK: - RegistryData
+
 struct RegistryData: Codable {
     let administrativeContact: RegistryDataAdministrativeContact?
     let audit: RegistryDataAudit
@@ -645,18 +655,18 @@ extension RegistryData {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(RegistryData.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         administrativeContact: RegistryDataAdministrativeContact?? = nil,
         audit: RegistryDataAudit? = nil,
@@ -687,7 +697,7 @@ extension RegistryData {
         updatedDateNormalized: Date? = nil,
         whoisServer: String? = nil,
         zoneContact: RegistryDataZoneContact?? = nil
-        ) -> RegistryData {
+    ) -> RegistryData {
         return RegistryData(
             administrativeContact: administrativeContact ?? self.administrativeContact,
             audit: audit ?? self.audit,
@@ -720,13 +730,13 @@ extension RegistryData {
             zoneContact: zoneContact ?? self.zoneContact
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -741,6 +751,7 @@ extension RegistryData {
 //   task.resume()
 
 // MARK: - RegistryDataAdministrativeContact
+
 struct RegistryDataAdministrativeContact: Codable {
     let city: String?
     let country, countryCode: String
@@ -749,7 +760,7 @@ struct RegistryDataAdministrativeContact: Codable {
     let rawText: String
     let state, street1, street2, street3: String?
     let street4, telephone, telephoneEXT, unparsable: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case city, country, countryCode, email, fax
         case faxEXT = "faxExt"
@@ -765,18 +776,18 @@ extension RegistryDataAdministrativeContact {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(RegistryDataAdministrativeContact.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         city: String?? = nil,
         country: String? = nil,
@@ -796,7 +807,7 @@ extension RegistryDataAdministrativeContact {
         telephone: String?? = nil,
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
-        ) -> RegistryDataAdministrativeContact {
+    ) -> RegistryDataAdministrativeContact {
         return RegistryDataAdministrativeContact(
             city: city ?? self.city,
             country: country ?? self.country,
@@ -818,13 +829,13 @@ extension RegistryDataAdministrativeContact {
             unparsable: unparsable ?? self.unparsable
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -839,6 +850,7 @@ extension RegistryDataAdministrativeContact {
 //   task.resume()
 
 // MARK: - RegistryDataAudit
+
 struct RegistryDataAudit: Codable {
     let createdDate, updatedDate: Date
 }
@@ -849,34 +861,34 @@ extension RegistryDataAudit {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(RegistryDataAudit.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         createdDate: Date? = nil,
         updatedDate: Date? = nil
-        ) -> RegistryDataAudit {
+    ) -> RegistryDataAudit {
         return RegistryDataAudit(
             createdDate: createdDate ?? self.createdDate,
             updatedDate: updatedDate ?? self.updatedDate
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -891,6 +903,7 @@ extension RegistryDataAudit {
 //   task.resume()
 
 // MARK: - RegistryDataBillingContact
+
 struct RegistryDataBillingContact: Codable {
     let city: String?
     let country, countryCode: String
@@ -899,7 +912,7 @@ struct RegistryDataBillingContact: Codable {
     let rawText: String
     let state, street1, street2, street3: String?
     let street4, telephone, telephoneEXT, unparsable: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case city, country, countryCode, email, fax
         case faxEXT = "faxExt"
@@ -915,18 +928,18 @@ extension RegistryDataBillingContact {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(RegistryDataBillingContact.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         city: String?? = nil,
         country: String? = nil,
@@ -946,7 +959,7 @@ extension RegistryDataBillingContact {
         telephone: String?? = nil,
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
-        ) -> RegistryDataBillingContact {
+    ) -> RegistryDataBillingContact {
         return RegistryDataBillingContact(
             city: city ?? self.city,
             country: country ?? self.country,
@@ -968,13 +981,13 @@ extension RegistryDataBillingContact {
             unparsable: unparsable ?? self.unparsable
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -989,6 +1002,7 @@ extension RegistryDataBillingContact {
 //   task.resume()
 
 // MARK: - RegistryDataNameServers
+
 struct RegistryDataNameServers: Codable {
     let hostNames: [String]
     let ips: [JSONAny]?
@@ -1001,36 +1015,36 @@ extension RegistryDataNameServers {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(RegistryDataNameServers.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         hostNames: [String]? = nil,
         ips: [JSONAny]?? = nil,
         rawText: String? = nil
-        ) -> RegistryDataNameServers {
+    ) -> RegistryDataNameServers {
         return RegistryDataNameServers(
             hostNames: hostNames ?? self.hostNames,
             ips: ips ?? self.ips,
             rawText: rawText ?? self.rawText
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1045,6 +1059,7 @@ extension RegistryDataNameServers {
 //   task.resume()
 
 // MARK: - Regustrant
+
 struct Regustrant: Codable {
     let city, name, organization, postalCode: String?
     let rawText: String
@@ -1059,18 +1074,18 @@ extension Regustrant {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Regustrant.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         city: String?? = nil,
         name: String?? = nil,
@@ -1083,7 +1098,7 @@ extension Regustrant {
         street3: String?? = nil,
         street4: String?? = nil,
         unparsable: String? = nil
-        ) -> Regustrant {
+    ) -> Regustrant {
         return Regustrant(
             city: city ?? self.city,
             name: name ?? self.name,
@@ -1098,13 +1113,13 @@ extension Regustrant {
             unparsable: unparsable ?? self.unparsable
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1119,6 +1134,7 @@ extension Regustrant {
 //   task.resume()
 
 // MARK: - RegistryDataTechnicalContact
+
 struct RegistryDataTechnicalContact: Codable {
     let city: String?
     let country, countryCode: String
@@ -1127,7 +1143,7 @@ struct RegistryDataTechnicalContact: Codable {
     let rawText: String
     let state, street1, street2, street3: String?
     let street4, telephone, telephoneEXT, unparsable: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case city, country, countryCode, email, fax
         case faxEXT = "faxExt"
@@ -1143,18 +1159,18 @@ extension RegistryDataTechnicalContact {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(RegistryDataTechnicalContact.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         city: String?? = nil,
         country: String? = nil,
@@ -1174,7 +1190,7 @@ extension RegistryDataTechnicalContact {
         telephone: String?? = nil,
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
-        ) -> RegistryDataTechnicalContact {
+    ) -> RegistryDataTechnicalContact {
         return RegistryDataTechnicalContact(
             city: city ?? self.city,
             country: country ?? self.country,
@@ -1196,13 +1212,13 @@ extension RegistryDataTechnicalContact {
             unparsable: unparsable ?? self.unparsable
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1217,6 +1233,7 @@ extension RegistryDataTechnicalContact {
 //   task.resume()
 
 // MARK: - RegistryDataZoneContact
+
 struct RegistryDataZoneContact: Codable {
     let city: String?
     let country, countryCode: String
@@ -1225,7 +1242,7 @@ struct RegistryDataZoneContact: Codable {
     let rawText: String
     let state, street1, street2, street3: String?
     let street4, telephone, telephoneEXT, unparsable: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case city, country, countryCode, email, fax
         case faxEXT = "faxExt"
@@ -1241,18 +1258,18 @@ extension RegistryDataZoneContact {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(RegistryDataZoneContact.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         city: String?? = nil,
         country: String? = nil,
@@ -1272,7 +1289,7 @@ extension RegistryDataZoneContact {
         telephone: String?? = nil,
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
-        ) -> RegistryDataZoneContact {
+    ) -> RegistryDataZoneContact {
         return RegistryDataZoneContact(
             city: city ?? self.city,
             country: country ?? self.country,
@@ -1294,13 +1311,13 @@ extension RegistryDataZoneContact {
             unparsable: unparsable ?? self.unparsable
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1315,6 +1332,7 @@ extension RegistryDataZoneContact {
 //   task.resume()
 
 // MARK: - WhoisRecordTechnicalContact
+
 struct WhoisRecordTechnicalContact: Codable {
     let city: String?
     let country, countryCode: String
@@ -1323,7 +1341,7 @@ struct WhoisRecordTechnicalContact: Codable {
     let rawText: String
     let state, street1, street2, street3: String?
     let street4, telephone, telephoneEXT, unparsable: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case city, country, countryCode, email, fax
         case faxEXT = "faxExt"
@@ -1339,18 +1357,18 @@ extension WhoisRecordTechnicalContact {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(WhoisRecordTechnicalContact.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         city: String?? = nil,
         country: String? = nil,
@@ -1370,7 +1388,7 @@ extension WhoisRecordTechnicalContact {
         telephone: String?? = nil,
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
-        ) -> WhoisRecordTechnicalContact {
+    ) -> WhoisRecordTechnicalContact {
         return WhoisRecordTechnicalContact(
             city: city ?? self.city,
             country: country ?? self.country,
@@ -1392,13 +1410,13 @@ extension WhoisRecordTechnicalContact {
             unparsable: unparsable ?? self.unparsable
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1413,6 +1431,7 @@ extension WhoisRecordTechnicalContact {
 //   task.resume()
 
 // MARK: - WhoisRecordZoneContact
+
 struct WhoisRecordZoneContact: Codable {
     let city: String?
     let country, countryCode: String
@@ -1421,7 +1440,7 @@ struct WhoisRecordZoneContact: Codable {
     let rawText: String
     let state, street1, street2, street3: String?
     let street4, telephone, telephoneEXT, unparsable: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case city, country, countryCode, email, fax
         case faxEXT = "faxExt"
@@ -1437,18 +1456,18 @@ extension WhoisRecordZoneContact {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(WhoisRecordZoneContact.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func with(
         city: String?? = nil,
         country: String? = nil,
@@ -1468,7 +1487,7 @@ extension WhoisRecordZoneContact {
         telephone: String?? = nil,
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
-        ) -> WhoisRecordZoneContact {
+    ) -> WhoisRecordZoneContact {
         return WhoisRecordZoneContact(
             city: city ?? self.city,
             country: country ?? self.country,
@@ -1490,13 +1509,13 @@ extension WhoisRecordZoneContact {
             unparsable: unparsable ?? self.unparsable
         )
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        return String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1522,7 +1541,7 @@ func newJSONEncoder() -> JSONEncoder {
 
 extension URLSession {
     fileprivate func codableTask<T: Codable>(with url: URL, completionHandler: @escaping (T?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        return self.dataTask(with: url) { data, response, error in
+        return dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 completionHandler(nil, response, error)
                 return
@@ -1530,37 +1549,36 @@ extension URLSession {
             completionHandler(try? newJSONDecoder().decode(T.self, from: data), response, nil)
         }
     }
-    
+
     func coordinateTask(with url: URL, completionHandler: @escaping (Coordinate?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        return self.codableTask(with: url, completionHandler: completionHandler)
+        return codableTask(with: url, completionHandler: completionHandler)
     }
 }
 
 // MARK: - Encode/decode helpers
 
 class JSONNull: Codable, Hashable {
-    
-    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
+    public static func == (_: JSONNull, _: JSONNull) -> Bool {
         return true
     }
-    
+
     public var hashValue: Int {
         return 0
     }
-    
-    public func hash(into hasher: inout Hasher) {
+
+    public func hash(into _: inout Hasher) {
         // No-op
     }
-    
+
     public init() {}
-    
+
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if !container.decodeNil() {
             throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encodeNil()
@@ -1569,38 +1587,37 @@ class JSONNull: Codable, Hashable {
 
 class JSONCodingKey: CodingKey {
     let key: String
-    
-    required init?(intValue: Int) {
+
+    required init?(intValue _: Int) {
         return nil
     }
-    
+
     required init?(stringValue: String) {
         key = stringValue
     }
-    
+
     var intValue: Int? {
         return nil
     }
-    
+
     var stringValue: String {
         return key
     }
 }
 
 class JSONAny: Codable {
-    
     let value: Any
-    
+
     static func decodingError(forCodingPath codingPath: [CodingKey]) -> DecodingError {
         let context = DecodingError.Context(codingPath: codingPath, debugDescription: "Cannot decode JSONAny")
         return DecodingError.typeMismatch(JSONAny.self, context)
     }
-    
+
     static func encodingError(forValue value: Any, codingPath: [CodingKey]) -> EncodingError {
         let context = EncodingError.Context(codingPath: codingPath, debugDescription: "Cannot encode JSONAny")
         return EncodingError.invalidValue(value, context)
     }
-    
+
     static func decode(from container: SingleValueDecodingContainer) throws -> Any {
         if let value = try? container.decode(Bool.self) {
             return value
@@ -1619,7 +1636,7 @@ class JSONAny: Codable {
         }
         throw decodingError(forCodingPath: container.codingPath)
     }
-    
+
     static func decode(from container: inout UnkeyedDecodingContainer) throws -> Any {
         if let value = try? container.decode(Bool.self) {
             return value
@@ -1646,7 +1663,7 @@ class JSONAny: Codable {
         }
         throw decodingError(forCodingPath: container.codingPath)
     }
-    
+
     static func decode(from container: inout KeyedDecodingContainer<JSONCodingKey>, forKey key: JSONCodingKey) throws -> Any {
         if let value = try? container.decode(Bool.self, forKey: key) {
             return value
@@ -1673,7 +1690,7 @@ class JSONAny: Codable {
         }
         throw decodingError(forCodingPath: container.codingPath)
     }
-    
+
     static func decodeArray(from container: inout UnkeyedDecodingContainer) throws -> [Any] {
         var arr: [Any] = []
         while !container.isAtEnd {
@@ -1682,7 +1699,7 @@ class JSONAny: Codable {
         }
         return arr
     }
-    
+
     static func decodeDictionary(from container: inout KeyedDecodingContainer<JSONCodingKey>) throws -> [String: Any] {
         var dict = [String: Any]()
         for key in container.allKeys {
@@ -1691,7 +1708,7 @@ class JSONAny: Codable {
         }
         return dict
     }
-    
+
     static func encode(to container: inout UnkeyedEncodingContainer, array: [Any]) throws {
         for value in array {
             if let value = value as? Bool {
@@ -1715,7 +1732,7 @@ class JSONAny: Codable {
             }
         }
     }
-    
+
     static func encode(to container: inout KeyedEncodingContainer<JSONCodingKey>, dictionary: [String: Any]) throws {
         for (key, value) in dictionary {
             let key = JSONCodingKey(stringValue: key)!
@@ -1740,7 +1757,7 @@ class JSONAny: Codable {
             }
         }
     }
-    
+
     static func encode(to container: inout SingleValueEncodingContainer, value: Any) throws {
         if let value = value as? Bool {
             try container.encode(value)
@@ -1756,18 +1773,18 @@ class JSONAny: Codable {
             throw encodingError(forValue: value, codingPath: container.codingPath)
         }
     }
-    
+
     public required init(from decoder: Decoder) throws {
         if var arrayContainer = try? decoder.unkeyedContainer() {
-            self.value = try JSONAny.decodeArray(from: &arrayContainer)
+            value = try JSONAny.decodeArray(from: &arrayContainer)
         } else if var container = try? decoder.container(keyedBy: JSONCodingKey.self) {
-            self.value = try JSONAny.decodeDictionary(from: &container)
+            value = try JSONAny.decodeDictionary(from: &container)
         } else {
             let container = try decoder.singleValueContainer()
-            self.value = try JSONAny.decode(from: container)
+            value = try JSONAny.decode(from: container)
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         if let arr = self.value as? [Any] {
             var container = encoder.unkeyedContainer()
@@ -1777,7 +1794,7 @@ class JSONAny: Codable {
             try JSONAny.encode(to: &container, dictionary: dict)
         } else {
             var container = encoder.singleValueContainer()
-            try JSONAny.encode(to: &container, value: self.value)
+            try JSONAny.encode(to: &container, value: value)
         }
     }
 }

@@ -40,14 +40,13 @@ struct Payment: Hashable {
         hasher.combine(applicationUsername)
         hasher.combine(simulatesAskToBuyInSandbox)
     }
-    
+
     static func == (lhs: Payment, rhs: Payment) -> Bool {
         return lhs.product.productIdentifier == rhs.product.productIdentifier
     }
 }
 
 class PaymentsController: TransactionController {
-
     private var payments: [Payment] = []
 
     private func findPaymentIndex(withProductIdentifier identifier: String) -> Int? {
@@ -66,11 +65,9 @@ class PaymentsController: TransactionController {
     }
 
     func processTransaction(_ transaction: SKPaymentTransaction, on paymentQueue: PaymentQueue) -> Bool {
-
         let transactionProductIdentifier = transaction.payment.productIdentifier
 
         guard let paymentIndex = findPaymentIndex(withProductIdentifier: transactionProductIdentifier) else {
-
             return false
         }
         let payment = payments[paymentIndex]
@@ -79,7 +76,7 @@ class PaymentsController: TransactionController {
 
         if transactionState == .purchased {
             let purchase = PurchaseDetails(productId: transactionProductIdentifier, quantity: transaction.payment.quantity, product: payment.product, transaction: transaction, originalTransaction: transaction.original, needsFinishTransaction: !payment.atomically)
-            
+
             payment.callback(.purchased(purchase: purchase))
 
             if payment.atomically {
@@ -89,7 +86,6 @@ class PaymentsController: TransactionController {
             return true
         }
         if transactionState == .failed {
-
             payment.callback(.failed(error: transactionError(for: transaction.error as NSError?)))
 
             paymentQueue.finishTransaction(transaction)
@@ -105,13 +101,12 @@ class PaymentsController: TransactionController {
 
     func transactionError(for error: NSError?) -> SKError {
         let message = "Unknown error"
-        let altError = NSError(domain: SKErrorDomain, code: SKError.unknown.rawValue, userInfo: [ NSLocalizedDescriptionKey: message ])
+        let altError = NSError(domain: SKErrorDomain, code: SKError.unknown.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
         let nsError = error ?? altError
         return SKError(_nsError: nsError)
     }
 
     func processTransactions(_ transactions: [SKPaymentTransaction], on paymentQueue: PaymentQueue) -> [SKPaymentTransaction] {
-
         return transactions.filter { !processTransaction($0, on: paymentQueue) }
     }
 }
