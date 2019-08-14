@@ -192,38 +192,55 @@ class WhoisLockedTableViewCell: UITableViewCell {
             buy.setTitle((buy.titleLabel?.text)! + " - " + price, for: .normal)
         } else {
             SwiftyStoreKit.retrieveProductsInfo([WhoisXml.subscriptions.monthly.identifier]) { result in
-                if let product = result.retrievedProducts.first {
-                    DispatchQueue.main.async {
-                        guard let price = product.localizedPrice else {
-                            return
+                guard result.error == nil else {
+                    print(result, "error: \(result.error!.localizedDescription)")
+                    return
+                }
+                
+                guard let product = result.retrievedProducts.first else {
+                    print("No products retrieved", result)
+                    return
+                }
+                
+                guard let price = product.localizedPrice else {
+                    return
+                }
+                
+                cachedPrice = price
+                
+                if #available(iOS 11.2, *) {
+                    if let sub = product.subscriptionPeriod {
+                        
+                        var terms = (single: "", multiple: "")
+                        
+                        switch sub.unit {
+                        case .day:
+                            terms = (single: "day", multiple: "days")
+                            break
+                        case .week:
+                            terms = (single: "week", multiple: "weeks")
+                        case .month:
+                            terms = (single: "month", multiple: "months")
+                            break
+                        case .year:
+                            terms = (single: "year", multiple: "years")
+                            break
+                        default:
+                            break
                         }
                         
-                        cachedPrice = price
-                        
-                        if #available(iOS 11.2, *) {
-                            if let sub = product.subscriptionPeriod {
-                                switch sub.unit {
-                                case .month:
-                                    if sub.numberOfUnits == 1 {
-                                        cachedPrice = price + "/month"
-                                    } else {
-                                        cachedPrice = price + "/" + String(describing: sub.numberOfUnits) + " months"
-                                    }
-                                    break
-                                default:
-                                    break
-                                }
+                        if !terms.single.isEmpty {
+                            if sub.numberOfUnits == 1 {
+                                cachedPrice = price + "/" + terms.single
+                            } else if sub.numberOfUnits > 1 {
+                                cachedPrice = price + "/" + String(describing: sub.numberOfUnits) + " " + terms.multiple
                             }
                         }
-                        
-                        buy.setTitle((buy.titleLabel?.text)! + " - " + cachedPrice!, for: .normal)
                     }
                 }
-                else if let invalidProductId = result.invalidProductIDs.first {
-                    print("Invalid product identifier: \(invalidProductId)")
-                }
-                else {
-                    print("Error: \(result.error?.localizedDescription)")
+                
+                DispatchQueue.main.async {
+                    buy.setTitle((buy.titleLabel?.text)! + " - " + cachedPrice!, for: .normal)
                 }
             }
         }

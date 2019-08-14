@@ -27,8 +27,6 @@ class PingViewController : UIViewController, UIScrollViewDelegate, UITextFieldDe
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        UIApplication.shared.statusBarStyle = .lightContent
-        
         stack = UIStackView()
         stack.backgroundColor = UIColor.black
         stack.axis = NSLayoutConstraint.Axis.vertical
@@ -39,8 +37,8 @@ class PingViewController : UIViewController, UIScrollViewDelegate, UITextFieldDe
         stack.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(stack)
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack!]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack!]))
 
         status = UITextView()
         status?.autoresizingMask = [.flexibleHeight, .flexibleWidth]

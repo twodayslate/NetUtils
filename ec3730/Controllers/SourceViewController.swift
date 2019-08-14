@@ -26,9 +26,7 @@ class SourceViewController : UIViewController, UIScrollViewDelegate, UITextField
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        
-        UIApplication.shared.statusBarStyle = .default
-        
+
         stack = UIStackView()
         stack.backgroundColor = UIColor.black
         stack.axis = NSLayoutConstraint.Axis.vertical
@@ -38,8 +36,8 @@ class SourceViewController : UIViewController, UIScrollViewDelegate, UITextField
         stack.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(stack)
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack!]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack!]))
         
         sourceView = UITextView()
         sourceView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]

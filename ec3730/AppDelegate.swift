@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         SwiftyStoreKit.finishTransaction(purchase.transaction)
                     }
                 // Unlock content
-                case .failed, .purchasing, .deferred:
+                default:
                     break // do nothing
                 }
             }
