@@ -2,18 +2,8 @@ import Foundation
 import SwiftyStoreKit
 import UIKit
 
-class WhoisXmlDnsCellManager {
-    var cells = [UITableViewCell]()
-    var iapDelegate: InAppPurchaseUpdateDelegate?
-
-    init() {
-        cells.append(LoadingCell(reuseIdentifier: "loading"))
-        WhoisXml.verifySubscription { error, results in
-            self.verifyInAppSubscription(error: error, result: results)
-        }
-    }
-
-    func askForMoney() {
+class WhoisXmlDnsCellManager: CellManager {
+    override func askForMoney() {
         if !WhoisXml.isSubscribed {
             let locked = WhoisLockedTableViewCell(reuseIdentifier: "dnslocked", heading: "Unlock DNS Lookup", subheading: "Our hosted DNS Lookup provides the records associated with a domain")
             locked.iapDelegate = self
@@ -21,30 +11,14 @@ class WhoisXmlDnsCellManager {
         }
     }
 
-    func startLoading() {
-        if WhoisXml.isSubscribed {
-            let cell = LoadingCell(reuseIdentifier: "loading")
-            cell.spinner.startAnimating()
-            cell.separatorInset.right = .greatestFiniteMagnitude
-            cells = [cell]
-        } else {
-            askForMoney()
-        }
-    }
-
-    func stopLoading() {
-        if WhoisXml.isSubscribed {
-            cells.removeAll()
-        } else {
-            askForMoney()
-        }
-    }
-
+    public var currentRecords: [DNSRecords]?
     func configure(_ records: [DNSRecords]?) {
         stopLoading()
         guard let records = records else {
             return
         }
+
+        currentRecords = records
 
         for record in records {
             let cell = ContactCell(reuseIdentifier: record.rawText, title: record.dnsType)
@@ -81,41 +55,8 @@ class WhoisXmlDnsCellManager {
             if let value = record.serial {
                 cell.addRow(ContactCellRow(title: "Serial", detail: "\(value)"))
             }
-            
+
             cells.append(cell)
         }
-    }
-}
-
-extension WhoisXmlDnsCellManager: InAppPurchaseUpdateDelegate {
-    func restoreInAppPurchase(_ results: RestoreResults) {
-        if WhoisXml.isSubscribed {
-            cells.removeAll()
-        }
-
-        iapDelegate?.restoreInAppPurchase(results)
-    }
-
-    func updatedInAppPurchase(_ result: PurchaseResult) {
-        switch result {
-        case .success:
-            if WhoisXml.isSubscribed {
-                cells.removeAll()
-            }
-        default:
-            break
-        }
-
-        iapDelegate?.updatedInAppPurchase(result)
-    }
-
-    func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?) {
-        if WhoisXml.isSubscribed {
-            cells.removeAll()
-        } else {
-            askForMoney()
-        }
-
-        iapDelegate?.verifyInAppSubscription(error: error, result: result)
     }
 }

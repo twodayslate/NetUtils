@@ -109,22 +109,34 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
         startAvoidingKeyboard()
     }
 
+    /// is loading to find simple IP address
     private var _isLoading = false
     var isLoading: Bool {
         get {
-            return _isLoading
+            return _isLoading && hostTable.isLoading
         }
         set {
             DispatchQueue.main.async {
-                self.hostTable.isLoading = self.isLoading
                 if newValue {
+                    self.hostTable.isLoading = true
                     self.loader.startAnimating()
                 } else {
+                    self.hostTable.isLoading = false
                     self.loader.stopAnimating()
                 }
             }
             _isLoading = newValue
+
+            if self.isLoading {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            } else {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
         }
+    }
+
+    func checkLoading() {
+        isLoading = _isLoading
     }
 
     let loader = UIActivityIndicatorView()
@@ -219,6 +231,7 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
 
             if WhoisXml.isSubscribed {
                 WhoisXml.whoisQuery(host) { error, response in
+                    self.checkLoading()
                     guard error == nil else {
                         self.showError("Error getting WHOIS", message: error!.localizedDescription)
                         self.hostTable.whoisRecord = nil
@@ -235,6 +248,7 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
                 }
 
                 WhoisXml.query(host, service: .dns) { (error, response: DnsCoordinate?) in
+                    self.checkLoading()
                     guard error == nil else {
                         self.showError("Error getting WHOIS", message: error!.localizedDescription)
                         self.hostTable.whoisRecord = nil

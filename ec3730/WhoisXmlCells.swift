@@ -75,45 +75,16 @@ class ContactCell: UITableViewCell {
     }
 }
 
-class WhoisXmlCellManager {
-    var cells = [UITableViewCell]()
-    var iapDelegate: InAppPurchaseUpdateDelegate?
+class WhoisXmlCellManager: CellManager {
+    var currentRecord: WhoisRecord?
 
-    init() {
-        cells.append(LoadingCell(reuseIdentifier: "loading"))
-        WhoisXml.verifySubscription { error, results in
-            self.verifyInAppSubscription(error: error, result: results)
-        }
-    }
-
-    func askForMoney() {
+    override func askForMoney() {
         if !WhoisXml.isSubscribed {
             let locked = WhoisLockedTableViewCell(reuseIdentifier: "locked")
             locked.iapDelegate = self
             cells = [locked]
         }
     }
-
-    func startLoading() {
-        if WhoisXml.isSubscribed {
-            let cell = LoadingCell(reuseIdentifier: "loading")
-            cell.spinner.startAnimating()
-            cell.separatorInset.right = .greatestFiniteMagnitude
-            cells = [cell]
-        } else {
-            askForMoney()
-        }
-    }
-
-    func stopLoading() {
-        if WhoisXml.isSubscribed {
-            cells.removeAll()
-        } else {
-            askForMoney()
-        }
-    }
-
-    var currentRecord: WhoisRecord?
 
     // swiftlint:disable:next cyclomatic_complexity
     func configure(_ record: WhoisRecord?) {
@@ -682,38 +653,5 @@ class WhoisXmlCellManager {
             let customCell = CopyDetailCell(title: customFieldName, detail: customFieldValue)
             cells.append(customCell)
         }
-    }
-}
-
-extension WhoisXmlCellManager: InAppPurchaseUpdateDelegate {
-    func restoreInAppPurchase(_ results: RestoreResults) {
-        if WhoisXml.isSubscribed {
-            cells.removeAll()
-        }
-
-        iapDelegate?.restoreInAppPurchase(results)
-    }
-
-    func updatedInAppPurchase(_ result: PurchaseResult) {
-        switch result {
-        case .success:
-            if WhoisXml.isSubscribed {
-                cells.removeAll()
-            }
-        default:
-            break
-        }
-
-        iapDelegate?.updatedInAppPurchase(result)
-    }
-
-    func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?) {
-        if WhoisXml.isSubscribed {
-            cells.removeAll()
-        } else {
-            askForMoney()
-        }
-
-        iapDelegate?.verifyInAppSubscription(error: error, result: result)
     }
 }

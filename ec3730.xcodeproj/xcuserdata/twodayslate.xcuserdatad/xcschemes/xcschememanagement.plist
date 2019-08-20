@@ -14,6 +14,29 @@
 			<key>orderHint</key>
 			<integer>10</integer>
 		</dict>
+		<key>ec3730UITests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>F6C8D8A0212E5AE900309373</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F6C8D8B6212E5AEB00309373</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F6C8D8C1212E5AEB00309373</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>

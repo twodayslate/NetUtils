@@ -21,9 +21,6 @@ target 'ec3730' do
     # Pods for testing
   end
 
-  target 'ec3730UITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  target 'ec3730UITests'
 
 end

@@ -13,9 +13,12 @@ import UIKit
 class HostTable: UITableViewController {
     let lockIcon = UIImage(named: "Lock")
 
-    var isLoading = false {
-        didSet {
-            if isLoading {
+    var isLoading: Bool {
+        get {
+            return dnsManager.isLoading && whoisManger.isLoading
+        }
+        set {
+            if newValue {
                 DispatchQueue.main.async {
                     self.whoisManger.startLoading()
                     self.dnsManager.startLoading()

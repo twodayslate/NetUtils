@@ -56,6 +56,7 @@
 		30A1A9F011DCCB5881FB72D9C89E14A3 /* railscasts.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 2AAD9A37DFA7E948C804397B46710719 /* railscasts.min.css */; };
 		33CF97469D3F267E887B8320493B195A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F2A6336E2386C25AFE81DF7DBDD2EF /* Foundation.framework */; };
 		3406709367A4D069D707E6343D9B499F /* sunburst.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 6434F58820969E3ADB1AE6BA2F067673 /* sunburst.min.css */; };
+		3B54FAE8647729ABB8A7AD7A937C1EB8 /* Pods-ec3730-ec3730UITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B82E4A6642415363E67C437C87D763C7 /* Pods-ec3730-ec3730UITests-dummy.m */; };
 		3B95F6D7813F2794DD6CF0BEAE2853DC /* PaymentQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D47EE0EC1576BF11607FF1BBAF7E7D2 /* PaymentQueueController.swift */; };
 		3CAA6E5219F3997A859577B688E9365A /* routeros.min.css in Resources */ = {isa = PBXBuildFile; fileRef = DB37FD80B3C626477D4F4B6106A35AEE /* routeros.min.css */; };
 		3F5BF0A034ED0E363A5CDD05C36EA2A3 /* hopscotch.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 51233B66BE1C136C164BE587AC629D33 /* hopscotch.min.css */; };
@@ -70,11 +71,11 @@
 		4BEC56EB2A2FBCEF4A32EE6EE1F48E22 /* SKProduct+LocalizedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211F7D8C8036B4F6942B55905D9C9D9C /* SKProduct+LocalizedPrice.swift */; };
 		4F246508449CC33854B7E1CC61699D9D /* shades-of-purple.min.css in Resources */ = {isa = PBXBuildFile; fileRef = C540AA97A2675E652BFA5D0B5A046701 /* shades-of-purple.min.css */; };
 		509AAB38C4407B8DF620D3364EE6860D /* docco.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 6B6839A41DC5A20FABDEFB426B97FB61 /* docco.min.css */; };
-		51DD16C49CD63BC3E1E33E57CF95F9F4 /* Pods-ec3730-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E82BE42B4620D01C840967D3EB6E2645 /* Pods-ec3730-dummy.m */; };
+		51DD16C49CD63BC3E1E33E57CF95F9F4 /* Pods-ec3730-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAE04A2CFE900CBBE1D833C5DC32158 /* Pods-ec3730-dummy.m */; };
 		52771A7768CF12328ECD07AD4050729D /* NetUtils-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1728B6FF93917347E59A0B519DD54994 /* NetUtils-dummy.m */; };
 		5958EA9310DE6034B00DFE8919916758 /* tomorrow-night.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 6BE4E370A005C22A3B17DA935A771E49 /* tomorrow-night.min.css */; };
 		5C1DB39ED6A07B9AF4F5B29B51DDD3B1 /* ir-black.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 6154A17E5279F3F1D19F1B9715680AF7 /* ir-black.min.css */; };
-		5DFF3571C8F48428AAABF6DB724FD499 /* Pods-ec3730Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CDC3BD62D2133EB9E68CC221B44C5E5 /* Pods-ec3730Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5DFF3571C8F48428AAABF6DB724FD499 /* Pods-ec3730Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FEBF43B516C7E5B54DB67DC6B2391A2 /* Pods-ec3730Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E2AC9DEBC506C976E544B0566B61DF0 /* isbl-editor-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = EDDF542703719596E676FE21AD72C90F /* isbl-editor-dark.min.css */; };
 		682D476D4804A5F7BFAE75EE827D2638 /* codepen-embed.min.css in Resources */ = {isa = PBXBuildFile; fileRef = EEA3817CDEE46373E55894B86F3A1DE2 /* codepen-embed.min.css */; };
 		69B08E1E5A144ECD1E4FF722E8ACECE3 /* lightfair.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 06AE28F04556BE7FDAAF5636A9CD7F90 /* lightfair.min.css */; };
@@ -86,6 +87,7 @@
 		70B30C189B53A7E694253E32F1CFD909 /* atelier-estuary-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = BE1598AB74F726F4D8DEF4D56C8E524A /* atelier-estuary-light.min.css */; };
 		746B9C316EDD28F601A99C13AEC63F24 /* Highlightr-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B2AFE08527842FF3B6858F4A4E88CC4 /* Highlightr-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		764C13BFA23196755AE16C23C407B1B2 /* vs.min.css in Resources */ = {isa = PBXBuildFile; fileRef = A5F4F50C25911F83B9C63A4003795D2F /* vs.min.css */; };
+		775C41B399780CF5AFC8918BECF5D832 /* Pods-ec3730-ec3730UITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FFFE5398D1D26C24226626921CBB8031 /* Pods-ec3730-ec3730UITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C683BA5716C6A53BBF281382D0F3452 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F2A6336E2386C25AFE81DF7DBDD2EF /* Foundation.framework */; };
 		7D6D4B1D849EA06229626399F32C64E9 /* tomorrow.min.css in Resources */ = {isa = PBXBuildFile; fileRef = BE5ED7814E34E1BBF85EDF96C82F7E88 /* tomorrow.min.css */; };
 		7E24A64B126B2E84349534D7D668AE30 /* paraiso-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 7DD2530D7D4798E0466CF482520A7ECB /* paraiso-light.min.css */; };
@@ -98,8 +100,6 @@
 		89A589D04411197399D7FCF7159AAE0A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8C16450E99A93529AE9DDA6F293294 /* CoreTelephony.framework */; };
 		8B6EC57B99EF7733C02DA7BC47D3C827 /* SwiftyStoreKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A601796BA70DD8D341FD1BC797C5E25A /* SwiftyStoreKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D5D26A5B70AA4D55D6BE58745D76E5A /* atelier-seaside-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 395E5831649080235C7DF5DAAA8372EF /* atelier-seaside-light.min.css */; };
-		8DF89052D1CD4A18C3AD273D5274A261 /* Pods-ec3730UITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FCCBC2A2FE734910C136F1485FE7558 /* Pods-ec3730UITests-dummy.m */; };
-		9187753BF806093169ECC743EDB63BCA /* Pods-ec3730UITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E377C9B5E3315D73BB2D60092F0157F4 /* Pods-ec3730UITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		94211506B10F74C3E3ED065E382BAB8B /* purebasic.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 3359BBEE3EC45D454870CBF4611C5808 /* purebasic.min.css */; };
 		945DCA340BE155923A9265A5F44FBAC7 /* xt256.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 5EB097E932FA1C6F56CE5535170C0679 /* xt256.min.css */; };
 		94C4D411154B20E95D71F0A540BEFA9E /* AppleReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B212F5E6434E3866DE72C5B8C665B4 /* AppleReceiptValidator.swift */; };
@@ -111,7 +111,6 @@
 		9BFAD43FAB646FB257EC1BAB5B961D6F /* atelier-seaside-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DD8B8005BEA5E2F9FE2F6853F4EB32F /* atelier-seaside-dark.min.css */; };
 		9DEA816E3C0C45754C0C55721B5C5A3E /* mono-blue.min.css in Resources */ = {isa = PBXBuildFile; fileRef = C25066A0F25CB77F670208C6087D2044 /* mono-blue.min.css */; };
 		9EFFA7B5F6A011C8629CB7F3EC3E580B /* CodeAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1371F05AA488D1DEE9D1C892220D4F4B /* CodeAttributedString.swift */; };
-		A041CD7181DA86AE83BEA8A1D01F31F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F2A6336E2386C25AFE81DF7DBDD2EF /* Foundation.framework */; };
 		A135726B17D46E531FF97ED1A5913B1E /* atelier-forest-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = A2BC06CC2208438F197AC83F8B417BD8 /* atelier-forest-light.min.css */; };
 		A3E3A956296D2642CC84D07F65D277A5 /* atelier-sulphurpool-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 9B343D50293E80FBCB365C5B2F1E49B2 /* atelier-sulphurpool-dark.min.css */; };
 		A623E240622352B0B89729F99971540A /* gruvbox-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D241E2C087EB3A9A046A5661967EFD3C /* gruvbox-dark.min.css */; };
@@ -144,6 +143,7 @@
 		C8AAAAA899223C4342B183E664284CED /* kimbie.light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 32839A95B71305A0E43BF20AC161DDCB /* kimbie.light.min.css */; };
 		C9537AAFF97CBF25AD79A10E8A802253 /* vs2015.min.css in Resources */ = {isa = PBXBuildFile; fileRef = E3FDC49629B8DE1434B62C9D5B1A7ADB /* vs2015.min.css */; };
 		CAF6C0CC4CA79C9AFB0506EC45C6E94B /* default.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 0265A1C74D6930354106379AB0372DB3 /* default.min.css */; };
+		CB6FFF6B088B6DBEED3384CA3EB835D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F2A6336E2386C25AFE81DF7DBDD2EF /* Foundation.framework */; };
 		CD5468196E7DE88F3C6531D76F480195 /* arduino-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 4B4EE8BDE0555FBC7387D2CDE20291A1 /* arduino-light.min.css */; };
 		CFCD464D6E4B76367A35F6752630BAA3 /* Highlightr-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 664FE83D20B32DBFFFADDD69441861C8 /* Highlightr-dummy.m */; };
 		D14B54215BC9EE0D8E75A9B9F6657F91 /* CompleteTransactionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111028E14F3D8F39DA5F965EE8723EA7 /* CompleteTransactionsController.swift */; };
@@ -159,12 +159,12 @@
 		EA0C2301A8F1A0DA9BD6D299CA10080A /* atelier-cave-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D8FFE1285D18C9803E2546AE1162E932 /* atelier-cave-light.min.css */; };
 		EBD7F5BCF2EC0163384B1D5873DCC762 /* highlight.min.js in Resources */ = {isa = PBXBuildFile; fileRef = B7E9024BDAFDCCD535C0CD9110B06686 /* highlight.min.js */; };
 		EDDC7DAE72472D6C48A3E3ECB654B1E6 /* xcode.min.css in Resources */ = {isa = PBXBuildFile; fileRef = C4E44529E65ED78367CFF006A9A901B7 /* xcode.min.css */; };
-		EF3D1B1E497833CB869AEFBD0D74AA0F /* Pods-ec3730Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 798E686912FB7C39F96A38CF5CC2A2C0 /* Pods-ec3730Tests-dummy.m */; };
+		EF3D1B1E497833CB869AEFBD0D74AA0F /* Pods-ec3730Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3375F9F24064E5907C6F238951AC00 /* Pods-ec3730Tests-dummy.m */; };
 		F05E65795E43FCD2F3CAF46C36F4F132 /* kimbie.dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = EA7623635A3808C981694DECDCE7CC7B /* kimbie.dark.min.css */; };
 		F330AFAD86B299CD69AB1AD7C90E87EF /* PlainPing-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FE438C4A2961D8E4255E9C1FACAB48A1 /* PlainPing-dummy.m */; };
 		F428474BFF9EAD3F0E1E445343F1B0CA /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653E3903E58E45434951ADD7AAFF9FFA /* Interface.swift */; };
 		F43C3A80AE7A7469CB144208F960AF5E /* atom-one-dark-reasonable.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FEF7ECECDA41812393ECAC30690F2 /* atom-one-dark-reasonable.min.css */; };
-		F44BAA11ECC19187E99F0B131638C524 /* Pods-ec3730-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 608B47202AAB4EA02309A4000DEBB655 /* Pods-ec3730-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F44BAA11ECC19187E99F0B131638C524 /* Pods-ec3730-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FB3A1B81008111608476E05962F01F5C /* Pods-ec3730-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4E817F44A73CB188A81A97D3F504E76 /* SwiftyStoreKit+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3414CE32604605993A19C71309798D8A /* SwiftyStoreKit+Types.swift */; };
 		F8E0A47D8491EF135AD8E3B5E54C2AD6 /* arta.min.css in Resources */ = {isa = PBXBuildFile; fileRef = A2A2E4A3CF9950947F5E76B174E9FBD9 /* arta.min.css */; };
 		F95835079F229816B6253F81DFC9B374 /* SimplePingAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009BCAADE18A5CEAE083151596FFE2FA /* SimplePingAdapter.swift */; };
@@ -173,12 +173,47 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0FE9D2BA0AE5B42EBF8B85CDF867CA39 /* PBXContainerItemProxy */ = {
+		31A7DE89A702A3A68A4F64029DDCA59F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 71BA8444464AA53003C34FE26CBF26A6;
-			remoteInfo = "Pods-ec3730";
+			remoteGlobalIDString = 52B60EC2A583F24ACBB69C113F5488B9;
+			remoteInfo = SwiftLint;
+		};
+		3F66496D1F3DD26E2C3ED34758312C7E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A909701FDE4A7A9692E3DCF5B2CBBC02;
+			remoteInfo = PlainPing;
+		};
+		45BBC429F83D05A33D4F2396DC1D4350 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22D5791102A9418874D0AC0946F36FAD;
+			remoteInfo = NetUtils;
+		};
+		505537CB5F76459A3435A87BD98F23E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0DFE582E64AE7298C59241B7B610B04;
+			remoteInfo = Highlightr;
+		};
+		5141C018BB883EDDD673474C2E23468B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CD0618C486973D5588EF20D2E8C0AEA;
+			remoteInfo = SwiftFormat;
+		};
+		5617ED379B5E861843E3F682EC54A7E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0B00B2C167CD783351BD1D00BD5AD1F8;
+			remoteInfo = ReachabilitySwift;
 		};
 		7AFA09270D5434DBF7E81F9B31C79AE2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -200,6 +235,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0B00B2C167CD783351BD1D00BD5AD1F8;
 			remoteInfo = ReachabilitySwift;
+		};
+		9CFDFCDF70F5AB2B6FE16C86D191D6A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCD4F1901DD86FEB184BFDD6673F4A7B;
+			remoteInfo = SwiftyStoreKit;
 		};
 		BD57B8ED614B574495DAD307C7D68503 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -244,19 +286,17 @@
 		017BD3F909E8BBA2C20A670F9B3E531E /* atelier-dune-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-dune-dark.min.css"; path = "Pod/Assets/styles/atelier-dune-dark.min.css"; sourceTree = "<group>"; };
 		020C713915F2F04E57912B021D622E50 /* tomorrow-night-eighties.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "tomorrow-night-eighties.min.css"; path = "Pod/Assets/styles/tomorrow-night-eighties.min.css"; sourceTree = "<group>"; };
 		0265A1C74D6930354106379AB0372DB3 /* default.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = default.min.css; path = Pod/Assets/styles/default.min.css; sourceTree = "<group>"; };
-		04FB2304F9800CFF9E2EFBE19D19E8C3 /* Pods-ec3730-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ec3730-acknowledgements.markdown"; sourceTree = "<group>"; };
 		06AE28F04556BE7FDAAF5636A9CD7F90 /* lightfair.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = lightfair.min.css; path = Pod/Assets/styles/lightfair.min.css; sourceTree = "<group>"; };
 		07D9B86AA16E987CC5BFF33A5CD37A06 /* atom-one-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atom-one-light.min.css"; path = "Pod/Assets/styles/atom-one-light.min.css"; sourceTree = "<group>"; };
 		096DF237B5157F85D8F28D6C6CBDD8AB /* NetUtils-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NetUtils-prefix.pch"; sourceTree = "<group>"; };
 		0D47EE0EC1576BF11607FF1BBAF7E7D2 /* PaymentQueueController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PaymentQueueController.swift; path = SwiftyStoreKit/PaymentQueueController.swift; sourceTree = "<group>"; };
 		0DAD9AEB12754CEE5316A29434267F41 /* NetUtils.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NetUtils.xcconfig; sourceTree = "<group>"; };
 		111028E14F3D8F39DA5F965EE8723EA7 /* CompleteTransactionsController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompleteTransactionsController.swift; path = SwiftyStoreKit/CompleteTransactionsController.swift; sourceTree = "<group>"; };
+		1256B691F93DADC7888F92CDB0D6DF1F /* Pods-ec3730-ec3730UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730-ec3730UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1371F05AA488D1DEE9D1C892220D4F4B /* CodeAttributedString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CodeAttributedString.swift; path = Pod/Classes/CodeAttributedString.swift; sourceTree = "<group>"; };
 		13EB4479A2CEE889CB1487E96B7C24D0 /* tomorrow-night-blue.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "tomorrow-night-blue.min.css"; path = "Pod/Assets/styles/tomorrow-night-blue.min.css"; sourceTree = "<group>"; };
 		1728B6FF93917347E59A0B519DD54994 /* NetUtils-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NetUtils-dummy.m"; sourceTree = "<group>"; };
-		17AB1CB504116A6B0F5FBC5A732DED51 /* Pods-ec3730UITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730UITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		188494E81A0CB079F8172525A886254B /* agate.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = agate.min.css; path = Pod/Assets/styles/agate.min.css; sourceTree = "<group>"; };
-		18DE21A024D1376745E890709E26708A /* Pods-ec3730UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1BA7346A34C95630ED6B9B279D999C43 /* googlecode.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = googlecode.min.css; path = Pod/Assets/styles/googlecode.min.css; sourceTree = "<group>"; };
 		1BEB36B3D92DD477DD6D4A5B3A2A71B5 /* RestorePurchasesController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RestorePurchasesController.swift; path = SwiftyStoreKit/RestorePurchasesController.swift; sourceTree = "<group>"; };
 		1BFDDAA7BE0921E9760AFDB082A61C70 /* an-old-hope.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "an-old-hope.min.css"; path = "Pod/Assets/styles/an-old-hope.min.css"; sourceTree = "<group>"; };
@@ -268,10 +308,10 @@
 		25DFCB2EAB57AD39855489A871483FD0 /* PlainPing-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PlainPing-prefix.pch"; sourceTree = "<group>"; };
 		2686223DAD841D22CA33D0C730510E63 /* github.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = github.min.css; path = Pod/Assets/styles/github.min.css; sourceTree = "<group>"; };
 		26CFE4C2E7D12AD3C7A5A2FE61BE1EB1 /* atelier-forest-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-forest-dark.min.css"; path = "Pod/Assets/styles/atelier-forest-dark.min.css"; sourceTree = "<group>"; };
-		277374855419C3E23AA403ECEB67E9E3 /* Pods_ec3730UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ec3730UITests.framework; path = "Pods-ec3730UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		279C4BBE8F8CA608673F34239DAFE39D /* Highlightr-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Highlightr-Info.plist"; sourceTree = "<group>"; };
 		2873988E5B6AD45BD4CAA79C4C5936FE /* NetUtils.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NetUtils.modulemap; sourceTree = "<group>"; };
 		2A142C3C823C3A09AAA69C38A01DF0C0 /* atelier-dune-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-dune-light.min.css"; path = "Pod/Assets/styles/atelier-dune-light.min.css"; sourceTree = "<group>"; };
+		2A3375F9F24064E5907C6F238951AC00 /* Pods-ec3730Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ec3730Tests-dummy.m"; sourceTree = "<group>"; };
 		2AA22761A61CC31FBBC03FAABD747199 /* SimplePing.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SimplePing.m; path = Pod/Classes/SimplePing.m; sourceTree = "<group>"; };
 		2AAD9A37DFA7E948C804397B46710719 /* railscasts.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = railscasts.min.css; path = Pod/Assets/styles/railscasts.min.css; sourceTree = "<group>"; };
 		2C4CDAB161706D34BB82E2BE6BD075AA /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = Pod/Classes/Theme.swift; sourceTree = "<group>"; };
@@ -283,24 +323,22 @@
 		32B7DC75A49FEE361D4EAD453F7DEB07 /* pojoaque.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = pojoaque.min.css; path = Pod/Assets/styles/pojoaque.min.css; sourceTree = "<group>"; };
 		3359BBEE3EC45D454870CBF4611C5808 /* purebasic.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = purebasic.min.css; path = Pod/Assets/styles/purebasic.min.css; sourceTree = "<group>"; };
 		3414CE32604605993A19C71309798D8A /* SwiftyStoreKit+Types.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SwiftyStoreKit+Types.swift"; path = "SwiftyStoreKit/SwiftyStoreKit+Types.swift"; sourceTree = "<group>"; };
-		34A5CAC748B32474AA8B500440D0D7BC /* Pods-ec3730.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730.release.xcconfig"; sourceTree = "<group>"; };
 		37F2A6336E2386C25AFE81DF7DBDD2EF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		384811C36CFC8CE837CDD1495E584D71 /* a11y-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "a11y-light.min.css"; path = "Pod/Assets/styles/a11y-light.min.css"; sourceTree = "<group>"; };
 		395E5831649080235C7DF5DAAA8372EF /* atelier-seaside-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-seaside-light.min.css"; path = "Pod/Assets/styles/atelier-seaside-light.min.css"; sourceTree = "<group>"; };
 		39DA0167D2F07406302520BAB243B6F5 /* darkula.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = darkula.min.css; path = Pod/Assets/styles/darkula.min.css; sourceTree = "<group>"; };
 		3B2AFE08527842FF3B6858F4A4E88CC4 /* Highlightr-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Highlightr-umbrella.h"; sourceTree = "<group>"; };
-		3CDC3BD62D2133EB9E68CC221B44C5E5 /* Pods-ec3730Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ec3730Tests-umbrella.h"; sourceTree = "<group>"; };
 		3ED574968BE27885595B8D81F11A725B /* PlainPing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PlainPing.framework; path = PlainPing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EF83CB623B133180ECCD6F07DE11627 /* Pods_ec3730Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ec3730Tests.framework; path = "Pods-ec3730Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F8FC1B2256437C3EB819F08A4D1CBE8 /* monokai-sublime.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "monokai-sublime.min.css"; path = "Pod/Assets/styles/monokai-sublime.min.css"; sourceTree = "<group>"; };
 		3FB06E0FA21C0ABB83DB501D75637C33 /* SwiftyStoreKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyStoreKit.modulemap; sourceTree = "<group>"; };
 		3FC33EE3715AC35578331FBCF870C41E /* NetUtils-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NetUtils-umbrella.h"; sourceTree = "<group>"; };
-		44857C10B3BE57F7CDF0D72DFA7A3C53 /* Pods-ec3730Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ec3730Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		415A4FF4C9B85BFE31FA249CEAE3EA26 /* Pods-ec3730-ec3730UITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ec3730-ec3730UITests.modulemap"; sourceTree = "<group>"; };
 		45EF79967E4B3FCFE4415569E997E0A8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		47B32FD2760818181A87663E6E1A4CAC /* obsidian.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = obsidian.min.css; path = Pod/Assets/styles/obsidian.min.css; sourceTree = "<group>"; };
+		48AFAD5213A5FAD4199633FE6EFD0956 /* Pods-ec3730-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ec3730-acknowledgements.markdown"; sourceTree = "<group>"; };
 		4B4EE8BDE0555FBC7387D2CDE20291A1 /* arduino-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "arduino-light.min.css"; path = "Pod/Assets/styles/arduino-light.min.css"; sourceTree = "<group>"; };
 		502BBD8FF056F303892367EB85ADF065 /* InAppReceiptRefreshRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InAppReceiptRefreshRequest.swift; path = SwiftyStoreKit/InAppReceiptRefreshRequest.swift; sourceTree = "<group>"; };
-		506203AFBCC5133FD552BC476B018521 /* Pods-ec3730.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ec3730.modulemap"; sourceTree = "<group>"; };
 		51233B66BE1C136C164BE587AC629D33 /* hopscotch.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = hopscotch.min.css; path = Pod/Assets/styles/hopscotch.min.css; sourceTree = "<group>"; };
 		51376ADD462B537B1DD5A7D3A84C3454 /* ProductsInfoController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProductsInfoController.swift; path = SwiftyStoreKit/ProductsInfoController.swift; sourceTree = "<group>"; };
 		5150C217C78282AD9D2AE58A6B6F2223 /* atelier-savanna-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-savanna-dark.min.css"; path = "Pod/Assets/styles/atelier-savanna-dark.min.css"; sourceTree = "<group>"; };
@@ -310,44 +348,46 @@
 		5B0FD2D4CFD8D3D56AC088EDF9569D76 /* brown-paper.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "brown-paper.min.css"; path = "Pod/Assets/styles/brown-paper.min.css"; sourceTree = "<group>"; };
 		5B3F8392EA7F2299209E1BA708301136 /* school-book.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "school-book.min.css"; path = "Pod/Assets/styles/school-book.min.css"; sourceTree = "<group>"; };
 		5EB097E932FA1C6F56CE5535170C0679 /* xt256.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = xt256.min.css; path = Pod/Assets/styles/xt256.min.css; sourceTree = "<group>"; };
-		5EE38862D61A0D079CFAAB437982A02F /* Pods-ec3730Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		5F5A9146BEA58322FDCA7B68DD2890F5 /* Pods-ec3730UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730UITests.release.xcconfig"; sourceTree = "<group>"; };
 		6027D64CF5B10477A207F1DB25FF6860 /* dracula.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = dracula.min.css; path = Pod/Assets/styles/dracula.min.css; sourceTree = "<group>"; };
-		608B47202AAB4EA02309A4000DEBB655 /* Pods-ec3730-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ec3730-umbrella.h"; sourceTree = "<group>"; };
 		6154A17E5279F3F1D19F1B9715680AF7 /* ir-black.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "ir-black.min.css"; path = "Pod/Assets/styles/ir-black.min.css"; sourceTree = "<group>"; };
 		631759553BBCD2410DC0372BC1F72A7C /* InAppProductQueryRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InAppProductQueryRequest.swift; path = SwiftyStoreKit/InAppProductQueryRequest.swift; sourceTree = "<group>"; };
+		64310E5D9150791B1422011E25666922 /* Pods-ec3730-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ec3730-frameworks.sh"; sourceTree = "<group>"; };
 		6434F58820969E3ADB1AE6BA2F067673 /* sunburst.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = sunburst.min.css; path = Pod/Assets/styles/sunburst.min.css; sourceTree = "<group>"; };
 		64D1A84E321955072625C7E8317041F6 /* atelier-sulphurpool-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-sulphurpool-light.min.css"; path = "Pod/Assets/styles/atelier-sulphurpool-light.min.css"; sourceTree = "<group>"; };
+		65346A83DE071FEBE6AE4939AE7B234E /* Pods-ec3730Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730Tests.release.xcconfig"; sourceTree = "<group>"; };
 		653E3903E58E45434951ADD7AAFF9FFA /* Interface.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Interface.swift; path = NetUtils/Interface.swift; sourceTree = "<group>"; };
+		6595610829575BBFAFBB166A7621DF43 /* Pods-ec3730-ec3730UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730-ec3730UITests.release.xcconfig"; sourceTree = "<group>"; };
 		660F2C687334E737693F937CD8251F88 /* magula.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = magula.min.css; path = Pod/Assets/styles/magula.min.css; sourceTree = "<group>"; };
 		664FE83D20B32DBFFFADDD69441861C8 /* Highlightr-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Highlightr-dummy.m"; sourceTree = "<group>"; };
+		677E120580D79D8576960F1363972C65 /* Pods_ec3730_ec3730UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ec3730_ec3730UITests.framework; path = "Pods-ec3730-ec3730UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B6839A41DC5A20FABDEFB426B97FB61 /* docco.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = docco.min.css; path = Pod/Assets/styles/docco.min.css; sourceTree = "<group>"; };
 		6BE4E370A005C22A3B17DA935A771E49 /* tomorrow-night.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "tomorrow-night.min.css"; path = "Pod/Assets/styles/tomorrow-night.min.css"; sourceTree = "<group>"; };
 		6E8C5571767A4DAF9B4FBC0D9A1F01E8 /* SwiftLint.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.xcconfig; sourceTree = "<group>"; };
+		7011C0393254BEFDFC2D0D76C9527DDB /* Pods-ec3730.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730.release.xcconfig"; sourceTree = "<group>"; };
 		70979271DE7B3CFEC22DD83CF9BCC20B /* qtcreator_light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = qtcreator_light.min.css; path = Pod/Assets/styles/qtcreator_light.min.css; sourceTree = "<group>"; };
 		72110DF7A24E066777B708937386572E /* solarized-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "solarized-light.min.css"; path = "Pod/Assets/styles/solarized-light.min.css"; sourceTree = "<group>"; };
 		7555731C6E95E83865C748765740689B /* foundation.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = foundation.min.css; path = Pod/Assets/styles/foundation.min.css; sourceTree = "<group>"; };
 		79151B9191245DFF920C1A723D6B0747 /* atelier-lakeside-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-lakeside-light.min.css"; path = "Pod/Assets/styles/atelier-lakeside-light.min.css"; sourceTree = "<group>"; };
-		798E686912FB7C39F96A38CF5CC2A2C0 /* Pods-ec3730Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ec3730Tests-dummy.m"; sourceTree = "<group>"; };
 		7A40D1D142DA49A959F1710059FF35E6 /* hybrid.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = hybrid.min.css; path = Pod/Assets/styles/hybrid.min.css; sourceTree = "<group>"; };
 		7C2C62A68A55921708CFBB723674AE72 /* ReachabilitySwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ReachabilitySwift.xcconfig; sourceTree = "<group>"; };
 		7D18ABB3AD9E6D51979F124FF9020037 /* atelier-savanna-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-savanna-light.min.css"; path = "Pod/Assets/styles/atelier-savanna-light.min.css"; sourceTree = "<group>"; };
 		7DB3C8BAA3D78E532F17CD75C7EC3704 /* Highlightr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Highlightr.framework; path = Highlightr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD2530D7D4798E0466CF482520A7ECB /* paraiso-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "paraiso-light.min.css"; path = "Pod/Assets/styles/paraiso-light.min.css"; sourceTree = "<group>"; };
 		7E8193529114BB838E3A3B2CF990E9D3 /* atelier-plateau-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-plateau-light.min.css"; path = "Pod/Assets/styles/atelier-plateau-light.min.css"; sourceTree = "<group>"; };
+		7FEBF43B516C7E5B54DB67DC6B2391A2 /* Pods-ec3730Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ec3730Tests-umbrella.h"; sourceTree = "<group>"; };
 		80447F72142B287DBBAA741E660474F3 /* solarized-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "solarized-dark.min.css"; path = "Pod/Assets/styles/solarized-dark.min.css"; sourceTree = "<group>"; };
+		81E202534D19E029A7365A1366387B11 /* Pods-ec3730-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730-Info.plist"; sourceTree = "<group>"; };
+		825AD80EAEA6F722B868AD95ADD20BAA /* Pods-ec3730-ec3730UITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ec3730-ec3730UITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		826C99B2FA382E83807475F25CBC8A87 /* a11y-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "a11y-dark.min.css"; path = "Pod/Assets/styles/a11y-dark.min.css"; sourceTree = "<group>"; };
-		859617C34217A0D2A3629456CE56AAF0 /* Pods-ec3730Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ec3730Tests.modulemap"; sourceTree = "<group>"; };
 		86F73DC2289AA04B9340449D51F220DB /* SimplePing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SimplePing.h; path = Pod/Classes/SimplePing.h; sourceTree = "<group>"; };
 		87568C87522C5F9544FE3BAFEB89F7EF /* atelier-estuary-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-estuary-dark.min.css"; path = "Pod/Assets/styles/atelier-estuary-dark.min.css"; sourceTree = "<group>"; };
 		8AC02B64E0BCB951E834F24794638E39 /* ReachabilitySwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ReachabilitySwift-Info.plist"; sourceTree = "<group>"; };
 		8D158916F14F0313E02A821FAFB12473 /* Shims.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Shims.swift; path = Pod/Classes/Shims.swift; sourceTree = "<group>"; };
-		8D9290AB27C66A47E412645B6D8F5B49 /* Pods-ec3730-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ec3730-frameworks.sh"; sourceTree = "<group>"; };
-		8F42636F51C8319477915878E7E6C704 /* Pods-ec3730-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730-Info.plist"; sourceTree = "<group>"; };
+		8E5D78730736F6FB35F1F558E942D140 /* Pods-ec3730Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ec3730Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8FECD84BBB93DF1107EB8D59980118CE /* ascetic.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = ascetic.min.css; path = Pod/Assets/styles/ascetic.min.css; sourceTree = "<group>"; };
 		90F546D1EB2A022532E161C6C0438612 /* Reachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = Sources/Reachability.swift; sourceTree = "<group>"; };
-		9221650756AF0F137864C551266743F5 /* Pods-ec3730UITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ec3730UITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		972157C413612BB319CECE857CCF48C3 /* SwiftyStoreKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyStoreKit-prefix.pch"; sourceTree = "<group>"; };
+		9751FEEF14A2CC70E633B2D2F22E866E /* Pods-ec3730-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730-acknowledgements.plist"; sourceTree = "<group>"; };
 		983EAB6A6AC28AF346517DFD53EDAF24 /* PaymentsController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PaymentsController.swift; path = SwiftyStoreKit/PaymentsController.swift; sourceTree = "<group>"; };
 		9890A947EF1928C960F10300A8728B7A /* ReachabilitySwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReachabilitySwift-prefix.pch"; sourceTree = "<group>"; };
 		9A3CED2F8226AADB47345808ED9278FB /* gml.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = gml.min.css; path = Pod/Assets/styles/gml.min.css; sourceTree = "<group>"; };
@@ -357,18 +397,17 @@
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E5FEF7ECECDA41812393ECAC30690F2 /* atom-one-dark-reasonable.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atom-one-dark-reasonable.min.css"; path = "Pod/Assets/styles/atom-one-dark-reasonable.min.css"; sourceTree = "<group>"; };
 		9EC3346E5EB19500A034239A5892EF29 /* HTMLUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTMLUtils.swift; path = Pod/Classes/HTMLUtils.swift; sourceTree = "<group>"; };
-		9FCCBC2A2FE734910C136F1485FE7558 /* Pods-ec3730UITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ec3730UITests-dummy.m"; sourceTree = "<group>"; };
 		A1C4CDCFD6EA8E86C065CA4D1E15A8B0 /* ReachabilitySwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReachabilitySwift-umbrella.h"; sourceTree = "<group>"; };
 		A2A2E4A3CF9950947F5E76B174E9FBD9 /* arta.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = arta.min.css; path = Pod/Assets/styles/arta.min.css; sourceTree = "<group>"; };
 		A2BC06CC2208438F197AC83F8B417BD8 /* atelier-forest-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-forest-light.min.css"; path = "Pod/Assets/styles/atelier-forest-light.min.css"; sourceTree = "<group>"; };
 		A5F4F50C25911F83B9C63A4003795D2F /* vs.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = vs.min.css; path = Pod/Assets/styles/vs.min.css; sourceTree = "<group>"; };
 		A601796BA70DD8D341FD1BC797C5E25A /* SwiftyStoreKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyStoreKit-umbrella.h"; sourceTree = "<group>"; };
-		AA7F9569708EEF7F4F65444CCA880D13 /* Pods-ec3730-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730-acknowledgements.plist"; sourceTree = "<group>"; };
 		AEC38CC6400FDB4EF573111440128C8D /* Pods_ec3730.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ec3730.framework; path = "Pods-ec3730.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B33121A59FE9C25655D01D2F37D35E3B /* PlainPing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlainPing.swift; path = Pod/Classes/PlainPing.swift; sourceTree = "<group>"; };
 		B6D2ADB544DFD9831A8F7C9A4AB76812 /* InAppReceiptVerificator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InAppReceiptVerificator.swift; path = SwiftyStoreKit/InAppReceiptVerificator.swift; sourceTree = "<group>"; };
 		B7891077A3FBE6340815FB0BBC51307D /* zenburn.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = zenburn.min.css; path = Pod/Assets/styles/zenburn.min.css; sourceTree = "<group>"; };
 		B7E9024BDAFDCCD535C0CD9110B06686 /* highlight.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = highlight.min.js; path = Pod/Assets/Highlighter/highlight.min.js; sourceTree = "<group>"; };
+		B82E4A6642415363E67C437C87D763C7 /* Pods-ec3730-ec3730UITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ec3730-ec3730UITests-dummy.m"; sourceTree = "<group>"; };
 		B88DA37EAA404DFC23401DC9E4FFD2A6 /* PlainPing-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PlainPing-Info.plist"; sourceTree = "<group>"; };
 		BA9B7E64C7CDED5A44D2ED91DAE5BF14 /* idea.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = idea.min.css; path = Pod/Assets/styles/idea.min.css; sourceTree = "<group>"; };
 		BC8C16450E99A93529AE9DDA6F293294 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
@@ -381,37 +420,37 @@
 		C4E44529E65ED78367CFF006A9A901B7 /* xcode.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = xcode.min.css; path = Pod/Assets/styles/xcode.min.css; sourceTree = "<group>"; };
 		C540AA97A2675E652BFA5D0B5A046701 /* shades-of-purple.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "shades-of-purple.min.css"; path = "Pod/Assets/styles/shades-of-purple.min.css"; sourceTree = "<group>"; };
 		C5D597DE770639A5F9DF5962003EAC12 /* darcula.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = darcula.min.css; path = Pod/Assets/styles/darcula.min.css; sourceTree = "<group>"; };
+		C60D12978F48F27A60F7F08CD2B37D4A /* Pods-ec3730-ec3730UITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730-ec3730UITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		C62E44594D880333260F5A63E8296FDF /* qtcreator_dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = qtcreator_dark.min.css; path = Pod/Assets/styles/qtcreator_dark.min.css; sourceTree = "<group>"; };
-		C788C230440F1556CAF9304BDFF7F571 /* Pods-ec3730UITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730UITests-Info.plist"; sourceTree = "<group>"; };
 		C7D324B5AFCF3AAA0E97C8A9BBBA069C /* ReachabilitySwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ReachabilitySwift.modulemap; sourceTree = "<group>"; };
 		C841F281B1312E83C0F96464317B157A /* ReachabilitySwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ReachabilitySwift-dummy.m"; sourceTree = "<group>"; };
 		C84A6D4F53AC5C13626056846AE7FEFE /* gruvbox-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "gruvbox-light.min.css"; path = "Pod/Assets/styles/gruvbox-light.min.css"; sourceTree = "<group>"; };
 		CC169EBF086E216E816770ABCA40D9B4 /* Highlightr.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Highlightr.swift; path = Pod/Classes/Highlightr.swift; sourceTree = "<group>"; };
 		CD335B60EA65871DB60517F58F20A020 /* far.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = far.min.css; path = Pod/Assets/styles/far.min.css; sourceTree = "<group>"; };
 		CD6311CBFBAB6F6332F5644250857991 /* color-brewer.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "color-brewer.min.css"; path = "Pod/Assets/styles/color-brewer.min.css"; sourceTree = "<group>"; };
-		CF1FC5BE849FC3A492460EC00742CF96 /* Pods-ec3730.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730.debug.xcconfig"; sourceTree = "<group>"; };
 		CF65241D5B6AC2E55CB429F167A3CB4A /* atelier-heath-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-heath-dark.min.css"; path = "Pod/Assets/styles/atelier-heath-dark.min.css"; sourceTree = "<group>"; };
 		D241E2C087EB3A9A046A5661967EFD3C /* gruvbox-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "gruvbox-dark.min.css"; path = "Pod/Assets/styles/gruvbox-dark.min.css"; sourceTree = "<group>"; };
-		D2DFDAB4713F2AF449749878F4B36820 /* Pods-ec3730Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730Tests-Info.plist"; sourceTree = "<group>"; };
 		D386E837DC2B6BFEBB32BB950E154CBE /* atelier-heath-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-heath-light.min.css"; path = "Pod/Assets/styles/atelier-heath-light.min.css"; sourceTree = "<group>"; };
 		D5683301E0A540F28C6681A0D0B84FF7 /* NetUtils-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NetUtils-Info.plist"; sourceTree = "<group>"; };
+		D7A0CA7B3C63434D56002546D7AE5641 /* Pods-ec3730Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7ED675127DDA1A989531748F1730741 /* PlainPing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PlainPing.xcconfig; sourceTree = "<group>"; };
 		D8FFE1285D18C9803E2546AE1162E932 /* atelier-cave-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-cave-light.min.css"; path = "Pod/Assets/styles/atelier-cave-light.min.css"; sourceTree = "<group>"; };
 		DA6AE576BBC720847D1E6B8286612732 /* paraiso-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "paraiso-dark.min.css"; path = "Pod/Assets/styles/paraiso-dark.min.css"; sourceTree = "<group>"; };
 		DB37FD80B3C626477D4F4B6106A35AEE /* routeros.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = routeros.min.css; path = Pod/Assets/styles/routeros.min.css; sourceTree = "<group>"; };
 		DC477504EDA84D253B79F8928B979A84 /* InAppReceipt.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InAppReceipt.swift; path = SwiftyStoreKit/InAppReceipt.swift; sourceTree = "<group>"; };
-		DD10B4D94DBBE802E374605873F39F32 /* Pods-ec3730UITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ec3730UITests.modulemap"; sourceTree = "<group>"; };
 		DD15270C524AC03CE3A2032594553E0A /* SwiftyStoreKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyStoreKit.swift; path = SwiftyStoreKit/SwiftyStoreKit.swift; sourceTree = "<group>"; };
 		DE0ACACFA398682EEAC54725CA71757F /* atelier-cave-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-cave-dark.min.css"; path = "Pod/Assets/styles/atelier-cave-dark.min.css"; sourceTree = "<group>"; };
 		DEF76CB430AB19A825BB25F45B4B8B11 /* OS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OS.swift; path = SwiftyStoreKit/OS.swift; sourceTree = "<group>"; };
 		E077F55B6107E36AF5A78D1BFEA23D32 /* PlainPing-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PlainPing-umbrella.h"; sourceTree = "<group>"; };
-		E377C9B5E3315D73BB2D60092F0157F4 /* Pods-ec3730UITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ec3730UITests-umbrella.h"; sourceTree = "<group>"; };
+		E082E4CFBFF05DCEE4C93CCC408A7D96 /* Pods-ec3730Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		E282E33D3848C35F88804647F42F38C9 /* Pods-ec3730Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ec3730Tests.modulemap"; sourceTree = "<group>"; };
 		E3FDC49629B8DE1434B62C9D5B1A7ADB /* vs2015.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = vs2015.min.css; path = Pod/Assets/styles/vs2015.min.css; sourceTree = "<group>"; };
 		E4D11C807466756B00443553FE65C894 /* SwiftyStoreKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyStoreKit-Info.plist"; sourceTree = "<group>"; };
+		E501BABDF0EB1A838D74C64BB8FA0C12 /* Pods-ec3730Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730Tests-Info.plist"; sourceTree = "<group>"; };
 		E753CC222A7155F67643EBD03784DCDB /* Highlightr.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Highlightr.modulemap; sourceTree = "<group>"; };
-		E82BE42B4620D01C840967D3EB6E2645 /* Pods-ec3730-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ec3730-dummy.m"; sourceTree = "<group>"; };
-		EA067B92E6C3428F7602AFA6ED730F4B /* Pods-ec3730Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		EA7623635A3808C981694DECDCE7CC7B /* kimbie.dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = kimbie.dark.min.css; path = Pod/Assets/styles/kimbie.dark.min.css; sourceTree = "<group>"; };
+		EAAE04A2CFE900CBBE1D833C5DC32158 /* Pods-ec3730-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ec3730-dummy.m"; sourceTree = "<group>"; };
+		EBD594A5688E058EADBB9F52AF6E23BB /* Pods-ec3730-ec3730UITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730-ec3730UITests-Info.plist"; sourceTree = "<group>"; };
 		ED74CCCA67C6B5435B0521B7AE6A10FC /* SwiftFormat.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftFormat.xcconfig; sourceTree = "<group>"; };
 		EDDF542703719596E676FE21AD72C90F /* isbl-editor-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "isbl-editor-dark.min.css"; path = "Pod/Assets/styles/isbl-editor-dark.min.css"; sourceTree = "<group>"; };
 		EEA3817CDEE46373E55894B86F3A1DE2 /* codepen-embed.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "codepen-embed.min.css"; path = "Pod/Assets/styles/codepen-embed.min.css"; sourceTree = "<group>"; };
@@ -421,9 +460,13 @@
 		F708E4F1AD06BE8EDC096B718FD923A5 /* rainbow.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = rainbow.min.css; path = Pod/Assets/styles/rainbow.min.css; sourceTree = "<group>"; };
 		F7396488A2441383D32B5586853FDEF7 /* tomorrow-night-bright.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "tomorrow-night-bright.min.css"; path = "Pod/Assets/styles/tomorrow-night-bright.min.css"; sourceTree = "<group>"; };
 		F861E361C88118A0B290CDE19E321C5F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		FB6072CC71583A693D3B852C9564056B /* Pods-ec3730Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730Tests.release.xcconfig"; sourceTree = "<group>"; };
+		F873ABCCD2DDFB6EE78D9F3E6A5F07A4 /* Pods-ec3730.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730.debug.xcconfig"; sourceTree = "<group>"; };
+		F9F69DDA635439CCB93DF06D7924E10B /* Pods-ec3730-ec3730UITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ec3730-ec3730UITests-frameworks.sh"; sourceTree = "<group>"; };
+		FB3A1B81008111608476E05962F01F5C /* Pods-ec3730-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ec3730-umbrella.h"; sourceTree = "<group>"; };
 		FC507E04D1FF43005333706638136831 /* atelier-plateau-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-plateau-dark.min.css"; path = "Pod/Assets/styles/atelier-plateau-dark.min.css"; sourceTree = "<group>"; };
 		FE438C4A2961D8E4255E9C1FACAB48A1 /* PlainPing-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PlainPing-dummy.m"; sourceTree = "<group>"; };
+		FF7D3617EBC241C0C5B54989317EB75A /* Pods-ec3730.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ec3730.modulemap"; sourceTree = "<group>"; };
+		FFFE5398D1D26C24226626921CBB8031 /* Pods-ec3730-ec3730UITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ec3730-ec3730UITests-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,14 +475,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE4301290B8267F8E2096316AFEAFCA0 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		44A4BA2E2ED76BA8D59BD1B1BDE4854C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A041CD7181DA86AE83BEA8A1D01F31F9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +491,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B00E2839609B4E34914F42EE0902732F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73A1ADAFFF71CE8049427B2C62C7E2EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB6FFF6B088B6DBEED3384CA3EB835D9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,23 +547,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SwiftFormat";
-			sourceTree = "<group>";
-		};
-		07E57813BA94E22586FFD5203081EC09 /* Pods-ec3730 */ = {
-			isa = PBXGroup;
-			children = (
-				506203AFBCC5133FD552BC476B018521 /* Pods-ec3730.modulemap */,
-				04FB2304F9800CFF9E2EFBE19D19E8C3 /* Pods-ec3730-acknowledgements.markdown */,
-				AA7F9569708EEF7F4F65444CCA880D13 /* Pods-ec3730-acknowledgements.plist */,
-				E82BE42B4620D01C840967D3EB6E2645 /* Pods-ec3730-dummy.m */,
-				8D9290AB27C66A47E412645B6D8F5B49 /* Pods-ec3730-frameworks.sh */,
-				8F42636F51C8319477915878E7E6C704 /* Pods-ec3730-Info.plist */,
-				608B47202AAB4EA02309A4000DEBB655 /* Pods-ec3730-umbrella.h */,
-				CF1FC5BE849FC3A492460EC00742CF96 /* Pods-ec3730.debug.xcconfig */,
-				34A5CAC748B32474AA8B500440D0D7BC /* Pods-ec3730.release.xcconfig */,
-			);
-			name = "Pods-ec3730";
-			path = "Target Support Files/Pods-ec3730";
 			sourceTree = "<group>";
 		};
 		10007CC7E5AAC09181EF0D122B94F80A /* Resources */ = {
@@ -682,6 +708,16 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		5910F1A212E377ACF4EFC7711FEA9D3B /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7A573F146ABDFCB0BA99090E1AD21435 /* Pods-ec3730 */,
+				CD7AFF1CD11CC14EBADD2DDC69A4B870 /* Pods-ec3730-ec3730UITests */,
+				DF17634836E3E972300086775E7CE9A2 /* Pods-ec3730Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
 		7441D0280BA33E3606B399477C8875A4 /* ReachabilitySwift */ = {
 			isa = PBXGroup;
 			children = (
@@ -692,45 +728,21 @@
 			path = ReachabilitySwift;
 			sourceTree = "<group>";
 		};
-		7EC952CAA4431C699A4660A6FD021EFA /* Targets Support Files */ = {
+		7A573F146ABDFCB0BA99090E1AD21435 /* Pods-ec3730 */ = {
 			isa = PBXGroup;
 			children = (
-				07E57813BA94E22586FFD5203081EC09 /* Pods-ec3730 */,
-				DB347896B45E2AE2AEFE9D6B5316B652 /* Pods-ec3730Tests */,
-				883216E5EDB41BF91D0A18DB5ECDD292 /* Pods-ec3730UITests */,
+				FF7D3617EBC241C0C5B54989317EB75A /* Pods-ec3730.modulemap */,
+				48AFAD5213A5FAD4199633FE6EFD0956 /* Pods-ec3730-acknowledgements.markdown */,
+				9751FEEF14A2CC70E633B2D2F22E866E /* Pods-ec3730-acknowledgements.plist */,
+				EAAE04A2CFE900CBBE1D833C5DC32158 /* Pods-ec3730-dummy.m */,
+				64310E5D9150791B1422011E25666922 /* Pods-ec3730-frameworks.sh */,
+				81E202534D19E029A7365A1366387B11 /* Pods-ec3730-Info.plist */,
+				FB3A1B81008111608476E05962F01F5C /* Pods-ec3730-umbrella.h */,
+				F873ABCCD2DDFB6EE78D9F3E6A5F07A4 /* Pods-ec3730.debug.xcconfig */,
+				7011C0393254BEFDFC2D0D76C9527DDB /* Pods-ec3730.release.xcconfig */,
 			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		883216E5EDB41BF91D0A18DB5ECDD292 /* Pods-ec3730UITests */ = {
-			isa = PBXGroup;
-			children = (
-				DD10B4D94DBBE802E374605873F39F32 /* Pods-ec3730UITests.modulemap */,
-				9221650756AF0F137864C551266743F5 /* Pods-ec3730UITests-acknowledgements.markdown */,
-				17AB1CB504116A6B0F5FBC5A732DED51 /* Pods-ec3730UITests-acknowledgements.plist */,
-				9FCCBC2A2FE734910C136F1485FE7558 /* Pods-ec3730UITests-dummy.m */,
-				C788C230440F1556CAF9304BDFF7F571 /* Pods-ec3730UITests-Info.plist */,
-				E377C9B5E3315D73BB2D60092F0157F4 /* Pods-ec3730UITests-umbrella.h */,
-				18DE21A024D1376745E890709E26708A /* Pods-ec3730UITests.debug.xcconfig */,
-				5F5A9146BEA58322FDCA7B68DD2890F5 /* Pods-ec3730UITests.release.xcconfig */,
-			);
-			name = "Pods-ec3730UITests";
-			path = "Target Support Files/Pods-ec3730UITests";
-			sourceTree = "<group>";
-		};
-		8966AC8C135760B98D00E11366C3B367 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7DB3C8BAA3D78E532F17CD75C7EC3704 /* Highlightr.framework */,
-				F654BE5686C3D98357F34C462FD8358B /* NetUtils.framework */,
-				3ED574968BE27885595B8D81F11A725B /* PlainPing.framework */,
-				AEC38CC6400FDB4EF573111440128C8D /* Pods_ec3730.framework */,
-				3EF83CB623B133180ECCD6F07DE11627 /* Pods_ec3730Tests.framework */,
-				277374855419C3E23AA403ECEB67E9E3 /* Pods_ec3730UITests.framework */,
-				21B03CA622E690725A6626C088E1D09F /* Reachability.framework */,
-				32B68D5B8C0127052BE81786F59B46F6 /* SwiftyStoreKit.framework */,
-			);
-			name = Products;
+			name = "Pods-ec3730";
+			path = "Target Support Files/Pods-ec3730";
 			sourceTree = "<group>";
 		};
 		ABE57AFBCDD78665140AAF5BADDDB399 /* PlainPing */ = {
@@ -797,14 +809,31 @@
 			path = Highlightr;
 			sourceTree = "<group>";
 		};
+		CD7AFF1CD11CC14EBADD2DDC69A4B870 /* Pods-ec3730-ec3730UITests */ = {
+			isa = PBXGroup;
+			children = (
+				415A4FF4C9B85BFE31FA249CEAE3EA26 /* Pods-ec3730-ec3730UITests.modulemap */,
+				825AD80EAEA6F722B868AD95ADD20BAA /* Pods-ec3730-ec3730UITests-acknowledgements.markdown */,
+				C60D12978F48F27A60F7F08CD2B37D4A /* Pods-ec3730-ec3730UITests-acknowledgements.plist */,
+				B82E4A6642415363E67C437C87D763C7 /* Pods-ec3730-ec3730UITests-dummy.m */,
+				F9F69DDA635439CCB93DF06D7924E10B /* Pods-ec3730-ec3730UITests-frameworks.sh */,
+				EBD594A5688E058EADBB9F52AF6E23BB /* Pods-ec3730-ec3730UITests-Info.plist */,
+				FFFE5398D1D26C24226626921CBB8031 /* Pods-ec3730-ec3730UITests-umbrella.h */,
+				1256B691F93DADC7888F92CDB0D6DF1F /* Pods-ec3730-ec3730UITests.debug.xcconfig */,
+				6595610829575BBFAFBB166A7621DF43 /* Pods-ec3730-ec3730UITests.release.xcconfig */,
+			);
+			name = "Pods-ec3730-ec3730UITests";
+			path = "Target Support Files/Pods-ec3730-ec3730UITests";
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */,
 				AEF4FAAC0774C72A99FB05754C1D5302 /* Pods */,
-				8966AC8C135760B98D00E11366C3B367 /* Products */,
-				7EC952CAA4431C699A4660A6FD021EFA /* Targets Support Files */,
+				E328D4997A9F2A9E174CB464666FDCD0 /* Products */,
+				5910F1A212E377ACF4EFC7711FEA9D3B /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -831,20 +860,35 @@
 			path = SwiftyStoreKit;
 			sourceTree = "<group>";
 		};
-		DB347896B45E2AE2AEFE9D6B5316B652 /* Pods-ec3730Tests */ = {
+		DF17634836E3E972300086775E7CE9A2 /* Pods-ec3730Tests */ = {
 			isa = PBXGroup;
 			children = (
-				859617C34217A0D2A3629456CE56AAF0 /* Pods-ec3730Tests.modulemap */,
-				44857C10B3BE57F7CDF0D72DFA7A3C53 /* Pods-ec3730Tests-acknowledgements.markdown */,
-				EA067B92E6C3428F7602AFA6ED730F4B /* Pods-ec3730Tests-acknowledgements.plist */,
-				798E686912FB7C39F96A38CF5CC2A2C0 /* Pods-ec3730Tests-dummy.m */,
-				D2DFDAB4713F2AF449749878F4B36820 /* Pods-ec3730Tests-Info.plist */,
-				3CDC3BD62D2133EB9E68CC221B44C5E5 /* Pods-ec3730Tests-umbrella.h */,
-				5EE38862D61A0D079CFAAB437982A02F /* Pods-ec3730Tests.debug.xcconfig */,
-				FB6072CC71583A693D3B852C9564056B /* Pods-ec3730Tests.release.xcconfig */,
+				E282E33D3848C35F88804647F42F38C9 /* Pods-ec3730Tests.modulemap */,
+				8E5D78730736F6FB35F1F558E942D140 /* Pods-ec3730Tests-acknowledgements.markdown */,
+				E082E4CFBFF05DCEE4C93CCC408A7D96 /* Pods-ec3730Tests-acknowledgements.plist */,
+				2A3375F9F24064E5907C6F238951AC00 /* Pods-ec3730Tests-dummy.m */,
+				E501BABDF0EB1A838D74C64BB8FA0C12 /* Pods-ec3730Tests-Info.plist */,
+				7FEBF43B516C7E5B54DB67DC6B2391A2 /* Pods-ec3730Tests-umbrella.h */,
+				D7A0CA7B3C63434D56002546D7AE5641 /* Pods-ec3730Tests.debug.xcconfig */,
+				65346A83DE071FEBE6AE4939AE7B234E /* Pods-ec3730Tests.release.xcconfig */,
 			);
 			name = "Pods-ec3730Tests";
 			path = "Target Support Files/Pods-ec3730Tests";
+			sourceTree = "<group>";
+		};
+		E328D4997A9F2A9E174CB464666FDCD0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7DB3C8BAA3D78E532F17CD75C7EC3704 /* Highlightr.framework */,
+				F654BE5686C3D98357F34C462FD8358B /* NetUtils.framework */,
+				3ED574968BE27885595B8D81F11A725B /* PlainPing.framework */,
+				AEC38CC6400FDB4EF573111440128C8D /* Pods_ec3730.framework */,
+				677E120580D79D8576960F1363972C65 /* Pods_ec3730_ec3730UITests.framework */,
+				3EF83CB623B133180ECCD6F07DE11627 /* Pods_ec3730Tests.framework */,
+				21B03CA622E690725A6626C088E1D09F /* Reachability.framework */,
+				32B68D5B8C0127052BE81786F59B46F6 /* SwiftyStoreKit.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E4B27E6A61223AD5017FF40CCD88233E /* Support Files */ = {
@@ -900,14 +944,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		384F6F8CCF9DBBFC5EF15999DC611768 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9187753BF806093169ECC743EDB63BCA /* Pods-ec3730UITests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4BD97B6720F940347C902321995E4A57 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -946,6 +982,14 @@
 			files = (
 				2DB19A681E324342D87CCD8A3203A3AF /* PlainPing-umbrella.h in Headers */,
 				B0AE6E728871E6ED7A5672D14D9FD9B2 /* SimplePing.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53D66682284C77EA40156230DB098FD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				775C41B399780CF5AFC8918BECF5D832 /* Pods-ec3730-ec3730UITests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,25 +1059,6 @@
 			productReference = F654BE5686C3D98357F34C462FD8358B /* NetUtils.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		3D510086F9B9AE60BD391C448CD681C7 /* Pods-ec3730UITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D5B59D35F2A83C6CD9215850A147B32A /* Build configuration list for PBXNativeTarget "Pods-ec3730UITests" */;
-			buildPhases = (
-				384F6F8CCF9DBBFC5EF15999DC611768 /* Headers */,
-				9A37CF43AAF1A6E9C5FFA18AA8D3B3B9 /* Sources */,
-				44A4BA2E2ED76BA8D59BD1B1BDE4854C /* Frameworks */,
-				59BAEA37CE932AAFA1CB8D231DE60A1D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5B7682EFA53A709A32AE7FB7792ABD70 /* PBXTargetDependency */,
-			);
-			name = "Pods-ec3730UITests";
-			productName = "Pods-ec3730UITests";
-			productReference = 277374855419C3E23AA403ECEB67E9E3 /* Pods_ec3730UITests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		71BA8444464AA53003C34FE26CBF26A6 /* Pods-ec3730 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7591B20B00F7305CF9ACBF11575580B0 /* Build configuration list for PBXNativeTarget "Pods-ec3730" */;
@@ -1095,6 +1120,31 @@
 			productReference = 7DB3C8BAA3D78E532F17CD75C7EC3704 /* Highlightr.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		DF094FE76E9E98AFA6FB8312DADB31D4 /* Pods-ec3730-ec3730UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FA88041DEB92D0B2A330DC23D26C6B2 /* Build configuration list for PBXNativeTarget "Pods-ec3730-ec3730UITests" */;
+			buildPhases = (
+				B53D66682284C77EA40156230DB098FD /* Headers */,
+				D46F3EBBF0C098CF538664CBE5CE4B82 /* Sources */,
+				73A1ADAFFF71CE8049427B2C62C7E2EE /* Frameworks */,
+				E2F5F05943B201B2D210729601E2F366 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0F443DB4E1BB77A18320775012DE9EC6 /* PBXTargetDependency */,
+				1DB891B73F296D61778B000B0292BD31 /* PBXTargetDependency */,
+				A657D98A1A716B9E9B75E137E8F6B19A /* PBXTargetDependency */,
+				2E2CA58387CB795E22D15898151D99BF /* PBXTargetDependency */,
+				DC79A7DF77B26843EF81FF9B9D9B7634 /* PBXTargetDependency */,
+				F2010044D7735EE20B686C42D7CBD229 /* PBXTargetDependency */,
+				55B9D5761848A5DB07898FFD8AE653F4 /* PBXTargetDependency */,
+			);
+			name = "Pods-ec3730-ec3730UITests";
+			productName = "Pods-ec3730-ec3730UITests";
+			productReference = 677E120580D79D8576960F1363972C65 /* Pods_ec3730_ec3730UITests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		FCD4F1901DD86FEB184BFDD6673F4A7B /* SwiftyStoreKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A45D5FBF1D06497D58BEF5F14D6D1E24 /* Build configuration list for PBXNativeTarget "SwiftyStoreKit" */;
@@ -1130,7 +1180,7 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 8966AC8C135760B98D00E11366C3B367 /* Products */;
+			productRefGroup = E328D4997A9F2A9E174CB464666FDCD0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -1138,8 +1188,8 @@
 				22D5791102A9418874D0AC0946F36FAD /* NetUtils */,
 				A909701FDE4A7A9692E3DCF5B2CBBC02 /* PlainPing */,
 				71BA8444464AA53003C34FE26CBF26A6 /* Pods-ec3730 */,
+				DF094FE76E9E98AFA6FB8312DADB31D4 /* Pods-ec3730-ec3730UITests */,
 				1F37A89D788CAFF91AE97F6087C5EC37 /* Pods-ec3730Tests */,
-				3D510086F9B9AE60BD391C448CD681C7 /* Pods-ec3730UITests */,
 				0B00B2C167CD783351BD1D00BD5AD1F8 /* ReachabilitySwift */,
 				1CD0618C486973D5588EF20D2E8C0AEA /* SwiftFormat */,
 				52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */,
@@ -1260,13 +1310,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		59BAEA37CE932AAFA1CB8D231DE60A1D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9A54338AC671140BD1AB14F91037078B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1289,6 +1332,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CDB992B9A91D4496813314D437D5DBCB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2F5F05943B201B2D210729601E2F366 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1350,14 +1400,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9A37CF43AAF1A6E9C5FFA18AA8D3B3B9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8DF89052D1CD4A18C3AD273D5274A261 /* Pods-ec3730UITests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9C9FF78F6878BCE13B73B6BB5DD0A609 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1372,6 +1414,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF3D1B1E497833CB869AEFBD0D74AA0F /* Pods-ec3730Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D46F3EBBF0C098CF538664CBE5CE4B82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B54FAE8647729ABB8A7AD7A937C1EB8 /* Pods-ec3730-ec3730UITests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1395,17 +1445,35 @@
 			target = 71BA8444464AA53003C34FE26CBF26A6 /* Pods-ec3730 */;
 			targetProxy = 7AFA09270D5434DBF7E81F9B31C79AE2 /* PBXContainerItemProxy */;
 		};
+		0F443DB4E1BB77A18320775012DE9EC6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Highlightr;
+			target = B0DFE582E64AE7298C59241B7B610B04 /* Highlightr */;
+			targetProxy = 505537CB5F76459A3435A87BD98F23E9 /* PBXContainerItemProxy */;
+		};
+		1DB891B73F296D61778B000B0292BD31 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NetUtils;
+			target = 22D5791102A9418874D0AC0946F36FAD /* NetUtils */;
+			targetProxy = 45BBC429F83D05A33D4F2396DC1D4350 /* PBXContainerItemProxy */;
+		};
 		1EB9DA9007C0599E52F58EE988DB2023 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PlainPing;
 			target = A909701FDE4A7A9692E3DCF5B2CBBC02 /* PlainPing */;
 			targetProxy = BD57B8ED614B574495DAD307C7D68503 /* PBXContainerItemProxy */;
 		};
-		5B7682EFA53A709A32AE7FB7792ABD70 /* PBXTargetDependency */ = {
+		2E2CA58387CB795E22D15898151D99BF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-ec3730";
-			target = 71BA8444464AA53003C34FE26CBF26A6 /* Pods-ec3730 */;
-			targetProxy = 0FE9D2BA0AE5B42EBF8B85CDF867CA39 /* PBXContainerItemProxy */;
+			name = ReachabilitySwift;
+			target = 0B00B2C167CD783351BD1D00BD5AD1F8 /* ReachabilitySwift */;
+			targetProxy = 5617ED379B5E861843E3F682EC54A7E8 /* PBXContainerItemProxy */;
+		};
+		55B9D5761848A5DB07898FFD8AE653F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyStoreKit;
+			target = FCD4F1901DD86FEB184BFDD6673F4A7B /* SwiftyStoreKit */;
+			targetProxy = 9CFDFCDF70F5AB2B6FE16C86D191D6A5 /* PBXContainerItemProxy */;
 		};
 		6C1536BAAE9AC63DA59B9F00C7D8C1C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1425,6 +1493,12 @@
 			target = 22D5791102A9418874D0AC0946F36FAD /* NetUtils */;
 			targetProxy = EA8C0D609632732911C44915EBF09C8C /* PBXContainerItemProxy */;
 		};
+		A657D98A1A716B9E9B75E137E8F6B19A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PlainPing;
+			target = A909701FDE4A7A9692E3DCF5B2CBBC02 /* PlainPing */;
+			targetProxy = 3F66496D1F3DD26E2C3ED34758312C7E /* PBXContainerItemProxy */;
+		};
 		CFE1EE380FFE3BC386FBC6A05765A4D1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftFormat;
@@ -1437,11 +1511,23 @@
 			target = 52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */;
 			targetProxy = C7A66A16B6B766641F93DB182D9D5B87 /* PBXContainerItemProxy */;
 		};
+		DC79A7DF77B26843EF81FF9B9D9B7634 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftFormat;
+			target = 1CD0618C486973D5588EF20D2E8C0AEA /* SwiftFormat */;
+			targetProxy = 5141C018BB883EDDD673474C2E23468B /* PBXContainerItemProxy */;
+		};
 		EC1059419FAC863F4B02E789B2B2228D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Highlightr;
 			target = B0DFE582E64AE7298C59241B7B610B04 /* Highlightr */;
 			targetProxy = E436B2FF4591C6D271EB655FB153A70F /* PBXContainerItemProxy */;
+		};
+		F2010044D7735EE20B686C42D7CBD229 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftLint;
+			target = 52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */;
+			targetProxy = 31A7DE89A702A3A68A4F64029DDCA59F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1475,6 +1561,45 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		23F6AAABC99A05951885E8AE69899128 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6595610829575BBFAFBB166A7621DF43 /* Pods-ec3730-ec3730UITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ec3730-ec3730UITests/Pods-ec3730-ec3730UITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ec3730-ec3730UITests/Pods-ec3730-ec3730UITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1544,7 +1669,7 @@
 		};
 		29FDA5E3D60387B1377A1A015CC38A36 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF1FC5BE849FC3A492460EC00742CF96 /* Pods-ec3730.debug.xcconfig */;
+			baseConfigurationReference = F873ABCCD2DDFB6EE78D9F3E6A5F07A4 /* Pods-ec3730.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1609,45 +1734,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		5044CCFCC24FCEC1FD2B0447D9FBD1B6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5F5A9146BEA58322FDCA7B68DD2890F5 /* Pods-ec3730UITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ec3730UITests/Pods-ec3730UITests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ec3730UITests/Pods-ec3730UITests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1813,7 +1899,7 @@
 		};
 		AA8F3AD45EEF5917C7B7F62777610DCB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB6072CC71583A693D3B852C9564056B /* Pods-ec3730Tests.release.xcconfig */;
+			baseConfigurationReference = 65346A83DE071FEBE6AE4939AE7B234E /* Pods-ec3730Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -2029,7 +2115,7 @@
 		};
 		D9AD5CF2D7A88D434DC5DEAD1A5EA6A8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34A5CAC748B32474AA8B500440D0D7BC /* Pods-ec3730.release.xcconfig */;
+			baseConfigurationReference = 7011C0393254BEFDFC2D0D76C9527DDB /* Pods-ec3730.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -2148,7 +2234,7 @@
 		};
 		F1139AA4A51BD322B5556C763F8A89CD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EE38862D61A0D079CFAAB437982A02F /* Pods-ec3730Tests.debug.xcconfig */;
+			baseConfigurationReference = D7A0CA7B3C63434D56002546D7AE5641 /* Pods-ec3730Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -2184,9 +2270,9 @@
 			};
 			name = Debug;
 		};
-		FFF72A78E3D175E8337C2F639DE3D464 /* Debug */ = {
+		FBDF81E062702B3F65DFA7A6BFE33085 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 18DE21A024D1376745E890709E26708A /* Pods-ec3730UITests.debug.xcconfig */;
+			baseConfigurationReference = 1256B691F93DADC7888F92CDB0D6DF1F /* Pods-ec3730-ec3730UITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -2199,7 +2285,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ec3730UITests/Pods-ec3730UITests-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-ec3730-ec3730UITests/Pods-ec3730-ec3730UITests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2208,7 +2294,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ec3730UITests/Pods-ec3730UITests.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-ec3730-ec3730UITests/Pods-ec3730-ec3730UITests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -2225,6 +2311,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0FA88041DEB92D0B2A330DC23D26C6B2 /* Build configuration list for PBXNativeTarget "Pods-ec3730-ec3730UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBDF81E062702B3F65DFA7A6BFE33085 /* Debug */,
+				23F6AAABC99A05951885E8AE69899128 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2302,15 +2397,6 @@
 			buildConfigurations = (
 				753EA8F1754B21D0DF6A0294635AC9F8 /* Debug */,
 				D54F289644106D2450CE57AEAB1B641D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D5B59D35F2A83C6CD9215850A147B32A /* Build configuration list for PBXNativeTarget "Pods-ec3730UITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FFF72A78E3D175E8337C2F639DE3D464 /* Debug */,
-				5044CCFCC24FCEC1FD2B0447D9FBD1B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -16,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
+        #if DEBUG
+            // https://docs.fastlane.tools/actions/snapshot/#speed-up-snapshots
+            if ProcessInfo().arguments.contains("SKIP_ANIMATIONS") {
+                UIView.setAnimationsEnabled(false)
+            }
+        #endif
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.black
 

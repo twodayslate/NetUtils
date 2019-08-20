@@ -70,9 +70,9 @@ class WhoisXml {
                 return "20"
             }
         }
-        
+
         static var cache = [String: TimedCache]()
-        
+
         var cache: TimedCache {
             if let currentCache = Service.cache[self.id] {
                 return currentCache
@@ -127,6 +127,12 @@ class WhoisXml {
     /// - Important:
     /// This will give you the cached version, use `verifySubscription` to get the asyncronous version
     public class var isSubscribed: Bool {
+        #if DEBUG
+            if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+                return true
+            }
+        #endif
+
         verifySubscription()
 
         guard let expiration = _cachedExpirationDate else {
@@ -249,11 +255,11 @@ extension WhoisXml {
 
             return
         }
-        
+
         if let cached: T = service.cache.value(for: queryUrl.absoluteString) {
             block?(nil, cached)
         }
-    
+
         service.balance { error, balance in
             guard error == nil else {
                 block?(error, nil)

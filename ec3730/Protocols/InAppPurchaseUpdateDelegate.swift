@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyStoreKit
 
-protocol InAppPurchaseUpdateDelegate {
+public protocol InAppPurchaseUpdateDelegate {
     func updatedInAppPurchase(_ result: PurchaseResult)
     func restoreInAppPurchase(_ results: RestoreResults)
     func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?)
