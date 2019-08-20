@@ -34,171 +34,6 @@ class WhoisTableViewCell: UITableViewCell {
     }
 }
 
-class HostTable: UITableViewController {
-    let lockIcon = UIImage(named: "Lock")
-
-    var isLoading = false {
-        didSet {
-            if isLoading {
-                DispatchQueue.main.async {
-                    self.whoisManger.startLoading()
-                }
-            }
-
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-
-    public var dnsLookups = Set<String>()
-
-    public var whoisRecord: WhoisRecord? {
-        didSet {
-            DispatchQueue.main.async {
-                self.whoisManger.configure(self.whoisRecord)
-                self.tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
-            }
-        }
-    }
-
-    public var whoisManger = WhoisXmlCellManager()
-
-    // swiftlint:disable:next identifier_name
-    public var _host: String = "Host"
-    public var host: String {
-        get {
-            return _host
-        }
-        set {
-            _host = newValue
-            self.title = self.host + " Information"
-        }
-    }
-
-    override func tableView(_: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.section == 1 {
-            return false
-        }
-        return true
-    }
-
-    override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            // show loading cell or the ip list
-            return isLoading ? 1 : dnsLookups.count
-        } else {
-            return whoisManger.cells.count // WHOIS
-        }
-    }
-
-    override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "A Name Lookup"
-        }
-        return "WHOIS"
-    }
-
-    override func numberOfSections(in _: UITableView) -> Int {
-        return 2
-    }
-
-    override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell?
-
-        if indexPath.section == 1 {
-            cell = whoisManger.cells[indexPath.row]
-        } else {
-            if isLoading || dnsLookups.count <= indexPath.row {
-                cell = LoadingCell(reuseIdentifier: "loading")
-            } else {
-                cell = CopyCell(title: dnsLookups.sorted()[indexPath.row])
-            }
-        }
-
-        return cell!
-    }
-
-    override func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-
-    override func tableView(_: UITableView, estimatedHeightForRowAt _: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        edgesForExtendedLayout = UIRectEdge() // https://stackoverflow.com/questions/20809164/uinavigationcontroller-bar-covers-its-uiviewcontrollers-content
-        title = host + " Information"
-        whoisManger.iapDelegate = self
-
-        // self.tableView.register(WhoisTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(WhoisTableViewCell.self))
-
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = UITableView.automaticDimension
-        // self.tableView.separatorInset.left =  self.view.frame.width
-        tableView.tableFooterView = UIView() // hide sepeartor
-        tableView.reloadData()
-    }
-}
-
-extension HostTable: InAppPurchaseUpdateDelegate {
-    func verify(showErrors: Bool = true) {
-        WhoisXml.verifySubscription { error, result in
-            guard error == nil else {
-                if showErrors {
-                    self.parent?.showError(message: error!.localizedDescription)
-                }
-                return
-            }
-
-            guard let result = result else {
-                // TODO: show error
-                if showErrors {
-                    self.parent?.showError(message: "Unable to verify subscription")
-                }
-                return
-            }
-
-            // TODO: show status if isn't subscribed
-            switch result {
-            case .purchased:
-                if showErrors {
-                    self.parent?.showError("❤", message: "Thank you for your purchase!")
-                }
-                DispatchQueue.main.async {
-                    self.whoisManger.configure(self.whoisRecord)
-                    self.tableView.reloadData()
-                }
-            case .expired:
-                if showErrors {
-                    self.parent?.showError("Subscription Expired", message: "Please purchase again or manage your subscription from inside the App Store")
-                }
-            case .notPurchased:
-                if showErrors {
-                    self.parent?.showError(message: "Subscription has not been purchased. Please try again laster.")
-                }
-            }
-        }
-    }
-
-    func restoreInAppPurchase(_: RestoreResults) {
-        verify()
-    }
-
-    func updatedInAppPurchase(_: PurchaseResult) {
-        verify()
-    }
-
-    func verifyInAppSubscription(error _: Error?, result _: VerifySubscriptionResult?) {
-        DispatchQueue.main.async {
-            self.whoisManger.configure(self.whoisRecord)
-            self.tableView.reloadData()
-        }
-    }
-}
-
 class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
     var urlBar: UITextField?
     var button: UIButton?
@@ -383,7 +218,7 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
             }
 
             if WhoisXml.isSubscribed {
-                WhoisXml.query(host) { error, response in
+                WhoisXml.whoisQuery(host) { error, response in
                     guard error == nil else {
                         self.showError("Error getting WHOIS", message: error!.localizedDescription)
                         self.hostTable.whoisRecord = nil
@@ -397,6 +232,22 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
                     }
 
                     self.hostTable.whoisRecord = response
+                }
+
+                WhoisXml.query(host, service: .dns) { (error, response: DnsCoordinate?) in
+                    guard error == nil else {
+                        self.showError("Error getting WHOIS", message: error!.localizedDescription)
+                        self.hostTable.whoisRecord = nil
+                        return
+                    }
+
+                    guard let response = response else {
+                        self.showError(message: "No Whois Data")
+                        self.hostTable.dnsRecords = nil
+                        return
+                    }
+
+                    self.hostTable.dnsRecords = response.dnsData.dnsRecords
                 }
             }
         }

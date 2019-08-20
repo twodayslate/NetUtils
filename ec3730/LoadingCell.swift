@@ -27,6 +27,11 @@ class LoadingCell: UITableViewCell {
 
         spinner.translatesAutoresizingMaskIntoConstraints = false
         stack.addArrangedSubview(spinner)
+        spinner.startAnimating()
+    }
+
+    convenience init() {
+        self.init(reuseIdentifier: "loading")
     }
 
     required init?(coder _: NSCoder) {

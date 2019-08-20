@@ -71,7 +71,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         }
     }
 
-    convenience init(reuseIdentifier: String?) {
+    convenience init(reuseIdentifier: String?, heading: String? = nil, subheading: String? = nil) {
         self.init(style: .default, reuseIdentifier: reuseIdentifier)
 
         restoringActivity.hidesWhenStopped = true
@@ -142,7 +142,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         mainStack.addArrangedSubview(rightStack)
 
         let headline = UILabel()
-        headline.text = "Unlock WHOIS Lookup"
+        headline.text = heading ?? "Unlock WHOIS Lookup"
         headline.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize * 2)
         headline.contentMode = .scaleAspectFit
         headline.adjustsFontSizeToFitWidth = true
@@ -151,7 +151,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         rightStack.addArrangedSubview(headline)
 
         let subtext = UILabel()
-        subtext.text = "Our Hosted WHOIS Lookup provides the registration details, also known as a WHOIS Record, of domain names"
+        subtext.text = subheading ?? "Our Hosted WHOIS Lookup provides the registration details, also known as a WHOIS Record, of domain names"
         subtext.lineBreakMode = .byWordWrapping
         subtext.contentMode = .scaleToFill
         subtext.numberOfLines = 0
@@ -177,16 +177,37 @@ class WhoisLockedTableViewCell: UITableViewCell {
 
         let buy = UIButton(type: .system)
         buy.tintColor = UIColor.white
-        buy.setTitle("Purchase", for: .normal)
+        buy.setTitle("Subscribe for Free", for: .normal)
         buy.addTarget(self, action: #selector(self.buy), for: .touchUpInside)
         buy.contentHorizontalAlignment = .center
         buy.backgroundColor = UIButton(type: .system).tintColor
         buy.layer.cornerRadius = 5.0
         buy.translatesAutoresizingMaskIntoConstraints = false
 
+        buttonStack.addArrangedSubview(buy)
+
+        let termStack = UIStackView()
+        termStack.translatesAutoresizingMaskIntoConstraints = false
+        termStack.axis = .vertical
+        termStack.distribution = .equalCentering
+        termStack.spacing = 0.0
+
+        let priceLabel = UILabel()
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        priceLabel.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+        priceLabel.textColor = UIColor.gray
+        priceLabel.textAlignment = .center
+        priceLabel.adjustsFontSizeToFitWidth = true
+        termStack.addArrangedSubview(priceLabel)
+
         if let price = cachedPrice {
-            buy.setTitle((buy.titleLabel?.text)! + " - " + price, for: .normal)
+            priceLabel.text = """
+            All Whois XML API data is available for \(price)
+            """
         } else {
+            priceLabel.text = """
+            All Whois XML API data available for subscribers only
+            """
             SwiftyStoreKit.retrieveProductsInfo([WhoisXml.Subscriptions.monthly.identifier]) { result in
                 guard result.error == nil else {
                     print(result, "error: \(result.error!.localizedDescription)")
@@ -232,18 +253,12 @@ class WhoisLockedTableViewCell: UITableViewCell {
                 }
 
                 DispatchQueue.main.async {
-                    buy.setTitle((buy.titleLabel?.text)! + " - " + cachedPrice!, for: .normal)
+                    priceLabel.text = """
+                    All Whois XML API data is available for \(cachedPrice!)
+                    """
                 }
             }
         }
-
-        buttonStack.addArrangedSubview(buy)
-
-        let termStack = UIStackView()
-        termStack.translatesAutoresizingMaskIntoConstraints = false
-        termStack.axis = .vertical
-        termStack.distribution = .equalCentering
-        termStack.spacing = 0.0
 
         let smallText = UILabel()
         // https://developer.apple.com/design/human-interface-guidelines/subscriptions/overview/

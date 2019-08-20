@@ -1,12 +1,17 @@
 # NetUtils
 
-NetUtils is a Network Utility application that has the following features:
-* A name lookup
-* WHOIS lookup
-* View network connectivity status
-* View network interfaces
-* ping
-* View Source
+The all-in-one Network Utility application!
+
+NetUtils is a Network Utility application that can do a whole lot, including:
+- Network connectivity status
+- Network interface information
+   - WiFi information
+   - VPN information
+- Host information
+- WHOIS information from Whois XML API (subscription required)
+- DNS information from Whois XML API (subscription required)
+- Ping utility
+- View page source
 
 ## Requirements
 
@@ -26,9 +31,13 @@ In order to use/build this project you will have to create an Api Key `enum`. An
 struct ApiKey {
     let name: String
     let key: String
-    
+
     static var WhoisXML: ApiKey {
-        return ApiKey(name: "WhoisXML", key: "myKey")
+        return ApiKey(name: "Whois XML API", key: "my_key_here")
+    }
+
+    static var inApp: ApiKey {
+        return ApiKey(name: "In-App Purchases", key: "my_key_here")
     }
 }
 ```

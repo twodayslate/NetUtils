@@ -80,6 +80,7 @@ class WhoisXmlCellManager {
     var iapDelegate: InAppPurchaseUpdateDelegate?
 
     init() {
+        cells.append(LoadingCell(reuseIdentifier: "loading"))
         WhoisXml.verifySubscription { error, results in
             self.verifyInAppSubscription(error: error, result: results)
         }
@@ -662,7 +663,10 @@ class WhoisXmlCellManager {
         cells.append(CopyDetailCell(title: "Availability", detail: record.domainAvailability))
 
         let status = record.status ?? record.registryData.status
-        cells.append(CopyDetailCell(title: "Status", detail: status))
+        let statusRow = CopyDetailCell(title: "Status", detail: status)
+        statusRow.detailLabel?.numberOfLines = 0
+        statusRow.detailLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+        cells.append(statusRow)
 
         if let customFieldName = record.customField1Name, let customFieldValue = record.customField1Value {
             let customCell = CopyDetailCell(title: customFieldName, detail: customFieldValue)

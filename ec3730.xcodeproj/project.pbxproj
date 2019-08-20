@@ -45,6 +45,9 @@
 		F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */; };
 		F6FDDFC82304803100FBF75E /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC72304803100FBF75E /* UserDefaults.swift */; };
 		F6FDDFCA23048DEF00FBF75E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC923048DEF00FBF75E /* UIView.swift */; };
+		F6FDDFD6230B095B00FBF75E /* HostTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFD5230B095B00FBF75E /* HostTable.swift */; };
+		F6FDDFD8230B106200FBF75E /* WhoisXmlDnsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */; };
+		F6FDDFDC230B2BB900FBF75E /* WhoisDnsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFDB230B2BB900FBF75E /* WhoisDnsResults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +123,9 @@
 		F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsSwitch.swift; sourceTree = "<group>"; };
 		F6FDDFC72304803100FBF75E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		F6FDDFC923048DEF00FBF75E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		F6FDDFD5230B095B00FBF75E /* HostTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostTable.swift; sourceTree = "<group>"; };
+		F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlDnsCells.swift; sourceTree = "<group>"; };
+		F6FDDFDB230B2BB900FBF75E /* WhoisDnsResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisDnsResults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +200,7 @@
 				F63102742130C99D00F34E42 /* PingViewController.swift */,
 				F6310278213366BB00F34E42 /* SourceViewController.swift */,
 				F63540DA213E05E000605ABE /* HostViewController.swift */,
+				F6FDDFD5230B095B00FBF75E /* HostTable.swift */,
 				F63102762130D76200F34E42 /* ReachabilityViewController.swift */,
 				F68CE569230463A50068D104 /* InterfaceTableViewController.swift */,
 				F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */,
@@ -245,6 +252,7 @@
 				F6A4EB942301C5DD00439562 /* Controllers */,
 				F691B0992147449200BDE0F4 /* WhoisXml.swift */,
 				F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */,
+				F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */,
 				F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */,
 				F68CE5612302203B0068D104 /* CopyDetailCell.swift */,
 				F68CE56323023F7E0068D104 /* CopyCell.swift */,
@@ -253,6 +261,7 @@
 				F6A4EB962301C70000439562 /* TimedCache.swift */,
 				F6A4EB9A2301E78E00439562 /* DNSResolver.swift */,
 				F619760A22FCA76200CE39A0 /* WhoisRecord.swift */,
+				F6FDDFDB230B2BB900FBF75E /* WhoisDnsResults.swift */,
 				F68CE56523031DA20068D104 /* WhoisErrors.swift */,
 				F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */,
 				F6A4EB932301C5CB00439562 /* Protocols */,
@@ -525,6 +534,7 @@
 				F67425DB21363FFF00A79492 /* UITextView.swift in Sources */,
 				F6310273212FA66600F34E42 /* SRCTabBarController.swift in Sources */,
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
+				F6FDDFD8230B106200FBF75E /* WhoisXmlDnsCells.swift in Sources */,
 				F68CE56623031DA20068D104 /* WhoisErrors.swift in Sources */,
 				F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */,
 				F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */,
@@ -537,6 +547,7 @@
 				F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */,
 				F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */,
 				F619760722FCA33B00CE39A0 /* WhoisXmlCells.swift in Sources */,
+				F6FDDFD6230B095B00FBF75E /* HostTable.swift in Sources */,
 				F60506742134B23F00DDF8A4 /* UIViewController.swift in Sources */,
 				F691B09A2147449200BDE0F4 /* WhoisXml.swift in Sources */,
 				F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */,
@@ -545,6 +556,7 @@
 				F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */,
 				F63540DB213E05E000605ABE /* HostViewController.swift in Sources */,
 				F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */,
+				F6FDDFDC230B2BB900FBF75E /* WhoisDnsResults.swift in Sources */,
 				F6A4EB922301C5B800439562 /* InAppPurchaseUpdateDelegate.swift in Sources */,
 				F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */,
 				F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */,
