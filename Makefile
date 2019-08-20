@@ -11,8 +11,9 @@ help:
 
 .PHONY: bootstrap
 bootstrap:
-	sudo gem install cocoapods
-	pod install
+	gem install bundler
+	bundle install
+	bundle exec pod install
 
 .PHONY: format lint
 lint: format
