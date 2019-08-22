@@ -120,8 +120,10 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
         set {
             DispatchQueue.main.async {
                 if newValue {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = true
                     self.loader.startAnimating()
                 } else {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.loader.stopAnimating()
                 }
             }
