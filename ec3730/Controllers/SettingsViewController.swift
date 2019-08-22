@@ -45,10 +45,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         case 0: // Browser
             return 1
         case 1: // Contact/Rate
-            if MFMailComposeViewController.canSendMail() {
-                return 2
-            }
-            return 1
+            return 3
         case 2: // Legal
             return 2
         default:
@@ -88,15 +85,14 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             }
 
         case 1:
-            var modifier = -1
-            if MFMailComposeViewController.canSendMail() {
-                modifier = 0
-            }
             switch indexPath.row {
-            case 0 + modifier:
+            case 0:
                 cell.textLabel?.text = "Contact"
                 cell.imageView?.image = UIImage(named: "at")
-            case 1 + modifier:
+            case 1:
+                cell.textLabel?.text = "Twitter"
+                cell.imageView?.image = UIImage(named: "twitter")
+            case 2:
                 cell.textLabel?.text = "Rate"
                 cell.imageView?.image = UIImage(named: "star")
             default:
@@ -160,33 +156,65 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 tableView.deselectRow(at: indexPath, animated: true)
             }
         case 1:
-            var modifier = -1
-            if MFMailComposeViewController.canSendMail() {
-                modifier = 0
-            }
             switch indexPath.row {
-            case 0 + modifier:
-                let composeVC = MFMailComposeViewController()
-                composeVC.mailComposeDelegate = self
-                composeVC.setToRecipients(["zac+netutils@gorak.us"])
+            case 0:
                 // swiftlint:disable:next force_cast
-                composeVC.setSubject((Bundle.main.infoDictionary?["CFBundleDisplayName"] as! String) + " v" + (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String))
+                var subject = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as! String) + " v" + (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String)
+                if MFMailComposeViewController.canSendMail() {
+                    let composeVC = MFMailComposeViewController()
+                    composeVC.mailComposeDelegate = self
+                    composeVC.setToRecipients(["zac+netutils@gorak.us"])
+                    composeVC.setSubject(subject)
 
-                // Present the view controller modally.
-                composeVC.addActionSheetForiPad()
-                present(composeVC, animated: true, completion: nil)
-
-            case 1 + modifier:
+                    // Present the view controller modally.
+                    composeVC.addActionSheetForiPad()
+                    present(composeVC, animated: true, completion: {
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    })
+                } else {
+                    subject = subject.replacingOccurrences(of: " ", with: "%20")
+                    let url = URL(string: "mailto:zac+netutils@gorak.us&subject=\(subject)")!
+                    
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: { _ in
+                            tableView.deselectRow(at: indexPath, animated: true)
+                        })
+                    } else {
+                        self.showError("Email Me", message: "zac+netutils@gorak.us")
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    }
+                    
+                }
+            case 1:
+                let twitter = URL(string: "twitter://user?screen_name=twodayslate")!
+                if UIApplication.shared.canOpenURL(twitter) {
+                    UIApplication.shared.open(twitter, options: [:], completionHandler: { success in
+                        if !success {
+                            self.open(URL(string: "https://twitter.com/twodayslate")!, title: "Twitter") { _ in
+                                tableView.deselectRow(at: indexPath, animated: true)
+                            }
+                        }
+                        DispatchQueue.main.async {
+                            tableView.deselectRow(at: indexPath, animated: true)
+                        }
+                    })
+                } else {
+                    open(URL(string: "https://twitter.com/twodayslate")!, title: "Twitter") { _ in
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    }
+                }
+                break
+            case 2:
                 let rateBlock = {
                     UIApplication.shared.open(URL(string: "https://itunes.apple.com/gb/app/id1434360325?action=write-review&mt=8")!, options: [:], completionHandler: { _ in
                         tableView.deselectRow(at: indexPath, animated: true)
                     })
                 }
 
-                // Only rate right away 45% of the time - otherwise filter users
+                // Only rate right away 25% of the time - otherwise filter users
                 let rand = arc4random_uniform(100)
 
-                if rand < 45 { // 45%
+                if rand < 25 { // 25% can rate directly
                     rateBlock()
                 } else {
                     let alert = UIAlertController(title: "Rate", message: "Do you love this app?", preferredStyle: .alert)

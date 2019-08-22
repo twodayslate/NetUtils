@@ -9,7 +9,7 @@
 import Foundation
 import Highlightr
 import UIKit
-
+import WebKit
 class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate {
     var sourceView: UITextView?
     var urlBar: UITextField?
@@ -22,6 +22,8 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
         return .default
     }
 
+    var browser: WKWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -33,22 +35,44 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
         // stack.alignment = .top
         // stack.distribution = UIStackViewDistribution.fillProportionally
         stack.translatesAutoresizingMaskIntoConstraints = false
-
+        
         view.addSubview(stack)
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack!]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack!]))
 
+        
+        let splitStackView = SplitStackView()
+        splitStackView.translatesAutoresizingMaskIntoConstraints = false
+        splitStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        
+        stack.addArrangedSubview(splitStackView)
+        
         sourceView = UITextView()
-        sourceView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        //sourceView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         // TODO: black fade top and bottom
-        let topPadding = max(view.frame.size.height - view.safeAreaLayoutGuide.layoutFrame.size.height, UIApplication.shared.statusBarFrame.height)
-        sourceView?.contentInset.top = topPadding
+//        let topPadding = max(view.frame.size.height - view.safeAreaLayoutGuide.layoutFrame.size.height, UIApplication.shared.statusBarFrame.height)
+//        sourceView?.contentInset.top = topPadding
+        
+
+        let sourceWrapper = UIView()
+        sourceWrapper.translatesAutoresizingMaskIntoConstraints = false
         sourceView?.isEditable = false
         sourceView?.isSelectable = true
         sourceView?.translatesAutoresizingMaskIntoConstraints = false
         sourceView?.clearsOnInsertion = true
-        sourceView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
-        stack.addArrangedSubview(sourceView!)
+        
+        let browserWrapper = UIView()
+        browserWrapper.translatesAutoresizingMaskIntoConstraints = false
+        browser = WKWebView()
+        browser.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        browser.navigationDelegate = self
+        browser.allowsBackForwardNavigationGestures = true
+        
+        browserWrapper.addSubview(browser)
+        splitStackView.addView(browserWrapper, ratio: 0.5, minRatio: 0.1)
+        sourceWrapper.addSubview(sourceView!)
+        splitStackView.addView(sourceWrapper, ratio: 0.5, minRatio: 0.1)
+        //stack.addArrangedSubview(sourceView!)
 
         barStack.axis = NSLayoutConstraint.Axis.horizontal
         barStack.alignment = .leading
@@ -66,7 +90,8 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
         urlBar?.textAlignment = .left
         urlBar?.borderStyle = .roundedRect
         urlBar?.keyboardType = .URL
-        urlBar?.placeholder = "https://google.com"
+        urlBar?.clearButtonMode = .whileEditing
+        urlBar?.placeholder = "https://google.com/"
         urlBar?.delegate = self
 
         barStack.addArrangedSubview(urlBar!)
@@ -84,9 +109,16 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
         bar.setItems([UIBarButtonItem(customView: barStack)], animated: false)
         stack.addArrangedSubview(bar)
 
+        
+        sourceView?.topAnchor.constraint(equalTo: sourceWrapper.topAnchor).isActive = true
+        sourceView?.bottomAnchor.constraint(equalTo: sourceWrapper.bottomAnchor).isActive = true
+        sourceView?.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        sourceView?.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        
         loader.hidesWhenStopped = true
         let yConstraint = NSLayoutConstraint(item: loader, attribute: .centerY, relatedBy: .equal, toItem: barStack, attribute: .centerY, multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([yConstraint])
+        
         startAvoidingKeyboard()
     }
 
@@ -120,8 +152,10 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
         set {
             DispatchQueue.main.async {
                 if newValue {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = true
                     self.loader.startAnimating()
                 } else {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.loader.stopAnimating()
                 }
             }
@@ -139,33 +173,83 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
         if urlString == "" {
             urlString = (urlBar?.placeholder)!
         }
-        if let url = URL(string: urlString) {
-            print("Viewing source for: ", url)
-            isLoading = true
-            DispatchQueue.global(qos: .userInitiated).async {
-                do {
-                    let source = try String(contentsOf: url, encoding: .ascii)
-                    let highlightr = Highlightr()
-                    let highlightedCode = highlightr?.highlight(source)
-                    DispatchQueue.main.async {
-                        self.sourceView?.attributedText = highlightedCode
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                    // self.status?.insertText(error.localizedDescription)
-                }
-
-                self.isLoading = false
-            }
-        } else {
-            // self.status?.insertText("Invalid URL\n")
-            let alert = UIAlertController(title: "Error", message: "Invalid URL", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
+        
+        guard var url = URL(string: urlString) else {
+            self.showError("Error", message: "Invalid URL")
+            return
         }
+        
+        var components: URLComponents?
+        
+        if url.scheme == nil {
+            components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+            components?.scheme = "https"
+            url = components?.url ?? url
+        }
+
+        print("Viewing source for: ", url.absoluteString)
+        DispatchQueue.main.async {
+            self.browser.load(URLRequest(url: url))
+        }
+    }
+}
+
+extension SourceViewController: WKNavigationDelegate {
+    private func setJavascript(showErrors: Bool = true, completion block: (()->Void)? = nil) {
+        self.browser.evaluateJavaScript("document.documentElement.outerHTML", completionHandler: { (source, error) in
+            
+            guard error == nil else {
+                if showErrors {
+                    self.showError("Error", message: error!.localizedDescription)
+                }
+                block?()
+                return
+            }
+            
+            guard let source = source as? String else {
+                if showErrors {
+                    self.showError("Error", message: "Unable to parse source")
+                }
+                block?()
+                return
+            }
+            
+            DispatchQueue.init(label: "highlight", qos: .userInitiated).async {
+                let highlightr = Highlightr()
+                let highlightedCode = highlightr?.highlight(source)
+                DispatchQueue.main.async {
+                    self.sourceView?.attributedText = highlightedCode
+                    block?()
+                }
+            }
+        })
+    }
+    
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        print("comitting")
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("finished")
+        self.urlBar?.text = webView.url?.absoluteString
+        self.setJavascript {
+            print("done")
+            
+            self.isLoading = false
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("failed")
+        self.setJavascript {
+            self.isLoading = false
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        DispatchQueue.main.async {
+            self.sourceView?.attributedText = nil
+        }
+        self.isLoading = true
     }
 }

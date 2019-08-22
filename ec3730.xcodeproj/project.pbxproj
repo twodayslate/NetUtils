@@ -50,6 +50,7 @@
 		F6FDDFDC230B2BB900FBF75E /* WhoisDnsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFDB230B2BB900FBF75E /* WhoisDnsResults.swift */; };
 		F6FDDFDE230C36DC00FBF75E /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFDD230C36DC00FBF75E /* SnapshotHelper.swift */; };
 		F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFDF230C4C7400FBF75E /* CellManager.swift */; };
+		F6FDDFE5230C89E100FBF75E /* SplitStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFE4230C89E100FBF75E /* SplitStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		F6FDDFDB230B2BB900FBF75E /* WhoisDnsResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisDnsResults.swift; sourceTree = "<group>"; };
 		F6FDDFDD230C36DC00FBF75E /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		F6FDDFDF230C4C7400FBF75E /* CellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellManager.swift; sourceTree = "<group>"; };
+		F6FDDFE4230C89E100FBF75E /* SplitStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 				F6C8D8A4212E5AE900309373 /* AppDelegate.swift */,
 				F6A4EB942301C5DD00439562 /* Controllers */,
 				F691B0992147449200BDE0F4 /* WhoisXml.swift */,
+				F6FDDFE4230C89E100FBF75E /* SplitStackView.swift */,
 				F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */,
 				F6FDDFDF230C4C7400FBF75E /* CellManager.swift */,
 				F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */,
@@ -403,7 +406,6 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 			);
 			mainGroup = F6C8D898212E5AE900309373;
@@ -581,6 +583,7 @@
 				F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */,
 				F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */,
 				F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */,
+				F6FDDFE5230C89E100FBF75E /* SplitStackView.swift in Sources */,
 				F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */,
 				F63540DB213E05E000605ABE /* HostViewController.swift in Sources */,
 				F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */,
