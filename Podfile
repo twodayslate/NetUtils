@@ -15,6 +15,7 @@ target 'ec3730' do
   pod 'PlainPing'
   pod 'NetUtils'
   pod 'SwiftyStoreKit'
+  pod 'SplitView', :git => 'https://github.com/twodayslate/SplitView.git'
 
   target 'ec3730Tests' do
     inherit! :search_paths

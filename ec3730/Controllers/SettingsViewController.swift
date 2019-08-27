@@ -174,16 +174,15 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 } else {
                     subject = subject.replacingOccurrences(of: " ", with: "%20")
                     let url = URL(string: "mailto:zac+netutils@gorak.us&subject=\(subject)")!
-                    
+
                     if UIApplication.shared.canOpenURL(url) {
                         UIApplication.shared.open(url, options: [:], completionHandler: { _ in
                             tableView.deselectRow(at: indexPath, animated: true)
                         })
                     } else {
-                        self.showError("Email Me", message: "zac+netutils@gorak.us")
+                        showError("Email Me", message: "zac+netutils@gorak.us")
                         tableView.deselectRow(at: indexPath, animated: true)
                     }
-                    
                 }
             case 1:
                 let twitter = URL(string: "twitter://user?screen_name=twodayslate")!
@@ -203,7 +202,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                         tableView.deselectRow(at: indexPath, animated: true)
                     }
                 }
-                break
             case 2:
                 let rateBlock = {
                     UIApplication.shared.open(URL(string: "https://itunes.apple.com/gb/app/id1434360325?action=write-review&mt=8")!, options: [:], completionHandler: { _ in
