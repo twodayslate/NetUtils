@@ -6,8 +6,10 @@
 //  Copyright © 2018 Zachary Gorak. All rights reserved.
 //
 
+import SKVersion
 import SwiftyStoreKit
 import UIKit
+import Version
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,8 +25,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         #endif
 
+        print(Bundle.main.bundleIdentifier?.description ?? "NO BUNDLE IDENTIFIER")
+
+        Bundle.main.storeVersion?.update {
+            canUpdate, version, error in
+            guard error == nil else {
+                print("An error has occured! \(error!.localizedDescription)")
+                return
+            }
+
+            guard let version = version else {
+                print("Unable to get new version")
+                return
+            }
+
+            if canUpdate {
+                self.window?.controller?.showError("Update Available!", message: "An update to \(String(describing: version)) is available in the App Store")
+            }
+        }
+
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.backgroundColor = UIColor.black
+        
+        if #available(iOS 13.0, *) {
+            window?.backgroundColor = UIColor.systemBackground
+        } else {
+            window?.backgroundColor = UIColor.black
+        }
 
         let tabViewController = SRCTabBarController()
         tabViewController.delegate = tabViewController

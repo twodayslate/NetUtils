@@ -3,16 +3,20 @@ PODS:
   - NetUtils (4.1.0)
   - PlainPing (0.5)
   - ReachabilitySwift (4.3.1)
-  - SplitView (1.0.0)
-  - SwiftFormat/CLI (0.40.11)
-  - SwiftLint (0.34.0)
+  - SKVersion (1.0.0):
+    - Version (~> 0.7.0)
+  - SplitView (1.2.0)
+  - SwiftFormat/CLI (0.40.12)
+  - SwiftLint (0.35.0)
   - SwiftyStoreKit (0.15.0)
+  - Version (0.7.1)
 
 DEPENDENCIES:
   - Highlightr
   - NetUtils
   - PlainPing
   - ReachabilitySwift
+  - SKVersion (from `https://github.com/twodayslate/SKVersion.git`)
   - SplitView (from `https://github.com/twodayslate/SplitView.git`)
   - SwiftFormat/CLI
   - SwiftLint
@@ -27,14 +31,20 @@ SPEC REPOS:
     - SwiftFormat
     - SwiftLint
     - SwiftyStoreKit
+    - Version
 
 EXTERNAL SOURCES:
+  SKVersion:
+    :git: https://github.com/twodayslate/SKVersion.git
   SplitView:
     :git: https://github.com/twodayslate/SplitView.git
 
 CHECKOUT OPTIONS:
+  SKVersion:
+    :commit: 0c7c9932afa5aa9230af2b7cbd3557f006e199d1
+    :git: https://github.com/twodayslate/SKVersion.git
   SplitView:
-    :commit: e03ed958ddafa1c4d250fbe3cb41f52e7e034fa2
+    :commit: 8942d7047b9d36588fd6aa63ab8d12bec1fb255f
     :git: https://github.com/twodayslate/SplitView.git
 
 SPEC CHECKSUMS:
@@ -42,11 +52,13 @@ SPEC CHECKSUMS:
   NetUtils: 414aca786a4be7d6c87a69613bdb6a5a2640f08e
   PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
-  SplitView: bcca0a7cc20a3c4b791aa07ee28097fdfb166f39
-  SwiftFormat: 304f39cab266d39c9d60f4fceec37ed6f43b931c
-  SwiftLint: 79d48a17c6565dc286c37efb8322c7b450f95c67
+  SKVersion: 8f9f78093f468960452bd60c8db1548fef0a5c95
+  SplitView: c83d66c39980bcfc3b3d9721babf822913951a8b
+  SwiftFormat: 73667bbb741386b0febf0bd1a1b8c502aa9d1c98
+  SwiftLint: 5553187048b900c91aa03552807681bb6b027846
   SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
+  Version: d7b9b7860c8a02790b15c730d50849d6004076a1
 
-PODFILE CHECKSUM: 96376063abb61c216e70232dcb457d564d2feaf3
+PODFILE CHECKSUM: 60bb75475b59830dcd1f82f541115ede01baa524
 
 COCOAPODS: 1.7.5

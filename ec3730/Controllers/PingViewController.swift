@@ -24,7 +24,11 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = UIColor.systemBackground
+        } else {
+            self.view.backgroundColor = .white
+        }
 
         stack = UIStackView()
         stack.backgroundColor = UIColor.black
@@ -71,7 +75,6 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
         urlBar = UITextField()
         urlBar?.autocorrectionType = .no
         urlBar?.autocapitalizationType = .none
-        // urlBar?.textColor = UIColor.black
         urlBar?.textAlignment = .left
         urlBar?.borderStyle = .roundedRect
         urlBar?.keyboardType = .URL
@@ -82,7 +85,7 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
 
         barStack.addArrangedSubview(urlBar!)
 
-        let button = UIButton(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
+        let button = UIButton(type: .system)
         button.setTitle("ping", for: .normal)
         button.sizeToFit()
         button.addTarget(self, action: #selector(ping), for: .touchDown)
@@ -91,11 +94,17 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
         barStack.addArrangedSubview(loader)
 
         let bar = UIToolbar()
-        bar.barStyle = .blackTranslucent
+        bar.barStyle = .default
         bar.setItems([UIBarButtonItem(customView: barStack)], animated: false)
         stack.addArrangedSubview(bar)
 
         loader.hidesWhenStopped = true
+        if #available(iOS 13.0, *) {
+            loader.style = .medium
+        } else {
+            loader.style = .gray
+        }
+
         let yConstraint = NSLayoutConstraint(item: loader, attribute: .centerY, relatedBy: .equal, toItem: barStack, attribute: .centerY, multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([yConstraint])
 

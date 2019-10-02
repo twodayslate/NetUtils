@@ -22,6 +22,10 @@
 		F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63540D8213DFE8300605ABE /* ApiKeys.swift */; };
 		F63540DB213E05E000605ABE /* HostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63540DA213E05E000605ABE /* HostViewController.swift */; };
 		F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63540DC213E1D1B00605ABE /* StoreKit.framework */; };
+		F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F744233CEB4B00BAA609 /* DataFeedCells.swift */; };
+		F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F746233CECD900BAA609 /* DataFeedCell.swift */; };
+		F650F749233CF15800BAA609 /* DataFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F748233CF15800BAA609 /* DataFeed.swift */; };
+		F650F74B233E62C100BAA609 /* BlurredPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F74A233E62C100BAA609 /* BlurredPickerView.swift */; };
 		F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661A27F23020FCF0023FA50 /* UIAlertController.swift */; };
 		F67425DB21363FFF00A79492 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67425DA21363FFF00A79492 /* UITextView.swift */; };
 		F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE55F23021AC70068D104 /* CopyLabel.swift */; };
@@ -97,6 +101,10 @@
 		F63540E0213E4DD200605ABE /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		F63540E2213E4E7800605ABE /* Xcode.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Xcode.app; path = ../../../../Applications/Xcode.app; sourceTree = "<group>"; };
 		F63540E4213E4F8400605ABE /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = ../../../../usr/lib/libresolv.9.dylib; sourceTree = "<group>"; };
+		F650F744233CEB4B00BAA609 /* DataFeedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedCells.swift; sourceTree = "<group>"; };
+		F650F746233CECD900BAA609 /* DataFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedCell.swift; sourceTree = "<group>"; };
+		F650F748233CF15800BAA609 /* DataFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeed.swift; sourceTree = "<group>"; };
+		F650F74A233E62C100BAA609 /* BlurredPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredPickerView.swift; sourceTree = "<group>"; };
 		F661A27F23020FCF0023FA50 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		F67425DA21363FFF00A79492 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		F68CE55F23021AC70068D104 /* CopyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyLabel.swift; sourceTree = "<group>"; };
@@ -259,8 +267,12 @@
 				F6C8D8A4212E5AE900309373 /* AppDelegate.swift */,
 				F6A4EB942301C5DD00439562 /* Controllers */,
 				F691B0992147449200BDE0F4 /* WhoisXml.swift */,
+				F650F748233CF15800BAA609 /* DataFeed.swift */,
 				F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */,
 				F6FDDFDF230C4C7400FBF75E /* CellManager.swift */,
+				F650F74A233E62C100BAA609 /* BlurredPickerView.swift */,
+				F650F744233CEB4B00BAA609 /* DataFeedCells.swift */,
+				F650F746233CECD900BAA609 /* DataFeedCell.swift */,
 				F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */,
 				F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */,
 				F68CE5612302203B0068D104 /* CopyDetailCell.swift */,
@@ -403,6 +415,7 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				en,
 				Base,
 			);
 			mainGroup = F6C8D898212E5AE900309373;
@@ -558,6 +571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6FDDFC82304803100FBF75E /* UserDefaults.swift in Sources */,
+				F650F74B233E62C100BAA609 /* BlurredPickerView.swift in Sources */,
 				F67425DB21363FFF00A79492 /* UITextView.swift in Sources */,
 				F6310273212FA66600F34E42 /* SRCTabBarController.swift in Sources */,
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
@@ -573,12 +587,14 @@
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
 				F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */,
 				F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */,
+				F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */,
 				F619760722FCA33B00CE39A0 /* WhoisXmlCells.swift in Sources */,
 				F6FDDFD6230B095B00FBF75E /* HostTable.swift in Sources */,
 				F60506742134B23F00DDF8A4 /* UIViewController.swift in Sources */,
 				F691B09A2147449200BDE0F4 /* WhoisXml.swift in Sources */,
 				F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */,
 				F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */,
+				F650F749233CF15800BAA609 /* DataFeed.swift in Sources */,
 				F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */,
 				F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */,
 				F63540DB213E05E000605ABE /* HostViewController.swift in Sources */,
@@ -587,6 +603,7 @@
 				F6A4EB922301C5B800439562 /* InAppPurchaseUpdateDelegate.swift in Sources */,
 				F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */,
 				F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */,
+				F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
 				F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */,
@@ -759,6 +776,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -767,6 +785,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -783,6 +802,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -791,6 +811,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;

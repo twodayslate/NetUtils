@@ -51,7 +51,11 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
         hostTable.verify(showErrors: false)
 
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = UIColor.systemBackground
+        } else {
+            self.view.backgroundColor = .white
+        }
 
         stack = UIStackView()
         stack.axis = NSLayoutConstraint.Axis.vertical
@@ -76,11 +80,9 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
         barStack.spacing = 10
         // barStack.translatesAutoresizingMaskIntoConstraints = false
 
-        // urlBar = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         urlBar = UITextField()
         urlBar?.autocorrectionType = .no
         urlBar?.autocapitalizationType = .none
-        urlBar?.textColor = UIColor.black
         urlBar?.textAlignment = .left
         urlBar?.borderStyle = .roundedRect
         urlBar?.keyboardType = .URL
@@ -90,7 +92,7 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
 
         barStack.addArrangedSubview(urlBar!)
 
-        let button = UIButton(frame: CGRect(x: 50, y: 50, width: 120, height: 50))
+        let button = UIButton(type: .system)
         button.setTitle("Lookup", for: .normal)
         button.sizeToFit()
         button.addTarget(self, action: #selector(fetchDataAndDisplayError), for: .touchDown)
@@ -99,11 +101,16 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
         barStack.addArrangedSubview(loader)
 
         let bar = UIToolbar()
-        bar.barStyle = .blackTranslucent
+        bar.barStyle = .default
         bar.setItems([UIBarButtonItem(customView: barStack)], animated: false)
         stack.addArrangedSubview(bar)
 
         loader.hidesWhenStopped = true
+        if #available(iOS 13.0, *) {
+            loader.style = .medium
+        } else {
+            loader.style = .gray
+        }
         let yConstraint = NSLayoutConstraint(item: loader, attribute: .centerY, relatedBy: .equal, toItem: barStack, attribute: .centerY, multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([yConstraint])
         startAvoidingKeyboard()
@@ -127,10 +134,12 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
             }
             _isLoading = newValue
 
-            if self.isLoading {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            } else {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            DispatchQueue.main.async {
+                if self.isLoading {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = true
+                } else {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
             }
         }
     }
@@ -193,7 +202,7 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
             throw URLError(.badURL)
         }
 
-        guard var comps = URLComponents(string: urlString) else {
+        guard let comps = URLComponents(string: urlString) else {
             throw URLError(.badURL)
         }
 

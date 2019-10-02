@@ -26,7 +26,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         }
     }
 
-    var restoringActivity = UIActivityIndicatorView(style: .gray)
+    var restoringActivity = UIActivityIndicatorView()
 
     @objc
     func restore(_: UIButton) {
@@ -75,6 +75,11 @@ class WhoisLockedTableViewCell: UITableViewCell {
         self.init(style: .default, reuseIdentifier: reuseIdentifier)
 
         restoringActivity.hidesWhenStopped = true
+        if #available(iOS 13.0, *) {
+            restoringActivity.style = .medium
+        } else {
+            restoringActivity.style = .gray
+        }
         // self.heightAnchor.constraint(equalToConstant: self.frame.height * 3).isActive = true
         // self.backgroundColor = UIColor.green
         // self.contentView.backgroundColor = UIColor.red
@@ -158,6 +163,14 @@ class WhoisLockedTableViewCell: UITableViewCell {
         // subtext.preferredMaxLayoutWidth = (self.contentView.frame.width/3)*2
         rightStack.addArrangedSubview(subtext)
 
+        let priceLabel = UILabel()
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        priceLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize - 2)
+        priceLabel.textColor = UIColor.gray
+        priceLabel.textAlignment = .center
+        priceLabel.numberOfLines = 0
+        stack.addArrangedSubview(priceLabel)
+
         let buttonStack = UIStackView()
         buttonStack.axis = .horizontal
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
@@ -177,7 +190,10 @@ class WhoisLockedTableViewCell: UITableViewCell {
 
         let buy = UIButton(type: .system)
         buy.tintColor = UIColor.white
-        buy.setTitle("Subscribe for Free", for: .normal)
+
+        let attString = NSMutableAttributedString(string: "Subscribe Now")
+
+        buy.setAttributedTitle(attString, for: .normal)
         buy.addTarget(self, action: #selector(self.buy), for: .touchUpInside)
         buy.contentHorizontalAlignment = .center
         buy.backgroundColor = UIButton(type: .system).tintColor
@@ -192,22 +208,79 @@ class WhoisLockedTableViewCell: UITableViewCell {
         termStack.distribution = .equalCentering
         termStack.spacing = 0.0
 
-        let priceLabel = UILabel()
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        priceLabel.textColor = UIColor.gray
-        priceLabel.textAlignment = .center
-        priceLabel.adjustsFontSizeToFitWidth = true
-        termStack.addArrangedSubview(priceLabel)
+        setPrice(for: priceLabel)
 
+        let smallText = UILabel()
+        // https://developer.apple.com/design/human-interface-guidelines/subscriptions/overview/
+        // swiftlint:disable line_length
+        smallText.text = """
+        Payment will be charged to your Apple ID account at the confirmation of purchase. The subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase.
+        """
+        // swiftlint:enanble line_length
+        smallText.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+        smallText.textColor = UIColor.lightGray
+        smallText.textAlignment = .justified
+        smallText.lineBreakMode = .byWordWrapping
+        smallText.numberOfLines = 0
+        smallText.translatesAutoresizingMaskIntoConstraints = false
+        termStack.addArrangedSubview(smallText)
+
+        let termStackInner = UIStackView()
+        termStackInner.translatesAutoresizingMaskIntoConstraints = false
+        termStackInner.axis = .horizontal
+        termStackInner.distribution = .equalCentering
+        termStackInner.spacing = 16.0
+        termStack.addArrangedSubview(termStackInner)
+
+        let privacy = UIButton()
+        privacy.setAttributedTitle(
+            NSAttributedString(
+                string: "Privacy Policy",
+                attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.foregroundColor: smallText.textColor as Any]
+            ),
+            for: .normal
+        )
+        privacy.titleLabel?.textAlignment = .center
+        privacy.titleLabel?.font = smallText.font
+        privacy.addTarget(self, action: #selector(clickPrivacy(_:)), for: .touchUpInside)
+        termStackInner.addArrangedSubview(privacy)
+
+        let tos = UIButton()
+        tos.setAttributedTitle(
+            NSAttributedString(
+                string: "Terms of Use",
+                attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.foregroundColor: smallText.textColor as Any]
+            ),
+            for: .normal
+        )
+        tos.titleLabel?.textAlignment = .center
+        tos.titleLabel?.font = smallText.font
+        tos.addTarget(self, action: #selector(clickToS(_:)), for: .touchUpInside)
+        termStackInner.addArrangedSubview(tos)
+
+        stack.addArrangedSubview(termStack)
+
+        separatorInset.right = .greatestFiniteMagnitude
+    }
+
+    func setPrice(for label: UILabel) {
         if let price = cachedPrice {
-            priceLabel.text = """
-            All Whois XML API data is available for \(price)
-            """
+            let attString = NSMutableAttributedString(string: """
+            Start your free 3-day trial then all Whois XML API data is available for \(price) automatically.
+            """)
+            attString.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: label.font.pointSize, weight: .bold)], range: NSRange(location: 0, length: 27))
+            DispatchQueue.main.async {
+                label.attributedText = attString
+            }
+            return
         } else {
-            priceLabel.text = """
-            All Whois XML API data available for subscribers only
-            """
+            let attString = NSMutableAttributedString(string: """
+            Start your free 3-day trial then all Whois XML API data is available for $0.99/month automatically.
+            """)
+            attString.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: label.font.pointSize, weight: .bold)], range: NSRange(location: 0, length: 27))
+            DispatchQueue.main.async {
+                label.attributedText = attString
+            }
             SwiftyStoreKit.retrieveProductsInfo([WhoisXml.Subscriptions.monthly.identifier]) { result in
                 guard result.error == nil else {
                     print(result, "error: \(result.error!.localizedDescription)")
@@ -252,64 +325,9 @@ class WhoisLockedTableViewCell: UITableViewCell {
                     }
                 }
 
-                DispatchQueue.main.async {
-                    priceLabel.text = """
-                    All Whois XML API data is available for \(cachedPrice!)
-                    """
-                }
+                self.setPrice(for: label)
             }
         }
-
-        let smallText = UILabel()
-        // https://developer.apple.com/design/human-interface-guidelines/subscriptions/overview/
-        // swiftlint:disable line_length
-        smallText.text = """
-        Payment will be charged to your Apple ID account at the confirmation of purchase. The subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase.
-        """
-        // swiftlint:enanble line_length
-        smallText.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        smallText.textColor = UIColor.lightGray
-        smallText.textAlignment = .justified
-        smallText.lineBreakMode = .byWordWrapping
-        smallText.numberOfLines = 0
-        termStack.addArrangedSubview(smallText)
-
-        let termStackInner = UIStackView()
-        termStackInner.translatesAutoresizingMaskIntoConstraints = false
-        termStackInner.axis = .horizontal
-        termStackInner.distribution = .equalCentering
-        termStackInner.spacing = 16.0
-        termStack.addArrangedSubview(termStackInner)
-
-        let privacy = UIButton()
-        privacy.setAttributedTitle(
-            NSAttributedString(
-                string: "Privacy Policy",
-                attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.foregroundColor: smallText.textColor as Any]
-            ),
-            for: .normal
-        )
-        privacy.titleLabel?.textAlignment = .center
-        privacy.titleLabel?.font = smallText.font
-        privacy.addTarget(self, action: #selector(clickPrivacy(_:)), for: .touchUpInside)
-        termStackInner.addArrangedSubview(privacy)
-
-        let tos = UIButton()
-        tos.setAttributedTitle(
-            NSAttributedString(
-                string: "Terms of Use",
-                attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.foregroundColor: smallText.textColor as Any]
-            ),
-            for: .normal
-        )
-        tos.titleLabel?.textAlignment = .center
-        tos.titleLabel?.font = smallText.font
-        tos.addTarget(self, action: #selector(clickToS(_:)), for: .touchUpInside)
-        termStackInner.addArrangedSubview(tos)
-
-        stack.addArrangedSubview(termStack)
-
-        separatorInset.right = .greatestFiniteMagnitude
     }
 
     @objc func clickPrivacy(_: UIButton) {

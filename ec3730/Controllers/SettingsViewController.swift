@@ -35,18 +35,20 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return 3
+        return 4
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         // TODO: do this automagically
         // https://stackoverflow.com/questions/36378001/is-it-possible-to-count-pictures-in-asset-catalog-with-particular-prefix
         switch section {
-        case 0: // Browser
+        case 0: // Appearance
             return 1
-        case 1: // Contact/Rate
+        case 1: // Browser
+            return 1
+        case 2: // Contact/Rate
             return 3
-        case 2: // Legal
+        case 3: // Legal
             return 2
         default:
             return 0
@@ -56,14 +58,17 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
+            return "Appearance"
+        case 1:
             return "Browser"
-        case 2:
+        case 3:
             return "Legal"
         default:
             return nil
         }
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "enabled1")
 
@@ -71,6 +76,21 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 
         switch indexPath.section {
         case 0:
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "Theme"
+                switch UserDefaults.standard.integer(forKey: "theme") {
+                case 1:
+                    cell.detailTextLabel?.text = "Light"
+                case 2:
+                    cell.detailTextLabel?.text = "Dark"
+                default:
+                    cell.detailTextLabel?.text = "System"
+                }
+            default:
+                break
+            }
+        case 1:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Open Links in"
@@ -84,7 +104,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 break
             }
 
-        case 1:
+        case 2:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Contact"
@@ -98,7 +118,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             default:
                 break
             }
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Privacy Policy"
@@ -114,10 +134,55 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
 
     let browserSheet = UIAlertController(title: "Browser", message: nil, preferredStyle: .actionSheet)
+    let themeSheet = UIAlertController(title: "Theme", message: nil, preferredStyle: .actionSheet)
 
+    // swiftlint:disable:next cyclomatic_complexity
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
+            if themeSheet.actions.count == 0 {
+                let inappSafariAction = UIAlertAction(title: "System", style: .default, handler: { _ in
+                    print("Auto")
+                    UserDefaults.standard.set(0, forKey: "theme")
+                    UserDefaults.standard.synchronize()
+                    let cell = self.tableView.cellForRow(at: indexPath)
+                    cell?.detailTextLabel?.text = "System"
+                })
+                themeSheet.addAction(inappSafariAction)
+                if #available(iOS 13.0, *) {
+                    let safariAction = UIAlertAction(title: "Light", style: .default, handler: { _ in
+                        print("Auto")
+                        UserDefaults.standard.set(1, forKey: "theme")
+                        UserDefaults.standard.synchronize()
+                        let cell = self.tableView.cellForRow(at: indexPath)
+                        cell?.detailTextLabel?.text = "Light"
+                    })
+                    themeSheet.addAction(safariAction)
+                    let darkAction = UIAlertAction(title: "Dark", style: .default, handler: { _ in
+                        print("Dark")
+                        UserDefaults.standard.set(2, forKey: "theme")
+                        UserDefaults.standard.synchronize()
+                        let cell = self.tableView.cellForRow(at: indexPath)
+                        cell?.detailTextLabel?.text = "Dark"
+                    })
+                    themeSheet.addAction(darkAction)
+                }
+                themeSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            }
+
+            for (index, action) in themeSheet.actions.enumerated() {
+                if UserDefaults.standard.integer(forKey: "theme") == index {
+                    action.setValue("true", forKey: "checked")
+                } else {
+                    action.setValue("false", forKey: "checked")
+                }
+            }
+            // swiftlint:disable:next line_length
+            themeSheet.addActionSheetForiPad(sourceView: tableView.cellForRow(at: indexPath), sourceRect: tableView.cellForRow(at: indexPath)?.detailTextLabel?.frame, permittedArrowDirections: UIPopoverArrowDirection.any)
+            present(themeSheet, animated: true) {
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+        case 1:
             if browserSheet.actions.count == 0 {
                 let inappSafariAction = UIAlertAction(title: "In-App Safari", style: .default, handler: { _ in
                     print("In-app Safari")
@@ -138,12 +203,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 browserSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             }
 
-            if let popoverController = browserSheet.popoverPresentationController {
-                popoverController.sourceView = view
-                popoverController.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
-                popoverController.permittedArrowDirections = UIPopoverArrowDirection()
-            }
-
             for (index, action) in browserSheet.actions.enumerated() {
                 if UserDefaults.standard.integer(forKey: "open_browser") == index {
                     action.setValue("true", forKey: "checked")
@@ -151,11 +210,12 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                     action.setValue("false", forKey: "checked")
                 }
             }
-            browserSheet.addActionSheetForiPad()
+            // swiftlint:disable:next line_length
+            browserSheet.addActionSheetForiPad(sourceView: tableView.cellForRow(at: indexPath), sourceRect: tableView.cellForRow(at: indexPath)?.detailTextLabel?.frame, permittedArrowDirections: UIPopoverArrowDirection.any)
             present(browserSheet, animated: true) {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
-        case 1:
+        case 2:
             switch indexPath.row {
             case 0:
                 // swiftlint:disable:next force_cast
@@ -167,7 +227,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                     composeVC.setSubject(subject)
 
                     // Present the view controller modally.
-                    composeVC.addActionSheetForiPad()
+                    composeVC.addActionSheetForiPad(sourceView: view)
                     present(composeVC, animated: true, completion: {
                         tableView.deselectRow(at: indexPath, animated: true)
                     })
@@ -227,11 +287,11 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                         let secondAlert = UIAlertController(title: "Thank you", message: "Thanks for the feedback! Please email us your specific feedback!", preferredStyle: .alert)
                         let okay = UIAlertAction(title: "Okay", style: .default, handler: nil)
                         secondAlert.addAction(okay)
-                        secondAlert.addActionSheetForiPad()
+                        secondAlert.addActionSheetForiPad(sourceView: self.view)
                         self.present(secondAlert, animated: true, completion: nil)
                     })
                     alert.addAction(no)
-                    alert.addActionSheetForiPad()
+                    alert.addActionSheetForiPad(sourceView: view)
                     present(alert, animated: true, completion: {
                         tableView.deselectRow(at: indexPath, animated: true)
                     })
@@ -239,7 +299,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             default:
                 break
             }
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0:
                 open(URL(string: "https://zac.gorak.us/ios/privacy.html")!, title: "Privacy Policy") { _ in

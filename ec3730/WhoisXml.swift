@@ -10,13 +10,18 @@ import Foundation
 import SwiftyStoreKit
 
 /// API wrapper for https://whoisxmlapi.com/
-class WhoisXml {
+class WhoisXml: DataFeed {
+    static var owned: Bool {
+        return WhoisXml.isSubscribed
+    }
+
     // MARK: - Properties
 
     /// The API Key for Whois XML API
     /// - Callout(Default):
     /// `ApiKey.WhoisXML`
-    public static let api: ApiKey = ApiKey.WhoisXML
+    public static var key: ApiKey = ApiKey.WhoisXML
+
     /// Session used to create tasks
     ///
     /// - Callout(Default):

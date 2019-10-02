@@ -122,7 +122,6 @@ class NetworkInterfacesTable: UITableViewController {
 }
 
 class ReachabilityViewController: UIViewController {
-    var urlBar: UITextField?
     var button: UIButton?
 
     var stack: UIStackView!
@@ -133,10 +132,17 @@ class ReachabilityViewController: UIViewController {
     let interfaceTable = NetworkInterfacesTable()
     let iNav = InterfaceNavigationController()
 
+    let locationManager = CLLocationManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        urlBar = UITextField(frame: CGRect(x: 0, y: view.frame.midY, width: view.frame.width, height: 25))
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = UIColor.systemBackground
+        } else {
+            self.view.backgroundColor = .white
+        }
+
+        locationManager.delegate = self
 
         stack = UIStackView()
         stack.axis = NSLayoutConstraint.Axis.vertical
@@ -177,13 +183,14 @@ class ReachabilityViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        update()
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: Reachability.shared)
         do {
             try Reachability.shared.startNotifier()
         } catch {
             print("could not start reachability notifier")
         }
+
+        update()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -230,46 +237,54 @@ class ReachabilityViewController: UIViewController {
 
     @objc
     func update() {
-        switch Reachability.shared.connection {
-        case .wifi:
-            connectedCheck.setOn(true, animated: true)
-            tabBarItem = connectedTabBarItem
-            connectedLabel.text = "Connected via WiFi"
+        DispatchQueue.main.async {
+            switch Reachability.shared.connection {
+            case .wifi:
+                self.connectedCheck.setOn(true, animated: true)
+                self.tabBarItem = self.connectedTabBarItem
+                self.connectedLabel.text = "Connected via WiFi"
 
-            if #available(iOS 13.0, *) {
-                let status = CLLocationManager.authorizationStatus()
-                if status == .authorizedWhenInUse {
+                if #available(iOS 13.0, *) {
+                    let status = CLLocationManager.authorizationStatus()
+                    if status == .authorizedWhenInUse || status == .authorizedAlways {
+                        if let (optionalInterface, optionalSsid, _) = WiFi.ssidInfo(), let interface = optionalInterface, let ssid = optionalSsid {
+                            self.connectedLabel.text = self.connectedLabel.text! + " (\(ssid)) on \(interface)"
+                        }
+                    } else {
+                        // XXX: add information prompt before the actual request
+                        self.locationManager.requestWhenInUseAuthorization()
+                        // XXX: This goes away after a second or two?... why?
+                    }
+                } else {
                     if let (optionalInterface, optionalSsid, _) = WiFi.ssidInfo(), let interface = optionalInterface, let ssid = optionalSsid {
                         self.connectedLabel.text = self.connectedLabel.text! + " (\(ssid)) on \(interface)"
                     }
-                } else {
-                    let locationManager = CLLocationManager()
-                    locationManager.delegate = self
-                    locationManager.requestWhenInUseAuthorization()
                 }
-            } else {
-                if let (optionalInterface, optionalSsid, _) = WiFi.ssidInfo(), let interface = optionalInterface, let ssid = optionalSsid {
-                    connectedLabel.text = connectedLabel.text! + " (\(ssid)) on \(interface)"
-                }
-            }
 
-        case .cellular:
-            connectedCheck.setOn(true, animated: true)
-            connectedLabel.text = "Connected via Cellular"
-            tabBarItem = connectedTabBarItem
-        case .none:
-            connectedCheck.setOn(false, animated: true)
-            connectedLabel.text = "Not Connected"
-            tabBarItem = disconnectedTabBarItem
+            case .cellular:
+                self.connectedCheck.setOn(true, animated: true)
+                self.connectedLabel.text = "Connected via Cellular"
+                self.tabBarItem = self.connectedTabBarItem
+            case .none:
+                self.connectedCheck.setOn(false, animated: true)
+                self.connectedLabel.text = "Not Connected"
+                self.tabBarItem = self.disconnectedTabBarItem
+            }
+            self.interfaceTable.updateInterfaces()
+            self.interfaceTable.tableView.reloadData()
         }
-        interfaceTable.updateInterfaces()
-        interfaceTable.tableView.reloadData()
-        // self.iNav.updateViewConstraints()
     }
 }
 
 extension ReachabilityViewController: CLLocationManagerDelegate {
-    func locationManager(_: CLLocationManager, didChangeAuthorization _: CLAuthorizationStatus) {
-        update()
+    func locationManager(_: CLLocationManager, didChangeAuthorization auth: CLAuthorizationStatus) {
+        switch auth {
+        case .authorizedAlways:
+            update()
+        case .authorizedWhenInUse:
+            update()
+        default:
+            break
+        }
     }
 }

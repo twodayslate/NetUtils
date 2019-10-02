@@ -13,7 +13,12 @@ class LoadingCell: UITableViewCell {
     var spinner: UIActivityIndicatorView
 
     init(reuseIdentifier: String?) {
-        spinner = UIActivityIndicatorView(style: .gray)
+        spinner = UIActivityIndicatorView()
+        if #available(iOS 13.0, *) {
+            spinner.style = .medium
+        } else {
+            spinner.style = .gray
+        }
 
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
 

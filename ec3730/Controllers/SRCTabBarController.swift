@@ -13,6 +13,9 @@ class SRCTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
+        defaultsChanged()
+
         let ping = PingViewController()
         ping.tabBarItem = UITabBarItem(title: "Ping", image: UIImage(named: "Ping"), tag: 0)
         ping.tabBarItem.selectedImage = UIImage(named: "Ping_selected")
@@ -33,5 +36,19 @@ class SRCTabBarController: UITabBarController, UITabBarControllerDelegate {
         settings.tabBarItem.selectedImage = UIImage(named: "Settings_selected")
 
         viewControllers = [host, reachability, ping, viewSource, settings]
+    }
+
+    @objc func defaultsChanged() {
+        if #available(iOS 13.0, *) {
+            print("testing dark mode")
+            switch UserDefaults.standard.integer(forKey: "theme") {
+            case 1:
+                self.overrideUserInterfaceStyle = .light
+            case 2:
+                self.overrideUserInterfaceStyle = .dark
+            default:
+                self.overrideUserInterfaceStyle = .unspecified
+            }
+        }
     }
 }

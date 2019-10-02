@@ -12,15 +12,30 @@ import SplitView
 import UIKit
 import WebKit
 
+class SourceBar: UIToolbar {
+    func position(for _: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
+    }
+
+    override var barPosition: UIBarPosition {
+        return .topAttached
+    }
+}
+
 class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate {
     var sourceView: UITextView?
     var urlBar: UITextField?
     var button: UIButton?
+    let highlighter = Highlightr()
+    var language = UIBarButtonItem()
+    let languagePicker = UIPickerView()
+    var blurredPicker: BlurredPickerView?
 
     var stack: UIStackView!
     let barStack = UIStackView()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
+        // XXX: should this be based on the content of the web view?
         return .default
     }
 
@@ -28,7 +43,12 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = UIColor.systemBackground
+        } else {
+            self.view.backgroundColor = .white
+        }
 
         stack = UIStackView()
         stack.backgroundColor = UIColor.black
@@ -46,34 +66,6 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
         splitStackView.translatesAutoresizingMaskIntoConstraints = false
         splitStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
 
-        stack.addArrangedSubview(splitStackView)
-
-        sourceView = UITextView()
-        // sourceView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        // TODO: black fade top and bottom
-//        let topPadding = max(view.frame.size.height - view.safeAreaLayoutGuide.layoutFrame.size.height, UIApplication.shared.statusBarFrame.height)
-//        sourceView?.contentInset.top = topPadding
-
-        let sourceWrapper = UIView()
-        sourceWrapper.translatesAutoresizingMaskIntoConstraints = false
-        sourceView?.isEditable = false
-        sourceView?.isSelectable = true
-        sourceView?.translatesAutoresizingMaskIntoConstraints = false
-        sourceView?.clearsOnInsertion = true
-
-        let browserWrapper = UIView()
-        browserWrapper.translatesAutoresizingMaskIntoConstraints = false
-        browser = WKWebView()
-        browser.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        browser.navigationDelegate = self
-        browser.allowsBackForwardNavigationGestures = true
-
-        browserWrapper.addSubview(browser)
-        splitStackView.addView(browserWrapper, ratio: 0.5, minRatio: 0.1)
-        sourceWrapper.addSubview(sourceView!)
-        splitStackView.addView(sourceWrapper, ratio: 0.5, minRatio: 0.1)
-        // stack.addArrangedSubview(sourceView!)
-
         barStack.axis = NSLayoutConstraint.Axis.horizontal
         barStack.alignment = .leading
         // barStack.autoresizingMask = [.flexibleWidth]
@@ -86,7 +78,6 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
         urlBar = UITextField()
         urlBar?.autocorrectionType = .no
         urlBar?.autocapitalizationType = .none
-        urlBar?.textColor = UIColor.black
         urlBar?.textAlignment = .left
         urlBar?.borderStyle = .roundedRect
         urlBar?.keyboardType = .URL
@@ -96,7 +87,7 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
 
         barStack.addArrangedSubview(urlBar!)
 
-        let button = UIButton(frame: CGRect(x: 50, y: 50, width: 120, height: 50))
+        let button = UIButton(type: .system)
         button.setTitle("View Source", for: .normal)
         button.sizeToFit()
         button.addTarget(self, action: #selector(viewSource), for: .touchDown)
@@ -104,19 +95,127 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
         button.widthAnchor.constraint(equalToConstant: button.frame.width).isActive = true
         barStack.addArrangedSubview(loader)
 
-        let bar = UIToolbar()
-        bar.barStyle = .blackTranslucent
+        let bar = SourceBar()
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.barStyle = .default
+
         bar.setItems([UIBarButtonItem(customView: barStack)], animated: false)
         stack.addArrangedSubview(bar)
 
-        sourceView?.topAnchor.constraint(equalTo: sourceWrapper.topAnchor).isActive = true
-        sourceView?.bottomAnchor.constraint(equalTo: sourceWrapper.bottomAnchor).isActive = true
-        sourceView?.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        sourceView?.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        stack.addArrangedSubview(splitStackView)
+
+//        let textStorage = CodeAttributedString()
+//        textStorage.language = "HTML"
+//        let layoutManager = NSLayoutManager()
+//        textStorage.addLayoutManager(layoutManager)
+//
+//        let textContainer = NSTextContainer(size: view.bounds.size)
+//        layoutManager.addTextContainer(textContainer)
+//
+//        sourceView = UITextView(frame: .zero, textContainer: textContainer)
+
+        sourceView = UITextView()
+        // sourceView?.textContainer.layoutManager.store
+        // sourceView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        // TODO: black fade top and bottom
+//        let topPadding = max(view.frame.size.height - view.safeAreaLayoutGuide.layoutFrame.size.height, UIApplication.shared.statusBarFrame.height)
+//        sourceView?.contentInset.top = topPadding
+
+        let sourceWrapper = UIView()
+        sourceWrapper.translatesAutoresizingMaskIntoConstraints = false
+        sourceView?.isEditable = false
+        sourceView?.isSelectable = true
+        sourceView?.translatesAutoresizingMaskIntoConstraints = false
+        sourceView?.clearsOnInsertion = true
+
+        let sourceStack = UIStackView()
+        sourceStack.axis = .vertical
+        sourceStack.translatesAutoresizingMaskIntoConstraints = false
+
+        let sourceBar = UIToolbar()
+        sourceBar.translatesAutoresizingMaskIntoConstraints = false
+
+//        language.frame = CGRect(x: 0, y: 0, width: 550, height: sourceBar.frame.height)
+//        language.text = "HTML"
+//        language.font = UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize)
+//        language.backgroundColor = .clear
+//        language.tintColor = .clear
+//        language.isEditable = false
+//        language.textAlignment = .center
+        language = UIBarButtonItem(title: "HTML", style: .done, target: self, action: #selector(selectLanguages))
+
+        // languagePicker.backgroundColor = UIColor.lightGray.withAlphaComponent(0.9)
+
+        // blurBackground.translatesAutoresizingMaskIntoConstraints = false
+        // languagePicker.insertSubview(blurBackground, at: 0)
+        // languagePicker.sendSubviewToBack(blurBackground)
+
+//        languagePicker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": blurBackground]))
+//        languagePicker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": blurBackground]))
+
+        blurredPicker = BlurredPickerView(picker: languagePicker, style: .regular)
+
+        languagePicker.delegate = self
+        languagePicker.dataSource = self
+
+        view.addSubview(blurredPicker!)
+//        blurredPicker?.isHidden = true
+//        blurredPicker?.alpha = 0.0
+
+        sourceBar.items = [
+            UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadJavascript)),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            language,
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Select All", style: .plain, target: self, action: #selector(selectSource(_:))),
+            UIBarButtonItem(title: "Copy", style: .plain, target: self, action: #selector(copySource(_:)))
+        ]
+        sourceStack.addArrangedSubview(sourceBar)
+        sourceStack.addArrangedSubview(sourceView!)
+
+        let browserWrapper = UIView()
+        browserWrapper.translatesAutoresizingMaskIntoConstraints = false
+        browser = WKWebView()
+        browser.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        browser.navigationDelegate = self
+        browser.allowsBackForwardNavigationGestures = true
+
+        browserWrapper.addSubview(browser)
+        splitStackView.addView(browserWrapper, ratio: 0.5, minRatio: 0.1)
+        
+        sourceWrapper.addSubview(sourceStack)
+        splitStackView.addView(sourceWrapper, ratio: 0.5, minRatio: 0.1)
+        // stack.addArrangedSubview(sourceView!)
+
+//        sourceView?.topAnchor.constraint(equalTo: sourceWrapper.topAnchor).isActive = true
+//        sourceView?.bottomAnchor.constraint(equalTo: sourceWrapper.bottomAnchor).isActive = true
+//        sourceView?.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+//        sourceView?.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
         loader.hidesWhenStopped = true
+        if #available(iOS 13.0, *) {
+            loader.style = .medium
+        } else {
+            loader.style = .gray
+        }
         let yConstraint = NSLayoutConstraint(item: loader, attribute: .centerY, relatedBy: .equal, toItem: barStack, attribute: .centerY, multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([yConstraint])
+
+        // bar.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
+
+        bar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+
+        sourceWrapper.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": sourceStack]))
+        sourceWrapper.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": sourceStack]))
+
+//        language.centerXAnchor.constraint(equalTo: sourceBar.centerXAnchor).isActive = true
+        // language.widthAnchor.constraint(greaterThanOrEqualTo: sourceBar.widthAnchor, multiplier: 0.3).isActive = true
+
+        blurredPicker?.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        blurredPicker?.bottom = view.safeAreaLayoutGuide.bottomAnchor
+        blurredPicker?.isHidden = true
+        blurredPicker?.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        blurredPicker?.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 
         startAvoidingKeyboard()
     }
@@ -191,9 +290,27 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
             self.browser.load(URLRequest(url: url))
         }
     }
+
+    @objc func selectSource(_ sender: Any?) {
+        DispatchQueue.main.async {
+            self.sourceView?.selectAll(sender)
+        }
+    }
+
+    @objc func copySource(_: Any?) {
+        UIPasteboard.general.string = sourceView?.text
+    }
+
+    @objc func selectLanguages() {
+        blurredPicker?.present(nil)
+    }
 }
 
 extension SourceViewController: WKNavigationDelegate {
+    @objc func reloadJavascript() {
+        setJavascript(showErrors: false, completion: nil)
+    }
+
     private func setJavascript(showErrors: Bool = true, completion block: (() -> Void)? = nil) {
         browser.evaluateJavaScript("document.documentElement.outerHTML", completionHandler: { source, error in
 
@@ -213,9 +330,10 @@ extension SourceViewController: WKNavigationDelegate {
                 return
             }
 
+            // Highlighter is slow af so doing this instead of using a text container
             DispatchQueue(label: "highlight", qos: .userInitiated).async {
-                let highlightr = Highlightr()
-                let highlightedCode = highlightr?.highlight(source)
+                let highlightedCode = self.highlighter?.highlight(source, as: self.language.title
+                    ?? "html", fastRender: true)
                 DispatchQueue.main.async {
                     self.sourceView?.attributedText = highlightedCode
                     block?()
@@ -250,5 +368,38 @@ extension SourceViewController: WKNavigationDelegate {
             self.sourceView?.attributedText = nil
         }
         isLoading = true
+    }
+}
+
+extension SourceViewController: UIPickerViewDelegate {
+    func pickerView(_: UIPickerView, titleForRow row: Int, forComponent _: Int) -> String? {
+        if row == 0 {
+            return "HTML"
+        }
+        if row == 1 {
+            return nil
+        }
+        return highlighter?.supportedLanguages()[row - 2] ?? nil
+    }
+
+    func pickerView(_: UIPickerView, didSelectRow row: Int, inComponent _: Int) {
+        if row == 0 || row == 1 {
+            language.title = "HTML"
+            return
+        }
+        language.title = highlighter?.supportedLanguages()[row - 2] ?? "HTML"
+    }
+}
+
+extension SourceViewController: UIPickerViewDataSource {
+    func numberOfComponents(in _: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_: UIPickerView, numberOfRowsInComponent _: Int) -> Int {
+        guard let languages = highlighter?.supportedLanguages() else {
+            return 1
+        }
+        return languages.count + 2
     }
 }

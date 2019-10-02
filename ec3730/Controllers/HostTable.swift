@@ -37,7 +37,8 @@ class HostTable: UITableViewController {
         didSet {
             DispatchQueue.main.async {
                 self.whoisManger.configure(self.whoisRecord)
-                self.tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+                self.tableView.reloadData()
+                // self.tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
             }
         }
     }
@@ -46,7 +47,8 @@ class HostTable: UITableViewController {
         didSet {
             DispatchQueue.main.async {
                 self.dnsManager.configure(self.dnsRecords)
-                self.tableView.reloadSections(IndexSet(integer: 2), with: .automatic)
+                self.tableView.reloadData()
+                // self.tableView.reloadSections(IndexSet(integer: 2), with: .automatic)
             }
         }
     }
@@ -62,7 +64,9 @@ class HostTable: UITableViewController {
         }
         set {
             _host = newValue
-            self.title = self.host + " Information"
+            DispatchQueue.main.async {
+                self.title = self.host + " Information"
+            }
         }
     }
 

@@ -73,7 +73,7 @@ extension UIViewController {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-            alert.addActionSheetForiPad()
+            alert.addActionSheetForiPad(sourceView: self.view)
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -82,7 +82,7 @@ extension UIViewController {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
-            alert.addActionSheetForiPad()
+            alert.addActionSheetForiPad(sourceView: self.view)
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -113,7 +113,7 @@ extension UIViewController {
             }
 
             alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
-            alert.addActionSheetForiPad()
+            alert.addActionSheetForiPad(sourceView: self.view)
             self.present(alert, animated: true, completion: nil)
         }
     }

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/// Resizable Split View, inspired by [Apple’s Split View](https://support.apple.com/en-us/HT207582#split) for iPadOS and [SplitKit](https://github.com/macteo/SplitKit)
 open class SplitView: UIView {
     // MARK: - Properties
     // MARK: Private
@@ -17,32 +18,29 @@ open class SplitView: UIView {
     private var smallestRatio: CGFloat = 0.02
     
     // MARK: Public
+    /// The views being split
     public var views = [SplitSupportingView]()
+    /// The handles between views
     public var handles = [SplitViewHandle]()
     
     /// The minimum width/height ratio for each view
     public var minimumRatio: CGFloat
     /// The animation duration when resizing views
-    public var animationDuration: TimeInterval = 0.01
+    public var animationDuration: TimeInterval = 0.2
+    
+    /// Snap Behavior
+    public var snap = [SplitViewSnapBehavior]() {
+        didSet {
+            self.update()
+        }
+    }
     
     /// This property determines the orientation of the arranged views.
-    /// Assigning the NSLayoutConstraint.Axis.vertical value creates a column of views.
-    /// Assigning the NSLayoutConstraint.Axis.horizontal value creates a row.
+    /// Assigning the `NSLayoutConstraint.Axis.vertical` value creates a column of views.
+    /// Assigning the `NSLayoutConstraint.Axis.horizontal` value creates a row.
     public var axis: NSLayoutConstraint.Axis {
         didSet {
-            DispatchQueue.main.async {
-                self.stack.axis = self.axis
-                
-                for handle in self.handles {
-                    handle.axis = self.axis
-                }
-                
-                self.setRatios()
-                
-                UIView.animate(withDuration: self.animationDuration * 2) {
-                    self.layoutIfNeeded()
-                }
-            }
+            self.update()
         }
     }
     
@@ -105,35 +103,47 @@ open class SplitView: UIView {
         self.setRatios()
     }
     
-    private func setRatios() {
-        // TODO: optimize
-        var totalHandleSize: CGFloat = 0.0
+    private func update() {
+        self.stack.axis = self.axis
+        
         for handle in self.handles {
-            totalHandleSize += handle.size
+            handle.axis = self.axis
         }
         
-        // TODO: optimize
-        var count = 0
-        for view in self.views where view.ratio > 0 {
-            count += 1
-        }
+        self.setRatios()
         
-        // TODO: optimize
+        UIView.animate(withDuration: self.animationDuration) {
+            self.layoutIfNeeded()
+        }
+    }
+    
+    private func setRatios() {
+        let totalHandleSize: CGFloat = handles.reduce(0.0) { $0 + $1.size }
+        let count = views.filter({ $0.ratio > 0 }).count
+        
         let handleConstant = totalHandleSize/CGFloat(count)
         
+        let original_constraints = views.compactMap({$0.constraint})
+        
         for (i, view) in views.enumerated() {
-            views[i].constraint?.isActive = false
-            views[i].constraint = nil
             
             print("Setting", i, view.ratio, handleConstant)
-            // using greaterThanOrEqual to ignore rounding errors
+            // using greaterThanOrEqual and lesser ratio to ignore rounding errors
+            
+            let constant = view.ratio > 0.0 ? -handleConstant: 0.0
+            let ratio = max(view.ratio - 0.01, 0.0)
+            
             if self.axis == .vertical {
-                views[i].constraint = NSLayoutConstraint(item: views[i].view, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: stack, attribute: .height, multiplier: view.ratio, constant: view.ratio > 0.0 ? -handleConstant: 0.0)
+                views[i].constraint = NSLayoutConstraint(item: views[i].view, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: stack, attribute: .height, multiplier: ratio, constant: constant)
             } else {
-                 views[i].constraint = NSLayoutConstraint(item: views[i].view, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: stack, attribute: .width, multiplier: view.ratio, constant: view.ratio > 0.0 ? -handleConstant: 0.0)
+                 views[i].constraint = NSLayoutConstraint(item: views[i].view, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: stack, attribute: .width, multiplier: ratio, constant: constant)
             }
-            views[i].constraint?.isActive = true
         }
+        
+        let new_constraints = views.compactMap({$0.constraint})
+        
+        NSLayoutConstraint.deactivate(original_constraints)
+        NSLayoutConstraint.activate(new_constraints)
     }
     
     private func ratio(given ratio: CGFloat, for organizer: SplitSupportingView)->CGFloat {
@@ -171,7 +181,16 @@ open class SplitView: UIView {
     
     private func assignRatios(newRatio: CGFloat, for index: Int) {
         var ratio = newRatio
-        var secondRatio = 1.0 - newRatio
+        
+        for snapBehavior in self.snap {
+            for point in snapBehavior.snapPoints {
+                if ratio > (point.percentage - point.tolerance) && ratio < (point.percentage + point.tolerance) {
+                    ratio = point.percentage
+                }
+            }
+        }
+        
+        var secondRatio = 1.0 - ratio
         
         if secondRatio < self.smallestRatio {
             secondRatio = 0.0
@@ -223,9 +242,8 @@ open class SplitView: UIView {
             views[handleIndex].ratio = self.ratio(given: max(ratio, views[handleIndex].minRatio), for: views[handleIndex])
             self.assignRatios(newRatio: views[handleIndex].ratio, for: handleIndex)
             
-            
+            self.setRatios()
             UIView.animate(withDuration: self.animationDuration) {
-                self.setRatios()
                 self.layoutIfNeeded()
             }
             
