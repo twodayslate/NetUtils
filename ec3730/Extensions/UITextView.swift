@@ -11,10 +11,10 @@ import UIKit
 
 extension UITextView {
     public func scrollToBottom() {
-        if self.text.count > 0 {
-            let location = self.text.count - 1
-            let bottom = NSMakeRange(location, 1)
-            self.scrollRangeToVisible(bottom)
+        if text.count > 0 {
+            let location = text.count - 1
+            let bottom = NSRange(location: location, length: 1)
+            scrollRangeToVisible(bottom)
         }
     }
 }

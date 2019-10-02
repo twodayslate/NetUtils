@@ -11,27 +11,27 @@ import Foundation
 class TimedCache {
     public var expirationInterval: TimeInterval
     private var data = [String: Any?]()
-    
+
     init(expiresIn interval: TimeInterval) {
-        self.expirationInterval = interval
+        expirationInterval = interval
     }
-    
+
     public func add(_ object: Any?, for key: String) {
-        self.data[key] = object
+        data[key] = object
         DispatchQueue.main.async {
-            Timer.scheduledTimer(withTimeInterval: self.expirationInterval, repeats: false) { timer in
+            Timer.scheduledTimer(withTimeInterval: self.expirationInterval, repeats: false) { _ in
                 self.data.removeValue(forKey: key)
             }
         }
     }
-    
+
     public func value<T>(for key: String) -> T? {
         guard let value = data[key] as? T else {
             return nil
         }
-        
+
         // XXX: invalidate and update the timer?
-        
+
         return value
     }
 }

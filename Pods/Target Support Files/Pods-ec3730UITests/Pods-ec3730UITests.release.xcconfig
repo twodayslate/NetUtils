@@ -1,8 +1,0 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Highlightr" "${PODS_CONFIGURATION_BUILD_DIR}/NetUtils" "${PODS_CONFIGURATION_BUILD_DIR}/PlainPing" "${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyStoreKit"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "${PODS_CONFIGURATION_BUILD_DIR}/Highlightr/Highlightr.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/NetUtils/NetUtils.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/PlainPing/PlainPing.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift/Reachability.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework/Headers"
-PODS_BUILD_DIR = ${BUILD_DIR}
-PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
-PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
-PODS_ROOT = ${SRCROOT}/Pods
