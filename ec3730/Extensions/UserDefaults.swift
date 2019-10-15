@@ -18,6 +18,9 @@ extension UserDefaults {
             public static var saveCalculatorResultAnimation: String { return "save_result_animation" }
             /// Key to enable/disable smart rotation lock for media
             public static var smartRotationLock: String { return "landscape_videos" }
+            public static var whoisXMLUserApiKey: String {
+                return "whois.xml.api.user.key"
+            }
         }
     }
 }

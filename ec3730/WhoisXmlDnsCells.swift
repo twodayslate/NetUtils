@@ -4,7 +4,7 @@ import UIKit
 
 class WhoisXmlDnsCellManager: CellManager {
     override func askForMoney() {
-        if !WhoisXml.isSubscribed {
+        if !WhoisXml.owned {
             let locked = WhoisLockedTableViewCell(reuseIdentifier: "dnslocked", heading: "Unlock DNS Lookup", subheading: "Our hosted DNS Lookup provides the records associated with a domain")
             locked.iapDelegate = self
             cells = [locked]

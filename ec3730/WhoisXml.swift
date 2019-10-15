@@ -11,16 +11,22 @@ import SwiftyStoreKit
 
 /// API wrapper for https://whoisxmlapi.com/
 class WhoisXml: DataFeed {
-    static var owned: Bool {
-        return WhoisXml.isSubscribed
-    }
+    public static var name = "Whois XML API"
+    public static var webpage: URL = URL(string: "https://www.whoisxmlapi.com/")!
+
+    public static var userKey: ApiKey? = {
+        guard let key = UserDefaults.standard.string(forKey: UserDefaults.NetUtils.Keys.whoisXMLUserApiKey) else {
+            return nil
+        }
+        return ApiKey(name: "Whois XML API (User)", key: key)
+    }()
 
     // MARK: - Properties
 
     /// The API Key for Whois XML API
     /// - Callout(Default):
     /// `ApiKey.WhoisXML`
-    public static var key: ApiKey = ApiKey.WhoisXML
+    internal static var key: ApiKey = ApiKey.WhoisXML
 
     /// Session used to create tasks
     ///
@@ -29,123 +35,22 @@ class WhoisXml: DataFeed {
     public static var session = URLSession.shared
     private static var _cachedExpirationDate: Date?
 
-    public enum Subscriptions {
-        /// Auto-renewable Monthly Subscription
-        case monthly
-
-        /// Product identifier
-        var identifier: String {
-            switch self {
-            default:
-                return "whois.monthly.auto"
-            }
-        }
-
-        /// - parameters:
-        ///   - subscription: the subscription to get the localized price for
-        ///   - block: completion block containing possible errors and/or the
-        ///            localized price of the `subscription`
-        public func retrieveLocalizedPrice(for subscription: Subscriptions = .monthly, completion block: ((String?, Error?) -> Void)? = nil) {
-            SwiftyStoreKit.retrieveProductsInfo([subscription.identifier]) { result in
-                guard result.error == nil else {
-                    block?(nil, result.error)
-                    return
-                }
-                if let product = result.retrievedProducts.first {
-                    block?(product.localizedPrice, nil)
-                } else if let invalidProductId = result.invalidProductIDs.first {
-                    block?(nil, WhoisXmlError.invalidProduct(id: invalidProductId))
-                }
-            }
-        }
-    }
-
-    enum Service {
-        case whois
-        case dns
-        case reputation
-
-        var id: String {
-            switch self {
-            case .whois:
-                return "1"
-            case .dns:
-                return "26"
-            case .reputation:
-                return "20"
-            }
-        }
-
-        static var cache = [String: TimedCache]()
-
-        var cache: TimedCache {
-            if let currentCache = Service.cache[self.id] {
-                return currentCache
-            }
-            Service.cache[self.id] = TimedCache(expiresIn: 300)
-            return Service.cache[self.id]!
-        }
-
-        func url(_ domain: String, key: String = ApiKey.WhoisXML.key) -> URL? {
-            switch self {
-            case .whois:
-                return Endpoint.whoisUrl(domain, with: key)
-            case .dns:
-                return Endpoint.dnsUrl(domain, with: key)
-            case .reputation:
-                return nil
-            }
-        }
-
-        func balance(key: String = ApiKey.WhoisXML.key, completion block: ((Error?, Int?) -> Void)? = nil) {
-            guard let balanceURL = Endpoint.balanceUrl(for: self.id, with: key) else {
-                block?(WhoisXmlError.invalidUrl, nil) // TODO: set error
-                return
-            }
-
-            WhoisXml.session.dataTask(with: balanceURL) { data, _, error in
-                guard error == nil else {
-                    block?(error, nil)
-                    return
-                }
-                guard let data = data else {
-                    block?(WhoisXmlError.empty, nil)
-                    return
-                }
-
-                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                    block?(WhoisXmlError.parse, nil) // TODO: set error
-                    return
-                }
-
-                guard let jsonDataArray = json["data"] as? [Any?], jsonDataArray.count == 1, let first = jsonDataArray[0] as? [String: Any?], let balance = first["credits"] as? Int else {
-                    block?(WhoisXmlError.parse, nil) // TODO: set error
-                    return
-                }
-
-                block?(nil, balance)
-            }.resume()
-        }
-    }
-
-    /// If the current user has subscribed to the WHOIS API
-    /// - Important:
-    /// This will give you the cached version, use `verifySubscription` to get the asyncronous version
-    public class var isSubscribed: Bool {
-        #if DEBUG
-            if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-                return true
-            }
-        #endif
-
-        verifySubscription()
-
-        guard let expiration = _cachedExpirationDate else {
-            return false
-        }
-
-        return expiration.timeIntervalSinceNow > 0
-    }
+//    
+//    public class var isSubscribed: Bool {
+//        #if DEBUG
+//            if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+//                return true
+//            }
+//        #endif
+//
+//        verifySubscription()
+//
+//        guard let expiration = _cachedExpirationDate else {
+//            return false
+//        }
+//
+//        return expiration.timeIntervalSinceNow > 0
+//    }
 
     class func verifySubscription(for subscription: Subscriptions = .monthly, completion block: ((Error?, VerifySubscriptionResult?) -> Void)? = nil) {
         guard let _ = SwiftyStoreKit.localReceiptData else {
@@ -159,8 +64,6 @@ class WhoisXml: DataFeed {
                 // Verify the purchase of a Subscription
                 let purchaseResult = SwiftyStoreKit.verifySubscriptions(productIds: Set([subscription.identifier]), inReceipt: receipt)
 
-                block?(nil, purchaseResult)
-
                 switch purchaseResult {
                 case let .purchased(expiryDate, items):
                     print("subscription is valid until \(expiryDate)\n\(items)\n")
@@ -170,6 +73,7 @@ class WhoisXml: DataFeed {
                 case .notPurchased:
                     print("The user has never purchased subscription")
                 }
+                block?(nil, purchaseResult)
 
             case let .error(error):
                 print("Receipt verification failed: \(error)")
@@ -177,40 +81,14 @@ class WhoisXml: DataFeed {
             }
         }
     }
+}
 
+extension WhoisXml {
+    typealias Endpoints = Endpoint
     /// A URL endpoint
     /// - SeeAlso:
     /// [Constructing URLs in Swift](https://www.swiftbysundell.com/posts/constructing-urls-in-swift)
-    struct Endpoint {
-        let schema: String
-        let host: String
-        var path: String = ""
-        var queryItems: [URLQueryItem] = [
-            URLQueryItem(name: "apiKey", value: ApiKey.WhoisXML.key)
-        ]
-
-        init(schema: String = "https", host: String = "www.whoisxmlapi.com", path: String = "", queryItems: [URLQueryItem] = [
-            URLQueryItem(name: "apiKey", value: ApiKey.WhoisXML.key)
-        ]) {
-            self.schema = schema
-            self.host = host
-            self.path = path
-            self.queryItems = queryItems
-        }
-
-        func with(schema: String? = nil, host: String? = nil, path: String? = nil, queryItems: [URLQueryItem]? = nil) -> Endpoint {
-            return Endpoint(schema: schema ?? self.schema, host: host ?? self.host, path: path ?? self.path, queryItems: queryItems ?? self.queryItems)
-        }
-
-        var url: URL? {
-            var components = URLComponents()
-            components.scheme = schema
-            components.host = host
-            components.path = path
-            components.queryItems = queryItems
-            return components.url
-        }
-
+    class Endpoint: DataFeedEndpoint {
         /// OLD https://www.whoisxmlapi.com/accountServices.php?servicetype=accountbalance&apiKey=#
         /// NEW https://user.whoisxmlapi.com/service/account-balance?productId=1&apiKey=#
         static func balanceUrl(for id: String = "1", with key: String = ApiKey.WhoisXML.key) -> URL? {
@@ -222,13 +100,13 @@ class WhoisXml: DataFeed {
                             ]).url
         }
 
-        /// https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey=at_QdHCML5OhryN0g2sHBeesD8aVNmMS&domainName=google.com
+        /// https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey=#&domainName=google.com
         static func whoisUrl(_ domain: String, with key: String = ApiKey.WhoisXML.key) -> URL? {
             guard let domain = domain.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
                 return nil
             }
 
-            return Endpoint(path: "/whoisserver/WhoisService", queryItems: [
+            return Endpoint(host: "www.whoisxmlapi.com", path: "/whoisserver/WhoisService", queryItems: [
                 URLQueryItem(name: "domainName", value: domain),
                 URLQueryItem(name: "apiKey", value: key),
                 URLQueryItem(name: "outputFormat", value: "JSON"),
@@ -243,7 +121,7 @@ class WhoisXml: DataFeed {
                 return nil
             }
 
-            return Endpoint(path: "/whoisserver/DNSService", queryItems: [
+            return Endpoint(host: "www.whoisxmlapi.com", path: "/whoisserver/DNSService", queryItems: [
                 URLQueryItem(name: "domainName", value: domain),
                 URLQueryItem(name: "apiKey", value: key),
                 URLQueryItem(name: "outputFormat", value: "JSON"),
@@ -253,19 +131,37 @@ class WhoisXml: DataFeed {
     }
 }
 
-extension WhoisXml {
-    public class func query<T: Decodable>(_ domain: String, service: WhoisXml.Service, key: String = ApiKey.WhoisXML.key, minimumBalance: Int = 100, completion block: ((Error?, T?) -> Void)? = nil) {
-        guard let queryUrl = service.url(domain, key: key) else {
-            block?(WhoisXmlError.invalidUrl, nil) // TODO: return error
+// MARK: - DataFeedService
 
+class WhoisXMLService: Service {
+    func endpoint(_ userData: [String: Any?]?) -> DataFeedEndpoint? {
+        guard let userData = userData, let userInput = userData["domain"] as? String, let domain = userInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+            return nil
+        }
+
+        return WhoisXml.Endpoint(host: "www.whoisxmlapi.com", path: "/whoisserver/WhoisService", queryItems: [
+            URLQueryItem(name: "domainName", value: domain),
+            URLQueryItem(name: "apiKey", value: WhoisXml.currentKey.key),
+            URLQueryItem(name: "outputFormat", value: "JSON"),
+            URLQueryItem(name: "da", value: "2"),
+            URLQueryItem(name: "ip", value: "1")
+        ])
+    }
+
+    func query<T>(_ userData: [String: Any?]?, completion block: ((Error?, T?) -> Void)?) where T: Decodable {
+        guard let endpoint = self.endpoint(userData), let endpointURL = endpoint.url else {
+            block?(WhoisXmlError.invalidUrl, nil)
             return
         }
 
-        if let cached: T = service.cache.value(for: queryUrl.absoluteString) {
+        let minimumBalance = userData?["minimumBalance"] as? Int ?? 100
+
+        if let cached: T = self.cache.value(for: endpointURL.absoluteString) {
             block?(nil, cached)
+            return
         }
 
-        service.balance { error, balance in
+        balance { error, balance in
             guard error == nil else {
                 block?(error, nil)
                 return
@@ -281,7 +177,7 @@ extension WhoisXml {
                 return
             }
 
-            WhoisXml.session.dataTask(with: queryUrl) { data, _, error in
+            WhoisXml.session.dataTask(with: endpointURL) { data, _, error in
                 guard error == nil else {
                     block?(error, nil)
                     return
@@ -328,10 +224,10 @@ extension WhoisXml {
 
                 do {
                     let coordinator = try decoder.decode(T.self, from: data)
-                    service.cache.add(coordinator, for: queryUrl.absoluteString)
+                    self.cache.add(coordinator, for: endpointURL.absoluteString)
                     block?(nil, coordinator)
                 } catch let decodeError {
-                    print(decodeError)
+                    print(decodeError, T.self, self.name)
                     print(String(data: data, encoding: .utf8) ?? "")
                     block?(decodeError, nil)
                 }
@@ -339,9 +235,231 @@ extension WhoisXml {
         }
     }
 
-    public class func whoisQuery(_ domain: String, key: String = ApiKey.WhoisXML.key, minimumBalance: Int = 100, completion block: ((Error?, WhoisRecord?) -> Void)? = nil) {
-        query(domain, service: .whois, key: key, minimumBalance: minimumBalance, completion: { (error, record: Coordinate?) in
-            block?(error, record?.whoisRecord)
-        })
+    var name: String
+    var id: String
+
+    init(name: String, id: String) {
+        self.name = name
+        self.id = id
+    }
+
+    func balance(key: String = WhoisXml.currentKey.key, completion block: ((Error?, Int?) -> Void)? = nil) {
+        guard let balanceURL = WhoisXml.Endpoint.balanceUrl(for: self.id, with: key) else {
+            block?(WhoisXmlError.invalidUrl, nil) // TODO: set error
+            return
+        }
+
+        WhoisXml.session.dataTask(with: balanceURL) { data, _, error in
+            guard error == nil else {
+                block?(error, nil)
+                return
+            }
+            guard let data = data else {
+                block?(WhoisXmlError.empty, nil)
+                return
+            }
+
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                block?(WhoisXmlError.parse, nil) // TODO: set error
+                return
+            }
+
+            guard let jsonDataArray = json["data"] as? [Any?], jsonDataArray.count == 1, let first = jsonDataArray[0] as? [String: Any?], let balance = first["credits"] as? Int else {
+                block?(WhoisXmlError.parse, nil) // TODO: set error
+                return
+            }
+
+            block?(nil, balance)
+        }.resume()
+    }
+
+    static var cache = [String: TimedCache]()
+
+    var cache: TimedCache {
+        if let currentCache = WhoisXMLService.cache[self.id] {
+            return currentCache
+        }
+        WhoisXMLService.cache[self.id] = TimedCache(expiresIn: 300)
+        return WhoisXMLService.cache[self.id]!
+    }
+}
+
+class WhoisXMLDnsService: WhoisXMLService {
+    override func endpoint(_ userData: [String: Any?]?) -> DataFeedEndpoint? {
+        guard let userData = userData, let userInput = userData["domain"] as? String, let domain = userInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+            return nil
+        }
+
+        return WhoisXml.Endpoint(host: "www.whoisxmlapi.com", path: "/whoisserver/DNSService", queryItems: [
+            URLQueryItem(name: "domainName", value: domain),
+            URLQueryItem(name: "apiKey", value: WhoisXml.currentKey.key),
+            URLQueryItem(name: "outputFormat", value: "JSON"),
+            URLQueryItem(name: "type", value: "_all")
+        ])
+    }
+}
+
+extension WhoisXml: DataFeedService {
+    static var whoisService: WhoisXMLService {
+        WhoisXMLService(name: "WHOIS", id: "1")
+    }
+
+    static var dnsService: WhoisXMLService {
+        return WhoisXMLDnsService(name: "DNS", id: "26")
+    }
+
+    static var services: [Service] = {
+        let reputation = WhoisXMLService(name: "Reputation", id: "20")
+
+        return [WhoisXml.whoisService, WhoisXml.dnsService, reputation]
+    }()
+
+//    enum Service {
+//        case whois
+//        case dns
+//        case reputation
+//
+//        var id: String {
+//            switch self {
+//            case .whois:
+//                return "1"
+//            case .dns:
+//                return "26"
+//            case .reputation:
+//                return "20"
+//            }
+//        }
+//
+//        static var cache = [String: TimedCache]()
+//
+//        var cache: TimedCache {
+//            if let currentCache = Service.cache[self.id] {
+//                return currentCache
+//            }
+//            Service.cache[self.id] = TimedCache(expiresIn: 300)
+//            return Service.cache[self.id]!
+//        }
+//
+//        func url(_ domain: String, key: String = ApiKey.WhoisXML.key) -> URL? {
+//            switch self {
+//            case .whois:
+//                return Endpoint.whoisUrl(domain, with: key)
+//            case .dns:
+//                return Endpoint.dnsUrl(domain, with: key)
+//            case .reputation:
+//                return nil
+//            }
+//        }
+//
+//        func balance(key: String = ApiKey.WhoisXML.key, completion block: ((Error?, Int?) -> Void)? = nil) {
+//            guard let balanceURL = Endpoint.balanceUrl(for: self.id, with: key) else {
+//                block?(WhoisXmlError.invalidUrl, nil) // TODO: set error
+//                return
+//            }
+//
+//            WhoisXml.session.dataTask(with: balanceURL) { data, _, error in
+//                guard error == nil else {
+//                    block?(error, nil)
+//                    return
+//                }
+//                guard let data = data else {
+//                    block?(WhoisXmlError.empty, nil)
+//                    return
+//                }
+//
+//                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+//                    block?(WhoisXmlError.parse, nil) // TODO: set error
+//                    return
+//                }
+//
+//                guard let jsonDataArray = json["data"] as? [Any?], jsonDataArray.count == 1, let first = jsonDataArray[0] as? [String: Any?], let balance = first["credits"] as? Int else {
+//                    block?(WhoisXmlError.parse, nil) // TODO: set error
+//                    return
+//                }
+//
+//                block?(nil, balance)
+//            }.resume()
+//        }
+//    }
+}
+
+// MARK: - DataFeedSubscription
+
+extension WhoisXml: DataFeedSubscription {
+    /// IF the user has access to the API feed
+    ///
+    /// We assume access if a user key is set
+    static var owned: Bool {
+        if self.userKey != nil {
+            return true
+        }
+        
+        return self.paid
+    }
+
+    /// If the current user has subscribed to the WHOIS API
+    /// - Important:
+    /// This will give you the cached version, use `verifySubscription` to get the asyncronous version
+    public static var paid: Bool {
+        #if DEBUG
+            if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+                return true
+            }
+        #endif
+
+        verifySubscription()
+        
+        guard let expiration = _cachedExpirationDate else {
+            return false
+        }
+
+        return expiration.timeIntervalSinceNow > 0
+    }
+
+    public static var subscriptions: [Subscription] = {
+        let monthly = Subscription("whois.monthly.auto")
+        let yearly = Subscription("whois.yearly.auto")
+
+        return [monthly, yearly]
+    }()
+    
+    func restore(completion block: ((RestoreResults)->Void)? = nil) {
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            for sub in WhoisXml.subscriptions {
+                sub.restore()
+            }
+            block?(results)
+        }
+    }
+
+    public enum Subscriptions {
+        /// Auto-renewable Monthly Subscription
+        case monthly
+
+        /// Product identifier
+        var identifier: String {
+            switch self {
+            default:
+                return "whois.monthly.auto"
+            }
+        }
+
+        /// - parameters:
+        ///   - subscription: the subscription to get the localized price for
+        ///   - block: completion block containing possible errors and/or the
+        ///            localized price of the `subscription`
+        public func retrieveLocalizedPrice(for subscription: Subscriptions = .monthly, completion block: ((String?, Error?) -> Void)? = nil) {
+            SwiftyStoreKit.retrieveProductsInfo([subscription.identifier]) { result in
+                guard result.error == nil else {
+                    block?(nil, result.error)
+                    return
+                }
+                if let product = result.retrievedProducts.first {
+                    block?(product.localizedPrice, nil)
+                } else if let invalidProductId = result.invalidProductIDs.first {
+                    block?(nil, WhoisXmlError.invalidProduct(id: invalidProductId))
+                }
+            }
+        }
     }
 }

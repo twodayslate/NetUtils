@@ -139,7 +139,7 @@ class ReachabilityViewController: UIViewController {
         if #available(iOS 13.0, *) {
             self.view.backgroundColor = UIColor.systemBackground
         } else {
-            self.view.backgroundColor = .white
+            view.backgroundColor = .white
         }
 
         locationManager.delegate = self

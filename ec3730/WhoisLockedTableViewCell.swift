@@ -43,7 +43,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
             }
 
             // Update isSubscribed cache
-            _ = WhoisXml.isSubscribed
+            _ = WhoisXml.owned
 
             self.iapDelegate?.restoreInAppPurchase(results)
         }
@@ -65,7 +65,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
             }
 
             // Update isSubscribed cache
-            _ = WhoisXml.isSubscribed
+            _ = WhoisXml.owned
 
             self.iapDelegate?.updatedInAppPurchase(result)
         }

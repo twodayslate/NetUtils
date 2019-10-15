@@ -36,8 +36,7 @@ class CopyLabel: UILabel {
         // let rect = timeLabel.textRect(forBounds: timeLabel.frame, limitedToNumberOfLines: 0)
         // copyMenu.setTargetRect(rect, in: self)
         // menu.setTargetRect(rect, in: timeLabel)
-        menu.setTargetRect(label.frame, in: label.superview!)
-        menu.setMenuVisible(true, animated: true)
+        menu.showMenu(from: label.superview!, rect: label.frame)
     }
 
     override var canBecomeFirstResponder: Bool {
