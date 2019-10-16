@@ -27,7 +27,7 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
         if #available(iOS 13.0, *) {
             self.view.backgroundColor = UIColor.systemBackground
         } else {
-            self.view.backgroundColor = .white
+            view.backgroundColor = .white
         }
 
         stack = UIStackView()
@@ -127,15 +127,6 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
             return _isLoading
         }
         set {
-            DispatchQueue.main.async {
-                if newValue {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = true
-                    self.loader.startAnimating()
-                } else {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    self.loader.stopAnimating()
-                }
-            }
             _isLoading = newValue
         }
     }

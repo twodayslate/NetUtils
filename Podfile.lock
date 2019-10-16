@@ -3,7 +3,7 @@ PODS:
   - NetUtils (4.1.0)
   - PlainPing (0.5)
   - ReachabilitySwift (4.3.1)
-  - SKVersion (1.0.0):
+  - SKVersion (2.0.0):
     - Version (~> 0.7.0)
   - SplitView (1.2.0)
   - SwiftFormat/CLI (0.40.12)
@@ -41,7 +41,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SKVersion:
-    :commit: 0c7c9932afa5aa9230af2b7cbd3557f006e199d1
+    :commit: 703a76fc6b71d4ebfbbc232ed86258edb6cd12ef
     :git: https://github.com/twodayslate/SKVersion.git
   SplitView:
     :commit: 8942d7047b9d36588fd6aa63ab8d12bec1fb255f
@@ -52,7 +52,7 @@ SPEC CHECKSUMS:
   NetUtils: 414aca786a4be7d6c87a69613bdb6a5a2640f08e
   PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
-  SKVersion: 8f9f78093f468960452bd60c8db1548fef0a5c95
+  SKVersion: 009f29325b6513bfc0438916c29c4c21e3b19dd2
   SplitView: c83d66c39980bcfc3b3d9721babf822913951a8b
   SwiftFormat: 73667bbb741386b0febf0bd1a1b8c502aa9d1c98
   SwiftLint: 5553187048b900c91aa03552807681bb6b027846

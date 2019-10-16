@@ -79,7 +79,7 @@ class WhoisXmlCellManager: CellManager {
     var currentRecord: WhoisRecord?
 
     override func askForMoney() {
-        if !WhoisXml.isSubscribed {
+        if !WhoisXml.owned {
             let locked = WhoisLockedTableViewCell(reuseIdentifier: "locked")
             locked.iapDelegate = self
             cells = [locked]

@@ -21,8 +21,9 @@ open class CellManager {
 
     init() {
         cells.append(LoadingCell(reuseIdentifier: "loading"))
-        WhoisXml.verifySubscription { error, results in
-            self.verifyInAppSubscription(error: error, result: results)
+        
+        WhoisXml.verifySubscriptions { error in
+            self.verifyInAppSubscription(error: error, result: nil)
         }
     }
 
@@ -32,7 +33,7 @@ open class CellManager {
 
     open func startLoading() {
         privateIsLoading = true
-        if WhoisXml.isSubscribed {
+        if WhoisXml.owned {
             let cell = LoadingCell(reuseIdentifier: "loading")
             cell.spinner.startAnimating()
             cell.separatorInset.right = .greatestFiniteMagnitude
@@ -45,7 +46,7 @@ open class CellManager {
 
     open func stopLoading() {
         privateIsLoading = false
-        if WhoisXml.isSubscribed {
+        if WhoisXml.owned {
             cells.removeAll()
         } else {
             askForMoney()
@@ -55,7 +56,7 @@ open class CellManager {
 
 extension CellManager: InAppPurchaseUpdateDelegate {
     public func restoreInAppPurchase(_ results: RestoreResults) {
-        if WhoisXml.isSubscribed {
+        if WhoisXml.owned {
             cells.removeAll()
         }
 
@@ -65,7 +66,7 @@ extension CellManager: InAppPurchaseUpdateDelegate {
     public func updatedInAppPurchase(_ result: PurchaseResult) {
         switch result {
         case .success:
-            if WhoisXml.isSubscribed {
+            if WhoisXml.owned {
                 cells.removeAll()
             }
         default:
@@ -76,7 +77,7 @@ extension CellManager: InAppPurchaseUpdateDelegate {
     }
 
     public func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?) {
-        if WhoisXml.isSubscribed {
+        if WhoisXml.owned {
             cells.removeAll()
         } else {
             askForMoney()

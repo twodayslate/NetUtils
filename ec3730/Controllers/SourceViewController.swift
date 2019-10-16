@@ -43,11 +43,11 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if #available(iOS 13.0, *) {
             self.view.backgroundColor = UIColor.systemBackground
         } else {
-            self.view.backgroundColor = .white
+            view.backgroundColor = .white
         }
 
         stack = UIStackView()
@@ -182,7 +182,7 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
 
         browserWrapper.addSubview(browser)
         splitStackView.addView(browserWrapper, ratio: 0.5, minRatio: 0.1)
-        
+
         sourceWrapper.addSubview(sourceStack)
         splitStackView.addView(sourceWrapper, ratio: 0.5, minRatio: 0.1)
         // stack.addArrangedSubview(sourceView!)
@@ -248,15 +248,6 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
             return _isLoading
         }
         set {
-            DispatchQueue.main.async {
-                if newValue {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = true
-                    self.loader.startAnimating()
-                } else {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    self.loader.stopAnimating()
-                }
-            }
             _isLoading = newValue
         }
     }

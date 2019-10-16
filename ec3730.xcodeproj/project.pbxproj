@@ -27,6 +27,12 @@
 		F650F749233CF15800BAA609 /* DataFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F748233CF15800BAA609 /* DataFeed.swift */; };
 		F650F74B233E62C100BAA609 /* BlurredPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F74A233E62C100BAA609 /* BlurredPickerView.swift */; };
 		F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661A27F23020FCF0023FA50 /* UIAlertController.swift */; };
+		F668EB3C23501FA200EEB379 /* DataFeedEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB3B23501FA200EEB379 /* DataFeedEndpoint.swift */; };
+		F668EB3F2355807100EEB379 /* SKProductSubscriptionPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB3E2355807100EEB379 /* SKProductSubscriptionPeriod.swift */; };
+		F668EB4323563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB4223563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift */; };
+		F668EB4523563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB4423563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift */; };
+		F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB462356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift */; };
+		F668EB4B2356AE3800EEB379 /* IAPFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */; };
 		F67425DB21363FFF00A79492 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67425DA21363FFF00A79492 /* UITextView.swift */; };
 		F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE55F23021AC70068D104 /* CopyLabel.swift */; };
 		F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE5612302203B0068D104 /* CopyDetailCell.swift */; };
@@ -40,6 +46,7 @@
 		F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB982301DFCC00439562 /* LoadingCell.swift */; };
 		F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB9A2301E78E00439562 /* DNSResolver.swift */; };
 		F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */; };
+		F6C87452234FE8030069A57C /* DataFeedsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C87451234FE8030069A57C /* DataFeedsTableViewController.swift */; };
 		F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C8D8A4212E5AE900309373 /* AppDelegate.swift */; };
 		F6C8D8AE212E5AEA00309373 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6C8D8AD212E5AEA00309373 /* Assets.xcassets */; };
 		F6C8D8B1212E5AEA00309373 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */; };
@@ -106,6 +113,12 @@
 		F650F748233CF15800BAA609 /* DataFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeed.swift; sourceTree = "<group>"; };
 		F650F74A233E62C100BAA609 /* BlurredPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredPickerView.swift; sourceTree = "<group>"; };
 		F661A27F23020FCF0023FA50 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		F668EB3B23501FA200EEB379 /* DataFeedEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedEndpoint.swift; sourceTree = "<group>"; };
+		F668EB3E2355807100EEB379 /* SKProductSubscriptionPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProductSubscriptionPeriod.swift; sourceTree = "<group>"; };
+		F668EB4223563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedSubscriptionCellManager.swift; sourceTree = "<group>"; };
+		F668EB4423563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedSubscriptionDataViewController.swift; sourceTree = "<group>"; };
+		F668EB462356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedUserApiKeyTableViewController.swift; sourceTree = "<group>"; };
+		F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPFooterView.swift; sourceTree = "<group>"; };
 		F67425DA21363FFF00A79492 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		F68CE55F23021AC70068D104 /* CopyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyLabel.swift; sourceTree = "<group>"; };
 		F68CE5612302203B0068D104 /* CopyDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyDetailCell.swift; sourceTree = "<group>"; };
@@ -120,6 +133,7 @@
 		F6A4EB9A2301E78E00439562 /* DNSResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
 		F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiSSID.swift; sourceTree = "<group>"; };
 		F6A4EB9E2301F31100439562 /* ec3730.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ec3730.entitlements; sourceTree = "<group>"; };
+		F6C87451234FE8030069A57C /* DataFeedsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedsTableViewController.swift; sourceTree = "<group>"; };
 		F6C8D8A1212E5AE900309373 /* ec3730.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ec3730.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6C8D8A4212E5AE900309373 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6C8D8AD212E5AEA00309373 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -201,6 +215,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F668EB3D23501FAC00EEB379 /* Data Feeds */ = {
+			isa = PBXGroup;
+			children = (
+				F650F748233CF15800BAA609 /* DataFeed.swift */,
+				F668EB3B23501FA200EEB379 /* DataFeedEndpoint.swift */,
+				F650F744233CEB4B00BAA609 /* DataFeedCells.swift */,
+				F650F746233CECD900BAA609 /* DataFeedCell.swift */,
+				F668EB4223563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift */,
+			);
+			path = "Data Feeds";
+			sourceTree = "<group>";
+		};
 		F6A4EB932301C5CB00439562 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +246,9 @@
 				F63102762130D76200F34E42 /* ReachabilityViewController.swift */,
 				F68CE569230463A50068D104 /* InterfaceTableViewController.swift */,
 				F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */,
+				F6C87451234FE8030069A57C /* DataFeedsTableViewController.swift */,
+				F668EB4423563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift */,
+				F668EB462356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -232,6 +261,7 @@
 				F6FDDFC72304803100FBF75E /* UserDefaults.swift */,
 				F68CE5672303291A0068D104 /* Error.swift */,
 				F661A27F23020FCF0023FA50 /* UIAlertController.swift */,
+				F668EB3E2355807100EEB379 /* SKProductSubscriptionPeriod.swift */,
 				F67425DA21363FFF00A79492 /* UITextView.swift */,
 				F63540D4213DEBDD00605ABE /* Reachability.swift */,
 			);
@@ -267,12 +297,11 @@
 				F6C8D8A4212E5AE900309373 /* AppDelegate.swift */,
 				F6A4EB942301C5DD00439562 /* Controllers */,
 				F691B0992147449200BDE0F4 /* WhoisXml.swift */,
-				F650F748233CF15800BAA609 /* DataFeed.swift */,
+				F668EB3D23501FAC00EEB379 /* Data Feeds */,
 				F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */,
 				F6FDDFDF230C4C7400FBF75E /* CellManager.swift */,
+				F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */,
 				F650F74A233E62C100BAA609 /* BlurredPickerView.swift */,
-				F650F744233CEB4B00BAA609 /* DataFeedCells.swift */,
-				F650F746233CECD900BAA609 /* DataFeedCell.swift */,
 				F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */,
 				F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */,
 				F68CE5612302203B0068D104 /* CopyDetailCell.swift */,
@@ -572,6 +601,7 @@
 			files = (
 				F6FDDFC82304803100FBF75E /* UserDefaults.swift in Sources */,
 				F650F74B233E62C100BAA609 /* BlurredPickerView.swift in Sources */,
+				F668EB4323563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift in Sources */,
 				F67425DB21363FFF00A79492 /* UITextView.swift in Sources */,
 				F6310273212FA66600F34E42 /* SRCTabBarController.swift in Sources */,
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
@@ -581,7 +611,9 @@
 				F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */,
 				F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
+				F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */,
 				F619760922FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift in Sources */,
+				F6C87452234FE8030069A57C /* DataFeedsTableViewController.swift in Sources */,
 				F6FDDFCA23048DEF00FBF75E /* UIView.swift in Sources */,
 				F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */,
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
@@ -593,16 +625,20 @@
 				F60506742134B23F00DDF8A4 /* UIViewController.swift in Sources */,
 				F691B09A2147449200BDE0F4 /* WhoisXml.swift in Sources */,
 				F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */,
+				F668EB4B2356AE3800EEB379 /* IAPFooterView.swift in Sources */,
+				F668EB3C23501FA200EEB379 /* DataFeedEndpoint.swift in Sources */,
 				F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */,
 				F650F749233CF15800BAA609 /* DataFeed.swift in Sources */,
 				F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */,
 				F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */,
 				F63540DB213E05E000605ABE /* HostViewController.swift in Sources */,
+				F668EB4523563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift in Sources */,
 				F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */,
 				F6FDDFDC230B2BB900FBF75E /* WhoisDnsResults.swift in Sources */,
 				F6A4EB922301C5B800439562 /* InAppPurchaseUpdateDelegate.swift in Sources */,
 				F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */,
 				F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */,
+				F668EB3F2355807100EEB379 /* SKProductSubscriptionPeriod.swift in Sources */,
 				F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
@@ -706,7 +742,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -760,7 +796,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -780,14 +816,15 @@
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -806,14 +843,15 @@
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -54,7 +54,7 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
         if #available(iOS 13.0, *) {
             self.view.backgroundColor = UIColor.systemBackground
         } else {
-            self.view.backgroundColor = .white
+            view.backgroundColor = .white
         }
 
         stack = UIStackView()
@@ -133,14 +133,6 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
                 }
             }
             _isLoading = newValue
-
-            DispatchQueue.main.async {
-                if self.isLoading {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = true
-                } else {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                }
-            }
         }
     }
 
@@ -238,8 +230,8 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
                 }
             }
 
-            if WhoisXml.isSubscribed {
-                WhoisXml.whoisQuery(host) { error, response in
+            if WhoisXml.owned {
+                WhoisXml.whoisService.query(["domain": host]) { (error, response: Coordinate?) in
                     self.checkLoading()
                     guard error == nil else {
                         self.showError("Error getting WHOIS", message: error!.localizedDescription)
@@ -253,10 +245,10 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
                         return
                     }
 
-                    self.hostTable.whoisRecord = response
+                    self.hostTable.whoisRecord = response.whoisRecord
                 }
 
-                WhoisXml.query(host, service: .dns) { (error, response: DnsCoordinate?) in
+                WhoisXml.dnsService.query(["domain": host]) { (error, response: DnsCoordinate?) in
                     self.checkLoading()
                     guard error == nil else {
                         self.showError("Error getting WHOIS", message: error!.localizedDescription)

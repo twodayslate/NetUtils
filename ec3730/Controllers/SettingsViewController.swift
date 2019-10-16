@@ -29,26 +29,28 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.groupTableViewBackground
+        view.backgroundColor = UIColor.systemGroupedBackground
         // Do any additional setup after loading the view, typically from a nib.
         title = "Settings"
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return 4
+        return 5
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         // TODO: do this automagically
         // https://stackoverflow.com/questions/36378001/is-it-possible-to-count-pictures-in-asset-catalog-with-particular-prefix
         switch section {
-        case 0: // Appearance
+        case 0: // Data feeds
             return 1
-        case 1: // Browser
+        case 1: // Appearance
             return 1
-        case 2: // Contact/Rate
+        case 2: // Browser
+            return 1
+        case 3: // Contact/Rate
             return 3
-        case 3: // Legal
+        case 4: // Legal
             return 2
         default:
             return 0
@@ -57,11 +59,11 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 
     override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0:
-            return "Appearance"
         case 1:
+            return "Appearance"
+        case 2:
             return "Browser"
-        case 3:
+        case 4:
             return "Legal"
         default:
             return nil
@@ -76,6 +78,8 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
 
         switch indexPath.section {
         case 0:
+            cell.textLabel?.text = "Data Feeds"
+        case 1:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Theme"
@@ -90,7 +94,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             default:
                 break
             }
-        case 1:
+        case 2:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Open Links in"
@@ -104,7 +108,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 break
             }
 
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Contact"
@@ -118,7 +122,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             default:
                 break
             }
-        case 3:
+        case 4:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Privacy Policy"
@@ -140,6 +144,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
+            let feed = DataFeedsTableViewController(style: .grouped)
+            tableView.deselectRow(at: indexPath, animated: true)
+            navigationController?.pushViewController(feed, animated: true)
+        case 1:
             if themeSheet.actions.count == 0 {
                 let inappSafariAction = UIAlertAction(title: "System", style: .default, handler: { _ in
                     print("Auto")
@@ -182,7 +190,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             present(themeSheet, animated: true) {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
-        case 1:
+        case 2:
             if browserSheet.actions.count == 0 {
                 let inappSafariAction = UIAlertAction(title: "In-App Safari", style: .default, handler: { _ in
                     print("In-app Safari")
@@ -215,7 +223,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             present(browserSheet, animated: true) {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0:
                 // swiftlint:disable:next force_cast
@@ -299,7 +307,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             default:
                 break
             }
-        case 3:
+        case 4:
             switch indexPath.row {
             case 0:
                 open(URL(string: "https://zac.gorak.us/ios/privacy.html")!, title: "Privacy Policy") { _ in
