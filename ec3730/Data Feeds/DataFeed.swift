@@ -33,13 +33,18 @@ open class Subscription {
             }
         #endif
 
-        verifySubscription()
-
         guard let expiration = self.cachedExpirationDate else {
+            verifySubscription()
             return false
         }
 
-        return expiration.timeIntervalSinceNow > 0
+        let state = expiration.timeIntervalSinceNow > 0
+        
+        if !state {
+            verifySubscription()
+        }
+        
+        return state
     }
 
     /// - parameters:
@@ -80,11 +85,11 @@ open class Subscription {
                 let purchaseResult = SwiftyStoreKit.verifySubscriptions(productIds: Set([self.identifier]),
                                                                         inReceipt: receipt)
                 switch purchaseResult {
-                case let .purchased(expiryDate, items):
-                    print("subscription is valid until \(expiryDate)\n\(items)\n")
+                case let .purchased(expiryDate, _):
+                    print("subscription is valid until \(expiryDate)\n")
                     self.cachedExpirationDate = expiryDate
-                case let .expired(expiryDate, items):
-                    print("subscription is expired since \(expiryDate)\n\(items)\n")
+                case let .expired(expiryDate, _):
+                    print("subscription is expired since \(expiryDate)")
                 case .notPurchased:
                     print("The user has never purchased subscription")
                 }
@@ -173,6 +178,29 @@ extension DataFeedSubscription {
                 sub.restore()
                 block?(results)
             }
+        }
+    }
+    
+    public static func verifySubscriptions(completion block: ((Error?)->Void)? = nil) {
+
+        switch self.subscriptions.count {
+        case 0:
+            block?(nil)
+        case 1:
+            self.subscriptions.first?.verifySubscription { _ in
+                block?(nil)
+            }
+        case 2:
+            self.subscriptions[0].verifySubscription { _ in
+                self.subscriptions[1].verifySubscription { _ in
+                    block?(nil)
+                }
+            }
+        default:
+            for sub in self.subscriptions {
+                sub.verifySubscription()
+            }
+            block?(nil)
         }
     }
 }

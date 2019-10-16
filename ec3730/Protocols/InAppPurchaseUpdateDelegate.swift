@@ -14,3 +14,8 @@ public protocol InAppPurchaseUpdateDelegate {
     func restoreInAppPurchase(_ results: RestoreResults)
     func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?)
 }
+
+public protocol InAppPurchaseAttemptDelegate {
+    func purchaseAttempted()
+    func restoreAttempted()
+}

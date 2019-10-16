@@ -8,13 +8,17 @@
 
 import Foundation
 import UIKit
+import SwiftyStoreKit
 
 class DataFeedSubscriptionTableViewController: UITableViewController {
-    let subscriber: DataFeed.Type
+    let subscriber: DataFeedSubscription.Type
     let manager: DataFeedSubscriptionCellManager
+    var iapDelegate: InAppPurchaseUpdateDelegate? = nil
+    var userApiUpdateDelegate: DataFeedUserApiKeyDelegate? = nil
 
-    init(subscriber: DataFeed.Type) {
+    init(subscriber: DataFeedSubscription.Type) {
         self.subscriber = subscriber
+        
         manager = DataFeedSubscriptionCellManager(subscriber: self.subscriber)
 
         super.init(style: .insetGrouped)
@@ -33,11 +37,10 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
     }
     
     @objc func restore(_ sender: Any?) {
-        
-        if let feedCell = manager.cells.first as? DataFeedSubscriptionCell {
-            feedCell.subscription.restore() { _ in
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+        SwiftyStoreKit.restorePurchases { results in
+            for sub in self.subscriber.subscriptions {
+                sub.verifySubscription { _ in
+                    self.restoreInAppPurchase(results)
                 }
             }
         }
@@ -66,7 +69,7 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
                 cell.accessoryType = .checkmark
             }
             
-            if let sub = self.subscriber as? DataFeedSubscription.Type, sub.paid {
+            if self.subscriber.paid {
                 cell.detailTextLabel?.text = nil
             }
             return cell
@@ -98,10 +101,17 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
             return nil
         }
         
-        let label = UITableViewHeaderFooterView.iapFooter()
-        label.delegate = self
-        // swiftlint:enable line_length
-        return label
+        if self.subscriber.paid {
+            let text = UILabel()
+            text.text = "Thank you for your support!"
+            text.textAlignment = .center
+            text.textColor = UIColor.systemGray
+            return text
+        }
+        
+        let footer = IAPFooterView()
+        footer.label.delegate = self
+        return footer
     }
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -113,10 +123,12 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
             self.navigationController?.present(controller, animated: true, completion: nil)
             return
         }
-        if let sub = self.subscriber as? DataFeedSubscription.Type, !sub.owned {
+        
+        if !self.subscriber.paid {
             if let cell = tableView.cellForRow(at: indexPath) as? DataFeedSubscriptionCell {
                 // TODO: show loading indicator
-                cell.subscription.buy() { _ in
+                cell.subscription.buy() { result in
+                    self.updatedInAppPurchase(result)
                     // TODO: hide loading indicator
                 }
             }
@@ -126,13 +138,40 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
 
 extension DataFeedSubscriptionTableViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        UIApplication.shared.open(URL)
+        
+        self.open(URL, title: "")
         return false
     }
 }
 
+// MARK: - DataFeedUserApiKeyDelegate
 extension DataFeedSubscriptionTableViewController: DataFeedUserApiKeyDelegate {
     func didUpdate() {
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+}
+
+extension DataFeedSubscriptionTableViewController: InAppPurchaseUpdateDelegate {
+    func updatedInAppPurchase(_ result: PurchaseResult) {
+        self.iapDelegate?.updatedInAppPurchase(result)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func restoreInAppPurchase(_ results: RestoreResults) {
+        self.iapDelegate?.restoreInAppPurchase(results)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?) {
+        self.iapDelegate?.verifyInAppSubscription(error: error, result: result)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }

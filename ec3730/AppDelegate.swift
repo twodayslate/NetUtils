@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
 
         print(Bundle.main.bundleIdentifier?.description ?? "NO BUNDLE IDENTIFIER")
-
+        
         Bundle.main.storeVersion?.update {
             canUpdate, version, error in
             guard error == nil else {
@@ -38,9 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Unable to get new version")
                 return
             }
-
+            
             if canUpdate {
-                self.window?.controller?.showError("Update Available!", message: "An update to \(String(describing: version)) is available in the App Store")
+                DispatchQueue.main.async {
+                    self.window?.rootViewController?.showError("Update Available!", message: "An update to \(String(describing: version)) is available in the App Store")
+                }
             }
         }
 

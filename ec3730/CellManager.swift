@@ -21,8 +21,9 @@ open class CellManager {
 
     init() {
         cells.append(LoadingCell(reuseIdentifier: "loading"))
-        WhoisXml.verifySubscription { error, results in
-            self.verifyInAppSubscription(error: error, result: results)
+        
+        WhoisXml.verifySubscriptions { error in
+            self.verifyInAppSubscription(error: error, result: nil)
         }
     }
 

@@ -87,7 +87,7 @@ class HostTable: UITableViewController {
             return 0
         }
     }
-
+    
     override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -126,13 +126,13 @@ class HostTable: UITableViewController {
         return cell!
     }
 
-    override func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-
-    override func tableView(_: UITableView, estimatedHeightForRowAt _: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+//    override func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//
+//    override func tableView(_: UITableView, estimatedHeightForRowAt _: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,7 +153,7 @@ class HostTable: UITableViewController {
 
 extension HostTable: InAppPurchaseUpdateDelegate {
     func verify(showErrors: Bool = true) {
-        WhoisXml.verifySubscription { error, result in
+        WhoisXml.verifySubscriptions { error in
             guard error == nil else {
                 if showErrors {
                     self.parent?.showError(message: error!.localizedDescription)
@@ -161,31 +161,21 @@ extension HostTable: InAppPurchaseUpdateDelegate {
                 return
             }
 
-            guard let result = result else {
+            if WhoisXml.paid {
+                if showErrors {
+                    self.parent?.showError(message: "Thank you for pruchase!")
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                return
+            }
+            
+            if !WhoisXml.owned {
                 if showErrors {
                     self.parent?.showError(message: "Unable to verify subscription")
                 }
                 return
-            }
-
-            switch result {
-            case .purchased:
-                if showErrors {
-                    self.parent?.showError("❤", message: "Thank you for your purchase!")
-                }
-                DispatchQueue.main.async {
-                    self.whoisManger.configure(self.whoisRecord)
-                    self.dnsManager.configure(self.dnsRecords)
-                    self.tableView.reloadData()
-                }
-            case .expired:
-                if showErrors {
-                    self.parent?.showError("Subscription Expired", message: "Please purchase again or manage your subscription from inside the App Store")
-                }
-            case .notPurchased:
-                if showErrors {
-                    self.parent?.showError(message: "Subscription has not been purchased. Please try again laster.")
-                }
             }
         }
     }

@@ -29,11 +29,10 @@
 		F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661A27F23020FCF0023FA50 /* UIAlertController.swift */; };
 		F668EB3C23501FA200EEB379 /* DataFeedEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB3B23501FA200EEB379 /* DataFeedEndpoint.swift */; };
 		F668EB3F2355807100EEB379 /* SKProductSubscriptionPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB3E2355807100EEB379 /* SKProductSubscriptionPeriod.swift */; };
-		F668EB4123558FE500EEB379 /* DataFeedCellRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB4023558FE500EEB379 /* DataFeedCellRow.swift */; };
 		F668EB4323563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB4223563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift */; };
 		F668EB4523563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB4423563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift */; };
 		F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB462356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift */; };
-		F668EB492356775800EEB379 /* UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB482356775800EEB379 /* UITableViewDelegate.swift */; };
+		F668EB4B2356AE3800EEB379 /* IAPFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */; };
 		F67425DB21363FFF00A79492 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67425DA21363FFF00A79492 /* UITextView.swift */; };
 		F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE55F23021AC70068D104 /* CopyLabel.swift */; };
 		F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE5612302203B0068D104 /* CopyDetailCell.swift */; };
@@ -116,11 +115,10 @@
 		F661A27F23020FCF0023FA50 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		F668EB3B23501FA200EEB379 /* DataFeedEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedEndpoint.swift; sourceTree = "<group>"; };
 		F668EB3E2355807100EEB379 /* SKProductSubscriptionPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProductSubscriptionPeriod.swift; sourceTree = "<group>"; };
-		F668EB4023558FE500EEB379 /* DataFeedCellRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedCellRow.swift; sourceTree = "<group>"; };
 		F668EB4223563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedSubscriptionCellManager.swift; sourceTree = "<group>"; };
 		F668EB4423563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedSubscriptionDataViewController.swift; sourceTree = "<group>"; };
 		F668EB462356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedUserApiKeyTableViewController.swift; sourceTree = "<group>"; };
-		F668EB482356775800EEB379 /* UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewDelegate.swift; sourceTree = "<group>"; };
+		F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPFooterView.swift; sourceTree = "<group>"; };
 		F67425DA21363FFF00A79492 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		F68CE55F23021AC70068D104 /* CopyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyLabel.swift; sourceTree = "<group>"; };
 		F68CE5612302203B0068D104 /* CopyDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyDetailCell.swift; sourceTree = "<group>"; };
@@ -225,7 +223,6 @@
 				F650F744233CEB4B00BAA609 /* DataFeedCells.swift */,
 				F650F746233CECD900BAA609 /* DataFeedCell.swift */,
 				F668EB4223563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift */,
-				F668EB4023558FE500EEB379 /* DataFeedCellRow.swift */,
 			);
 			path = "Data Feeds";
 			sourceTree = "<group>";
@@ -262,7 +259,6 @@
 				F60506732134B23F00DDF8A4 /* UIViewController.swift */,
 				F6FDDFC923048DEF00FBF75E /* UIView.swift */,
 				F6FDDFC72304803100FBF75E /* UserDefaults.swift */,
-				F668EB482356775800EEB379 /* UITableViewDelegate.swift */,
 				F68CE5672303291A0068D104 /* Error.swift */,
 				F661A27F23020FCF0023FA50 /* UIAlertController.swift */,
 				F668EB3E2355807100EEB379 /* SKProductSubscriptionPeriod.swift */,
@@ -304,6 +300,7 @@
 				F668EB3D23501FAC00EEB379 /* Data Feeds */,
 				F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */,
 				F6FDDFDF230C4C7400FBF75E /* CellManager.swift */,
+				F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */,
 				F650F74A233E62C100BAA609 /* BlurredPickerView.swift */,
 				F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */,
 				F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */,
@@ -628,15 +625,14 @@
 				F60506742134B23F00DDF8A4 /* UIViewController.swift in Sources */,
 				F691B09A2147449200BDE0F4 /* WhoisXml.swift in Sources */,
 				F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */,
+				F668EB4B2356AE3800EEB379 /* IAPFooterView.swift in Sources */,
 				F668EB3C23501FA200EEB379 /* DataFeedEndpoint.swift in Sources */,
 				F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */,
 				F650F749233CF15800BAA609 /* DataFeed.swift in Sources */,
 				F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */,
 				F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */,
 				F63540DB213E05E000605ABE /* HostViewController.swift in Sources */,
-				F668EB492356775800EEB379 /* UITableViewDelegate.swift in Sources */,
 				F668EB4523563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift in Sources */,
-				F668EB4123558FE500EEB379 /* DataFeedCellRow.swift in Sources */,
 				F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */,
 				F6FDDFDC230B2BB900FBF75E /* WhoisDnsResults.swift in Sources */,
 				F6A4EB922301C5B800439562 /* InAppPurchaseUpdateDelegate.swift in Sources */,
@@ -816,7 +812,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -843,7 +839,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;

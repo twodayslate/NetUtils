@@ -11,6 +11,7 @@ import SwiftyStoreKit
 import UIKit
 
 private var cachedPrice: String?
+
 class WhoisLockedTableViewCell: UITableViewCell {
     var iapDelegate: InAppPurchaseUpdateDelegate?
 
@@ -28,6 +29,8 @@ class WhoisLockedTableViewCell: UITableViewCell {
 
     var restoringActivity = UIActivityIndicatorView()
 
+    internal let smallText = UITextView()
+    
     @objc
     func restore(_: UIButton) {
         isRestoring = true
@@ -51,7 +54,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
 
     @objc func buy(_: UIButton) {
         isRestoring = true
-        SwiftyStoreKit.purchaseProduct(WhoisXml.Subscriptions.monthly.identifier, quantity: 1, atomically: true, simulatesAskToBuyInSandbox: false) { result in
+        SwiftyStoreKit.purchaseProduct(WhoisXml.subscriptions[0].identifier, quantity: 1, atomically: true, simulatesAskToBuyInSandbox: false) { result in
 
             self.isRestoring = false
 
@@ -65,12 +68,23 @@ class WhoisLockedTableViewCell: UITableViewCell {
             }
 
             // Update isSubscribed cache
-            _ = WhoisXml.owned
+            _ = WhoisXml.paid
 
             self.iapDelegate?.updatedInAppPurchase(result)
         }
     }
 
+    /// This fixes a bug
+    /// https://stackoverflow.com/questions/16868117/uitextview-that-expands-to-text-using-auto-layout
+//    override func didMoveToSuperview() {
+//        super.didMoveToSuperview()
+//
+//        smallText.attributedText = smallText.attributedText
+//        smallText.sizeToFit()
+//        smallText.invalidateIntrinsicContentSize()
+//        smallText.superview?.layoutIfNeeded()
+//    }
+    
     convenience init(reuseIdentifier: String?, heading: String? = nil, subheading: String? = nil) {
         self.init(style: .default, reuseIdentifier: reuseIdentifier)
 
@@ -151,14 +165,15 @@ class WhoisLockedTableViewCell: UITableViewCell {
         headline.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize * 2)
         headline.contentMode = .scaleAspectFit
         headline.adjustsFontSizeToFitWidth = true
-
+        headline.setContentCompressionResistancePriority(.required, for: .vertical)
         headline.translatesAutoresizingMaskIntoConstraints = false
         rightStack.addArrangedSubview(headline)
 
         let subtext = UILabel()
-        subtext.text = subheading ?? "Our Hosted WHOIS Lookup provides the registration details, also known as a WHOIS Record, of domain names"
+        subtext.text = subheading ?? "Our hosted WHOIS Lookup provides the registration details, also known as a WHOIS Record, of domain names"
         subtext.lineBreakMode = .byWordWrapping
         subtext.contentMode = .scaleToFill
+        subtext.setContentCompressionResistancePriority(.required, for: .vertical)
         subtext.numberOfLines = 0
         // subtext.preferredMaxLayoutWidth = (self.contentView.frame.width/3)*2
         rightStack.addArrangedSubview(subtext)
@@ -166,6 +181,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         let priceLabel = UILabel()
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize - 2)
+        priceLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         priceLabel.textColor = UIColor.gray
         priceLabel.textAlignment = .center
         priceLabel.numberOfLines = 0
@@ -176,6 +192,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
         buttonStack.spacing = 8.0
         buttonStack.distribution = .fillProportionally
+        buttonStack.setContentCompressionResistancePriority(.required, for: .vertical)
         stack.addArrangedSubview(buttonStack)
 
         buttonStack.addArrangedSubview(restoringActivity)
@@ -202,63 +219,22 @@ class WhoisLockedTableViewCell: UITableViewCell {
 
         buttonStack.addArrangedSubview(buy)
 
-        let termStack = UIStackView()
-        termStack.translatesAutoresizingMaskIntoConstraints = false
-        termStack.axis = .vertical
-        termStack.distribution = .equalCentering
-        termStack.spacing = 0.0
-
         setPrice(for: priceLabel)
-
-        let smallText = UILabel()
-        // https://developer.apple.com/design/human-interface-guidelines/subscriptions/overview/
-        // swiftlint:disable line_length
-        smallText.text = """
-        Payment will be charged to your Apple ID account at the confirmation of purchase. The subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase.
-        """
-        // swiftlint:enanble line_length
-        smallText.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        smallText.textColor = UIColor.lightGray
-        smallText.textAlignment = .justified
-        smallText.lineBreakMode = .byWordWrapping
-        smallText.numberOfLines = 0
+        
+        
+        let text = IAPFooterView.legaleeze(color: .systemGray4)
+        
         smallText.translatesAutoresizingMaskIntoConstraints = false
-        termStack.addArrangedSubview(smallText)
-
-        let termStackInner = UIStackView()
-        termStackInner.translatesAutoresizingMaskIntoConstraints = false
-        termStackInner.axis = .horizontal
-        termStackInner.distribution = .equalCentering
-        termStackInner.spacing = 16.0
-        termStack.addArrangedSubview(termStackInner)
-
-        let privacy = UIButton()
-        privacy.setAttributedTitle(
-            NSAttributedString(
-                string: "Privacy Policy",
-                attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.foregroundColor: smallText.textColor as Any]
-            ),
-            for: .normal
-        )
-        privacy.titleLabel?.textAlignment = .center
-        privacy.titleLabel?.font = smallText.font
-        privacy.addTarget(self, action: #selector(clickPrivacy(_:)), for: .touchUpInside)
-        termStackInner.addArrangedSubview(privacy)
-
-        let tos = UIButton()
-        tos.setAttributedTitle(
-            NSAttributedString(
-                string: "Terms of Use",
-                attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.foregroundColor: smallText.textColor as Any]
-            ),
-            for: .normal
-        )
-        tos.titleLabel?.textAlignment = .center
-        tos.titleLabel?.font = smallText.font
-        tos.addTarget(self, action: #selector(clickToS(_:)), for: .touchUpInside)
-        termStackInner.addArrangedSubview(tos)
-
-        stack.addArrangedSubview(termStack)
+        smallText.isEditable = false
+        smallText.isScrollEnabled = false
+        smallText.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGray3]
+        smallText.delegate = self
+        smallText.attributedText = text
+        smallText.isScrollEnabled = false
+        // TODO: fix the sizing issue
+        smallText.automaticallyAdjustsScrollIndicatorInsets = false
+        
+        stack.addArrangedSubview(smallText)
 
         separatorInset.right = .greatestFiniteMagnitude
     }
@@ -281,7 +257,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
             DispatchQueue.main.async {
                 label.attributedText = attString
             }
-            SwiftyStoreKit.retrieveProductsInfo([WhoisXml.Subscriptions.monthly.identifier]) { result in
+            SwiftyStoreKit.retrieveProductsInfo([WhoisXml.subscriptions[0].identifier]) { result in
                 guard result.error == nil else {
                     print(result, "error: \(result.error!.localizedDescription)")
                     return
@@ -329,22 +305,14 @@ class WhoisLockedTableViewCell: UITableViewCell {
             }
         }
     }
+}
 
-    @objc func clickPrivacy(_: UIButton) {
-        // self.controller.open did not work with Safari
-        UIApplication.shared.open(
-            URL(string: "https://zac.gorak.us/ios/privacy.html")!,
-            options: [:],
-            completionHandler: nil
-        )
-    }
-
-    @objc func clickToS(_: UIButton) {
-        // self.controller.open did not work with Safari
-        UIApplication.shared.open(
-            URL(string: "https://zac.gorak.us/ios/terms.html")!,
-            options: [:],
-            completionHandler: nil
-        )
+extension WhoisLockedTableViewCell: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if let window = UIApplication.shared.windows.first(where: { (window) -> Bool in window.isKeyWindow}) {
+            window.rootViewController?.open(URL, title: "")
+        }
+        
+        return false
     }
 }

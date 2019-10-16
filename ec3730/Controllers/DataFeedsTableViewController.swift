@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyStoreKit
 
 class DataFeedsTableViewController: UITableViewController {
     let dataFeeds = DataFeedCells()
@@ -21,7 +22,9 @@ class DataFeedsTableViewController: UITableViewController {
     }
 
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return dataFeeds.cells[indexPath.row]
+        let cell = dataFeeds.cells[indexPath.row]
+        cell.iapDelegate = self
+        return cell
     }
     
     override func viewDidLoad() {
@@ -34,32 +37,34 @@ class DataFeedsTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        dataFeeds.startLoading()
     }
     
     @objc func restore(_ sender: Any?) {
-        
-        if let feedCell = dataFeeds.cells.first as? DataFeedCell, let sub = feedCell.subscriber as? DataFeedSubscription.Type {
-            sub.restore() { _ in
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+        SwiftyStoreKit.restorePurchases { results in
+            for sub in self.dataFeeds.subscriptions {
+                sub.verifySubscriptions { _ in 
+                    self.restoreInAppPurchase(results)
                 }
             }
         }
     }
 
     override func tableView(_: UITableView, viewForFooterInSection _: Int) -> UIView? {
+        let footer = IAPFooterView()
+        footer.label.delegate = self
+        return footer
         
-        let label = UITableViewHeaderFooterView.iapFooter()
-        label.delegate = self
-        // swiftlint:enable line_length
-        return label
+//        let label = UITableViewHeaderFooterView.iapFooter()
+//        label.delegate = self
+//        // swiftlint:enable line_length
+//        return label
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? DataFeedCell {
-            let controller = DataFeedSubscriptionTableViewController(subscriber: cell.subscriber)
+        if let cell = tableView.cellForRow(at: indexPath) as? DataFeedCell, let subscriber = cell.subscriber as? DataFeedSubscription.Type {
+            let controller = DataFeedSubscriptionTableViewController(subscriber: subscriber)
+            controller.iapDelegate = self
+            controller.userApiUpdateDelegate = self
             navigationController?.pushViewController(controller, animated: true)
         }
 
@@ -74,7 +79,36 @@ class DataFeedsTableViewController: UITableViewController {
 
 extension DataFeedsTableViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        UIApplication.shared.open(URL)
+        self.open(URL, title: "")
         return false
+    }
+}
+
+extension DataFeedsTableViewController: InAppPurchaseUpdateDelegate {
+    func updatedInAppPurchase(_ result: PurchaseResult) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func restoreInAppPurchase(_ results: RestoreResults) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+}
+
+// MARK: - DataFeedUserApiKeyDelegate
+extension DataFeedsTableViewController: DataFeedUserApiKeyDelegate {
+    func didUpdate() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }

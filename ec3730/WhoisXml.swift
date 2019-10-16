@@ -32,55 +32,7 @@ class WhoisXml: DataFeed {
     ///
     /// - Callout(Default):
     /// `URLSession.shared`
-    public static var session = URLSession.shared
-    private static var _cachedExpirationDate: Date?
-
-//    
-//    public class var isSubscribed: Bool {
-//        #if DEBUG
-//            if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-//                return true
-//            }
-//        #endif
-//
-//        verifySubscription()
-//
-//        guard let expiration = _cachedExpirationDate else {
-//            return false
-//        }
-//
-//        return expiration.timeIntervalSinceNow > 0
-//    }
-
-    class func verifySubscription(for subscription: Subscriptions = .monthly, completion block: ((Error?, VerifySubscriptionResult?) -> Void)? = nil) {
-        guard let _ = SwiftyStoreKit.localReceiptData else {
-            block?(nil, VerifySubscriptionResult.notPurchased)
-            return
-        }
-        let validator = AppleReceiptValidator(service: .production, sharedSecret: ApiKey.inApp.key)
-        SwiftyStoreKit.verifyReceipt(using: validator) { result in
-            switch result {
-            case let .success(receipt):
-                // Verify the purchase of a Subscription
-                let purchaseResult = SwiftyStoreKit.verifySubscriptions(productIds: Set([subscription.identifier]), inReceipt: receipt)
-
-                switch purchaseResult {
-                case let .purchased(expiryDate, items):
-                    print("subscription is valid until \(expiryDate)\n\(items)\n")
-                    _cachedExpirationDate = expiryDate
-                case let .expired(expiryDate, items):
-                    print("subscription is expired since \(expiryDate)\n\(items)\n")
-                case .notPurchased:
-                    print("The user has never purchased subscription")
-                }
-                block?(nil, purchaseResult)
-
-            case let .error(error):
-                print("Receipt verification failed: \(error)")
-                block?(error, nil)
-            }
-        }
-    }
+    static var session = URLSession.shared
 }
 
 extension WhoisXml {
@@ -313,74 +265,6 @@ extension WhoisXml: DataFeedService {
 
         return [WhoisXml.whoisService, WhoisXml.dnsService, reputation]
     }()
-
-//    enum Service {
-//        case whois
-//        case dns
-//        case reputation
-//
-//        var id: String {
-//            switch self {
-//            case .whois:
-//                return "1"
-//            case .dns:
-//                return "26"
-//            case .reputation:
-//                return "20"
-//            }
-//        }
-//
-//        static var cache = [String: TimedCache]()
-//
-//        var cache: TimedCache {
-//            if let currentCache = Service.cache[self.id] {
-//                return currentCache
-//            }
-//            Service.cache[self.id] = TimedCache(expiresIn: 300)
-//            return Service.cache[self.id]!
-//        }
-//
-//        func url(_ domain: String, key: String = ApiKey.WhoisXML.key) -> URL? {
-//            switch self {
-//            case .whois:
-//                return Endpoint.whoisUrl(domain, with: key)
-//            case .dns:
-//                return Endpoint.dnsUrl(domain, with: key)
-//            case .reputation:
-//                return nil
-//            }
-//        }
-//
-//        func balance(key: String = ApiKey.WhoisXML.key, completion block: ((Error?, Int?) -> Void)? = nil) {
-//            guard let balanceURL = Endpoint.balanceUrl(for: self.id, with: key) else {
-//                block?(WhoisXmlError.invalidUrl, nil) // TODO: set error
-//                return
-//            }
-//
-//            WhoisXml.session.dataTask(with: balanceURL) { data, _, error in
-//                guard error == nil else {
-//                    block?(error, nil)
-//                    return
-//                }
-//                guard let data = data else {
-//                    block?(WhoisXmlError.empty, nil)
-//                    return
-//                }
-//
-//                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-//                    block?(WhoisXmlError.parse, nil) // TODO: set error
-//                    return
-//                }
-//
-//                guard let jsonDataArray = json["data"] as? [Any?], jsonDataArray.count == 1, let first = jsonDataArray[0] as? [String: Any?], let balance = first["credits"] as? Int else {
-//                    block?(WhoisXmlError.parse, nil) // TODO: set error
-//                    return
-//                }
-//
-//                block?(nil, balance)
-//            }.resume()
-//        }
-//    }
 }
 
 // MARK: - DataFeedSubscription
@@ -407,13 +291,13 @@ extension WhoisXml: DataFeedSubscription {
             }
         #endif
 
-        verifySubscription()
-        
-        guard let expiration = _cachedExpirationDate else {
-            return false
+        for sub in WhoisXml.subscriptions {
+            if sub.isSubscribed {
+                return true
+            }
         }
-
-        return expiration.timeIntervalSinceNow > 0
+        
+        return false
     }
 
     public static var subscriptions: [Subscription] = {
@@ -429,37 +313,6 @@ extension WhoisXml: DataFeedSubscription {
                 sub.restore()
             }
             block?(results)
-        }
-    }
-
-    public enum Subscriptions {
-        /// Auto-renewable Monthly Subscription
-        case monthly
-
-        /// Product identifier
-        var identifier: String {
-            switch self {
-            default:
-                return "whois.monthly.auto"
-            }
-        }
-
-        /// - parameters:
-        ///   - subscription: the subscription to get the localized price for
-        ///   - block: completion block containing possible errors and/or the
-        ///            localized price of the `subscription`
-        public func retrieveLocalizedPrice(for subscription: Subscriptions = .monthly, completion block: ((String?, Error?) -> Void)? = nil) {
-            SwiftyStoreKit.retrieveProductsInfo([subscription.identifier]) { result in
-                guard result.error == nil else {
-                    block?(nil, result.error)
-                    return
-                }
-                if let product = result.retrievedProducts.first {
-                    block?(product.localizedPrice, nil)
-                } else if let invalidProductId = result.invalidProductIDs.first {
-                    block?(nil, WhoisXmlError.invalidProduct(id: invalidProductId))
-                }
-            }
         }
     }
 }

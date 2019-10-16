@@ -9,27 +9,20 @@
 import Foundation
 import UIKit
 
-class DataFeedCells: CellManager {
-    override init() {
-        super.init()
-
+class DataFeedCells {
+    
+    var feeds: [DataFeed.Type] {
+        return [WhoisXml.self]
+    }
+    
+    var subscriptions: [DataFeedSubscription.Type] {
+        return [WhoisXml.self]
+    }
+    
+    var cells: [DataFeedCell] {
         let whoisCell = DataFeedCell(subscriber: WhoisXml.self)
         whoisCell.descriptionText.text = "Unlocks WHOIS and DNS Lookup"
-
-        cells = [whoisCell]
+        
+        return [whoisCell]
     }
-
-    override func askForMoney() {
-        return
-    }
-
-    override func startLoading() {
-        for cell in cells {
-            if let cell = cell as? DataFeedCell {
-                cell.reload()
-            }
-        }
-    }
-
-    override func stopLoading() {}
 }
