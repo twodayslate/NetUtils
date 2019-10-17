@@ -48,8 +48,6 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
     let whoisCache = TimedCache(expiresIn: 180)
 
     override func viewDidLoad() {
-        hostTable.verify(showErrors: false)
-
         super.viewDidLoad()
         if #available(iOS 13.0, *) {
             self.view.backgroundColor = UIColor.systemBackground
@@ -210,6 +208,7 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
 
         DispatchQueue.global(qos: .userInitiated).async {
             print("Host fetch for: ", host)
+
             // Reset values
             self.hostTable.host = host
             self.hostTable.dnsLookups.removeAll()
@@ -230,7 +229,12 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
                 }
             }
 
-            if WhoisXml.owned {
+            // Has a delay to prevent flooding
+            let delay = UInt32.random(in: ClosedRange(uncheckedBounds: (10, 10000))) * 100 // max 1 second
+            print("Delaying for", delay)
+            usleep(delay)
+
+            if WhoisXml.current.owned {
                 WhoisXml.whoisService.query(["domain": host]) { (error, response: Coordinate?) in
                     self.checkLoading()
                     guard error == nil else {
@@ -240,7 +244,7 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
                     }
 
                     guard let response = response else {
-                        self.showError(message: "No Whois Data")
+                        self.showError(message: "No WHOIS Data")
                         self.hostTable.whoisRecord = nil
                         return
                     }
@@ -251,18 +255,38 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
                 WhoisXml.dnsService.query(["domain": host]) { (error, response: DnsCoordinate?) in
                     self.checkLoading()
                     guard error == nil else {
-                        self.showError("Error getting WHOIS", message: error!.localizedDescription)
-                        self.hostTable.whoisRecord = nil
+                        self.showError("Error getting DNS", message: error!.localizedDescription)
+                        self.hostTable.dnsRecords = nil
                         return
                     }
 
                     guard let response = response else {
-                        self.showError(message: "No Whois Data")
+                        self.showError(message: "No DNS Data")
                         self.hostTable.dnsRecords = nil
                         return
                     }
 
                     self.hostTable.dnsRecords = response.dnsData.dnsRecords
+                }
+            }
+
+            if GoogleWebRisk.current.oneTime.purchased || GoogleWebRisk.current.userKey != nil {
+                GoogleWebRisk.lookupService.query(["uri": url.absoluteString]) {
+                    (error, response: GoogleWebRiskRecordWrapper?) in
+                    self.checkLoading()
+                    guard error == nil else {
+                        self.showError("Error getting Web Risk Information", message: error!.localizedDescription)
+                        self.hostTable.webRiskRecord = nil
+                        return
+                    }
+
+                    guard let response = response else {
+                        self.showError(message: "No Web Risk Data")
+                        self.hostTable.webRiskRecord = nil
+                        return
+                    }
+
+                    self.hostTable.webRiskRecord = response
                 }
             }
         }

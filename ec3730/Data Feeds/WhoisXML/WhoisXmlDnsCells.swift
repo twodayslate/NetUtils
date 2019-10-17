@@ -4,8 +4,8 @@ import UIKit
 
 class WhoisXmlDnsCellManager: CellManager {
     override func askForMoney() {
-        if !WhoisXml.owned {
-            let locked = WhoisLockedTableViewCell(reuseIdentifier: "dnslocked", heading: "Unlock DNS Lookup", subheading: "Our hosted DNS Lookup provides the records associated with a domain")
+        if !WhoisXml.current.owned {
+            let locked = WhoisLockedTableViewCell(WhoisXml.current, heading: "Unlock DNS Lookup", subheading: "Our hosted DNS Lookup provides the records associated with a domain")
             locked.iapDelegate = self
             cells = [locked]
         }
@@ -19,6 +19,8 @@ class WhoisXmlDnsCellManager: CellManager {
         }
 
         currentRecords = records
+
+        cells = []
 
         for record in records {
             let cell = ContactCell(reuseIdentifier: record.rawText, title: record.dnsType)

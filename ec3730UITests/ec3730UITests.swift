@@ -51,7 +51,7 @@ class EC3730UITests: XCTestCase {
         openVC("Ping")
         app.toolbars["Toolbar"].buttons["ping"].tap()
 
-        //swiftlint:disable line_length
+        // swiftlint:disable line_length
         waitForElementToAppear(element:
             app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .textView).element)
         // swiftlint:enable vertical_whitespace line_length

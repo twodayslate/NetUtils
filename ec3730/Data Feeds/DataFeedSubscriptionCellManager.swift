@@ -17,6 +17,10 @@ class DataFeedSubscriptionCell: UITableViewCell {
 
         textLabel?.text = self.subscription.product?.subscriptionPeriod?.unit.localizedAdjectiveDescription
         detailTextLabel?.text = self.subscription.product?.localizedPrice
+
+        if subscription.isSubscribed {
+            accessoryType = .checkmark
+        }
     }
 
     required init?(coder _: NSCoder) {
@@ -24,29 +28,38 @@ class DataFeedSubscriptionCell: UITableViewCell {
     }
 }
 
-class DataFeedSubscriptionCellManager: CellManager {
-    let subscriber: DataFeed.Type
+class DataFeedOneTimeCell: UITableViewCell {
+    var product: OneTimePurchase
+    init(_ product: OneTimePurchase) {
+        self.product = product
+        super.init(style: .value1, reuseIdentifier: product.identifier)
 
-    init(subscriber: DataFeed.Type) {
+        textLabel?.text = "One-Time Purchase"
+        detailTextLabel?.text = self.product.product?.localizedPrice
+    }
+
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class DataFeedSubscriptionCellManager {
+    let subscriber: DataFeed
+
+    var subscriptionCells = [DataFeedSubscriptionCell]()
+    var oneTimePurchaseCell: DataFeedOneTimeCell?
+
+    init(subscriber: DataFeed) {
         self.subscriber = subscriber
-        super.init()
 
-        cells = []
-
-        if let subscriptions = self.subscriber as? DataFeedSubscription.Type {
+        if let subscriptions = self.subscriber as? DataFeedSubscription {
             for (_, sub) in subscriptions.subscriptions.enumerated() {
-                cells.append(DataFeedSubscriptionCell(sub))
+                subscriptionCells.append(DataFeedSubscriptionCell(sub))
             }
         }
-    }
 
-    override func askForMoney() {
-        return
+        if let oneTime = self.subscriber as? DataFeedOneTimePurchase {
+            oneTimePurchaseCell = DataFeedOneTimeCell(oneTime.oneTime)
+        }
     }
-
-    override func startLoading() {
-        return
-    }
-
-    override func stopLoading() {}
 }

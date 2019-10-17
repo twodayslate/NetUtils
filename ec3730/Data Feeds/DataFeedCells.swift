@@ -10,19 +10,27 @@ import Foundation
 import UIKit
 
 class DataFeedCells {
-    
-    var feeds: [DataFeed.Type] {
-        return [WhoisXml.self]
+    var feeds: [DataFeed] {
+        return [WhoisXml.current, GoogleWebRisk.current]
     }
-    
-    var subscriptions: [DataFeedSubscription.Type] {
-        return [WhoisXml.self]
+
+    var subscriptions: [DataFeedSubscription] {
+        // swiftlint:disable:next force_cast
+        return feeds.filter { $0 is DataFeedSubscription } as! [DataFeedSubscription]
     }
-    
+
+    var oneTimes: [DataFeedOneTimePurchase] {
+        // swiftlint:disable:next force_cast
+        return feeds.filter { $0 is DataFeedOneTimePurchase } as! [DataFeedOneTimePurchase]
+    }
+
     var cells: [DataFeedCell] {
-        let whoisCell = DataFeedCell(subscriber: WhoisXml.self)
+        let whoisCell = DataFeedCell(subscriber: WhoisXml.current)
         whoisCell.descriptionText.text = "Unlocks WHOIS and DNS Lookup"
-        
-        return [whoisCell]
+
+        let webRisk = DataFeedCell(subscriber: GoogleWebRisk.current)
+        webRisk.descriptionText.text = "Unlocks detection of malicious URLs"
+
+        return [whoisCell, webRisk]
     }
 }

@@ -133,7 +133,7 @@ extension UIViewController: SFSafariViewControllerDelegate {
             safari.title = title
             safari.delegate = self
             _ = safari.view // https://stackoverflow.com/questions/46439142/sfsafariviewcontroller-blank-in-ios-11-xcode-9-0
-            
+
             if let navigationController = self.navigationController {
                 navigationController.pushViewController(safari, animated: true)
             } else {

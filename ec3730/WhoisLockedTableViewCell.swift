@@ -13,7 +13,7 @@ import UIKit
 private var cachedPrice: String?
 
 class WhoisLockedTableViewCell: UITableViewCell {
-    var iapDelegate: InAppPurchaseUpdateDelegate?
+    var iapDelegate: DataFeedInAppPurchaseUpdateDelegate?
 
     var isRestoring = false {
         didSet {
@@ -30,31 +30,24 @@ class WhoisLockedTableViewCell: UITableViewCell {
     var restoringActivity = UIActivityIndicatorView()
 
     internal let smallText = UITextView()
-    
+
     @objc
     func restore(_: UIButton) {
         isRestoring = true
         SwiftyStoreKit.restorePurchases(atomically: true) { results in
             self.isRestoring = false
 
-            if results.restoreFailedPurchases.count > 0 {
-                print("Restore Failed: \(results.restoreFailedPurchases)")
-            } else if results.restoredPurchases.count > 0 {
-                print("Restore Success: \(results.restoredPurchases)")
-            } else {
-                print("Nothing to Restore")
-            }
+            (self.dataFeed as? DataFeedSubscription)?.verifySubscriptions()
+            (self.dataFeed as? DataFeedOneTimePurchase)?.oneTime.verifyPurchase()
 
-            // Update isSubscribed cache
-            _ = WhoisXml.owned
-
-            self.iapDelegate?.restoreInAppPurchase(results)
+            // swiftlint:disable:next line_length
+            self.iapDelegate?.didUpdateInAppPurchase(self.dataFeed, error: nil, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
         }
     }
 
     @objc func buy(_: UIButton) {
         isRestoring = true
-        SwiftyStoreKit.purchaseProduct(WhoisXml.subscriptions[0].identifier, quantity: 1, atomically: true, simulatesAskToBuyInSandbox: false) { result in
+        SwiftyStoreKit.purchaseProduct(WhoisXml.current.subscriptions[0].identifier, quantity: 1, atomically: true, simulatesAskToBuyInSandbox: false) { result in
 
             self.isRestoring = false
 
@@ -68,9 +61,10 @@ class WhoisLockedTableViewCell: UITableViewCell {
             }
 
             // Update isSubscribed cache
-            _ = WhoisXml.paid
+            _ = WhoisXml.current.paid
 
-            self.iapDelegate?.updatedInAppPurchase(result)
+            // swiftlint:disable:next line_length
+            self.iapDelegate?.didUpdateInAppPurchase(self.dataFeed, error: nil, purchaseResult: result, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
         }
     }
 
@@ -84,9 +78,12 @@ class WhoisLockedTableViewCell: UITableViewCell {
 //        smallText.invalidateIntrinsicContentSize()
 //        smallText.superview?.layoutIfNeeded()
 //    }
-    
-    convenience init(reuseIdentifier: String?, heading: String? = nil, subheading: String? = nil) {
-        self.init(style: .default, reuseIdentifier: reuseIdentifier)
+
+    var dataFeed: DataFeed
+
+    init(_ dataFeed: DataFeed, heading: String? = nil, subheading: String? = nil) {
+        self.dataFeed = dataFeed
+        super.init(style: .default, reuseIdentifier: dataFeed.name)
 
         restoringActivity.hidesWhenStopped = true
         if #available(iOS 13.0, *) {
@@ -220,10 +217,9 @@ class WhoisLockedTableViewCell: UITableViewCell {
         buttonStack.addArrangedSubview(buy)
 
         setPrice(for: priceLabel)
-        
-        
+
         let text = IAPFooterView.legaleeze(color: .systemGray4)
-        
+
         smallText.translatesAutoresizingMaskIntoConstraints = false
         smallText.isEditable = false
         smallText.isScrollEnabled = false
@@ -233,10 +229,14 @@ class WhoisLockedTableViewCell: UITableViewCell {
         smallText.isScrollEnabled = false
         // TODO: fix the sizing issue
         smallText.automaticallyAdjustsScrollIndicatorInsets = false
-        
+
         stack.addArrangedSubview(smallText)
 
         separatorInset.right = .greatestFiniteMagnitude
+    }
+
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     func setPrice(for label: UILabel) {
@@ -257,7 +257,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
             DispatchQueue.main.async {
                 label.attributedText = attString
             }
-            SwiftyStoreKit.retrieveProductsInfo([WhoisXml.subscriptions[0].identifier]) { result in
+            SwiftyStoreKit.retrieveProductsInfo([WhoisXml.current.subscriptions[0].identifier]) { result in
                 guard result.error == nil else {
                     print(result, "error: \(result.error!.localizedDescription)")
                     return
@@ -308,11 +308,11 @@ class WhoisLockedTableViewCell: UITableViewCell {
 }
 
 extension WhoisLockedTableViewCell: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        if let window = UIApplication.shared.windows.first(where: { (window) -> Bool in window.isKeyWindow}) {
+    func textView(_: UITextView, shouldInteractWith URL: URL, in _: NSRange, interaction _: UITextItemInteraction) -> Bool {
+        if let window = UIApplication.shared.windows.first(where: { (window) -> Bool in window.isKeyWindow }) {
             window.rootViewController?.open(URL, title: "")
         }
-        
+
         return false
     }
 }

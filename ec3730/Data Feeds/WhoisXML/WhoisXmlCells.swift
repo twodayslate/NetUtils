@@ -79,8 +79,9 @@ class WhoisXmlCellManager: CellManager {
     var currentRecord: WhoisRecord?
 
     override func askForMoney() {
-        if !WhoisXml.owned {
-            let locked = WhoisLockedTableViewCell(reuseIdentifier: "locked")
+        if !WhoisXml.current.owned {
+            let locked = WhoisLockedTableViewCell(WhoisXml.current, heading: "Unlock WHOIS Lookup",
+                                                  subheading: "Our hosted WHOIS Lookup provides the registration details, also known as a WHOIS Record, of domain names")
             locked.iapDelegate = self
             cells = [locked]
         }
@@ -95,6 +96,8 @@ class WhoisXmlCellManager: CellManager {
         }
 
         currentRecord = record
+
+        cells = []
 
         let createdCell = CopyDetailCell(title: "Created", detail: "\(record.createdDate ?? record.registryData.createdDate)")
         cells.append(createdCell)

@@ -269,6 +269,10 @@ class ReachabilityViewController: UIViewController {
                 self.connectedCheck.setOn(false, animated: true)
                 self.connectedLabel.text = "Not Connected"
                 self.tabBarItem = self.disconnectedTabBarItem
+            case .unavailable:
+                self.connectedCheck.setOn(false, animated: true)
+                self.connectedLabel.text = "Unavailable"
+                self.tabBarItem = self.disconnectedTabBarItem
             }
             self.interfaceTable.updateInterfaces()
             self.interfaceTable.tableView.reloadData()

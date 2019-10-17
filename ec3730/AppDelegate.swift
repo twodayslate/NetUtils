@@ -26,9 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
 
         print(Bundle.main.bundleIdentifier?.description ?? "NO BUNDLE IDENTIFIER")
-        
-        Bundle.main.storeVersion?.update {
-            canUpdate, version, error in
+
+        Bundle.main.storeVersion?.update { canUpdate, version, error in
             guard error == nil else {
                 print("An error has occured! \(error!.localizedDescription)")
                 return
@@ -38,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Unable to get new version")
                 return
             }
-            
+
             if canUpdate {
                 DispatchQueue.main.async {
                     self.window?.rootViewController?.showError("Update Available!", message: "An update to \(String(describing: version)) is available in the App Store")
@@ -48,24 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        if #available(iOS 13.0, *) {
-            window?.backgroundColor = UIColor.systemBackground
-        } else {
-            window?.backgroundColor = UIColor.black
-        }
+        window?.backgroundColor = UIColor.black
 
         let tabViewController = SRCTabBarController()
         tabViewController.delegate = tabViewController
-
-//        let splitViewController = SRCSplitViewController()
-//        splitViewController.delegate = splitViewController
-//        let masterViewController = UINavigationController.init(rootViewController: MasterViewController())
-//
-//        let detailViewController = UINavigationController.init(rootViewController: DetailViewController())
-//
-//        splitViewController.viewControllers = [masterViewController, detailViewController]
-//
-//        splitViewController.preferredDisplayMode = .allVisible
 
         window!.rootViewController = tabViewController
 
@@ -86,8 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-//        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-//        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         return true
     }
 
