@@ -53,13 +53,17 @@ class DataFeedCell: UITableViewCell {
 
         accessoryType = .disclosureIndicator
 
-        if let subscriptions = self.subscriber as? DataFeedSubscription {
-            if subscriptions.owned {
+        if let purchase = self.subscriber as? DataFeedPurchaseProtocol {
+            if purchase.owned {
                 addCheckmark()
             }
 
-            if !subscriptions.paid {
-                bigSubButton.setTitle("Subscribe Now", for: .normal)
+            if !purchase.paid {
+                if self.subscriber is DataFeedSubscription {
+                    bigSubButton.setTitle("Subscribe Now", for: .normal)
+                } else {
+                    bigSubButton.setTitle("Purchase", for: .normal)
+                }
                 bigSubButton.translatesAutoresizingMaskIntoConstraints = false
                 bigSubButton.addTarget(self, action: #selector(purchase(_:)), for: .touchUpInside)
                 bigSubButton.contentHorizontalAlignment = .center
@@ -71,60 +75,7 @@ class DataFeedCell: UITableViewCell {
                 firstSubDisclaimer = UILabel()
                 firstSubDisclaimer?.textAlignment = .center
                 firstSubDisclaimer?.numberOfLines = 0
-                firstSubDisclaimer?.text = "All \(subscriber.name) Data is available for -/- automatically"
-                firstSubDisclaimer?.translatesAutoresizingMaskIntoConstraints = false
-                stack.addArrangedSubview(firstSubDisclaimer!)
-
-                stack.setCustomSpacing(16.0, after: descriptionText)
-                stack.setCustomSpacing(8.0, after: bigSubButton)
-
-                if let mainSub = subscriptions.subscriptions.first, let product = mainSub.product {
-                    let defaultText = "All \(subscriber.name) Data is available for \(product.localizedPrice ?? "-")/\(product.subscriptionPeriod?.unit.localizedDescription.lowercased() ?? "-") automatically"
-                    let defaultAttr = NSAttributedString(string: defaultText, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize, weight: .regular)])
-                    firstSubDisclaimer?.attributedText = defaultAttr
-
-                    if let intro = product.introductoryPrice {
-                        // **Start your free 3-day trial** then all WHOIS XML Data is available for $0.99/month automatically
-                        let string = NSMutableAttributedString(string: "")
-                        if intro.paymentMode == .freeTrial {
-                            let bold = "Start your free \(intro.subscriptionPeriod.localizedDescription.lowercased()) trial "
-                            // swiftlint:disable:next line_length
-                            let boldAttr = NSAttributedString(string: bold, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize, weight: .bold),
-                                                                                         NSAttributedString.Key.foregroundColor: UIColor.systemGray])
-
-                            string.append(boldAttr)
-
-                            let unbold = "then all \(subscriber.name) Data is available for \(product.localizedPrice ?? "-")/\(product.subscriptionPeriod?.unit.localizedDescription.lowercased() ?? "-") automatically"
-                            // swiftlint:disable:next line_length
-                            let unboldAttr = NSAttributedString(string: unbold, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray])
-                            string.append(unboldAttr)
-
-                            firstSubDisclaimer?.attributedText = string
-                        } // has a free trial
-                    } // has an intro price
-                } // has a product
-            } // is paid
-        } // is a subscriber type
-        else if let oneTime = self.subscriber as? DataFeedOneTimePurchase {
-            if oneTime.oneTime.purchased || oneTime.userKey != nil {
-                addCheckmark()
-            }
-
-            if !oneTime.oneTime.purchased {
-                bigSubButton.setTitle("Purchase", for: .normal)
-                bigSubButton.translatesAutoresizingMaskIntoConstraints = false
-                bigSubButton.addTarget(self, action: #selector(purchase(_:)), for: .touchUpInside)
-                bigSubButton.contentHorizontalAlignment = .center
-                bigSubButton.backgroundColor = UIButton(type: .system).tintColor
-                bigSubButton.layer.cornerRadius = 5.0
-
-                stack.addArrangedSubview(bigSubButton)
-
-                firstSubDisclaimer = UILabel()
-                firstSubDisclaimer?.textAlignment = .center
-                firstSubDisclaimer?.numberOfLines = 0
-                firstSubDisclaimer?.attributedText = NSAttributedString(string: "All \(subscriber.name) Data is available for \(oneTime.oneTime.product?.localizedPrice ?? "-")", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray])
-
+                firstSubDisclaimer?.attributedText = purchase.defaultProduct?.attributedText(subscriber: purchase)
                 firstSubDisclaimer?.translatesAutoresizingMaskIntoConstraints = false
                 stack.addArrangedSubview(firstSubDisclaimer!)
 
@@ -159,16 +110,25 @@ class DataFeedCell: UITableViewCell {
     var iapDelegate: DataFeedInAppPurchaseUpdateDelegate?
 
     @objc func purchase(_: Any?) {
-        guard let subscriptions = self.subscriber as? DataFeedSubscription, let defaultSub = subscriptions.subscriptions.first else {
+        guard subscriber is DataFeedPurchaseProtocol else {
             return
         }
 
-        defaultSub.buy {
-            result in
+        if let subscriptions = self.subscriber as? DataFeedSubscription, let defaultSub = subscriptions.subscriptions.first {
+            defaultSub.buy {
+                result in
 
-            subscriptions.verifySubscriptions { error in
-                self.iapDelegate?.didUpdateInAppPurchase(self.subscriber, error: error, purchaseResult: result,
-                                                         restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+                subscriptions.verifySubscriptions { error in
+                    self.iapDelegate?.didUpdateInAppPurchase(self.subscriber, error: error, purchaseResult: result,
+                                                             restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+                }
+            }
+        } else {
+            if let one = self.subscriber as? DataFeedOneTimePurchase {
+                one.oneTime.purchase { result in
+                    self.iapDelegate?.didUpdateInAppPurchase(self.subscriber, error: nil, purchaseResult: result,
+                                                             restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+                }
             }
         }
     }

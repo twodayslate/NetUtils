@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import StoreKit
 import SwiftyStoreKit
 
 /// API wrapper for https://whoisxmlapi.com/
@@ -151,6 +152,14 @@ extension WhoisXml: DataFeedSubscription {
         return oneTime.purchased
     }
 
+    var defaultProduct: SKProduct? {
+        guard let product = self.subscriptions[0].product else {
+            retrieve()
+            return nil
+        }
+        return product
+    }
+
     func restore(completion block: ((RestoreResults) -> Void)? = nil) {
         SwiftyStoreKit.restorePurchases(atomically: true) { results in
             self.subscriptions[0].restore { _ in
@@ -158,6 +167,44 @@ extension WhoisXml: DataFeedSubscription {
                     self.oneTime.restore { _ in
                         block?(results)
                     }
+                }
+            }
+        }
+    }
+
+    func verify(completion block: ((Error?) -> Void)? = nil) {
+        subscriptions[0].verifySubscription { error in
+            guard error == nil else {
+                block?(error)
+                return
+            }
+            self.subscriptions[1].verifySubscription { errorTwo in
+                guard errorTwo == nil else {
+                    block?(errorTwo)
+                    return
+                }
+                self.oneTime.verifyPurchase { errorThree in
+                    block?(errorThree)
+                }
+            }
+        }
+    }
+
+    func retrieve(completion block: ((Error?) -> Void)? = nil) {
+        subscriptions[0].retrieveProduct { error in
+            guard error == nil else {
+                block?(error)
+                return
+            }
+
+            self.subscriptions[1].retrieveProduct { errorTwo in
+                guard errorTwo == nil else {
+                    block?(errorTwo)
+                    return
+                }
+
+                self.oneTime.retrieveProduct { errorThree in
+                    block?(errorThree)
                 }
             }
         }

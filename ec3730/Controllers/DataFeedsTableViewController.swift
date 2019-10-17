@@ -42,14 +42,12 @@ class DataFeedsTableViewController: UITableViewController {
     }
 
     @objc func restore(_: Any?) {
-        SwiftyStoreKit.restorePurchases { _ in
-            for sub in self.dataFeeds.subscriptions {
-                sub.verifySubscriptions { error in
-                    // This will just reload the table. Might want to do this more smart
-                    // swiftlint:disable:next line_length
-                    self.didUpdateInAppPurchase(sub, error: error, purchaseResult: nil, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
-                }
-            }
+        for purchase in dataFeeds.purchases {
+            purchase.restore(completion: { results in
+                // This will just reload the table. Might want to do this more smart
+                // swiftlint:disable:next line_length
+                self.didUpdateInAppPurchase(purchase, error: nil, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+            })
         }
     }
 

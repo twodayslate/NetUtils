@@ -61,4 +61,14 @@ class WhoisXmlDnsCellManager: CellManager {
             cells.append(cell)
         }
     }
+
+    override func reload() {
+        if let prod = self.dataFeed as? DataFeedPurchaseProtocol {
+            if prod.owned {
+                configure(currentRecords)
+            } else {
+                askForMoney()
+            }
+        }
+    }
 }

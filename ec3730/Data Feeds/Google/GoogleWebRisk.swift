@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import StoreKit
+import SwiftyStoreKit
 
 final class GoogleWebRisk: DataFeedSingleton, DataFeedOneTimePurchase {
     var name: String = "Google Web Risk API"
@@ -186,5 +188,39 @@ extension GoogleWebRisk: DataFeedService {
                 }
             }.resume()
         }
+    }
+}
+
+extension DataFeedOneTimePurchase {
+    var paid: Bool {
+        return oneTime.purchased
+    }
+
+    var owned: Bool {
+        if userKey != nil {
+            return true
+        }
+
+        return paid
+    }
+
+    var defaultProduct: SKProduct? {
+        guard let product = self.oneTime.product else {
+            retrieve()
+            return nil
+        }
+        return product
+    }
+
+    func restore(completion block: ((RestoreResults) -> Void)? = nil) {
+        oneTime.restore(completion: block)
+    }
+
+    func verify(completion block: ((Error?) -> Void)? = nil) {
+        oneTime.verifyPurchase(completion: block)
+    }
+
+    func retrieve(completion block: ((Error?) -> Void)? = nil) {
+        oneTime.retrieveProduct(completion: block)
     }
 }

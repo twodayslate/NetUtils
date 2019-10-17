@@ -11,10 +11,12 @@ import UIKit
 
 class GoogleWebRiskCellManager: CellManager {
     override func askForMoney() {
-        if !(GoogleWebRisk.current.oneTime.purchased || GoogleWebRisk.current.userKey != nil) {
-            let locked = WhoisLockedTableViewCell(WhoisXml.current, heading: "Unlock Google Web Risk Detection", subheading: "Detect malicious URLs and unsafe web resources")
-            locked.iapDelegate = self
-            cells = [locked]
+        if let purchase = self.dataFeed as? DataFeedPurchaseProtocol {
+            if !purchase.owned {
+                let locked = WhoisLockedTableViewCell(purchase, heading: "Unlock Google Web Risk Detection", subheading: "Detect malicious URLs and unsafe web resources")
+                locked.iapDelegate = self
+                cells = [locked]
+            }
         }
     }
 
@@ -39,6 +41,16 @@ class GoogleWebRiskCellManager: CellManager {
             let noRisks = UITableViewCell(style: .default, reuseIdentifier: "no_risks")
             noRisks.textLabel?.text = "No risks detected"
             cells.append(noRisks)
+        }
+    }
+
+    override func reload() {
+        if let prod = self.dataFeed as? DataFeedPurchaseProtocol {
+            if prod.owned {
+                configure(currentRecord)
+            } else {
+                askForMoney()
+            }
         }
     }
 }

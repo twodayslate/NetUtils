@@ -24,6 +24,11 @@ class DataFeedCells {
         return feeds.filter { $0 is DataFeedOneTimePurchase } as! [DataFeedOneTimePurchase]
     }
 
+    var purchases: [DataFeedPurchaseProtocol] {
+        // swiftlint:disable:next force_cast
+        return feeds.filter { $0 is DataFeedPurchaseProtocol } as! [DataFeedPurchaseProtocol]
+    }
+
     var cells: [DataFeedCell] {
         let whoisCell = DataFeedCell(subscriber: WhoisXml.current)
         whoisCell.descriptionText.text = "Unlocks WHOIS and DNS Lookup"

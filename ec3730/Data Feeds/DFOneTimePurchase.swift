@@ -35,17 +35,18 @@ open class OneTimePurchase {
                     block?(result)
                     return
                 }
-                self.verifyPurchase()
+                self.verifyPurchase { _ in
+                    block?(result)
+                }
             default:
-                break
+                block?(result)
             }
-            block?(result)
         }
     }
 
-    public func verifyPurchase(completion block: (() -> Void)? = nil) {
+    public func verifyPurchase(completion block: ((Error?) -> Void)? = nil) {
         guard SwiftyStoreKit.localReceiptData != nil else {
-            block?()
+            block?(nil)
             return
         }
 
@@ -66,7 +67,7 @@ open class OneTimePurchase {
             default:
                 break
             }
-            block?()
+            block?(nil)
         }
     }
 
@@ -104,13 +105,13 @@ open class OneTimePurchase {
             }
 
             // Update isSubscribed cache
-            self.verifyPurchase {
+            self.verifyPurchase { _ in
                 block?(results)
             }
         }
     }
 }
 
-protocol DataFeedOneTimePurchase: DataFeed {
+protocol DataFeedOneTimePurchase: DataFeedPurchaseProtocol {
     var oneTime: OneTimePurchase { get }
 }

@@ -173,31 +173,56 @@ class HostTable: UITableViewController {
         tableView.estimatedRowHeight = UITableView.automaticDimension
         // self.tableView.separatorInset.left =  self.view.frame.width
         tableView.tableFooterView = UIView() // hide sepeartor
-        tableView.reloadData()
+
+        fetchProducts()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        fetchProducts()
+    }
+
+    func fetchProducts() {
+        if !WhoisXml.current.owned, WhoisXml.current.defaultProduct == nil {
+            WhoisXml.current.subscriptions[0].retrieveProduct { _ in
+                self.reload()
+            }
+        }
+
+        if !GoogleWebRisk.current.owned, GoogleWebRisk.current.defaultProduct == nil {
+            GoogleWebRisk.current.oneTime.retrieveProduct { _ in
+                self.reload()
+            }
+        }
     }
 }
 
 extension HostTable: DataFeedInAppPurchaseUpdateDelegate {
-    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult _: PurchaseResult?, restoreResults _: RestoreResults?, verifySubscriptionResult _: VerifySubscriptionResult?, verifyPurchaseResult _: VerifyPurchaseResult?, retrieveResults _: RetrieveResults?) {
+    func reload() {
+        whoisManger.reload()
+        dnsManager.reload()
+        webRiskManager.reload()
+
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+
+    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults _: RestoreResults?, verifySubscriptionResult _: VerifySubscriptionResult?, verifyPurchaseResult _: VerifyPurchaseResult?, retrieveResults _: RetrieveResults?) {
         guard error == nil else {
             parent?.showError(message: error!.localizedDescription)
             return
         }
 
-        if let sub = feed as? DataFeedSubscription, sub.owned {
-            if sub.paid {
-                parent?.showError(message: "Thank you for purchase!")
-            }
-        } else {
-            if let one = feed as? DataFeedOneTimePurchase, one.oneTime.purchased {
-                parent?.showError(message: "Thank you for purchase!")
+        if purchaseResult != nil {
+            if let purchase = feed as? DataFeedPurchaseProtocol, purchase.paid {
+                parent?.showError("<3", message: "Thank you for your purchase!")
             } else {
                 parent?.showError(message: "Unable to verify purchase, please try again.")
             }
         }
 
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        reload()
     }
 }

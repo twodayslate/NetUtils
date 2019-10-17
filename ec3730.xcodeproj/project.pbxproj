@@ -60,6 +60,7 @@
 		F6C8D8B1212E5AEA00309373 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */; };
 		F6C8D8BC212E5AEB00309373 /* ec3730Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C8D8BB212E5AEB00309373 /* ec3730Tests.swift */; };
 		F6C8D8C7212E5AEB00309373 /* ec3730UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C8D8C6212E5AEB00309373 /* ec3730UITests.swift */; };
+		F6D0B77A235902E3009E493B /* DataFeedPurchaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D0B779235902E3009E493B /* DataFeedPurchaseProtocol.swift */; };
 		F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D4BB0923583E6100FDAFF7 /* GoogleWebRiskRecord.swift */; };
 		F6D4BB0C23584E0C00FDAFF7 /* GoogleWebRiskCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D4BB0B23584E0B00FDAFF7 /* GoogleWebRiskCellManager.swift */; };
 		F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */; };
@@ -163,6 +164,7 @@
 		F6C8D8C2212E5AEB00309373 /* ec3730UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ec3730UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6C8D8C6212E5AEB00309373 /* ec3730UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ec3730UITests.swift; sourceTree = "<group>"; };
 		F6C8D8C8212E5AEB00309373 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6D0B779235902E3009E493B /* DataFeedPurchaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedPurchaseProtocol.swift; sourceTree = "<group>"; };
 		F6D4BB0923583E6100FDAFF7 /* GoogleWebRiskRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleWebRiskRecord.swift; sourceTree = "<group>"; };
 		F6D4BB0B23584E0B00FDAFF7 /* GoogleWebRiskCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleWebRiskCellManager.swift; sourceTree = "<group>"; };
 		F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				F650F748233CF15800BAA609 /* DataFeed.swift */,
 				F69E364D235808560017296E /* DFSubscription.swift */,
 				F69E365323580A7D0017296E /* DataFeedSubscription.swift */,
+				F6D0B779235902E3009E493B /* DataFeedPurchaseProtocol.swift */,
 				F69E365523580AA00017296E /* DataFeedService.swift */,
 				F69E3651235808DF0017296E /* DFOneTimePurchase.swift */,
 				F668EB3B23501FA200EEB379 /* DataFeedEndpoint.swift */,
@@ -657,6 +660,7 @@
 				F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */,
 				F69E3652235808DF0017296E /* DFOneTimePurchase.swift in Sources */,
 				F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */,
+				F6D0B77A235902E3009E493B /* DataFeedPurchaseProtocol.swift in Sources */,
 				F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */,
@@ -877,7 +881,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -904,7 +908,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

@@ -37,21 +37,10 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
     }
 
     @objc func restore(_: Any?) {
-        SwiftyStoreKit.restorePurchases { results in
-            if let subscriptions = self.subscriber as? DataFeedSubscription {
-                for sub in subscriptions.subscriptions {
-                    sub.verifySubscription { error in
-                        // swiftlint:disable:next line_length
-                        self.didUpdateInAppPurchase(self.subscriber, error: error, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
-                    }
-                }
-            }
-
-            if let oneTime = self.subscriber as? DataFeedOneTimePurchase {
-                oneTime.oneTime.verifyPurchase {
-                    // swiftlint:disable:next line_length
-                    self.didUpdateInAppPurchase(self.subscriber, error: nil, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
-                }
+        if let purchase = self.subscriber as? DataFeedPurchaseProtocol {
+            purchase.restore { results in
+                // swiftlint:disable:next line_length
+                self.didUpdateInAppPurchase(self.subscriber, error: nil, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
             }
         }
     }
@@ -82,7 +71,8 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
         if manager.subscriptionCells.count > 0, indexPath.section == 0 {
             let cell = manager.subscriptionCells[indexPath.row]
 
-            if (subscriber as? DataFeedSubscription)?.paid ?? false {
+            // hide price if the user alerady paid for this product
+            if (subscriber as? DataFeedPurchaseProtocol)?.paid ?? false {
                 cell.detailTextLabel?.text = nil
             }
 
@@ -114,29 +104,33 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
     }
 
     override func tableView(_: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        // No footer for API key
         if section == tableView.numberOfSections - 1 {
             return nil
         }
 
+        let thankYou = UILabel()
+        thankYou.text = "Thank you for your support!"
+        thankYou.textAlignment = .center
+        thankYou.textColor = UIColor.systemGray
+
+        if let subscription = subscriber as? DataFeedSubscription {
+            if section == 0 {
+                if subscription.paid {
+                    return thankYou
+                } else {
+                    let footer = IAPFooterView()
+                    footer.label.delegate = self
+                    return footer
+                }
+            }
+        }
+
         if let oneTime = subscriber as? DataFeedOneTimePurchase, oneTime.oneTime.purchased {
-            let text = UILabel()
-            text.text = "Thank you for your support!"
-            text.textAlignment = .center
-            text.textColor = UIColor.systemGray
-            return text
+            return thankYou
         }
 
-        if let subscription = subscriber as? DataFeedSubscription, subscription.paid {
-            let text = UILabel()
-            text.text = "Thank you for your support!"
-            text.textAlignment = .center
-            text.textColor = UIColor.systemGray
-            return text
-        }
-
-        let footer = IAPFooterView()
-        footer.label.delegate = self
-        return footer
+        return nil
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -149,7 +143,7 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
             return
         }
 
-        if !((subscriber as? DataFeedSubscription)?.paid ?? true) {
+        if !((subscriber as? DataFeedPurchaseProtocol)?.paid ?? true) {
             if let cell = tableView.cellForRow(at: indexPath) as? DataFeedSubscriptionCell {
                 // TODO: show loading indicator
                 cell.subscription.buy { result in
@@ -158,9 +152,7 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
                     // TODO: hide loading indicator
                 }
             }
-        }
 
-        if !((subscriber as? DataFeedOneTimePurchase)?.oneTime.purchased ?? true) {
             if let cell = tableView.cellForRow(at: indexPath) as? DataFeedOneTimeCell {
                 cell.product.purchase { result in
                     // swiftlint:disable:next line_length

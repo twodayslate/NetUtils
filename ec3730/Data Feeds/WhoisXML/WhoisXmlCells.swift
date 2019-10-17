@@ -657,4 +657,14 @@ class WhoisXmlCellManager: CellManager {
             cells.append(customCell)
         }
     }
+
+    override func reload() {
+        if let prod = self.dataFeed as? DataFeedPurchaseProtocol {
+            if prod.owned {
+                configure(currentRecord)
+            } else {
+                askForMoney()
+            }
+        }
+    }
 }

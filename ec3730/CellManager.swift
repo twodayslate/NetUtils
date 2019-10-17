@@ -27,9 +27,10 @@ open class CellManager {
         self.service = service
         cells.append(LoadingCell())
 
-        WhoisXml.current.verifySubscriptions { error in
-            // swiftlint:disable:next line_length
-            self.didUpdateInAppPurchase(self.dataFeed, error: error, purchaseResult: nil, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+        if let prod = feed as? DataFeedPurchaseProtocol {
+            prod.verify { error in
+                self.didUpdateInAppPurchase(self.dataFeed, error: error, purchaseResult: nil, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+            }
         }
     }
 
@@ -39,33 +40,41 @@ open class CellManager {
 
     open func startLoading() {
         privateIsLoading = true
-        if WhoisXml.current.owned {
-            let cell = LoadingCell(reuseIdentifier: "loading")
-            cell.spinner.startAnimating()
-            cell.separatorInset.right = .greatestFiniteMagnitude
-            cells = [cell]
-        } else {
-            privateIsLoading = false
-            askForMoney()
+
+        if let paid = self.dataFeed as? DataFeedPurchaseProtocol {
+            if paid.owned {
+                let cell = LoadingCell(reuseIdentifier: "loading")
+                cell.spinner.startAnimating()
+                cell.separatorInset.right = .greatestFiniteMagnitude
+                cells = [cell]
+            } else {
+                privateIsLoading = false
+                askForMoney()
+            }
         }
     }
 
     open func stopLoading() {
         privateIsLoading = false
-        if WhoisXml.current.owned {
-            cells.removeAll()
-        } else {
-            askForMoney()
+
+        if let paid = self.dataFeed as? DataFeedPurchaseProtocol {
+            if paid.owned {
+                cells.removeAll()
+            } else {
+                askForMoney()
+            }
         }
+    }
+
+    open func reload() {
+        fatalError("Must override")
     }
 }
 
 extension CellManager: DataFeedInAppPurchaseUpdateDelegate {
     func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults: RestoreResults?, verifySubscriptionResult: VerifySubscriptionResult?, verifyPurchaseResult: VerifyPurchaseResult?, retrieveResults: RetrieveResults?) {
-        if let sub = feed as? DataFeedSubscription, sub.owned {
-            cells.removeAll()
-        } else {
-            if let one = feed as? DataFeedOneTimePurchase, one.oneTime.purchased || one.userKey != nil {
+        if let paid = self.dataFeed as? DataFeedPurchaseProtocol {
+            if paid.owned {
                 cells.removeAll()
             } else {
                 askForMoney()

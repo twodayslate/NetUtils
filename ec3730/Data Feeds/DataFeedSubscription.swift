@@ -10,10 +10,8 @@ import Foundation
 import StoreKit
 import SwiftyStoreKit
 
-protocol DataFeedSubscription: DataFeed {
+protocol DataFeedSubscription: DataFeedPurchaseProtocol {
     /// If the API is a paid API or if the user can submit their own API key
-    var paid: Bool { get }
-    var owned: Bool { get }
 
     var subscriptions: [Subscription] { get }
 }
