@@ -15,6 +15,7 @@ target 'ec3730' do
   pod 'PlainPing'
   pod 'NetUtils'
   pod 'SwiftyStoreKit'
+  pod 'KeychainAccess'
   pod 'SplitView', :git => 'https://github.com/twodayslate/SplitView.git'
   pod 'SKVersion', :git => 'https://github.com/twodayslate/SKVersion.git'
 

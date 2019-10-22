@@ -21,9 +21,11 @@ import Foundation
 
 struct Coordinate: Codable {
     let whoisRecord: WhoisRecord
+    let error: String?
 
     enum CodingKeys: String, CodingKey {
         case whoisRecord = "WhoisRecord"
+        case error
     }
 }
 
@@ -49,7 +51,8 @@ extension Coordinate {
         whoisRecord: WhoisRecord? = nil
     ) -> Coordinate {
         return Coordinate(
-            whoisRecord: whoisRecord ?? self.whoisRecord
+            whoisRecord: whoisRecord ?? self.whoisRecord,
+            error: error
         )
     }
 

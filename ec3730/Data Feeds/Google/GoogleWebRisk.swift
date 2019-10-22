@@ -6,30 +6,34 @@
 //  Copyright © 2019 Zachary Gorak. All rights reserved.
 //
 
+import CloudKit
+import CoreData
 import Foundation
+import KeychainAccess
 import StoreKit
 import SwiftyStoreKit
 
 final class GoogleWebRisk: DataFeedSingleton, DataFeedOneTimePurchase {
     var name: String = "Google Web Risk API"
 
-    var key: ApiKey = ApiKey.GoogleWebRisk
-
     var webpage: URL = URL(string: "https://cloud.google.com/web-risk/")!
 
-    public var userKey: ApiKey? {
+    public var userKey: String? {
         didSet {
+            let keychian = Keychain().synchronizable(true)
             if let key = self.userKey {
-                UserDefaults.standard.set(key.key, forKey: UserDefaults.NetUtils.Keys.keyFor(dataFeed: self))
-                UserDefaults.standard.synchronize()
+                try? keychian.set(key, key: UserDefaults.NetUtils.Keys.keyFor(dataFeed: self))
+            } else {
+                try? keychian.remove(UserDefaults.NetUtils.Keys.keyFor(dataFeed: self))
             }
         }
     }
 
     public static var current: GoogleWebRisk = {
         let retVal = GoogleWebRisk()
-        if let key = UserDefaults.standard.string(forKey: UserDefaults.NetUtils.Keys.keyFor(dataFeed: retVal)) {
-            retVal.userKey = ApiKey(name: retVal.name, key: key)
+        let keychian = Keychain().synchronizable(true)
+        if let key = try? keychian.get(UserDefaults.NetUtils.Keys.keyFor(dataFeed: retVal)) {
+            retVal.userKey = key
         }
         return retVal
     }()
@@ -73,18 +77,26 @@ extension GoogleWebRisk {
     /// [Constructing URLs in Swift](https://www.swiftbysundell.com/posts/constructing-urls-in-swift)
     class Endpoint: DataFeedEndpoint {
         /// https://webrisk.googleapis.com/v1beta1/uris:search?key=YOUR_API_KEY&threatTypes=MALWARE&uri=http%3A%2F%2Ftestsafebrowsing.appspot.com%2Fs%2Fmalware.html
-        static func lookup(uri: String, threats: [ThreatTypes] = [.malware, .unwanted, .socialEngineering], with key: String = ApiKey.GoogleWebRisk.key) -> Endpoint? {
+        static func lookup(uri: String, threats: [ThreatTypes] = [.malware, .unwanted, .socialEngineering], with key: String? = nil) -> Endpoint? {
             guard let fixedURI = uri.addingPercentEncoding(withAllowedCharacters: []) else {
                 return nil
             }
 
-            var threatItems = [URLQueryItem(name: "key", value: key), URLQueryItem(name: "uri", value: fixedURI)]
+            var threatItems = [
+                URLQueryItem(name: "uri", value: fixedURI),
+                URLQueryItem(name: "api", value: "webRisk"),
+                URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString)
+            ]
+
+            if let key = GoogleWebRisk.current.userKey {
+                threatItems.append(URLQueryItem(name: "key", value: key))
+            }
 
             for threat in threats {
                 threatItems.append(URLQueryItem(name: "threatTypes", value: threat.rawValue))
             }
 
-            return Endpoint(host: "webrisk.googleapis.com",
+            return Endpoint(host: "api.netutils.workers.dev",
                             path: "/v1beta1/uris:search", queryItems: threatItems)
         }
     }
@@ -93,6 +105,10 @@ extension GoogleWebRisk {
 // MARK: - DataFeedService
 
 extension GoogleWebRisk: DataFeedService {
+    var totalUsage: Int {
+        return services.reduce(0) { $0 + $1.usage }
+    }
+
     public static var lookupService: GoogleWebRiskLookupService = {
         GoogleWebRiskLookupService()
     }()
@@ -114,6 +130,8 @@ extension GoogleWebRisk: DataFeedService {
                 block?(DataFeedError.invalidUrl, nil)
                 return
             }
+
+            usage += 1
 
             if let cached: T = self.cache.value(for: endpointURL.absoluteString) {
                 block?(nil, cached)
@@ -180,6 +198,7 @@ extension GoogleWebRisk: DataFeedService {
 
                     let coordinator = try decoder.decode(T.self, from: data)
                     self.cache.add(coordinator, for: endpointURL.absoluteString)
+
                     block?(nil, coordinator)
                 } catch let decodeError {
                     print(decodeError, T.self, self.name)

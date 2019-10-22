@@ -6,7 +6,9 @@
 //  Copyright © 2019 Zachary Gorak. All rights reserved.
 //
 
+import CoreData
 import Foundation
+import UIKit
 
 class WhoisXMLService: Service {
     // MARK: - Properties
@@ -36,13 +38,20 @@ class WhoisXMLService: Service {
             return nil
         }
 
-        return WhoisXml.Endpoint(host: "www.whoisxmlapi.com", path: "/whoisserver/WhoisService", queryItems: [
+        var params = [
             URLQueryItem(name: "domainName", value: domain),
-            URLQueryItem(name: "apiKey", value: WhoisXml.current.currentKey.key),
             URLQueryItem(name: "outputFormat", value: "JSON"),
             URLQueryItem(name: "da", value: "2"),
-            URLQueryItem(name: "ip", value: "1")
-        ])
+            URLQueryItem(name: "ip", value: "1"),
+            URLQueryItem(name: "api", value: "whoisXml"),
+            URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString)
+        ]
+
+        if let key = WhoisXml.current.userKey {
+            params.append(URLQueryItem(name: "apiKey", value: key))
+        }
+
+        return WhoisXml.Endpoint(host: "api.netutils.workers.dev", path: "/whoisserver/WhoisService", queryItems: params)
     }
 
     func query<T: Codable>(_ userData: [String: Any?]?, completion block: ((Error?, T?) -> Void)?) {
@@ -53,12 +62,14 @@ class WhoisXMLService: Service {
 
         let minimumBalance = userData?["minimumBalance"] as? Int ?? 100
 
+        usage += 1
+
         if let cached: T = self.cache.value(for: endpointURL.absoluteString) {
             block?(nil, cached)
             return
         }
 
-        balance { error, balance in
+        balance(key: WhoisXml.current.userKey) { error, balance in
             guard error == nil else {
                 block?(error, nil)
                 return
@@ -132,7 +143,7 @@ class WhoisXMLService: Service {
         }
     }
 
-    func balance(key: String = WhoisXml.current.currentKey.key, completion block: ((Error?, Int?) -> Void)? = nil) {
+    func balance(key: String?, completion block: ((Error?, Int?) -> Void)? = nil) {
         guard let balanceURL = WhoisXml.Endpoint.balanceUrl(for: self.id, with: key) else {
             block?(DataFeedError.invalidUrl, nil) // TODO: set error
             return

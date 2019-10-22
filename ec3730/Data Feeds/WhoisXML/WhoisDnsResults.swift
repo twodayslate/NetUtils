@@ -10,9 +10,11 @@ import Foundation
 
 struct DnsCoordinate: Codable {
     let dnsData: DNSResults
+    let error: String?
 
     enum CodingKeys: String, CodingKey {
         case dnsData = "DNSData"
+        case error
     }
 }
 
@@ -35,7 +37,7 @@ extension DnsCoordinate {
     func with(
         whoisRecord: DNSResults? = nil
     ) -> DnsCoordinate {
-        return DnsCoordinate(dnsData: whoisRecord ?? dnsData)
+        return DnsCoordinate(dnsData: whoisRecord ?? dnsData, error: nil)
     }
 
     func jsonData() throws -> Data {

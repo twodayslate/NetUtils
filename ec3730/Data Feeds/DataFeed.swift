@@ -17,16 +17,9 @@ protocol DataFeedSingleton: DataFeed {
 
 protocol DataFeed: AnyObject {
     var name: String { get }
-    var key: ApiKey { get }
-    var userKey: ApiKey? { get set }
+    var userKey: String? { get set }
 
     var webpage: URL { get }
 
     typealias Endpoints = DataFeedEndpoint
-}
-
-extension DataFeed {
-    public var currentKey: ApiKey {
-        return userKey ?? key
-    }
 }
