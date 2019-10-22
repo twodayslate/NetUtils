@@ -194,8 +194,6 @@ extension GoogleWebRisk: DataFeedService {
                 }
 
                 do {
-                    print(String(data: data, encoding: .utf8) ?? "")
-
                     let coordinator = try decoder.decode(T.self, from: data)
                     self.cache.add(coordinator, for: endpointURL.absoluteString)
 

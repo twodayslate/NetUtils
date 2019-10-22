@@ -65,58 +65,20 @@ extension WhoisXml {
     class Endpoint: DataFeedEndpoint {
         /// OLD https://www.whoisxmlapi.com/accountServices.php?servicetype=accountbalance&apiKey=#
         /// NEW https://user.whoisxmlapi.com/service/account-balance?productId=1&apiKey=#
-        static func balanceUrl(for id: String = "1", with key: String? = nil) -> URL? {
+        static func balanceUrl(for id: String, with key: String?) -> URL? {
             var params = [
                 URLQueryItem(name: "productId", value: id),
-                URLQueryItem(name: "apiKey", value: key),
-                URLQueryItem(name: "output_format", value: "JSON")
+                URLQueryItem(name: "output_format", value: "JSON"),
+                URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
+                URLQueryItem(name: "api", value: "whoisXmlBalance")
             ]
 
             if let key = key {
                 params.append(URLQueryItem(name: "apiKey", value: key))
             }
 
-            return Endpoint(host: "user.whoisxmlapi.com",
+            return Endpoint(host: "api.netutils.workers.dev",
                             path: "/service/account-balance", queryItems: params).url
-        }
-
-        /// https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey=#&domainName=google.com
-        static func whoisUrl(_ domain: String, with key: String? = nil) -> URL? {
-            guard let domain = domain.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
-                return nil
-            }
-
-            var params = [
-                URLQueryItem(name: "domainName", value: domain),
-                URLQueryItem(name: "outputFormat", value: "JSON"),
-                URLQueryItem(name: "da", value: "2"),
-                URLQueryItem(name: "ip", value: "1")
-            ]
-
-            if let key = key {
-                params.append(URLQueryItem(name: "apiKey", value: key))
-            }
-
-            return Endpoint(host: "www.whoisxmlapi.com", path: "/whoisserver/WhoisService", queryItems: params).url
-        }
-
-        /// https://www.whoisxmlapi.com/whoisserver/DNSService?apiKey=#&domainName=bbc.com&type=1
-        static func dnsUrl(_ domain: String, with key: String? = nil) -> URL? {
-            guard let domain = domain.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
-                return nil
-            }
-
-            var params = [
-                URLQueryItem(name: "domainName", value: domain),
-                URLQueryItem(name: "outputFormat", value: "JSON"),
-                URLQueryItem(name: "type", value: "_all")
-            ]
-
-            if let key = key {
-                params.append(URLQueryItem(name: "apiKey", value: key))
-            }
-
-            return Endpoint(host: "www.whoisxmlapi.com", path: "/whoisserver/DNSService", queryItems: params).url
         }
     }
 }
