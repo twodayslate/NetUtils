@@ -40,7 +40,6 @@ class SRCTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     @objc func defaultsChanged() {
         if #available(iOS 13.0, *) {
-            print("testing dark mode")
             switch UserDefaults.standard.integer(forKey: "theme") {
             case 1:
                 self.overrideUserInterfaceStyle = .light

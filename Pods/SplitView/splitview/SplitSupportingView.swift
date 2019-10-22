@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public struct SplitSupportingView: Equatable {
+internal struct SplitSupportingView: Equatable {
     public let view: UIView
     /// The current width/height ratio of `view`
     var ratio: CGFloat = .zero

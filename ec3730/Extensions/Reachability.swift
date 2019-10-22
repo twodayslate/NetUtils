@@ -10,5 +10,5 @@ import Foundation
 import Reachability
 
 extension Reachability {
-    static let shared = Reachability()!
+    static let shared = (try? Reachability())!
 }

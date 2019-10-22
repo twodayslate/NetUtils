@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import StoreKit
 import SwiftyStoreKit
 import UIKit
 
 private var cachedPrice: String?
 
 class WhoisLockedTableViewCell: UITableViewCell {
-    var iapDelegate: InAppPurchaseUpdateDelegate?
+    var iapDelegate: DataFeedInAppPurchaseUpdateDelegate?
 
     var isRestoring = false {
         didSet {
@@ -30,47 +31,38 @@ class WhoisLockedTableViewCell: UITableViewCell {
     var restoringActivity = UIActivityIndicatorView()
 
     internal let smallText = UITextView()
-    
+
     @objc
     func restore(_: UIButton) {
         isRestoring = true
-        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+
+        dataFeed.restore { results in
             self.isRestoring = false
-
-            if results.restoreFailedPurchases.count > 0 {
-                print("Restore Failed: \(results.restoreFailedPurchases)")
-            } else if results.restoredPurchases.count > 0 {
-                print("Restore Success: \(results.restoredPurchases)")
-            } else {
-                print("Nothing to Restore")
-            }
-
-            // Update isSubscribed cache
-            _ = WhoisXml.owned
-
-            self.iapDelegate?.restoreInAppPurchase(results)
+            // swiftlint:disable:next line_length
+            self.didUpdateInAppPurchase(self.dataFeed, error: nil, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
         }
     }
 
     @objc func buy(_: UIButton) {
         isRestoring = true
-        SwiftyStoreKit.purchaseProduct(WhoisXml.subscriptions[0].identifier, quantity: 1, atomically: true, simulatesAskToBuyInSandbox: false) { result in
 
-            self.isRestoring = false
+        // TODO: generalize block
 
-            switch result {
-            case let .success(product):
-                if product.needsFinishTransaction {
-                    SwiftyStoreKit.finishTransaction(product.transaction)
-                }
-            default:
-                break
+        if let sub = (self.dataFeed as? DataFeedSubscription), let defaultSub = sub.subscriptions.first {
+            defaultSub.buy { result in
+                self.isRestoring = false
+                // swiftlint:disable:next line_length
+                self.iapDelegate?.didUpdateInAppPurchase(self.dataFeed, error: nil, purchaseResult: result, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
             }
+            return
+        }
 
-            // Update isSubscribed cache
-            _ = WhoisXml.paid
-
-            self.iapDelegate?.updatedInAppPurchase(result)
+        if let one = (self.dataFeed as? DataFeedOneTimePurchase) {
+            one.oneTime.purchase { result in
+                self.isRestoring = false
+                // swiftlint:disable:next line_length
+                self.iapDelegate?.didUpdateInAppPurchase(self.dataFeed, error: nil, purchaseResult: result, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+            }
         }
     }
 
@@ -84,9 +76,12 @@ class WhoisLockedTableViewCell: UITableViewCell {
 //        smallText.invalidateIntrinsicContentSize()
 //        smallText.superview?.layoutIfNeeded()
 //    }
-    
-    convenience init(reuseIdentifier: String?, heading: String? = nil, subheading: String? = nil) {
-        self.init(style: .default, reuseIdentifier: reuseIdentifier)
+
+    var dataFeed: DataFeedPurchaseProtocol
+
+    init(_ dataFeed: DataFeedPurchaseProtocol, heading: String, subheading: String) {
+        self.dataFeed = dataFeed
+        super.init(style: .default, reuseIdentifier: dataFeed.name)
 
         restoringActivity.hidesWhenStopped = true
         if #available(iOS 13.0, *) {
@@ -94,6 +89,25 @@ class WhoisLockedTableViewCell: UITableViewCell {
         } else {
             restoringActivity.style = .gray
         }
+
+        // We want to reload this as soon as possible if the product does not exist
+        if !self.dataFeed.owned {
+            let prod = (self.dataFeed as? DataFeedSubscription)?.subscriptions.first?.product
+            if prod == nil {
+                (self.dataFeed as? DataFeedSubscription)?.subscriptions[0].retrieveProduct { error in
+                    // swiftlint:disable:next line_length
+                    self.didUpdateInAppPurchase(self.dataFeed, error: error, purchaseResult: nil, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+                }
+            }
+
+            if !(self.dataFeed is DataFeedSubscription) {
+                (self.dataFeed as? DataFeedOneTimePurchase)?.retrieve { error in
+                    // swiftlint:disable:next line_length
+                    self.didUpdateInAppPurchase(self.dataFeed, error: error, purchaseResult: nil, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+                }
+            }
+        }
+
         // self.heightAnchor.constraint(equalToConstant: self.frame.height * 3).isActive = true
         // self.backgroundColor = UIColor.green
         // self.contentView.backgroundColor = UIColor.red
@@ -161,7 +175,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         mainStack.addArrangedSubview(rightStack)
 
         let headline = UILabel()
-        headline.text = heading ?? "Unlock WHOIS Lookup"
+        headline.text = heading
         headline.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize * 2)
         headline.contentMode = .scaleAspectFit
         headline.adjustsFontSizeToFitWidth = true
@@ -170,7 +184,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         rightStack.addArrangedSubview(headline)
 
         let subtext = UILabel()
-        subtext.text = subheading ?? "Our hosted WHOIS Lookup provides the registration details, also known as a WHOIS Record, of domain names"
+        subtext.text = subheading
         subtext.lineBreakMode = .byWordWrapping
         subtext.contentMode = .scaleToFill
         subtext.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -208,9 +222,14 @@ class WhoisLockedTableViewCell: UITableViewCell {
         let buy = UIButton(type: .system)
         buy.tintColor = UIColor.white
 
-        let attString = NSMutableAttributedString(string: "Subscribe Now")
+        if self.dataFeed is DataFeedSubscription {
+            let attString = NSMutableAttributedString(string: "Subscribe Now")
+            buy.setAttributedTitle(attString, for: .normal)
+        } else {
+            let attString = NSMutableAttributedString(string: "Purchase")
+            buy.setAttributedTitle(attString, for: .normal)
+        }
 
-        buy.setAttributedTitle(attString, for: .normal)
         buy.addTarget(self, action: #selector(self.buy), for: .touchUpInside)
         buy.contentHorizontalAlignment = .center
         buy.backgroundColor = UIButton(type: .system).tintColor
@@ -219,100 +238,53 @@ class WhoisLockedTableViewCell: UITableViewCell {
 
         buttonStack.addArrangedSubview(buy)
 
+        priceLabel.text = "Unable to fetching price..."
+
         setPrice(for: priceLabel)
-        
-        
-        let text = IAPFooterView.legaleeze(color: .systemGray4)
-        
-        smallText.translatesAutoresizingMaskIntoConstraints = false
-        smallText.isEditable = false
-        smallText.isScrollEnabled = false
-        smallText.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGray3]
-        smallText.delegate = self
-        smallText.attributedText = text
-        smallText.isScrollEnabled = false
-        // TODO: fix the sizing issue
-        smallText.automaticallyAdjustsScrollIndicatorInsets = false
-        
-        stack.addArrangedSubview(smallText)
+
+        if self.dataFeed is DataFeedSubscription {
+            let text = IAPFooterView.legaleeze(color: .systemGray4)
+
+            smallText.translatesAutoresizingMaskIntoConstraints = false
+            smallText.isEditable = false
+            smallText.isScrollEnabled = false
+            smallText.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGray3]
+            smallText.delegate = self
+            smallText.attributedText = text
+            smallText.isScrollEnabled = false
+            // TODO: fix the sizing issue
+            smallText.automaticallyAdjustsScrollIndicatorInsets = false
+
+            stack.addArrangedSubview(smallText)
+        }
 
         separatorInset.right = .greatestFiniteMagnitude
     }
 
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     func setPrice(for label: UILabel) {
-        if let price = cachedPrice {
-            let attString = NSMutableAttributedString(string: """
-            Start your free 3-day trial then all Whois XML API data is available for \(price) automatically.
-            """)
-            attString.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: label.font.pointSize, weight: .bold)], range: NSRange(location: 0, length: 27))
-            DispatchQueue.main.async {
-                label.attributedText = attString
-            }
-            return
-        } else {
-            let attString = NSMutableAttributedString(string: """
-            Start your free 3-day trial then all Whois XML API data is available for $0.99/month automatically.
-            """)
-            attString.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: label.font.pointSize, weight: .bold)], range: NSRange(location: 0, length: 27))
-            DispatchQueue.main.async {
-                label.attributedText = attString
-            }
-            SwiftyStoreKit.retrieveProductsInfo([WhoisXml.subscriptions[0].identifier]) { result in
-                guard result.error == nil else {
-                    print(result, "error: \(result.error!.localizedDescription)")
-                    return
-                }
-
-                guard let product = result.retrievedProducts.first else {
-                    print("No products retrieved", result)
-                    return
-                }
-
-                guard let price = product.localizedPrice else {
-                    return
-                }
-
-                cachedPrice = price
-
-                if #available(iOS 11.2, *) {
-                    if let sub = product.subscriptionPeriod {
-                        var terms = (single: "", multiple: "")
-
-                        switch sub.unit {
-                        case .day:
-                            terms = (single: "day", multiple: "days")
-                        case .week:
-                            terms = (single: "week", multiple: "weeks")
-                        case .month:
-                            terms = (single: "month", multiple: "months")
-                        case .year:
-                            terms = (single: "year", multiple: "years")
-                        default:
-                            break
-                        }
-
-                        if !terms.single.isEmpty {
-                            if sub.numberOfUnits == 1 {
-                                cachedPrice = price + "/" + terms.single
-                            } else if sub.numberOfUnits > 1 {
-                                cachedPrice = price + "/" + String(describing: sub.numberOfUnits) + " " + terms.multiple
-                            }
-                        }
-                    }
-                }
-
-                self.setPrice(for: label)
-            }
+        DispatchQueue.main.async {
+            label.attributedText = self.dataFeed.defaultProduct?.attributedText(subscriber: self.dataFeed)
         }
     }
 }
 
 extension WhoisLockedTableViewCell: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        if let window = UIApplication.shared.windows.first(where: { (window) -> Bool in window.isKeyWindow}) {
+    func textView(_: UITextView, shouldInteractWith URL: URL, in _: NSRange, interaction _: UITextItemInteraction) -> Bool {
+        if let window = UIApplication.shared.windows.first(where: { (window) -> Bool in window.isKeyWindow }) {
             window.rootViewController?.open(URL, title: "")
         }
-        
+
         return false
+    }
+}
+
+extension WhoisLockedTableViewCell: DataFeedInAppPurchaseUpdateDelegate {
+    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults: RestoreResults?, verifySubscriptionResult: VerifySubscriptionResult?, verifyPurchaseResult: VerifyPurchaseResult?, retrieveResults: RetrieveResults?) {
+        // swiftlint:disable:next line_length
+        iapDelegate?.didUpdateInAppPurchase(feed, error: error, purchaseResult: purchaseResult, restoreResults: restoreResults, verifySubscriptionResult: verifySubscriptionResult, verifyPurchaseResult: verifyPurchaseResult, retrieveResults: retrieveResults)
     }
 }

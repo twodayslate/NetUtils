@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import UIKit
 import SwiftyStoreKit
+import UIKit
 
 class DataFeedsTableViewController: UITableViewController {
     let dataFeeds = DataFeedCells()
@@ -26,26 +26,28 @@ class DataFeedsTableViewController: UITableViewController {
         cell.iapDelegate = self
         return cell
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = "Data Feeds"
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Restore", style: .plain, target: self, action: #selector(restore(_:)))
+
+        title = "Data Feeds"
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Restore", style: .plain, target: self, action: #selector(restore(_:)))
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        tableView.reloadData()
     }
-    
-    @objc func restore(_ sender: Any?) {
-        SwiftyStoreKit.restorePurchases { results in
-            for sub in self.dataFeeds.subscriptions {
-                sub.verifySubscriptions { _ in 
-                    self.restoreInAppPurchase(results)
-                }
-            }
+
+    @objc func restore(_: Any?) {
+        for purchase in dataFeeds.purchases {
+            purchase.restore(completion: { results in
+                // This will just reload the table. Might want to do this more smart
+                // swiftlint:disable:next line_length
+                self.didUpdateInAppPurchase(purchase, error: nil, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+            })
         }
     }
 
@@ -53,7 +55,7 @@ class DataFeedsTableViewController: UITableViewController {
         let footer = IAPFooterView()
         footer.label.delegate = self
         return footer
-        
+
 //        let label = UITableViewHeaderFooterView.iapFooter()
 //        label.delegate = self
 //        // swiftlint:enable line_length
@@ -61,11 +63,13 @@ class DataFeedsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? DataFeedCell, let subscriber = cell.subscriber as? DataFeedSubscription.Type {
-            let controller = DataFeedSubscriptionTableViewController(subscriber: subscriber)
-            controller.iapDelegate = self
-            controller.userApiUpdateDelegate = self
-            navigationController?.pushViewController(controller, animated: true)
+        if let cell = tableView.cellForRow(at: indexPath) as? DataFeedCell {
+            if let subscriber = cell.subscriber as? DataFeedSubscription ?? cell.subscriber as? DataFeedOneTimePurchase {
+                let controller = DataFeedSubscriptionTableViewController(subscriber: subscriber)
+                controller.iapDelegate = self
+                controller.userApiUpdateDelegate = self
+                navigationController?.pushViewController(controller, animated: true)
+            }
         }
 
         self.tableView.deselectRow(at: indexPath, animated: true)
@@ -78,26 +82,14 @@ class DataFeedsTableViewController: UITableViewController {
 }
 
 extension DataFeedsTableViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        self.open(URL, title: "")
+    func textView(_: UITextView, shouldInteractWith URL: URL, in _: NSRange, interaction _: UITextItemInteraction) -> Bool {
+        open(URL, title: "")
         return false
     }
 }
 
-extension DataFeedsTableViewController: InAppPurchaseUpdateDelegate {
-    func updatedInAppPurchase(_ result: PurchaseResult) {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    func restoreInAppPurchase(_ results: RestoreResults) {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?) {
+extension DataFeedsTableViewController: DataFeedInAppPurchaseUpdateDelegate {
+    func didUpdateInAppPurchase(_: DataFeed, error _: Error?, purchaseResult _: PurchaseResult?, restoreResults _: RestoreResults?, verifySubscriptionResult _: VerifySubscriptionResult?, verifyPurchaseResult _: VerifyPurchaseResult?, retrieveResults _: RetrieveResults?) {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -105,8 +97,9 @@ extension DataFeedsTableViewController: InAppPurchaseUpdateDelegate {
 }
 
 // MARK: - DataFeedUserApiKeyDelegate
+
 extension DataFeedsTableViewController: DataFeedUserApiKeyDelegate {
-    func didUpdate() {
+    func didUpdateUserApiKey(_: DataFeed) {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

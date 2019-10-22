@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum WhoisXmlError: Error {
+enum DataFeedError: Error {
     case invalidUrl
     case invalidProduct(id: String)
     case empty // No data
@@ -18,18 +18,18 @@ enum WhoisXmlError: Error {
 
     case custom(description: String, reason: String?, suggestion: String?, help: String?)
 
-    init(_ with: WhoisXmlError) {
+    init(_ with: DataFeedError) {
         self = with
     }
 }
 
-extension WhoisXmlError: LocalizedError {
+extension DataFeedError: LocalizedError {
     /// A localized message describing what error occurred.
     var errorDescription: String? {
         switch self {
         case let .invalidProduct(id):
             return "Invalid product identifier \"\(id)\""
-        case .custom(let desc, _, _, _):
+        case let .custom(desc, _, _, _):
             return desc
         default:
             return nil
@@ -39,7 +39,7 @@ extension WhoisXmlError: LocalizedError {
     /// A localized message describing the reason for the failure.
     var failureReason: String? {
         switch self {
-        case .custom(_, let reason, _, _):
+        case let .custom(_, reason, _, _):
             return reason
         default:
             return nil
@@ -49,7 +49,7 @@ extension WhoisXmlError: LocalizedError {
     /// A localized message describing how one might recover from the failure.
     var recoverySuggestion: String? {
         switch self {
-        case .custom(_, _, let suggestion, _):
+        case let .custom(_, _, suggestion, _):
             return suggestion
         default:
             return nil
@@ -67,7 +67,7 @@ extension WhoisXmlError: LocalizedError {
     }
 }
 
-extension WhoisXmlError: RecoverableError {
+extension DataFeedError: RecoverableError {
     func attemptRecovery(optionIndex _: Int) -> Bool {
         return false
     }

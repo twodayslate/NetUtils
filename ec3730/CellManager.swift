@@ -12,18 +12,25 @@ import UIKit
 
 open class CellManager {
     public var cells = [UITableViewCell]()
-    public var iapDelegate: InAppPurchaseUpdateDelegate?
+    var iapDelegate: DataFeedInAppPurchaseUpdateDelegate?
 
     internal var privateIsLoading: Bool = false
     public var isLoading: Bool {
         return privateIsLoading
     }
 
-    init() {
-        cells.append(LoadingCell(reuseIdentifier: "loading"))
-        
-        WhoisXml.verifySubscriptions { error in
-            self.verifyInAppSubscription(error: error, result: nil)
+    var dataFeed: DataFeed
+    var service: Service
+
+    init(_ feed: DataFeed, service: Service) {
+        dataFeed = feed
+        self.service = service
+        cells.append(LoadingCell())
+
+        if let prod = feed as? DataFeedPurchaseProtocol {
+            prod.verify { error in
+                self.didUpdateInAppPurchase(self.dataFeed, error: error, purchaseResult: nil, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+            }
         }
     }
 
@@ -33,56 +40,48 @@ open class CellManager {
 
     open func startLoading() {
         privateIsLoading = true
-        if WhoisXml.owned {
-            let cell = LoadingCell(reuseIdentifier: "loading")
-            cell.spinner.startAnimating()
-            cell.separatorInset.right = .greatestFiniteMagnitude
-            cells = [cell]
-        } else {
-            privateIsLoading = false
-            askForMoney()
+
+        if let paid = self.dataFeed as? DataFeedPurchaseProtocol {
+            if paid.owned {
+                let cell = LoadingCell(reuseIdentifier: "loading")
+                cell.spinner.startAnimating()
+                cell.separatorInset.right = .greatestFiniteMagnitude
+                cells = [cell]
+            } else {
+                privateIsLoading = false
+                askForMoney()
+            }
         }
     }
 
     open func stopLoading() {
         privateIsLoading = false
-        if WhoisXml.owned {
-            cells.removeAll()
-        } else {
-            askForMoney()
+
+        if let paid = self.dataFeed as? DataFeedPurchaseProtocol {
+            if paid.owned {
+                cells.removeAll()
+            } else {
+                askForMoney()
+            }
         }
+    }
+
+    open func reload() {
+        fatalError("Must override")
     }
 }
 
-extension CellManager: InAppPurchaseUpdateDelegate {
-    public func restoreInAppPurchase(_ results: RestoreResults) {
-        if WhoisXml.owned {
-            cells.removeAll()
-        }
-
-        iapDelegate?.restoreInAppPurchase(results)
-    }
-
-    public func updatedInAppPurchase(_ result: PurchaseResult) {
-        switch result {
-        case .success:
-            if WhoisXml.owned {
+extension CellManager: DataFeedInAppPurchaseUpdateDelegate {
+    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults: RestoreResults?, verifySubscriptionResult: VerifySubscriptionResult?, verifyPurchaseResult: VerifyPurchaseResult?, retrieveResults: RetrieveResults?) {
+        if let paid = self.dataFeed as? DataFeedPurchaseProtocol {
+            if paid.owned {
                 cells.removeAll()
+            } else {
+                askForMoney()
             }
-        default:
-            break
         }
 
-        iapDelegate?.updatedInAppPurchase(result)
-    }
-
-    public func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?) {
-        if WhoisXml.owned {
-            cells.removeAll()
-        } else {
-            askForMoney()
-        }
-
-        iapDelegate?.verifyInAppSubscription(error: error, result: result)
+        // swiftlint:disable:next line_length
+        iapDelegate?.didUpdateInAppPurchase(feed, error: error, purchaseResult: purchaseResult, restoreResults: restoreResults, verifySubscriptionResult: verifySubscriptionResult, verifyPurchaseResult: verifyPurchaseResult, retrieveResults: retrieveResults)
     }
 }

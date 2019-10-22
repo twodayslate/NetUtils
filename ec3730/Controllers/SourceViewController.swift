@@ -63,6 +63,8 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack!]))
 
         let splitStackView = SplitView()
+        splitStackView.axis = .vertical
+        splitStackView.snap = [.quarter]
         splitStackView.translatesAutoresizingMaskIntoConstraints = false
         splitStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
 
@@ -181,10 +183,10 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
         browser.allowsBackForwardNavigationGestures = true
 
         browserWrapper.addSubview(browser)
-        splitStackView.addView(browserWrapper, ratio: 0.5, minRatio: 0.1)
+        splitStackView.addSplitSubview(browserWrapper, desiredRatio: 0.5, minimumRatio: 0.1)
 
         sourceWrapper.addSubview(sourceStack)
-        splitStackView.addView(sourceWrapper, ratio: 0.5, minRatio: 0.1)
+        splitStackView.addSplitSubview(sourceWrapper, desiredRatio: 0.5, minimumRatio: 0.1)
         // stack.addArrangedSubview(sourceView!)
 
 //        sourceView?.topAnchor.constraint(equalTo: sourceWrapper.topAnchor).isActive = true

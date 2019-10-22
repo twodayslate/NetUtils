@@ -37,10 +37,18 @@
 		F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE55F23021AC70068D104 /* CopyLabel.swift */; };
 		F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE5612302203B0068D104 /* CopyDetailCell.swift */; };
 		F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE56323023F7E0068D104 /* CopyCell.swift */; };
-		F68CE56623031DA20068D104 /* WhoisErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE56523031DA20068D104 /* WhoisErrors.swift */; };
+		F68CE56623031DA20068D104 /* DataFeedErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE56523031DA20068D104 /* DataFeedErrors.swift */; };
 		F68CE5682303291A0068D104 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE5672303291A0068D104 /* Error.swift */; };
 		F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE569230463A50068D104 /* InterfaceTableViewController.swift */; };
 		F691B09A2147449200BDE0F4 /* WhoisXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = F691B0992147449200BDE0F4 /* WhoisXml.swift */; };
+		F69E3648235805180017296E /* GoogleWebRisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E3647235805180017296E /* GoogleWebRisk.swift */; };
+		F69E364A235806370017296E /* WhoisXMLDnsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E3649235806370017296E /* WhoisXMLDnsService.swift */; };
+		F69E364C235806720017296E /* WhoisXMLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E364B235806720017296E /* WhoisXMLService.swift */; };
+		F69E364E235808560017296E /* DFSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E364D235808560017296E /* DFSubscription.swift */; };
+		F69E36502358089C0017296E /* DFService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E364F2358089C0017296E /* DFService.swift */; };
+		F69E3652235808DF0017296E /* DFOneTimePurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E3651235808DF0017296E /* DFOneTimePurchase.swift */; };
+		F69E365423580A7D0017296E /* DataFeedSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E365323580A7D0017296E /* DataFeedSubscription.swift */; };
+		F69E365623580AA00017296E /* DataFeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E365523580AA00017296E /* DataFeedService.swift */; };
 		F6A4EB922301C5B800439562 /* InAppPurchaseUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB912301C5B800439562 /* InAppPurchaseUpdateDelegate.swift */; };
 		F6A4EB972301C70000439562 /* TimedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB962301C70000439562 /* TimedCache.swift */; };
 		F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB982301DFCC00439562 /* LoadingCell.swift */; };
@@ -52,6 +60,9 @@
 		F6C8D8B1212E5AEA00309373 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */; };
 		F6C8D8BC212E5AEB00309373 /* ec3730Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C8D8BB212E5AEB00309373 /* ec3730Tests.swift */; };
 		F6C8D8C7212E5AEB00309373 /* ec3730UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C8D8C6212E5AEB00309373 /* ec3730UITests.swift */; };
+		F6D0B77A235902E3009E493B /* DataFeedPurchaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D0B779235902E3009E493B /* DataFeedPurchaseProtocol.swift */; };
+		F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D4BB0923583E6100FDAFF7 /* GoogleWebRiskRecord.swift */; };
+		F6D4BB0C23584E0C00FDAFF7 /* GoogleWebRiskCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D4BB0B23584E0B00FDAFF7 /* GoogleWebRiskCellManager.swift */; };
 		F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */; };
 		F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */; };
 		F6FDDFC82304803100FBF75E /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC72304803100FBF75E /* UserDefaults.swift */; };
@@ -123,10 +134,18 @@
 		F68CE55F23021AC70068D104 /* CopyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyLabel.swift; sourceTree = "<group>"; };
 		F68CE5612302203B0068D104 /* CopyDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyDetailCell.swift; sourceTree = "<group>"; };
 		F68CE56323023F7E0068D104 /* CopyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCell.swift; sourceTree = "<group>"; };
-		F68CE56523031DA20068D104 /* WhoisErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisErrors.swift; sourceTree = "<group>"; };
+		F68CE56523031DA20068D104 /* DataFeedErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedErrors.swift; sourceTree = "<group>"; };
 		F68CE5672303291A0068D104 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		F68CE569230463A50068D104 /* InterfaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceTableViewController.swift; sourceTree = "<group>"; };
 		F691B0992147449200BDE0F4 /* WhoisXml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXml.swift; sourceTree = "<group>"; };
+		F69E3647235805180017296E /* GoogleWebRisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleWebRisk.swift; sourceTree = "<group>"; };
+		F69E3649235806370017296E /* WhoisXMLDnsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXMLDnsService.swift; sourceTree = "<group>"; };
+		F69E364B235806720017296E /* WhoisXMLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXMLService.swift; sourceTree = "<group>"; };
+		F69E364D235808560017296E /* DFSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFSubscription.swift; sourceTree = "<group>"; };
+		F69E364F2358089C0017296E /* DFService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFService.swift; sourceTree = "<group>"; };
+		F69E3651235808DF0017296E /* DFOneTimePurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFOneTimePurchase.swift; sourceTree = "<group>"; };
+		F69E365323580A7D0017296E /* DataFeedSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedSubscription.swift; sourceTree = "<group>"; };
+		F69E365523580AA00017296E /* DataFeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedService.swift; sourceTree = "<group>"; };
 		F6A4EB912301C5B800439562 /* InAppPurchaseUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseUpdateDelegate.swift; sourceTree = "<group>"; };
 		F6A4EB962301C70000439562 /* TimedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedCache.swift; sourceTree = "<group>"; };
 		F6A4EB982301DFCC00439562 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
@@ -145,6 +164,9 @@
 		F6C8D8C2212E5AEB00309373 /* ec3730UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ec3730UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6C8D8C6212E5AEB00309373 /* ec3730UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ec3730UITests.swift; sourceTree = "<group>"; };
 		F6C8D8C8212E5AEB00309373 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6D0B779235902E3009E493B /* DataFeedPurchaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedPurchaseProtocol.swift; sourceTree = "<group>"; };
+		F6D4BB0923583E6100FDAFF7 /* GoogleWebRiskRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleWebRiskRecord.swift; sourceTree = "<group>"; };
+		F6D4BB0B23584E0B00FDAFF7 /* GoogleWebRiskCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleWebRiskCellManager.swift; sourceTree = "<group>"; };
 		F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsSwitch.swift; sourceTree = "<group>"; };
 		F6FDDFC72304803100FBF75E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -219,12 +241,35 @@
 			isa = PBXGroup;
 			children = (
 				F650F748233CF15800BAA609 /* DataFeed.swift */,
+				F69E364D235808560017296E /* DFSubscription.swift */,
+				F69E365323580A7D0017296E /* DataFeedSubscription.swift */,
+				F6D0B779235902E3009E493B /* DataFeedPurchaseProtocol.swift */,
+				F69E365523580AA00017296E /* DataFeedService.swift */,
+				F69E3651235808DF0017296E /* DFOneTimePurchase.swift */,
 				F668EB3B23501FA200EEB379 /* DataFeedEndpoint.swift */,
+				F69E364F2358089C0017296E /* DFService.swift */,
 				F650F744233CEB4B00BAA609 /* DataFeedCells.swift */,
 				F650F746233CECD900BAA609 /* DataFeedCell.swift */,
 				F668EB4223563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift */,
+				F68CE56523031DA20068D104 /* DataFeedErrors.swift */,
+				F6D4BB0823583E4800FDAFF7 /* Google */,
+				F69E3646235804C10017296E /* WhoisXML */,
 			);
 			path = "Data Feeds";
+			sourceTree = "<group>";
+		};
+		F69E3646235804C10017296E /* WhoisXML */ = {
+			isa = PBXGroup;
+			children = (
+				F691B0992147449200BDE0F4 /* WhoisXml.swift */,
+				F69E364B235806720017296E /* WhoisXMLService.swift */,
+				F69E3649235806370017296E /* WhoisXMLDnsService.swift */,
+				F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */,
+				F619760A22FCA76200CE39A0 /* WhoisRecord.swift */,
+				F6FDDFDB230B2BB900FBF75E /* WhoisDnsResults.swift */,
+				F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */,
+			);
+			path = WhoisXML;
 			sourceTree = "<group>";
 		};
 		F6A4EB932301C5CB00439562 /* Protocols */ = {
@@ -296,13 +341,10 @@
 				F6A4EB9E2301F31100439562 /* ec3730.entitlements */,
 				F6C8D8A4212E5AE900309373 /* AppDelegate.swift */,
 				F6A4EB942301C5DD00439562 /* Controllers */,
-				F691B0992147449200BDE0F4 /* WhoisXml.swift */,
 				F668EB3D23501FAC00EEB379 /* Data Feeds */,
-				F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */,
 				F6FDDFDF230C4C7400FBF75E /* CellManager.swift */,
 				F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */,
 				F650F74A233E62C100BAA609 /* BlurredPickerView.swift */,
-				F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */,
 				F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */,
 				F68CE5612302203B0068D104 /* CopyDetailCell.swift */,
 				F68CE56323023F7E0068D104 /* CopyCell.swift */,
@@ -310,9 +352,6 @@
 				F68CE55F23021AC70068D104 /* CopyLabel.swift */,
 				F6A4EB962301C70000439562 /* TimedCache.swift */,
 				F6A4EB9A2301E78E00439562 /* DNSResolver.swift */,
-				F619760A22FCA76200CE39A0 /* WhoisRecord.swift */,
-				F6FDDFDB230B2BB900FBF75E /* WhoisDnsResults.swift */,
-				F68CE56523031DA20068D104 /* WhoisErrors.swift */,
 				F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */,
 				F6A4EB932301C5CB00439562 /* Protocols */,
 				F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */,
@@ -342,6 +381,16 @@
 				F6C8D8C8212E5AEB00309373 /* Info.plist */,
 			);
 			path = ec3730UITests;
+			sourceTree = "<group>";
+		};
+		F6D4BB0823583E4800FDAFF7 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				F69E3647235805180017296E /* GoogleWebRisk.swift */,
+				F6D4BB0923583E6100FDAFF7 /* GoogleWebRiskRecord.swift */,
+				F6D4BB0B23584E0B00FDAFF7 /* GoogleWebRiskCellManager.swift */,
+			);
+			path = Google;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -606,17 +655,23 @@
 				F6310273212FA66600F34E42 /* SRCTabBarController.swift in Sources */,
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
 				F6FDDFD8230B106200FBF75E /* WhoisXmlDnsCells.swift in Sources */,
-				F68CE56623031DA20068D104 /* WhoisErrors.swift in Sources */,
+				F68CE56623031DA20068D104 /* DataFeedErrors.swift in Sources */,
+				F69E365423580A7D0017296E /* DataFeedSubscription.swift in Sources */,
 				F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */,
+				F69E3652235808DF0017296E /* DFOneTimePurchase.swift in Sources */,
 				F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */,
+				F6D0B77A235902E3009E493B /* DataFeedPurchaseProtocol.swift in Sources */,
 				F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */,
 				F619760922FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift in Sources */,
+				F69E3648235805180017296E /* GoogleWebRisk.swift in Sources */,
 				F6C87452234FE8030069A57C /* DataFeedsTableViewController.swift in Sources */,
 				F6FDDFCA23048DEF00FBF75E /* UIView.swift in Sources */,
 				F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */,
+				F69E365623580AA00017296E /* DataFeedService.swift in Sources */,
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
+				F69E36502358089C0017296E /* DFService.swift in Sources */,
 				F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */,
 				F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */,
 				F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */,
@@ -628,6 +683,7 @@
 				F668EB4B2356AE3800EEB379 /* IAPFooterView.swift in Sources */,
 				F668EB3C23501FA200EEB379 /* DataFeedEndpoint.swift in Sources */,
 				F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */,
+				F6D4BB0C23584E0C00FDAFF7 /* GoogleWebRiskCellManager.swift in Sources */,
 				F650F749233CF15800BAA609 /* DataFeed.swift in Sources */,
 				F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */,
 				F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */,
@@ -639,10 +695,14 @@
 				F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */,
 				F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */,
 				F668EB3F2355807100EEB379 /* SKProductSubscriptionPeriod.swift in Sources */,
+				F69E364E235808560017296E /* DFSubscription.swift in Sources */,
 				F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
+				F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */,
+				F69E364C235806720017296E /* WhoisXMLService.swift in Sources */,
 				F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */,
+				F69E364A235806370017296E /* WhoisXMLDnsService.swift in Sources */,
 				F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,7 +872,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -821,7 +881,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -839,7 +899,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -848,7 +908,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

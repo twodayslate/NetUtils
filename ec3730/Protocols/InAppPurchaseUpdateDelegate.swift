@@ -9,13 +9,6 @@
 import Foundation
 import SwiftyStoreKit
 
-public protocol InAppPurchaseUpdateDelegate {
-    func updatedInAppPurchase(_ result: PurchaseResult)
-    func restoreInAppPurchase(_ results: RestoreResults)
-    func verifyInAppSubscription(error: Error?, result: VerifySubscriptionResult?)
-}
-
-public protocol InAppPurchaseAttemptDelegate {
-    func purchaseAttempted()
-    func restoreAttempted()
+protocol DataFeedInAppPurchaseUpdateDelegate {
+    func didUpdateInAppPurchase(_ for: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults: RestoreResults?, verifySubscriptionResult: VerifySubscriptionResult?, verifyPurchaseResult: VerifyPurchaseResult?, retrieveResults: RetrieveResults?)
 }

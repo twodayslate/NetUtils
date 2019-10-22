@@ -15,13 +15,14 @@ class HostTable: UITableViewController {
 
     var isLoading: Bool {
         get {
-            return dnsManager.isLoading && whoisManger.isLoading
+            return dnsManager.isLoading && whoisManger.isLoading && webRiskManager.isLoading
         }
         set {
             if newValue {
                 DispatchQueue.main.async {
                     self.whoisManger.startLoading()
                     self.dnsManager.startLoading()
+                    self.webRiskManager.startLoading()
                 }
             }
 
@@ -43,6 +44,15 @@ class HostTable: UITableViewController {
         }
     }
 
+    public var webRiskRecord: GoogleWebRiskRecordWrapper? {
+        didSet {
+            DispatchQueue.main.async {
+                self.webRiskManager.configure(self.webRiskRecord)
+                self.tableView.reloadData()
+            }
+        }
+    }
+
     public var dnsRecords: [DNSRecords]? {
         didSet {
             DispatchQueue.main.async {
@@ -53,8 +63,17 @@ class HostTable: UITableViewController {
         }
     }
 
-    public var whoisManger = WhoisXmlCellManager()
-    public var dnsManager = WhoisXmlDnsCellManager()
+    public var whoisManger = WhoisXmlCellManager(WhoisXml.current, service: WhoisXml.whoisService)
+    public var dnsManager = WhoisXmlDnsCellManager(WhoisXml.current, service: WhoisXml.dnsService)
+    public var webRiskManager = GoogleWebRiskCellManager(GoogleWebRisk.current, service: GoogleWebRisk.lookupService)
+
+    init() {
+        super.init(style: .plain)
+    }
+
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // swiftlint:disable:next identifier_name
     public var _host: String = "Host"
@@ -83,11 +102,13 @@ class HostTable: UITableViewController {
             return whoisManger.cells.count // WHOIS
         case 2:
             return dnsManager.cells.count
+        case 3:
+            return webRiskManager.cells.count
         default:
             return 0
         }
     }
-    
+
     override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -96,13 +117,15 @@ class HostTable: UITableViewController {
             return "WHOIS"
         case 2:
             return "DNS"
+        case 3:
+            return "Web Risk"
         default:
             return nil
         }
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return 3
+        return 4
     }
 
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,8 +142,10 @@ class HostTable: UITableViewController {
             cell = whoisManger.cells[indexPath.row]
         case 2:
             cell = dnsManager.cells[indexPath.row]
+        case 3:
+            cell = webRiskManager.cells[indexPath.row]
         default:
-            return LoadingCell(reuseIdentifier: "error")
+            return LoadingCell()
         }
 
         return cell!
@@ -140,6 +165,7 @@ class HostTable: UITableViewController {
         title = host + " Information"
         whoisManger.iapDelegate = self
         dnsManager.iapDelegate = self
+        webRiskManager.iapDelegate = self
 
         // self.tableView.register(WhoisTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(WhoisTableViewCell.self))
 
@@ -147,52 +173,56 @@ class HostTable: UITableViewController {
         tableView.estimatedRowHeight = UITableView.automaticDimension
         // self.tableView.separatorInset.left =  self.view.frame.width
         tableView.tableFooterView = UIView() // hide sepeartor
-        tableView.reloadData()
+
+        fetchProducts()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        fetchProducts()
+    }
+
+    func fetchProducts() {
+        if !WhoisXml.current.owned, WhoisXml.current.defaultProduct == nil {
+            WhoisXml.current.subscriptions[0].retrieveProduct { _ in
+                self.reload()
+            }
+        }
+
+        if !GoogleWebRisk.current.owned, GoogleWebRisk.current.defaultProduct == nil {
+            GoogleWebRisk.current.oneTime.retrieveProduct { _ in
+                self.reload()
+            }
+        }
     }
 }
 
-extension HostTable: InAppPurchaseUpdateDelegate {
-    func verify(showErrors: Bool = true) {
-        WhoisXml.verifySubscriptions { error in
-            guard error == nil else {
-                if showErrors {
-                    self.parent?.showError(message: error!.localizedDescription)
-                }
-                return
-            }
+extension HostTable: DataFeedInAppPurchaseUpdateDelegate {
+    func reload() {
+        whoisManger.reload()
+        dnsManager.reload()
+        webRiskManager.reload()
 
-            if WhoisXml.paid {
-                if showErrors {
-                    self.parent?.showError(message: "Thank you for pruchase!")
-                }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                return
-            }
-            
-            if !WhoisXml.owned {
-                if showErrors {
-                    self.parent?.showError(message: "Unable to verify subscription")
-                }
-                return
-            }
-        }
-    }
-
-    func restoreInAppPurchase(_: RestoreResults) {
-        verify()
-    }
-
-    func updatedInAppPurchase(_: PurchaseResult) {
-        verify()
-    }
-
-    func verifyInAppSubscription(error _: Error?, result _: VerifySubscriptionResult?) {
         DispatchQueue.main.async {
-            self.whoisManger.configure(self.whoisRecord)
-            self.dnsManager.configure(self.dnsRecords)
             self.tableView.reloadData()
         }
+    }
+
+    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults _: RestoreResults?, verifySubscriptionResult _: VerifySubscriptionResult?, verifyPurchaseResult _: VerifyPurchaseResult?, retrieveResults _: RetrieveResults?) {
+        guard error == nil else {
+            parent?.showError(message: error!.localizedDescription)
+            return
+        }
+
+        if purchaseResult != nil {
+            if let purchase = feed as? DataFeedPurchaseProtocol, purchase.paid {
+                parent?.showError("<3", message: "Thank you for your purchase!")
+            } else {
+                parent?.showError(message: "Unable to verify purchase, please try again.")
+            }
+        }
+
+        reload()
     }
 }

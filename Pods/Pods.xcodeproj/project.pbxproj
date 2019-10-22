@@ -28,6 +28,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		05228C9C60979A5DD5C9A41263A9FBB1 /* SplitSupportingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D2185794AAF88AD420EC8DD7111998 /* SplitSupportingView.swift */; };
 		07252E9AC17882D2B1EA4168AFCCE740 /* tomorrow-night-blue.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 42287268EE2C93E299C378379FFDBB0F /* tomorrow-night-blue.min.css */; };
 		0768FEAC866E87AE8EC777F0D6D7ECD6 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 85938604A1960FE147FD1DFD111E5EB6 /* SimplePing.m */; };
 		08EFCDAA97DF13161E4256DDC02F4DAA /* solarized-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = E52F894612480A1DE562783D41860AD9 /* solarized-dark.min.css */; };
@@ -49,7 +50,6 @@
 		2832AC0AEA1EF2268C8E46C0BF8E4EFF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720EF54D5357473D900DEEAF5080DFEC /* Foundation.framework */; };
 		295CFC1BD4613F4AD34DD8229EF50F93 /* atom-one-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 726EDF1124FF145B702E10DAF95E7BFD /* atom-one-light.min.css */; };
 		2C0D498C7785ECEC234D4EB9EA5FF458 /* InAppProductQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD0360737E2417340D37464B5C0D7A /* InAppProductQueryRequest.swift */; };
-		2C182CDD678794AA64A911474E5B883B /* SplitViewHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E28416350ED68EBB775EF8D2C704BA /* SplitViewHandle.swift */; };
 		2C8498AF2573866DF00271149F660EE4 /* InAppReceiptVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BE167196BF004A5CBDBFC54026F7C7 /* InAppReceiptVerificator.swift */; };
 		2DB19A681E324342D87CCD8A3203A3AF /* PlainPing-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D0055FA7979DDE69E6F52B531F9895EB /* PlainPing-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E7CA3EAF445B41806F1C1BC057E628E /* foundation.min.css in Resources */ = {isa = PBXBuildFile; fileRef = AABEE690CA48B0A5EFC05BC3A7703CBC /* foundation.min.css */; };
@@ -59,7 +59,6 @@
 		31744A00FAC42B149FBE535D81DE68A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720EF54D5357473D900DEEAF5080DFEC /* Foundation.framework */; };
 		33CF97469D3F267E887B8320493B195A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720EF54D5357473D900DEEAF5080DFEC /* Foundation.framework */; };
 		3406709367A4D069D707E6343D9B499F /* sunburst.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 35B5A0686690A37FA080CD8DEEE6A4C4 /* sunburst.min.css */; };
-		3AA0D0CDF706C940ED49C962F92D6764 /* splitview.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B6DD0FD9EBDC8F55F42AE73109C0ECA /* splitview.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3B95F6D7813F2794DD6CF0BEAE2853DC /* PaymentQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B377A30258D2E04CA8950EB5F8950B6C /* PaymentQueueController.swift */; };
 		3CAA6E5219F3997A859577B688E9365A /* routeros.min.css in Resources */ = {isa = PBXBuildFile; fileRef = B7DCAE109C4AC9B2CC0A738D8D6A9742 /* routeros.min.css */; };
 		3CAF2019DACF68D00050E2C9BD816AA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720EF54D5357473D900DEEAF5080DFEC /* Foundation.framework */; };
@@ -94,9 +93,9 @@
 		6C91B4F117FFA093F740F975C33CB2B8 /* pojoaque.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 084ACD7902D4B1D9F23699D477960B9C /* pojoaque.min.css */; };
 		70866031BBB9398A61E0FCC5DA0E4228 /* atom-one-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 6E2E3919CF0EC1CD4D56018D9DD6556D /* atom-one-dark.min.css */; };
 		70B30C189B53A7E694253E32F1CFD909 /* atelier-estuary-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 699276F3EC49FDE759B90523213F2506 /* atelier-estuary-light.min.css */; };
-		71CD68E86D9301CBFFDB51E4603FD83D /* SplitViewSnapBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57A145F5F190037124EF5DCF76FA609 /* SplitViewSnapBehavior.swift */; };
 		746B9C316EDD28F601A99C13AEC63F24 /* Highlightr-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B8EDA1E0CA0F80C18AA384EC7015D1E9 /* Highlightr-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		764C13BFA23196755AE16C23C407B1B2 /* vs.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 77FA067B2BA1041A8CB15F8529A639BB /* vs.min.css */; };
+		77A338E50595E10C0FFBE3D4DDFB110F /* SplitView.h in Headers */ = {isa = PBXBuildFile; fileRef = 81216C75EF5010D78AF1CA2BCD8A52D0 /* SplitView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BC97943690EDBF87ADD1894BC36B25E /* Version.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D66808908B76649BB3172168446F73 /* Version.framework */; };
 		7C683BA5716C6A53BBF281382D0F3452 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720EF54D5357473D900DEEAF5080DFEC /* Foundation.framework */; };
 		7D6D4B1D849EA06229626399F32C64E9 /* tomorrow.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D8ECFE54AD296470E0EA0E826D025DC7 /* tomorrow.min.css */; };
@@ -112,7 +111,6 @@
 		89453DE5FF4129D4AEFCDB48E5193D98 /* atelier-savanna-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 07443973ED2E29DC21C4699AA1B67D46 /* atelier-savanna-dark.min.css */; };
 		89A589D04411197399D7FCF7159AAE0A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE79139F214FF477E39F3B6555A28931 /* CoreTelephony.framework */; };
 		8B6EC57B99EF7733C02DA7BC47D3C827 /* SwiftyStoreKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C30218046D090B35B6A754A77065D28 /* SwiftyStoreKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B841FFDD27C4FA69ACBC94FF13D8C69 /* SplitView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AD0D79BCEC9D3A7400C2C18A9515971 /* SplitView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D5D26A5B70AA4D55D6BE58745D76E5A /* atelier-seaside-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = FDFF626E857CD0810616393EFDE36C11 /* atelier-seaside-light.min.css */; };
 		94211506B10F74C3E3ED065E382BAB8B /* purebasic.min.css in Resources */ = {isa = PBXBuildFile; fileRef = FD58FBCC144B8829AF0A3E1A0D9EFB19 /* purebasic.min.css */; };
 		945DCA340BE155923A9265A5F44FBAC7 /* xt256.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 10BF3EB2255269B0DFA3EA7FDBF418A5 /* xt256.min.css */; };
@@ -121,18 +119,21 @@
 		963C85C58CE21ACF53AF1164C41DBF44 /* an-old-hope.min.css in Resources */ = {isa = PBXBuildFile; fileRef = E874A6A1562195AD6B2AD8BBE95C51CE /* an-old-hope.min.css */; };
 		966AE63AECA7D2B7517C5DA3C82AA505 /* SKVersion-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C329EC566932D91B97A7AA416D539FFA /* SKVersion-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96C050D6E6CE50C2BD3AF12853F2B6A8 /* PaymentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80995036D78A8D26AA4E77107D151CC /* PaymentsController.swift */; };
-		978311C20821CA9FE5444415836753BC /* SplitView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CC00144B40B45E9D1C5B4E95798B6D /* SplitView-dummy.m */; };
+		978311C20821CA9FE5444415836753BC /* SplitView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4BC21C1AD49ED6C7A6963AE7EBFCD /* SplitView-dummy.m */; };
 		98A56F4FB4306A4281F6426384A9F982 /* rainbow.min.css in Resources */ = {isa = PBXBuildFile; fileRef = C7136EFE243179927C5EEDEADA0E8099 /* rainbow.min.css */; };
 		99EAAD46EA7DCCDD5A6EC791BEF1332A /* SKVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDB96126EC09591E157BB8DD0D7C4BD /* SKVersion.swift */; };
+		9A5D35AFD479A7EBF7AF77BF4C4EC823 /* SplitViewSnapBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EF5B7E6F507BDBEA4FB5B85B3EE376 /* SplitViewSnapBehavior.swift */; };
 		9B2C6F18B5500D183750D3404BB8E3EF /* Pods-ec3730-ec3730UITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B82E4A6642415363E67C437C87D763C7 /* Pods-ec3730-ec3730UITests-dummy.m */; };
 		9BBCACB93C3591CC2C05F032F545CBAD /* atelier-dune-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 4718A4BF0DAEAA23AECD21E975CB530B /* atelier-dune-dark.min.css */; };
 		9BFAD43FAB646FB257EC1BAB5B961D6F /* atelier-seaside-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = B0D75BB73D9B595888B126533C9C1828 /* atelier-seaside-dark.min.css */; };
 		9DEA816E3C0C45754C0C55721B5C5A3E /* mono-blue.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 4D032B30309C2E7C3EBA771DD45B0361 /* mono-blue.min.css */; };
 		9EFFA7B5F6A011C8629CB7F3EC3E580B /* CodeAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A37CD0A375B43C1BE4696EAC3924D /* CodeAttributedString.swift */; };
 		A135726B17D46E531FF97ED1A5913B1E /* atelier-forest-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 1DA524D6A367A039BE46D2C60580929F /* atelier-forest-light.min.css */; };
+		A37CA60FE1949E46D9FF4C5F66841028 /* SplitViewHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9094CA381E1B7EEC38A1DE8A7A318 /* SplitViewHandle.swift */; };
 		A3E3A956296D2642CC84D07F65D277A5 /* atelier-sulphurpool-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 69960CE5E5B38B365F314C2AA3E751C7 /* atelier-sulphurpool-dark.min.css */; };
 		A623E240622352B0B89729F99971540A /* gruvbox-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = EE7444B6D64632C755041C6877A7E2FB /* gruvbox-dark.min.css */; };
 		A7B6BDC6A19D36FCE9F4656E03502D68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6598098FC784CAD163F717760A63E6A /* UIKit.framework */; };
+		A935A7DD77539EC61B92C6069EFB6B4B /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A74298CBFE21BE28931B295537C3A12 /* SplitView.swift */; };
 		A9D9D0E8198E55FF5AD536AB433F90D5 /* gruvbox-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = EC153EDE50F63150F031CEFD328A8A5E /* gruvbox-light.min.css */; };
 		AA5C32D97513834B0735E998633E5573 /* Shims.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711FD5701E1753D4E9376CA328B1863C /* Shims.swift */; };
 		AC56BFE3FB91CFEDE9228AF4C38A4F02 /* VersionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53854B6F21F80A3591BDB69A0E33F3F /* VersionParser.swift */; };
@@ -147,7 +148,6 @@
 		B281D8A8ECC3FAF6633C0B14AA073F25 /* ProductsInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41C10C0EA172397E8AF80E0A86703A /* ProductsInfoController.swift */; };
 		B322E14EE5D4B1F203C3C543F285C418 /* paraiso-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = FDAEBFE8A2A5BF0E55F6033870147D51 /* paraiso-dark.min.css */; };
 		B33068F24A37B5C3D7980AF7CE1E76DB /* SwiftyStoreKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F356971B1919F39396B3B4D6F232862 /* SwiftyStoreKit-dummy.m */; };
-		B46C54497E76C7968DBD3D2673AE2986 /* SplitSupportingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F89B04854D4034FDFD27E8DE4D7E73 /* SplitSupportingView.swift */; };
 		BC995ADB8550B0B8CB8B53AC8BC643EC /* qtcreator_dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 289A49BB9ED9B7091F92EA1659C3C0BA /* qtcreator_dark.min.css */; };
 		BE09CC034675464469183909970F2460 /* obsidian.min.css in Resources */ = {isa = PBXBuildFile; fileRef = EF06498019EC62F3DFAAC0FCF4D60D81 /* obsidian.min.css */; };
 		BE3CE38906F7D03DBAB9FD8F4C9C7932 /* Pods-ec3730-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FB3A1B81008111608476E05962F01F5C /* Pods-ec3730-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -160,6 +160,7 @@
 		C2D65EAE8886AC3A1EF396D513DFA37F /* atelier-plateau-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = B0A3BBF5999EBCB52206FD731463C05D /* atelier-plateau-light.min.css */; };
 		C5E4135327693EACA18256193F2DC95B /* nord.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 809CF812505904D3935B3A92A9F96407 /* nord.min.css */; };
 		C78E0AA446C0068A7BEFBCFE0756F45C /* RestorePurchasesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECB916FD1AC029172FE51971D09C158 /* RestorePurchasesController.swift */; };
+		C84B11C72D5266B89B06B90F9E1E134E /* SplitView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D085E5B299A30138A7297D340BEE9D1 /* SplitView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C8AAAAA899223C4342B183E664284CED /* kimbie.light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D57E5D6397C3B9E82DA67F71F6BCFD2C /* kimbie.light.min.css */; };
 		C9537AAFF97CBF25AD79A10E8A802253 /* vs2015.min.css in Resources */ = {isa = PBXBuildFile; fileRef = C68DCA1CF94887D6F4EDFEEEA2CF4736 /* vs2015.min.css */; };
 		CAF6C0CC4CA79C9AFB0506EC45C6E94B /* default.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 7000005A26CD285FAAE22CDC5E5D2E65 /* default.min.css */; };
@@ -179,7 +180,6 @@
 		E7E8411A877D5374B0BE09D7856FC0CF /* atelier-lakeside-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 615357C62C92A5E9CA299CAFD2F3C7D8 /* atelier-lakeside-light.min.css */; };
 		EA0C2301A8F1A0DA9BD6D299CA10080A /* atelier-cave-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 058DF324B9DAA5C6D40CFA200A9C8FFB /* atelier-cave-light.min.css */; };
 		EBD7F5BCF2EC0163384B1D5873DCC762 /* highlight.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 804C779D054F366C5E0B55876DF43F7F /* highlight.min.js */; };
-		EBFF1768730A4DE2CE725202308F629A /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF765075B34B136391F1FC41884545D8 /* SplitView.swift */; };
 		EDDC7DAE72472D6C48A3E3ECB654B1E6 /* xcode.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 944831BEE8C8381B13D148D2E266312E /* xcode.min.css */; };
 		EF3D1B1E497833CB869AEFBD0D74AA0F /* Pods-ec3730Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3375F9F24064E5907C6F238951AC00 /* Pods-ec3730Tests-dummy.m */; };
 		F05E65795E43FCD2F3CAF46C36F4F132 /* kimbie.dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF96739BE15AAD6386FBE7B7E511A3 /* kimbie.dark.min.css */; };
@@ -360,7 +360,7 @@
 		07443973ED2E29DC21C4699AA1B67D46 /* atelier-savanna-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-savanna-dark.min.css"; path = "Pod/Assets/styles/atelier-savanna-dark.min.css"; sourceTree = "<group>"; };
 		075D3C6ECA3779B6B11DD0BE2F6F0EFD /* androidstudio.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = androidstudio.min.css; path = Pod/Assets/styles/androidstudio.min.css; sourceTree = "<group>"; };
 		084ACD7902D4B1D9F23699D477960B9C /* pojoaque.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = pojoaque.min.css; path = Pod/Assets/styles/pojoaque.min.css; sourceTree = "<group>"; };
-		0B2C87B2EB917B9CDBFF44A4CC497BC1 /* SplitView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SplitView-Info.plist"; sourceTree = "<group>"; };
+		0CB580046375F2B5F3FA95AC1F2F828B /* SplitView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SplitView.modulemap; sourceTree = "<group>"; };
 		0D23153AD07A3E57E39C6974DAAACD6B /* SwiftyStoreKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyStoreKit-Info.plist"; sourceTree = "<group>"; };
 		10BF3EB2255269B0DFA3EA7FDBF418A5 /* xt256.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = xt256.min.css; path = Pod/Assets/styles/xt256.min.css; sourceTree = "<group>"; };
 		1256B691F93DADC7888F92CDB0D6DF1F /* Pods-ec3730-ec3730UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730-ec3730UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -376,25 +376,24 @@
 		21B03CA622E690725A6626C088E1D09F /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Reachability.framework; path = ReachabilitySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2262160BF6F13156ED24B8653603FDD4 /* color-brewer.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "color-brewer.min.css"; path = "Pod/Assets/styles/color-brewer.min.css"; sourceTree = "<group>"; };
 		2423506684289F4E38BC47FF83B9B003 /* InAppReceiptRefreshRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InAppReceiptRefreshRequest.swift; path = SwiftyStoreKit/InAppReceiptRefreshRequest.swift; sourceTree = "<group>"; };
+		242C31EBB8AFB938BEAC2D571848E0A6 /* SplitView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SplitView-Info.plist"; sourceTree = "<group>"; };
 		27067BC6A907041700100FFF2CE8D6C7 /* NetUtils-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NetUtils-umbrella.h"; sourceTree = "<group>"; };
 		277BFFCBC88797FF499A1AE905D87429 /* SKVersion-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SKVersion-Info.plist"; sourceTree = "<group>"; };
 		27D66808908B76649BB3172168446F73 /* Version.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Version.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		280C1D5273EDF59E6784A53DC4F7AE19 /* CompleteTransactionsController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompleteTransactionsController.swift; path = SwiftyStoreKit/CompleteTransactionsController.swift; sourceTree = "<group>"; };
 		289A49BB9ED9B7091F92EA1659C3C0BA /* qtcreator_dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = qtcreator_dark.min.css; path = Pod/Assets/styles/qtcreator_dark.min.css; sourceTree = "<group>"; };
-		28E28416350ED68EBB775EF8D2C704BA /* SplitViewHandle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplitViewHandle.swift; path = splitview/SplitViewHandle.swift; sourceTree = "<group>"; };
 		2A26AB81308A7F17A30D1CC8AE1C6332 /* Reachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = Sources/Reachability.swift; sourceTree = "<group>"; };
 		2A3375F9F24064E5907C6F238951AC00 /* Pods-ec3730Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ec3730Tests-dummy.m"; sourceTree = "<group>"; };
+		2A74298CBFE21BE28931B295537C3A12 /* SplitView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplitView.swift; path = SplitView/SplitView.swift; sourceTree = "<group>"; };
 		2B41C10C0EA172397E8AF80E0A86703A /* ProductsInfoController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProductsInfoController.swift; path = SwiftyStoreKit/ProductsInfoController.swift; sourceTree = "<group>"; };
 		2DE188602E1300205A79C4916D16BED3 /* PlainPing.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PlainPing.modulemap; sourceTree = "<group>"; };
 		2F7AEEDAEB99C58BCCC5A58197DB60BA /* paraiso-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "paraiso-light.min.css"; path = "Pod/Assets/styles/paraiso-light.min.css"; sourceTree = "<group>"; };
 		32887F9C31B6547F96D5C90B8AFAFAB6 /* PlainPing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlainPing.swift; path = Pod/Classes/PlainPing.swift; sourceTree = "<group>"; };
 		32B68D5B8C0127052BE81786F59B46F6 /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyStoreKit.framework; path = SwiftyStoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		34F89B04854D4034FDFD27E8DE4D7E73 /* SplitSupportingView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplitSupportingView.swift; path = splitview/SplitSupportingView.swift; sourceTree = "<group>"; };
 		35B5A0686690A37FA080CD8DEEE6A4C4 /* sunburst.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = sunburst.min.css; path = Pod/Assets/styles/sunburst.min.css; sourceTree = "<group>"; };
 		361DB6BC276487DB6D3957665AD25CA7 /* railscasts.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = railscasts.min.css; path = Pod/Assets/styles/railscasts.min.css; sourceTree = "<group>"; };
 		36D3B6B593A7AF27983895E29B724974 /* googlecode.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = googlecode.min.css; path = Pod/Assets/styles/googlecode.min.css; sourceTree = "<group>"; };
 		38562D14E69471FFC3DB5E5106C401CA /* PlainPing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PlainPing.xcconfig; sourceTree = "<group>"; };
-		38B4214643BE2BE884F69F09C3E0E283 /* SplitView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SplitView.modulemap; sourceTree = "<group>"; };
 		3976AB46D4A1CE96A8F6894795E14649 /* github.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = github.min.css; path = Pod/Assets/styles/github.min.css; sourceTree = "<group>"; };
 		3C30218046D090B35B6A754A77065D28 /* SwiftyStoreKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyStoreKit-umbrella.h"; sourceTree = "<group>"; };
 		3C48278014E1263D4F780155CBB8A03D /* SwiftyStoreKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyStoreKit.modulemap; sourceTree = "<group>"; };
@@ -416,12 +415,13 @@
 		4B6CD0FF27EE109F99A646FCA161A0E0 /* ascetic.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = ascetic.min.css; path = Pod/Assets/styles/ascetic.min.css; sourceTree = "<group>"; };
 		4C5E7D2F6FB056EFE0B843B3A7DE157B /* SKVersion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SKVersion.h; path = SKVersion/SKVersion.h; sourceTree = "<group>"; };
 		4D032B30309C2E7C3EBA771DD45B0361 /* mono-blue.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "mono-blue.min.css"; path = "Pod/Assets/styles/mono-blue.min.css"; sourceTree = "<group>"; };
+		4D085E5B299A30138A7297D340BEE9D1 /* SplitView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SplitView-umbrella.h"; sourceTree = "<group>"; };
+		50EF5B7E6F507BDBEA4FB5B85B3EE376 /* SplitViewSnapBehavior.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplitViewSnapBehavior.swift; path = SplitView/SplitViewSnapBehavior.swift; sourceTree = "<group>"; };
 		51D45BC2F8D90E233B7398898B2DDA19 /* zenburn.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = zenburn.min.css; path = Pod/Assets/styles/zenburn.min.css; sourceTree = "<group>"; };
 		52B9B76C1B768F5DEE03A557A694C0C8 /* dracula.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = dracula.min.css; path = Pod/Assets/styles/dracula.min.css; sourceTree = "<group>"; };
 		53B48FC36F265E4549C680FD5EC1C8FF /* NetUtils.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NetUtils.xcconfig; sourceTree = "<group>"; };
 		560689291B12019B766E7C45C15DEB38 /* NetUtils-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NetUtils-Info.plist"; sourceTree = "<group>"; };
 		564DDD2F2DAFA920E567597D4FC1AEC7 /* SwiftyStoreKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyStoreKit-prefix.pch"; sourceTree = "<group>"; };
-		571428FDD4B246B79D66C5DABAD0A920 /* SplitView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SplitView-prefix.pch"; sourceTree = "<group>"; };
 		5B52D11E598EBFA9384AA2632BA9D9B7 /* agate.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = agate.min.css; path = Pod/Assets/styles/agate.min.css; sourceTree = "<group>"; };
 		5EC30819FDD3E3318048BE66E3EC7B08 /* ReachabilitySwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ReachabilitySwift-Info.plist"; sourceTree = "<group>"; };
 		5EE1D832CA741B3447F9EBA0917EFC4A /* Interface.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Interface.swift; path = NetUtils/Interface.swift; sourceTree = "<group>"; };
@@ -446,7 +446,6 @@
 		720EF54D5357473D900DEEAF5080DFEC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		726EDF1124FF145B702E10DAF95E7BFD /* atom-one-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atom-one-light.min.css"; path = "Pod/Assets/styles/atom-one-light.min.css"; sourceTree = "<group>"; };
 		7329535F5F4E701C5D72B2FA73B54655 /* isbl-editor-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "isbl-editor-dark.min.css"; path = "Pod/Assets/styles/isbl-editor-dark.min.css"; sourceTree = "<group>"; };
-		73CC00144B40B45E9D1C5B4E95798B6D /* SplitView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SplitView-dummy.m"; sourceTree = "<group>"; };
 		754A68C38ED25698AEB55D72B9CF73BF /* dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = dark.min.css; path = Pod/Assets/styles/dark.min.css; sourceTree = "<group>"; };
 		77441ECC17550E3CADF10B482DA278DF /* SwiftLint.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.xcconfig; sourceTree = "<group>"; };
 		77FA067B2BA1041A8CB15F8529A639BB /* vs.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = vs.min.css; path = Pod/Assets/styles/vs.min.css; sourceTree = "<group>"; };
@@ -458,15 +457,16 @@
 		7FEBF43B516C7E5B54DB67DC6B2391A2 /* Pods-ec3730Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ec3730Tests-umbrella.h"; sourceTree = "<group>"; };
 		804C779D054F366C5E0B55876DF43F7F /* highlight.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = highlight.min.js; path = Pod/Assets/Highlighter/highlight.min.js; sourceTree = "<group>"; };
 		809CF812505904D3935B3A92A9F96407 /* nord.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = nord.min.css; path = Pod/Assets/styles/nord.min.css; sourceTree = "<group>"; };
+		81216C75EF5010D78AF1CA2BCD8A52D0 /* SplitView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SplitView.h; path = SplitView/SplitView.h; sourceTree = "<group>"; };
 		81E202534D19E029A7365A1366387B11 /* Pods-ec3730-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730-Info.plist"; sourceTree = "<group>"; };
 		825AD80EAEA6F722B868AD95ADD20BAA /* Pods-ec3730-ec3730UITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ec3730-ec3730UITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		828C0591CADE4A803C7C12DABB2069C7 /* Highlightr.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Highlightr.modulemap; sourceTree = "<group>"; };
 		83A0077837F8540A8A7079F438EA3759 /* monokai.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = monokai.min.css; path = Pod/Assets/styles/monokai.min.css; sourceTree = "<group>"; };
+		83EA4B41ABAC62280CBEDCBFC34AD390 /* SplitView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SplitView-prefix.pch"; sourceTree = "<group>"; };
 		85938604A1960FE147FD1DFD111E5EB6 /* SimplePing.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SimplePing.m; path = Pod/Classes/SimplePing.m; sourceTree = "<group>"; };
 		85C29FC9CDF598DFAEEA57E16376B7AB /* SplitView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SplitView.framework; path = SplitView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87CA181E4FA9CA514429B671C4E942C4 /* InAppReceipt.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InAppReceipt.swift; path = SwiftyStoreKit/InAppReceipt.swift; sourceTree = "<group>"; };
 		89C75CBE3C4ACDB6A0D14973BF7BD619 /* hybrid.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = hybrid.min.css; path = Pod/Assets/styles/hybrid.min.css; sourceTree = "<group>"; };
-		8AD0D79BCEC9D3A7400C2C18A9515971 /* SplitView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SplitView-umbrella.h"; sourceTree = "<group>"; };
 		8B38652F7912700D2CA1C389C29C7930 /* school-book.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "school-book.min.css"; path = "Pod/Assets/styles/school-book.min.css"; sourceTree = "<group>"; };
 		8C443B1C405A5DF7D61F8B125212644C /* idea.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = idea.min.css; path = Pod/Assets/styles/idea.min.css; sourceTree = "<group>"; };
 		8D87BE1C3B30C0A9CAD66885C5BCEFE3 /* shades-of-purple.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "shades-of-purple.min.css"; path = "Pod/Assets/styles/shades-of-purple.min.css"; sourceTree = "<group>"; };
@@ -478,7 +478,6 @@
 		966589FE3E4CF1334986DB9A0078885F /* AppleReceiptValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleReceiptValidator.swift; path = SwiftyStoreKit/AppleReceiptValidator.swift; sourceTree = "<group>"; };
 		9751FEEF14A2CC70E633B2D2F22E866E /* Pods-ec3730-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730-acknowledgements.plist"; sourceTree = "<group>"; };
 		99E00163AA560719AABB19D571E4442B /* arduino-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "arduino-light.min.css"; path = "Pod/Assets/styles/arduino-light.min.css"; sourceTree = "<group>"; };
-		9B6DD0FD9EBDC8F55F42AE73109C0ECA /* splitview.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = splitview.h; path = splitview/splitview.h; sourceTree = "<group>"; };
 		9BEF96739BE15AAD6386FBE7B7E511A3 /* kimbie.dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = kimbie.dark.min.css; path = Pod/Assets/styles/kimbie.dark.min.css; sourceTree = "<group>"; };
 		9CDB96126EC09591E157BB8DD0D7C4BD /* SKVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SKVersion.swift; path = SKVersion/SKVersion.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -491,6 +490,7 @@
 		A68DAF0A53BE764DACDD605A2202F20A /* hopscotch.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = hopscotch.min.css; path = Pod/Assets/styles/hopscotch.min.css; sourceTree = "<group>"; };
 		A739776F56EABFA2FBA4200BC41962BE /* SimplePingAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SimplePingAdapter.swift; path = Pod/Classes/SimplePingAdapter.swift; sourceTree = "<group>"; };
 		A89B65CC869188B7FF31E2EB3EA55212 /* Version.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Version.modulemap; sourceTree = "<group>"; };
+		A8A4BC21C1AD49ED6C7A6963AE7EBFCD /* SplitView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SplitView-dummy.m"; sourceTree = "<group>"; };
 		A8BB6DEE60A8192C896123A9B6149F1E /* Highlightr-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Highlightr-Info.plist"; sourceTree = "<group>"; };
 		A8F05688D9AD0B24694611410B5A61E6 /* docco.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = docco.min.css; path = Pod/Assets/styles/docco.min.css; sourceTree = "<group>"; };
 		AABEE690CA48B0A5EFC05BC3A7703CBC /* foundation.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = foundation.min.css; path = Pod/Assets/styles/foundation.min.css; sourceTree = "<group>"; };
@@ -503,7 +503,6 @@
 		B0D75BB73D9B595888B126533C9C1828 /* atelier-seaside-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-seaside-dark.min.css"; path = "Pod/Assets/styles/atelier-seaside-dark.min.css"; sourceTree = "<group>"; };
 		B0FEF279FC70A6F3154CF1D6C68C245E /* atelier-cave-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-cave-dark.min.css"; path = "Pod/Assets/styles/atelier-cave-dark.min.css"; sourceTree = "<group>"; };
 		B377A30258D2E04CA8950EB5F8950B6C /* PaymentQueueController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PaymentQueueController.swift; path = SwiftyStoreKit/PaymentQueueController.swift; sourceTree = "<group>"; };
-		B57A145F5F190037124EF5DCF76FA609 /* SplitViewSnapBehavior.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplitViewSnapBehavior.swift; path = splitview/SplitViewSnapBehavior.swift; sourceTree = "<group>"; };
 		B71E0E8071C33E2D26E91DA427533785 /* SKProduct+LocalizedPrice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SKProduct+LocalizedPrice.swift"; path = "SwiftyStoreKit/SKProduct+LocalizedPrice.swift"; sourceTree = "<group>"; };
 		B7DCAE109C4AC9B2CC0A738D8D6A9742 /* routeros.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = routeros.min.css; path = Pod/Assets/styles/routeros.min.css; sourceTree = "<group>"; };
 		B82E4A6642415363E67C437C87D763C7 /* Pods-ec3730-ec3730UITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ec3730-ec3730UITests-dummy.m"; sourceTree = "<group>"; };
@@ -511,7 +510,6 @@
 		BB48C6CAD88AF9D7B6331C2B3AB9639C /* SwiftFormat.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftFormat.xcconfig; sourceTree = "<group>"; };
 		BD5A17B6A36607C2A7031A384458D675 /* atom-one-dark-reasonable.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atom-one-dark-reasonable.min.css"; path = "Pod/Assets/styles/atom-one-dark-reasonable.min.css"; sourceTree = "<group>"; };
 		BE79139F214FF477E39F3B6555A28931 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
-		BF765075B34B136391F1FC41884545D8 /* SplitView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplitView.swift; path = splitview/SplitView.swift; sourceTree = "<group>"; };
 		C329EC566932D91B97A7AA416D539FFA /* SKVersion-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SKVersion-umbrella.h"; sourceTree = "<group>"; };
 		C60D12978F48F27A60F7F08CD2B37D4A /* Pods-ec3730-ec3730UITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730-ec3730UITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		C68DCA1CF94887D6F4EDFEEEA2CF4736 /* vs2015.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = vs2015.min.css; path = Pod/Assets/styles/vs2015.min.css; sourceTree = "<group>"; };
@@ -529,6 +527,8 @@
 		D7A0CA7B3C63434D56002546D7AE5641 /* Pods-ec3730Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D80995036D78A8D26AA4E77107D151CC /* PaymentsController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PaymentsController.swift; path = SwiftyStoreKit/PaymentsController.swift; sourceTree = "<group>"; };
 		D888B4A1F3CB3E14063D20E9E7B5A56A /* ReachabilitySwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ReachabilitySwift.modulemap; sourceTree = "<group>"; };
+		D8D2185794AAF88AD420EC8DD7111998 /* SplitSupportingView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplitSupportingView.swift; path = SplitView/SplitSupportingView.swift; sourceTree = "<group>"; };
+		D8E9094CA381E1B7EEC38A1DE8A7A318 /* SplitViewHandle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplitViewHandle.swift; path = SplitView/SplitViewHandle.swift; sourceTree = "<group>"; };
 		D8ECFE54AD296470E0EA0E826D025DC7 /* tomorrow.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = tomorrow.min.css; path = Pod/Assets/styles/tomorrow.min.css; sourceTree = "<group>"; };
 		D917778305C099E61AAEF6004C5C8CB6 /* atelier-heath-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-heath-dark.min.css"; path = "Pod/Assets/styles/atelier-heath-dark.min.css"; sourceTree = "<group>"; };
 		D964D8696C0628B7167EE94493F6C624 /* atelier-savanna-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "atelier-savanna-light.min.css"; path = "Pod/Assets/styles/atelier-savanna-light.min.css"; sourceTree = "<group>"; };
@@ -537,7 +537,6 @@
 		DBDD0360737E2417340D37464B5C0D7A /* InAppProductQueryRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InAppProductQueryRequest.swift; path = SwiftyStoreKit/InAppProductQueryRequest.swift; sourceTree = "<group>"; };
 		DC2570713E35526C94CD90DC1558CDD2 /* Highlightr.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Highlightr.swift; path = Pod/Classes/Highlightr.swift; sourceTree = "<group>"; };
 		DD05C00E27541D7C406535E8D6F322D8 /* brown-paper.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "brown-paper.min.css"; path = "Pod/Assets/styles/brown-paper.min.css"; sourceTree = "<group>"; };
-		DDD191119028693376B9FC3128920F3C /* SplitView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SplitView.xcconfig; sourceTree = "<group>"; };
 		DE228B593EFD82EF4018C2AAB6B68AD9 /* SKVersion.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SKVersion.xcconfig; sourceTree = "<group>"; };
 		E00F5E96100EE485BDF574C098BEEDBD /* Version.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Version.framework; path = Version.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E082E4CFBFF05DCEE4C93CCC408A7D96 /* Pods-ec3730Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ec3730Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -563,6 +562,7 @@
 		F873ABCCD2DDFB6EE78D9F3E6A5F07A4 /* Pods-ec3730.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ec3730.debug.xcconfig"; sourceTree = "<group>"; };
 		F87573662D817464633087D731BC4FEF /* isbl-editor-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "isbl-editor-light.min.css"; path = "Pod/Assets/styles/isbl-editor-light.min.css"; sourceTree = "<group>"; };
 		F9F69DDA635439CCB93DF06D7924E10B /* Pods-ec3730-ec3730UITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ec3730-ec3730UITests-frameworks.sh"; sourceTree = "<group>"; };
+		FA53FD3264200524EE75880C9C0C5B49 /* SplitView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SplitView.xcconfig; sourceTree = "<group>"; };
 		FB3A1B81008111608476E05962F01F5C /* Pods-ec3730-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ec3730-umbrella.h"; sourceTree = "<group>"; };
 		FD58FBCC144B8829AF0A3E1A0D9EFB19 /* purebasic.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = purebasic.min.css; path = Pod/Assets/styles/purebasic.min.css; sourceTree = "<group>"; };
 		FDAEBFE8A2A5BF0E55F6033870147D51 /* paraiso-dark.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "paraiso-dark.min.css"; path = "Pod/Assets/styles/paraiso-dark.min.css"; sourceTree = "<group>"; };
@@ -773,7 +773,7 @@
 				58912612DBD97F021043FD00CF4E0585 /* PlainPing */,
 				7DA1B769920D11D1859DA01AFF77CD30 /* ReachabilitySwift */,
 				B23FD70B575EADA64692C0138EA62DD6 /* SKVersion */,
-				33399AEF03E56966F6216D3CAF8B1440 /* SplitView */,
+				8480B580A898D4563FC8AC2CF072C90F /* SplitView */,
 				D8F41ABEAD6D9776176DF0F14C3E2D6F /* SwiftFormat */,
 				925A2D0C4CCC4CE63B1689A577023155 /* SwiftLint */,
 				B4659FE9F8EF773C89266BB7741CFEE4 /* SwiftyStoreKit */,
@@ -789,20 +789,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SwiftLint";
-			sourceTree = "<group>";
-		};
-		33399AEF03E56966F6216D3CAF8B1440 /* SplitView */ = {
-			isa = PBXGroup;
-			children = (
-				34F89B04854D4034FDFD27E8DE4D7E73 /* SplitSupportingView.swift */,
-				9B6DD0FD9EBDC8F55F42AE73109C0ECA /* splitview.h */,
-				BF765075B34B136391F1FC41884545D8 /* SplitView.swift */,
-				28E28416350ED68EBB775EF8D2C704BA /* SplitViewHandle.swift */,
-				B57A145F5F190037124EF5DCF76FA609 /* SplitViewSnapBehavior.swift */,
-				5A98477D48331491ABC0B53DA441B872 /* Support Files */,
-			);
-			name = SplitView;
-			path = SplitView;
 			sourceTree = "<group>";
 		};
 		37C0F4C0A2591B6B5D75F10AFB38CAE1 /* Support Files */ = {
@@ -856,20 +842,6 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		5A98477D48331491ABC0B53DA441B872 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				38B4214643BE2BE884F69F09C3E0E283 /* SplitView.modulemap */,
-				DDD191119028693376B9FC3128920F3C /* SplitView.xcconfig */,
-				73CC00144B40B45E9D1C5B4E95798B6D /* SplitView-dummy.m */,
-				0B2C87B2EB917B9CDBFF44A4CC497BC1 /* SplitView-Info.plist */,
-				571428FDD4B246B79D66C5DABAD0A920 /* SplitView-prefix.pch */,
-				8AD0D79BCEC9D3A7400C2C18A9515971 /* SplitView-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SplitView";
-			sourceTree = "<group>";
-		};
 		79913C1521DEAC174229395C9DA6DFAC /* Version */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,6 +888,34 @@
 				FD110642821C39EBC5EBEB170866165A /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8480B580A898D4563FC8AC2CF072C90F /* SplitView */ = {
+			isa = PBXGroup;
+			children = (
+				D8D2185794AAF88AD420EC8DD7111998 /* SplitSupportingView.swift */,
+				81216C75EF5010D78AF1CA2BCD8A52D0 /* SplitView.h */,
+				2A74298CBFE21BE28931B295537C3A12 /* SplitView.swift */,
+				D8E9094CA381E1B7EEC38A1DE8A7A318 /* SplitViewHandle.swift */,
+				50EF5B7E6F507BDBEA4FB5B85B3EE376 /* SplitViewSnapBehavior.swift */,
+				8CDA1736918EB6930EABBF9EBE98FD56 /* Support Files */,
+			);
+			name = SplitView;
+			path = SplitView;
+			sourceTree = "<group>";
+		};
+		8CDA1736918EB6930EABBF9EBE98FD56 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0CB580046375F2B5F3FA95AC1F2F828B /* SplitView.modulemap */,
+				FA53FD3264200524EE75880C9C0C5B49 /* SplitView.xcconfig */,
+				A8A4BC21C1AD49ED6C7A6963AE7EBFCD /* SplitView-dummy.m */,
+				242C31EBB8AFB938BEAC2D571848E0A6 /* SplitView-Info.plist */,
+				83EA4B41ABAC62280CBEDCBFC34AD390 /* SplitView-prefix.pch */,
+				4D085E5B299A30138A7297D340BEE9D1 /* SplitView-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SplitView";
 			sourceTree = "<group>";
 		};
 		925A2D0C4CCC4CE63B1689A577023155 /* SwiftLint */ = {
@@ -1216,12 +1216,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C25AF9D8137D31BADA26E0D540859CB0 /* Headers */ = {
+		B2E3A2700B4E9FAB2EEA8A160433D1E0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B841FFDD27C4FA69ACBC94FF13D8C69 /* SplitView-umbrella.h in Headers */,
-				3AA0D0CDF706C940ED49C962F92D6764 /* splitview.h in Headers */,
+				C84B11C72D5266B89B06B90F9E1E134E /* SplitView-umbrella.h in Headers */,
+				77A338E50595E10C0FFBE3D4DDFB110F /* SplitView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1303,7 +1303,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2B6012E7D4617FFE19FF55B929B62F49 /* Build configuration list for PBXNativeTarget "SplitView" */;
 			buildPhases = (
-				C25AF9D8137D31BADA26E0D540859CB0 /* Headers */,
+				B2E3A2700B4E9FAB2EEA8A160433D1E0 /* Headers */,
 				DF165D4AB5D783E748306FC6E9546FEE /* Sources */,
 				813E5ABD399977E8C9FDBBEF84EDFCDD /* Frameworks */,
 				A2ABB601F3ACBA50D597144E0AF0CB16 /* Resources */,
@@ -1774,11 +1774,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B46C54497E76C7968DBD3D2673AE2986 /* SplitSupportingView.swift in Sources */,
+				05228C9C60979A5DD5C9A41263A9FBB1 /* SplitSupportingView.swift in Sources */,
 				978311C20821CA9FE5444415836753BC /* SplitView-dummy.m in Sources */,
-				EBFF1768730A4DE2CE725202308F629A /* SplitView.swift in Sources */,
-				2C182CDD678794AA64A911474E5B883B /* SplitViewHandle.swift in Sources */,
-				71CD68E86D9301CBFFDB51E4603FD83D /* SplitViewSnapBehavior.swift in Sources */,
+				A935A7DD77539EC61B92C6069EFB6B4B /* SplitView.swift in Sources */,
+				A37CA60FE1949E46D9FF4C5F66841028 /* SplitViewHandle.swift in Sources */,
+				9A5D35AFD479A7EBF7AF77BF4C4EC823 /* SplitViewSnapBehavior.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1931,43 +1931,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		058B9369DE57EB8FE37E0D99791C8F4F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDD191119028693376B9FC3128920F3C /* SplitView.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SplitView/SplitView-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SplitView/SplitView-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/SplitView/SplitView.modulemap";
-				PRODUCT_MODULE_NAME = SplitView;
-				PRODUCT_NAME = SplitView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		0889D02C6F44DD81EEE108BC70E0D29C /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7011C0393254BEFDFC2D0D76C9527DDB /* Pods-ec3730.release.xcconfig */;
@@ -2000,6 +1963,43 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0F1F8E6E28785B45EC083994013940E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA53FD3264200524EE75880C9C0C5B49 /* SplitView.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SplitView/SplitView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SplitView/SplitView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SplitView/SplitView.modulemap";
+				PRODUCT_MODULE_NAME = SplitView;
+				PRODUCT_NAME = SplitView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2117,42 +2117,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		1A551310FD0EB692EC8CA8E1A2BF58D4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDD191119028693376B9FC3128920F3C /* SplitView.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SplitView/SplitView-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SplitView/SplitView-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/SplitView/SplitView.modulemap";
-				PRODUCT_MODULE_NAME = SplitView;
-				PRODUCT_NAME = SplitView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		1A798B0221ECC43448A38033283CFE1F /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2463,6 +2427,42 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		84F8E3D7F97F00908EE0A9C11B42E8DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA53FD3264200524EE75880C9C0C5B49 /* SplitView.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SplitView/SplitView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SplitView/SplitView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SplitView/SplitView.modulemap";
+				PRODUCT_MODULE_NAME = SplitView;
+				PRODUCT_NAME = SplitView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		8D9C5DF25380D913350BDCA225353A58 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2930,8 +2930,8 @@
 		2B6012E7D4617FFE19FF55B929B62F49 /* Build configuration list for PBXNativeTarget "SplitView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A551310FD0EB692EC8CA8E1A2BF58D4 /* Debug */,
-				058B9369DE57EB8FE37E0D99791C8F4F /* Release */,
+				84F8E3D7F97F00908EE0A9C11B42E8DF /* Debug */,
+				0F1F8E6E28785B45EC083994013940E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
