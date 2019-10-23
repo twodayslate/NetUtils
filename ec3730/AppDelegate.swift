@@ -80,12 +80,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     public static var persistantStore: NSPersistentCloudKitContainer? = {
         let container = NSPersistentCloudKitContainer(name: "NetUtilsCoreData")
-        container.loadPersistentStores { desc, error in
+        container.loadPersistentStores { _, error in
             guard error == nil else {
                 // do something with error?
                 return
             }
-            print(desc)
         }
         return container
     }()
