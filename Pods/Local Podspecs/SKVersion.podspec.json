@@ -1,0 +1,36 @@
+{
+  "name": "SKVersion",
+  "version": "2.0.0",
+  "summary": "Version Update Checker",
+  "swift_versions": [
+    "5.0"
+  ],
+  "description": "App Store Version update checker",
+  "homepage": "https://github.com/twodayslate/SKVersion",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "twodayslate": "zac@gorak.us"
+  },
+  "source": {
+    "git": "https://github.com/twodayslate/SKVersion.git",
+    "tag": "v2.0.0"
+  },
+  "social_media_url": "https://twitter.com/twodayslate",
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source_files": "SKVersion/*",
+  "exclude_files": [
+    "SKVersion/Info.plist"
+  ],
+  "public_header_files": "SKVersion/*.h",
+  "dependencies": {
+    "Version": [
+      "~> 0.7.0"
+    ]
+  },
+  "swift_version": "5.0"
+}
