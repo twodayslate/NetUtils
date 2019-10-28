@@ -19,7 +19,11 @@ extension UserDefaults {
             /// Key to enable/disable smart rotation lock for media
             public static var smartRotationLock: String { return "landscape_videos" }
             public static func keyFor(dataFeed: DataFeed) -> String {
-                return dataFeed.name.lowercased().replacingOccurrences(of: " ", with: ".") + ".key"
+                return "feed." + dataFeed.name.lowercased().replacingOccurrences(of: " ", with: ".") + ".key"
+            }
+
+            public static func keyFor(service: Service) -> String {
+                return "service." + service.name.lowercased().replacingOccurrences(of: " ", with: ".") + ".usage.key"
             }
         }
     }

@@ -39,7 +39,7 @@ class SRCTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
 
     @objc func defaultsChanged() {
-        if #available(iOS 13.0, *) {
+        DispatchQueue.main.async {
             switch UserDefaults.standard.integer(forKey: "theme") {
             case 1:
                 self.overrideUserInterfaceStyle = .light

@@ -1,5 +1,6 @@
 PODS:
   - Highlightr (2.1.0)
+  - KeychainAccess (3.2.1)
   - NetUtils (4.1.0)
   - PlainPing (0.5)
   - ReachabilitySwift (5.0.0)
@@ -13,6 +14,7 @@ PODS:
 
 DEPENDENCIES:
   - Highlightr
+  - KeychainAccess
   - NetUtils
   - PlainPing
   - ReachabilitySwift
@@ -25,6 +27,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Highlightr
+    - KeychainAccess
     - NetUtils
     - PlainPing
     - ReachabilitySwift
@@ -49,6 +52,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
+  KeychainAccess: d5470352939ced6d6f7fb51cb2e67aae51fc294f
   NetUtils: 414aca786a4be7d6c87a69613bdb6a5a2640f08e
   PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
@@ -59,6 +63,6 @@ SPEC CHECKSUMS:
   SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
   Version: d7b9b7860c8a02790b15c730d50849d6004076a1
 
-PODFILE CHECKSUM: 60bb75475b59830dcd1f82f541115ede01baa524
+PODFILE CHECKSUM: cdd85f1764f7fa70582263e85655c5ff6809e8e7
 
 COCOAPODS: 1.7.5

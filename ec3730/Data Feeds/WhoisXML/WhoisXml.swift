@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import KeychainAccess
 import StoreKit
 import SwiftyStoreKit
 
@@ -15,27 +16,28 @@ final class WhoisXml: DataFeedSingleton, DataFeedOneTimePurchase {
     public let name: String = "Whois XML API"
     public var webpage: URL { return URL(string: "https://www.whoisxmlapi.com/")! }
 
-    public var userKey: ApiKey? {
+    public var userKey: String? {
         didSet {
+            // Save the key to the keychain
+
+            let keychian = Keychain().synchronizable(true)
             if let key = self.userKey {
-                UserDefaults.standard.set(key.key, forKey: UserDefaults.NetUtils.Keys.keyFor(dataFeed: self))
-                UserDefaults.standard.synchronize()
+                try? keychian.set(key, key: UserDefaults.NetUtils.Keys.keyFor(dataFeed: self))
+            } else {
+                try? keychian.remove(UserDefaults.NetUtils.Keys.keyFor(dataFeed: self))
             }
         }
     }
 
     public static var current: WhoisXml = {
         let retVal = WhoisXml()
-        if let key = UserDefaults.standard.string(forKey: UserDefaults.NetUtils.Keys.keyFor(dataFeed: retVal)) {
-            retVal.userKey = ApiKey(name: retVal.name, key: key)
+
+        let keychian = Keychain().synchronizable(true)
+        if let key = try? keychian.get(UserDefaults.NetUtils.Keys.keyFor(dataFeed: retVal)) {
+            retVal.userKey = key
         }
         return retVal
     }()
-
-    /// The API Key for Whois XML API
-    /// - Callout(Default):
-    /// `ApiKey.WhoisXML`
-    internal var key: ApiKey = ApiKey.WhoisXML
 
     /// Session used to create tasks
     ///
@@ -63,42 +65,20 @@ extension WhoisXml {
     class Endpoint: DataFeedEndpoint {
         /// OLD https://www.whoisxmlapi.com/accountServices.php?servicetype=accountbalance&apiKey=#
         /// NEW https://user.whoisxmlapi.com/service/account-balance?productId=1&apiKey=#
-        static func balanceUrl(for id: String = "1", with key: String = ApiKey.WhoisXML.key) -> URL? {
-            return Endpoint(host: "user.whoisxmlapi.com",
-                            path: "/service/account-balance", queryItems: [
-                                URLQueryItem(name: "productId", value: id),
-                                URLQueryItem(name: "apiKey", value: key),
-                                URLQueryItem(name: "output_format", value: "JSON")
-                            ]).url
-        }
+        static func balanceUrl(for id: String, with key: String?) -> URL? {
+            var params = [
+                URLQueryItem(name: "productId", value: id),
+                URLQueryItem(name: "output_format", value: "JSON"),
+                URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
+                URLQueryItem(name: "api", value: "whoisXmlBalance")
+            ]
 
-        /// https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey=#&domainName=google.com
-        static func whoisUrl(_ domain: String, with key: String = ApiKey.WhoisXML.key) -> URL? {
-            guard let domain = domain.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
-                return nil
+            if let key = key {
+                params.append(URLQueryItem(name: "apiKey", value: key))
             }
 
-            return Endpoint(host: "www.whoisxmlapi.com", path: "/whoisserver/WhoisService", queryItems: [
-                URLQueryItem(name: "domainName", value: domain),
-                URLQueryItem(name: "apiKey", value: key),
-                URLQueryItem(name: "outputFormat", value: "JSON"),
-                URLQueryItem(name: "da", value: "2"),
-                URLQueryItem(name: "ip", value: "1")
-            ]).url
-        }
-
-        /// https://www.whoisxmlapi.com/whoisserver/DNSService?apiKey=#&domainName=bbc.com&type=1
-        static func dnsUrl(_ domain: String, with key: String = ApiKey.WhoisXML.key) -> URL? {
-            guard let domain = domain.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
-                return nil
-            }
-
-            return Endpoint(host: "www.whoisxmlapi.com", path: "/whoisserver/DNSService", queryItems: [
-                URLQueryItem(name: "domainName", value: domain),
-                URLQueryItem(name: "apiKey", value: key),
-                URLQueryItem(name: "outputFormat", value: "JSON"),
-                URLQueryItem(name: "type", value: "_all")
-            ]).url
+            return Endpoint(host: "api.netutils.workers.dev",
+                            path: "/service/account-balance", queryItems: params).url
         }
     }
 }

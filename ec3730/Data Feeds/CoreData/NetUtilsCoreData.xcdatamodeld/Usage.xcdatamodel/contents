@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="19A602" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ServiceUsage" representedClassName="ServiceUsage" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="serviceName" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="ServiceUsage" positionX="-63" positionY="-18" width="128" height="73"/>
+    </elements>
+</model>

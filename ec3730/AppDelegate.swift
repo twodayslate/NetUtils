@@ -11,9 +11,13 @@ import SwiftyStoreKit
 import UIKit
 import Version
 
+import CloudKit
+import CoreData
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    let services = WhoisXml.current.services + GoogleWebRisk.current.services
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -73,6 +77,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+
+    public static var persistantStore: NSPersistentCloudKitContainer? = {
+        let container = NSPersistentCloudKitContainer(name: "NetUtilsCoreData")
+        container.loadPersistentStores { _, error in
+            guard error == nil else {
+                // do something with error?
+                return
+            }
+        }
+        return container
+    }()
 
     func applicationWillResignActive(_: UIApplication) {
         // Sent when the application is about to move from active to inactive state.

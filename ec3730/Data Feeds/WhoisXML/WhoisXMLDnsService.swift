@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class WhoisXMLDnsService: WhoisXMLService {
     override func endpoint(_ userData: [String: Any?]?) -> DataFeedEndpoint? {
@@ -14,11 +15,16 @@ class WhoisXMLDnsService: WhoisXMLService {
             return nil
         }
 
-        return WhoisXml.Endpoint(host: "www.whoisxmlapi.com", path: "/whoisserver/DNSService", queryItems: [
-            URLQueryItem(name: "domainName", value: domain),
-            URLQueryItem(name: "apiKey", value: WhoisXml.current.currentKey.key),
-            URLQueryItem(name: "outputFormat", value: "JSON"),
-            URLQueryItem(name: "type", value: "_all")
-        ])
+        var params = [URLQueryItem(name: "domainName", value: domain),
+                      URLQueryItem(name: "outputFormat", value: "JSON"),
+                      URLQueryItem(name: "type", value: "_all"),
+                      URLQueryItem(name: "api", value: "whoisXml"),
+                      URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString)]
+
+        if let key = WhoisXml.current.userKey {
+            params.append(URLQueryItem(name: "apiKey", value: key))
+        }
+
+        return WhoisXml.Endpoint(host: "api.netutils.workers.dev", path: "/whoisserver/DNSService", queryItems: params)
     }
 }

@@ -133,7 +133,7 @@ class DataFeedUserApiKeyTableViewController: UITableViewController {
     override func tableView(_: UITableView, cellForRowAt _: IndexPath) -> UITableViewCell {
         let cell = InputTableViewCell()
         cell.input.placeholder = "API Key"
-        cell.input.text = subscriber.userKey?.key
+        cell.input.text = subscriber.userKey
         cell.input.addTarget(self, action: #selector(updateKey(_:)), for: .editingDidEnd)
         return cell
     }
@@ -141,18 +141,14 @@ class DataFeedUserApiKeyTableViewController: UITableViewController {
     @objc func updateKey(_ sender: UITextField?) {
         guard let keyText = sender?.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
             subscriber.userKey = nil
-            UserDefaults.standard.set(nil, forKey: UserDefaults.NetUtils.Keys.keyFor(dataFeed: subscriber))
             return
         }
 
         if keyText.isEmpty {
             subscriber.userKey = nil
-            UserDefaults.standard.set(nil, forKey: UserDefaults.NetUtils.Keys.keyFor(dataFeed: subscriber))
         } else {
-            UserDefaults.standard.set(keyText, forKey: UserDefaults.NetUtils.Keys.keyFor(dataFeed: subscriber))
-            subscriber.userKey = ApiKey(name: subscriber.name, key: keyText)
+            subscriber.userKey = keyText
         }
-        UserDefaults.standard.synchronize()
 
         userApiDelegate?.didUpdateUserApiKey(subscriber)
     }

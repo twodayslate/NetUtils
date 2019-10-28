@@ -134,7 +134,7 @@ class HostTable: UITableViewController {
         switch indexPath.section {
         case 0:
             if isLoading || dnsLookups.count <= indexPath.row {
-                cell = LoadingCell(reuseIdentifier: "loading")
+                cell = LoadingCell()
             } else {
                 cell = CopyCell(title: dnsLookups.sorted()[indexPath.row])
             }

@@ -43,7 +43,7 @@ open class CellManager {
 
         if let paid = self.dataFeed as? DataFeedPurchaseProtocol {
             if paid.owned {
-                let cell = LoadingCell(reuseIdentifier: "loading")
+                let cell = LoadingCell()
                 cell.spinner.startAnimating()
                 cell.separatorInset.right = .greatestFiniteMagnitude
                 cells = [cell]

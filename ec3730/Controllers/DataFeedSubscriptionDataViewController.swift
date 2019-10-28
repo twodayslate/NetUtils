@@ -45,30 +45,57 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
         }
     }
 
+    var hasUsage: Bool {
+        if let serviceSubscriber = self.subscriber as? DataFeedService {
+            if serviceSubscriber.totalUsage > 0 {
+                return true
+            }
+        }
+        return false
+    }
+
+    var subscriptionIndex = -1
+    var oneTimeIndex = -1
+    var usageIndex = -1
+
     override func numberOfSections(in _: UITableView) -> Int {
-        var count = 1 // API Key
+        var count = 0
 
         if manager.subscriptionCells.count > 1 {
+            subscriptionIndex = count
             count += 1
         }
 
         if manager.oneTimePurchaseCell != nil {
+            oneTimeIndex = count
             count += 1
         }
+
+        if hasUsage {
+            usageIndex = count
+            count += 1
+        }
+
+        count += 1 // API key
 
         return count
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if manager.subscriptionCells.count > 0, section == 0 {
+        if section == subscriptionIndex {
             return manager.subscriptionCells.count
+        }
+
+        if section == usageIndex {
+            // want today, month, year, total, clear
+            return 5
         }
 
         return 1
     }
 
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if manager.subscriptionCells.count > 0, indexPath.section == 0 {
+        if indexPath.section == subscriptionIndex {
             let cell = manager.subscriptionCells[indexPath.row]
 
             // hide price if the user alerady paid for this product
@@ -79,12 +106,46 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
             return cell
         }
 
-        if let oneTimeCell = manager.oneTimePurchaseCell {
-            if manager.subscriptionCells.count > 0, indexPath.section == 1 {
-                return oneTimeCell
-            } else if indexPath.section == 0 {
-                return oneTimeCell
+        if indexPath.section == oneTimeIndex, let cell = manager.oneTimePurchaseCell {
+            if (subscriber as? DataFeedPurchaseProtocol)?.paid ?? false {
+                cell.detailTextLabel?.text = nil
             }
+
+            return cell
+        }
+
+        if indexPath.section == usageIndex {
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: "usage")
+            cell.detailTextLabel?.text = "-"
+            cell.selectionStyle = .none
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "Past Day"
+                if let total = (subscriber as? DataFeedService)?.usageToday {
+                    cell.detailTextLabel?.text = "\(total)"
+                }
+            case 1:
+                cell.textLabel?.text = "Past month"
+                if let total = (subscriber as? DataFeedService)?.usageThisMonth {
+                    cell.detailTextLabel?.text = "\(total)"
+                }
+            case 2:
+                cell.textLabel?.text = "Past Year"
+                if let total = (subscriber as? DataFeedService)?.usageThisYear {
+                    cell.detailTextLabel?.text = "\(total)"
+                }
+            case 3:
+                cell.textLabel?.text = "Total"
+                if let total = (subscriber as? DataFeedService)?.totalUsage {
+                    cell.detailTextLabel?.text = "\(total)"
+                }
+            default:
+                let center = CenterTextTableViewCell()
+                center.centerLabel.text = "Clear"
+                center.centerLabel.textColor = tableView.tintColor
+                return center
+            }
+            return cell
         }
 
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "userAPI")
@@ -114,20 +175,26 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
         thankYou.textAlignment = .center
         thankYou.textColor = UIColor.systemGray
 
-        if let subscription = subscriber as? DataFeedSubscription {
-            if section == 0 {
-                if subscription.paid {
-                    return thankYou
-                } else {
-                    let footer = IAPFooterView()
-                    footer.label.delegate = self
-                    return footer
-                }
+        if section == subscriptionIndex, let subscription = subscriber as? DataFeedSubscription {
+            if subscription.paid {
+                return thankYou
+            } else {
+                let footer = IAPFooterView()
+                footer.label.delegate = self
+                return footer
             }
         }
 
-        if let oneTime = subscriber as? DataFeedOneTimePurchase, oneTime.oneTime.purchased {
+        if section == oneTimeIndex, let oneTime = subscriber as? DataFeedOneTimePurchase, oneTime.oneTime.purchased {
             return thankYou
+        }
+
+        return nil
+    }
+
+    override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == usageIndex {
+            return "Usage"
         }
 
         return nil
@@ -141,6 +208,15 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
             controller.userApiDelegate = self
             navigationController?.present(controller, animated: true, completion: nil)
             return
+        }
+
+        if let serv = (subscriber as? DataFeedService), indexPath.section == usageIndex {
+            serv.clearUsage {
+                DispatchQueue.main.async {
+                    self.usageIndex = -1
+                    self.tableView.reloadData()
+                }
+            }
         }
 
         if !((subscriber as? DataFeedPurchaseProtocol)?.paid ?? true) {

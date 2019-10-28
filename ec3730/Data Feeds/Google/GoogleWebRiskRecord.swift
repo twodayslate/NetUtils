@@ -10,6 +10,7 @@ import Foundation
 
 struct GoogleWebRiskRecordWrapper: Codable {
     var threat: GoogleWebRiskRecord?
+    var error: String?
 }
 
 struct GoogleWebRiskRecord: Codable {
