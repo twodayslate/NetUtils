@@ -1,0 +1,10 @@
+${PODS_ROOT}/Target Support Files/Pods-ec3730-ec3730UITests/Pods-ec3730-ec3730UITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework
+${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework
+${BUILT_PRODUCTS_DIR}/NetUtils/NetUtils.framework
+${BUILT_PRODUCTS_DIR}/PlainPing/PlainPing.framework
+${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework
+${BUILT_PRODUCTS_DIR}/SKVersion/SKVersion.framework
+${BUILT_PRODUCTS_DIR}/SplitView/SplitView.framework
+${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework
+${BUILT_PRODUCTS_DIR}/Version/Version.framework
