@@ -31,11 +31,15 @@ class SRCTabBarController: UITabBarController, UITabBarControllerDelegate {
         host.tabBarItem = UITabBarItem(title: "Host", image: UIImage(named: "Network"), tag: 3)
         host.tabBarItem.selectedImage = UIImage(named: "Network_selected")
 
+        let device = DeviceViewController()
+        device.tabBarItem = UITabBarItem(title: "Device", image: UIImage(named: "Device"), tag: 3)
+        device.tabBarItem.selectedImage = UIImage(named: "Device_selected")
+
         let settings = SettingsNavigationController()
         settings.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "Settings"), tag: 4)
         settings.tabBarItem.selectedImage = UIImage(named: "Settings_selected")
 
-        viewControllers = [host, reachability, ping, viewSource, settings]
+        viewControllers = [host, reachability, ping, viewSource, device, settings]
     }
 
     @objc func defaultsChanged() {

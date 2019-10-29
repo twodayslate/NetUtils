@@ -11,8 +11,6 @@ import SwiftyStoreKit
 import UIKit
 
 class HostTable: UITableViewController {
-    let lockIcon = UIImage(named: "Lock")
-
     var isLoading: Bool {
         get {
             return dnsManager.isLoading && whoisManger.isLoading && webRiskManager.isLoading
@@ -209,9 +207,17 @@ extension HostTable: DataFeedInAppPurchaseUpdateDelegate {
         }
     }
 
-    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults _: RestoreResults?, verifySubscriptionResult _: VerifySubscriptionResult?, verifyPurchaseResult _: VerifyPurchaseResult?, retrieveResults _: RetrieveResults?) {
+    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults: RestoreResults?, verifySubscriptionResult _: VerifySubscriptionResult?, verifyPurchaseResult _: VerifyPurchaseResult?, retrieveResults _: RetrieveResults?) {
         guard error == nil else {
-            parent?.showError(message: error!.localizedDescription)
+            // Only show error if user purchased or restored
+            if purchaseResult != nil {
+                parent?.showError("Error", message: "Unable to verify purchase, please try agian.")
+            }
+
+            if restoreResults != nil {
+                parent?.showError("Error", message: "Unable to restore, please try agian.")
+            }
+
             return
         }
 

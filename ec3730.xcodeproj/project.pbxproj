@@ -66,6 +66,8 @@
 		F6D0B781235A6C61009E493B /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6D0B780235A6C61009E493B /* CloudKit.framework */; };
 		F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D4BB0923583E6100FDAFF7 /* GoogleWebRiskRecord.swift */; };
 		F6D4BB0C23584E0C00FDAFF7 /* GoogleWebRiskCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D4BB0B23584E0B00FDAFF7 /* GoogleWebRiskCellManager.swift */; };
+		F6FBB86723677FA700E023F2 /* DeviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FBB86623677FA700E023F2 /* DeviceController.swift */; };
+		F6FBB869236781AC00E023F2 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FBB868236781AC00E023F2 /* UIDevice.swift */; };
 		F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */; };
 		F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */; };
 		F6FDDFC82304803100FBF75E /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FDDFC72304803100FBF75E /* UserDefaults.swift */; };
@@ -173,6 +175,8 @@
 		F6D0B780235A6C61009E493B /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		F6D4BB0923583E6100FDAFF7 /* GoogleWebRiskRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleWebRiskRecord.swift; sourceTree = "<group>"; };
 		F6D4BB0B23584E0B00FDAFF7 /* GoogleWebRiskCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleWebRiskCellManager.swift; sourceTree = "<group>"; };
+		F6FBB86623677FA700E023F2 /* DeviceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceController.swift; sourceTree = "<group>"; };
+		F6FBB868236781AC00E023F2 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsSwitch.swift; sourceTree = "<group>"; };
 		F6FDDFC72304803100FBF75E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -299,6 +303,7 @@
 				F6FDDFD5230B095B00FBF75E /* HostTable.swift */,
 				F63102762130D76200F34E42 /* ReachabilityViewController.swift */,
 				F68CE569230463A50068D104 /* InterfaceTableViewController.swift */,
+				F6FBB86623677FA700E023F2 /* DeviceController.swift */,
 				F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */,
 				F6C87451234FE8030069A57C /* DataFeedsTableViewController.swift */,
 				F668EB4423563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift */,
@@ -314,6 +319,7 @@
 				F6FDDFC923048DEF00FBF75E /* UIView.swift */,
 				F6FDDFC72304803100FBF75E /* UserDefaults.swift */,
 				F68CE5672303291A0068D104 /* Error.swift */,
+				F6FBB868236781AC00E023F2 /* UIDevice.swift */,
 				F661A27F23020FCF0023FA50 /* UIAlertController.swift */,
 				F668EB3E2355807100EEB379 /* SKProductSubscriptionPeriod.swift */,
 				F67425DA21363FFF00A79492 /* UITextView.swift */,
@@ -721,9 +727,11 @@
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
 				F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */,
 				F69E364C235806720017296E /* WhoisXMLService.swift in Sources */,
+				F6FBB869236781AC00E023F2 /* UIDevice.swift in Sources */,
 				F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */,
 				F69E364A235806370017296E /* WhoisXMLDnsService.swift in Sources */,
 				F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */,
+				F6FBB86723677FA700E023F2 /* DeviceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -893,7 +901,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -902,7 +910,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.1;
+				MARKETING_VERSION = 2.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -922,7 +930,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -931,7 +939,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.1;
+				MARKETING_VERSION = 2.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -157,7 +157,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         mainStack.addArrangedSubview(iconWrap)
         iconWrap.widthAnchor.constraint(equalToConstant: frame.height * 2).isActive = true
 
-        let icon = UIImageView(image: UIImage(named: "Lock"))
+        let icon = UIImageView(image: UIImage(systemName: "lock.shield.fill"))
         icon.translatesAutoresizingMaskIntoConstraints = false
         iconWrap.addSubview(icon)
         icon.heightAnchor.constraint(equalTo: iconWrap.widthAnchor, multiplier: 0.8).isActive = true

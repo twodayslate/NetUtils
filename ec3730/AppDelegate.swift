@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         #endif
 
+        UIDevice.current.isBatteryMonitoringEnabled = true
+
         print(Bundle.main.bundleIdentifier?.description ?? "NO BUNDLE IDENTIFIER")
 
         Bundle.main.storeVersion?.update { canUpdate, version, error in
