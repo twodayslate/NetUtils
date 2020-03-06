@@ -230,9 +230,10 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
             }
 
             // Has a delay to prevent flooding
-            let delay = UInt32.random(in: ClosedRange(uncheckedBounds: (10, 10000))) * 100 // max 1 second
+            let delay = UInt32.random(in: ClosedRange(uncheckedBounds: (50, 10000))) * 100 // max 1 second
             print("Delaying for", delay)
             usleep(delay)
+            print("Continuing")
 
             if WhoisXml.current.owned {
                 WhoisXml.whoisService.query(["domain": host]) { (error, response: Coordinate?) in
@@ -289,6 +290,32 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
                     self.hostTable.webRiskRecord = response
                 }
             }
+            
+            if Monapi.current.owned {
+                Monapi.lookupService.query(["uri": url]) {
+                    (error, response: MonapiThreat?) in
+                        self.checkLoading()
+                        guard error == nil else {
+                            self.showError("Error getting \(Monapi.current.name) Information", message: error!.localizedDescription)
+                            self.hostTable.monapiRecord = nil
+                            return
+                        }
+
+                        guard let response = response else {
+                            self.showError(message: "No \(Monapi.current.name) Data")
+                            self.hostTable.monapiRecord = nil
+                            return
+                        }
+                    
+                        if let msgError = response.error ?? response.detail {
+                            self.showError("monapi.io", message: msgError)
+                            self.hostTable.monapiRecord = nil
+                        }
+
+                    self.hostTable.monapiRecord = response
+                }
+            }
         }
+        
     }
 }

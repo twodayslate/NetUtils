@@ -36,7 +36,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
     func restore(_: UIButton) {
         isRestoring = true
 
-        dataFeed.restore { results in
+        self.dataFeed.restore { results in
             self.isRestoring = false
             // swiftlint:disable:next line_length
             self.didUpdateInAppPurchase(self.dataFeed, error: nil, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
