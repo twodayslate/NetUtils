@@ -115,3 +115,37 @@ open class OneTimePurchase {
 protocol DataFeedOneTimePurchase: DataFeedPurchaseProtocol {
     var oneTime: OneTimePurchase { get }
 }
+
+extension DataFeedOneTimePurchase {
+    var paid: Bool {
+        return self.oneTime.purchased
+    }
+
+    var owned: Bool {
+        if userKey != nil {
+            return true
+        }
+
+        return self.paid
+    }
+
+    var defaultProduct: SKProduct? {
+        guard let product = self.oneTime.product else {
+            self.retrieve()
+            return nil
+        }
+        return product
+    }
+
+    func restore(completion block: ((RestoreResults) -> Void)? = nil) {
+        self.oneTime.restore(completion: block)
+    }
+
+    func verify(completion block: ((Error?) -> Void)? = nil) {
+        self.oneTime.verifyPurchase(completion: block)
+    }
+
+    func retrieve(completion block: ((Error?) -> Void)? = nil) {
+        self.oneTime.retrieveProduct(completion: block)
+    }
+}

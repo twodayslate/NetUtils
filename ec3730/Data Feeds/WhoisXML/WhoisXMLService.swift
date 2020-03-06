@@ -44,7 +44,8 @@ class WhoisXMLService: Service {
             URLQueryItem(name: "da", value: "2"),
             URLQueryItem(name: "ip", value: "1"),
             URLQueryItem(name: "api", value: "whoisXml"),
-            URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString)
+            URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
+            URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier)
         ]
 
         if let key = WhoisXml.current.userKey {

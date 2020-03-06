@@ -121,19 +121,25 @@ open class Subscription {
     }
 
     public func restore(completion block: ((RestoreResults) -> Void)? = nil) {
-        SwiftyStoreKit.restorePurchases(atomically: true) { results in
-            if results.restoreFailedPurchases.count > 0 {
-                print("Restore Failed: \(results.restoreFailedPurchases)")
-            } else if results.restoredPurchases.count > 0 {
-                print("Restore Success: \(results.restoredPurchases)")
-            } else {
-                print("Nothing to Restore")
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases where purchase.needsFinishTransaction {
+                SwiftyStoreKit.finishTransaction(purchase.transaction)
             }
+            SwiftyStoreKit.restorePurchases(atomically: true) { results in
+                if results.restoreFailedPurchases.count > 0 {
+                    print("Restore Failed: \(results.restoreFailedPurchases)")
+                } else if results.restoredPurchases.count > 0 {
+                    print("Restore Success: \(results.restoredPurchases)")
+                } else {
+                    print("Nothing to Restore")
+                }
 
-            // Update isSubscribed cache
-            self.verifySubscription { _ in
-                block?(results)
+                // Update isSubscribed cache
+                self.verifySubscription { _ in
+                    block?(results)
+                }
             }
         }
+        
     }
 }

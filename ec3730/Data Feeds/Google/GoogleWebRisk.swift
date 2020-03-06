@@ -85,7 +85,8 @@ extension GoogleWebRisk {
             var threatItems = [
                 URLQueryItem(name: "uri", value: fixedURI),
                 URLQueryItem(name: "api", value: "webRisk"),
-                URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString)
+                URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
+                URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier),
             ]
 
             if let key = GoogleWebRisk.current.userKey {
@@ -205,39 +206,5 @@ extension GoogleWebRisk: DataFeedService {
                 }
             }.resume()
         }
-    }
-}
-
-extension DataFeedOneTimePurchase {
-    var paid: Bool {
-        return oneTime.purchased
-    }
-
-    var owned: Bool {
-        if userKey != nil {
-            return true
-        }
-
-        return paid
-    }
-
-    var defaultProduct: SKProduct? {
-        guard let product = self.oneTime.product else {
-            retrieve()
-            return nil
-        }
-        return product
-    }
-
-    func restore(completion block: ((RestoreResults) -> Void)? = nil) {
-        oneTime.restore(completion: block)
-    }
-
-    func verify(completion block: ((Error?) -> Void)? = nil) {
-        oneTime.verifyPurchase(completion: block)
-    }
-
-    func retrieve(completion block: ((Error?) -> Void)? = nil) {
-        oneTime.retrieveProduct(completion: block)
     }
 }

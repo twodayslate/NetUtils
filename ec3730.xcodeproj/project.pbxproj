@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,6 +34,13 @@
 		F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB462356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift */; };
 		F668EB4B2356AE3800EEB379 /* IAPFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */; };
 		F67425DB21363FFF00A79492 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67425DA21363FFF00A79492 /* UITextView.swift */; };
+		F67ED9F02409F3D300021F6C /* MonapiRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67ED9EF2409F3D300021F6C /* MonapiRecord.swift */; };
+		F67ED9F22409F3E200021F6C /* MonapiCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67ED9F12409F3E200021F6C /* MonapiCellManager.swift */; };
+		F67ED9F5240DF56100021F6C /* AddressURL in Frameworks */ = {isa = PBXBuildFile; productRef = F67ED9F4240DF56100021F6C /* AddressURL */; };
+		F67ED9F82411A09000021F6C /* NetUtils in Frameworks */ = {isa = PBXBuildFile; productRef = F67ED9F72411A09000021F6C /* NetUtils */; };
+		F67ED9FB2411A0C200021F6C /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = F67ED9FA2411A0C200021F6C /* Reachability */; };
+		F67ED9FE2411A0D400021F6C /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = F67ED9FD2411A0D400021F6C /* KeychainAccess */; };
+		F67EDA012411A1C000021F6C /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = F67EDA002411A1C000021F6C /* SwiftyStoreKit */; };
 		F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE55F23021AC70068D104 /* CopyLabel.swift */; };
 		F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE5612302203B0068D104 /* CopyDetailCell.swift */; };
 		F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE56323023F7E0068D104 /* CopyCell.swift */; };
@@ -54,6 +61,7 @@
 		F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB982301DFCC00439562 /* LoadingCell.swift */; };
 		F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB9A2301E78E00439562 /* DNSResolver.swift */; };
 		F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */; };
+		F6B15A5D23F7ABFC001DB252 /* Monapi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B15A5C23F7ABFC001DB252 /* Monapi.swift */; };
 		F6C591BA235EC3A9009BA4B7 /* CenterTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C591B9235EC3A9009BA4B7 /* CenterTextTableViewCell.swift */; };
 		F6C87452234FE8030069A57C /* DataFeedsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C87451234FE8030069A57C /* DataFeedsTableViewController.swift */; };
 		F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C8D8A4212E5AE900309373 /* AppDelegate.swift */; };
@@ -136,6 +144,8 @@
 		F668EB462356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedUserApiKeyTableViewController.swift; sourceTree = "<group>"; };
 		F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPFooterView.swift; sourceTree = "<group>"; };
 		F67425DA21363FFF00A79492 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
+		F67ED9EF2409F3D300021F6C /* MonapiRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonapiRecord.swift; sourceTree = "<group>"; };
+		F67ED9F12409F3E200021F6C /* MonapiCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonapiCellManager.swift; sourceTree = "<group>"; };
 		F68CE55F23021AC70068D104 /* CopyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyLabel.swift; sourceTree = "<group>"; };
 		F68CE5612302203B0068D104 /* CopyDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyDetailCell.swift; sourceTree = "<group>"; };
 		F68CE56323023F7E0068D104 /* CopyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCell.swift; sourceTree = "<group>"; };
@@ -157,6 +167,7 @@
 		F6A4EB9A2301E78E00439562 /* DNSResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
 		F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiSSID.swift; sourceTree = "<group>"; };
 		F6A4EB9E2301F31100439562 /* ec3730.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ec3730.entitlements; sourceTree = "<group>"; };
+		F6B15A5C23F7ABFC001DB252 /* Monapi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monapi.swift; sourceTree = "<group>"; };
 		F6C591B9235EC3A9009BA4B7 /* CenterTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTextTableViewCell.swift; sourceTree = "<group>"; };
 		F6C87451234FE8030069A57C /* DataFeedsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedsTableViewController.swift; sourceTree = "<group>"; };
 		F6C8D8A1212E5AE900309373 /* ec3730.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ec3730.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,8 +205,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6D0B781235A6C61009E493B /* CloudKit.framework in Frameworks */,
+				F67EDA012411A1C000021F6C /* SwiftyStoreKit in Frameworks */,
+				F67ED9FB2411A0C200021F6C /* Reachability in Frameworks */,
+				F67ED9FE2411A0D400021F6C /* KeychainAccess in Frameworks */,
 				2B7DACA0889E8F704227451C /* Pods_ec3730.framework in Frameworks */,
+				F67ED9F82411A09000021F6C /* NetUtils in Frameworks */,
 				F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */,
+				F67ED9F5240DF56100021F6C /* AddressURL in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +281,7 @@
 				F650F746233CECD900BAA609 /* DataFeedCell.swift */,
 				F668EB4223563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift */,
 				F68CE56523031DA20068D104 /* DataFeedErrors.swift */,
+				F6B15A5E23F7AC04001DB252 /* Monapi */,
 				F6D4BB0823583E4800FDAFF7 /* Google */,
 				F69E3646235804C10017296E /* WhoisXML */,
 			);
@@ -326,6 +343,16 @@
 				F63540D4213DEBDD00605ABE /* Reachability.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F6B15A5E23F7AC04001DB252 /* Monapi */ = {
+			isa = PBXGroup;
+			children = (
+				F6B15A5C23F7ABFC001DB252 /* Monapi.swift */,
+				F67ED9EF2409F3D300021F6C /* MonapiRecord.swift */,
+				F67ED9F12409F3E200021F6C /* MonapiCellManager.swift */,
+			);
+			path = Monapi;
 			sourceTree = "<group>";
 		};
 		F6C8D898212E5AE900309373 = {
@@ -436,6 +463,13 @@
 			dependencies = (
 			);
 			name = ec3730;
+			packageProductDependencies = (
+				F67ED9F4240DF56100021F6C /* AddressURL */,
+				F67ED9F72411A09000021F6C /* NetUtils */,
+				F67ED9FA2411A0C200021F6C /* Reachability */,
+				F67ED9FD2411A0D400021F6C /* KeychainAccess */,
+				F67EDA002411A1C000021F6C /* SwiftyStoreKit */,
+			);
 			productName = ec3730;
 			productReference = F6C8D8A1212E5AE900309373 /* ec3730.app */;
 			productType = "com.apple.product-type.application";
@@ -521,6 +555,13 @@
 				Base,
 			);
 			mainGroup = F6C8D898212E5AE900309373;
+			packageReferences = (
+				F67ED9F3240DF56100021F6C /* XCRemoteSwiftPackageReference "AddressURL" */,
+				F67ED9F62411A09000021F6C /* XCRemoteSwiftPackageReference "swift-netutils" */,
+				F67ED9F92411A0C200021F6C /* XCRemoteSwiftPackageReference "Reachability" */,
+				F67ED9FC2411A0D400021F6C /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				F67ED9FF2411A1C000021F6C /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
+			);
 			productRefGroup = F6C8D8A2212E5AE900309373 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -690,6 +731,7 @@
 				F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */,
 				F619760922FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift in Sources */,
 				F69E3648235805180017296E /* GoogleWebRisk.swift in Sources */,
+				F67ED9F02409F3D300021F6C /* MonapiRecord.swift in Sources */,
 				F6C87452234FE8030069A57C /* DataFeedsTableViewController.swift in Sources */,
 				F6FDDFCA23048DEF00FBF75E /* UIView.swift in Sources */,
 				F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */,
@@ -697,6 +739,7 @@
 				F69E365623580AA00017296E /* DataFeedService.swift in Sources */,
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
 				F69E36502358089C0017296E /* DFService.swift in Sources */,
+				F6B15A5D23F7ABFC001DB252 /* Monapi.swift in Sources */,
 				F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */,
 				F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */,
 				F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */,
@@ -732,6 +775,7 @@
 				F69E364A235806370017296E /* WhoisXMLDnsService.swift in Sources */,
 				F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */,
 				F6FBB86723677FA700E023F2 /* DeviceController.swift in Sources */,
+				F67ED9F22409F3E200021F6C /* MonapiCellManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -901,7 +945,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -910,7 +954,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.2;
+				MARKETING_VERSION = 2.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -930,7 +974,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -939,7 +983,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.2;
+				MARKETING_VERSION = 2.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1077,6 +1121,77 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F67ED9F3240DF56100021F6C /* XCRemoteSwiftPackageReference "AddressURL" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twodayslate/AddressURL";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		F67ED9F62411A09000021F6C /* XCRemoteSwiftPackageReference "swift-netutils" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/svdo/swift-netutils";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
+		F67ED9F92411A0C200021F6C /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		F67ED9FC2411A0D400021F6C /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
+		F67ED9FF2411A1C000021F6C /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F67ED9F4240DF56100021F6C /* AddressURL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F67ED9F3240DF56100021F6C /* XCRemoteSwiftPackageReference "AddressURL" */;
+			productName = AddressURL;
+		};
+		F67ED9F72411A09000021F6C /* NetUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F67ED9F62411A09000021F6C /* XCRemoteSwiftPackageReference "swift-netutils" */;
+			productName = NetUtils;
+		};
+		F67ED9FA2411A0C200021F6C /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F67ED9F92411A0C200021F6C /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
+		F67ED9FD2411A0D400021F6C /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F67ED9FC2411A0D400021F6C /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+		F67EDA002411A1C000021F6C /* SwiftyStoreKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F67ED9FF2411A1C000021F6C /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */;
+			productName = SwiftyStoreKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		F6D0B77C235A6A43009E493B /* NetUtilsCoreData.xcdatamodeld */ = {

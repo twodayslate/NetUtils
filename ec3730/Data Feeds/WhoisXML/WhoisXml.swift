@@ -72,6 +72,10 @@ extension WhoisXml {
                 URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
                 URLQueryItem(name: "api", value: "whoisXmlBalance")
             ]
+            
+            if let bundle = Bundle.main.bundleIdentifier {
+                params.append(URLQueryItem(name: "bundleIdentifier", value: bundle))
+            }
 
             if let key = key {
                 params.append(URLQueryItem(name: "apiKey", value: key))

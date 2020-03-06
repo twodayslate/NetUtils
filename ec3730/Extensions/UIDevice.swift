@@ -23,8 +23,9 @@ extension UIDevice {
      This value should not be used in determining if there is room for an irreplaceable resource. In the case of irreplaceable resources, always attempt to save the resource regardless of available capacity and handle failure as gracefully as possible.
      */
     /// https://stackoverflow.com/a/47463829/193772
-    var freeDiskSpaceInBytes:Int64 {
+    var freeDiskSpaceInBytes: Int64 {
         if #available(iOS 11.0, *) {
+            // swiftlint:disable:next line_length
             if let space = try? URL(fileURLWithPath: NSHomeDirectory() as String).resourceValues(forKeys: [URLResourceKey.volumeAvailableCapacityForImportantUsageKey]).volumeAvailableCapacityForImportantUsage {
                 return space
             } else {
