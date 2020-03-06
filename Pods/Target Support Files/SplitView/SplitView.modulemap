@@ -1,6 +1,0 @@
-framework module SplitView {
-  umbrella header "SplitView-umbrella.h"
-
-  export *
-  module * { export * }
-}

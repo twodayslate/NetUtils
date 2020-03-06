@@ -1,6 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-ec3730-ec3730UITests/Pods-ec3730-ec3730UITests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework
 ${BUILT_PRODUCTS_DIR}/PlainPing/PlainPing.framework
-${BUILT_PRODUCTS_DIR}/SKVersion/SKVersion.framework
-${BUILT_PRODUCTS_DIR}/SplitView/SplitView.framework
-${BUILT_PRODUCTS_DIR}/Version/Version.framework

@@ -1,8 +1,9 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Highlightr" "${PODS_CONFIGURATION_BUILD_DIR}/PlainPing" "${PODS_CONFIGURATION_BUILD_DIR}/SKVersion" "${PODS_CONFIGURATION_BUILD_DIR}/SplitView" "${PODS_CONFIGURATION_BUILD_DIR}/Version"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Highlightr" "${PODS_CONFIGURATION_BUILD_DIR}/PlainPing"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Highlightr/Highlightr.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/PlainPing/PlainPing.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SKVersion/SKVersion.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SplitView/SplitView.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Version/Version.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "Highlightr" -framework "PlainPing" -framework "SKVersion" -framework "SplitView" -framework "UIKit" -framework "Version"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Highlightr/Highlightr.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/PlainPing/PlainPing.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "Highlightr" -framework "PlainPing" -framework "UIKit"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES

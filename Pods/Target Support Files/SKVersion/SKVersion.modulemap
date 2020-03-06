@@ -1,6 +1,0 @@
-framework module SKVersion {
-  umbrella header "SKVersion-umbrella.h"
-
-  export *
-  module * { export * }
-}
