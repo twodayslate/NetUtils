@@ -43,6 +43,7 @@
 		F67EDA012411A1C000021F6C /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = F67EDA002411A1C000021F6C /* SwiftyStoreKit */; };
 		F67EDA042411E70F00021F6C /* SplitView in Frameworks */ = {isa = PBXBuildFile; productRef = F67EDA032411E70F00021F6C /* SplitView */; };
 		F67EDA072411EA7700021F6C /* SKVersion in Frameworks */ = {isa = PBXBuildFile; productRef = F67EDA062411EA7700021F6C /* SKVersion */; };
+		F67EDA0A2411F42B00021F6C /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = F67EDA092411F42B00021F6C /* Highlightr */; };
 		F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE55F23021AC70068D104 /* CopyLabel.swift */; };
 		F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE5612302203B0068D104 /* CopyDetailCell.swift */; };
 		F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE56323023F7E0068D104 /* CopyCell.swift */; };
@@ -214,6 +215,7 @@
 				2B7DACA0889E8F704227451C /* Pods_ec3730.framework in Frameworks */,
 				F67ED9F82411A09000021F6C /* NetUtils in Frameworks */,
 				F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */,
+				F67EDA0A2411F42B00021F6C /* Highlightr in Frameworks */,
 				F67ED9F5240DF56100021F6C /* AddressURL in Frameworks */,
 				F67EDA042411E70F00021F6C /* SplitView in Frameworks */,
 			);
@@ -475,6 +477,7 @@
 				F67EDA002411A1C000021F6C /* SwiftyStoreKit */,
 				F67EDA032411E70F00021F6C /* SplitView */,
 				F67EDA062411EA7700021F6C /* SKVersion */,
+				F67EDA092411F42B00021F6C /* Highlightr */,
 			);
 			productName = ec3730;
 			productReference = F6C8D8A1212E5AE900309373 /* ec3730.app */;
@@ -569,6 +572,7 @@
 				F67ED9FF2411A1C000021F6C /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
 				F67EDA022411E70F00021F6C /* XCRemoteSwiftPackageReference "splitview" */,
 				F67EDA052411EA7700021F6C /* XCRemoteSwiftPackageReference "SKVersion" */,
+				F67EDA082411F42B00021F6C /* XCRemoteSwiftPackageReference "Highlightr" */,
 			);
 			productRefGroup = F6C8D8A2212E5AE900309373 /* Products */;
 			projectDirPath = "";
@@ -953,7 +957,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -962,7 +966,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.5.0;
+				MARKETING_VERSION = 2.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -982,7 +986,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -991,7 +995,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.5.0;
+				MARKETING_VERSION = 2.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1187,6 +1191,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		F67EDA082411F42B00021F6C /* XCRemoteSwiftPackageReference "Highlightr" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/helje5/Highlightr";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1224,6 +1236,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F67EDA052411EA7700021F6C /* XCRemoteSwiftPackageReference "SKVersion" */;
 			productName = SKVersion;
+		};
+		F67EDA092411F42B00021F6C /* Highlightr */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F67EDA082411F42B00021F6C /* XCRemoteSwiftPackageReference "Highlightr" */;
+			productName = Highlightr;
 		};
 /* End XCSwiftPackageProductDependency section */
 

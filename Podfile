@@ -10,7 +10,6 @@ target 'ec3730' do
 
   # Pods for ec3730
 
-  pod 'Highlightr'
   pod 'PlainPing'
 
   target 'ec3730Tests' do

@@ -149,6 +149,9 @@ struct MonapiThreat: Codable {
         self.result = try? container.decode(String?.self, forKey: .result)
 
         self.error = try? container.decode(String?.self, forKey: .error)
+        
+        // if error throw an exception?
+        
         self.detail = try? container.decode(String?.self, forKey: .detail)
     }
 }
