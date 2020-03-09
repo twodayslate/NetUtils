@@ -13,6 +13,8 @@ import UIKit
 open class CellManager {
     public var cells = [UITableViewCell]()
     var iapDelegate: DataFeedInAppPurchaseUpdateDelegate?
+    
+    var isCollapsed: Bool = false
 
     internal var privateIsLoading: Bool = false
     public var isLoading: Bool {

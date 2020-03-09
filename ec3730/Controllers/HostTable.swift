@@ -10,6 +10,37 @@ import Foundation
 import SwiftyStoreKit
 import UIKit
 
+class CollapseButton: UIButton {
+    var manager: CellManager? {
+        didSet {
+            self.setToggleImage()
+        }
+    }
+    var sectionIndex: Int?
+
+    func setToggleImage() {
+        guard let manager = self.manager else {
+            return
+        }
+                    
+        if manager.isCollapsed {
+            self.setImage(UIImage(systemName: "arrowtriangle.up.fill"), for: .normal)
+        } else {
+            self.setImage(UIImage(systemName: "arrowtriangle.down.fill"), for: .normal)
+        }
+    }
+    
+    func toggle() {
+        guard let manager = self.manager else {
+            return
+        }
+
+        manager.isCollapsed = !manager.isCollapsed
+
+        self.setToggleImage()
+    }
+}
+
 class HostTable: UITableViewController {
     var isLoading: Bool {
         get {
@@ -108,33 +139,91 @@ class HostTable: UITableViewController {
             // show loading cell or ip list
             return isLoading ? 1 : dnsLookups.count
         case 1:
+            if whoisManger.isCollapsed {
+                return 0
+            }
             return whoisManger.cells.count // WHOIS
         case 2:
+            if dnsManager.isCollapsed {
+                return 0
+            }
             return dnsManager.cells.count
         case 3:
+            if webRiskManager.isCollapsed {
+                return 0
+            }
             return webRiskManager.cells.count
         case 4:
+            if monapiManager.isCollapsed {
+                return 0
+            }
             return self.monapiManager.cells.count
         default:
             return 0
         }
     }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 55.0 // I want this to be dynamic, UITableView.automaticDimension doesn't work
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+//        view.layoutMargins = .init(top: 8.0, left: 16.0, bottom: 8.0, right: 16.0)
+        view.backgroundColor = .systemGray4
 
-    override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stack)
+
+        stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0).isActive = true
+        stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0).isActive = true
+        stack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0).isActive = true
+        stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0).isActive = true
+
+        let title = UILabel()
+        title.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: UIFont.boldSystemFont(ofSize: UIFont.labelFontSize))
+        title.adjustsFontForContentSizeCategory = true
+        title.translatesAutoresizingMaskIntoConstraints = false
+        stack.addArrangedSubview(title)
+
+        let collapse = CollapseButton(type: .system)
+        collapse.translatesAutoresizingMaskIntoConstraints = false
+        collapse.addTarget(self, action: #selector(collapse(_:)), for: .touchUpInside)
+        collapse.sectionIndex = section
+        
+        if section != 0 {
+            stack.addArrangedSubview(collapse)
+        }
+        
         switch section {
         case 0:
-            return "Simple IP Lookup"
+            title.text = "Simple IP Lookup"
         case 1:
-            return "WHOIS"
+            title.text = "WHOIS"
+            collapse.manager = whoisManger
         case 2:
-            return "DNS"
+            title.text = "DNS"
+            collapse.manager = dnsManager
         case 3:
-            return "Web Risk"
+            title.text = "Web Risk"
+            collapse.manager = webRiskManager
         case 4:
-            return "monapi.io"
+            title.text = "monapi.io"
+            collapse.manager = monapiManager
         default:
-            return nil
+            break
         }
+
+        return view
+    }
+    
+    @objc func collapse(_ sender: CollapseButton?) {
+        sender?.toggle()
+        guard let index = sender?.sectionIndex else {
+            return
+        }
+        self.tableView.reloadSections(IndexSet(integer: index), with: .automatic)
     }
 
     override func numberOfSections(in _: UITableView) -> Int {

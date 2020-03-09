@@ -161,18 +161,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PlainPing/PlainPing.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SKVersion/SKVersion.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SplitView/SplitView.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Version/Version.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PlainPing/PlainPing.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SKVersion/SKVersion.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SplitView/SplitView.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Version/Version.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

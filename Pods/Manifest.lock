@@ -1,52 +1,24 @@
 PODS:
-  - Highlightr (2.1.0)
   - PlainPing (0.5)
-  - SKVersion (2.0.0):
-    - Version (~> 0.7.0)
-  - SplitView (2.0.0)
   - SwiftFormat/CLI (0.44.4)
   - SwiftLint (0.39.1)
-  - Version (0.7.3)
 
 DEPENDENCIES:
-  - Highlightr
   - PlainPing
-  - SKVersion (from `https://github.com/twodayslate/SKVersion.git`)
-  - SplitView (from `https://github.com/twodayslate/SplitView.git`)
   - SwiftFormat/CLI
   - SwiftLint
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Highlightr
+  trunk:
     - PlainPing
     - SwiftFormat
     - SwiftLint
-    - Version
-
-EXTERNAL SOURCES:
-  SKVersion:
-    :git: https://github.com/twodayslate/SKVersion.git
-  SplitView:
-    :git: https://github.com/twodayslate/SplitView.git
-
-CHECKOUT OPTIONS:
-  SKVersion:
-    :commit: 703a76fc6b71d4ebfbbc232ed86258edb6cd12ef
-    :git: https://github.com/twodayslate/SKVersion.git
-  SplitView:
-    :commit: 84ac0f0bc10ece471d337a307a0e9d6203f871ae
-    :git: https://github.com/twodayslate/SplitView.git
 
 SPEC CHECKSUMS:
-  Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
   PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
-  SKVersion: 009f29325b6513bfc0438916c29c4c21e3b19dd2
-  SplitView: 8a1023e05012014295ff0544f3f9a2030b975489
   SwiftFormat: 8b3c6b69454305a61c221355095f62dacc0811bf
   SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
-  Version: 6a785d82131b1fa82e747ddd78631ab56dd679ff
 
-PODFILE CHECKSUM: b41e6ff7b928da09bdf3a215f0f3092844016437
+PODFILE CHECKSUM: ad98bb23acdfac07d79f81b7356f5ed24131c00c
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.3
