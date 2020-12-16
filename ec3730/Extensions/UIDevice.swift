@@ -95,6 +95,8 @@ extension UIDevice.BatteryState {
 extension UIUserInterfaceIdiom {
     var description: String? {
         switch self {
+        case .mac:
+            return "Mac"
         case .carPlay:
             return "CarPlay"
         case .pad:

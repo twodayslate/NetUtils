@@ -188,6 +188,7 @@ class HostTable: UITableViewController {
         stack.addArrangedSubview(title)
 
         let collapse = CollapseButton(type: .system)
+        collapse.contentHorizontalAlignment = .right
         collapse.translatesAutoresizingMaskIntoConstraints = false
         collapse.addTarget(self, action: #selector(collapse(_:)), for: .touchUpInside)
         collapse.sectionIndex = section

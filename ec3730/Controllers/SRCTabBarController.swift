@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import SplitTabBar
 
-class SRCTabBarController: UITabBarController, UITabBarControllerDelegate {
+class SRCTabBarController: SplitTabBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,7 +40,7 @@ class SRCTabBarController: UITabBarController, UITabBarControllerDelegate {
         settings.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "Settings"), tag: 4)
         settings.tabBarItem.selectedImage = UIImage(named: "Settings_selected")
 
-        viewControllers = [host, reachability, ping, viewSource, device, settings]
+        self.setViewControllers([host, reachability, ping, viewSource, device, settings])
     }
 
     @objc func defaultsChanged() {
