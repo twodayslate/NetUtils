@@ -7,8 +7,10 @@
 //
 
 import Foundation
-import PlainPing
+
+import SwiftyPing
 import UIKit
+import AddressURL
 
 class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate {
     var status: UITextView?
@@ -79,7 +81,7 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
         urlBar?.borderStyle = .roundedRect
         urlBar?.keyboardType = .URL
         // urlBar?.autoresizingMask = [.flexibleWidth]
-        urlBar?.placeholder = "google.com"
+        urlBar?.placeholder = "1.1.1.1"
         urlBar?.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         urlBar?.delegate = self
 
@@ -159,8 +161,64 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
     }
 
     func pingRepeated(_ url: URL, count: Int = 1) {
-        PlainPing.ping(url.absoluteString, withTimeout: 3.0, completionBlock: { (timeElapsed: Double?, error: Error?) in
-            if let latency = timeElapsed {
+        self.isLoading = true
+        
+        guard let pinger = try? SwiftyPing(host: url.absoluteString, configuration: PingConfiguration(interval: 0.5, with: 5), queue: .global()) else {
+            self.isLoading = false
+            return
+        }
+        
+
+        var count = 1
+        self.maxLatency = Double.leastNormalMagnitude
+        self.minLatency = Double.greatestFiniteMagnitude
+        pinger.observer = { response in
+            print(response)
+            print(response.sequenceNumber)
+            if let error = response.error {
+                self.errorCount += 1
+                switch error {
+                case .addressLookupError:
+                    self.status?.insertText("Address lookup failed.\n")
+                case .addressMemoryError:
+                    self.status?.insertText("Address data could not be converted to `sockaddr`.\n")
+                case .checksumMismatch(_,_):
+                    self.status?.insertText("The received checksum doesn't match the calculated one.\n")
+                case .checksumOutOfBounds:
+                    self.status?.insertText("Checksum is out-of-bounds for `UInt16` in `computeCheckSum`.\n")
+                case .hostNotFound:
+                    self.status?.insertText("Host was not found.\n")
+                case .identifierMismatch(_,_):
+                    self.status?.insertText("Response `identifier` doesn't match what was sent.\n")
+                case .invalidCode(_):
+                    self.status?.insertText("Response `code` was invalid.\n")
+                case .invalidHeaderOffset:
+                    self.status?.insertText("The ICMP header offset couldn't be calculated.\n")
+                case .invalidLength(_):
+                    self.status?.insertText("The response length was too short.\n")
+                case .invalidSequenceIndex(_,_):
+                    self.status?.insertText("Response `sequenceNumber` doesn't match.\n")
+                case .invalidType(_):
+                    self.status?.insertText("Response `type` was invalid.\n")
+                case .packageCreationFailed:
+                    self.status?.insertText("Unspecified package creation error.\n")
+                case .requestError:
+                    self.status?.insertText("An error occured while sending the request.\n")
+                case .requestTimeout:
+                    self.status?.insertText("The request send timed out.\n")
+                case .responseTimeout:
+                    self.status?.insertText("The response took longer to arrive than `configuration.timeoutInterval`.\n")
+                case .socketNil:
+                    self.status?.insertText("For some reason, the socket is `nil`.\n")
+                case .socketOptionsSetError(_):
+                    self.status?.insertText("Failed to change socket options, in particular SIGPIPE.\n")
+                case .unexpectedPayloadLength:
+                    self.status?.insertText("Unexpected payload length.\n")
+                case .unknownHostError:
+                    self.status?.insertText("Unknown error occured within host lookup.\n")
+                }
+            } else if let duration = response.duration {
+                let latency = duration * 1000
                 self.latencySum += latency
                 if latency > self.maxLatency {
                     self.maxLatency = latency
@@ -170,44 +228,89 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
                 }
                 self.status?.insertText(String(format: "latency=%0.3f ms\n", latency))
             }
-
-            if let error = error {
-                self.status?.insertText(error.localizedDescription + "\n")
-                self.errorCount += 1
-            }
-
-            if count >= self.pingCount {
-                if count > 1 {
-                    self.status?.insertText("--- \(url.absoluteString) ping statistics ---\n")
-
-                    // 5 packets transmitted, 5 packets received, 0.0% packet loss
-                    self.status?.insertText("\(count) packets transmitted, ")
-                    let received = count - self.errorCount
-                    self.status?.insertText("\(count - self.errorCount) received, ")
-                    if count == received {
-                        self.status?.insertText("0.0% packet loss\n")
-                    } else if received == 0 {
-                        self.status?.insertText("100% packet loss\n")
-                    } else {
-                        self.status?.insertText(String(format: "%0.1f%% packet loss\n", Double(received) / Double(count) * 100.0))
-                    }
-
-                    // round-trip min/avg/max/stddev = 14.063/21.031/28.887/4.718 ms
-                    self.status?.insertText("latency min/avg/max = ")
-                    if self.errorCount == count {
-                        self.status?.insertText("n/a\n")
-                    } else {
-                        let avg = self.latencySum / Double(count)
-                        self.status?.insertText(String(format: "%0.3f/%0.3f/%0.4f ms\n", self.minLatency, avg, self.maxLatency))
-                    }
-                    self.latencySum = 0.0
-                }
+            if count >= 5 {
+                pinger.stopPinging()
                 self.isLoading = false
-            } else {
-                self.pingRepeated(url, count: count + 1)
+                
+                self.status?.insertText("--- \(url.absoluteString) ping statistics ---\n")
+
+                // 5 packets transmitted, 5 packets received, 0.0% packet loss
+                self.status?.insertText("\(count) packets transmitted, ")
+                let received = count - self.errorCount
+                self.status?.insertText("\(count - self.errorCount) received, ")
+                if count == received {
+                    self.status?.insertText("0.0% packet loss\n")
+                } else if received == 0 {
+                    self.status?.insertText("100% packet loss\n")
+                } else {
+                    self.status?.insertText(String(format: "%0.1f%% packet loss\n", Double(received) / Double(count) * 100.0))
+                }
+
+                // round-trip min/avg/max/stddev = 14.063/21.031/28.887/4.718 ms
+                self.status?.insertText("latency min/avg/max = ")
+                if self.errorCount == count {
+                    self.status?.insertText("n/a\n")
+                } else {
+                    let avg = self.latencySum / Double(count)
+                    self.status?.insertText(String(format: "%0.3f/%0.3f/%0.4f ms\n", self.minLatency, avg, self.maxLatency))
+                }
+                self.latencySum = 0.0
             }
+            count = count + 1
             self.status?.scrollToBottom()
-        })
+        }
+        
+        
+        try? pinger.startPinging()
+//        PlainPing.ping(url.absoluteString, withTimeout: 3.0, completionBlock: { (timeElapsed: Double?, error: Error?) in
+//            if let latency = timeElapsed {
+//                self.latencySum += latency
+//                if latency > self.maxLatency {
+//                    self.maxLatency = latency
+//                }
+//                if latency < self.minLatency {
+//                    self.minLatency = latency
+//                }
+//                self.status?.insertText(String(format: "latency=%0.3f ms\n", latency))
+//            }
+//
+//            if let error = error {
+//                self.status?.insertText(error.localizedDescription + "\n")
+//                self.errorCount += 1
+//            }
+//
+//            if count >= self.pingCount {
+//                if count > 1 {
+//                    self.status?.insertText("--- \(url.absoluteString) ping statistics ---\n")
+//
+//                    // 5 packets transmitted, 5 packets received, 0.0% packet loss
+//                    self.status?.insertText("\(count) packets transmitted, ")
+//                    let received = count - self.errorCount
+//                    self.status?.insertText("\(count - self.errorCount) received, ")
+//                    if count == received {
+//                        self.status?.insertText("0.0% packet loss\n")
+//                    } else if received == 0 {
+//                        self.status?.insertText("100% packet loss\n")
+//                    } else {
+//                        self.status?.insertText(String(format: "%0.1f%% packet loss\n", Double(received) / Double(count) * 100.0))
+//                    }
+//
+//                    // round-trip min/avg/max/stddev = 14.063/21.031/28.887/4.718 ms
+//                    self.status?.insertText("latency min/avg/max = ")
+//                    if self.errorCount == count {
+//                        self.status?.insertText("n/a\n")
+//                    } else {
+//                        let avg = self.latencySum / Double(count)
+//                        self.status?.insertText(String(format: "%0.3f/%0.3f/%0.4f ms\n", self.minLatency, avg, self.maxLatency))
+//                    }
+//                    self.latencySum = 0.0
+//                }
+//                self.isLoading = false
+//            } else {
+//                self.pingRepeated(url, count: count + 1)
+//            }
+//
+//        })
     }
 
     @objc
