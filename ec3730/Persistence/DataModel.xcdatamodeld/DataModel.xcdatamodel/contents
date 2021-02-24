@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PingItem" representedClassName=".PingItem" syncable="YES">
+        <attribute name="byteCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="error" optional="YES" attributeType="String"/>
+        <attribute name="identifier" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="ipAddress" optional="YES" attributeType="String"/>
+        <attribute name="sequenceNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PingSet" inverseName="pings" inverseEntity="PingSet"/>
+    </entity>
+    <entity name="PingSet" representedClassName=".PingSet" syncable="YES">
+        <attribute name="host" optional="YES" attributeType="String"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="pings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PingItem" inverseName="relationship" inverseEntity="PingItem"/>
+    </entity>
+    <elements>
+        <element name="PingItem" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="PingSet" positionX="-54" positionY="45" width="128" height="74"/>
+    </elements>
+</model>

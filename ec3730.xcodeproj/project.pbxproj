@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		F60506742134B23F00DDF8A4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60506732134B23F00DDF8A4 /* UIViewController.swift */; };
+		F60FD36025E0607C00BCEF86 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F60FD35E25E0607C00BCEF86 /* DataModel.xcdatamodeld */; };
+		F60FD36525E060A800BCEF86 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60FD36425E060A800BCEF86 /* Persistence.swift */; };
+		F60FD36A25E060D700BCEF86 /* PingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60FD36925E060D700BCEF86 /* PingItem.swift */; };
 		F619760722FCA33B00CE39A0 /* WhoisXmlCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */; };
 		F619760922FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */; };
 		F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F619760A22FCA76200CE39A0 /* WhoisRecord.swift */; };
@@ -19,6 +22,8 @@
 		F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63540D8213DFE8300605ABE /* ApiKeys.swift */; };
 		F63540DB213E05E000605ABE /* HostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63540DA213E05E000605ABE /* HostViewController.swift */; };
 		F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63540DC213E1D1B00605ABE /* StoreKit.framework */; };
+		F643030B25E47BA300109C92 /* EZPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643030A25E47BA300109C92 /* EZPanel.swift */; };
+		F643036825E6033D00109C92 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = F643036725E6033D00109C92 /* DeviceKit */; };
 		F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F744233CEB4B00BAA609 /* DataFeedCells.swift */; };
 		F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F746233CECD900BAA609 /* DataFeedCell.swift */; };
 		F650F749233CF15800BAA609 /* DataFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F748233CF15800BAA609 /* DataFeed.swift */; };
@@ -108,6 +113,9 @@
 
 /* Begin PBXFileReference section */
 		F60506732134B23F00DDF8A4 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		F60FD35F25E0607C00BCEF86 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		F60FD36425E060A800BCEF86 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		F60FD36925E060D700BCEF86 /* PingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingItem.swift; sourceTree = "<group>"; };
 		F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlCells.swift; sourceTree = "<group>"; };
 		F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisLockedTableViewCell.swift; sourceTree = "<group>"; };
 		F619760A22FCA76200CE39A0 /* WhoisRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisRecord.swift; sourceTree = "<group>"; };
@@ -123,6 +131,7 @@
 		F63540E0213E4DD200605ABE /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		F63540E2213E4E7800605ABE /* Xcode.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Xcode.app; path = ../../../../Applications/Xcode.app; sourceTree = "<group>"; };
 		F63540E4213E4F8400605ABE /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = ../../../../usr/lib/libresolv.9.dylib; sourceTree = "<group>"; };
+		F643030A25E47BA300109C92 /* EZPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EZPanel.swift; sourceTree = "<group>"; };
 		F650F744233CEB4B00BAA609 /* DataFeedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedCells.swift; sourceTree = "<group>"; };
 		F650F746233CECD900BAA609 /* DataFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedCell.swift; sourceTree = "<group>"; };
 		F650F748233CF15800BAA609 /* DataFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeed.swift; sourceTree = "<group>"; };
@@ -206,6 +215,7 @@
 				F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */,
 				F67EDA0A2411F42B00021F6C /* Highlightr in Frameworks */,
 				F67ED9F5240DF56100021F6C /* AddressURL in Frameworks */,
+				F643036825E6033D00109C92 /* DeviceKit in Frameworks */,
 				F67EDA042411E70F00021F6C /* SplitView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,6 +248,16 @@
 				F63540DC213E1D1B00605ABE /* StoreKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F60FD36E25E060DC00BCEF86 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				F60FD35E25E0607C00BCEF86 /* DataModel.xcdatamodeld */,
+				F60FD36425E060A800BCEF86 /* Persistence.swift */,
+				F60FD36925E060D700BCEF86 /* PingItem.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		F668EB3D23501FAC00EEB379 /* Data Feeds */ = {
@@ -290,6 +310,7 @@
 			children = (
 				F6310272212FA66600F34E42 /* SRCTabBarController.swift */,
 				F63102742130C99D00F34E42 /* PingViewController.swift */,
+				F643030A25E47BA300109C92 /* EZPanel.swift */,
 				F6310278213366BB00F34E42 /* SourceViewController.swift */,
 				F63540DA213E05E000605ABE /* HostViewController.swift */,
 				F6FDDFD5230B095B00FBF75E /* HostTable.swift */,
@@ -374,6 +395,7 @@
 				F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */,
 				F6C8D8AD212E5AEA00309373 /* Assets.xcassets */,
 				F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */,
+				F60FD36E25E060DC00BCEF86 /* Persistence */,
 				F6C8D8B2212E5AEA00309373 /* Info.plist */,
 				F6A4EB952301C5EF00439562 /* Extensions */,
 				F63540D8213DFE8300605ABE /* ApiKeys.swift */,
@@ -445,6 +467,7 @@
 				F67EDA092411F42B00021F6C /* Highlightr */,
 				F66BB71F2453B85C00E86A93 /* SplitTabBar */,
 				F6F2017225DB6C18008BA024 /* SwiftyPing */,
+				F643036725E6033D00109C92 /* DeviceKit */,
 			);
 			productName = ec3730;
 			productReference = F6C8D8A1212E5AE900309373 /* ec3730.app */;
@@ -539,6 +562,7 @@
 				F67EDA082411F42B00021F6C /* XCRemoteSwiftPackageReference "Highlightr" */,
 				F66BB71E2453B85C00E86A93 /* XCRemoteSwiftPackageReference "SplitTabBar" */,
 				F6F2017125DB6C18008BA024 /* XCRemoteSwiftPackageReference "SwiftyPing" */,
+				F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 			);
 			productRefGroup = F6C8D8A2212E5AE900309373 /* Products */;
 			projectDirPath = "";
@@ -589,6 +613,7 @@
 				F6310273212FA66600F34E42 /* SRCTabBarController.swift in Sources */,
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
 				F6FDDFD8230B106200FBF75E /* WhoisXmlDnsCells.swift in Sources */,
+				F60FD36A25E060D700BCEF86 /* PingItem.swift in Sources */,
 				F68CE56623031DA20068D104 /* DataFeedErrors.swift in Sources */,
 				F69E365423580A7D0017296E /* DataFeedSubscription.swift in Sources */,
 				F69E3652235808DF0017296E /* DFOneTimePurchase.swift in Sources */,
@@ -607,6 +632,7 @@
 				F6C591BA235EC3A9009BA4B7 /* CenterTextTableViewCell.swift in Sources */,
 				F69E365623580AA00017296E /* DataFeedService.swift in Sources */,
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
+				F60FD36025E0607C00BCEF86 /* DataModel.xcdatamodeld in Sources */,
 				F69E36502358089C0017296E /* DFService.swift in Sources */,
 				F6B15A5D23F7ABFC001DB252 /* Monapi.swift in Sources */,
 				F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */,
@@ -635,11 +661,13 @@
 				F69E364E235808560017296E /* DFSubscription.swift in Sources */,
 				F6D0B77E235A6A43009E493B /* NetUtilsCoreData.xcdatamodeld in Sources */,
 				F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */,
+				F643030B25E47BA300109C92 /* EZPanel.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
 				F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */,
 				F69E364C235806720017296E /* WhoisXMLService.swift in Sources */,
 				F6FBB869236781AC00E023F2 /* UIDevice.swift in Sources */,
+				F60FD36525E060A800BCEF86 /* Persistence.swift in Sources */,
 				F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */,
 				F69E364A235806370017296E /* WhoisXMLDnsService.swift in Sources */,
 				F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */,
@@ -815,7 +843,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -824,11 +852,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.5.2;
+				MARKETING_VERSION = 2.5.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -843,7 +871,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -852,11 +880,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.5.2;
+				MARKETING_VERSION = 2.5.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -988,6 +1016,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devicekit/DeviceKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.3.0;
+			};
+		};
 		F66BB71E2453B85C00E86A93 /* XCRemoteSwiftPackageReference "SplitTabBar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twodayslate/SplitTabBar.git";
@@ -1071,6 +1107,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F643036725E6033D00109C92 /* DeviceKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */;
+			productName = DeviceKit;
+		};
 		F66BB71F2453B85C00E86A93 /* SplitTabBar */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F66BB71E2453B85C00E86A93 /* XCRemoteSwiftPackageReference "SplitTabBar" */;
@@ -1124,6 +1165,16 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
+		F60FD35E25E0607C00BCEF86 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F60FD35F25E0607C00BCEF86 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = F60FD35F25E0607C00BCEF86 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		F6D0B77C235A6A43009E493B /* NetUtilsCoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

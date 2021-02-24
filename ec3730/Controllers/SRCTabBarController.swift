@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SplitTabBar
+import SwiftUI
 
 class SRCTabBarController: SplitTabBarViewController {
     override func viewDidLoad() {
@@ -17,7 +18,13 @@ class SRCTabBarController: SplitTabBarViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
         defaultsChanged()
 
-        let ping = PingViewController()
+        
+        var ping: UIViewController!
+        if #available(iOS 14.0, *) {
+            ping = UIHostingController(rootView: PingSwiftUIViewController())
+        } else {
+            ping = PingViewController()
+        }
         ping.tabBarItem = UITabBarItem(title: "Ping", image: UIImage(named: "Ping"), tag: 0)
         ping.tabBarItem.selectedImage = UIImage(named: "Ping_selected")
 
