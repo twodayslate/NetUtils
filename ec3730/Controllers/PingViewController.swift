@@ -7,8 +7,390 @@
 //
 
 import Foundation
-import PlainPing
+
+import SwiftyPing
 import UIKit
+import AddressURL
+
+import SwiftUI
+
+@available(iOS 14.0, *)
+struct PingNumberSettings: View {
+    
+    @Binding var numberOfPings: Int
+    @Binding var indefinitely: Bool
+    
+    var numberFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.maximum = 1000
+        formatter.minimum = 1
+        return formatter
+    }
+    
+    var body: some View {
+        Form {
+            Section {
+                Toggle("Indefinitely", isOn: $indefinitely)
+            }
+            if(!self.indefinitely) {
+            Section {
+                Stepper(value: $numberOfPings, in: ClosedRange(1..<1000)) {
+                    HStack {
+                        Text("Number")
+                        TextField("\(self.numberOfPings)", value: $numberOfPings, formatter: self.numberFormatter).foregroundColor(.gray)
+                    }
+                }
+                
+                Picker("Number of pings", selection: $numberOfPings, content: {
+                    ForEach(1..<1000) { i in
+                        Text("\(i)").id(i)
+                    }
+                }).pickerStyle(WheelPickerStyle())
+                }
+            }
+        }.navigationTitle("Ping Count")
+    }
+}
+
+@available(iOS 14.0, *)
+struct PingSettings: View {
+    
+    @Binding var interval: Double
+    @Binding var timeout: Double
+    @Binding var pingIndefinitly: Bool
+    @Binding var pingCount: Int
+    @Binding var savePings: Bool
+    
+    var numberFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.alwaysShowsDecimalSeparator = true
+        formatter.minimumFractionDigits = 2
+        return formatter
+    }
+    
+    var body: some View {
+        Form {
+            //TextField("Number of pings", text: $numberOfPings)
+            NavigationLink(
+                destination: PingNumberSettings(numberOfPings: $pingCount, indefinitely: $pingIndefinitly),
+                label: {
+                    HStack {
+                        Text("Ping Count")
+                        Spacer()
+                        if self.pingIndefinitly {
+                            Text("Indefinitely").foregroundColor(.gray)
+                        } else {
+                            Text("\(self.pingCount)").foregroundColor(.gray)
+                        }
+                        
+                    }
+                })
+            Section {
+                Stepper(value: $interval, in: 0...10.0, step: 0.1) {
+                    HStack {
+                        Text("Interval")
+                        TextField("\(self.interval, specifier: "%.02f")", value: $interval, formatter: self.numberFormatter).foregroundColor(.gray)
+                    }
+                    
+                }
+                Stepper(value: $timeout, in: 0...10, step: 0.5) {
+                    HStack {
+                        Text("Timeout")
+                        TextField("\(self.timeout, specifier: "%.2f")", value: $timeout, formatter: self.numberFormatter).foregroundColor(.gray)
+                    }
+                }
+            }
+            Section {
+                Toggle("Save Pings", isOn: $savePings)
+            }
+        }.navigationBarTitle("Ping Settings", displayMode: .inline)
+    }
+}
+
+struct VisualEffectView: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+}
+
+@available(iOS 14.0, *)
+struct PingSetView: View {
+    
+    var ping: PingSet
+    
+    var body: some View {
+        if ping.pings.count <= 0 {
+            Text("No pings recorded")
+        } else {
+            List {
+                ForEach(Array(ping.pings.sorted(by: {a, b in
+                                a.sequenceNumber < b.sequenceNumber })), id: \.self) { ping in
+                    HStack {
+                        Text("#\(ping.sequenceNumber)")
+                        if let error = ping.error {
+                            Text("\(error)")
+                        } else {
+                            VStack(alignment: .leading) {
+                                if let address = ping.ipAddress {
+                                    Text("\(address)").font(.headline)
+                                    Text("\(ping.byteCount) bytes")
+                                }
+                            }
+                            Spacer()
+                            Text("\(ping.duration*1000, specifier: "%.02f") ms")
+                        }
+                    }
+                    
+                }
+            }.navigationTitle(ping.host)
+        }
+    }
+}
+
+@available(iOS 14.0, *)
+struct PingSetList: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(fetchRequest: PingSet.fetchAllRequest()) var pings: FetchedResults<PingSet>
+    
+    var body: some View {
+        List {
+            ForEach(pings) { ping in
+                NavigationLink(
+                    destination: PingSetView(ping: ping),
+                    label: {
+                        VStack(alignment: .leading) {
+                            HStack(alignment: .center) {
+                                Text("\(ping.host)").font(.headline)
+                                Spacer()
+                                Text("\(ping.pings.count)").font(.footnote).foregroundColor(.gray)
+                            }
+                            Text("\(ping.timestamp)").font(.caption)
+                        }
+                    })
+            }.onDelete(perform: deleteItems)
+        }.listStyle(PlainListStyle()).navigationTitle("History").toolbar {
+            #if os(iOS)
+            EditButton()
+            #endif
+        }
+    }
+    
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { pings[$0] }.forEach(viewContext.delete)
+
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+}
+
+struct DeferView<Content: View>: View {
+    let content: () -> Content
+
+    init(@ViewBuilder _ content: @escaping () -> Content) {
+        self.content = content
+    }
+    var body: some View {
+        content()          // << everything is created here
+    }
+}
+
+@available(iOS 14.0, *)
+struct PingSwiftUIViewController: View {
+    let persistenceController = PersistenceController.shared
+    
+    @State var text: String = ""
+    
+    @State var isPinging: Bool = false
+    
+    @State var entries = [String]()
+    
+    @AppStorage("ping.indefinitly") var pingIndefinity: Bool = false
+    @AppStorage("ping.count") var pingCount: Int = 5
+    @AppStorage("ping.timeout") var pingTimeout: Double = 5.0
+    @AppStorage("ping.interval") var pingInterval: Double = 0.5
+    @AppStorage("ping.save") var pingSave: Bool = true
+    
+    @State var showSettings: Bool = false
+        
+    var defaultPing = "google.com"
+    
+    @State var dismissKeyboard = UUID()
+    
+    @State var showAlert: Bool = false
+    @State var alertMessage: String? = nil
+    
+    var body: some View {
+        NavigationView {
+            GeometryReader { geometry in
+                VStack(alignment: .leading, spacing: 0.0){
+                    ScrollViewReader { reader in
+                        ScrollView {
+                            LazyVStack(alignment: .leading, spacing: 0.0) {
+                                ForEach(0..<entries.count, id: \.self) { i in
+                                    Text(entries[i]).multilineTextAlignment(.leading).foregroundColor(.green).tag(i).font(Font.system(.footnote, design: .monospaced))
+                                }.onChange(of: entries, perform: { value in
+                                    withAnimation {
+                                        reader.scrollTo(entries.count-1, anchor: .bottom)
+                                    }
+                                })
+                            }.padding()
+                        }.background(Color.black.ignoresSafeArea(.all, edges: .horizontal)).onTapGesture(perform: {
+                            dismissKeyboard = UUID()
+                        })
+                    }
+                    VStack(alignment: .leading, spacing: 0.0) {
+                        Divider()
+                        HStack(alignment: .center) {
+                            // it would be great if this could be a .bottomBar toolbar but it is too buggy
+                            TextField(self.defaultPing, text: $text,  onCommit: { self.ping() }).id(dismissKeyboard).disableAutocorrection(true).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.URL).padding(.leading, geometry.safeAreaInsets.leading)
+                            if self.isPinging {
+                                Button("Cancel", action: {
+                                    self.cancel()
+                                }).padding(.trailing, geometry.safeAreaInsets.trailing)
+                            } else {
+                                Button("ping", action: {
+                                   self.ping()
+                                }).padding(.trailing, geometry.safeAreaInsets.trailing)
+                            }
+                        }.padding(.horizontal).padding([.vertical], 6)
+                    }.background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)).ignoresSafeArea(.all, edges: .horizontal)).ignoresSafeArea()
+                }.navigationBarTitle("Ping", displayMode: .inline)
+            }.toolbar(content: {
+                ToolbarItem(placement: .navigationBarLeading, content: {
+                    Button(action: { showSettings.toggle() }, label: {
+                        Image(systemName: "gear")
+                    })
+                })
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    NavigationLink(
+                        destination: PingSetList(),
+                        label: {
+                            Image(systemName: "clock")
+                        })
+                })
+            }).sheet(isPresented: $showSettings, content: {
+                EZPanel {
+                    PingSettings(interval: $pingInterval, timeout: $pingTimeout, pingIndefinitly: $pingIndefinity, pingCount: $pingCount, savePings: $pingSave)
+                }
+            }).alert(isPresented: $showAlert, content: {
+                Alert(title: Text("Error"), message: Text("\(self.alertMessage ?? "")"), dismissButton: .none)
+            }) // GeometryReader
+        }.onDisappear(perform: {
+            self.pinger?.stopPinging()
+        }).navigationViewStyle(StackNavigationViewStyle()).environment(\.managedObjectContext, persistenceController.container.viewContext) // NavigationView
+    }
+    func cancel() {
+        self.dismissKeyboard = UUID()
+        self.isPinging = false
+        self.pinger?.stopPinging()
+        
+    }
+    
+    @State var pinger: SwiftyPing? = nil
+    
+    func ping() {
+        print("ping")
+        self.dismissKeyboard = UUID()
+        let saveThisSession = self.pingSave
+        let text = self.text.isEmpty ? self.defaultPing : self.text
+        guard let host = URL(string: text)?.absoluteString else {
+            self.alertMessage = "Unable to create URL. Please try again."
+            self.showAlert.toggle()
+            return
+        }
+        guard let pinger = try? SwiftyPing(host: host, configuration: PingConfiguration(interval: self.pingInterval, with: self.pingTimeout), queue: .global()) else {
+            self.alertMessage = "Unable to create ping. Please try again."
+            self.showAlert.toggle()
+            return
+        }
+        self.pinger = pinger
+        var ps: PingSet?
+        if saveThisSession {
+            ps = PingSet(context: persistenceController.container.viewContext)
+            ps?.host = host
+            try? ps?.managedObjectContext?.save()
+        }
+        
+        if !self.pingIndefinity {
+            pinger.targetCount = self.pingCount
+        }
+        
+        var count = 1
+        
+        var latencySum: Double = 0.0
+        var minLatency: Double = Double.greatestFiniteMagnitude
+        var maxLatency: Double = Double.leastNormalMagnitude
+        var errorCount = 0
+        
+        self.entries.append("PING " + host)
+        
+        pinger.observer = { response in
+            print(response)
+            if saveThisSession {
+                let item = PingItem(context: persistenceController.container.viewContext, response: response)
+                ps?.pings.insert(item)
+                try? ps?.managedObjectContext?.save()
+            }
+            
+            if let error = response.error {
+                errorCount += 1
+                self.entries.append(error.localizedDescription)
+            } else if let duration = response.duration {
+                let latency = duration * 1000
+                latencySum += latency
+                if latency > maxLatency {
+                    maxLatency = latency
+                }
+                if latency < minLatency {
+                    minLatency = latency
+                }
+                self.entries.append("\(response.byteCount ?? 0) bytes from \(response.ipAddress ?? "") icmp_seq=\(response.sequenceNumber) time=\(latency) ms")
+            }
+            
+            if !self.pingIndefinity, count >= self.pingCount {
+                self.pinger?.stopPinging()
+                self.isPinging = false
+                
+                self.entries.append("--- \(host) ping statistics ---")
+
+                // 5 packets transmitted, 5 packets received, 0.0% packet loss
+                self.entries.append("\(count) packets transmitted, ")
+                let received = count - errorCount
+                self.entries.append("\(count - errorCount) received, ")
+                if count == received {
+                    self.entries.append("0.0% packet loss")
+                } else if received == 0 {
+                    self.entries.append("100% packet loss")
+                } else {
+                    self.entries.append(String(format: "%0.1f%% packet loss", Double(received) / Double(count) * 100.0))
+                }
+
+                // round-trip min/avg/max/stddev = 14.063/21.031/28.887/4.718 ms
+                var stats = "ronnd-trip min/avg/max = "
+                if errorCount == count {
+                    stats += "n/a"
+                } else {
+                    let avg = latencySum / Double(count)
+                    stats += (String(format: "%0.3f/%0.3f/%0.4f ms", minLatency, avg, maxLatency))
+                }
+                self.entries.append("\(stats)\n")
+            }
+            count += 1
+        }
+        
+        self.isPinging = true
+        try? pinger.startPinging()
+    }
+}
 
 class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate {
     var status: UITextView?
@@ -79,7 +461,7 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
         urlBar?.borderStyle = .roundedRect
         urlBar?.keyboardType = .URL
         // urlBar?.autoresizingMask = [.flexibleWidth]
-        urlBar?.placeholder = "google.com"
+        urlBar?.placeholder = "1.1.1.1"
         urlBar?.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         urlBar?.delegate = self
 
@@ -145,69 +527,116 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
     }
 
     public var pingCount: Int = 5
-
-    private var latencySum: Double = 0.0
-    private var minLatency: Double = Double.greatestFiniteMagnitude
-    private var maxLatency: Double = Double.leastNormalMagnitude
-    private var errorCount = 0
-
-    public func resetStats() {
-        latencySum = 0.0
-        minLatency = Double.greatestFiniteMagnitude
-        maxLatency = Double.leastNormalMagnitude
-        errorCount = 0
-    }
-
+    private var pinger: SwiftyPing? = nil
+    
+    
     func pingRepeated(_ url: URL, count: Int = 1) {
-        PlainPing.ping(url.absoluteString, withTimeout: 3.0, completionBlock: { (timeElapsed: Double?, error: Error?) in
-            if let latency = timeElapsed {
-                self.latencySum += latency
-                if latency > self.maxLatency {
-                    self.maxLatency = latency
+        self.isLoading = true
+        
+        guard let pinger = try? SwiftyPing(host: url.absoluteString, configuration: PingConfiguration(interval: 0.5, with: 5), queue: .global()) else {
+            self.isLoading = false
+            return
+        }
+        
+        self.pinger = pinger
+        
+        var count = 1
+        
+        var latencySum: Double = 0.0
+        var minLatency: Double = Double.greatestFiniteMagnitude
+        var maxLatency: Double = Double.leastNormalMagnitude
+        var errorCount = 0
+        pinger.targetCount = self.pingCount
+        pinger.observer = { response in
+            print(response)
+            print(response.sequenceNumber)
+            if let error = response.error {
+                errorCount += 1
+                switch error {
+                case .addressLookupError:
+                    self.status?.insertText("Address lookup failed.\n")
+                case .addressMemoryError:
+                    self.status?.insertText("Address data could not be converted to `sockaddr`.\n")
+                case .checksumMismatch(_,_):
+                    self.status?.insertText("The received checksum doesn't match the calculated one.\n")
+                case .checksumOutOfBounds:
+                    self.status?.insertText("Checksum is out-of-bounds for `UInt16` in `computeCheckSum`.\n")
+                case .hostNotFound:
+                    self.status?.insertText("Host was not found.\n")
+                case .identifierMismatch(_,_):
+                    self.status?.insertText("Response `identifier` doesn't match what was sent.\n")
+                case .invalidCode(_):
+                    self.status?.insertText("Response `code` was invalid.\n")
+                case .invalidHeaderOffset:
+                    self.status?.insertText("The ICMP header offset couldn't be calculated.\n")
+                case .invalidLength(_):
+                    self.status?.insertText("The response length was too short.\n")
+                case .invalidSequenceIndex(_,_):
+                    self.status?.insertText("Response `sequenceNumber` doesn't match.\n")
+                case .invalidType(_):
+                    self.status?.insertText("Response `type` was invalid.\n")
+                case .packageCreationFailed:
+                    self.status?.insertText("Unspecified package creation error.\n")
+                case .requestError:
+                    self.status?.insertText("An error occured while sending the request.\n")
+                case .requestTimeout:
+                    self.status?.insertText("The request send timed out.\n")
+                case .responseTimeout:
+                    self.status?.insertText("The response took longer to arrive than `configuration.timeoutInterval`.\n")
+                case .socketNil:
+                    self.status?.insertText("For some reason, the socket is `nil`.\n")
+                case .socketOptionsSetError(_):
+                    self.status?.insertText("Failed to change socket options, in particular SIGPIPE.\n")
+                case .unexpectedPayloadLength:
+                    self.status?.insertText("Unexpected payload length.\n")
+                case .unknownHostError:
+                    self.status?.insertText("Unknown error occured within host lookup.\n")
                 }
-                if latency < self.minLatency {
-                    self.minLatency = latency
+            } else if let duration = response.duration {
+                let latency = duration * 1000
+                latencySum += latency
+                if latency > maxLatency {
+                    maxLatency = latency
+                }
+                if latency < minLatency {
+                    minLatency = latency
                 }
                 self.status?.insertText(String(format: "latency=%0.3f ms\n", latency))
             }
-
-            if let error = error {
-                self.status?.insertText(error.localizedDescription + "\n")
-                self.errorCount += 1
-            }
-
             if count >= self.pingCount {
-                if count > 1 {
-                    self.status?.insertText("--- \(url.absoluteString) ping statistics ---\n")
-
-                    // 5 packets transmitted, 5 packets received, 0.0% packet loss
-                    self.status?.insertText("\(count) packets transmitted, ")
-                    let received = count - self.errorCount
-                    self.status?.insertText("\(count - self.errorCount) received, ")
-                    if count == received {
-                        self.status?.insertText("0.0% packet loss\n")
-                    } else if received == 0 {
-                        self.status?.insertText("100% packet loss\n")
-                    } else {
-                        self.status?.insertText(String(format: "%0.1f%% packet loss\n", Double(received) / Double(count) * 100.0))
-                    }
-
-                    // round-trip min/avg/max/stddev = 14.063/21.031/28.887/4.718 ms
-                    self.status?.insertText("latency min/avg/max = ")
-                    if self.errorCount == count {
-                        self.status?.insertText("n/a\n")
-                    } else {
-                        let avg = self.latencySum / Double(count)
-                        self.status?.insertText(String(format: "%0.3f/%0.3f/%0.4f ms\n", self.minLatency, avg, self.maxLatency))
-                    }
-                    self.latencySum = 0.0
-                }
+                pinger.stopPinging()
                 self.isLoading = false
-            } else {
-                self.pingRepeated(url, count: count + 1)
+                
+                self.status?.insertText("--- \(url.absoluteString) ping statistics ---\n")
+
+                // 5 packets transmitted, 5 packets received, 0.0% packet loss
+                self.status?.insertText("\(count) packets transmitted, ")
+                let received = count - errorCount
+                self.status?.insertText("\(count - errorCount) received, ")
+                if count == received {
+                    self.status?.insertText("0.0% packet loss\n")
+                } else if received == 0 {
+                    self.status?.insertText("100% packet loss\n")
+                } else {
+                    self.status?.insertText(String(format: "%0.1f%% packet loss\n", Double(received) / Double(count) * 100.0))
+                }
+
+                // round-trip min/avg/max/stddev = 14.063/21.031/28.887/4.718 ms
+                self.status?.insertText("latency min/avg/max = ")
+                if errorCount == count {
+                    self.status?.insertText("n/a\n")
+                } else {
+                    let avg = latencySum / Double(count)
+                    self.status?.insertText(String(format: "%0.3f/%0.3f/%0.4f ms\n", minLatency, avg, maxLatency))
+                }
+                latencySum = 0.0
             }
+            count = count + 1
             self.status?.scrollToBottom()
-        })
+        }
+        
+        
+        try? pinger.startPinging()
     }
 
     @objc
@@ -220,7 +649,6 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
             if let url = URL(string: urlString) {
                 status?.insertText("PING " + url.absoluteString + "\n")
                 isLoading = true
-                resetStats()
                 pingRepeated(url)
             } else {
                 status?.insertText("Invalid URL\n")

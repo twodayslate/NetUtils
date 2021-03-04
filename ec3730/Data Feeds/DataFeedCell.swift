@@ -59,8 +59,8 @@ class DataFeedCell: UITableViewCell {
             }
 
             if !purchase.paid {
-                if self.subscriber is DataFeedSubscription {
-                    bigSubButton.setTitle("Subscribe Now", for: .normal)
+                if let subscriber = self.subscriber as? DataFeedSubscription {
+                    bigSubButton.setTitle("Subscribe Now for \(subscriber.subscriptions.first?.product?.localizedPrice ?? "-")", for: .normal)
                 } else {
                     bigSubButton.setTitle("Purchase", for: .normal)
                 }

@@ -222,9 +222,14 @@ class WhoisLockedTableViewCell: UITableViewCell {
         let buy = UIButton(type: .system)
         buy.tintColor = UIColor.white
 
-        if self.dataFeed is DataFeedSubscription {
-            let attString = NSMutableAttributedString(string: "Subscribe Now")
-            buy.setAttributedTitle(attString, for: .normal)
+        if let subscription = self.dataFeed as? DataFeedSubscription {
+            if let price = subscription.defaultProduct?.localizedPrice {
+                let attString = NSMutableAttributedString(string: "Subscribe Now for \(price)")
+                buy.setAttributedTitle(attString, for: .normal)
+            } else {
+                let attString = NSMutableAttributedString(string: "Subscribe Now")
+                buy.setAttributedTitle(attString, for: .normal)
+            }
         } else {
             let attString = NSMutableAttributedString(string: "Purchase")
             buy.setAttributedTitle(attString, for: .normal)
