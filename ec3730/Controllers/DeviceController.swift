@@ -12,6 +12,7 @@ import JavaScriptCore
 import WebKit
 import MachO
 import DeviceKit
+import CoreTelephony
 
 class DeviceViewController: UINavigationController {
     init() {
@@ -36,7 +37,7 @@ class UIDeviceTableViewController: UITableViewController {
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return 4
+        return hasCarriers ? 5 : 4
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -44,9 +45,38 @@ class UIDeviceTableViewController: UITableViewController {
         case 1: return "Memory"
         case 2: return "JavaScriptCore"
         case 3: return "Fingerprints"
+        case 4:
+            return "Cellular Providers"
         default:
             return nil
         }
+    }
+    
+    var hasCarriers: Bool {
+        return (CTTelephonyNetworkInfo().serviceSubscriberCellularProviders?.count ?? 0) > 0
+    }
+    
+    var carrierEntires: [(String, String)] {
+        var ans = [(String, String)]()
+        guard self.hasCarriers, let providers = CTTelephonyNetworkInfo().serviceSubscriberCellularProviders else {
+            return ans
+        }
+        for (i, carrier) in providers.enumerated() {
+            if let name = carrier.value.carrierName {
+                ans.append(("Provider \(i) Carrier Name", name))
+            }
+            ans.append(("Provider \(i) Allows VOIP", carrier.value.allowsVOIP ? "Yes" : "No"))
+            if let value = carrier.value.isoCountryCode {
+                ans.append(("Provider \(i) ISO Country Code", value))
+            }
+            if let value = carrier.value.mobileCountryCode {
+                ans.append(("Provider \(i) Mobile Country Code", value))
+            }
+            if let value = carrier.value.mobileNetworkCode {
+                ans.append(("Provider \(i) Mobile Network Code", value))
+            }
+        }
+        return ans
     }
 
     var deviceEntries: [(String, String)] {
@@ -86,6 +116,8 @@ class UIDeviceTableViewController: UITableViewController {
             ("Has Telephoto Camera", Device.current.hasTelephotoCamera ? "Yes" : "No"),
             ("Has Ultrawide Camera", Device.current.hasUltraWideCamera ? "Yes" : "No"),
             ("Has Rounded Display Corners", Device.current.hasRoundedDisplayCorners ? "Yes" : "No"),
+            
+            
         ]
 
         func getArchitecture() -> NSString {
@@ -263,6 +295,8 @@ class UIDeviceTableViewController: UITableViewController {
             return jsEntries.count
         case 3:
             return 2
+        case 4:
+            return carrierEntires.count
         default:
             fatalError("Unknown section")
         }
@@ -299,6 +333,9 @@ class UIDeviceTableViewController: UITableViewController {
             }
             // has to be "visible"
             return cell
+        case 4:
+            let item = carrierEntires[indexPath.row]
+            return CopyDetailCell(title: item.0, detail: item.1)
         default:
             fatalError("Unknown section")
         }

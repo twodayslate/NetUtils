@@ -51,6 +51,8 @@ public class PingSet: NSManagedObject, Identifiable {
     @NSManaged public var timestamp: Date
     @NSManaged public var pings: Set<PingItem>
     @NSManaged public var host: String
+    @NSManaged public var ttl: Int
+    @NSManaged public var payloadSize: Int
     
     convenience init(context: NSManagedObjectContext) {
         guard let entity = NSEntityDescription.entity(forEntityName: "PingSet", in: context) else {
@@ -59,6 +61,12 @@ public class PingSet: NSManagedObject, Identifiable {
         self.init(entity: entity, insertInto: context)
         self.timestamp = Date()
         self.pings = Set()
+    }
+    
+    convenience init(context: NSManagedObjectContext, configuration: PingConfiguration) {
+        self.init(context: context)
+        self.ttl = configuration.timeToLive ?? 0
+        self.payloadSize = configuration.payloadSize
     }
 }
 
@@ -106,13 +114,11 @@ public class PingItem: NSManagedObject, Identifiable {
         }
         
         self.identifier = response.identifier
-        self.sequenceNumber = response.sequenceNumber
+        self.sequenceNumber = Int(response.sequenceNumber)
         if let error = response.error {
             self.error = error.localizedDescription
         }
-        if let duration = response.duration {
-            self.duration = duration
-        }
+        self.duration = duration
         if let ipAddress = response.ipAddress {
             self.ipAddress = ipAddress
         }

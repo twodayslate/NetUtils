@@ -41,9 +41,11 @@ struct PingNumberSettings: View {
                     }
                 }
                 
-                Picker("Number of pings", selection: $numberOfPings, content: {
+                Picker("Number of pings", selection: Binding(get: {return self.numberOfPings-1}, set: { newValue in
+                                                                self.numberOfPings = (newValue+1)
+                }), content: {
                     ForEach(1..<1000) { i in
-                        Text("\(i)").id(i)
+                        Text("\(i)").tag(i)
                     }
                 }).pickerStyle(WheelPickerStyle())
                 }
@@ -60,11 +62,32 @@ struct PingSettings: View {
     @Binding var pingIndefinitly: Bool
     @Binding var pingCount: Int
     @Binding var savePings: Bool
+    @Binding var payloadSize: Int
+    @Binding var enableTTL: Bool
+    @Binding var ttl: Int
     
     var numberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.alwaysShowsDecimalSeparator = true
         formatter.minimumFractionDigits = 2
+        return formatter
+    }
+    
+    var payloadSizeNumberFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.alwaysShowsDecimalSeparator = false
+        formatter.minimumFractionDigits = 0
+        formatter.minimum = 44
+        formatter.maximum = 4096
+        return formatter
+    }
+    
+    var ttlNumberFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.alwaysShowsDecimalSeparator = false
+        formatter.minimumFractionDigits = 0
+        formatter.minimum = 1
+        formatter.maximum = 255
         return formatter
     }
     
@@ -89,20 +112,60 @@ struct PingSettings: View {
                 Stepper(value: $interval, in: 0...10.0, step: 0.1) {
                     HStack {
                         Text("Interval")
-                        TextField("\(self.interval, specifier: "%.02f")", value: $interval, formatter: self.numberFormatter).foregroundColor(.gray)
+                        let str: LocalizedStringKey = "\(self.interval, specifier: "%.02f")"
+                        TextField(str, value: $interval, formatter: self.numberFormatter).foregroundColor(.gray)
                     }
                     
                 }
                 Stepper(value: $timeout, in: 0...10, step: 0.5) {
                     HStack {
                         Text("Timeout")
-                        TextField("\(self.timeout, specifier: "%.2f")", value: $timeout, formatter: self.numberFormatter).foregroundColor(.gray)
+                        let str: LocalizedStringKey = "\(self.timeout, specifier: "%.2f")"
+                        TextField(str, value: $timeout, formatter: self.numberFormatter).foregroundColor(.gray)
+                    }
+                }
+            }
+            Section {
+                Stepper(value: $payloadSize, in: 44...4096, step: 1) {
+                    HStack {
+                        Text("Payload Size")
+                        let str: LocalizedStringKey = "\(self.payloadSize, specifier: "%d")"
+                        TextField(str, value: $payloadSize, formatter: self.payloadSizeNumberFormatter).foregroundColor(.gray)
+                    }
+                }
+            }
+            Section {
+                Toggle("Use TTL", isOn: $enableTTL)
+                if (self.enableTTL) {
+                    Stepper(value: $ttl, in: 1...255, step: 1) {
+                        HStack {
+                            Text("TTL")
+                            let str: LocalizedStringKey = "\(self.ttl, specifier: "%d")"
+                            TextField(str, value: $ttl, formatter: self.ttlNumberFormatter).foregroundColor(.gray)
+                        }
                     }
                 }
             }
             Section {
                 Toggle("Save Pings", isOn: $savePings)
             }
+            Button(action: {
+                self.enableTTL = false
+                self.ttl = 64
+                self.payloadSize = 44
+                self.interval = 0.5
+                self.timeout = 5.0
+                self.pingCount = 5
+                self.pingIndefinitly = false
+                self.savePings = true
+            }, label: {
+                HStack {
+                    Spacer()
+                    Text("Reset")
+                    Spacer()
+                }
+                
+            })
         }.navigationBarTitle("Ping Settings", displayMode: .inline)
     }
 }
@@ -215,6 +278,9 @@ struct PingSwiftUIViewController: View {
     
     @AppStorage("ping.indefinitly") var pingIndefinity: Bool = false
     @AppStorage("ping.count") var pingCount: Int = 5
+    @AppStorage("ping.payloadSize") var pingPayloadSize: Int = 44
+    @AppStorage("ping.useTTL") var pingUseTTL: Bool = false
+    @AppStorage("ping.ttl") var pingTTL: Int = 64
     @AppStorage("ping.timeout") var pingTimeout: Double = 5.0
     @AppStorage("ping.interval") var pingInterval: Double = 0.5
     @AppStorage("ping.save") var pingSave: Bool = true
@@ -279,7 +345,7 @@ struct PingSwiftUIViewController: View {
                 })
             }).sheet(isPresented: $showSettings, content: {
                 EZPanel {
-                    PingSettings(interval: $pingInterval, timeout: $pingTimeout, pingIndefinitly: $pingIndefinity, pingCount: $pingCount, savePings: $pingSave)
+                    PingSettings(interval: $pingInterval, timeout: $pingTimeout, pingIndefinitly: $pingIndefinity, pingCount: $pingCount, savePings: $pingSave, payloadSize: $pingPayloadSize, enableTTL: $pingUseTTL, ttl: $pingTTL)
                 }
             }).alert(isPresented: $showAlert, content: {
                 Alert(title: Text("Error"), message: Text("\(self.alertMessage ?? "")"), dismissButton: .none)
@@ -307,7 +373,12 @@ struct PingSwiftUIViewController: View {
             self.showAlert.toggle()
             return
         }
-        guard let pinger = try? SwiftyPing(host: host, configuration: PingConfiguration(interval: self.pingInterval, with: self.pingTimeout), queue: .global()) else {
+        var config = PingConfiguration(interval: self.pingInterval, with: self.pingTimeout)
+        if self.pingUseTTL {
+            config.timeToLive = self.pingTTL
+        }
+        config.payloadSize = self.pingPayloadSize
+        guard let pinger = try? SwiftyPing(host: host, configuration: config, queue: .global()) else {
             self.alertMessage = "Unable to create ping. Please try again."
             self.showAlert.toggle()
             return
@@ -315,7 +386,7 @@ struct PingSwiftUIViewController: View {
         self.pinger = pinger
         var ps: PingSet?
         if saveThisSession {
-            ps = PingSet(context: persistenceController.container.viewContext)
+            ps = PingSet(context: persistenceController.container.viewContext, configuration: config)
             ps?.host = host
             try? ps?.managedObjectContext?.save()
         }
@@ -344,7 +415,8 @@ struct PingSwiftUIViewController: View {
             if let error = response.error {
                 errorCount += 1
                 self.entries.append(error.localizedDescription)
-            } else if let duration = response.duration {
+            } else {
+                let duration = response.duration
                 let latency = duration * 1000
                 latencySum += latency
                 if latency > maxLatency {
@@ -592,7 +664,8 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
                 case .unknownHostError:
                     self.status?.insertText("Unknown error occured within host lookup.\n")
                 }
-            } else if let duration = response.duration {
+            } else {
+                let duration = response.duration 
                 let latency = duration * 1000
                 latencySum += latency
                 if latency > maxLatency {

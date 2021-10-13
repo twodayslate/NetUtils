@@ -12,11 +12,13 @@
     </entity>
     <entity name="PingSet" representedClassName=".PingSet" syncable="YES">
         <attribute name="host" optional="YES" attributeType="String"/>
+        <attribute name="payloadSize" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="ttl" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="pings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PingItem" inverseName="relationship" inverseEntity="PingItem"/>
     </entity>
     <elements>
         <element name="PingItem" positionX="-63" positionY="-18" width="128" height="149"/>
-        <element name="PingSet" positionX="-54" positionY="45" width="128" height="74"/>
+        <element name="PingSet" positionX="-54" positionY="45" width="128" height="104"/>
     </elements>
 </model>

@@ -35,7 +35,12 @@ class SRCTabBarController: SplitTabBarViewController {
         viewSource.tabBarItem = UITabBarItem(title: "View Source", image: UIImage(named: "Source"), tag: 2)
         viewSource.tabBarItem.selectedImage = UIImage(named: "Source_selected")
 
-        let host = HostViewController()
+        var host: UIViewController!
+        if #available(iOS 15.0, *) {
+            host = UIHostingController(rootView: HostView())
+        } else {
+            host = HostViewController()
+        }
         host.tabBarItem = UITabBarItem(title: "Host", image: UIImage(named: "Network"), tag: 3)
         host.tabBarItem.selectedImage = UIImage(named: "Network_selected")
 
