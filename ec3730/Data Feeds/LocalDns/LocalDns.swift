@@ -35,6 +35,7 @@ extension LocalDns: DataFeedService {
 
     class IPLookupService: Service {
         var name: String = "Simple IP Lookup"
+        var description = "Simple IP Lookup"
 
         var cache = TimedCache(expiresIn: 60)
 

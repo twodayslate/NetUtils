@@ -25,7 +25,7 @@
 		F6397FE525E8937A00914B3F /* HostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FE425E8937900914B3F /* HostView.swift */; };
 		F6397FED25EEFEAE00914B3F /* CopyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */; };
 		F6397FF225EF012300914B3F /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FF125EF012300914B3F /* ShareSheetView.swift */; };
-		F6397FF725EF045200914B3F /* LockedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FF625EF045200914B3F /* LockedCellView.swift */; };
+		F6397FF725EF045200914B3F /* PurchaseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FF625EF045200914B3F /* PurchaseCellView.swift */; };
 		F643030B25E47BA300109C92 /* EZPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643030A25E47BA300109C92 /* EZPanel.swift */; };
 		F643036825E6033D00109C92 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = F643036725E6033D00109C92 /* DeviceKit */; };
 		F64418E6271CA13000E40F2C /* LocalDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64418E5271CA13000E40F2C /* LocalDns.swift */; };
@@ -150,7 +150,7 @@
 		F6397FE425E8937900914B3F /* HostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostView.swift; sourceTree = "<group>"; };
 		F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellView.swift; sourceTree = "<group>"; };
 		F6397FF125EF012300914B3F /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
-		F6397FF625EF045200914B3F /* LockedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedCellView.swift; sourceTree = "<group>"; };
+		F6397FF625EF045200914B3F /* PurchaseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCellView.swift; sourceTree = "<group>"; };
 		F643030A25E47BA300109C92 /* EZPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EZPanel.swift; sourceTree = "<group>"; };
 		F64418E5271CA13000E40F2C /* LocalDns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDns.swift; sourceTree = "<group>"; };
 		F644A0F727925CF60061C98B /* HostModelWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostModelWrapperView.swift; sourceTree = "<group>"; };
@@ -300,7 +300,7 @@
 				F66643B426F02A8F000F17BC /* HostViewSection.swift */,
 				F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */,
 				F6397FF125EF012300914B3F /* ShareSheetView.swift */,
-				F6397FF625EF045200914B3F /* LockedCellView.swift */,
+				F6397FF625EF045200914B3F /* PurchaseCellView.swift */,
 				F671EF4B277553D6007AF79F /* HostSectionOrganizerView.swift */,
 			);
 			path = Views;
@@ -756,7 +756,7 @@
 				F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */,
 				F69E364A235806370017296E /* WhoisXMLDnsService.swift in Sources */,
 				F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */,
-				F6397FF725EF045200914B3F /* LockedCellView.swift in Sources */,
+				F6397FF725EF045200914B3F /* PurchaseCellView.swift in Sources */,
 				F6FBB86723677FA700E023F2 /* DeviceController.swift in Sources */,
 				F671EF4C277553D6007AF79F /* HostSectionOrganizerView.swift in Sources */,
 			);

@@ -31,6 +31,7 @@ extension SimpleDNSResolver:  DataFeedService {
     
     class DNSResolverService: Service {
         var name: String = "Simple IP Lookup"
+        var description: String = "Simple IP Lookup"
         
         func endpoint(_ userData: [String : Any?]?) -> DataFeedEndpoint? {
             return nil

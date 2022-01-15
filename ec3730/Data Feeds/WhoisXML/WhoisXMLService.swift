@@ -15,6 +15,7 @@ class WhoisXMLService: Service {
 
     var name: String
     var id: String
+    var description: String
 
     static var cache = [String: TimedCache]()
 
@@ -28,9 +29,10 @@ class WhoisXMLService: Service {
 
     // MARK: - Initializers
 
-    init(name: String, id: String) {
+    init(name: String, description: String, id: String) {
         self.name = name
         self.id = id
+        self.description = description
     }
 
     func endpoint(_ userData: [String: Any?]?) -> DataFeedEndpoint? {

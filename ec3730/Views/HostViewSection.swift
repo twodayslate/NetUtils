@@ -35,7 +35,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                                 row
                             }
                         } else {
-                            PurchaseCellView(model: storeModel, heading: sectionModel.dataFeed.name, subheading: sectionModel.dataFeed.webpage.description)
+                            PurchaseCellView(model: storeModel, heading: sectionModel.dataFeed.name, subheading: sectionModel.service.description)
                             //PurchaseCellView(model: storeModel)
                         }
                     } else {

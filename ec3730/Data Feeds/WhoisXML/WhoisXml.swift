@@ -91,17 +91,19 @@ extension WhoisXml {
 
 extension WhoisXml: DataFeedService {
     static var whoisService: WhoisXMLService = {
-        WhoisXMLService(name: "WHOIS", id: "1")
+        WhoisXMLService(name: "WHOIS", description: "Our hosted WHOIS Lookup provides the registration details, also known as a WHOIS Record, of domain names", id: "1")
     }()
 
     static var dnsService: WhoisXMLService = {
-        WhoisXMLDnsService(name: "DNS", id: "26")
+        WhoisXMLDnsService(name: "DNS", description: "Our hosted DNS Lookup provides the records associated with a domain", id: "26")
+    }()
+    
+    static var reputationService: WhoisXMLService = {
+        WhoisXMLService(name: "Reputation", description: "Reputation", id: "20")
     }()
 
     var services: [Service] {
-        let reputation = WhoisXMLService(name: "Reputation", id: "20")
-
-        return [WhoisXml.whoisService, WhoisXml.dnsService, reputation]
+        return [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService]
     }
 }
 
