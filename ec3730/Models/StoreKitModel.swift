@@ -144,7 +144,15 @@ extension StoreKitModel {
         return StoreKitModel(defaultId: "monapi.monthly.auto", ids: ["monapi.yearly.auto", "monapi.onetime"])
     }
     
+    static var dns: StoreKitModel {
+        return StoreKitModel(defaultId: "monapi.monthly.auto", ids: ["monapi.yearly.auto", "monapi.onetime"])
+    }
+    
     static var monapi: StoreKitModel {
         return StoreKitModel(defaultId: "monapi.monthly.auto", ids: ["monapi.yearly.auto", "monapi.onetime"])
+    }
+    
+    static var webrisk: StoreKitModel {
+        return StoreKitModel(defaultId: "googlewebrisk.onetime", ids: [])
     }
 }

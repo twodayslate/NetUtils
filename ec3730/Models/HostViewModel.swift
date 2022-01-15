@@ -41,7 +41,9 @@ class HostViewModel: ObservableObject {
         var all_sections = [
             LocalDnsModel(),
             WhoisXmlWhoisSectionModel(),
-            MonapiSectionModel()]
+            WhoisXmlDnsSectionModel(),
+            GoogleWebRiskSectionModel()
+        ]
         all_sections.removeAll(where: {self.hidden.contains($0.service.name)})
         
         var ordered_sections = [HostSectionModel]()
