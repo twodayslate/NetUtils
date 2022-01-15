@@ -290,31 +290,6 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
                     self.hostTable.webRiskRecord = response
                 }
             }
-            
-            if Monapi.current.owned {
-                Monapi.lookupService.query(["uri": url]) {
-                    (error, response: MonapiThreat?) in
-                        self.checkLoading()
-                        guard error == nil else {
-                            self.showError("Error getting \(Monapi.current.name) Information", message: error!.localizedDescription)
-                            self.hostTable.monapiRecord = nil
-                            return
-                        }
-
-                        guard let response = response else {
-                            self.showError(message: "No \(Monapi.current.name) Data")
-                            self.hostTable.monapiRecord = nil
-                            return
-                        }
-                    
-                        if let msgError = response.error ?? response.detail {
-                            self.showError("monapi.io", message: msgError)
-                            self.hostTable.monapiRecord = nil
-                        }
-
-                    self.hostTable.monapiRecord = response
-                }
-            }
         }
         
     }
