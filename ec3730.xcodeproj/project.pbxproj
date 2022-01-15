@@ -30,6 +30,7 @@
 		F643036825E6033D00109C92 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = F643036725E6033D00109C92 /* DeviceKit */; };
 		F64418E6271CA13000E40F2C /* LocalDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64418E5271CA13000E40F2C /* LocalDns.swift */; };
 		F644A0F827925CF60061C98B /* HostModelWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F644A0F727925CF60061C98B /* HostModelWrapperView.swift */; };
+		F644A0FA279268BD0061C98B /* FSDisclosureGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F644A0F9279268BD0061C98B /* FSDisclosureGroup.swift */; };
 		F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F744233CEB4B00BAA609 /* DataFeedCells.swift */; };
 		F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F746233CECD900BAA609 /* DataFeedCell.swift */; };
 		F650F749233CF15800BAA609 /* DataFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F748233CF15800BAA609 /* DataFeed.swift */; };
@@ -152,6 +153,7 @@
 		F643030A25E47BA300109C92 /* EZPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EZPanel.swift; sourceTree = "<group>"; };
 		F64418E5271CA13000E40F2C /* LocalDns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDns.swift; sourceTree = "<group>"; };
 		F644A0F727925CF60061C98B /* HostModelWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostModelWrapperView.swift; sourceTree = "<group>"; };
+		F644A0F9279268BD0061C98B /* FSDisclosureGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSDisclosureGroup.swift; sourceTree = "<group>"; };
 		F650F744233CEB4B00BAA609 /* DataFeedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedCells.swift; sourceTree = "<group>"; };
 		F650F746233CECD900BAA609 /* DataFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedCell.swift; sourceTree = "<group>"; };
 		F650F748233CF15800BAA609 /* DataFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeed.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				F6397FE425E8937900914B3F /* HostView.swift */,
+				F644A0F9279268BD0061C98B /* FSDisclosureGroup.swift */,
 				F644A0F727925CF60061C98B /* HostModelWrapperView.swift */,
 				F66643B426F02A8F000F17BC /* HostViewSection.swift */,
 				F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */,
@@ -736,6 +739,7 @@
 				F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */,
 				F643030B25E47BA300109C92 /* EZPanel.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
+				F644A0FA279268BD0061C98B /* FSDisclosureGroup.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
 				F644A0F827925CF60061C98B /* HostModelWrapperView.swift in Sources */,
 				F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */,
