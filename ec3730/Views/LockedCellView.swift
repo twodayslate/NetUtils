@@ -1,4 +1,5 @@
 import SwiftUI
+import StoreKit
 
 @available(iOS 15.0.0, *)
 struct PurchaseCellView: View {
@@ -11,6 +12,8 @@ struct PurchaseCellView: View {
     @State var imageSize: CGFloat = 64.0
     
     var body: some View {
+        let isOneTime = (self.model.defaultProduct?.type == .nonConsumable)
+        
         VStack(alignment: .leading) {
             
             HStack(alignment: .center) {
@@ -23,7 +26,15 @@ struct PurchaseCellView: View {
                 }
             }
             
-            (Text("Start your free 3-day trial").bold() + Text(" then all \( "things" ) Data is available for \(self.model.defaultProduct?.displayPrice ?? "-")/month automatically")).font(.footnote)
+            if !isOneTime {
+                // we don't know what kind of product this is so let's just assume it is a trial so Apple doesn't yell at us
+                let promoUnitType = self.model.defaultProduct?.subscription?.introductoryOffer?.period.unit ?? Product.SubscriptionPeriod.Unit.day
+                
+                let unitType = self.model.defaultProduct?.subscription?.subscriptionPeriod.unit ?? .month
+                
+                (Text("Start your free \(self.model.defaultProduct?.subscription?.introductoryOffer?.period.value ?? 3)-\(promoUnitType.debugDescription.lowercased()) trial").bold() + Text(" then all \( self.heading ) Data is available for \(self.model.defaultProduct?.displayPrice ?? "-")/\(unitType.debugDescription.lowercased()) automatically")).font(.footnote)
+            }
+            
             HStack {
                 if self.isRestoring {
                     ProgressView().progressViewStyle(CircularProgressViewStyle())
@@ -41,10 +52,19 @@ struct PurchaseCellView: View {
                         await self.buy()
                     }
                 }, label: {
-                    Text("Subscibe Now for only $0.99").bold()
+                    if isOneTime {
+                        Text("Buy Now for only \(self.model.defaultProduct?.displayPrice ?? "-")")
+                    } else {
+                    Text("Subscibe Now for only \(self.model.defaultProduct?.displayPrice ?? "-")").bold()
+                    }
                 }).padding().frame(maxWidth: .infinity).background(Color.accentColor).foregroundColor(.white).cornerRadius(16.0)
             }.padding(.vertical, 4)
-            Text("Payment will be charged to your Apple ID account at the confirmation of purchase. The subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase.").font(.caption2).foregroundColor(Color(UIColor.systemGray2))
+            if isOneTime {
+                Text("Payment will be charged to your Apple ID account at the confirmation of purchase.").font(.caption2).foregroundColor(Color(UIColor.systemGray2))
+            } else {
+                Text("Payment will be charged to your Apple ID account at the confirmation of purchase. The subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase.").font(.caption2).foregroundColor(Color(UIColor.systemGray2))
+            }
+            
             HStack {
                 Spacer()
                 Link(destination: URL(string: "https://zac.gorak.us/ios/privacy")!, label: {

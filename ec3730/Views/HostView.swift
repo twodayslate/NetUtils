@@ -116,7 +116,7 @@ struct HostDragRelocateDelegate: DropDelegate {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            HostView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            HostView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext).environmentObject(HostViewModel.shared)
         }
     }
 }

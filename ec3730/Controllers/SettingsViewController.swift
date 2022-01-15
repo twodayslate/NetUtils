@@ -36,7 +36,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return 5
+        return 6
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,7 +68,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             return "Appearance"
         case 3:
             return "Browser"
-        case 4:
+        case 5:
             return "Legal"
         default:
             return nil

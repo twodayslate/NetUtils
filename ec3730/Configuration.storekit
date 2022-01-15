@@ -126,7 +126,11 @@
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "57A4F298",
-          "introductoryOffer" : null,
+          "introductoryOffer" : {
+            "internalID" : "41957EBC",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
           "localizations" : [
             {
               "description" : "",
@@ -144,11 +148,15 @@
           "adHocOffers" : [
 
           ],
-          "displayPrice" : "0.99",
+          "displayPrice" : "9.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "4171E05E",
-          "introductoryOffer" : null,
+          "introductoryOffer" : {
+            "internalID" : "9FA0AEAD",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
           "localizations" : [
             {
               "description" : "",
@@ -157,7 +165,7 @@
             }
           ],
           "productID" : "whois.yearly.auto",
-          "recurringSubscriptionPeriod" : "P1M",
+          "recurringSubscriptionPeriod" : "P1Y",
           "referenceName" : null,
           "subscriptionGroupID" : "6FA4E8C1",
           "type" : "RecurringSubscription"

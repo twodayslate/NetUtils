@@ -17,7 +17,9 @@ struct HostSectionOrganizerView: View {
                             self.model.objectWillChange.send()
                             self.model.sections.move(fromOffsets: indexSet, toOffset: offset)
                         }
-                    }.onDelete { indexSet in
+                    }
+                    // would be great if instead of delete it said hide
+                    .onDelete { indexSet in
                         print(indexSet, indexSet.first ?? "")
                         if let index = indexSet.first {
                             let section = model.sections[index]
@@ -27,10 +29,14 @@ struct HostSectionOrganizerView: View {
                         }
                     }
                 }
+                
                 Section(header: Text("Hidden")) {
                     ForEach(model.hidden, id: \.self) { section in
                             Text(section)
-                    }.onDelete { indexSet in
+                    }
+                    // would be great if instead of delete it said
+                    // unhide or show
+                    .onDelete { indexSet in
                         if let index = indexSet.first {
                             let section = model.hidden[index]
                             withAnimation {
