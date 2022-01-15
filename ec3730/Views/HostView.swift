@@ -30,11 +30,9 @@ struct FSDisclosureGroup<Label, Content>: View where Label: View, Content: View 
   }
 }
 
-
-
 @available(iOS 15.0, *)
 struct HostView: View {
-    @StateObject var model = HostViewModel()
+    @EnvironmentObject var model: HostViewModel
     
     @State var dragging: HostViewSection? = nil
     
@@ -62,14 +60,19 @@ struct HostView: View {
                         Divider()
                         HStack(alignment: .center) {
                             // it would be great if this could be a .bottomBar toolbar but it is too buggy
-                            TextField(self.defaultUrl, text: $text,  onCommit: { self.query() }).id(dismissKeyboard).disableAutocorrection(true).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.URL).padding(.leading, geometry.safeAreaInsets.leading)
+                            TextField(self.defaultUrl, text: $text,  onCommit: { Task {
+                                await self.query()
+                            }
+                            }).id(dismissKeyboard).disableAutocorrection(true).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.URL).padding(.leading, geometry.safeAreaInsets.leading)
                             if self.model.isQuerying {
                                 Button("Cancel", action: {
                                     self.cancel()
                                 }).padding(.trailing, geometry.safeAreaInsets.trailing)
                             } else {
                                 Button("Lookup", action: {
-                                   self.query()
+                                    Task {
+                                   await self.query()
+                                    }
                                 }).padding(.trailing, geometry.safeAreaInsets.trailing)
                             }
                         }.padding(.horizontal).padding([.vertical], 6)
@@ -84,12 +87,12 @@ struct HostView: View {
     }
     
     // iOS 15 todo: https://www.hackingwithswift.com/quick-start/swiftui/how-to-take-action-when-the-user-submits-a-textfield
-    func query() {
+    func query() async {
         var url = URL(string: self.text)
         if (url == nil) && self.text.isEmpty {
             url = URL(string: self.defaultUrl)
         }
-        self.model.query(url: url, completion: {
+        await self.model.query(url: url, completion: {
             
         })
     }

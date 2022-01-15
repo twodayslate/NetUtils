@@ -9,6 +9,7 @@
 import MessageUI
 import SafariServices
 import UIKit
+import SwiftUI
 
 class SettingsNavigationController: UINavigationController {
     convenience init() {
@@ -44,13 +45,15 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         switch section {
         case 0: // Data feeds
             return 1
-        case 1: // Appearance
+        case 1: // Host Section Order
             return 1
-        case 2: // Browser
+        case 2: // Appearance
             return 1
-        case 3: // Contact/Rate
+        case 3: // Browser
+            return 1
+        case 4: // Contact/Rate
             return 3
-        case 4: // Legal
+        case 5: // Legal
             return 2
         default:
             return 0
@@ -60,8 +63,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 1:
-            return "Appearance"
+            return "Host"
         case 2:
+            return "Appearance"
+        case 3:
             return "Browser"
         case 4:
             return "Legal"
@@ -80,6 +85,8 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         case 0:
             cell.textLabel?.text = "Data Feeds"
         case 1:
+            cell.textLabel?.text = "Section Order"
+        case 2:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Theme"
@@ -94,7 +101,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             default:
                 break
             }
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Open Links in"
@@ -108,7 +115,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 break
             }
 
-        case 3:
+        case 4:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Contact"
@@ -122,7 +129,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             default:
                 break
             }
-        case 4:
+        case 5:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Privacy Policy"
@@ -148,6 +155,12 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             tableView.deselectRow(at: indexPath, animated: true)
             navigationController?.pushViewController(feed, animated: true)
         case 1:
+            tableView.deselectRow(at: indexPath, animated: true)
+            if #available(iOS 15.0, *) {
+                let organizer = UIHostingController(rootView: HostModelWrapperView(view: HostSectionOrganizerView()))
+                navigationController?.pushViewController(organizer, animated: true)
+            }
+        case 2:
             if themeSheet.actions.count == 0 {
                 let inappSafariAction = UIAlertAction(title: "System", style: .default, handler: { _ in
                     print("Auto")
@@ -190,7 +203,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             present(themeSheet, animated: true) {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
-        case 2:
+        case 3:
             if browserSheet.actions.count == 0 {
                 let inappSafariAction = UIAlertAction(title: "In-App Safari", style: .default, handler: { _ in
                     print("In-app Safari")
@@ -223,7 +236,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             present(browserSheet, animated: true) {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
-        case 3:
+        case 4:
             switch indexPath.row {
             case 0:
                 // swiftlint:disable:next force_cast
@@ -307,7 +320,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             default:
                 break
             }
-        case 4:
+        case 5:
             switch indexPath.row {
             case 0:
                 open(URL(string: "https://zac.gorak.us/ios/privacy.html")!, title: "Privacy Policy") { _ in

@@ -28,6 +28,8 @@
 		F6397FF725EF045200914B3F /* LockedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FF625EF045200914B3F /* LockedCellView.swift */; };
 		F643030B25E47BA300109C92 /* EZPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643030A25E47BA300109C92 /* EZPanel.swift */; };
 		F643036825E6033D00109C92 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = F643036725E6033D00109C92 /* DeviceKit */; };
+		F64418E6271CA13000E40F2C /* LocalDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64418E5271CA13000E40F2C /* LocalDns.swift */; };
+		F644A0F827925CF60061C98B /* HostModelWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F644A0F727925CF60061C98B /* HostModelWrapperView.swift */; };
 		F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F744233CEB4B00BAA609 /* DataFeedCells.swift */; };
 		F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F746233CECD900BAA609 /* DataFeedCell.swift */; };
 		F650F749233CF15800BAA609 /* DataFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F748233CF15800BAA609 /* DataFeed.swift */; };
@@ -45,6 +47,7 @@
 		F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB462356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift */; };
 		F668EB4B2356AE3800EEB379 /* IAPFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */; };
 		F66BB7202453B85C00E86A93 /* SplitTabBar in Frameworks */ = {isa = PBXBuildFile; productRef = F66BB71F2453B85C00E86A93 /* SplitTabBar */; };
+		F671EF4C277553D6007AF79F /* HostSectionOrganizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671EF4B277553D6007AF79F /* HostSectionOrganizerView.swift */; };
 		F67425DB21363FFF00A79492 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67425DA21363FFF00A79492 /* UITextView.swift */; };
 		F67ED9F02409F3D300021F6C /* MonapiRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67ED9EF2409F3D300021F6C /* MonapiRecord.swift */; };
 		F67ED9F22409F3E200021F6C /* MonapiCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67ED9F12409F3E200021F6C /* MonapiCellManager.swift */; };
@@ -147,6 +150,8 @@
 		F6397FF125EF012300914B3F /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		F6397FF625EF045200914B3F /* LockedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedCellView.swift; sourceTree = "<group>"; };
 		F643030A25E47BA300109C92 /* EZPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EZPanel.swift; sourceTree = "<group>"; };
+		F64418E5271CA13000E40F2C /* LocalDns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDns.swift; sourceTree = "<group>"; };
+		F644A0F727925CF60061C98B /* HostModelWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostModelWrapperView.swift; sourceTree = "<group>"; };
 		F650F744233CEB4B00BAA609 /* DataFeedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedCells.swift; sourceTree = "<group>"; };
 		F650F746233CECD900BAA609 /* DataFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedCell.swift; sourceTree = "<group>"; };
 		F650F748233CF15800BAA609 /* DataFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeed.swift; sourceTree = "<group>"; };
@@ -161,6 +166,7 @@
 		F668EB4423563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedSubscriptionDataViewController.swift; sourceTree = "<group>"; };
 		F668EB462356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedUserApiKeyTableViewController.swift; sourceTree = "<group>"; };
 		F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPFooterView.swift; sourceTree = "<group>"; };
+		F671EF4B277553D6007AF79F /* HostSectionOrganizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSectionOrganizerView.swift; sourceTree = "<group>"; };
 		F67425DA21363FFF00A79492 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		F67ED9EF2409F3D300021F6C /* MonapiRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonapiRecord.swift; sourceTree = "<group>"; };
 		F67ED9F12409F3E200021F6C /* MonapiCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonapiCellManager.swift; sourceTree = "<group>"; };
@@ -285,12 +291,22 @@
 			isa = PBXGroup;
 			children = (
 				F6397FE425E8937900914B3F /* HostView.swift */,
+				F644A0F727925CF60061C98B /* HostModelWrapperView.swift */,
 				F66643B426F02A8F000F17BC /* HostViewSection.swift */,
 				F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */,
 				F6397FF125EF012300914B3F /* ShareSheetView.swift */,
 				F6397FF625EF045200914B3F /* LockedCellView.swift */,
+				F671EF4B277553D6007AF79F /* HostSectionOrganizerView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F64418E3271CA11900E40F2C /* LocalDns */ = {
+			isa = PBXGroup;
+			children = (
+				F64418E5271CA13000E40F2C /* LocalDns.swift */,
+			);
+			path = LocalDns;
 			sourceTree = "<group>";
 		};
 		F66643B126F02A4C000F17BC /* Models */ = {
@@ -319,6 +335,7 @@
 				F650F746233CECD900BAA609 /* DataFeedCell.swift */,
 				F668EB4223563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift */,
 				F68CE56523031DA20068D104 /* DataFeedErrors.swift */,
+				F64418E3271CA11900E40F2C /* LocalDns */,
 				F6B15A5E23F7AC04001DB252 /* Monapi */,
 				F6D4BB0823583E4800FDAFF7 /* Google */,
 				F69E3646235804C10017296E /* WhoisXML */,
@@ -701,6 +718,7 @@
 				F668EB4B2356AE3800EEB379 /* IAPFooterView.swift in Sources */,
 				F668EB3C23501FA200EEB379 /* DataFeedEndpoint.swift in Sources */,
 				F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */,
+				F64418E6271CA13000E40F2C /* LocalDns.swift in Sources */,
 				F6D4BB0C23584E0C00FDAFF7 /* GoogleWebRiskCellManager.swift in Sources */,
 				F650F749233CF15800BAA609 /* DataFeed.swift in Sources */,
 				F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */,
@@ -719,6 +737,7 @@
 				F643030B25E47BA300109C92 /* EZPanel.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
+				F644A0F827925CF60061C98B /* HostModelWrapperView.swift in Sources */,
 				F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */,
 				F69E364C235806720017296E /* WhoisXMLService.swift in Sources */,
 				F6FBB869236781AC00E023F2 /* UIDevice.swift in Sources */,
@@ -731,6 +750,7 @@
 				F6397FF725EF045200914B3F /* LockedCellView.swift in Sources */,
 				F6FBB86723677FA700E023F2 /* DeviceController.swift in Sources */,
 				F67ED9F22409F3E200021F6C /* MonapiCellManager.swift in Sources */,
+				F671EF4C277553D6007AF79F /* HostSectionOrganizerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

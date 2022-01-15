@@ -11,7 +11,7 @@ import UIKit
 
 class DataFeedCells {
     var feeds: [DataFeed] {
-        return [WhoisXml.current, GoogleWebRisk.current, Monapi.current]
+        return [WhoisXml.current, GoogleWebRisk.current]
     }
 
     var subscriptions: [DataFeedSubscription] {

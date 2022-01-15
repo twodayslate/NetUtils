@@ -3,16 +3,30 @@ import SwiftUI
 import Combine
 
 @available(iOS 15.0, *)
+@MainActor
 class HostViewModel: ObservableObject {
-    @Published var sections: [HostViewSection]
+    @Published var sections: [HostViewSection] {
+        didSet {
+            self.order = self.sections.map({ $0.sectionModel.service.name })
+        }
+    }
     
     static var hiddenKey = "hostviewmodel.hidden"
+    /** The key used to determine the section order*/
+    static var orderKey = "hostviewmodel.order"
+    
+    @Published var order: [String] = UserDefaults.standard.object(forKey: HostViewModel.orderKey) as? [String] ?? [] {
+        didSet {
+            UserDefaults.standard.set(self.order, forKey: Self.orderKey)
+        }
+    }
     
     @Published var hidden: [String] = UserDefaults.standard.object(forKey: HostViewModel.hiddenKey) as? [String] ?? [] {
         didSet {
+            print("did set \(self.hidden.count) v \(self.sections.count)")
             UserDefaults.standard.set(self.hidden, forKey: Self.hiddenKey)
-            self.generateVisibleSections()
             objectWillChange.send()
+            self.generateVisibleSections()
         }
     }
             
@@ -20,18 +34,27 @@ class HostViewModel: ObservableObject {
         self.sections = []
         self.generateVisibleSections()
     }
-        
+    
+    static var shared: HostViewModel { return HostViewModel() }
+
     private func generateVisibleSections() {
-        let sections = [
-//            HostSectionModel(SimpleDNSResolver.current, service: SimpleDNSResolver.resolver),
-//            HostSectionModel(WhoisXml.current, service: WhoisXml.dnsService),
+        var all_sections = [
+            LocalDnsModel(),
             WhoisXmlWhoisSectionModel(),
-//            HostSectionModel(GoogleWebRisk.current, service: GoogleWebRisk.lookupService),
             MonapiSectionModel()]
-        let visible_section_titles = sections.drop(while: { self.hidden.contains($0.service.name) })
+        all_sections.removeAll(where: {self.hidden.contains($0.service.name)})
         
+        var ordered_sections = [HostSectionModel]()
         
-        self.sections = visible_section_titles.map {
+        for sectionName in self.order {
+            if let section = all_sections.first(where: {$0.service.name == sectionName}) {
+                ordered_sections.append(section)
+                all_sections.removeAll(where: {$0 == section})
+            }
+        }
+        ordered_sections.append(contentsOf: all_sections)
+        
+        self.sections = ordered_sections.map {
             return HostViewSection(model: self, sectionModel: $0)
         }
     }
@@ -41,7 +64,7 @@ class HostViewModel: ObservableObject {
     private var workItems = [DispatchWorkItem]()
     private let _queue = DispatchQueue(label: "HostViewModelQueue")
     
-    func query(url: URL? = nil, completion block: (()->())? = nil) {
+    func query(url: URL? = nil, completion block: (()->())? = nil) async {
         self.cancel()
         self.isQuerying = true
         
@@ -56,9 +79,9 @@ class HostViewModel: ObservableObject {
                     group.leave()
                 }
             }
-            _queue.async {
+//            Task.detached(priority: .userInitiated) {
                 item.perform()
-            }
+//            }
         }
         
         group.notify(queue: .main) {

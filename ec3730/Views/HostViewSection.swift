@@ -28,13 +28,20 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
         FSDisclosureGroup(isExpanded: $isExpanded,
             content: {
                 LazyVStack(alignment: .leading, spacing: 0) {
-                    if self.sectionModel.storeModel.purchasedIdentifiers.count > 0 {
-                        // Need se-0309
+                    if let storeModel = self.sectionModel.storeModel {
+                        if storeModel.purchasedIdentifiers.count > 0 {
+                            // Need se-0309
+                            ForEach(self.sectionModel.content) { row in
+                                row
+                            }
+                        } else {
+                            PurchaseCellView(model: storeModel, heading: sectionModel.dataFeed.name, subheading: sectionModel.dataFeed.webpage.description)
+                            //PurchaseCellView(model: storeModel)
+                        }
+                    } else {
                         ForEach(self.sectionModel.content) { row in
                             row
                         }
-                    } else {
-                        PurchaseCellView(model: self.sectionModel.storeModel)
                     }
                     
                 }.listRowInsets(EdgeInsets.init(top: 8, leading: 0, bottom: 8, trailing: 0)).background(Color.init(UIColor.systemBackground))

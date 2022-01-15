@@ -58,7 +58,7 @@ class StoreKitModel: ObservableObject {
     }
     
     @MainActor
-    func restore(completion block: (() -> Void)?) async throws {
+    func restore(completion block: (() -> Void)? = nil) async throws {
         try? await AppStore.sync()
         block?()
 //        let products = try await Product.products(for: self.productSet)

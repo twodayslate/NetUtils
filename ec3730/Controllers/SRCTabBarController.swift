@@ -37,7 +37,7 @@ class SRCTabBarController: SplitTabBarViewController {
 
         var host: UIViewController!
         if #available(iOS 15.0, *) {
-            host = UIHostingController(rootView: HostView())
+            host = UIHostingController(rootView: HostModelWrapperView(view: HostView()))
         } else {
             host = HostViewController()
         }

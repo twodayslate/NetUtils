@@ -4,7 +4,7 @@ import Combine
 
 
 @available(iOS 15.0, *)
-class HostSectionModel: ObservableObject {
+class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
     
     @Published var content = [CopyCellView]()
 
@@ -17,7 +17,7 @@ class HostSectionModel: ObservableObject {
     
     var dataToCopy: String? = nil
     
-    @Published var storeModel: StoreKitModel!
+    @Published var storeModel: StoreKitModel?
     
     init(_ feed: DataFeed, service: Service) {
         self.dataFeed = feed
@@ -26,6 +26,38 @@ class HostSectionModel: ObservableObject {
     
     func query(url: URL? = nil, completion block: (()->())? = nil) {
         fatalError("Configure your section query")
+    }
+    
+    static func == (lhs: HostSectionModel, rhs: HostSectionModel) -> Bool {
+        return lhs.service.name == rhs.service.name
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.service.name)
+    }
+}
+
+@available(iOS 15.0, *)
+class LocalDnsModel: HostSectionModel {
+    convenience init() {
+        self.init(LocalDns.current, service: LocalDns.lookupService)
+    }
+
+    override func query(url: URL? = nil, completion block: (() -> ())? = nil) {
+        guard let host = url?.host else {
+            block?()
+            return
+        }
+        
+        self.service.query(["host": host]) { (error, response: [String]?) in
+            self.content.removeAll()
+            guard let addresses = response else {
+                return
+            }
+            for address in addresses {
+                self.content.append(CopyCellView(title: "Address", content: address))
+            }
+        }
     }
 }
 
@@ -47,8 +79,6 @@ class MonapiSectionModel: HostSectionModel {
             block?()
         }
     }
-    
-    //var storeMode =
 }
 
 @available(iOS 15.0, *)
@@ -642,7 +672,6 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 }
 
                 self.configure(with: response.whoisRecord)
-                
         }
     }
 }
