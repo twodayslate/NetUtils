@@ -14,6 +14,7 @@ struct HostSectionOrganizerView: View {
                     }.onMove { indexSet, offset in
                         print(indexSet, indexSet.first ?? "", offset)
                         withAnimation {
+                            self.model.objectWillChange.send()
                             self.model.sections.move(fromOffsets: indexSet, toOffset: offset)
                         }
                     }.onDelete { indexSet in

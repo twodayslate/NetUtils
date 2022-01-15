@@ -73,6 +73,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
             if self != self.model.sections.last, let index = self.model.sections.firstIndex(of: self) {
                 Button(action: {
                     withAnimation {
+                        self.model.objectWillChange.send()
                         self.model.sections.swapAt(index, index.advanced(by: 1))
                     }
                 }, label: {

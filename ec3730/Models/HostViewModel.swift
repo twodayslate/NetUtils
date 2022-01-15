@@ -35,7 +35,7 @@ class HostViewModel: ObservableObject {
         self.generateVisibleSections()
     }
     
-    static var shared: HostViewModel { return HostViewModel() }
+    static var shared: HostViewModel = { return HostViewModel() }()
 
     private func generateVisibleSections() {
         var all_sections = [
@@ -73,15 +73,13 @@ class HostViewModel: ObservableObject {
         for section in self.sections {
             group.enter()
             
-            var item: DispatchWorkItem!
-            item = DispatchWorkItem {
-                section.sectionModel.query(url: url) {
-                    group.leave()
-                }
+            Task {
+                DispatchWorkItem {
+                    section.sectionModel.query(url: url) {
+                        group.leave()
+                    }
+                }.perform()
             }
-//            Task.detached(priority: .userInitiated) {
-                item.perform()
-//            }
         }
         
         group.notify(queue: .main) {
