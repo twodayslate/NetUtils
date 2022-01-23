@@ -19,7 +19,7 @@ struct HostResult: View {
             ScrollView {
                 
                 LazyVStack(alignment: .leading, spacing: 0) {
-                    ForEach(Array(self.group.results), id: \.self) { result in
+                    ForEach(Array(self.group.results.sorted(by: { $0.date < $1.date })), id: \.self) { result in
                         if let data = HostSectionModel.configure(with: result) {
                             HostResultSection(data: data)
                         } else {

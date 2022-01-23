@@ -81,20 +81,21 @@ struct WhoisRecord: Codable {
     let administrativeContact: WhoisRecordAdministrativeContact?
     let audit: WhoisRecordAudit
     let billingContact: WhoisRecordBillingContact?
-    let contactEmail: String
+    let contactEmail: String?
     let createdDate, createdDateNormalized: Date?
     let customField1Name, customField1Value, customField2Name, customField2Value: String?
     let customField3Name, customField3Value: String?
-    let domainAvailability, domainName, domainNameEXT: String
-    let estimatedDomainAge: Int
+    let domainAvailability, domainName, domainNameEXT: String?
+    let estimatedDomainAge: Int?
     let expiresDate, expiresDateNormalized: Date?
     let footer, header: String?
     let ips: [String]?
     let nameServers: WhoisRecordNameServers?
-    let parseCode: Int
+    let parseCode: Int?
     let rawText: String?
+    let dataError: String?
     let registrant: Registrant?
-    let registrarIANAID, registrarName: String
+    let registrarIANAID, registrarName: String?
     let registryData: RegistryData
     let status, strippedText: String?
     let technicalContact: WhoisRecordTechnicalContact?
@@ -103,7 +104,7 @@ struct WhoisRecord: Codable {
     let zoneContact: WhoisRecordZoneContact?
 
     enum CodingKeys: String, CodingKey {
-        case administrativeContact, audit, billingContact, contactEmail, createdDate, createdDateNormalized, customField1Name, customField1Value, customField2Name, customField2Value, customField3Name, customField3Value, domainAvailability, domainName
+        case administrativeContact, audit, billingContact, contactEmail, createdDate, createdDateNormalized, customField1Name, customField1Value, customField2Name, dataError, customField2Value, customField3Name, customField3Value, domainAvailability, domainName
         case domainNameEXT = "domainNameExt"
         case estimatedDomainAge, expiresDate, expiresDateNormalized, footer, header, ips, nameServers, parseCode, rawText, registrant, registrarIANAID, registrarName, registryData, status, strippedText, technicalContact, updatedDate, updatedDateNormalized, whoisServer, zoneContact
     }
@@ -127,81 +128,81 @@ extension WhoisRecord {
         try self.init(data: try Data(contentsOf: url))
     }
 
-    func with(
-        administrativeContact: WhoisRecordAdministrativeContact?? = nil,
-        audit: WhoisRecordAudit? = nil,
-        billingContact: WhoisRecordBillingContact?? = nil,
-        contactEmail: String? = nil,
-        createdDate: Date?? = nil,
-        createdDateNormalized: Date?? = nil,
-        customField1Name: String?? = nil,
-        customField1Value: String?? = nil,
-        customField2Name: String?? = nil,
-        customField2Value: String?? = nil,
-        customField3Name: String?? = nil,
-        customField3Value: String?? = nil,
-        domainAvailability: String? = nil,
-        domainName: String? = nil,
-        domainNameEXT: String? = nil,
-        estimatedDomainAge: Int? = nil,
-        expiresDate: Date?? = nil,
-        expiresDateNormalized: Date?? = nil,
-        footer: String?? = nil,
-        header: String?? = nil,
-        ips: [String]?? = nil,
-        nameServers: WhoisRecordNameServers?? = nil,
-        parseCode: Int? = nil,
-        rawText: String?? = nil,
-        registrant: Registrant?? = nil,
-        registrarIANAID: String? = nil,
-        registrarName: String? = nil,
-        registryData: RegistryData? = nil,
-        status: String?? = nil,
-        strippedText: String?? = nil,
-        technicalContact: WhoisRecordTechnicalContact?? = nil,
-        updatedDate: Date?? = nil,
-        updatedDateNormalized: Date?? = nil,
-        whoisServer: String?? = nil,
-        zoneContact: WhoisRecordZoneContact?? = nil
-    ) -> WhoisRecord {
-        return WhoisRecord(
-            administrativeContact: administrativeContact ?? self.administrativeContact,
-            audit: audit ?? self.audit,
-            billingContact: billingContact ?? self.billingContact,
-            contactEmail: contactEmail ?? self.contactEmail,
-            createdDate: createdDate ?? self.createdDate,
-            createdDateNormalized: createdDateNormalized ?? self.createdDateNormalized,
-            customField1Name: customField1Name ?? self.customField1Name,
-            customField1Value: customField1Value ?? self.customField1Value,
-            customField2Name: customField2Name ?? self.customField2Name,
-            customField2Value: customField2Value ?? self.customField2Value,
-            customField3Name: customField3Name ?? self.customField3Name,
-            customField3Value: customField3Value ?? self.customField3Value,
-            domainAvailability: domainAvailability ?? self.domainAvailability,
-            domainName: domainName ?? self.domainName,
-            domainNameEXT: domainNameEXT ?? self.domainNameEXT,
-            estimatedDomainAge: estimatedDomainAge ?? self.estimatedDomainAge,
-            expiresDate: expiresDate ?? self.expiresDate,
-            expiresDateNormalized: expiresDateNormalized ?? self.expiresDateNormalized,
-            footer: footer ?? self.footer,
-            header: header ?? self.header,
-            ips: ips ?? self.ips,
-            nameServers: nameServers ?? self.nameServers,
-            parseCode: parseCode ?? self.parseCode,
-            rawText: rawText ?? self.rawText,
-            registrant: registrant ?? self.registrant,
-            registrarIANAID: registrarIANAID ?? self.registrarIANAID,
-            registrarName: registrarName ?? self.registrarName,
-            registryData: registryData ?? self.registryData,
-            status: status ?? self.status,
-            strippedText: strippedText ?? self.strippedText,
-            technicalContact: technicalContact ?? self.technicalContact,
-            updatedDate: updatedDate ?? self.updatedDate,
-            updatedDateNormalized: updatedDateNormalized ?? self.updatedDateNormalized,
-            whoisServer: whoisServer ?? self.whoisServer,
-            zoneContact: zoneContact ?? self.zoneContact
-        )
-    }
+//    func with(
+//        administrativeContact: WhoisRecordAdministrativeContact?? = nil,
+//        audit: WhoisRecordAudit? = nil,
+//        billingContact: WhoisRecordBillingContact?? = nil,
+//        contactEmail: String? = nil,
+//        createdDate: Date?? = nil,
+//        createdDateNormalized: Date?? = nil,
+//        customField1Name: String?? = nil,
+//        customField1Value: String?? = nil,
+//        customField2Name: String?? = nil,
+//        customField2Value: String?? = nil,
+//        customField3Name: String?? = nil,
+//        customField3Value: String?? = nil,
+//        domainAvailability: String? = nil,
+//        domainName: String? = nil,
+//        domainNameEXT: String? = nil,
+//        estimatedDomainAge: Int? = nil,
+//        expiresDate: Date?? = nil,
+//        expiresDateNormalized: Date?? = nil,
+//        footer: String?? = nil,
+//        header: String?? = nil,
+//        ips: [String]?? = nil,
+//        nameServers: WhoisRecordNameServers?? = nil,
+//        parseCode: Int? = nil,
+//        rawText: String?? = nil,
+//        registrant: Registrant?? = nil,
+//        registrarIANAID: String? = nil,
+//        registrarName: String? = nil,
+//        registryData: RegistryData? = nil,
+//        status: String?? = nil,
+//        strippedText: String?? = nil,
+//        technicalContact: WhoisRecordTechnicalContact?? = nil,
+//        updatedDate: Date?? = nil,
+//        updatedDateNormalized: Date?? = nil,
+//        whoisServer: String?? = nil,
+//        zoneContact: WhoisRecordZoneContact?? = nil
+//    ) -> WhoisRecord {
+//        return WhoisRecord(
+//            administrativeContact: administrativeContact ?? self.administrativeContact,
+//            audit: audit ?? self.audit,
+//            billingContact: billingContact ?? self.billingContact,
+//            contactEmail: contactEmail ?? self.contactEmail,
+//            createdDate: createdDate ?? self.createdDate,
+//            createdDateNormalized: createdDateNormalized ?? self.createdDateNormalized,
+//            customField1Name: customField1Name ?? self.customField1Name,
+//            customField1Value: customField1Value ?? self.customField1Value,
+//            customField2Name: customField2Name ?? self.customField2Name,
+//            customField2Value: customField2Value ?? self.customField2Value,
+//            customField3Name: customField3Name ?? self.customField3Name,
+//            customField3Value: customField3Value ?? self.customField3Value,
+//            domainAvailability: domainAvailability ?? self.domainAvailability,
+//            domainName: domainName ?? self.domainName,
+//            domainNameEXT: domainNameEXT ?? self.domainNameEXT,
+//            estimatedDomainAge: estimatedDomainAge ?? self.estimatedDomainAge,
+//            expiresDate: expiresDate ?? self.expiresDate,
+//            expiresDateNormalized: expiresDateNormalized ?? self.expiresDateNormalized,
+//            footer: footer ?? self.footer,
+//            header: header ?? self.header,
+//            ips: ips ?? self.ips,
+//            nameServers: nameServers ?? self.nameServers,
+//            parseCode: parseCode ?? self.parseCode,
+//            rawText: rawText ?? self.rawText,
+//            registrant: registrant ?? self.registrant,
+//            registrarIANAID: registrarIANAID ?? self.registrarIANAID,
+//            registrarName: registrarName ?? self.registrarName,
+//            registryData: registryData ?? self.registryData,
+//            status: status ?? self.status,
+//            strippedText: strippedText ?? self.strippedText,
+//            technicalContact: technicalContact ?? self.technicalContact,
+//            updatedDate: updatedDate ?? self.updatedDate,
+//            updatedDateNormalized: updatedDateNormalized ?? self.updatedDateNormalized,
+//            whoisServer: whoisServer ?? self.whoisServer,
+//            zoneContact: zoneContact ?? self.zoneContact, dataError: nil
+//        )
+//    }
 
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
@@ -635,20 +636,22 @@ struct RegistryData: Codable {
     let administrativeContact: RegistryDataAdministrativeContact?
     let audit: RegistryDataAudit
     let billingContact: RegistryDataBillingContact?
-    let createdDate, createdDateNormalized: Date
+    let createdDate, createdDateNormalized: Date?
     let customField1Name, customField1Value, customField2Name, customField2Value: String?
     let customField3Name, customField3Value: String?
     let domainName: String
-    let expiresDate, expiresDateNormalized: Date
+    let expiresDate, expiresDateNormalized: Date?
     let footer, header: String?
-    let nameServers: RegistryDataNameServers
+    let nameServers: RegistryDataNameServers?
     let parseCode: Int
-    let rawText, registrarIANAID, registrarName: String
+    let rawText: String
+    let registrarIANAID, registrarName: String?
     let regustrant: Regustrant?
-    let status, strippedText: String
+    let status, strippedText: String?
     let technicalContact: RegistryDataTechnicalContact?
-    let updatedDate, updatedDateNormalized: Date
+    let updatedDate, updatedDateNormalized: Date?
     let whoisServer: String
+    let dataError: String?
     let zoneContact: RegistryDataZoneContact?
 }
 
@@ -670,69 +673,70 @@ extension RegistryData {
         try self.init(data: try Data(contentsOf: url))
     }
 
-    func with(
-        administrativeContact: RegistryDataAdministrativeContact?? = nil,
-        audit: RegistryDataAudit? = nil,
-        billingContact: RegistryDataBillingContact?? = nil,
-        createdDate: Date? = nil,
-        createdDateNormalized: Date? = nil,
-        customField1Name: String?? = nil,
-        customField1Value: String?? = nil,
-        customField2Name: String?? = nil,
-        customField2Value: String?? = nil,
-        customField3Name: String?? = nil,
-        customField3Value: String?? = nil,
-        domainName: String? = nil,
-        expiresDate: Date? = nil,
-        expiresDateNormalized: Date? = nil,
-        footer: String?? = nil,
-        header: String?? = nil,
-        nameServers: RegistryDataNameServers? = nil,
-        parseCode: Int? = nil,
-        rawText: String? = nil,
-        registrarIANAID: String? = nil,
-        registrarName: String? = nil,
-        regustrant: Regustrant?? = nil,
-        status: String? = nil,
-        strippedText: String? = nil,
-        technicalContact: RegistryDataTechnicalContact?? = nil,
-        updatedDate: Date? = nil,
-        updatedDateNormalized: Date? = nil,
-        whoisServer: String? = nil,
-        zoneContact: RegistryDataZoneContact?? = nil
-    ) -> RegistryData {
-        return RegistryData(
-            administrativeContact: administrativeContact ?? self.administrativeContact,
-            audit: audit ?? self.audit,
-            billingContact: billingContact ?? self.billingContact,
-            createdDate: createdDate ?? self.createdDate,
-            createdDateNormalized: createdDateNormalized ?? self.createdDateNormalized,
-            customField1Name: customField1Name ?? self.customField1Name,
-            customField1Value: customField1Value ?? self.customField1Value,
-            customField2Name: customField2Name ?? self.customField2Name,
-            customField2Value: customField2Value ?? self.customField2Value,
-            customField3Name: customField3Name ?? self.customField3Name,
-            customField3Value: customField3Value ?? self.customField3Value,
-            domainName: domainName ?? self.domainName,
-            expiresDate: expiresDate ?? self.expiresDate,
-            expiresDateNormalized: expiresDateNormalized ?? self.expiresDateNormalized,
-            footer: footer ?? self.footer,
-            header: header ?? self.header,
-            nameServers: nameServers ?? self.nameServers,
-            parseCode: parseCode ?? self.parseCode,
-            rawText: rawText ?? self.rawText,
-            registrarIANAID: registrarIANAID ?? self.registrarIANAID,
-            registrarName: registrarName ?? self.registrarName,
-            regustrant: regustrant ?? self.regustrant,
-            status: status ?? self.status,
-            strippedText: strippedText ?? self.strippedText,
-            technicalContact: technicalContact ?? self.technicalContact,
-            updatedDate: updatedDate ?? self.updatedDate,
-            updatedDateNormalized: updatedDateNormalized ?? self.updatedDateNormalized,
-            whoisServer: whoisServer ?? self.whoisServer,
-            zoneContact: zoneContact ?? self.zoneContact
-        )
-    }
+//    func with(
+//        administrativeContact: RegistryDataAdministrativeContact?? = nil,
+//        audit: RegistryDataAudit? = nil,
+//        billingContact: RegistryDataBillingContact?? = nil,
+//        createdDate: Date? = nil,
+//        createdDateNormalized: Date? = nil,
+//        customField1Name: String?? = nil,
+//        customField1Value: String?? = nil,
+//        customField2Name: String?? = nil,
+//        customField2Value: String?? = nil,
+//        customField3Name: String?? = nil,
+//        customField3Value: String?? = nil,
+//        domainName: String? = nil,
+//        expiresDate: Date? = nil,
+//        expiresDateNormalized: Date? = nil,
+//        footer: String?? = nil,
+//        header: String?? = nil,
+//        nameServers: RegistryDataNameServers? = nil,
+//        parseCode: Int? = nil,
+//        rawText: String? = nil,
+//        registrarIANAID: String? = nil,
+//        registrarName: String? = nil,
+//        regustrant: Regustrant?? = nil,
+//        status: String? = nil,
+//        strippedText: String? = nil,
+//        technicalContact: RegistryDataTechnicalContact?? = nil,
+//        updatedDate: Date? = nil,
+//        updatedDateNormalized: Date? = nil,
+//        whoisServer: String? = nil,
+//        zoneContact: RegistryDataZoneContact?? = nil
+//    ) -> RegistryData {
+//        return RegistryData(
+//            administrativeContact: administrativeContact ?? self.administrativeContact,
+//            audit: audit ?? self.audit,
+//            billingContact: billingContact ?? self.billingContact,
+//            createdDate: createdDate ?? self.createdDate,
+//            createdDateNormalized: createdDateNormalized ?? self.createdDateNormalized,
+//            customField1Name: customField1Name ?? self.customField1Name,
+//            customField1Value: customField1Value ?? self.customField1Value,
+//            customField2Name: customField2Name ?? self.customField2Name,
+//            customField2Value: customField2Value ?? self.customField2Value,
+//            customField3Name: customField3Name ?? self.customField3Name,
+//            customField3Value: customField3Value ?? self.customField3Value,
+//            domainName: domainName ?? self.domainName,
+//            expiresDate: expiresDate ?? self.expiresDate,
+//            expiresDateNormalized: expiresDateNormalized ?? self.expiresDateNormalized,
+//            footer: footer ?? self.footer,
+//            header: header ?? self.header,
+//            nameServers: nameServers ?? self.nameServers,
+//            parseCode: parseCode ?? self.parseCode,
+//            rawText: rawText ?? self.rawText,
+//            registrarIANAID: registrarIANAID ?? self.registrarIANAID,
+//            registrarName: registrarName ?? self.registrarName,
+//            regustrant: regustrant ?? self.regustrant,
+//            status: status ?? self.status,
+//            strippedText: strippedText ?? self.strippedText,
+//            technicalContact: technicalContact ?? self.technicalContact,
+//            updatedDate: updatedDate ?? self.updatedDate,
+//            updatedDateNormalized: updatedDateNormalized ?? self.updatedDateNormalized,
+//            whoisServer: whoisServer ?? self.whoisServer,
+//            zoneContact: zoneContact ?? self.zoneContact,
+//            dataError: nil
+//        )
+//    }
 
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)

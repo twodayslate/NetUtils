@@ -15,30 +15,51 @@ struct HostView: View {
     @State var dismissKeyboard = UUID()
     var defaultUrl = "google.com"
     
+    @State var showErrors = false
+    @State var errors: [Error]? = nil
+    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
                     ScrollView {
-                        LazyVStack(alignment: .leading, spacing: 0) {
-                            ForEach(self.model.sections, id: \.self.id) { section in
-                                section.onDrag {
+                        // too jumpy if this is a lazy vstack
+                        // so we will make it a regular vstack until we have
+                        // more sections? can reinvestigate later
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(self.model.sections) { section in
+                                section
+                                    .id(section.id)
+                                    .onDrag {
                                     self.dragging = section
 
                                     return NSItemProvider(item: String(section.id) as NSString, typeIdentifier: "com.twodayslate.netutils.hostview.header")
                                 }
                                 .onDrop(of: ["com.twodayslate.netutils.hostview.header"], delegate: HostDragRelocateDelegate(item: section, listData: $model.sections, current: $dragging))
                             }
-                        }.animation(.default, value: model.sections)
+                        }
+                        .animation(.default, value: model.sections)
                     }
                     VStack(alignment: .leading, spacing: 0.0) {
                         Divider()
                         HStack(alignment: .center) {
                             // it would be great if this could be a .bottomBar toolbar but it is too buggy
                             TextField(self.defaultUrl, text: $text,  onCommit: { Task {
-                                await self.query()
+                                await self.query { errors in
+                                    guard errors.count <= 0 else {
+                                        self.showErrors = true
+                                        self.errors = errors
+                                        return
+                                    }
+                                }
                             }
-                            }).id(dismissKeyboard).disableAutocorrection(true).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.URL).padding(.leading, geometry.safeAreaInsets.leading)
+                            })
+                                .textInputAutocapitalization(.never)
+                                .id(dismissKeyboard)
+                                .disableAutocorrection(true)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.URL)
+                                .padding(.leading, geometry.safeAreaInsets.leading)
                             if self.model.isQuerying {
                                 Button("Cancel", action: {
                                     self.cancel()
@@ -46,7 +67,14 @@ struct HostView: View {
                             } else {
                                 Button("Lookup", action: {
                                     Task {
-                                   await self.query()
+                                   await self.query { errors in
+                                       guard errors.count <= 0 else {
+                                           self.showErrors = true
+                                           self.errors = errors
+                                           return
+                                       }
+                                       
+                                   }
                                     }
                                 }).padding(.trailing, geometry.safeAreaInsets.trailing)
                             }
@@ -64,6 +92,11 @@ struct HostView: View {
 
                     }
             }
+            .alert("Error", isPresented: $showErrors, presenting: self.errors, actions: {_ in
+                Button("Okay", role: .cancel) {}
+            }, message: { errors in
+                Text("\(errors.debugDescription)")
+            })
         }.environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
     
@@ -73,7 +106,7 @@ struct HostView: View {
     
     // iOS 15 todo: https://www.hackingwithswift.com/quick-start/swiftui/how-to-take-action-when-the-user-submits-a-textfield
     @MainActor
-    func query() async {
+    func query(completion block: (([Error])->())? = nil) async {
         var urlString = self.text.trimmingCharacters(in: .whitespacesAndNewlines)
 
         if urlString.isEmpty {
@@ -95,7 +128,15 @@ struct HostView: View {
             return
         }
 
-        await self.model.query(url: url, completion: {
+        await self.model.query(url: url, completion: { errors in
+            
+            let actualErrors = errors.filter({
+                if let se = $0 as? MoreStoreKitError {
+                    return se != .NotPurchased
+                }
+                return true
+            })
+            
             var datas = Set<HostData>()
             for section in self.model.sections {
                 
@@ -105,6 +146,9 @@ struct HostView: View {
             }
             let group = HostDataGroup(context: PersistenceController.shared.container.viewContext, url: url, data: datas)
             try? group.managedObjectContext?.save()
+            
+            
+            block?(actualErrors)
         })
     }
 

@@ -5,50 +5,62 @@ class LocalDnsModel: HostSectionModel {
         self.init(LocalDns.current, service: LocalDns.lookupService)
     }
 
-    override func configure(with data: Data?) {
-        self.dataToCopy = nil
-        self.content.removeAll()
+    @MainActor
+    override func configure(with data: Data?) throws -> Data? {
+        self.reset()
+
         guard let data = data else {
-            return
+            return nil
         }
         
-        if let addresses = try? JSONDecoder().decode([String].self, from: data) {
-            self.configure(addresses: addresses)
-        }
+        let addresses = try JSONDecoder().decode([String].self, from: data)
+        
+        return try self.configure(addresses: addresses)
     }
     
-    func configure(addresses: [String]) {
-        self.dataToCopy = nil
-        self.content.removeAll()
+    @MainActor
+    func configure(addresses: [String]) throws -> Data {
+        self.reset()
         
-        if let copyData = try? JSONEncoder().encode(addresses) {
-            self.dataToCopy = String(data: copyData, encoding: .utf8)
-        }
+        let copyData = try JSONEncoder().encode(addresses)
+        self.latestData = copyData
+        self.dataToCopy = String(data: copyData, encoding: .utf8)
         
         for address in addresses {
             self.content.append(CopyCellView(title: "Address", content: address))
         }
+        
+        return copyData
     }
     
-    override func query(url: URL? = nil, completion block: (() -> ())? = nil) {
-        self.dataToCopy = nil
-        self.content.removeAll()
+    @MainActor
+    override func query(url: URL? = nil, completion block: ((Error?, Data?) -> ())? = nil) {
+        // we are already on the main queue
+        self.reset()
         
         guard let host = url?.host else {
-            block?()
+            block?(URLError(URLError.badURL), nil)
             return
         }
         
-        self.service.query(["host": host]) { (error, response: [String]?) in
-            defer {
-                block?()
+        self.service.query(["host": host]) { (responseError, response: [String]?) in
+            DispatchQueue.main.async {
+                guard responseError == nil else {
+                    block?(responseError, nil)
+                    return
+                }
+                
+                guard let addresses = response else {
+                    block?(URLError(URLError.badServerResponse), nil)
+                    return
+                }
+                
+                do {
+                    block?(nil, try self.configure(addresses: addresses))
+                } catch {
+                    block?(error, nil)
+                }
             }
-
-            guard let addresses = response else {
-                return
-            }
-            
-            self.configure(addresses: addresses)
         }
     }
 }

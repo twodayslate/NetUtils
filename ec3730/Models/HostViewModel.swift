@@ -2,6 +2,13 @@ import Foundation
 import SwiftUI
 import Combine
 
+actor ActorArray<T> {
+    var values: [T] = []
+    func append(_ values: [T]) {
+        self.values.append(contentsOf: values)
+    }
+}
+
 @available(iOS 15.0, *)
 @MainActor
 class HostViewModel: ObservableObject {
@@ -66,27 +73,39 @@ class HostViewModel: ObservableObject {
     private var workItems = [DispatchWorkItem]()
     private let _queue = DispatchQueue(label: "HostViewModelQueue")
     
-    func query(url: URL? = nil, completion block: (()->())? = nil) async {
+    func query(url: URL? = nil, completion block: (([Error])->())? = nil) async {
         self.cancel()
         self.isQuerying = true
         
         let group = DispatchGroup()
+        let errors = ActorArray<Error>()
     
         for section in self.sections {
             group.enter()
             
             Task {
                 DispatchWorkItem {
-                    section.sectionModel.query(url: url) {
-                        group.leave()
+                    section.sectionModel.query(url: url) { error, _ in
+            
+                        Task {
+                            guard let error = error else {
+                                group.leave()
+                                return
+                            }
+                            await errors.append([error])
+                            group.leave()
+                        }
+                        
                     }
                 }.perform()
             }
         }
         
         group.notify(queue: .main) {
-            self.isQuerying = false
-            block?()
+            Task {
+                self.isQuerying = false
+                block?(await errors.values)
+            }
         }
     }
     

@@ -3,9 +3,10 @@ import CoreData
 public class HostDataGroup: NSManagedObject, Identifiable {
     @NSManaged public var date: Date
     @NSManaged public var url: URL
+    // would be great if this was an ordered set but obj-c and nsmanaged doesn't like that
     @NSManaged public var results: Set<HostData>
     
-    convenience init(context: NSManagedObjectContext, url: URL, data: Set<HostData> = Set()) {
+    convenience init(context: NSManagedObjectContext, url: URL, data: Set<HostData> = Set<HostData>()) {
         guard let entity = NSEntityDescription.entity(forEntityName: "HostDataGroup", in: context) else {
             fatalError("No entity named HostDataGroup")
         }

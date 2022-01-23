@@ -32,6 +32,9 @@
 		F63B922A279C8EE5007E845F /* HostResultSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B9229279C8EE5007E845F /* HostResultSection.swift */; };
 		F63B922C279C9079007E845F /* HostResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B922B279C9079007E845F /* HostResult.swift */; };
 		F63B922F279C985B007E845F /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = F63B922E279C985B007E845F /* Cache */; };
+		F63B9232279E130C007E845F /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = F63B9231279E130C007E845F /* Collections */; };
+		F63B9234279E130C007E845F /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = F63B9233279E130C007E845F /* DequeModule */; };
+		F63B9236279E130C007E845F /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = F63B9235279E130C007E845F /* OrderedCollections */; };
 		F643030B25E47BA300109C92 /* EZPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643030A25E47BA300109C92 /* EZPanel.swift */; };
 		F643036825E6033D00109C92 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = F643036725E6033D00109C92 /* DeviceKit */; };
 		F64418E6271CA13000E40F2C /* LocalDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64418E5271CA13000E40F2C /* LocalDns.swift */; };
@@ -249,6 +252,7 @@
 				F6F2017325DB6C18008BA024 /* SwiftyPing in Frameworks */,
 				F67ED9FB2411A0C200021F6C /* Reachability in Frameworks */,
 				F66643B026ED686D000F17BC /* InterposeKit in Frameworks */,
+				F63B9234279E130C007E845F /* DequeModule in Frameworks */,
 				F67EDA072411EA7700021F6C /* SKVersion in Frameworks */,
 				F67ED9FE2411A0D400021F6C /* KeychainAccess in Frameworks */,
 				F67ED9F82411A09000021F6C /* NetUtils in Frameworks */,
@@ -257,9 +261,11 @@
 				F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */,
 				F67EDA0A2411F42B00021F6C /* Highlightr in Frameworks */,
 				F67ED9F5240DF56100021F6C /* AddressURL in Frameworks */,
+				F63B9236279E130C007E845F /* OrderedCollections in Frameworks */,
 				F66643AD26ED5392000F17BC /* Introspect in Frameworks */,
 				F643036825E6033D00109C92 /* DeviceKit in Frameworks */,
 				F67EDA042411E70F00021F6C /* SplitView in Frameworks */,
+				F63B9232279E130C007E845F /* Collections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +563,9 @@
 				F66643AC26ED5392000F17BC /* Introspect */,
 				F66643AF26ED686D000F17BC /* InterposeKit */,
 				F63B922E279C985B007E845F /* Cache */,
+				F63B9231279E130C007E845F /* Collections */,
+				F63B9233279E130C007E845F /* DequeModule */,
+				F63B9235279E130C007E845F /* OrderedCollections */,
 			);
 			productName = ec3730;
 			productReference = F6C8D8A1212E5AE900309373 /* ec3730.app */;
@@ -655,6 +664,7 @@
 				F66643AB26ED5392000F17BC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				F66643AE26ED686D000F17BC /* XCRemoteSwiftPackageReference "InterposeKit" */,
 				F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */,
+				F63B9230279E130C007E845F /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = F6C8D8A2212E5AE900309373 /* Products */;
 			projectDirPath = "";
@@ -1134,6 +1144,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		F63B9230279E130C007E845F /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devicekit/DeviceKit";
@@ -1245,6 +1263,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
+		};
+		F63B9231279E130C007E845F /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F63B9230279E130C007E845F /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		F63B9233279E130C007E845F /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F63B9230279E130C007E845F /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		F63B9235279E130C007E845F /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F63B9230279E130C007E845F /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 		F643036725E6033D00109C92 /* DeviceKit */ = {
 			isa = XCSwiftPackageProductDependency;

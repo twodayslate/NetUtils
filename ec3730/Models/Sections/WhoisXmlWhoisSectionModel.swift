@@ -1,5 +1,6 @@
 import SwiftUI
 import Cache
+import StoreKit
 
 class WhoisXmlWhoisSectionModel: HostSectionModel {
     convenience init() {
@@ -7,29 +8,33 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
         self.storeModel = StoreKitModel.whois
     }
 
-    override func configure(with data: Data) {
-        self.content.removeAll()
-        self.dataToCopy = nil
-        guard let result = try? JSONDecoder().decode(WhoisRecord.self, from: data) else {
-            return
-        }
-        self.configure(with: result)
+    @MainActor
+    override func configure(with data: Data) throws -> Data? {
+        self.reset()
+        let result = try JSONDecoder().decode(WhoisRecord.self, from: data)
+        return try self.configure(with: result)
     }
     
-    func configure(with record: WhoisRecord) {
-        DispatchQueue.main.async {
-            self.content.removeAll()
+    @MainActor
+    func configure(with record: WhoisRecord) throws -> Data {
+        self.reset()
             
-            if let copyData = try? JSONEncoder().encode(record) {
-                self.dataToCopy = String(data: copyData, encoding: .utf8)
-            }
+            let copyData = try JSONEncoder().encode(record)
+            self.latestData = copyData
+            self.dataToCopy = String(data: copyData, encoding: .utf8)
                         
-            self.content.append(CopyCellView(title: "Created", content: "\(record.createdDate ?? record.registryData.createdDate)"))
+            if let error = record.dataError {
+                self.content.append(CopyCellView(title: "Error", content: error))
+            }
+            
+            self.content.append(CopyCellView(title: "Created", content: "\(record.createdDate ?? record.registryData.createdDate ?? record.audit.createdDate)"))
 
-            self.content.append(CopyCellView(title: "Updated", content: "\(record.updatedDate ?? record.registryData.updatedDate)"))
+            self.content.append(CopyCellView(title: "Updated", content: "\(record.updatedDate ?? record.registryData.updatedDate ?? record.audit.updatedDate)"))
 
-            self.content.append(CopyCellView(title: "Expires", content: "\(record.expiresDate ?? record.registryData.expiresDate)"))
-
+            if let expiresDate = record.expiresDate ?? record.registryData.expiresDate {
+                self.content.append(CopyCellView(title: "Expires", content: "\(expiresDate)"))
+            }
+            
             self.content.append(CopyCellView(title: "Registrar", content: record.registrarName))
 
             self.content.append(CopyCellView(title: "IANAID", content: record.registrarIANAID))
@@ -38,11 +43,13 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 self.content.append(CopyCellView(title: "WHOIS Server", content: whoisServer))
             }
 
-            self.content.append(CopyCellView(title: "Estimated Age", content: "\(record.estimatedDomainAge) day(s)"))
+            if let estimatedAge = record.estimatedDomainAge {
+                self.content.append(CopyCellView(title: "Estimated Age", content: "\(estimatedAge) day(s)"))
+            }
 
             self.content.append(CopyCellView(title: "Contact Email", content: record.contactEmail))
 
-            let hostNames = record.nameServers?.hostNames ?? record.registryData.nameServers.hostNames
+            let hostNames = record.nameServers?.hostNames ?? record.registryData.nameServers?.hostNames ?? []
             if hostNames.count > 0 {
                 var cells = [CopyCellRow]()
                 for host in hostNames.sorted() {
@@ -555,50 +562,56 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 let customCell =  CopyCellView(title: customFieldName, content: customFieldValue)
                 self.content.append(customCell)
             }
-        }
+            return copyData
     }
     
     
     private let cache = MemoryStorage<String, WhoisRecord>(config: .init(expiry: .seconds(15), countLimit: 3, totalCostLimit: 0))
     
-    override func query(url: URL? = nil, completion block: (() -> ())? = nil) {
-        self.dataToCopy = nil
-        self.content.removeAll()
+    @MainActor
+    override func query(url: URL? = nil, completion block: ((Error?, Data?) -> ())? = nil) {
+        self.reset()
     
         guard let host = url?.host else {
-            block?()
+            block?(URLError(URLError.badURL), nil)
             return
         }
 
         if let record = try? cache.object(forKey: host) {
-            self.configure(with: record)
-            block?()
+            do {
+                block?(nil, try self.configure(with: record))
+            } catch {
+                block?(error, nil)
+            }
             return
         }
         
         guard (self.dataFeed.userKey != nil || self.storeModel?.owned ?? false) else {
-            block?()
+            block?(MoreStoreKitError.NotPurchased, nil)
             return
         }
         
-        WhoisXml.whoisService.query(["domain": host]) { (error, response: Coordinate?) in
-            print(response.debugDescription)
-
-                defer {
-                    block?()
-                }
-                
-                guard error == nil else {
-                    // todo show error
+        WhoisXml.whoisService.query(["domain": host]) { (responseError, response: Coordinate?) in
+            DispatchQueue.main.async {
+                print(response.debugDescription)
+                    
+                guard responseError == nil else {
+                    block?(responseError, nil)
                     return
                 }
 
                 guard let response = response else {
-                    // todo show error
+                    block?(URLError(URLError.badServerResponse), nil)
                     return
                 }
                 self.cache.setObject(response.whoisRecord, forKey: host)
-                self.configure(with: response.whoisRecord)
+
+                do {
+                    block?(nil, try self.configure(with: response.whoisRecord))
+                } catch {
+                    block?(error, nil)
+                }
+            }
         }
     }
 }

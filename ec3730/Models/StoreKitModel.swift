@@ -1,5 +1,10 @@
 import StoreKit
 import SwiftUI
+import SwiftyStoreKit
+
+enum MoreStoreKitError: Error {
+    case NotPurchased
+}
 
 @available(iOS 15.0.0, *)
 class StoreKitModel: ObservableObject {
@@ -29,7 +34,7 @@ class StoreKitModel: ObservableObject {
 
         Task {
             //Initialize the store by starting a product request.
-            try? await retrieve()
+            try await retrieve()
         }
     }
 
@@ -76,6 +81,7 @@ class StoreKitModel: ObservableObject {
             if let transaction = await product.latestTransaction {
                 try await self.updatePurchasedIdentifiers(transaction.payloadValue)
             } else {
+                self.objectWillChange.send()
                 // can't get the latest transaction so assume it isn't purchased
                 purchasedIdentifiers.remove(product.id)
             }

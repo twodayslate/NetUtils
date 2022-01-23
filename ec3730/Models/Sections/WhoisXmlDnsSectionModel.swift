@@ -7,22 +7,23 @@ class WhoisXmlDnsSectionModel: HostSectionModel {
         self.storeModel = StoreKitModel.dns
     }
 
-    override func configure(with data: Data) {
-        self.content.removeAll()
-        self.dataToCopy = nil
-        guard let result = try? JSONDecoder().decode([DNSRecords].self, from: data) else {
-            return
-        }
-        self.configure(with: result)
+    @MainActor
+    override func configure(with data: Data) throws -> Data? {
+        self.reset()
+        
+        let result = try JSONDecoder().decode([DNSRecords].self, from: data)
+        
+        return try self.configure(with: result)
     }
     
-    func configure(with records: [DNSRecords]) {
-        DispatchQueue.main.async {
-            self.content.removeAll()
+    @MainActor
+    func configure(with records: [DNSRecords]) throws -> Data? {
+            self.reset()
             
-            if let copyData = try? JSONEncoder().encode(records) {
-                self.dataToCopy = String(data: copyData, encoding: .utf8)
-            }
+            let copyData = try JSONEncoder().encode(records)
+            self.latestData = copyData
+            self.dataToCopy = String(data: copyData, encoding: .utf8)
+            
             
             for record in records {
                 var rows = [CopyCellRow]()
@@ -59,57 +60,68 @@ class WhoisXmlDnsSectionModel: HostSectionModel {
                 if let value = record.serial {
                     rows.append(CopyCellRow(title: "Serial", content: "\(value)"))
                 }
+                
+                rows.append(CopyCellRow(title: "Raw", content: record.rawText))
 
                 self.content.append(CopyCellView(title: record.dnsType, rows: rows))
             }
-        }
+        
+        return self.latestData
     }
     
     private let cache = MemoryStorage<String, [DNSRecords]>(config: .init(expiry: .seconds(15), countLimit: 3, totalCostLimit: 0))
     
-    override func query(url: URL? = nil, completion block: (() -> ())? = nil) {
-        self.dataToCopy = nil
-        self.content.removeAll()
+    @MainActor
+    override func query(url: URL? = nil, completion block: ((Error?, Data?) -> ())? = nil) {
+        self.reset()
         
         guard let host = url?.host else {
-            block?()
+            block?(URLError(.badURL), nil)
             return
         }
         
         if let record = try? cache.object(forKey: host) {
-            self.configure(with: record)
-            block?()
+            do {
+                block?(nil, try self.configure(with: record))
+            } catch {
+                block?(error, nil)
+            }
             return
         }
         
         guard (self.dataFeed.userKey != nil || self.storeModel?.owned ?? false) else {
-            block?()
+            block?(MoreStoreKitError.NotPurchased, nil)
             return
         }
         
         WhoisXml.dnsService.query(["domain": host]) { (error, response: DnsCoordinate?) in
-            print(response.debugDescription)
+            DispatchQueue.main.async {
+                print(response.debugDescription)
+                    
+                    guard error == nil else {
+                        // todo show error
+                        block?(error, nil)
+                        return
+                    }
 
-                defer {
-                    block?()
-                }
+                    guard let response = response else {
+                        // todo show error
+                        block?(URLError(URLError.badServerResponse), nil)
+                        return
+                    }
+
                 
-                guard error == nil else {
-                    // todo show error
+                guard let record = response.dnsData.dnsRecords else {
+                    block?(URLError(URLError.badServerResponse), nil)
                     return
                 }
-
-                guard let response = response else {
-                    // todo show error
-                    return
+                self.cache.setObject(record, forKey: host)
+                do {
+                    block?(nil, try self.configure(with: record))
+                } catch {
+                    block?(error, nil)
                 }
-
-            
-            guard let record = response.dnsData.dnsRecords else {
-                return
             }
-            self.cache.setObject(record, forKey: host)
-            self.configure(with: record)
         }
     }
 }

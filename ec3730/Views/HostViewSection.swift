@@ -17,7 +17,13 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
     @ObservedObject var model: HostViewModel
     
     @ObservedObject var sectionModel: HostSectionModel
+    // easy way to force get changes instead of having sectionmodel bubble them up
+    // correctly
+    @ObservedObject var storeModel: StoreKitModel
     
+    @State var identifiersIds = [String]()
+    
+    @MainActor
     var canQuery: Bool {
         if let storeModel = self.sectionModel.storeModel {
             return (storeModel.owned || sectionModel.dataFeed.userKey != nil)
@@ -28,6 +34,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
     init(model: HostViewModel, sectionModel: HostSectionModel){
         self.model = model
         self.sectionModel = sectionModel
+        self.storeModel = sectionModel.storeModel ?? StoreKitModel(defaultId: "", ids: [])
         self._isExpanded = AppStorage(wrappedValue: false, "\(Self.self).isExpanded."+sectionModel.service.name)
     }
     
@@ -44,7 +51,6 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                             }
                         } else {
                             PurchaseCellView(model: storeModel, heading: sectionModel.dataFeed.name, subheading: sectionModel.service.description)
-                            //PurchaseCellView(model: storeModel)
                         }
                     } else {
                         ForEach(self.sectionModel.content) { row in
@@ -52,8 +58,10 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                         }
                     }
                     
-                }.listRowInsets(EdgeInsets.init(top: 8, leading: 0, bottom: 8, trailing: 0)).background(Color.init(UIColor.systemBackground))
-            },
+                }
+                .listRowInsets(EdgeInsets.init(top: 8, leading: 0, bottom: 8, trailing: 0))
+                .background(Color.init(UIColor.systemBackground))
+        },
             label: {
                 HStack(alignment: .center) {
                     Text(self.sectionModel.service.name).font(.headline).padding()
@@ -120,6 +128,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
     }
     
     var id: String {
-        self.sectionModel.service.name + "\(self.canQuery.description)"
+        let ans = self.sectionModel.dataFeed.name + self.sectionModel.service.name + "\(self.canQuery.description)"
+        return ans.filter { !$0.isWhitespace }
     }
 }

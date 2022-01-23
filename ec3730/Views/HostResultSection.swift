@@ -28,7 +28,6 @@ struct HostResultSection: View, Equatable, Identifiable, Hashable {
     var body: some View {
         FSDisclosureGroup(isExpanded: $isExpanded,
             content: {
-                
                 LazyVStack(alignment: .leading, spacing: 0) {
 
                         ForEach(self.sectionModel.content) { row in
