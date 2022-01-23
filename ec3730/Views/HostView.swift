@@ -53,8 +53,18 @@ struct HostView: View {
                         }.padding(.horizontal).padding([.vertical], 6)
                     }.background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)).ignoresSafeArea(.all, edges: .horizontal)).ignoresSafeArea()
                 }.navigationBarTitle("Host Information", displayMode: .inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing, content: {
+                        NavigationLink(
+                            destination: HostHistoryList(),
+                            label: {
+                                Image(systemName: "clock")
+                            })
+                        })
+
+                    }
             }
-        }
+        }.environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
     
     func cancel() {
@@ -62,13 +72,39 @@ struct HostView: View {
     }
     
     // iOS 15 todo: https://www.hackingwithswift.com/quick-start/swiftui/how-to-take-action-when-the-user-submits-a-textfield
+    @MainActor
     func query() async {
-        var url = URL(string: self.text)
-        if (url == nil) && self.text.isEmpty {
-            url = URL(string: self.defaultUrl)
+        var urlString = self.text.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if urlString.isEmpty {
+            urlString = self.defaultUrl
         }
+
+        guard let comps = URLComponents(string: urlString) else {
+            // display error
+            return
+        }
+
+        // we add the https:// for the user so they can just type google.com and things will still work
+        if comps.scheme == nil, !urlString.contains("://") {
+            urlString = "https://" + urlString
+        }
+
+        guard let url = URL(string: urlString)?.standardized, UIApplication.shared.canOpenURL(url), let _ = url.host else {
+            // display error
+            return
+        }
+
         await self.model.query(url: url, completion: {
-            
+            var datas = Set<HostData>()
+            for section in self.model.sections {
+                
+                if let str = section.sectionModel.dataToCopy, let data = str.data(using: .utf8) {
+                    datas.insert(HostData(context: PersistenceController.shared.container.viewContext, service: section.sectionModel.service, data: data))
+                }
+            }
+            let group = HostDataGroup(context: PersistenceController.shared.container.viewContext, url: url, data: datas)
+            try? group.managedObjectContext?.save()
         })
     }
 

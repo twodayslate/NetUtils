@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="HostDataEntity" representedClassName=".HostData" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="service" optional="YES" attributeType="String"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HostDataGroup" inverseName="results" inverseEntity="HostDataGroup"/>
+    </entity>
+    <entity name="HostDataGroup" representedClassName=".HostDataGroup" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="url" optional="YES" attributeType="URI"/>
+        <relationship name="results" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HostDataEntity" inverseName="relationship" inverseEntity="HostDataEntity"/>
+    </entity>
     <entity name="PingItem" representedClassName=".PingItem" syncable="YES">
         <attribute name="byteCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -20,5 +31,7 @@
     <elements>
         <element name="PingItem" positionX="-63" positionY="-18" width="128" height="149"/>
         <element name="PingSet" positionX="-54" positionY="45" width="128" height="104"/>
+        <element name="HostDataEntity" positionX="-63" positionY="63" width="128" height="89"/>
+        <element name="HostDataGroup" positionX="-54" positionY="72" width="128" height="74"/>
     </elements>
 </model>

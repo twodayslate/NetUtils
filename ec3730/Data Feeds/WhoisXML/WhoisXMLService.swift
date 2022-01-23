@@ -109,7 +109,8 @@ class WhoisXMLService: Service {
                         "yyyy-MM-dd HH:mm:ss",
                         "yyyy-MM-dd",
                         "yyyy-MM-dd HH:mm:ss.SSS ZZZ",
-                        "yyyy-MM-dd HH:mm:ss ZZZ" // 1997-09-15 07:00:00 UTC
+                        "yyyy-MM-dd HH:mm:ss ZZZ", // 1997-09-15 07:00:00 UTC,
+                        "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" // 2016-11-05T04:45:03.00Z
                     ]
 
                     for format in formats {

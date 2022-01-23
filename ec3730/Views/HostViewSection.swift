@@ -17,6 +17,13 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
     @ObservedObject var model: HostViewModel
     
     @ObservedObject var sectionModel: HostSectionModel
+    
+    var canQuery: Bool {
+        if let storeModel = self.sectionModel.storeModel {
+            return (storeModel.owned || sectionModel.dataFeed.userKey != nil)
+        }
+        return false
+    }
 
     init(model: HostViewModel, sectionModel: HostSectionModel){
         self.model = model
@@ -27,9 +34,10 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
     var body: some View {
         FSDisclosureGroup(isExpanded: $isExpanded,
             content: {
+                
                 LazyVStack(alignment: .leading, spacing: 0) {
                     if let storeModel = self.sectionModel.storeModel {
-                        if storeModel.purchasedIdentifiers.count > 0 {
+                        if self.canQuery  {
                             // Need se-0309
                             ForEach(self.sectionModel.content) { row in
                                 row
@@ -52,6 +60,12 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                     Spacer()
                 }
         })
+            .onAppear {
+                // update purchase state
+                Task {
+                    try? await self.sectionModel.storeModel?.update()
+                }
+            }
         .background(Color(UIColor.systemGroupedBackground)).contextMenu(menuItems: {
             Button(action: {
                 withAnimation {
@@ -94,10 +108,10 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                 UIPasteboard.general.string = self.sectionModel.dataToCopy
             }, label: {
                 Label("Copy", systemImage: "doc.on.doc")
-            })
+            }).disabled(self.sectionModel.dataToCopy == nil)
             Button(action: { self.shouldShare.toggle() }, label: {
                 Label("Share", systemImage: "square.and.arrow.up")
-            })
+            }).disabled(self.sectionModel.dataToCopy == nil)
         })
         .sheet(isPresented: $shouldShare, content: {
             ShareSheetView(activityItems: [self.sectionModel.dataToCopy ?? "Error"])
@@ -106,6 +120,6 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
     }
     
     var id: String {
-        self.sectionModel.service.name
+        self.sectionModel.service.name + "\(self.canQuery.description)"
     }
 }

@@ -14,8 +14,7 @@ struct PurchaseCellView: View {
     var body: some View {
         let isOneTime = (self.model.defaultProduct?.type == .nonConsumable)
         
-        VStack(alignment: .leading) {
-            
+        VStack(alignment: .leading) {            
             HStack(alignment: .center) {
                 //GeometryReader { geometry  in
                 Image(systemName: "lock.shield.fill").renderingMode(.template).resizable().foregroundColor(.accentColor).aspectRatio(contentMode: .fit).frame(width: imageSize)
@@ -91,8 +90,10 @@ struct PurchaseCellView: View {
 
     func restore() async {
         self.isRestoring = true
-        try? await self.model.restore()
-        self.isRestoring = false
+        try? await self.model.restore(completion: {
+            self.model.objectWillChange.send()
+            self.isRestoring = false
+        })
     }
     
     func buy() async {

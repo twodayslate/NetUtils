@@ -1,4 +1,5 @@
 import SwiftUI
+import Cache
 
 class WhoisXmlWhoisSectionModel: HostSectionModel {
     convenience init() {
@@ -6,6 +7,15 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
         self.storeModel = StoreKitModel.whois
     }
 
+    override func configure(with data: Data) {
+        self.content.removeAll()
+        self.dataToCopy = nil
+        guard let result = try? JSONDecoder().decode(WhoisRecord.self, from: data) else {
+            return
+        }
+        self.configure(with: result)
+    }
+    
     func configure(with record: WhoisRecord) {
         DispatchQueue.main.async {
             self.content.removeAll()
@@ -40,534 +50,533 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 }
                 self.content.append(CopyCellView(title: "Host Names", rows: cells))
             }
-//
-//            var didAddRecord = false
-//            if let contact = record.registrant {
-//                didAddRecord = true
-//                let cell = ContactCell(reuseIdentifier: "registrant", title: "Registrant")
-//                if let name = contact.name {
-//                    cell.addRow(ContactCellRow(title: "Name", content: name))
-//                }
-//
-//                if let org = contact.organization {
-//                    cell.addRow(ContactCellRow(title: "Organization", content: org))
-//                }
-//
-//                var street: [String] = [String]()
-//                if let address = contact.street1 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street2 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street3 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street4 {
-//                    street.append(address)
-//                }
-//                if street.count > 0 {
-//                    cell.addRow(ContactCellRow(title: "Street", content: street.joined(separator: "\n")))
-//                }
-//
-//                if let city = contact.city {
-//                    cell.addRow(ContactCellRow(title: "City", content: city))
-//                }
-//
-//                if let postCode = contact.postalCode {
-//                    cell.addRow(ContactCellRow(title: "Postal Code", content: postCode))
-//                }
-//
-//                if let state = contact.state {
-//                    cell.addRow(ContactCellRow(title: "State", content: state))
-//                }
-//
-//                cell.addRow(ContactCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
-//
-//                if let email = contact.email {
-//                    cell.addRow(ContactCellRow(title: "Email", content: email))
-//                }
-//
-//                if var phone = contact.telephone {
-//                    if let phoneExt = contact.telephoneEXT {
-//                        phone += " \(phoneExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: phone))
-//                }
-//
-//                if var fax = contact.fax {
-//                    if let faxExt = contact.faxEXT {
-//                        fax += " \(faxExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: fax))
-//                }
-//
-//                cells.append(cell)
-//            }
-//
-//            if !didAddRecord, let contact = record.registryData.regustrant {
-//                let cell = ContactCell(reuseIdentifier: "admin", title: "Registrant")
-//                if let name = contact.name {
-//                    cell.addRow(ContactCellRow(title: "Name", content: name))
-//                }
-//
-//                if let org = contact.organization {
-//                    cell.addRow(ContactCellRow(title: "Organization", content: org))
-//                }
-//
-//                var street: [String] = [String]()
-//                if let address = contact.street1 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street2 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street3 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street4 {
-//                    street.append(address)
-//                }
-//                if street.count > 0 {
-//                    cell.addRow(ContactCellRow(title: "Street", content: street.joined(separator: "\n")))
-//                }
-//
-//                if let city = contact.city {
-//                    cell.addRow(ContactCellRow(title: "City", content: city))
-//                }
-//
-//                if let postCode = contact.postalCode {
-//                    cell.addRow(ContactCellRow(title: "Postal Code", content: postCode))
-//                }
-//
-//                if let state = contact.state {
-//                    cell.addRow(ContactCellRow(title: "State", content: state))
-//                }
-//
-//                cells.append(cell)
-//            }
-//
-//            didAddRecord = false
-//            if let contact = record.administrativeContact {
-//                didAddRecord = true
-//                let cell = ContactCell(reuseIdentifier: "admin", title: "Administrative Contact")
-//                if let name = contact.name {
-//                    cell.addRow(ContactCellRow(title: "Name", content: name))
-//                }
-//
-//                if let org = contact.organization {
-//                    cell.addRow(ContactCellRow(title: "Organization", content: org))
-//                }
-//
-//                var street: [String] = [String]()
-//                if let address = contact.street1 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street2 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street3 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street4 {
-//                    street.append(address)
-//                }
-//                if street.count > 0 {
-//                    cell.addRow(ContactCellRow(title: "Street", content: street.joined(separator: "\n")))
-//                }
-//
-//                if let city = contact.city {
-//                    cell.addRow(ContactCellRow(title: "City", content: city))
-//                }
-//
-//                if let postCode = contact.postalCode {
-//                    cell.addRow(ContactCellRow(title: "Postal Code", content: postCode))
-//                }
-//
-//                if let state = contact.state {
-//                    cell.addRow(ContactCellRow(title: "State", content: state))
-//                }
-//
-//                cell.addRow(ContactCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
-//
-//                if let email = contact.email {
-//                    cell.addRow(ContactCellRow(title: "Email", content: email))
-//                }
-//
-//                if var phone = contact.telephone {
-//                    if let phoneExt = contact.telephoneEXT {
-//                        phone += " \(phoneExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: phone))
-//                }
-//
-//                if var fax = contact.fax {
-//                    if let faxExt = contact.faxEXT {
-//                        fax += " \(faxExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: fax))
-//                }
-//
-//                cells.append(cell)
-//            }
-//
-//            if !didAddRecord, let contact = record.registryData.administrativeContact {
-//                let cell = ContactCell(reuseIdentifier: "admin", title: "Administrative Contact")
-//                if let name = contact.name {
-//                    cell.addRow(ContactCellRow(title: "Name", content: name))
-//                }
-//
-//                if let org = contact.organization {
-//                    cell.addRow(ContactCellRow(title: "Organization", content: org))
-//                }
-//
-//                var street: [String] = [String]()
-//                if let address = contact.street1 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street2 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street3 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street4 {
-//                    street.append(address)
-//                }
-//                if street.count > 0 {
-//                    cell.addRow(ContactCellRow(title: "Street", content: street.joined(separator: "\n")))
-//                }
-//
-//                if let city = contact.city {
-//                    cell.addRow(ContactCellRow(title: "City", content: city))
-//                }
-//
-//                if let postCode = contact.postalCode {
-//                    cell.addRow(ContactCellRow(title: "Postal Code", content: postCode))
-//                }
-//
-//                if let state = contact.state {
-//                    cell.addRow(ContactCellRow(title: "State", content: state))
-//                }
-//
-//                cell.addRow(ContactCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
-//
-//                if let email = contact.email {
-//                    cell.addRow(ContactCellRow(title: "Email", content: email))
-//                }
-//
-//                if var phone = contact.telephone {
-//                    if let phoneExt = contact.telephoneEXT {
-//                        phone += " \(phoneExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: phone))
-//                }
-//
-//                if var fax = contact.fax {
-//                    if let faxExt = contact.faxEXT {
-//                        fax += " \(faxExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: fax))
-//                }
-//
-//                cells.append(cell)
-//            }
-//
-//            didAddRecord = false
-//            if let contact = record.technicalContact {
-//                didAddRecord = true
-//                let cell = ContactCell(reuseIdentifier: "tech", title: "Technical Contact")
-//                if let name = contact.name {
-//                    cell.addRow(ContactCellRow(title: "Name", content: name))
-//                }
-//
-//                if let org = contact.organization {
-//                    cell.addRow(ContactCellRow(title: "Organization", content: org))
-//                }
-//
-//                var street: [String] = [String]()
-//                if let address = contact.street1 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street2 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street3 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street4 {
-//                    street.append(address)
-//                }
-//                if street.count > 0 {
-//                    cell.addRow(ContactCellRow(title: "Street", content: street.joined(separator: "\n")))
-//                }
-//
-//                if let city = contact.city {
-//                    cell.addRow(ContactCellRow(title: "City", content: city))
-//                }
-//
-//                if let postCode = contact.postalCode {
-//                    cell.addRow(ContactCellRow(title: "Postal Code", content: postCode))
-//                }
-//
-//                if let state = contact.state {
-//                    cell.addRow(ContactCellRow(title: "State", content: state))
-//                }
-//
-//                cell.addRow(ContactCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
-//
-//                if let email = contact.email {
-//                    cell.addRow(ContactCellRow(title: "Email", content: email))
-//                }
-//
-//                if var phone = contact.telephone {
-//                    if let phoneExt = contact.telephoneEXT {
-//                        phone += " \(phoneExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: phone))
-//                }
-//
-//                if var fax = contact.fax {
-//                    if let faxExt = contact.faxEXT {
-//                        fax += " \(faxExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: fax))
-//                }
-//
-//                cells.append(cell)
-//            }
-//
-//            if let contact = record.registryData.technicalContact {
-//                let cell = ContactCell(reuseIdentifier: "tech", title: "Technical Contact")
-//                if let name = contact.name {
-//                    cell.addRow(ContactCellRow(title: "Name", content: name))
-//                }
-//
-//                if let org = contact.organization {
-//                    cell.addRow(ContactCellRow(title: "Organization", content: org))
-//                }
-//
-//                var street: [String] = [String]()
-//                if let address = contact.street1 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street2 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street3 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street4 {
-//                    street.append(address)
-//                }
-//                if street.count > 0 {
-//                    cell.addRow(ContactCellRow(title: "Street", content: street.joined(separator: "\n")))
-//                }
-//
-//                if let city = contact.city {
-//                    cell.addRow(ContactCellRow(title: "City", content: city))
-//                }
-//
-//                if let postCode = contact.postalCode {
-//                    cell.addRow(ContactCellRow(title: "Postal Code", content: postCode))
-//                }
-//
-//                if let state = contact.state {
-//                    cell.addRow(ContactCellRow(title: "State", content: state))
-//                }
-//
-//                cell.addRow(ContactCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
-//
-//                if let email = contact.email {
-//                    cell.addRow(ContactCellRow(title: "Email", content: email))
-//                }
-//
-//                if var phone = contact.telephone {
-//                    if let phoneExt = contact.telephoneEXT {
-//                        phone += " \(phoneExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: phone))
-//                }
-//
-//                if var fax = contact.fax {
-//                    if let faxExt = contact.faxEXT {
-//                        fax += " \(faxExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: fax))
-//                }
-//
-//                cells.append(cell)
-//            }
-//
-//            didAddRecord = false
-//            if let contact = record.billingContact {
-//                didAddRecord = true
-//                let cell = ContactCell(reuseIdentifier: "billing", title: "Billing Contact")
-//                if let name = contact.name {
-//                    cell.addRow(ContactCellRow(title: "Name", content: name))
-//                }
-//
-//                if let org = contact.organization {
-//                    cell.addRow(ContactCellRow(title: "Organization", content: org))
-//                }
-//
-//                var street: [String] = [String]()
-//                if let address = contact.street1 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street2 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street3 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street4 {
-//                    street.append(address)
-//                }
-//                if street.count > 0 {
-//                    cell.addRow(ContactCellRow(title: "Street", content: street.joined(separator: "\n")))
-//                }
-//
-//                if let city = contact.city {
-//                    cell.addRow(ContactCellRow(title: "City", content: city))
-//                }
-//
-//                if let postCode = contact.postalCode {
-//                    cell.addRow(ContactCellRow(title: "Postal Code", content: postCode))
-//                }
-//
-//                if let state = contact.state {
-//                    cell.addRow(ContactCellRow(title: "State", content: state))
-//                }
-//
-//                cell.addRow(ContactCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
-//
-//                if let email = contact.email {
-//                    cell.addRow(ContactCellRow(title: "Email", content: email))
-//                }
-//
-//                if var phone = contact.telephone {
-//                    if let phoneExt = contact.telephoneEXT {
-//                        phone += " \(phoneExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: phone))
-//                }
-//
-//                if var fax = contact.fax {
-//                    if let faxExt = contact.faxEXT {
-//                        fax += " \(faxExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: fax))
-//                }
-//
-//                cells.append(cell)
-//            }
-//
-//            if !didAddRecord, let contact = record.registryData.billingContact {
-//                let cell = ContactCell(reuseIdentifier: "billing", title: "Billing Contact")
-//                if let name = contact.name {
-//                    cell.addRow(ContactCellRow(title: "Name", content: name))
-//                }
-//
-//                if let org = contact.organization {
-//                    cell.addRow(ContactCellRow(title: "Organization", content: org))
-//                }
-//
-//                var street: [String] = [String]()
-//                if let address = contact.street1 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street2 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street3 {
-//                    street.append(address)
-//                }
-//                if let address = contact.street4 {
-//                    street.append(address)
-//                }
-//                if street.count > 0 {
-//                    let streetCell = ContactCellRow(title: "Street", content: street.joined(separator: "\n"))
-//                    streetCell.detailLabel.numberOfLines = 0
-//                    cell.addRow(streetCell)
-//                }
-//
-//                if let city = contact.city {
-//                    cell.addRow(ContactCellRow(title: "City", content: city))
-//                }
-//
-//                if let postCode = contact.postalCode {
-//                    cell.addRow(ContactCellRow(title: "Postal Code", content: postCode))
-//                }
-//
-//                if let state = contact.state {
-//                    cell.addRow(ContactCellRow(title: "State", content: state))
-//                }
-//
-//                cell.addRow(ContactCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
-//
-//                if let email = contact.email {
-//                    cell.addRow(ContactCellRow(title: "Email", content: email))
-//                }
-//
-//                if var phone = contact.telephone {
-//                    if let phoneExt = contact.telephoneEXT {
-//                        phone += " \(phoneExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Phone", content: phone))
-//                }
-//
-//                if var fax = contact.fax {
-//                    if let faxExt = contact.faxEXT {
-//                        fax += " \(faxExt)"
-//                    }
-//
-//                    cell.addRow(ContactCellRow(title: "Fax", content: fax))
-//                }
-//
-//                cells.append(cell)
-//            }
-//
-//            cells.append( CopyCellView(title: "Availability", content: record.domainAvailability))
-//
-//            let status = record.status ?? record.registryData.status
-//            let statusRow =  CopyCellView(title: "Status", content: status)
-//            statusRow.detailLabel?.numberOfLines = 0
-//            statusRow.detailLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-//            cells.append(statusRow)
-//
-//            if let customFieldName = record.customField1Name, let customFieldValue = record.customField1Value {
-//                let customCell =  CopyCellView(title: customFieldName, content: customFieldValue)
-//                cells.append(customCell)
-//            }
-//
-//            if let customFieldName = record.customField2Name, let customFieldValue = record.customField2Value {
-//                let customCell =  CopyCellView(title: customFieldName, content: customFieldValue)
-//                cells.append(customCell)
-//            }
-//
-//            if let customFieldName = record.customField3Name, let customFieldValue = record.customField3Value {
-//                let customCell =  CopyCellView(title: customFieldName, content: customFieldValue)
-//                cells.append(customCell)
-//            }
+
+            if let contact = record.registrant {
+                var rows = [CopyCellRow]()
+
+                if let name = contact.name {
+                    rows.append(CopyCellRow(title: "Name", content: name))
+                }
+
+                if let org = contact.organization {
+                    rows.append(CopyCellRow(title: "Organization", content: org))
+                }
+
+                var street: [String] = [String]()
+                if let address = contact.street1 {
+                    street.append(address)
+                }
+                if let address = contact.street2 {
+                    street.append(address)
+                }
+                if let address = contact.street3 {
+                    street.append(address)
+                }
+                if let address = contact.street4 {
+                    street.append(address)
+                }
+                if street.count > 0 {
+                    rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                }
+
+                if let city = contact.city {
+                    rows.append(CopyCellRow(title: "City", content: city))
+                }
+
+                if let postCode = contact.postalCode {
+                    rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                }
+
+                if let state = contact.state {
+                    rows.append(CopyCellRow(title: "State", content: state))
+                }
+
+                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+
+                if let email = contact.email {
+                    rows.append(CopyCellRow(title: "Email", content: email))
+                }
+
+                if var phone = contact.telephone {
+                    if let phoneExt = contact.telephoneEXT {
+                        phone += " \(phoneExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: phone))
+                }
+
+                if var fax = contact.fax {
+                    if let faxExt = contact.faxEXT {
+                        fax += " \(faxExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: fax))
+                }
+
+                self.content.append(CopyCellView(title: "Registrant", rows: rows))
+            } else if let contact = record.registryData.regustrant {
+                var rows = [CopyCellRow]()
+                
+                if let name = contact.name {
+                    rows.append(CopyCellRow(title: "Name", content: name))
+                }
+
+                if let org = contact.organization {
+                    rows.append(CopyCellRow(title: "Organization", content: org))
+                }
+
+                var street: [String] = [String]()
+                if let address = contact.street1 {
+                    street.append(address)
+                }
+                if let address = contact.street2 {
+                    street.append(address)
+                }
+                if let address = contact.street3 {
+                    street.append(address)
+                }
+                if let address = contact.street4 {
+                    street.append(address)
+                }
+                if street.count > 0 {
+                    rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                }
+
+                if let city = contact.city {
+                    rows.append(CopyCellRow(title: "City", content: city))
+                }
+
+                if let postCode = contact.postalCode {
+                    rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                }
+
+                if let state = contact.state {
+                    rows.append(CopyCellRow(title: "State", content: state))
+                }
+
+                self.content.append(CopyCellView(title: "Registrant", rows: rows))
+            }
+            
+            if let contact = record.administrativeContact {
+                var rows = [CopyCellRow]()
+                if let name = contact.name {
+                    rows.append(CopyCellRow(title: "Name", content: name))
+                }
+
+                if let org = contact.organization {
+                    rows.append(CopyCellRow(title: "Organization", content: org))
+                }
+
+                var street: [String] = [String]()
+                if let address = contact.street1 {
+                    street.append(address)
+                }
+                if let address = contact.street2 {
+                    street.append(address)
+                }
+                if let address = contact.street3 {
+                    street.append(address)
+                }
+                if let address = contact.street4 {
+                    street.append(address)
+                }
+                if street.count > 0 {
+                    rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                }
+
+                if let city = contact.city {
+                    rows.append(CopyCellRow(title: "City", content: city))
+                }
+
+                if let postCode = contact.postalCode {
+                    rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                }
+
+                if let state = contact.state {
+                    rows.append(CopyCellRow(title: "State", content: state))
+                }
+
+                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+
+                if let email = contact.email {
+                    rows.append(CopyCellRow(title: "Email", content: email))
+                }
+
+                if var phone = contact.telephone {
+                    if let phoneExt = contact.telephoneEXT {
+                        phone += " \(phoneExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: phone))
+                }
+
+                if var fax = contact.fax {
+                    if let faxExt = contact.faxEXT {
+                        fax += " \(faxExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: fax))
+                }
+
+                self.content.append(CopyCellView(title: "Administrative Contact", rows: rows))
+            } else if let contact = record.registryData.administrativeContact {
+                var rows = [CopyCellRow]()
+                if let name = contact.name {
+                    rows.append(CopyCellRow(title: "Name", content: name))
+                }
+
+                if let org = contact.organization {
+                    rows.append(CopyCellRow(title: "Organization", content: org))
+                }
+
+                var street: [String] = [String]()
+                if let address = contact.street1 {
+                    street.append(address)
+                }
+                if let address = contact.street2 {
+                    street.append(address)
+                }
+                if let address = contact.street3 {
+                    street.append(address)
+                }
+                if let address = contact.street4 {
+                    street.append(address)
+                }
+                if street.count > 0 {
+                    rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                }
+
+                if let city = contact.city {
+                    rows.append(CopyCellRow(title: "City", content: city))
+                }
+
+                if let postCode = contact.postalCode {
+                    rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                }
+
+                if let state = contact.state {
+                    rows.append(CopyCellRow(title: "State", content: state))
+                }
+
+                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+
+                if let email = contact.email {
+                    rows.append(CopyCellRow(title: "Email", content: email))
+                }
+
+                if var phone = contact.telephone {
+                    if let phoneExt = contact.telephoneEXT {
+                        phone += " \(phoneExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: phone))
+                }
+
+                if var fax = contact.fax {
+                    if let faxExt = contact.faxEXT {
+                        fax += " \(faxExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: fax))
+                }
+
+                self.content.append(CopyCellView(title: "Administrative Contact", rows: rows))
+            }
+//
+            if let contact = record.technicalContact {
+                var rows = [CopyCellRow]()
+                if let name = contact.name {
+                    rows.append(CopyCellRow(title: "Name", content: name))
+                }
+
+                if let org = contact.organization {
+                    rows.append(CopyCellRow(title: "Organization", content: org))
+                }
+
+                var street: [String] = [String]()
+                if let address = contact.street1 {
+                    street.append(address)
+                }
+                if let address = contact.street2 {
+                    street.append(address)
+                }
+                if let address = contact.street3 {
+                    street.append(address)
+                }
+                if let address = contact.street4 {
+                    street.append(address)
+                }
+                if street.count > 0 {
+                    rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                }
+
+                if let city = contact.city {
+                    rows.append(CopyCellRow(title: "City", content: city))
+                }
+
+                if let postCode = contact.postalCode {
+                    rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                }
+
+                if let state = contact.state {
+                    rows.append(CopyCellRow(title: "State", content: state))
+                }
+
+                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+
+                if let email = contact.email {
+                    rows.append(CopyCellRow(title: "Email", content: email))
+                }
+
+                if var phone = contact.telephone {
+                    if let phoneExt = contact.telephoneEXT {
+                        phone += " \(phoneExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: phone))
+                }
+
+                if var fax = contact.fax {
+                    if let faxExt = contact.faxEXT {
+                        fax += " \(faxExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: fax))
+                }
+
+                self.content.append(CopyCellView(title: "Technical Contact", rows: rows))
+            } else if let contact = record.registryData.technicalContact {
+                var rows = [CopyCellRow]()
+                if let name = contact.name {
+                    rows.append(CopyCellRow(title: "Name", content: name))
+                }
+
+                if let org = contact.organization {
+                    rows.append(CopyCellRow(title: "Organization", content: org))
+                }
+
+                var street: [String] = [String]()
+                if let address = contact.street1 {
+                    street.append(address)
+                }
+                if let address = contact.street2 {
+                    street.append(address)
+                }
+                if let address = contact.street3 {
+                    street.append(address)
+                }
+                if let address = contact.street4 {
+                    street.append(address)
+                }
+                if street.count > 0 {
+                    rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                }
+
+                if let city = contact.city {
+                    rows.append(CopyCellRow(title: "City", content: city))
+                }
+
+                if let postCode = contact.postalCode {
+                    rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                }
+
+                if let state = contact.state {
+                    rows.append(CopyCellRow(title: "State", content: state))
+                }
+
+                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+
+                if let email = contact.email {
+                    rows.append(CopyCellRow(title: "Email", content: email))
+                }
+
+                if var phone = contact.telephone {
+                    if let phoneExt = contact.telephoneEXT {
+                        phone += " \(phoneExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: phone))
+                }
+
+                if var fax = contact.fax {
+                    if let faxExt = contact.faxEXT {
+                        fax += " \(faxExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: fax))
+                }
+
+                self.content.append(CopyCellView(title: "Technical Contact", rows: rows))
+            }
+//
+            if let contact = record.billingContact {
+                var rows = [CopyCellRow]()
+                if let name = contact.name {
+                    rows.append(CopyCellRow(title: "Name", content: name))
+                }
+
+                if let org = contact.organization {
+                    rows.append(CopyCellRow(title: "Organization", content: org))
+                }
+
+                var street: [String] = [String]()
+                if let address = contact.street1 {
+                    street.append(address)
+                }
+                if let address = contact.street2 {
+                    street.append(address)
+                }
+                if let address = contact.street3 {
+                    street.append(address)
+                }
+                if let address = contact.street4 {
+                    street.append(address)
+                }
+                if street.count > 0 {
+                    rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                }
+
+                if let city = contact.city {
+                    rows.append(CopyCellRow(title: "City", content: city))
+                }
+
+                if let postCode = contact.postalCode {
+                    rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                }
+
+                if let state = contact.state {
+                    rows.append(CopyCellRow(title: "State", content: state))
+                }
+
+                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+
+                if let email = contact.email {
+                    rows.append(CopyCellRow(title: "Email", content: email))
+                }
+
+                if var phone = contact.telephone {
+                    if let phoneExt = contact.telephoneEXT {
+                        phone += " \(phoneExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: phone))
+                }
+
+                if var fax = contact.fax {
+                    if let faxExt = contact.faxEXT {
+                        fax += " \(faxExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: fax))
+                }
+
+                self.content.append(CopyCellView(title: "Billing Contact", rows: rows))
+            } else if let contact = record.registryData.billingContact {
+                var rows = [CopyCellRow]()
+                if let name = contact.name {
+                    rows.append(CopyCellRow(title: "Name", content: name))
+                }
+
+                if let org = contact.organization {
+                    rows.append(CopyCellRow(title: "Organization", content: org))
+                }
+
+                var street: [String] = [String]()
+                if let address = contact.street1 {
+                    street.append(address)
+                }
+                if let address = contact.street2 {
+                    street.append(address)
+                }
+                if let address = contact.street3 {
+                    street.append(address)
+                }
+                if let address = contact.street4 {
+                    street.append(address)
+                }
+                if street.count > 0 {
+                    let streetCell = CopyCellRow(title: "Street", content: street.joined(separator: "\n"))
+                    rows.append(streetCell)
+                }
+
+                if let city = contact.city {
+                    rows.append(CopyCellRow(title: "City", content: city))
+                }
+
+                if let postCode = contact.postalCode {
+                    rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                }
+
+                if let state = contact.state {
+                    rows.append(CopyCellRow(title: "State", content: state))
+                }
+
+                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+
+                if let email = contact.email {
+                    rows.append(CopyCellRow(title: "Email", content: email))
+                }
+
+                if var phone = contact.telephone {
+                    if let phoneExt = contact.telephoneEXT {
+                        phone += " \(phoneExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Phone", content: phone))
+                }
+
+                if var fax = contact.fax {
+                    if let faxExt = contact.faxEXT {
+                        fax += " \(faxExt)"
+                    }
+
+                    rows.append(CopyCellRow(title: "Fax", content: fax))
+                }
+
+                self.content.append(CopyCellView(title: "Billing Contact", rows: rows))
+            }
+
+            self.content.append( CopyCellView(title: "Availability", content: record.domainAvailability))
+
+            let status = record.status ?? record.registryData.status
+            self.content.append(CopyCellView(title: "Status", content: status))
+
+            if let customFieldName = record.customField1Name, let customFieldValue = record.customField1Value {
+                let customCell =  CopyCellView(title: customFieldName, content: customFieldValue)
+                self.content.append(customCell)
+            }
+
+            if let customFieldName = record.customField2Name, let customFieldValue = record.customField2Value {
+                let customCell =  CopyCellView(title: customFieldName, content: customFieldValue)
+                self.content.append(customCell)
+            }
+
+            if let customFieldName = record.customField3Name, let customFieldValue = record.customField3Value {
+                let customCell =  CopyCellView(title: customFieldName, content: customFieldValue)
+                self.content.append(customCell)
+            }
         }
     }
     
+    
+    private let cache = MemoryStorage<String, WhoisRecord>(config: .init(expiry: .seconds(15), countLimit: 3, totalCostLimit: 0))
+    
     override func query(url: URL? = nil, completion block: (() -> ())? = nil) {
+        self.dataToCopy = nil
+        self.content.removeAll()
+    
         guard let host = url?.host else {
+            block?()
+            return
+        }
+
+        if let record = try? cache.object(forKey: host) {
+            self.configure(with: record)
+            block?()
+            return
+        }
+        
+        guard (self.dataFeed.userKey != nil || self.storeModel?.owned ?? false) else {
             block?()
             return
         }
@@ -588,7 +597,7 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     // todo show error
                     return
                 }
-
+                self.cache.setObject(response.whoisRecord, forKey: host)
                 self.configure(with: response.whoisRecord)
         }
     }

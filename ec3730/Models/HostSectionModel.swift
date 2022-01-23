@@ -24,6 +24,30 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
         self.service = service
     }
     
+    class func configure(with result: HostData) -> HostSectionModel? {
+        let available_services = [
+            LocalDnsModel(),
+            WhoisXmlWhoisSectionModel(),
+            GoogleWebRiskSectionModel(),
+            WhoisXmlDnsSectionModel()
+        ]
+        
+        for service in available_services {
+            if result.service == service.service.name {
+                
+                service.configure(with: result.data)
+                return service
+                
+            }
+        }
+        
+        return nil
+    }
+    
+    func configure(with data: Data) {
+        fatalError("Configure your section configure data function")
+    }
+    
     func query(url: URL? = nil, completion block: (()->())? = nil) {
         fatalError("Configure your section query")
     }

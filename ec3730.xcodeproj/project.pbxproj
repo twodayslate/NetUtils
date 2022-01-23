@@ -26,6 +26,12 @@
 		F6397FED25EEFEAE00914B3F /* CopyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */; };
 		F6397FF225EF012300914B3F /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FF125EF012300914B3F /* ShareSheetView.swift */; };
 		F6397FF725EF045200914B3F /* PurchaseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FF625EF045200914B3F /* PurchaseCellView.swift */; };
+		F63B9224279BBA03007E845F /* HostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B9223279BBA03007E845F /* HostData.swift */; };
+		F63B9226279BBA87007E845F /* HostDataGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B9225279BBA87007E845F /* HostDataGroup.swift */; };
+		F63B9228279BC31B007E845F /* HostHistoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B9227279BC31B007E845F /* HostHistoryList.swift */; };
+		F63B922A279C8EE5007E845F /* HostResultSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B9229279C8EE5007E845F /* HostResultSection.swift */; };
+		F63B922C279C9079007E845F /* HostResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B922B279C9079007E845F /* HostResult.swift */; };
+		F63B922F279C985B007E845F /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = F63B922E279C985B007E845F /* Cache */; };
 		F643030B25E47BA300109C92 /* EZPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643030A25E47BA300109C92 /* EZPanel.swift */; };
 		F643036825E6033D00109C92 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = F643036725E6033D00109C92 /* DeviceKit */; };
 		F64418E6271CA13000E40F2C /* LocalDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64418E5271CA13000E40F2C /* LocalDns.swift */; };
@@ -151,6 +157,11 @@
 		F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellView.swift; sourceTree = "<group>"; };
 		F6397FF125EF012300914B3F /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		F6397FF625EF045200914B3F /* PurchaseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCellView.swift; sourceTree = "<group>"; };
+		F63B9223279BBA03007E845F /* HostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostData.swift; sourceTree = "<group>"; };
+		F63B9225279BBA87007E845F /* HostDataGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostDataGroup.swift; sourceTree = "<group>"; };
+		F63B9227279BC31B007E845F /* HostHistoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostHistoryList.swift; sourceTree = "<group>"; };
+		F63B9229279C8EE5007E845F /* HostResultSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostResultSection.swift; sourceTree = "<group>"; };
+		F63B922B279C9079007E845F /* HostResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostResult.swift; sourceTree = "<group>"; };
 		F643030A25E47BA300109C92 /* EZPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EZPanel.swift; sourceTree = "<group>"; };
 		F64418E5271CA13000E40F2C /* LocalDns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDns.swift; sourceTree = "<group>"; };
 		F644A0F727925CF60061C98B /* HostModelWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostModelWrapperView.swift; sourceTree = "<group>"; };
@@ -242,6 +253,7 @@
 				F67ED9FE2411A0D400021F6C /* KeychainAccess in Frameworks */,
 				F67ED9F82411A09000021F6C /* NetUtils in Frameworks */,
 				F66BB7202453B85C00E86A93 /* SplitTabBar in Frameworks */,
+				F63B922F279C985B007E845F /* Cache in Frameworks */,
 				F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */,
 				F67EDA0A2411F42B00021F6C /* Highlightr in Frameworks */,
 				F67ED9F5240DF56100021F6C /* AddressURL in Frameworks */,
@@ -287,6 +299,8 @@
 				F60FD35E25E0607C00BCEF86 /* DataModel.xcdatamodeld */,
 				F60FD36425E060A800BCEF86 /* Persistence.swift */,
 				F60FD36925E060D700BCEF86 /* PingItem.swift */,
+				F63B9223279BBA03007E845F /* HostData.swift */,
+				F63B9225279BBA87007E845F /* HostDataGroup.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -295,6 +309,9 @@
 			isa = PBXGroup;
 			children = (
 				F6397FE425E8937900914B3F /* HostView.swift */,
+				F63B9227279BC31B007E845F /* HostHistoryList.swift */,
+				F63B922B279C9079007E845F /* HostResult.swift */,
+				F63B9229279C8EE5007E845F /* HostResultSection.swift */,
 				F644A0F9279268BD0061C98B /* FSDisclosureGroup.swift */,
 				F644A0F727925CF60061C98B /* HostModelWrapperView.swift */,
 				F66643B426F02A8F000F17BC /* HostViewSection.swift */,
@@ -539,6 +556,7 @@
 				F643036725E6033D00109C92 /* DeviceKit */,
 				F66643AC26ED5392000F17BC /* Introspect */,
 				F66643AF26ED686D000F17BC /* InterposeKit */,
+				F63B922E279C985B007E845F /* Cache */,
 			);
 			productName = ec3730;
 			productReference = F6C8D8A1212E5AE900309373 /* ec3730.app */;
@@ -636,6 +654,7 @@
 				F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 				F66643AB26ED5392000F17BC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				F66643AE26ED686D000F17BC /* XCRemoteSwiftPackageReference "InterposeKit" */,
+				F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */,
 			);
 			productRefGroup = F6C8D8A2212E5AE900309373 /* Products */;
 			projectDirPath = "";
@@ -697,6 +716,7 @@
 				F644A0FD279283300061C98B /* LocalDnsModel.swift in Sources */,
 				F6D0B77A235902E3009E493B /* DataFeedPurchaseProtocol.swift in Sources */,
 				F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */,
+				F63B9224279BBA03007E845F /* HostData.swift in Sources */,
 				F66643B326F02A5B000F17BC /* HostViewModel.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F6C38E8826FABEFB00BD9A71 /* StoreKitModel.swift in Sources */,
@@ -708,6 +728,7 @@
 				F6FDDFCA23048DEF00FBF75E /* UIView.swift in Sources */,
 				F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */,
 				F6C591BA235EC3A9009BA4B7 /* CenterTextTableViewCell.swift in Sources */,
+				F63B9228279BC31B007E845F /* HostHistoryList.swift in Sources */,
 				F69E365623580AA00017296E /* DataFeedService.swift in Sources */,
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
 				F60FD36025E0607C00BCEF86 /* DataModel.xcdatamodeld in Sources */,
@@ -716,6 +737,7 @@
 				F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */,
 				F644A103279284EE0061C98B /* GoogleWebRiskSectionModel.swift in Sources */,
 				F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */,
+				F63B922A279C8EE5007E845F /* HostResultSection.swift in Sources */,
 				F619760722FCA33B00CE39A0 /* WhoisXmlCells.swift in Sources */,
 				F6FDDFD6230B095B00FBF75E /* HostTable.swift in Sources */,
 				F644A0FF279283640061C98B /* WhoisXmlWhoisSectionModel.swift in Sources */,
@@ -757,8 +779,10 @@
 				F69E364A235806370017296E /* WhoisXMLDnsService.swift in Sources */,
 				F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */,
 				F6397FF725EF045200914B3F /* PurchaseCellView.swift in Sources */,
+				F63B9226279BBA87007E845F /* HostDataGroup.swift in Sources */,
 				F6FBB86723677FA700E023F2 /* DeviceController.swift in Sources */,
 				F671EF4C277553D6007AF79F /* HostSectionOrganizerView.swift in Sources */,
+				F63B922C279C9079007E845F /* HostResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1102,6 +1126,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hyperoslo/Cache";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devicekit/DeviceKit";
@@ -1209,6 +1241,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F63B922E279C985B007E845F /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
+		};
 		F643036725E6033D00109C92 /* DeviceKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */;

@@ -57,27 +57,29 @@ class StoreKitModel: ObservableObject {
         }
     }
     
+    /// App Store sync and update products
     @MainActor
     func restore(completion block: (() -> Void)? = nil) async throws {
-        try? await AppStore.sync()
+        try await AppStore.sync()
+        
+        try await self.update()
+        
         block?()
-//        let products = try await Product.products(for: self.productSet)
-//
-//        for product in products {
-//            if product.id == self.defaultPurchaseIdentifier {
-//                self.defaultProduct = product
-//            }
-//            for status in try await product.subscription?.status ?? [] {
-//                if status.state == .subscribed {
-//
-//                }
-//            }
-//            if let ownershipType = try await product.latestTransaction?.payloadValue.ownershipType {
-//                if ownershipType == .purchased || ownershipType == .familyShared {
-//
-//                }
-//            }
-//        }
+    }
+    
+    @MainActor
+    /// Update the products and update purchase identifiers
+    func update() async throws {
+        let products = try await Product.products(for: self.productSet)
+        self.products = products
+        for product in products {
+            if let transaction = await product.latestTransaction {
+                try await self.updatePurchasedIdentifiers(transaction.payloadValue)
+            } else {
+                // can't get the latest transaction so assume it isn't purchased
+                purchasedIdentifiers.remove(product.id)
+            }
+        }
     }
     
     func purchase(_ product: Product) async throws -> StoreKit.Transaction? {
@@ -110,6 +112,11 @@ class StoreKitModel: ObservableObject {
             if product.id == self.defaultPurchaseIdentifier {
                 self.defaultProduct = product
             }
+            
+            if let transaction = await product.latestTransaction {
+                try await self.updatePurchasedIdentifiers(transaction.payloadValue)
+            }
+            
         }
         block?(products)
     }
@@ -128,6 +135,7 @@ class StoreKitModel: ObservableObject {
 
     @MainActor
     func updatePurchasedIdentifiers(_ transaction: StoreKit.Transaction) async {
+        self.objectWillChange.send()
         if transaction.revocationDate == nil {
             //If the App Store has not revoked the transaction, add it to the list of `purchasedIdentifiers`.
             purchasedIdentifiers.insert(transaction.productID)
@@ -136,23 +144,25 @@ class StoreKitModel: ObservableObject {
             purchasedIdentifiers.remove(transaction.productID)
         }
     }
+    
+    var owned: Bool {
+        return self.purchasedIdentifiers.count > 0
+    }
 }
 
 @available(iOS 15.0.0, *)
 extension StoreKitModel {
-    static var whois: StoreKitModel {
-        return StoreKitModel(defaultId: "monapi.monthly.auto", ids: ["monapi.yearly.auto", "monapi.onetime"])
-    }
+    static var whois: StoreKitModel = {
+        return StoreKitModel(defaultId: "whois.monthly.auto", ids: ["whois.yearly.auto", "whois.onetime"])
+    }()
     
-    static var dns: StoreKitModel {
-        return StoreKitModel(defaultId: "monapi.monthly.auto", ids: ["monapi.yearly.auto", "monapi.onetime"])
-    }
+    static var dns: StoreKitModel = .whois
     
-    static var monapi: StoreKitModel {
+    static var monapi: StoreKitModel = {
         return StoreKitModel(defaultId: "monapi.monthly.auto", ids: ["monapi.yearly.auto", "monapi.onetime"])
-    }
+    }()
     
-    static var webrisk: StoreKitModel {
+    static var webrisk: StoreKitModel = {
         return StoreKitModel(defaultId: "googlewebrisk.onetime", ids: [])
-    }
+    }()
 }
