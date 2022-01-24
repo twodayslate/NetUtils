@@ -293,8 +293,8 @@ class UIDeviceTableViewController: UITableViewController {
             return memoryEntries.count
         case 2:
             return jsEntries.count
-        case 3:
-            return 2
+        case 3: // fingerprints
+            return 1
         case 4:
             return carrierEntires.count
         default:
@@ -319,19 +319,14 @@ class UIDeviceTableViewController: UITableViewController {
             let item = jsEntries[indexPath.row]
             return CopyDetailCell(title: item.0, detail: item.1)
         case 3:
-            let cell = WKCopyDetailCell(title: "Browser Fingerprint #\(indexPath.row+1)", detail: "-")
+            let cell = WKCopyDetailCell(title: "Browser Fingerprint", detail: "-")
             
             switch indexPath.row {
-            case 0:
-                cell.webview.load(URLRequest(url: URL(string: "http://www.devpowerapi.com/fingerprint")!))
-                self.fingerprintCellWrapperDelegate.cell = cell
-                cell.webview.navigationDelegate = self.fingerprintCellWrapperDelegate
             default:
                 cell.webview.load(URLRequest(url: URL(string: "https://fingerprint.netutils.workers.dev/")!))
                 self.netutilsFingerPrintCellWrapperDelegate.cell = cell
                 cell.webview.navigationDelegate = self.netutilsFingerPrintCellWrapperDelegate
             }
-            // has to be "visible"
             return cell
         case 4:
             let item = carrierEntires[indexPath.row]
