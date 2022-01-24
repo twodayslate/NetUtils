@@ -143,8 +143,17 @@ class StoreKitModel: ObservableObject {
     func updatePurchasedIdentifiers(_ transaction: StoreKit.Transaction) async {
         self.objectWillChange.send()
         if transaction.revocationDate == nil {
-            //If the App Store has not revoked the transaction, add it to the list of `purchasedIdentifiers`.
-            purchasedIdentifiers.insert(transaction.productID)
+            // check if the purchse is expired
+            if let expirationDate = transaction.expirationDate {
+                if expirationDate >= Date() {
+                    purchasedIdentifiers.insert(transaction.productID)
+                } else {
+                    purchasedIdentifiers.remove(transaction.productID)
+                }
+            } else {
+                //If the App Store has not revoked the transaction, add it to the list of `purchasedIdentifiers`.
+                purchasedIdentifiers.insert(transaction.productID)
+            }
         } else {
             //If the App Store has revoked this transaction, remove it from the list of `purchasedIdentifiers`.
             purchasedIdentifiers.remove(transaction.productID)

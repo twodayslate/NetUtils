@@ -35,7 +35,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
         self.model = model
         self.sectionModel = sectionModel
         self.storeModel = sectionModel.storeModel ?? StoreKitModel(defaultId: "", ids: [])
-        self._isExpanded = AppStorage(wrappedValue: false, "\(Self.self).isExpanded."+sectionModel.service.name)
+        self._isExpanded = AppStorage(wrappedValue: true, "\(Self.self).isExpanded."+sectionModel.service.name)
     }
     
     var body: some View {

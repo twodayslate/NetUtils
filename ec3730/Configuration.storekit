@@ -35,7 +35,7 @@
       "type" : "NonConsumable"
     },
     {
-      "displayPrice" : "20.99",
+      "displayPrice" : "199.99",
       "familyShareable" : false,
       "internalID" : "2FA95E6E",
       "localizations" : [
@@ -46,7 +46,7 @@
         }
       ],
       "productID" : "whois.onetime",
-      "referenceName" : null,
+      "referenceName" : "Whois XML API One-Time Purchase ",
       "type" : "NonConsumable"
     }
   ],
@@ -140,7 +140,7 @@
           ],
           "productID" : "whois.monthly.auto",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : null,
+          "referenceName" : "Whois XML API Monthly Subscription (Auto-Renewable)",
           "subscriptionGroupID" : "6FA4E8C1",
           "type" : "RecurringSubscription"
         },
@@ -148,7 +148,7 @@
           "adHocOffers" : [
 
           ],
-          "displayPrice" : "9.99",
+          "displayPrice" : "10.49",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "4171E05E",
@@ -166,7 +166,7 @@
           ],
           "productID" : "whois.yearly.auto",
           "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : null,
+          "referenceName" : "Whois XML API Yearly Subscription (Auto-Renewable) ",
           "subscriptionGroupID" : "6FA4E8C1",
           "type" : "RecurringSubscription"
         }
