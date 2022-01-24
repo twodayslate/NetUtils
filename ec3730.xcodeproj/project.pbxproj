@@ -32,9 +32,6 @@
 		F63B922A279C8EE5007E845F /* HostResultSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B9229279C8EE5007E845F /* HostResultSection.swift */; };
 		F63B922C279C9079007E845F /* HostResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B922B279C9079007E845F /* HostResult.swift */; };
 		F63B922F279C985B007E845F /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = F63B922E279C985B007E845F /* Cache */; };
-		F63B9232279E130C007E845F /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = F63B9231279E130C007E845F /* Collections */; };
-		F63B9234279E130C007E845F /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = F63B9233279E130C007E845F /* DequeModule */; };
-		F63B9236279E130C007E845F /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = F63B9235279E130C007E845F /* OrderedCollections */; };
 		F643030B25E47BA300109C92 /* EZPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643030A25E47BA300109C92 /* EZPanel.swift */; };
 		F643036825E6033D00109C92 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = F643036725E6033D00109C92 /* DeviceKit */; };
 		F64418E6271CA13000E40F2C /* LocalDns.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64418E5271CA13000E40F2C /* LocalDns.swift */; };
@@ -49,8 +46,6 @@
 		F650F749233CF15800BAA609 /* DataFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F748233CF15800BAA609 /* DataFeed.swift */; };
 		F650F74B233E62C100BAA609 /* BlurredPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F74A233E62C100BAA609 /* BlurredPickerView.swift */; };
 		F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661A27F23020FCF0023FA50 /* UIAlertController.swift */; };
-		F66643AD26ED5392000F17BC /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = F66643AC26ED5392000F17BC /* Introspect */; };
-		F66643B026ED686D000F17BC /* InterposeKit in Frameworks */ = {isa = PBXBuildFile; productRef = F66643AF26ED686D000F17BC /* InterposeKit */; };
 		F66643B326F02A5B000F17BC /* HostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66643B226F02A5B000F17BC /* HostViewModel.swift */; };
 		F66643B526F02A8F000F17BC /* HostViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66643B426F02A8F000F17BC /* HostViewSection.swift */; };
 		F66643B726F030D5000F17BC /* HostSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66643B626F030D5000F17BC /* HostSectionModel.swift */; };
@@ -251,8 +246,6 @@
 				F67EDA012411A1C000021F6C /* SwiftyStoreKit in Frameworks */,
 				F6F2017325DB6C18008BA024 /* SwiftyPing in Frameworks */,
 				F67ED9FB2411A0C200021F6C /* Reachability in Frameworks */,
-				F66643B026ED686D000F17BC /* InterposeKit in Frameworks */,
-				F63B9234279E130C007E845F /* DequeModule in Frameworks */,
 				F67EDA072411EA7700021F6C /* SKVersion in Frameworks */,
 				F67ED9FE2411A0D400021F6C /* KeychainAccess in Frameworks */,
 				F67ED9F82411A09000021F6C /* NetUtils in Frameworks */,
@@ -261,11 +254,8 @@
 				F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */,
 				F67EDA0A2411F42B00021F6C /* Highlightr in Frameworks */,
 				F67ED9F5240DF56100021F6C /* AddressURL in Frameworks */,
-				F63B9236279E130C007E845F /* OrderedCollections in Frameworks */,
-				F66643AD26ED5392000F17BC /* Introspect in Frameworks */,
 				F643036825E6033D00109C92 /* DeviceKit in Frameworks */,
 				F67EDA042411E70F00021F6C /* SplitView in Frameworks */,
-				F63B9232279E130C007E845F /* Collections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,12 +550,7 @@
 				F66BB71F2453B85C00E86A93 /* SplitTabBar */,
 				F6F2017225DB6C18008BA024 /* SwiftyPing */,
 				F643036725E6033D00109C92 /* DeviceKit */,
-				F66643AC26ED5392000F17BC /* Introspect */,
-				F66643AF26ED686D000F17BC /* InterposeKit */,
 				F63B922E279C985B007E845F /* Cache */,
-				F63B9231279E130C007E845F /* Collections */,
-				F63B9233279E130C007E845F /* DequeModule */,
-				F63B9235279E130C007E845F /* OrderedCollections */,
 			);
 			productName = ec3730;
 			productReference = F6C8D8A1212E5AE900309373 /* ec3730.app */;
@@ -661,10 +646,7 @@
 				F66BB71E2453B85C00E86A93 /* XCRemoteSwiftPackageReference "SplitTabBar" */,
 				F6F2017125DB6C18008BA024 /* XCRemoteSwiftPackageReference "SwiftyPing" */,
 				F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */,
-				F66643AB26ED5392000F17BC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				F66643AE26ED686D000F17BC /* XCRemoteSwiftPackageReference "InterposeKit" */,
 				F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */,
-				F63B9230279E130C007E845F /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = F6C8D8A2212E5AE900309373 /* Products */;
 			projectDirPath = "";
@@ -963,7 +945,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -991,7 +973,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -1144,36 +1126,12 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		F63B9230279E130C007E845F /* XCRemoteSwiftPackageReference "swift-collections" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-collections.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devicekit/DeviceKit";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.3.0;
-			};
-		};
-		F66643AB26ED5392000F17BC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.3;
-			};
-		};
-		F66643AE26ED686D000F17BC /* XCRemoteSwiftPackageReference "InterposeKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/steipete/InterposeKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.2;
 			};
 		};
 		F66BB71E2453B85C00E86A93 /* XCRemoteSwiftPackageReference "SplitTabBar" */ = {
@@ -1264,35 +1222,10 @@
 			package = F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
 		};
-		F63B9231279E130C007E845F /* Collections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F63B9230279E130C007E845F /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = Collections;
-		};
-		F63B9233279E130C007E845F /* DequeModule */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F63B9230279E130C007E845F /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = DequeModule;
-		};
-		F63B9235279E130C007E845F /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F63B9230279E130C007E845F /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
 		F643036725E6033D00109C92 /* DeviceKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */;
 			productName = DeviceKit;
-		};
-		F66643AC26ED5392000F17BC /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F66643AB26ED5392000F17BC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
-		F66643AF26ED686D000F17BC /* InterposeKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F66643AE26ED686D000F17BC /* XCRemoteSwiftPackageReference "InterposeKit" */;
-			productName = InterposeKit;
 		};
 		F66BB71F2453B85C00E86A93 /* SplitTabBar */ = {
 			isa = XCSwiftPackageProductDependency;
