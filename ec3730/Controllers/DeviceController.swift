@@ -294,7 +294,7 @@ class UIDeviceTableViewController: UITableViewController {
         case 2:
             return jsEntries.count
         case 3: // fingerprints
-            return 1
+            return 2
         case 4:
             return carrierEntires.count
         default:
@@ -304,6 +304,8 @@ class UIDeviceTableViewController: UITableViewController {
     }
     
     var fingerprintCellWrapperDelegate = DevpowerapiNavigationCellWrapper()
+    
+    var expressFingerprintCellWrapperDelegate = ExpressFingerprintNavigationCellWrapper()
 
     var netutilsFingerPrintCellWrapperDelegate = NetUtilsNavigationCellWrapper()
     
@@ -319,13 +321,19 @@ class UIDeviceTableViewController: UITableViewController {
             let item = jsEntries[indexPath.row]
             return CopyDetailCell(title: item.0, detail: item.1)
         case 3:
-            let cell = WKCopyDetailCell(title: "Browser Fingerprint", detail: "-")
+            let cell = WKCopyDetailCell(title: "Browser Fingerprint #\(indexPath.row+1)", detail: "-")
             
             switch indexPath.row {
-            default:
+            case 0:
                 cell.webview.load(URLRequest(url: URL(string: "https://fingerprint.netutils.workers.dev/")!))
                 self.netutilsFingerPrintCellWrapperDelegate.cell = cell
                 cell.webview.navigationDelegate = self.netutilsFingerPrintCellWrapperDelegate
+                break
+            default:
+                cell.webview.load(URLRequest(url: URL(string: "https://byo.sh/fingerprint")!))
+                self.expressFingerprintCellWrapperDelegate.cell = cell
+                cell.webview.navigationDelegate = self.expressFingerprintCellWrapperDelegate
+                break
             }
             return cell
         case 4:
@@ -353,6 +361,26 @@ class DevpowerapiNavigationCellWrapper: NSObject, WKNavigationDelegate {
                 return
             }
             if let htmlString = d["fingerprint"] {
+                DispatchQueue.main.async {
+                    self.cell?.detailLabel?.text = htmlString
+                }
+            }
+        })
+    }
+}
+
+class ExpressFingerprintNavigationCellWrapper: NSObject, WKNavigationDelegate {
+    var cell: CopyDetailCell? = nil
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webView.evaluateJavaScript("document.documentElement.innerText.toString()", completionHandler: { json, _ in
+            guard let json = json as? String, let jsonData = json.data(using: .utf8) else {
+                return
+            }
+            guard let d = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? Dictionary<String, Any> else {
+                return
+            }
+            if let htmlString = d["hash"] as? String? {
                 DispatchQueue.main.async {
                     self.cell?.detailLabel?.text = htmlString
                 }
