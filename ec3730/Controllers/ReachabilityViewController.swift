@@ -244,21 +244,15 @@ class ReachabilityViewController: UIViewController {
                 self.tabBarItem = self.connectedTabBarItem
                 self.connectedLabel.text = "Connected via WiFi"
 
-                if #available(iOS 13.0, *) {
-                    let status = CLLocationManager.authorizationStatus()
-                    if status == .authorizedWhenInUse || status == .authorizedAlways {
-                        if let (optionalInterface, optionalSsid, _) = WiFi.ssidInfo(), let interface = optionalInterface, let ssid = optionalSsid {
-                            self.connectedLabel.text = self.connectedLabel.text! + " (\(ssid)) on \(interface)"
-                        }
-                    } else {
-                        // XXX: add information prompt before the actual request
-                        self.locationManager.requestWhenInUseAuthorization()
-                        // XXX: This goes away after a second or two?... why?
-                    }
-                } else {
+                let status = self.locationManager.authorizationStatus
+                if status == .authorizedWhenInUse || status == .authorizedAlways {
                     if let (optionalInterface, optionalSsid, _) = WiFi.ssidInfo(), let interface = optionalInterface, let ssid = optionalSsid {
                         self.connectedLabel.text = self.connectedLabel.text! + " (\(ssid)) on \(interface)"
                     }
+                } else {
+                    // XXX: add information prompt before the actual request
+                    self.locationManager.requestWhenInUseAuthorization()
+                    // XXX: This goes away after a second or two?... why?
                 }
 
             case .cellular:

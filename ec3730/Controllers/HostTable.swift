@@ -44,7 +44,7 @@ class CollapseButton: UIButton {
 class HostTable: UITableViewController {
     var isLoading: Bool {
         get {
-            return dnsManager.isLoading && whoisManger.isLoading && webRiskManager.isLoading && monapiManager.isLoading
+            return dnsManager.isLoading && whoisManger.isLoading && webRiskManager.isLoading
         }
         set {
             if newValue {
@@ -52,7 +52,6 @@ class HostTable: UITableViewController {
                     self.whoisManger.startLoading()
                     self.dnsManager.startLoading()
                     self.webRiskManager.startLoading()
-                    self.monapiManager.startLoading()
                 }
             }
 
@@ -82,15 +81,6 @@ class HostTable: UITableViewController {
             }
         }
     }
-    
-    public var monapiRecord: MonapiThreat? {
-        didSet {
-            DispatchQueue.main.async {
-                self.monapiManager.configure(self.monapiRecord)
-                self.tableView.reloadData()
-            }
-        }
-    }
 
     public var dnsRecords: [DNSRecords]? {
         didSet {
@@ -105,7 +95,6 @@ class HostTable: UITableViewController {
     public var whoisManger = WhoisXmlCellManager(WhoisXml.current, service: WhoisXml.whoisService)
     public var dnsManager = WhoisXmlDnsCellManager(WhoisXml.current, service: WhoisXml.dnsService)
     public var webRiskManager = GoogleWebRiskCellManager(GoogleWebRisk.current, service: GoogleWebRisk.lookupService)
-    public var monapiManager = MonapiCellManager(Monapi.current, service: Monapi.lookupService)
 
     init() {
         super.init(style: .plain)
@@ -153,11 +142,6 @@ class HostTable: UITableViewController {
                 return 0
             }
             return webRiskManager.cells.count
-        case 4:
-            if monapiManager.isCollapsed {
-                return 0
-            }
-            return self.monapiManager.cells.count
         default:
             return 0
         }
@@ -209,9 +193,6 @@ class HostTable: UITableViewController {
         case 3:
             title.text = "Web Risk"
             collapse.manager = webRiskManager
-        case 4:
-            title.text = "monapi.io"
-            collapse.manager = monapiManager
         default:
             break
         }
@@ -247,8 +228,6 @@ class HostTable: UITableViewController {
             cell = dnsManager.cells[indexPath.row]
         case 3:
             cell = webRiskManager.cells[indexPath.row]
-        case 4:
-            cell = monapiManager.cells[indexPath.row]
         default:
             return LoadingCell()
         }
@@ -271,7 +250,6 @@ class HostTable: UITableViewController {
         whoisManger.iapDelegate = self
         dnsManager.iapDelegate = self
         webRiskManager.iapDelegate = self
-        monapiManager.iapDelegate = self
 
         // self.tableView.register(WhoisTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(WhoisTableViewCell.self))
 
@@ -301,12 +279,6 @@ class HostTable: UITableViewController {
                 self.reload()
             }
         }
-        
-        if !Monapi.current.owned, Monapi.current.defaultProduct == nil {
-            Monapi.current.subscriptions[0].retrieveProduct { _ in
-                self.reload()
-            }
-        }
     }
 }
 
@@ -315,7 +287,6 @@ extension HostTable: DataFeedInAppPurchaseUpdateDelegate {
         whoisManger.reload()
         dnsManager.reload()
         webRiskManager.reload()
-        monapiManager.reload()
 
         DispatchQueue.main.async {
             self.tableView.reloadData()

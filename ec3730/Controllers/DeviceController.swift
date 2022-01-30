@@ -12,6 +12,7 @@ import JavaScriptCore
 import WebKit
 import MachO
 import DeviceKit
+import CoreTelephony
 
 class DeviceViewController: UINavigationController {
     init() {
@@ -36,7 +37,7 @@ class UIDeviceTableViewController: UITableViewController {
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return 4
+        return hasCarriers ? 5 : 4
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -44,9 +45,38 @@ class UIDeviceTableViewController: UITableViewController {
         case 1: return "Memory"
         case 2: return "JavaScriptCore"
         case 3: return "Fingerprints"
+        case 4:
+            return "Cellular Providers"
         default:
             return nil
         }
+    }
+    
+    var hasCarriers: Bool {
+        return (CTTelephonyNetworkInfo().serviceSubscriberCellularProviders?.count ?? 0) > 0
+    }
+    
+    var carrierEntires: [(String, String)] {
+        var ans = [(String, String)]()
+        guard self.hasCarriers, let providers = CTTelephonyNetworkInfo().serviceSubscriberCellularProviders else {
+            return ans
+        }
+        for (i, carrier) in providers.enumerated() {
+            if let name = carrier.value.carrierName {
+                ans.append(("Provider \(i) Carrier Name", name))
+            }
+            ans.append(("Provider \(i) Allows VOIP", carrier.value.allowsVOIP ? "Yes" : "No"))
+            if let value = carrier.value.isoCountryCode {
+                ans.append(("Provider \(i) ISO Country Code", value))
+            }
+            if let value = carrier.value.mobileCountryCode {
+                ans.append(("Provider \(i) Mobile Country Code", value))
+            }
+            if let value = carrier.value.mobileNetworkCode {
+                ans.append(("Provider \(i) Mobile Network Code", value))
+            }
+        }
+        return ans
     }
 
     var deviceEntries: [(String, String)] {
@@ -86,6 +116,8 @@ class UIDeviceTableViewController: UITableViewController {
             ("Has Telephoto Camera", Device.current.hasTelephotoCamera ? "Yes" : "No"),
             ("Has Ultrawide Camera", Device.current.hasUltraWideCamera ? "Yes" : "No"),
             ("Has Rounded Display Corners", Device.current.hasRoundedDisplayCorners ? "Yes" : "No"),
+            
+            
         ]
 
         func getArchitecture() -> NSString {
@@ -261,8 +293,10 @@ class UIDeviceTableViewController: UITableViewController {
             return memoryEntries.count
         case 2:
             return jsEntries.count
-        case 3:
+        case 3: // fingerprints
             return 2
+        case 4:
+            return carrierEntires.count
         default:
             fatalError("Unknown section")
         }
@@ -270,6 +304,8 @@ class UIDeviceTableViewController: UITableViewController {
     }
     
     var fingerprintCellWrapperDelegate = DevpowerapiNavigationCellWrapper()
+    
+    var expressFingerprintCellWrapperDelegate = ExpressFingerprintNavigationCellWrapper()
 
     var netutilsFingerPrintCellWrapperDelegate = NetUtilsNavigationCellWrapper()
     
@@ -289,16 +325,20 @@ class UIDeviceTableViewController: UITableViewController {
             
             switch indexPath.row {
             case 0:
-                cell.webview.load(URLRequest(url: URL(string: "http://www.devpowerapi.com/fingerprint")!))
-                self.fingerprintCellWrapperDelegate.cell = cell
-                cell.webview.navigationDelegate = self.fingerprintCellWrapperDelegate
-            default:
                 cell.webview.load(URLRequest(url: URL(string: "https://fingerprint.netutils.workers.dev/")!))
                 self.netutilsFingerPrintCellWrapperDelegate.cell = cell
                 cell.webview.navigationDelegate = self.netutilsFingerPrintCellWrapperDelegate
+                break
+            default:
+                cell.webview.load(URLRequest(url: URL(string: "https://byo.sh/fingerprint")!))
+                self.expressFingerprintCellWrapperDelegate.cell = cell
+                cell.webview.navigationDelegate = self.expressFingerprintCellWrapperDelegate
+                break
             }
-            // has to be "visible"
             return cell
+        case 4:
+            let item = carrierEntires[indexPath.row]
+            return CopyDetailCell(title: item.0, detail: item.1)
         default:
             fatalError("Unknown section")
         }
@@ -321,6 +361,26 @@ class DevpowerapiNavigationCellWrapper: NSObject, WKNavigationDelegate {
                 return
             }
             if let htmlString = d["fingerprint"] {
+                DispatchQueue.main.async {
+                    self.cell?.detailLabel?.text = htmlString
+                }
+            }
+        })
+    }
+}
+
+class ExpressFingerprintNavigationCellWrapper: NSObject, WKNavigationDelegate {
+    var cell: CopyDetailCell? = nil
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webView.evaluateJavaScript("document.documentElement.innerText.toString()", completionHandler: { json, _ in
+            guard let json = json as? String, let jsonData = json.data(using: .utf8) else {
+                return
+            }
+            guard let d = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? Dictionary<String, Any> else {
+                return
+            }
+            if let htmlString = d["hash"] as? String? {
                 DispatchQueue.main.async {
                     self.cell?.detailLabel?.text = htmlString
                 }

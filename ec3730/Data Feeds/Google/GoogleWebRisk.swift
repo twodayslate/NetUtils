@@ -116,6 +116,7 @@ extension GoogleWebRisk: DataFeedService {
 
     class GoogleWebRiskLookupService: Service {
         var name: String = "Google Web Risk Lookup API"
+        var description: String = "Detect malicious URLs and unsafe web resources"
 
         var cache = TimedCache(expiresIn: 60)
 

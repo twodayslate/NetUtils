@@ -15,6 +15,7 @@ class WhoisXMLService: Service {
 
     var name: String
     var id: String
+    var description: String
 
     static var cache = [String: TimedCache]()
 
@@ -28,9 +29,10 @@ class WhoisXMLService: Service {
 
     // MARK: - Initializers
 
-    init(name: String, id: String) {
+    init(name: String, description: String, id: String) {
         self.name = name
         self.id = id
+        self.description = description
     }
 
     func endpoint(_ userData: [String: Any?]?) -> DataFeedEndpoint? {
@@ -107,7 +109,8 @@ class WhoisXMLService: Service {
                         "yyyy-MM-dd HH:mm:ss",
                         "yyyy-MM-dd",
                         "yyyy-MM-dd HH:mm:ss.SSS ZZZ",
-                        "yyyy-MM-dd HH:mm:ss ZZZ" // 1997-09-15 07:00:00 UTC
+                        "yyyy-MM-dd HH:mm:ss ZZZ", // 1997-09-15 07:00:00 UTC,
+                        "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" // 2016-11-05T04:45:03.00Z
                     ]
 
                     for format in formats {

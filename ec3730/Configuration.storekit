@@ -1,0 +1,180 @@
+{
+  "identifier" : "7C36A528",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "25.99",
+      "familyShareable" : false,
+      "internalID" : "041F33B2",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "monapi.onetime",
+      "referenceName" : "monapi.io One-Time Purchase ",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "720FB21F",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "googlewebrisk.onetime",
+      "referenceName" : "Google Web Risk API ",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "199.99",
+      "familyShareable" : false,
+      "internalID" : "2FA95E6E",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "whois.onetime",
+      "referenceName" : "Whois XML API One-Time Purchase ",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "3CBDD2F3",
+      "localizations" : [
+
+      ],
+      "name" : "monapi.io",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "displayPrice" : "0.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "CA1892A7",
+          "introductoryOffer" : {
+            "internalID" : "4AF403FD",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "monapi.monthly.auto",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "monapi.io Monthly Subscription (Auto-Renewable) ",
+          "subscriptionGroupID" : "3CBDD2F3",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "displayPrice" : "9.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "E82D0D5C",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "monapi.yearly.auto",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "monapi.io Yearly Subscription (Auto-Renewable) ",
+          "subscriptionGroupID" : "3CBDD2F3",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    },
+    {
+      "id" : "6FA4E8C1",
+      "localizations" : [
+
+      ],
+      "name" : "WhoisXML",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "displayPrice" : "0.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "57A4F298",
+          "introductoryOffer" : {
+            "internalID" : "41957EBC",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "whois.monthly.auto",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Whois XML API Monthly Subscription (Auto-Renewable)",
+          "subscriptionGroupID" : "6FA4E8C1",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "displayPrice" : "10.49",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "4171E05E",
+          "introductoryOffer" : {
+            "internalID" : "9FA0AEAD",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "whois.yearly.auto",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Whois XML API Yearly Subscription (Auto-Renewable) ",
+          "subscriptionGroupID" : "6FA4E8C1",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 1
+  }
+}

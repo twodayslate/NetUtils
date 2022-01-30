@@ -279,9 +279,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
 
 extension WhoisLockedTableViewCell: UITextViewDelegate {
     func textView(_: UITextView, shouldInteractWith URL: URL, in _: NSRange, interaction _: UITextItemInteraction) -> Bool {
-        if let window = UIApplication.shared.windows.first(where: { (window) -> Bool in window.isKeyWindow }) {
-            window.rootViewController?.open(URL, title: "")
-        }
+        self.window?.rootViewController?.open(URL, title: "")
 
         return false
     }

@@ -11,7 +11,7 @@ import UIKit
 
 class DataFeedCells {
     var feeds: [DataFeed] {
-        return [WhoisXml.current, GoogleWebRisk.current, Monapi.current]
+        return [WhoisXml.current, GoogleWebRisk.current]
     }
 
     var subscriptions: [DataFeedSubscription] {
@@ -36,9 +36,6 @@ class DataFeedCells {
         let webRisk = DataFeedCell(subscriber: GoogleWebRisk.current)
         webRisk.descriptionText.text = "Unlocks detection of malicious URLs"
 
-        let monapi = DataFeedCell(subscriber: Monapi.current)
-        monapi.descriptionText.text = "Unlocks email verification and IP/domain threat data (BETA)"
-
-        return [whoisCell, webRisk, monapi]
+        return [whoisCell, webRisk]
     }
 }

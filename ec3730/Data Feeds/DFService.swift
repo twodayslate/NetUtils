@@ -11,6 +11,7 @@ import Foundation
 
 protocol Service: AnyObject {
     var name: String { get }
+    var description: String { get }
     func endpoint(_ userData: [String: Any?]?) -> DataFeedEndpoint?
 
     var usage: Int { get set }

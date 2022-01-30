@@ -77,6 +77,19 @@ open class Subscription {
         }
 
         let validator = AppleReceiptValidator(service: .production, sharedSecret: ApiKey.inApp.key)
+        
+        if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL,
+            FileManager.default.fileExists(atPath: appStoreReceiptURL.path) {
+            do {
+                let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
+                print(receiptData)
+                let _ = receiptData.base64EncodedString(options: [])
+                
+                // Add code to read receiptData...
+            }
+            catch {
+                print("Couldn't read receipt data: " + error.localizedDescription) }
+        }
 
         SwiftyStoreKit.verifyReceipt(using: validator) { result in
             switch result {
