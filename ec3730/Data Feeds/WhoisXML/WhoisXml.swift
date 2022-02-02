@@ -99,7 +99,7 @@ extension WhoisXml: DataFeedService {
     }()
     
     static var reputationService: WhoisXMLService = {
-        WhoisXMLService(name: "Reputation", description: "Reputation", id: "20")
+        WhoisXMLService(name: "Reputation", description: "Our hosted lookup uses hundreds of parameters to calculate reputation scores.", id: "20")
     }()
 
     var services: [Service] {
