@@ -80,36 +80,6 @@ class WhoisXmlReputationSectionModel: HostSectionModel {
                 }
             }
         }
-        
-//        WhoisXml.dnsService.query(["domain": host]) { (error, response: DnsCoordinate?) in
-//            DispatchQueue.main.async {
-//                print(response.debugDescription)
-//
-//                    guard error == nil else {
-//                        // todo show error
-//                        block?(error, nil)
-//                        return
-//                    }
-//
-//                    guard let response = response else {
-//                        // todo show error
-//                        block?(URLError(URLError.badServerResponse), nil)
-//                        return
-//                    }
-//
-//
-//                guard let record = response.dnsData.dnsRecords else {
-//                    block?(URLError(URLError.badServerResponse), nil)
-//                    return
-//                }
-//                self.cache.setObject(record, forKey: host)
-//                do {
-//                    block?(nil, try self.configure(with: record))
-//                } catch {
-//                    block?(error, nil)
-//                }
-//            }
-//        }
     }
 }
 
