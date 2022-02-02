@@ -1,6 +1,7 @@
 const apiKeyKeyMap = new Map([
   ["webRisk", "key"],
   ["whoisXml", "apiKey"],
+  ["whoisXmlReputation", "apiKey"],
   ["whoisXmlBalance", "apiKey"],
   ["monapi", "userKey"]
 ])
@@ -8,6 +9,7 @@ const apiKeyKeyMap = new Map([
 const apiKeyMap = new Map([
   ["webRisk", GOOGLE_WEB_RISK_API_KEY],
   ["whoisXml", WHOIS_XML_API_KEY],
+  ["whoisXmlReputation", WHOIS_XML_API_KEY],
   ["whoisXmlBalance", WHOIS_XML_API_KEY],
   ["monapi", MONAPI_KEY]
 ]);
@@ -16,6 +18,7 @@ const apiHostMap = new Map([
   ["webRisk", "webrisk.googleapis.com"],
   ["whoisXml", "www.whoisxmlapi.com"],
   ["whoisXmlBalance", "user.whoisxmlapi.com"],
+  ["whoisXmlReputation", "domain-reputation.whoisxmlapi.com"],
   ["monapi", "api.monapi.io"]
 ]);
 
@@ -33,6 +36,8 @@ async function handleRequest(request) {
   let api = params.get("api");
   let newRequest = new Request(request);
   params.delete("api")
+  params.delete("service_name")
+  params.delete("service_id")
   params.delete("identifierForVendor") // to be saved for later
   params.delete("bundleIdentifier") // to be saved for later
   requestURL.search = params;

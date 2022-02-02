@@ -45,6 +45,8 @@
 		F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F746233CECD900BAA609 /* DataFeedCell.swift */; };
 		F650F749233CF15800BAA609 /* DataFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F748233CF15800BAA609 /* DataFeed.swift */; };
 		F650F74B233E62C100BAA609 /* BlurredPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F74A233E62C100BAA609 /* BlurredPickerView.swift */; };
+		F65FDA6527AB03BC0024521B /* WhoisXmlReputationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FDA6427AB03BC0024521B /* WhoisXmlReputationSectionModel.swift */; };
+		F65FDA6727AB06920024521B /* WhoisXmlReputationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FDA6627AB06920024521B /* WhoisXmlReputationRecord.swift */; };
 		F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661A27F23020FCF0023FA50 /* UIAlertController.swift */; };
 		F66643B326F02A5B000F17BC /* HostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66643B226F02A5B000F17BC /* HostViewModel.swift */; };
 		F66643B526F02A8F000F17BC /* HostViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66643B426F02A8F000F17BC /* HostViewSection.swift */; };
@@ -172,6 +174,8 @@
 		F650F746233CECD900BAA609 /* DataFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedCell.swift; sourceTree = "<group>"; };
 		F650F748233CF15800BAA609 /* DataFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeed.swift; sourceTree = "<group>"; };
 		F650F74A233E62C100BAA609 /* BlurredPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredPickerView.swift; sourceTree = "<group>"; };
+		F65FDA6427AB03BC0024521B /* WhoisXmlReputationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlReputationSectionModel.swift; sourceTree = "<group>"; };
+		F65FDA6627AB06920024521B /* WhoisXmlReputationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlReputationRecord.swift; sourceTree = "<group>"; };
 		F661A27F23020FCF0023FA50 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		F66643B226F02A5B000F17BC /* HostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewModel.swift; sourceTree = "<group>"; };
 		F66643B426F02A8F000F17BC /* HostViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewSection.swift; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 				F644A0FE279283640061C98B /* WhoisXmlWhoisSectionModel.swift */,
 				F644A102279284EE0061C98B /* GoogleWebRiskSectionModel.swift */,
 				F644A100279283E30061C98B /* WhoisXmlDnsSectionModel.swift */,
+				F65FDA6427AB03BC0024521B /* WhoisXmlReputationSectionModel.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -380,6 +385,7 @@
 				F69E3649235806370017296E /* WhoisXMLDnsService.swift */,
 				F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */,
 				F619760A22FCA76200CE39A0 /* WhoisRecord.swift */,
+				F65FDA6627AB06920024521B /* WhoisXmlReputationRecord.swift */,
 				F6FDDFDB230B2BB900FBF75E /* WhoisDnsResults.swift */,
 				F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */,
 			);
@@ -727,6 +733,8 @@
 				F69E36502358089C0017296E /* DFService.swift in Sources */,
 				F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */,
 				F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */,
+				F65FDA6527AB03BC0024521B /* WhoisXmlReputationSectionModel.swift in Sources */,
+				F65FDA6727AB06920024521B /* WhoisXmlReputationRecord.swift in Sources */,
 				F644A103279284EE0061C98B /* GoogleWebRiskSectionModel.swift in Sources */,
 				F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */,
 				F63B922A279C8EE5007E845F /* HostResultSection.swift in Sources */,

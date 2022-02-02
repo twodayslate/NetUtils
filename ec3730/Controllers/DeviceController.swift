@@ -330,7 +330,7 @@ class UIDeviceTableViewController: UITableViewController {
                 cell.webview.navigationDelegate = self.netutilsFingerPrintCellWrapperDelegate
                 break
             default:
-                cell.webview.load(URLRequest(url: URL(string: "https://byo.sh/fingerprint")!))
+                cell.webview.load(URLRequest(url: URL(string: "https://fingerprint2.netutils.workers.dev/")!))
                 self.expressFingerprintCellWrapperDelegate.cell = cell
                 cell.webview.navigationDelegate = self.expressFingerprintCellWrapperDelegate
                 break
