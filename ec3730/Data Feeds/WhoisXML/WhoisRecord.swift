@@ -227,7 +227,7 @@ extension WhoisRecord {
 
 struct WhoisRecordAdministrativeContact: Codable {
     let city: String?
-    let country, countryCode: String
+    let country, countryCode: String?
     let email, fax, faxEXT, name: String?
     let organization, postalCode: String?
     let rawText: String
@@ -379,7 +379,7 @@ extension WhoisRecordAudit {
 
 struct WhoisRecordBillingContact: Codable {
     let city: String?
-    let country, countryCode: String
+    let country, countryCode: String?
     let email, fax, faxEXT, name: String?
     let organization, postalCode: String?
     let rawText: String
@@ -535,7 +535,7 @@ extension WhoisRecordNameServers {
 
 struct Registrant: Codable {
     let city: String?
-    let country, countryCode: String
+    let country, countryCode: String?
     let email, fax, faxEXT, name: String?
     let organization, postalCode: String?
     let rawText: String
@@ -761,7 +761,7 @@ extension RegistryData {
 
 struct RegistryDataAdministrativeContact: Codable {
     let city: String?
-    let country, countryCode: String
+    let country, countryCode: String?
     let email, fax, faxEXT, name: String?
     let organization, postalCode: String?
     let rawText: String
@@ -913,7 +913,7 @@ extension RegistryDataAudit {
 
 struct RegistryDataBillingContact: Codable {
     let city: String?
-    let country, countryCode: String
+    let country, countryCode: String?
     let email, fax, faxEXT, name: String?
     let organization, postalCode: String?
     let rawText: String
@@ -1144,7 +1144,7 @@ extension Regustrant {
 
 struct RegistryDataTechnicalContact: Codable {
     let city: String?
-    let country, countryCode: String
+    let country, countryCode: String?
     let email, fax, faxEXT, name: String?
     let organization, postalCode: String?
     let rawText: String
@@ -1243,7 +1243,7 @@ extension RegistryDataTechnicalContact {
 
 struct RegistryDataZoneContact: Codable {
     let city: String?
-    let country, countryCode: String
+    let country, countryCode: String?
     let email, fax, faxEXT, name: String?
     let organization, postalCode: String?
     let rawText: String
@@ -1342,7 +1342,7 @@ extension RegistryDataZoneContact {
 
 struct WhoisRecordTechnicalContact: Codable {
     let city: String?
-    let country, countryCode: String
+    let country, countryCode: String?
     let email, fax, faxEXT, name: String?
     let organization, postalCode: String?
     let rawText: String
@@ -1441,7 +1441,7 @@ extension WhoisRecordTechnicalContact {
 
 struct WhoisRecordZoneContact: Codable {
     let city: String?
-    let country, countryCode: String
+    let country, countryCode: String?
     let email, fax, faxEXT, name: String?
     let organization, postalCode: String?
     let rawText: String

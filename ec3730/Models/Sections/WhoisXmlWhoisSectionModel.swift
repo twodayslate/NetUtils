@@ -98,7 +98,13 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     rows.append(CopyCellRow(title: "State", content: state))
                 }
 
-                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+                if let country = contact.country {
+                    if let countryCode = contact.countryCode {
+                        rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    } else {
+                        rows.append(CopyCellRow(title: "Country", content: country))
+                    }
+                }
 
                 if let email = contact.email {
                     rows.append(CopyCellRow(title: "Email", content: email))
@@ -203,7 +209,14 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     rows.append(CopyCellRow(title: "State", content: state))
                 }
 
-                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+                if let country = contact.country {
+                    if let countryCode = contact.countryCode {
+                        rows.append(CopyCellRow(title: "Country", content: "\(country) (\(countryCode))"))
+                    } else {
+                        rows.append(CopyCellRow(title: "Country", content: country))
+                    }
+                }
+                
 
                 if let email = contact.email {
                     rows.append(CopyCellRow(title: "Email", content: email))
@@ -265,7 +278,13 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     rows.append(CopyCellRow(title: "State", content: state))
                 }
 
-                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+                if let country = contact.country {
+                    if let countryCode = contact.countryCode {
+                        rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    } else {
+                        rows.append(CopyCellRow(title: "Country", content: country))
+                    }
+                }
 
                 if let email = contact.email {
                     rows.append(CopyCellRow(title: "Email", content: email))
@@ -329,7 +348,13 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     rows.append(CopyCellRow(title: "State", content: state))
                 }
 
-                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+                if let country = contact.country {
+                    if let countryCode = contact.countryCode {
+                        rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    } else {
+                        rows.append(CopyCellRow(title: "Country", content: country))
+                    }
+                }
 
                 if let email = contact.email {
                     rows.append(CopyCellRow(title: "Email", content: email))
@@ -391,7 +416,13 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     rows.append(CopyCellRow(title: "State", content: state))
                 }
 
-                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+                if let country = contact.country {
+                    if let countryCode = contact.countryCode {
+                        rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    } else {
+                        rows.append(CopyCellRow(title: "Country", content: country))
+                    }
+                }
 
                 if let email = contact.email {
                     rows.append(CopyCellRow(title: "Email", content: email))
@@ -455,7 +486,13 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     rows.append(CopyCellRow(title: "State", content: state))
                 }
 
-                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+                if let country = contact.country {
+                    if let countryCode = contact.countryCode {
+                        rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    } else {
+                        rows.append(CopyCellRow(title: "Country", content: country))
+                    }
+                }
 
                 if let email = contact.email {
                     rows.append(CopyCellRow(title: "Email", content: email))
@@ -518,7 +555,13 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     rows.append(CopyCellRow(title: "State", content: state))
                 }
 
-                rows.append(CopyCellRow(title: "Country", content: contact.country + "(\(contact.countryCode))"))
+                if let country = contact.country {
+                    if let countryCode = contact.countryCode {
+                        rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    } else {
+                        rows.append(CopyCellRow(title: "Country", content: country))
+                    }
+                }
 
                 if let email = contact.email {
                     rows.append(CopyCellRow(title: "Email", content: email))

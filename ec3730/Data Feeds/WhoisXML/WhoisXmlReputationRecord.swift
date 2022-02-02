@@ -328,7 +328,7 @@ struct WhoisXmlReputationRecord: Codable {
 
 struct WhoisXmlReputationTestResult: Codable {
     var test: String
-    var testCode: WhoisXmlReputationTestCodes
+    var testCode: Int
     var warnings: [String]
-    var warningCodes: [WhoisXmlReputationWarningCodes]
+    var warningCodes: [Int]
 }
