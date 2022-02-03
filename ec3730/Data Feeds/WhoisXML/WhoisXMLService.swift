@@ -39,13 +39,23 @@ class WhoisXMLService: Service {
         guard let userData = userData, let userInput = userData["domain"] as? String, let domain = userInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
             return nil
         }
+        
+        var api = "whoisXml"
+        switch self {
+        case WhoisXml.reputationService:
+            api = "whoisXmlReputation"
+        default:
+            api = "whoisXml"
+        }
 
         var params = [
             URLQueryItem(name: "domainName", value: domain),
             URLQueryItem(name: "outputFormat", value: "JSON"),
             URLQueryItem(name: "da", value: "2"),
             URLQueryItem(name: "ip", value: "1"),
-            URLQueryItem(name: "api", value: "whoisXml"),
+            URLQueryItem(name: "api", value: api),
+            URLQueryItem(name: "service_name", value: self.name),
+            URLQueryItem(name: "service_id", value: self.id),
             URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
             URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier)
         ]
@@ -54,7 +64,16 @@ class WhoisXMLService: Service {
             params.append(URLQueryItem(name: "apiKey", value: key))
         }
 
-        return WhoisXml.Endpoint(host: "api.netutils.workers.dev", path: "/whoisserver/WhoisService", queryItems: params)
+        var path: String!
+        switch self {
+        case WhoisXml.reputationService:
+            path = "/api/v1"
+        default:
+            path = "/whoisserver/WhoisService"
+        }
+        
+        
+        return WhoisXml.Endpoint(host: "api.netutils.workers.dev", path: path, queryItems: params)
     }
 
     func query<T: Codable>(_ userData: [String: Any?]?, completion block: ((Error?, T?) -> Void)?) {
@@ -175,5 +194,12 @@ class WhoisXMLService: Service {
 
             block?(nil, balance)
         }.resume()
+    }
+}
+
+
+extension WhoisXMLService: Equatable {
+    static func == (lhs: WhoisXMLService, rhs: WhoisXMLService) -> Bool {
+        return lhs.id == rhs.id && lhs.name == rhs.name
     }
 }

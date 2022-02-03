@@ -173,6 +173,8 @@ extension StoreKitModel {
     
     static var dns: StoreKitModel = .whois
     
+    static var reputation: StoreKitModel = .whois
+    
     static var monapi: StoreKitModel = {
         return StoreKitModel(defaultId: "monapi.monthly.auto", ids: ["monapi.yearly.auto", "monapi.onetime"])
     }()

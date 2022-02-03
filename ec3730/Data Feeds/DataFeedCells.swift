@@ -31,7 +31,7 @@ class DataFeedCells {
 
     var cells: [DataFeedCell] {
         let whoisCell = DataFeedCell(subscriber: WhoisXml.current)
-        whoisCell.descriptionText.text = "Unlocks WHOIS and DNS Lookup"
+        whoisCell.descriptionText.text = "Unlocks WHOIS, DNS, and Reputation Lookup"
 
         let webRisk = DataFeedCell(subscriber: GoogleWebRisk.current)
         webRisk.descriptionText.text = "Unlocks detection of malicious URLs"
