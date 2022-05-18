@@ -22,13 +22,11 @@ class HostViewModel: ObservableObject {
     /** The key used to determine the section order*/
     static var orderKey = "hostviewmodel.order"
     
-    @Published var order: [String] = UserDefaults.standard.object(forKey: HostViewModel.orderKey) as? [String] ?? [] {
-        didSet {
-            UserDefaults.standard.set(self.order, forKey: Self.orderKey)
-        }
-    }
+    @Published var order: [String] { didSet {
+        UserDefaults.standard.set(self.order, forKey: Self.orderKey)
+    }}
     
-    @Published var hidden: [String] = UserDefaults.standard.object(forKey: HostViewModel.hiddenKey) as? [String] ?? [] {
+    @Published var hidden: [String] {
         didSet {
             print("did set \(self.hidden.count) v \(self.sections.count)")
             UserDefaults.standard.set(self.hidden, forKey: Self.hiddenKey)
@@ -38,6 +36,8 @@ class HostViewModel: ObservableObject {
     }
             
     init() {
+        self.order = UserDefaults.standard.object(forKey: HostViewModel.orderKey) as? [String] ?? []
+        self.hidden = UserDefaults.standard.object(forKey: HostViewModel.hiddenKey) as? [String] ?? []
         self.sections = []
         self.generateVisibleSections()
     }
