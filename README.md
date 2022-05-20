@@ -16,9 +16,6 @@ NetUtils is a Network Utility application that can do a whole lot, including:
 
 ## Requirements
 
-### CocoaPods
-This project uses [CocoaPods](https://cocoapods.org/). The Podfile and Pods folder is included for your conviencance. This project will slowly transition to Swift Package Manager.
-
 ### API Keys
 
 In order to use/build this project you will have to create an Api Key `enum`. An example is below:
@@ -35,6 +32,10 @@ struct ApiKey {
 ```
 
 This is necessary to support for In-App purchases properly. Service related keys are stored on the [Cloudflare Workers®](https://www.cloudflare.com/products/cloudflare-workers/) server.
+
+### Releasing
+
+[fastlane](https://fastlane.tools/) is used for screenshots. 
 
 ## Credits
 
