@@ -36,7 +36,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
     func restore(_: UIButton) {
         isRestoring = true
 
-        self.dataFeed.restore { results in
+        dataFeed.restore { results in
             self.isRestoring = false
             // swiftlint:disable:next line_length
             self.didUpdateInAppPurchase(self.dataFeed, error: nil, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
@@ -48,7 +48,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
 
         // TODO: generalize block
 
-        if let sub = (self.dataFeed as? DataFeedSubscription), let defaultSub = sub.subscriptions.first {
+        if let sub = (dataFeed as? DataFeedSubscription), let defaultSub = sub.subscriptions.first {
             defaultSub.buy { result in
                 self.isRestoring = false
                 // swiftlint:disable:next line_length
@@ -57,7 +57,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
             return
         }
 
-        if let one = (self.dataFeed as? DataFeedOneTimePurchase) {
+        if let one = (dataFeed as? DataFeedOneTimePurchase) {
             one.oneTime.purchase { result in
                 self.isRestoring = false
                 // swiftlint:disable:next line_length
@@ -266,6 +266,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         separatorInset.right = .greatestFiniteMagnitude
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -279,7 +280,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
 
 extension WhoisLockedTableViewCell: UITextViewDelegate {
     func textView(_: UITextView, shouldInteractWith URL: URL, in _: NSRange, interaction _: UITextItemInteraction) -> Bool {
-        self.window?.rootViewController?.open(URL, title: "")
+        window?.rootViewController?.open(URL, title: "")
 
         return false
     }

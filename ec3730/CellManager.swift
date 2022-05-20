@@ -13,7 +13,7 @@ import UIKit
 open class CellManager {
     public var cells = [UITableViewCell]()
     var iapDelegate: DataFeedInAppPurchaseUpdateDelegate?
-    
+
     var isCollapsed: Bool = false
 
     internal var privateIsLoading: Bool = false
@@ -43,7 +43,7 @@ open class CellManager {
     open func startLoading() {
         privateIsLoading = true
 
-        if let paid = self.dataFeed as? DataFeedPurchaseProtocol {
+        if let paid = dataFeed as? DataFeedPurchaseProtocol {
             if paid.owned {
                 let cell = LoadingCell()
                 cell.spinner.startAnimating()
@@ -59,7 +59,7 @@ open class CellManager {
     open func stopLoading() {
         privateIsLoading = false
 
-        if let paid = self.dataFeed as? DataFeedPurchaseProtocol {
+        if let paid = dataFeed as? DataFeedPurchaseProtocol {
             if paid.owned {
                 cells.removeAll()
             } else {
@@ -75,7 +75,7 @@ open class CellManager {
 
 extension CellManager: DataFeedInAppPurchaseUpdateDelegate {
     func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults: RestoreResults?, verifySubscriptionResult: VerifySubscriptionResult?, verifyPurchaseResult: VerifyPurchaseResult?, retrieveResults: RetrieveResults?) {
-        if let paid = self.dataFeed as? DataFeedPurchaseProtocol {
+        if let paid = dataFeed as? DataFeedPurchaseProtocol {
             if paid.owned {
                 cells.removeAll()
             } else {

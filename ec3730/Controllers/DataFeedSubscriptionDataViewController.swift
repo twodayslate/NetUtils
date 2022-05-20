@@ -24,6 +24,7 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
         super.init(style: .insetGrouped)
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -37,7 +38,7 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
     }
 
     @objc func restore(_: Any?) {
-        if let purchase = self.subscriber as? DataFeedPurchaseProtocol {
+        if let purchase = subscriber as? DataFeedPurchaseProtocol {
             purchase.restore { results in
                 // swiftlint:disable:next line_length
                 self.didUpdateInAppPurchase(self.subscriber, error: nil, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
@@ -46,7 +47,7 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
     }
 
     var hasUsage: Bool {
-        if let serviceSubscriber = self.subscriber as? DataFeedService {
+        if let serviceSubscriber = subscriber as? DataFeedService {
             if serviceSubscriber.totalUsage > 0 {
                 return true
             }

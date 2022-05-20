@@ -20,9 +20,8 @@ class WhoisXMLDnsService: WhoisXMLService {
                       URLQueryItem(name: "type", value: "_all"),
                       URLQueryItem(name: "api", value: "whoisXml"),
                       URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
-                      URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier)
-        ]
-        
+                      URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier)]
+
         if let key = WhoisXml.current.userKey {
             params.append(URLQueryItem(name: "apiKey", value: key))
         }

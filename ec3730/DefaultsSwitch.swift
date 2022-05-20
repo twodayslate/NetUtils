@@ -25,6 +25,7 @@ class DefaultsSwitch: UISwitch {
         UserDefaults.standard.synchronize()
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

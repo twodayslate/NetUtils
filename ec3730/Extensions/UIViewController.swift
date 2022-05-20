@@ -29,7 +29,8 @@ extension UIViewController {
     @objc private func _onKeyboardFrameWillChangeNotificationReceived(_ notification: Notification) {
         if #available(iOS 11.0, *) {
             guard let userInfo = notification.userInfo,
-                let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+                  let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            else {
                 return
             }
 
@@ -134,7 +135,7 @@ extension UIViewController: SFSafariViewControllerDelegate {
             safari.delegate = self
             _ = safari.view // https://stackoverflow.com/questions/46439142/sfsafariviewcontroller-blank-in-ios-11-xcode-9-0
 
-            if let navigationController = self.navigationController {
+            if let navigationController = navigationController {
                 navigationController.pushViewController(safari, animated: true)
             } else {
                 present(safari, animated: true, completion: {
@@ -145,7 +146,7 @@ extension UIViewController: SFSafariViewControllerDelegate {
     }
 
     public func safariViewControllerDidFinish(_ safariController: SFSafariViewController) {
-        if let navigationController = self.navigationController {
+        if let navigationController = navigationController {
             navigationController.popToRootViewController(animated: true)
         } else {
             safariController.dismiss(animated: true, completion: nil)

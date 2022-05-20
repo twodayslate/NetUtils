@@ -13,31 +13,32 @@ import UIKit
 class CollapseButton: UIButton {
     var manager: CellManager? {
         didSet {
-            self.setToggleImage()
+            setToggleImage()
         }
     }
+
     var sectionIndex: Int?
 
     func setToggleImage() {
-        guard let manager = self.manager else {
+        guard let manager = manager else {
             return
         }
-                    
+
         if manager.isCollapsed {
-            self.setImage(UIImage(systemName: "arrowtriangle.up.fill"), for: .normal)
+            setImage(UIImage(systemName: "arrowtriangle.up.fill"), for: .normal)
         } else {
-            self.setImage(UIImage(systemName: "arrowtriangle.down.fill"), for: .normal)
+            setImage(UIImage(systemName: "arrowtriangle.down.fill"), for: .normal)
         }
     }
-    
+
     func toggle() {
-        guard let manager = self.manager else {
+        guard let manager = manager else {
             return
         }
 
         manager.isCollapsed = !manager.isCollapsed
 
-        self.setToggleImage()
+        setToggleImage()
     }
 }
 
@@ -100,6 +101,7 @@ class HostTable: UITableViewController {
         super.init(style: .plain)
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -146,12 +148,12 @@ class HostTable: UITableViewController {
             return 0
         }
     }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+    override func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         return 55.0 // I want this to be dynamic, UITableView.automaticDimension doesn't work
     }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+    override func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
 //        view.layoutMargins = .init(top: 8.0, left: 16.0, bottom: 8.0, right: 16.0)
         view.backgroundColor = .systemGray4
@@ -176,11 +178,11 @@ class HostTable: UITableViewController {
         collapse.translatesAutoresizingMaskIntoConstraints = false
         collapse.addTarget(self, action: #selector(collapse(_:)), for: .touchUpInside)
         collapse.sectionIndex = section
-        
+
         if section != 0 {
             stack.addArrangedSubview(collapse)
         }
-        
+
         switch section {
         case 0:
             title.text = "Simple IP Lookup"
@@ -199,13 +201,13 @@ class HostTable: UITableViewController {
 
         return view
     }
-    
+
     @objc func collapse(_ sender: CollapseButton?) {
         sender?.toggle()
         guard let index = sender?.sectionIndex else {
             return
         }
-        self.tableView.reloadSections(IndexSet(integer: index), with: .automatic)
+        tableView.reloadSections(IndexSet(integer: index), with: .automatic)
     }
 
     override func numberOfSections(in _: UITableView) -> Int {

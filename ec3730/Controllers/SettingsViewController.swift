@@ -8,8 +8,8 @@
 
 import MessageUI
 import SafariServices
-import UIKit
 import SwiftUI
+import UIKit
 
 class SettingsNavigationController: UINavigationController {
     convenience init() {
@@ -21,6 +21,7 @@ class SettingsNavigationController: UINavigationController {
         viewControllers = [SettingsTableViewController(style: .grouped)]
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -161,7 +162,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 navigationController?.pushViewController(organizer, animated: true)
             }
         case 2:
-            if themeSheet.actions.count == 0 {
+            if themeSheet.actions.isEmpty {
                 let inappSafariAction = UIAlertAction(title: "System", style: .default, handler: { _ in
                     print("Auto")
                     UserDefaults.standard.set(0, forKey: "theme")
@@ -204,7 +205,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 tableView.deselectRow(at: indexPath, animated: true)
             }
         case 3:
-            if browserSheet.actions.count == 0 {
+            if browserSheet.actions.isEmpty {
                 let inappSafariAction = UIAlertAction(title: "In-App Safari", style: .default, handler: { _ in
                     print("In-app Safari")
                     UserDefaults.standard.set(0, forKey: "open_browser")

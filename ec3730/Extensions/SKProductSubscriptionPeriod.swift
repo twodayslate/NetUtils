@@ -11,7 +11,7 @@ import StoreKit
 
 extension SKProduct {
     func attributedText(subscriber: DataFeedPurchaseProtocol) -> NSAttributedString {
-        if let intro = self.introductoryPrice {
+        if let intro = introductoryPrice {
             // **Start your free 3-day trial** then all WHOIS XML Data is available for $0.99/month automatically
             let string = NSMutableAttributedString(string: "")
             if intro.paymentMode == .freeTrial {

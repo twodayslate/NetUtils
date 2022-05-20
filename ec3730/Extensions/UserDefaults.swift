@@ -9,8 +9,8 @@
 import Foundation
 
 extension UserDefaults {
-    class NetUtils {
-        class Keys {
+    enum NetUtils {
+        enum Keys {
             public static var hideScrollbars: String { return "hide_scrollbars" }
             /// Key to enable/disable resource thumbnails
             public static var resourceThumbnails: String { return "resource_thumbnails" }

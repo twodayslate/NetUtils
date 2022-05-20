@@ -21,7 +21,7 @@ final class WhoisXml: DataFeedSingleton, DataFeedOneTimePurchase {
             // Save the key to the keychain
 
             let keychian = Keychain().synchronizable(true)
-            if let key = self.userKey {
+            if let key = userKey {
                 try? keychian.set(key, key: UserDefaults.NetUtils.Keys.keyFor(dataFeed: self))
             } else {
                 try? keychian.remove(UserDefaults.NetUtils.Keys.keyFor(dataFeed: self))
@@ -52,7 +52,7 @@ final class WhoisXml: DataFeedSingleton, DataFeedOneTimePurchase {
         return [monthly, yearly]
     }()
 
-    var oneTime: OneTimePurchase = OneTimePurchase("whois.onetime")
+    var oneTime: OneTimePurchase = .init("whois.onetime")
 }
 
 // MARK: - Endpoints
@@ -72,7 +72,7 @@ extension WhoisXml {
                 URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
                 URLQueryItem(name: "api", value: "whoisXmlBalance")
             ]
-            
+
             if let bundle = Bundle.main.bundleIdentifier {
                 params.append(URLQueryItem(name: "bundleIdentifier", value: bundle))
             }
@@ -90,17 +90,11 @@ extension WhoisXml {
 // MARK: - DataFeedService
 
 extension WhoisXml: DataFeedService {
-    static var whoisService: WhoisXMLService = {
-        WhoisXMLService(name: "WHOIS", description: "Our hosted WHOIS Lookup provides the registration details, also known as a WHOIS Record, of domain names", id: "1")
-    }()
+    static var whoisService: WhoisXMLService = .init(name: "WHOIS", description: "Our hosted WHOIS Lookup provides the registration details, also known as a WHOIS Record, of domain names", id: "1")
 
-    static var dnsService: WhoisXMLService = {
-        WhoisXMLDnsService(name: "DNS", description: "Our hosted DNS Lookup provides the records associated with a domain", id: "26")
-    }()
-    
-    static var reputationService: WhoisXMLService = {
-        WhoisXMLService(name: "Reputation", description: "Our hosted lookup uses hundreds of parameters to calculate reputation scores.", id: "20")
-    }()
+    static var dnsService: WhoisXMLService = WhoisXMLDnsService(name: "DNS", description: "Our hosted DNS Lookup provides the records associated with a domain", id: "26")
+
+    static var reputationService: WhoisXMLService = .init(name: "Reputation", description: "Our hosted lookup uses hundreds of parameters to calculate reputation scores.", id: "20")
 
     var services: [Service] {
         return [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService]
@@ -139,7 +133,7 @@ extension WhoisXml: DataFeedSubscription {
     }
 
     var defaultProduct: SKProduct? {
-        guard let product = self.subscriptions[0].product else {
+        guard let product = subscriptions[0].product else {
             retrieve()
             return nil
         }

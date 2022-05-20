@@ -1547,7 +1547,7 @@ func newJSONEncoder() -> JSONEncoder {
 // MARK: - URLSession response handlers
 
 extension URLSession {
-    fileprivate func codableTask<T: Codable>(with url: URL, completionHandler: @escaping (T?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    private func codableTask<T: Codable>(with url: URL, completionHandler: @escaping (T?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         return dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 completionHandler(nil, response, error)
@@ -1793,10 +1793,10 @@ class JSONAny: Codable {
     }
 
     public func encode(to encoder: Encoder) throws {
-        if let arr = self.value as? [Any] {
+        if let arr = value as? [Any] {
             var container = encoder.unkeyedContainer()
             try JSONAny.encode(to: &container, array: arr)
-        } else if let dict = self.value as? [String: Any] {
+        } else if let dict = value as? [String: Any] {
             var container = encoder.container(keyedBy: JSONCodingKey.self)
             try JSONAny.encode(to: &container, dictionary: dict)
         } else {

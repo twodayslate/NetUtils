@@ -1,21 +1,19 @@
+import AddressURL
 import CloudKit
 import CoreData
 import Foundation
 import KeychainAccess
 import StoreKit
 import SwiftyStoreKit
-import AddressURL
 
 final class LocalDns: DataFeedSingleton {
     var name: String = "Simple IP Lookup"
 
-    var webpage: URL = URL(string: "https://zac.gorak.us/")!
+    var webpage: URL = .init(string: "https://zac.gorak.us/")!
 
     public var userKey: String?
 
-    public static var current: LocalDns = {
-        return LocalDns()
-    }()
+    public static var current: LocalDns = .init()
 
     static var session = URLSession.shared
 
@@ -29,9 +27,7 @@ extension LocalDns: DataFeedService {
         return services.reduce(0) { $0 + $1.usage }
     }
 
-    public static var lookupService: IPLookupService = {
-        IPLookupService()
-    }()
+    public static var lookupService: IPLookupService = .init()
 
     class IPLookupService: Service {
         var name: String = "Simple IP Lookup"
@@ -39,7 +35,7 @@ extension LocalDns: DataFeedService {
 
         var cache = TimedCache(expiresIn: 60)
 
-        func endpoint(_ userData: [String: Any?]?) -> DataFeedEndpoint? {
+        func endpoint(_: [String: Any?]?) -> DataFeedEndpoint? {
             return nil
         }
 
@@ -48,7 +44,7 @@ extension LocalDns: DataFeedService {
                 block?(URLError(.badURL), nil)
                 return
             }
-            
+
             DNSResolver.resolve(host: host) { error, addresses in
                 guard error == nil else {
                     block?(error, nil)

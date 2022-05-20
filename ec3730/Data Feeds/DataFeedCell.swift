@@ -89,6 +89,7 @@ class DataFeedCell: UITableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -114,7 +115,7 @@ class DataFeedCell: UITableViewCell {
             return
         }
 
-        if let subscriptions = self.subscriber as? DataFeedSubscription, let defaultSub = subscriptions.subscriptions.first {
+        if let subscriptions = subscriber as? DataFeedSubscription, let defaultSub = subscriptions.subscriptions.first {
             defaultSub.buy {
                 result in
 
@@ -124,7 +125,7 @@ class DataFeedCell: UITableViewCell {
                 }
             }
         } else {
-            if let one = self.subscriber as? DataFeedOneTimePurchase {
+            if let one = subscriber as? DataFeedOneTimePurchase {
                 one.oneTime.purchase { result in
                     self.iapDelegate?.didUpdateInAppPurchase(self.subscriber, error: nil, purchaseResult: result,
                                                              restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)

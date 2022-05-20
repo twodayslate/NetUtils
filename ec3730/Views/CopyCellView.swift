@@ -6,9 +6,9 @@ protocol CopyCellProtocol: View, Hashable, Identifiable {
 
 struct CopyCellRow: Identifiable, Hashable, Codable {
     var id: Int {
-        return self.hashValue
+        return hashValue
     }
-    
+
     var title: String?
     var content: String
 }
@@ -16,26 +16,26 @@ struct CopyCellRow: Identifiable, Hashable, Codable {
 @available(iOS 15.0, *)
 struct CopyCellView: CopyCellProtocol {
     var id: String {
-        return self.contentsToShare + "\(self.hashValue)"
+        return contentsToShare + "\(hashValue)"
     }
 
     static func == (lhs: CopyCellView, rhs: CopyCellView) -> Bool {
         return lhs.title == rhs.title && lhs.content == rhs.content
     }
-    
-    func hash(into hasher: inout Hasher){
-        hasher.combine(self.title)
-        hasher.combine(self.content)
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(title)
+        hasher.combine(content)
     }
-    
+
     var title: String
-    var content: String? = nil
-    var rows: [CopyCellRow]? = nil
-    
+    var content: String?
+    var rows: [CopyCellRow]?
+
     @State var shouldShare: Bool = false
-    
+
     var contentsToShare: String {
-        if let content = self.content {
+        if let content = content {
             let dict = [title: content]
             guard let data = try? JSONSerialization.data(withJSONObject: dict), let string = String(data: data, encoding: .utf8) else {
                 return "{}"
@@ -43,21 +43,21 @@ struct CopyCellView: CopyCellProtocol {
 
             return string
         }
-        
-        if let rows = self.rows {
+
+        if let rows = rows {
             let dict = [title: rows]
-            guard let data = try? JSONEncoder().encode( dict), let string = String(data: data, encoding: .utf8) else {
+            guard let data = try? JSONEncoder().encode(dict), let string = String(data: data, encoding: .utf8) else {
                 return "{}"
             }
-                    
+
             return string
         }
-        
+
         return "{}"
     }
-    
+
     @State var expanded = true
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if let content = self.content {
@@ -98,7 +98,6 @@ struct CopyCellView: CopyCellProtocol {
     }
 }
 
-    
 @available(iOS 15.0, *)
 struct CopyCellView_Previews: PreviewProvider {
     static var previews: some View {

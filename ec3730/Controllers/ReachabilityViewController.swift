@@ -30,14 +30,14 @@ class NetworkInterfacesTable: UITableViewController {
     }
 
     override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if enabledInterfaces.count > 0, section == 0 {
+        if !enabledInterfaces.isEmpty, section == 0 {
             return "Enabled (Up)"
         }
         return "Disabled (Down)"
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return (enabledInterfaces.count > 0 ? 1 : 0) + (disabledInterfaces.count > 0 ? 1 : 0)
+        return (!enabledInterfaces.isEmpty ? 1 : 0) + (!disabledInterfaces.isEmpty ? 1 : 0)
     }
 
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

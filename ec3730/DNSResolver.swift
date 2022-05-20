@@ -10,40 +10,36 @@ enum DNSResolverError: Error {
 }
 
 final class SimpleDNSResolver: DataFeedSingleton {
-    
-    static var current: SimpleDNSResolver = {
-        return SimpleDNSResolver()
-    }()
-    
-    static var session: URLSession = URLSession.shared
-    
+    static var current: SimpleDNSResolver = .init()
+
+    static var session: URLSession = .shared
+
     var name: String = "DNS Resolver"
-    
-    var userKey: String? = nil
-    
-    var webpage: URL = URL(staticString: "https://zac.gorak.us")
+
+    var userKey: String?
+
+    var webpage: URL = .init(staticString: "https://zac.gorak.us")
 }
 
-extension SimpleDNSResolver:  DataFeedService {
+extension SimpleDNSResolver: DataFeedService {
     var services: [Service] {
         [Self.resolver]
     }
-    
+
     class DNSResolverService: Service {
         var name: String = "Simple IP Lookup"
         var description: String = "Simple IP Lookup"
-        
-        func endpoint(_ userData: [String : Any?]?) -> DataFeedEndpoint? {
+
+        func endpoint(_: [String: Any?]?) -> DataFeedEndpoint? {
             return nil
         }
-        
-        func query<T>(_ userData: [String : Any?]?, completion block: ((Error?, T?) -> Void)?) where T : Decodable, T : Encodable {
+
+        func query<T>(_: [String: Any?]?, completion block: ((Error?, T?) -> Void)?) where T: Decodable, T: Encodable {
             block?(nil, nil)
         }
     }
-    
+
     static var resolver = DNSResolverService()
-    
 }
 
 final class DNSResolver {
@@ -117,7 +113,7 @@ final class DNSResolver {
             Unmanaged.passUnretained(self).release()
         }
 
-        guard let userInfo = self.timer?.userInfo else {
+        guard let userInfo = timer?.userInfo else {
             return
         }
 

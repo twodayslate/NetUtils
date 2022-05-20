@@ -31,7 +31,7 @@ class CopyCell: UITableViewCell {
         titleLabel?.text = title
         titleLabel?.font = UITableViewCell(style: .value1, reuseIdentifier: "reused").textLabel?.font
         titleLabel?.textColor = UITableViewCell(style: .value1, reuseIdentifier: "reused").textLabel?.textColor
-        //titleLabel?.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
+        // titleLabel?.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
 
         detailLabel = CopyLabel()
         detailLabel?.text = detail
@@ -51,6 +51,7 @@ class CopyCell: UITableViewCell {
         titleLabel?.widthAnchor.constraint(greaterThanOrEqualTo: stack.widthAnchor, multiplier: 0.25).isActive = true
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

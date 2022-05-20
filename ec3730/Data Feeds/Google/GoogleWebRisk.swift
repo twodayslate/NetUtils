@@ -16,12 +16,12 @@ import SwiftyStoreKit
 final class GoogleWebRisk: DataFeedSingleton, DataFeedOneTimePurchase {
     var name: String = "Google Web Risk API"
 
-    var webpage: URL = URL(string: "https://cloud.google.com/web-risk/")!
+    var webpage: URL = .init(string: "https://cloud.google.com/web-risk/")!
 
     public var userKey: String? {
         didSet {
             let keychian = Keychain().synchronizable(true)
-            if let key = self.userKey {
+            if let key = userKey {
                 try? keychian.set(key, key: UserDefaults.NetUtils.Keys.keyFor(dataFeed: self))
             } else {
                 try? keychian.remove(UserDefaults.NetUtils.Keys.keyFor(dataFeed: self))
@@ -40,7 +40,7 @@ final class GoogleWebRisk: DataFeedSingleton, DataFeedOneTimePurchase {
 
     static var session = URLSession.shared
 
-    var oneTime: OneTimePurchase = OneTimePurchase("googlewebrisk.onetime")
+    var oneTime: OneTimePurchase = .init("googlewebrisk.onetime")
 
     var services: [Service] = {
         [GoogleWebRisk.lookupService]
@@ -77,7 +77,7 @@ extension GoogleWebRisk {
     /// [Constructing URLs in Swift](https://www.swiftbysundell.com/posts/constructing-urls-in-swift)
     class Endpoint: DataFeedEndpoint {
         /// https://webrisk.googleapis.com/v1beta1/uris:search?key=YOUR_API_KEY&threatTypes=MALWARE&uri=http%3A%2F%2Ftestsafebrowsing.appspot.com%2Fs%2Fmalware.html
-        static func lookup(uri: String, threats: [ThreatTypes] = [.malware, .unwanted, .socialEngineering], with key: String? = nil) -> Endpoint? {
+        static func lookup(uri: String, threats: [ThreatTypes] = [.malware, .unwanted, .socialEngineering], with _: String? = nil) -> Endpoint? {
             guard let fixedURI = uri.addingPercentEncoding(withAllowedCharacters: []) else {
                 return nil
             }
@@ -86,7 +86,7 @@ extension GoogleWebRisk {
                 URLQueryItem(name: "uri", value: fixedURI),
                 URLQueryItem(name: "api", value: "webRisk"),
                 URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
-                URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier),
+                URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier)
             ]
 
             if let key = GoogleWebRisk.current.userKey {
@@ -110,9 +110,7 @@ extension GoogleWebRisk: DataFeedService {
         return services.reduce(0) { $0 + $1.usage }
     }
 
-    public static var lookupService: GoogleWebRiskLookupService = {
-        GoogleWebRiskLookupService()
-    }()
+    public static var lookupService: GoogleWebRiskLookupService = .init()
 
     class GoogleWebRiskLookupService: Service {
         var name: String = "Google Web Risk Lookup API"
@@ -128,14 +126,14 @@ extension GoogleWebRisk: DataFeedService {
         }
 
         func query<T: Codable>(_ userData: [String: Any?]?, completion block: ((Error?, T?) -> Void)?) {
-            guard let endpoint = self.endpoint(userData), let endpointURL = endpoint.url else {
+            guard let endpoint = endpoint(userData), let endpointURL = endpoint.url else {
                 block?(DataFeedError.invalidUrl, nil)
                 return
             }
 
             usage += 1
 
-            if let cached: T = self.cache.value(for: endpointURL.absoluteString) {
+            if let cached: T = cache.value(for: endpointURL.absoluteString) {
                 block?(nil, cached)
                 return
             }

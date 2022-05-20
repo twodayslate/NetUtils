@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-extension UITextView {
-    public func scrollToBottom() {
-        if text.count > 0 {
+public extension UITextView {
+    func scrollToBottom() {
+        if !text.isEmpty {
             let location = text.count - 1
             let bottom = NSRange(location: location, length: 1)
             scrollRangeToVisible(bottom)

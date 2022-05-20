@@ -20,11 +20,11 @@ class WhoisXMLService: Service {
     static var cache = [String: TimedCache]()
 
     var cache: TimedCache {
-        if let currentCache = WhoisXMLService.cache[self.id] {
+        if let currentCache = WhoisXMLService.cache[id] {
             return currentCache
         }
-        WhoisXMLService.cache[self.id] = TimedCache(expiresIn: 600) // 10 minutes
-        return WhoisXMLService.cache[self.id]!
+        WhoisXMLService.cache[id] = TimedCache(expiresIn: 600) // 10 minutes
+        return WhoisXMLService.cache[id]!
     }
 
     // MARK: - Initializers
@@ -39,7 +39,7 @@ class WhoisXMLService: Service {
         guard let userData = userData, let userInput = userData["domain"] as? String, let domain = userInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
             return nil
         }
-        
+
         var api = "whoisXml"
         switch self {
         case WhoisXml.reputationService:
@@ -54,8 +54,8 @@ class WhoisXMLService: Service {
             URLQueryItem(name: "da", value: "2"),
             URLQueryItem(name: "ip", value: "1"),
             URLQueryItem(name: "api", value: api),
-            URLQueryItem(name: "service_name", value: self.name),
-            URLQueryItem(name: "service_id", value: self.id),
+            URLQueryItem(name: "service_name", value: name),
+            URLQueryItem(name: "service_id", value: id),
             URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
             URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier)
         ]
@@ -71,13 +71,12 @@ class WhoisXMLService: Service {
         default:
             path = "/whoisserver/WhoisService"
         }
-        
-        
+
         return WhoisXml.Endpoint(host: "api.netutils.workers.dev", path: path, queryItems: params)
     }
 
     func query<T: Codable>(_ userData: [String: Any?]?, completion block: ((Error?, T?) -> Void)?) {
-        guard let endpoint = self.endpoint(userData), let endpointURL = endpoint.url else {
+        guard let endpoint = endpoint(userData), let endpointURL = endpoint.url else {
             block?(DataFeedError.invalidUrl, nil)
             return
         }
@@ -86,7 +85,7 @@ class WhoisXMLService: Service {
 
         usage += 1
 
-        if let cached: T = self.cache.value(for: endpointURL.absoluteString) {
+        if let cached: T = cache.value(for: endpointURL.absoluteString) {
             block?(nil, cached)
             return
         }
@@ -167,7 +166,7 @@ class WhoisXMLService: Service {
     }
 
     func balance(key: String?, completion block: ((Error?, Int?) -> Void)? = nil) {
-        guard let balanceURL = WhoisXml.Endpoint.balanceUrl(for: self.id, with: key) else {
+        guard let balanceURL = WhoisXml.Endpoint.balanceUrl(for: id, with: key) else {
             block?(DataFeedError.invalidUrl, nil) // TODO: set error
             return
         }
@@ -196,7 +195,6 @@ class WhoisXMLService: Service {
         }.resume()
     }
 }
-
 
 extension WhoisXMLService: Equatable {
     static func == (lhs: WhoisXMLService, rhs: WhoisXMLService) -> Bool {
