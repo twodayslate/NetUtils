@@ -1,6 +1,8 @@
 # file options
 
 --exclude fastlane
+--exclude .build
+--exclude .swiftpm
 
 # format options
 
@@ -36,5 +38,5 @@
 --wrapcollections preserve
 
 # rules
-
+--disable wrapMultilineStatementBraces
 --enable isEmpty

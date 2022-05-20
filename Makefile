@@ -1,4 +1,4 @@
-SOURCE_ROOT:=./ec3730
+SOURCE_ROOT:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 .PHONY: help
 help:
@@ -6,20 +6,24 @@ help:
 	@echo "Targets:"
 	@echo "  bootstrap      Install necessary programs and requirements."
 	@echo "  help           Print this message and exit."
-	@echo "  format         Format/lint project."
+	@echo "  format         Format and lint project."
+	@echo "  snapshot       Use fastlane to take and deliver snapshots."
 	@echo "  open           Open workspace."
 
 .PHONY: bootstrap
 bootstrap:
 	gem install bundler
 	bundle install
-	bundle exec pod install
 
 .PHONY: format lint
 lint: format
 format:
-	./Pods/SwiftFormat/CommandLineTool/swiftformat .
-	./Pods/SwiftLint/swiftlint autocorrect "${SOURCE_ROOT}"
+	cd BuildTools && swift run -c release swiftformat --config "${SOURCE_ROOT}/.swiftformat" "${SOURCE_ROOT}"
+	cd BuildTools && swift run -c release swiftlint --config "${SOURCE_ROOT}/.swiftlint.yml" "${SOURCE_ROOT}" --fix
+
+.PHONY: snapshot
+snapshot:
+	fastlane snapshot && fastlane ios deliver_snapshots
 
 .PHONY: open
 open:
