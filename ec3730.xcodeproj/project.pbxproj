@@ -535,7 +535,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F6C8D8CB212E5AEB00309373 /* Build configuration list for PBXNativeTarget "ec3730" */;
 			buildPhases = (
-				AA821A7B2836D664000B9954 /* ShellScript */,
+				AA821A7B2836D664000B9954 /* SwiftFormat */,
 				F6C8D89D212E5AE900309373 /* Sources */,
 				F6C8D89E212E5AE900309373 /* Frameworks */,
 				F6C8D89F212E5AE900309373 /* Resources */,
@@ -693,7 +693,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AA821A7B2836D664000B9954 /* ShellScript */ = {
+		AA821A7B2836D664000B9954 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -702,6 +702,7 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftFormat;
 			outputFileListPaths = (
 			);
 			outputPaths = (
