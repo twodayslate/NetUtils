@@ -10,14 +10,9 @@ opt_in_rules: # some rules are turned off by default, so you need to opt-in
 # only_rules: # delete `disabled_rules` & `opt_in_rules` if using this
 #   - empty_parameters
 #   - vertical_whitespace
-
-included: # paths to include during linting. `--path` is ignored if present.
-  - /Users/ahmadazam/Documents/GitHub/NetUtils/ec3730
 excluded: # paths to ignore during linting. Takes precedence over `included`.
-  - ec3730Tests
-  - ec3730UITests
   - fastlane
-  - Pods
+  - "**/.build/"
  # Exclude files with a wildcard
 analyzer_rules: # Rules run by `swiftlint analyze`
   - explicit_self
