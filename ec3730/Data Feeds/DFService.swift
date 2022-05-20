@@ -22,7 +22,7 @@ protocol Service: AnyObject {
 extension Service {
     var usage: Int {
         get {
-            let search = NSPredicate(format: "serviceName like %@", argumentArray: [self.name])
+            let search = NSPredicate(format: "serviceName like %@", argumentArray: [name])
             if let context = AppDelegate.persistantStore?.viewContext {
                 let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
                 request.predicate = search
@@ -45,7 +45,7 @@ extension Service {
     }
 
     func clearUsage(completion block: (() -> Void)? = nil) {
-        let search = NSPredicate(format: "serviceName like %@", argumentArray: [self.name])
+        let search = NSPredicate(format: "serviceName like %@", argumentArray: [name])
         if let context = AppDelegate.persistantStore?.viewContext {
             let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
             request.predicate = search
@@ -72,7 +72,7 @@ extension Service {
         let calendar = NSCalendar.current
         let endDate = NSDate()
         let startDate = calendar.date(byAdding: .day, value: -1, to: endDate as Date)! as NSDate
-        let search = NSPredicate(format: "(date >= %@) AND serviceName like %@", argumentArray: [startDate, self.name])
+        let search = NSPredicate(format: "(date >= %@) AND serviceName like %@", argumentArray: [startDate, name])
         if let context = AppDelegate.persistantStore?.viewContext {
             let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
             request.predicate = search
@@ -85,7 +85,7 @@ extension Service {
         let calendar = NSCalendar.current
         let endDate = NSDate()
         let startDate = calendar.date(byAdding: .month, value: -1, to: endDate as Date)! as NSDate
-        let search = NSPredicate(format: "date >= %@ AND serviceName like %@", argumentArray: [startDate, self.name])
+        let search = NSPredicate(format: "date >= %@ AND serviceName like %@", argumentArray: [startDate, name])
         if let context = AppDelegate.persistantStore?.viewContext {
             let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
             request.predicate = search
@@ -98,7 +98,7 @@ extension Service {
         let calendar = NSCalendar.current
         let endDate = NSDate()
         let startDate = calendar.date(byAdding: .year, value: -1, to: endDate as Date)! as NSDate
-        let search = NSPredicate(format: "date >= %@ AND serviceName like %@", argumentArray: [startDate, self.name])
+        let search = NSPredicate(format: "date >= %@ AND serviceName like %@", argumentArray: [startDate, name])
         if let context = AppDelegate.persistantStore?.viewContext {
             let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
             request.predicate = search

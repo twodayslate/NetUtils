@@ -14,11 +14,11 @@ class DataFeedsTableViewController: UITableViewController {
     let dataFeeds = DataFeedCells()
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return dataFeeds.cells.count
+        dataFeeds.cells.count
     }
 
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

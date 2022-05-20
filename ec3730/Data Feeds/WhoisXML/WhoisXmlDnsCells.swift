@@ -63,7 +63,7 @@ class WhoisXmlDnsCellManager: CellManager {
     }
 
     override func reload() {
-        if let prod = self.dataFeed as? DataFeedPurchaseProtocol {
+        if let prod = dataFeed as? DataFeedPurchaseProtocol {
             if prod.owned {
                 configure(currentRecords)
             } else {

@@ -33,7 +33,7 @@ open class Subscription {
             }
         #endif
 
-        guard let expiration = self.cachedExpirationDate else {
+        guard let expiration = cachedExpirationDate else {
             verifySubscription()
             return false
         }
@@ -56,7 +56,7 @@ open class Subscription {
             return
         }
 
-        SwiftyStoreKit.retrieveProductsInfo([self.identifier]) { result in
+        SwiftyStoreKit.retrieveProductsInfo([identifier]) { result in
             guard result.error == nil else {
                 block?(result.error)
                 return
@@ -77,18 +77,18 @@ open class Subscription {
         }
 
         let validator = AppleReceiptValidator(service: .production, sharedSecret: ApiKey.inApp.key)
-        
+
         if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL,
-            FileManager.default.fileExists(atPath: appStoreReceiptURL.path) {
+           FileManager.default.fileExists(atPath: appStoreReceiptURL.path) {
             do {
                 let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
                 print(receiptData)
-                let _ = receiptData.base64EncodedString(options: [])
-                
+                _ = receiptData.base64EncodedString(options: [])
+
                 // Add code to read receiptData...
+            } catch {
+                print("Couldn't read receipt data: " + error.localizedDescription)
             }
-            catch {
-                print("Couldn't read receipt data: " + error.localizedDescription) }
         }
 
         SwiftyStoreKit.verifyReceipt(using: validator) { result in
@@ -139,9 +139,9 @@ open class Subscription {
                 SwiftyStoreKit.finishTransaction(purchase.transaction)
             }
             SwiftyStoreKit.restorePurchases(atomically: true) { results in
-                if results.restoreFailedPurchases.count > 0 {
+                if !results.restoreFailedPurchases.isEmpty {
                     print("Restore Failed: \(results.restoreFailedPurchases)")
-                } else if results.restoredPurchases.count > 0 {
+                } else if !results.restoredPurchases.isEmpty {
                     print("Restore Success: \(results.restoredPurchases)")
                 } else {
                     print("Nothing to Restore")
@@ -153,6 +153,5 @@ open class Subscription {
                 }
             }
         }
-        
     }
 }

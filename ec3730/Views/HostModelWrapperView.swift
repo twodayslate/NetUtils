@@ -6,7 +6,7 @@ import SwiftUI
  */
 struct HostModelWrapperView<Content: View>: View {
     var view: Content
-    
+
     var body: some View {
         view.environmentObject(HostViewModel.shared)
     }

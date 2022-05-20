@@ -69,10 +69,10 @@ extension DataFeedError: LocalizedError {
 
 extension DataFeedError: RecoverableError {
     func attemptRecovery(optionIndex _: Int) -> Bool {
-        return false
+        false
     }
 
     var recoveryOptions: [String] {
-        return []
+        []
     }
 }

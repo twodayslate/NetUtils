@@ -11,7 +11,7 @@ import UIKit
 
 class GoogleWebRiskCellManager: CellManager {
     override func askForMoney() {
-        if let purchase = self.dataFeed as? DataFeedPurchaseProtocol {
+        if let purchase = dataFeed as? DataFeedPurchaseProtocol {
             if !purchase.owned {
                 let locked = WhoisLockedTableViewCell(purchase, heading: "Unlock Google Web Risk Detection", subheading: "Detect malicious URLs and unsafe web resources")
                 locked.iapDelegate = self
@@ -45,7 +45,7 @@ class GoogleWebRiskCellManager: CellManager {
     }
 
     override func reload() {
-        if let prod = self.dataFeed as? DataFeedPurchaseProtocol {
+        if let prod = dataFeed as? DataFeedPurchaseProtocol {
             if prod.owned {
                 configure(currentRecord)
             } else {

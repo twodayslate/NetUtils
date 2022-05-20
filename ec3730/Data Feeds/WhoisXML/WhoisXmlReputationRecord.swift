@@ -18,8 +18,8 @@ enum WhoisXmlReputationTestCodes: Int, Codable {
     case Potentiallydangerouscontent = 91
     case Hostconfigurationissues = 92
     case WHOISDomaincheck = 93
-    
-    func name() -> String{
+
+    func name() -> String {
         switch self {
         case .mailServersReverseIPAddressMatch:
             return "Mail servers Reverse IP addresses match"
@@ -57,8 +57,8 @@ enum WhoisXmlReputationTestCodes: Int, Codable {
             return "WHOIS Domain check"
         }
     }
-         
 }
+
 enum WhoisXmlReputationWarningCodes: Int, Codable {
     case nameServersWithPrivateIpsFound = 1001
     case Somenameserversdontrespond = 1002
@@ -144,10 +144,9 @@ enum WhoisXmlReputationWarningCodes: Int, Codable {
     case TLSArecordconfiguredincorrectly = 6020
     case OCSPstaplingnotconfigured = 6021
     case PublickeylistedonDebiansblacklist = 6022
-    
+
     func warning() -> String {
         switch self {
-
         case .nameServersWithPrivateIpsFound:
             return "Name servers with private IPs found."
         case .Somenameserversdontrespond:

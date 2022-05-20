@@ -18,7 +18,7 @@ class BlurredPickerView: UIView {
     private var bottomConstraint: NSLayoutConstraint?
     var bottom: NSLayoutYAxisAnchor? {
         didSet {
-            guard let bottom = self.bottom else {
+            guard let bottom = bottom else {
                 return
             }
 
@@ -44,8 +44,8 @@ class BlurredPickerView: UIView {
         self.picker.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         self.picker.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
 
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": self.background]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": self.background]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": background]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollview]|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": background]))
 
 //        self.background.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
 //        self.background.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
@@ -58,7 +58,7 @@ class BlurredPickerView: UIView {
         doneBar.translatesAutoresizingMaskIntoConstraints = false
         doneBar.items = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.dismiss(_:)))
+            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismiss(_:))),
         ]
 
         addSubview(doneBar)
@@ -71,6 +71,7 @@ class BlurredPickerView: UIView {
         topAnchor.constraint(equalTo: doneBar.topAnchor).isActive = true
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -79,7 +80,7 @@ class BlurredPickerView: UIView {
         layer.removeAllAnimations()
         picker.resignFirstResponder()
 
-        guard let _ = self.bottom else {
+        guard let _ = bottom else {
             UIView.animate(withDuration: animationDuration, animations: {
                 self.alpha = 0.0
             }, completion: { _ in
@@ -103,7 +104,7 @@ class BlurredPickerView: UIView {
         layer.removeAllAnimations()
 
         picker.becomeFirstResponder()
-        guard let _ = self.bottom else {
+        guard let _ = bottom else {
             UIView.animate(withDuration: animationDuration, animations: {
                 self.isHidden = false
                 self.alpha = 1.0

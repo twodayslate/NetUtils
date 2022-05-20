@@ -37,6 +37,7 @@ class ContactCellRow: UIStackView {
         detailLabel.addGestureRecognizer(hold)
     }
 
+    @available(*, unavailable)
     required init(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -66,6 +67,7 @@ class ContactCell: UITableViewCell {
         stack.addArrangedSubview(titleLabel!)
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -88,14 +90,12 @@ class WhoisXmlCellManager: CellManager {
     }
 
     // swiftlint:disable:next cyclomatic_complexity
-    func configure(_ record: WhoisRecord?) {
+    func configure(_: WhoisRecord?) {
         stopLoading()
-
-       
     }
 
     override func reload() {
-        if let prod = self.dataFeed as? DataFeedPurchaseProtocol {
+        if let prod = dataFeed as? DataFeedPurchaseProtocol {
             if prod.owned {
                 configure(currentRecord)
             } else {

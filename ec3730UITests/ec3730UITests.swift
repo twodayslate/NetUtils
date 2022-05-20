@@ -86,7 +86,7 @@ class EC3730UITests: XCTestCase {
         expectation(for: existsPredicate,
                     evaluatedWith: element, handler: nil)
 
-        waitForExpectations(timeout: timeout) { (error) -> Void in
+        waitForExpectations(timeout: timeout) { error in
             if error != nil {
                 let message = "Failed to find \(element) after \(timeout) seconds."
                 self.recordFailure(withDescription: message, inFile: file, atLine: Int(line), expected: true)

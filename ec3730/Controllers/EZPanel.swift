@@ -4,15 +4,16 @@ import SwiftUI
  */
 struct EZPanel<Content>: View where Content: View {
     let content: () -> Content
-    
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
+
     init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
     }
+
     var body: some View {
         NavigationView {
-            content().navigationBarItems(trailing: Button(action: {self.presentationMode.wrappedValue.dismiss()}) {
+            content().navigationBarItems(trailing: Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                 Image(systemName: "xmark.circle.fill").foregroundColor(Color(UIColor.systemGray3))
             })
         }

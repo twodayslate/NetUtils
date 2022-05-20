@@ -118,7 +118,7 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
     private var _isLoading = false
     var isLoading: Bool {
         get {
-            return _isLoading && hostTable.isLoading
+            _isLoading && hostTable.isLoading
         }
         set {
             DispatchQueue.main.async {
@@ -274,23 +274,22 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
             if GoogleWebRisk.current.oneTime.purchased || GoogleWebRisk.current.userKey != nil {
                 GoogleWebRisk.lookupService.query(["uri": url.absoluteString]) {
                     (error, response: GoogleWebRiskRecordWrapper?) in
-                    self.checkLoading()
-                    guard error == nil else {
-                        self.showError("Error getting Web Risk Information", message: error!.localizedDescription)
-                        self.hostTable.webRiskRecord = nil
-                        return
-                    }
+                        self.checkLoading()
+                        guard error == nil else {
+                            self.showError("Error getting Web Risk Information", message: error!.localizedDescription)
+                            self.hostTable.webRiskRecord = nil
+                            return
+                        }
 
-                    guard let response = response else {
-                        self.showError(message: "No Web Risk Data")
-                        self.hostTable.webRiskRecord = nil
-                        return
-                    }
+                        guard let response = response else {
+                            self.showError(message: "No Web Risk Data")
+                            self.hostTable.webRiskRecord = nil
+                            return
+                        }
 
-                    self.hostTable.webRiskRecord = response
+                        self.hostTable.webRiskRecord = response
                 }
             }
         }
-        
     }
 }

@@ -10,10 +10,10 @@ import Foundation
 
 extension Error {
     var localized: LocalizedError? {
-        return self as? LocalizedError
+        self as? LocalizedError
     }
 
     var title: String {
-        return "Error"
+        "Error"
     }
 }

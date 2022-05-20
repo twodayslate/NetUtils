@@ -16,7 +16,7 @@ open class OneTimePurchase {
 
     private var privatePurchased: Bool = false
     var purchased: Bool {
-        return privatePurchased
+        privatePurchased
     }
 
     init(_ identifier: String) {
@@ -80,7 +80,7 @@ open class OneTimePurchase {
             return
         }
 
-        SwiftyStoreKit.retrieveProductsInfo([self.identifier]) { result in
+        SwiftyStoreKit.retrieveProductsInfo([identifier]) { result in
             guard result.error == nil else {
                 block?(result.error)
                 return
@@ -96,9 +96,9 @@ open class OneTimePurchase {
 
     public func restore(completion block: ((RestoreResults) -> Void)? = nil) {
         SwiftyStoreKit.restorePurchases(atomically: true) { results in
-            if results.restoreFailedPurchases.count > 0 {
+            if !results.restoreFailedPurchases.isEmpty {
                 print("Restore Failed: \(results.restoreFailedPurchases)")
-            } else if results.restoredPurchases.count > 0 {
+            } else if !results.restoredPurchases.isEmpty {
                 print("Restore Success: \(results.restoredPurchases)")
             } else {
                 print("Nothing to Restore")
@@ -118,7 +118,7 @@ protocol DataFeedOneTimePurchase: DataFeedPurchaseProtocol {
 
 extension DataFeedOneTimePurchase {
     var paid: Bool {
-        return self.oneTime.purchased
+        oneTime.purchased
     }
 
     var owned: Bool {
@@ -126,26 +126,26 @@ extension DataFeedOneTimePurchase {
             return true
         }
 
-        return self.paid
+        return paid
     }
 
     var defaultProduct: SKProduct? {
-        guard let product = self.oneTime.product else {
-            self.retrieve()
+        guard let product = oneTime.product else {
+            retrieve()
             return nil
         }
         return product
     }
 
     func restore(completion block: ((RestoreResults) -> Void)? = nil) {
-        self.oneTime.restore(completion: block)
+        oneTime.restore(completion: block)
     }
 
     func verify(completion block: ((Error?) -> Void)? = nil) {
-        self.oneTime.verifyPurchase(completion: block)
+        oneTime.verifyPurchase(completion: block)
     }
 
     func retrieve(completion block: ((Error?) -> Void)? = nil) {
-        self.oneTime.retrieveProduct(completion: block)
+        oneTime.retrieveProduct(completion: block)
     }
 }

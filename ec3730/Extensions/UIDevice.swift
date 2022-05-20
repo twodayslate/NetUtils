@@ -11,9 +11,9 @@ import UIKit
 
 extension UIDevice {
     /// https://stackoverflow.com/a/47463829/193772
-    var totalDiskSpaceInBytes:Int64 {
+    var totalDiskSpaceInBytes: Int64 {
         guard let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory() as String),
-            let space = (systemAttributes[FileAttributeKey.systemSize] as? NSNumber)?.int64Value else { return 0 }
+              let space = (systemAttributes[FileAttributeKey.systemSize] as? NSNumber)?.int64Value else { return 0 }
         return space
     }
 
@@ -33,14 +33,14 @@ extension UIDevice {
             }
         } else {
             if let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory() as String),
-            let freeSpace = (systemAttributes[FileAttributeKey.systemFreeSize] as? NSNumber)?.int64Value {
+               let freeSpace = (systemAttributes[FileAttributeKey.systemFreeSize] as? NSNumber)?.int64Value {
                 return freeSpace
             } else {
                 return 0
             }
         }
     }
-    
+
     var boottime: Date? {
         var tv = timeval()
         var tvSize = MemoryLayout<timeval>.size
@@ -52,7 +52,7 @@ extension UIDevice {
     }
 
     var uptime: TimeInterval {
-        guard let bootTime = self.boottime else {
+        guard let bootTime = boottime else {
             return 0
         }
         return Date().timeIntervalSince(bootTime)

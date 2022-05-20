@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import UIKit
 import SplitTabBar
 import SwiftUI
+import UIKit
 
 class SRCTabBarController: SplitTabBarViewController {
     override func viewDidLoad() {
@@ -18,7 +18,6 @@ class SRCTabBarController: SplitTabBarViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
         defaultsChanged()
 
-        
         var ping: UIViewController!
         if #available(iOS 14.0, *) {
             ping = UIHostingController(rootView: PingSwiftUIViewController())
@@ -52,7 +51,7 @@ class SRCTabBarController: SplitTabBarViewController {
         settings.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "Settings"), tag: 4)
         settings.tabBarItem.selectedImage = UIImage(named: "Settings_selected")
 
-        self.setViewControllers([host, reachability, ping, viewSource, device, settings])
+        setViewControllers([host, reachability, ping, viewSource, device, settings])
     }
 
     @objc func defaultsChanged() {

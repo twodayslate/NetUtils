@@ -1,23 +1,22 @@
+import Combine
 import Foundation
 import SwiftUI
-import Combine
 
 struct HostResult: View {
     @State var shouldShare: Bool = false
-    //@ObservedObject var model: HostViewModel
-    
+    // @ObservedObject var model: HostViewModel
+
     @ObservedObject var group: HostDataGroup
 
-    init(_ group: HostDataGroup){
+    init(_ group: HostDataGroup) {
         self.group = group
     }
-    
+
     @State var text = ""
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ScrollView {
-                
                 LazyVStack(alignment: .leading, spacing: 0) {
                     ForEach(Array(self.group.results.sorted(by: { $0.date < $1.date })), id: \.self) { result in
                         if let data = HostSectionModel.configure(with: result) {
@@ -28,8 +27,6 @@ struct HostResult: View {
                                 Text("\(result)")
                             }
                         }
-                        
-                        
                     }
                 }
             }
@@ -38,7 +35,7 @@ struct HostResult: View {
                 HStack(alignment: .center) {
                     // it would be great if this could be a .bottomBar toolbar but it is too buggy
                     TextField("", text: $text, prompt: Text(group.url.absoluteString))
-                    .disabled(true).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.URL)
+                        .disabled(true).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.URL)
                 }.padding(.horizontal).padding([.vertical], 6)
                 HStack(alignment: .center) {
                     Spacer()

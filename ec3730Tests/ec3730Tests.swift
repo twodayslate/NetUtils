@@ -6,8 +6,8 @@
 //  Copyright © 2018 Zachary Gorak. All rights reserved.
 //
 
-@testable import ec3730
 import XCTest
+@testable import ec3730
 
 class EC3730Tests: XCTestCase {
     override func setUp() {

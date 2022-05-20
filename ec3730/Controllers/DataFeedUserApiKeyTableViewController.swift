@@ -16,10 +16,10 @@ class UserApiKeyFooterView: UITableViewHeaderFooterView {
     /// https://developer.apple.com/design/human-interface-guidelines/subscriptions/overview/
     func legaleeze(color _: UIColor = .systemGray) -> NSMutableAttributedString {
         // swiftlint:disable line_length
-        let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
+        let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.center
 
-        let link = NSMutableAttributedString(string: "Manage your API key from \(subscriber.name)", attributes: [NSAttributedString.Key.link: self.subscriber.webpage.absoluteString, NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        let link = NSMutableAttributedString(string: "Manage your API key from \(subscriber.name)", attributes: [NSAttributedString.Key.link: subscriber.webpage.absoluteString, NSAttributedString.Key.paragraphStyle: paragraphStyle])
 
         return link
     }
@@ -46,6 +46,7 @@ class UserApiKeyFooterView: UITableViewHeaderFooterView {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": stack]))
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -67,6 +68,7 @@ class InputTableViewCell: UITableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[scrollview]-|", options: .alignAllCenterY, metrics: nil, views: ["scrollview": input]))
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -92,6 +94,7 @@ class DataFeedUserApiKeyController: UINavigationController {
         super.init(rootViewController: tableController)
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -106,6 +109,7 @@ class DataFeedUserApiKeyTableViewController: UITableViewController {
         super.init(style: .grouped)
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -123,11 +127,11 @@ class DataFeedUserApiKeyTableViewController: UITableViewController {
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_: UITableView, cellForRowAt _: IndexPath) -> UITableViewCell {

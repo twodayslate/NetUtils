@@ -20,15 +20,15 @@ class InterfaceTable: UITableViewController {
 
     var dataSource: [(title: String, content: Any?)] {
         var sources = [
-            (title: "Name", content: self.interface.name),
-            (title: "Address", content: self.interface.address),
-            (title: "Netmask", content: self.interface.netmask),
-            (title: "Broadcast Address", content: self.interface.broadcastAddress),
-            (title: "Family", content: self.interface.family.toString()),
-            (title: "Loopback", content: self.interface.isLoopback),
-            (title: "Runing", content: self.interface.isRunning),
-            (title: "Up", content: self.interface.isUp),
-            (title: "Supports Multicast", content: self.interface.supportsMulticast)
+            (title: "Name", content: interface.name),
+            (title: "Address", content: interface.address),
+            (title: "Netmask", content: interface.netmask),
+            (title: "Broadcast Address", content: interface.broadcastAddress),
+            (title: "Family", content: interface.family.toString()),
+            (title: "Loopback", content: interface.isLoopback),
+            (title: "Runing", content: interface.isRunning),
+            (title: "Up", content: interface.isUp),
+            (title: "Supports Multicast", content: interface.supportsMulticast),
         ] as [(title: String, content: Any?)]
 
         if let SSID = interfaceInfo?[kCNNetworkInfoKeySSID as String] as? String {
@@ -52,11 +52,11 @@ class InterfaceTable: UITableViewController {
             (key: "SOCKSEnable", title: "SOCKS"),
             (key: "ProxyAutoDiscoveryEnable", title: "Proxy Auto Discovery"),
             (key: "HTTPProxy", title: "HTTP Proxy"),
-            (key: "ExcludeSimpleHostnames", title: "Excludes Simple Hostnames")
+            (key: "ExcludeSimpleHostnames", title: "Excludes Simple Hostnames"),
         ]
 
         for keys in proxyKeys {
-            if let item = self.vpnInfo?[keys.key] {
+            if let item = vpnInfo?[keys.key] {
                 sources.append((title: keys.title, content: item))
             }
         }
@@ -72,16 +72,17 @@ class InterfaceTable: UITableViewController {
         title = self.interface.name
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return dataSource.count
+        dataSource.count
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,7 +90,7 @@ class InterfaceTable: UITableViewController {
 
         let content = dataSource[indexPath.row].content
 
-        if let rar = self.dataSource[indexPath.row].content as? [String] {
+        if let rar = dataSource[indexPath.row].content as? [String] {
             cell = ContactCell(reuseIdentifier: dataSource[indexPath.row].title, title: dataSource[indexPath.row].title)
 
             for thing in rar {
