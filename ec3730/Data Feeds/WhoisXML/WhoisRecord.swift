@@ -50,18 +50,18 @@ extension Coordinate {
     func with(
         whoisRecord: WhoisRecord? = nil
     ) -> Coordinate {
-        return Coordinate(
+        Coordinate(
             whoisRecord: whoisRecord ?? self.whoisRecord,
             error: error
         )
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -205,11 +205,11 @@ extension WhoisRecord {
 //    }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -281,7 +281,7 @@ extension WhoisRecordAdministrativeContact {
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
     ) -> WhoisRecordAdministrativeContact {
-        return WhoisRecordAdministrativeContact(
+        WhoisRecordAdministrativeContact(
             city: city ?? self.city,
             country: country ?? self.country,
             countryCode: countryCode ?? self.countryCode,
@@ -304,11 +304,11 @@ extension WhoisRecordAdministrativeContact {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -350,18 +350,18 @@ extension WhoisRecordAudit {
         createdDate: Date? = nil,
         updatedDate: Date? = nil
     ) -> WhoisRecordAudit {
-        return WhoisRecordAudit(
+        WhoisRecordAudit(
             createdDate: createdDate ?? self.createdDate,
             updatedDate: updatedDate ?? self.updatedDate
         )
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -433,7 +433,7 @@ extension WhoisRecordBillingContact {
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
     ) -> WhoisRecordBillingContact {
-        return WhoisRecordBillingContact(
+        WhoisRecordBillingContact(
             city: city ?? self.city,
             country: country ?? self.country,
             countryCode: countryCode ?? self.countryCode,
@@ -456,11 +456,11 @@ extension WhoisRecordBillingContact {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -505,7 +505,7 @@ extension WhoisRecordNameServers {
         ips: [JSONAny]?? = nil,
         rawText: String? = nil
     ) -> WhoisRecordNameServers {
-        return WhoisRecordNameServers(
+        WhoisRecordNameServers(
             hostNames: hostNames ?? self.hostNames,
             ips: ips ?? self.ips,
             rawText: rawText ?? self.rawText
@@ -513,11 +513,11 @@ extension WhoisRecordNameServers {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -589,7 +589,7 @@ extension Registrant {
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
     ) -> Registrant {
-        return Registrant(
+        Registrant(
             city: city ?? self.city,
             country: country ?? self.country,
             countryCode: countryCode ?? self.countryCode,
@@ -612,11 +612,11 @@ extension Registrant {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -739,11 +739,11 @@ extension RegistryData {
 //    }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -815,7 +815,7 @@ extension RegistryDataAdministrativeContact {
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
     ) -> RegistryDataAdministrativeContact {
-        return RegistryDataAdministrativeContact(
+        RegistryDataAdministrativeContact(
             city: city ?? self.city,
             country: country ?? self.country,
             countryCode: countryCode ?? self.countryCode,
@@ -838,11 +838,11 @@ extension RegistryDataAdministrativeContact {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -884,18 +884,18 @@ extension RegistryDataAudit {
         createdDate: Date? = nil,
         updatedDate: Date? = nil
     ) -> RegistryDataAudit {
-        return RegistryDataAudit(
+        RegistryDataAudit(
             createdDate: createdDate ?? self.createdDate,
             updatedDate: updatedDate ?? self.updatedDate
         )
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -967,7 +967,7 @@ extension RegistryDataBillingContact {
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
     ) -> RegistryDataBillingContact {
-        return RegistryDataBillingContact(
+        RegistryDataBillingContact(
             city: city ?? self.city,
             country: country ?? self.country,
             countryCode: countryCode ?? self.countryCode,
@@ -990,11 +990,11 @@ extension RegistryDataBillingContact {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1039,7 +1039,7 @@ extension RegistryDataNameServers {
         ips: [JSONAny]?? = nil,
         rawText: String? = nil
     ) -> RegistryDataNameServers {
-        return RegistryDataNameServers(
+        RegistryDataNameServers(
             hostNames: hostNames ?? self.hostNames,
             ips: ips ?? self.ips,
             rawText: rawText ?? self.rawText
@@ -1047,11 +1047,11 @@ extension RegistryDataNameServers {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1106,7 +1106,7 @@ extension Regustrant {
         street4: String?? = nil,
         unparsable: String? = nil
     ) -> Regustrant {
-        return Regustrant(
+        Regustrant(
             city: city ?? self.city,
             name: name ?? self.name,
             organization: organization ?? self.organization,
@@ -1122,11 +1122,11 @@ extension Regustrant {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1198,7 +1198,7 @@ extension RegistryDataTechnicalContact {
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
     ) -> RegistryDataTechnicalContact {
-        return RegistryDataTechnicalContact(
+        RegistryDataTechnicalContact(
             city: city ?? self.city,
             country: country ?? self.country,
             countryCode: countryCode ?? self.countryCode,
@@ -1221,11 +1221,11 @@ extension RegistryDataTechnicalContact {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1297,7 +1297,7 @@ extension RegistryDataZoneContact {
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
     ) -> RegistryDataZoneContact {
-        return RegistryDataZoneContact(
+        RegistryDataZoneContact(
             city: city ?? self.city,
             country: country ?? self.country,
             countryCode: countryCode ?? self.countryCode,
@@ -1320,11 +1320,11 @@ extension RegistryDataZoneContact {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1396,7 +1396,7 @@ extension WhoisRecordTechnicalContact {
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
     ) -> WhoisRecordTechnicalContact {
-        return WhoisRecordTechnicalContact(
+        WhoisRecordTechnicalContact(
             city: city ?? self.city,
             country: country ?? self.country,
             countryCode: countryCode ?? self.countryCode,
@@ -1419,11 +1419,11 @@ extension WhoisRecordTechnicalContact {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1495,7 +1495,7 @@ extension WhoisRecordZoneContact {
         telephoneEXT: String?? = nil,
         unparsable: String?? = nil
     ) -> WhoisRecordZoneContact {
-        return WhoisRecordZoneContact(
+        WhoisRecordZoneContact(
             city: city ?? self.city,
             country: country ?? self.country,
             countryCode: countryCode ?? self.countryCode,
@@ -1518,11 +1518,11 @@ extension WhoisRecordZoneContact {
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -1548,7 +1548,7 @@ func newJSONEncoder() -> JSONEncoder {
 
 extension URLSession {
     private func codableTask<T: Codable>(with url: URL, completionHandler: @escaping (T?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        return dataTask(with: url) { data, response, error in
+        dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 completionHandler(nil, response, error)
                 return
@@ -1558,7 +1558,7 @@ extension URLSession {
     }
 
     func coordinateTask(with url: URL, completionHandler: @escaping (Coordinate?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        return codableTask(with: url, completionHandler: completionHandler)
+        codableTask(with: url, completionHandler: completionHandler)
     }
 }
 
@@ -1566,11 +1566,11 @@ extension URLSession {
 
 class JSONNull: Codable, Hashable {
     public static func == (_: JSONNull, _: JSONNull) -> Bool {
-        return true
+        true
     }
 
     public var hashValue: Int {
-        return 0
+        0
     }
 
     public func hash(into _: inout Hasher) {
@@ -1596,7 +1596,7 @@ class JSONCodingKey: CodingKey {
     let key: String
 
     required init?(intValue _: Int) {
-        return nil
+        nil
     }
 
     required init?(stringValue: String) {
@@ -1604,11 +1604,11 @@ class JSONCodingKey: CodingKey {
     }
 
     var intValue: Int? {
-        return nil
+        nil
     }
 
     var stringValue: String {
-        return key
+        key
     }
 }
 

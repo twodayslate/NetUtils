@@ -37,7 +37,7 @@ class NetworkInterfacesTable: UITableViewController {
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return (!enabledInterfaces.isEmpty ? 1 : 0) + (!disabledInterfaces.isEmpty ? 1 : 0)
+        (!enabledInterfaces.isEmpty ? 1 : 0) + (!disabledInterfaces.isEmpty ? 1 : 0)
     }
 
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,15 +89,15 @@ class NetworkInterfacesTable: UITableViewController {
     private var _cachedEnabledInterfaces = [Interface]()
 
     private var cachedInterfaces: [Interface] {
-        return _cachedInterfaces
+        _cachedInterfaces
     }
 
     public var disabledInterfaces: [Interface] {
-        return _cachedDisabledInterfaces
+        _cachedDisabledInterfaces
     }
 
     public var enabledInterfaces: [Interface] {
-        return _cachedEnabledInterfaces
+        _cachedEnabledInterfaces
     }
 
     public func updateInterfaces() {

@@ -22,10 +22,10 @@ open class DataFeedEndpoint {
     }
 
     func with(schema: String? = nil, host: String? = nil, path: String? = nil, queryItems: [URLQueryItem]? = nil) -> DataFeedEndpoint {
-        return DataFeedEndpoint(schema: schema ?? self.schema,
-                                host: host ?? self.host,
-                                path: path ?? self.path,
-                                queryItems: queryItems ?? self.queryItems)
+        DataFeedEndpoint(schema: schema ?? self.schema,
+                         host: host ?? self.host,
+                         path: path ?? self.path,
+                         queryItems: queryItems ?? self.queryItems)
     }
 
     var url: URL? {

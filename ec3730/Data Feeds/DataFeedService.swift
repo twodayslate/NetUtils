@@ -20,18 +20,18 @@ extension DataFeedService {
     }
 
     var totalUsage: Int {
-        return services.reduce(0) { $0 + $1.usage }
+        services.reduce(0) { $0 + $1.usage }
     }
 
     var usageToday: Int {
-        return services.reduce(0) { $0 + $1.usageToday }
+        services.reduce(0) { $0 + $1.usageToday }
     }
 
     var usageThisMonth: Int {
-        return services.reduce(0) { $0 + $1.usageMonth }
+        services.reduce(0) { $0 + $1.usageMonth }
     }
 
     var usageThisYear: Int {
-        return services.reduce(0) { $0 + $1.usageYear }
+        services.reduce(0) { $0 + $1.usageYear }
     }
 }

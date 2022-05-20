@@ -38,7 +38,7 @@ class UIDeviceTableViewController: UITableViewController {
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return hasCarriers ? 5 : 4
+        hasCarriers ? 5 : 4
     }
 
     override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -54,7 +54,7 @@ class UIDeviceTableViewController: UITableViewController {
     }
 
     var hasCarriers: Bool {
-        return (CTTelephonyNetworkInfo().serviceSubscriberCellularProviders?.count ?? 0) > 0
+        (CTTelephonyNetworkInfo().serviceSubscriberCellularProviders?.count ?? 0) > 0
     }
 
     var carrierEntires: [(String, String)] {
@@ -116,7 +116,7 @@ class UIDeviceTableViewController: UITableViewController {
             ("Has Sensor Housing", Device.current.hasSensorHousing ? "Yes" : "No"),
             ("Has Telephoto Camera", Device.current.hasTelephotoCamera ? "Yes" : "No"),
             ("Has Ultrawide Camera", Device.current.hasUltraWideCamera ? "Yes" : "No"),
-            ("Has Rounded Display Corners", Device.current.hasRoundedDisplayCorners ? "Yes" : "No")
+            ("Has Rounded Display Corners", Device.current.hasRoundedDisplayCorners ? "Yes" : "No"),
         ]
 
         func getArchitecture() -> NSString {

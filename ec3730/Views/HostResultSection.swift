@@ -7,7 +7,7 @@ import SwiftUI
 /// it doesn't have move up/down or hide since these are saved in core data and no point in hiding
 struct HostResultSection: View, Equatable, Identifiable, Hashable {
     static func == (lhs: HostResultSection, rhs: HostResultSection) -> Bool {
-        return lhs.sectionModel.service.name == rhs.sectionModel.service.name
+        lhs.sectionModel.service.name == rhs.sectionModel.service.name
     }
 
     func hash(into hasher: inout Hasher) {

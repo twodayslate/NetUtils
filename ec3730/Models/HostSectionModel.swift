@@ -31,7 +31,7 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
             WhoisXmlWhoisSectionModel(),
             GoogleWebRiskSectionModel(),
             WhoisXmlReputationSectionModel(),
-            WhoisXmlDnsSectionModel()
+            WhoisXmlDnsSectionModel(),
         ]
 
         for service in available_services {
@@ -58,7 +58,7 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
     }
 
     static func == (lhs: HostSectionModel, rhs: HostSectionModel) -> Bool {
-        return lhs.service.name == rhs.service.name
+        lhs.service.name == rhs.service.name
     }
 
     func hash(into hasher: inout Hasher) {

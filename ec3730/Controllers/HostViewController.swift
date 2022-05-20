@@ -118,7 +118,7 @@ class HostViewController: UIViewController, UITextFieldDelegate, UIScrollViewDel
     private var _isLoading = false
     var isLoading: Bool {
         get {
-            return _isLoading && hostTable.isLoading
+            _isLoading && hostTable.isLoading
         }
         set {
             DispatchQueue.main.async {

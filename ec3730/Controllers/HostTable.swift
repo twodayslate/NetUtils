@@ -45,7 +45,7 @@ class CollapseButton: UIButton {
 class HostTable: UITableViewController {
     var isLoading: Bool {
         get {
-            return dnsManager.isLoading && whoisManger.isLoading && webRiskManager.isLoading
+            dnsManager.isLoading && whoisManger.isLoading && webRiskManager.isLoading
         }
         set {
             if newValue {
@@ -110,7 +110,7 @@ class HostTable: UITableViewController {
     public var _host: String = "Host"
     public var host: String {
         get {
-            return _host
+            _host
         }
         set {
             _host = newValue
@@ -121,7 +121,7 @@ class HostTable: UITableViewController {
     }
 
     override func tableView(_: UITableView, shouldHighlightRowAt _: IndexPath) -> Bool {
-        return false
+        false
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,7 +150,7 @@ class HostTable: UITableViewController {
     }
 
     override func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
-        return 55.0 // I want this to be dynamic, UITableView.automaticDimension doesn't work
+        55.0 // I want this to be dynamic, UITableView.automaticDimension doesn't work
     }
 
     override func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -211,7 +211,7 @@ class HostTable: UITableViewController {
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return 5
+        5
     }
 
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

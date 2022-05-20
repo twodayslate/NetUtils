@@ -18,7 +18,7 @@ open class CellManager {
 
     internal var privateIsLoading: Bool = false
     public var isLoading: Bool {
-        return privateIsLoading
+        privateIsLoading
     }
 
     var dataFeed: DataFeed

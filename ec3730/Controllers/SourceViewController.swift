@@ -14,11 +14,11 @@ import WebKit
 
 class SourceBar: UIToolbar {
     func position(for _: UIBarPositioning) -> UIBarPosition {
-        return .topAttached
+        .topAttached
     }
 
     override var barPosition: UIBarPosition {
-        return .topAttached
+        .topAttached
     }
 }
 
@@ -36,7 +36,7 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         // XXX: should this be based on the content of the web view?
-        return .default
+        .default
     }
 
     var browser: WKWebView!
@@ -170,7 +170,7 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
             language,
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
             UIBarButtonItem(title: "Select All", style: .plain, target: self, action: #selector(selectSource(_:))),
-            UIBarButtonItem(title: "Copy", style: .plain, target: self, action: #selector(copySource(_:)))
+            UIBarButtonItem(title: "Copy", style: .plain, target: self, action: #selector(copySource(_:))),
         ]
         sourceStack.addArrangedSubview(sourceBar)
         sourceStack.addArrangedSubview(sourceView!)
@@ -247,7 +247,7 @@ class SourceViewController: UIViewController, UIScrollViewDelegate, UITextFieldD
     private var _isLoading = false
     var isLoading: Bool {
         get {
-            return _isLoading
+            _isLoading
         }
         set {
             _isLoading = newValue
@@ -386,7 +386,7 @@ extension SourceViewController: UIPickerViewDelegate {
 
 extension SourceViewController: UIPickerViewDataSource {
     func numberOfComponents(in _: UIPickerView) -> Int {
-        return 1
+        1
     }
 
     func pickerView(_: UIPickerView, numberOfRowsInComponent _: Int) -> Int {

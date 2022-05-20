@@ -16,7 +16,7 @@ open class OneTimePurchase {
 
     private var privatePurchased: Bool = false
     var purchased: Bool {
-        return privatePurchased
+        privatePurchased
     }
 
     init(_ identifier: String) {
@@ -118,7 +118,7 @@ protocol DataFeedOneTimePurchase: DataFeedPurchaseProtocol {
 
 extension DataFeedOneTimePurchase {
     var paid: Bool {
-        return oneTime.purchased
+        oneTime.purchased
     }
 
     var owned: Bool {

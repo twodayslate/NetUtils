@@ -86,7 +86,7 @@ extension GoogleWebRisk {
                 URLQueryItem(name: "uri", value: fixedURI),
                 URLQueryItem(name: "api", value: "webRisk"),
                 URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
-                URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier)
+                URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier),
             ]
 
             if let key = GoogleWebRisk.current.userKey {
@@ -107,7 +107,7 @@ extension GoogleWebRisk {
 
 extension GoogleWebRisk: DataFeedService {
     var totalUsage: Int {
-        return services.reduce(0) { $0 + $1.usage }
+        services.reduce(0) { $0 + $1.usage }
     }
 
     public static var lookupService: GoogleWebRiskLookupService = .init()
@@ -160,7 +160,7 @@ extension GoogleWebRisk: DataFeedService {
                         "yyyy-MM-dd",
                         "yyyy-MM-dd HH:mm:ss.SSS ZZZ",
                         "yyyy-MM-dd HH:mm:ss ZZZ", // 1997-09-15 07:00:00 UTC
-                        "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXXXX" // 2019-10-17T06:38:04.993563079Z
+                        "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXXXX", // 2019-10-17T06:38:04.993563079Z
                     ]
 
                     // 2019-10-17T06:38:04.993563079Z

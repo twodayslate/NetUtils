@@ -28,7 +28,7 @@ class InterfaceTable: UITableViewController {
             (title: "Loopback", content: interface.isLoopback),
             (title: "Runing", content: interface.isRunning),
             (title: "Up", content: interface.isUp),
-            (title: "Supports Multicast", content: interface.supportsMulticast)
+            (title: "Supports Multicast", content: interface.supportsMulticast),
         ] as [(title: String, content: Any?)]
 
         if let SSID = interfaceInfo?[kCNNetworkInfoKeySSID as String] as? String {
@@ -52,7 +52,7 @@ class InterfaceTable: UITableViewController {
             (key: "SOCKSEnable", title: "SOCKS"),
             (key: "ProxyAutoDiscoveryEnable", title: "Proxy Auto Discovery"),
             (key: "HTTPProxy", title: "HTTP Proxy"),
-            (key: "ExcludeSimpleHostnames", title: "Excludes Simple Hostnames")
+            (key: "ExcludeSimpleHostnames", title: "Excludes Simple Hostnames"),
         ]
 
         for keys in proxyKeys {
@@ -78,11 +78,11 @@ class InterfaceTable: UITableViewController {
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return dataSource.count
+        dataSource.count
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

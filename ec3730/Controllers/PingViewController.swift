@@ -366,7 +366,7 @@ struct PingSwiftUIViewController: View {
         print("ping")
         dismissKeyboard = UUID()
         let saveThisSession = pingSave
-        let text = self.text.isEmpty ? defaultPing : self.text
+        let text = text.isEmpty ? defaultPing : text
         guard let host = URL(string: text)?.absoluteString else {
             alertMessage = "Unable to create URL. Please try again."
             showAlert.toggle()
@@ -472,7 +472,7 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
     // let preferredStatusBarStyle: UIStatusBarStyle = .lightContent
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        .lightContent
     }
 
     override func viewDidLoad() {
@@ -577,7 +577,7 @@ class PingViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
     private var _isLoading = false
     var isLoading: Bool {
         get {
-            return _isLoading
+            _isLoading
         }
         set {
             _isLoading = newValue

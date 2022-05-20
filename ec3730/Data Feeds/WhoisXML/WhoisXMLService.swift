@@ -57,7 +57,7 @@ class WhoisXMLService: Service {
             URLQueryItem(name: "service_name", value: name),
             URLQueryItem(name: "service_id", value: id),
             URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
-            URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier)
+            URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier),
         ]
 
         if let key = WhoisXml.current.userKey {
@@ -128,7 +128,7 @@ class WhoisXMLService: Service {
                         "yyyy-MM-dd",
                         "yyyy-MM-dd HH:mm:ss.SSS ZZZ",
                         "yyyy-MM-dd HH:mm:ss ZZZ", // 1997-09-15 07:00:00 UTC,
-                        "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" // 2016-11-05T04:45:03.00Z
+                        "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", // 2016-11-05T04:45:03.00Z
                     ]
 
                     for format in formats {
@@ -198,6 +198,6 @@ class WhoisXMLService: Service {
 
 extension WhoisXMLService: Equatable {
     static func == (lhs: WhoisXMLService, rhs: WhoisXMLService) -> Bool {
-        return lhs.id == rhs.id && lhs.name == rhs.name
+        lhs.id == rhs.id && lhs.name == rhs.name
     }
 }

@@ -31,7 +31,7 @@ extension SimpleDNSResolver: DataFeedService {
         var description: String = "Simple IP Lookup"
 
         func endpoint(_: [String: Any?]?) -> DataFeedEndpoint? {
-            return nil
+            nil
         }
 
         func query<T>(_: [String: Any?]?, completion block: ((Error?, T?) -> Void)?) where T: Decodable, T: Encodable {

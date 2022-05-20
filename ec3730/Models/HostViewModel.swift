@@ -14,7 +14,7 @@ actor ActorArray<T> {
 class HostViewModel: ObservableObject {
     @Published var sections: [HostViewSection] {
         didSet {
-            order = sections.map { $0.sectionModel.service.name }
+            order = sections.map(\.sectionModel.service.name)
         }
     }
 
@@ -50,7 +50,7 @@ class HostViewModel: ObservableObject {
             WhoisXmlWhoisSectionModel(),
             WhoisXmlDnsSectionModel(),
             WhoisXmlReputationSectionModel(),
-            GoogleWebRiskSectionModel()
+            GoogleWebRiskSectionModel(),
         ]
         all_sections.removeAll(where: { self.hidden.contains($0.service.name) })
 

@@ -24,7 +24,7 @@ final class LocalDns: DataFeedSingleton {
 
 extension LocalDns: DataFeedService {
     var totalUsage: Int {
-        return services.reduce(0) { $0 + $1.usage }
+        services.reduce(0) { $0 + $1.usage }
     }
 
     public static var lookupService: IPLookupService = .init()
@@ -36,7 +36,7 @@ extension LocalDns: DataFeedService {
         var cache = TimedCache(expiresIn: 60)
 
         func endpoint(_: [String: Any?]?) -> DataFeedEndpoint? {
-            return nil
+            nil
         }
 
         func query<T: Codable>(_ userData: [String: Any?]?, completion block: ((Error?, T?) -> Void)?) {

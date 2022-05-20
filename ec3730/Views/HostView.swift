@@ -176,7 +176,7 @@ struct HostDragRelocateDelegate: DropDelegate {
     }
 
     func dropUpdated(info _: DropInfo) -> DropProposal? {
-        return DropProposal(operation: .move)
+        DropProposal(operation: .move)
     }
 
     func performDrop(info _: DropInfo) -> Bool {

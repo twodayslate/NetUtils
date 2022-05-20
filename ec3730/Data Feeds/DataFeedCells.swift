@@ -11,22 +11,22 @@ import UIKit
 
 class DataFeedCells {
     var feeds: [DataFeed] {
-        return [WhoisXml.current, GoogleWebRisk.current]
+        [WhoisXml.current, GoogleWebRisk.current]
     }
 
     var subscriptions: [DataFeedSubscription] {
         // swiftlint:disable:next force_cast
-        return feeds.filter { $0 is DataFeedSubscription } as! [DataFeedSubscription]
+        feeds.filter { $0 is DataFeedSubscription } as! [DataFeedSubscription]
     }
 
     var oneTimes: [DataFeedOneTimePurchase] {
         // swiftlint:disable:next force_cast
-        return feeds.filter { $0 is DataFeedOneTimePurchase } as! [DataFeedOneTimePurchase]
+        feeds.filter { $0 is DataFeedOneTimePurchase } as! [DataFeedOneTimePurchase]
     }
 
     var purchases: [DataFeedPurchaseProtocol] {
         // swiftlint:disable:next force_cast
-        return feeds.filter { $0 is DataFeedPurchaseProtocol } as! [DataFeedPurchaseProtocol]
+        feeds.filter { $0 is DataFeedPurchaseProtocol } as! [DataFeedPurchaseProtocol]
     }
 
     var cells: [DataFeedCell] {

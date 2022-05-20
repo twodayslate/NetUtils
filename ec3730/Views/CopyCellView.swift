@@ -6,7 +6,7 @@ protocol CopyCellProtocol: View, Hashable, Identifiable {
 
 struct CopyCellRow: Identifiable, Hashable, Codable {
     var id: Int {
-        return hashValue
+        hashValue
     }
 
     var title: String?
@@ -16,11 +16,11 @@ struct CopyCellRow: Identifiable, Hashable, Codable {
 @available(iOS 15.0, *)
 struct CopyCellView: CopyCellProtocol {
     var id: String {
-        return contentsToShare + "\(hashValue)"
+        contentsToShare + "\(hashValue)"
     }
 
     static func == (lhs: CopyCellView, rhs: CopyCellView) -> Bool {
-        return lhs.title == rhs.title && lhs.content == rhs.content
+        lhs.title == rhs.title && lhs.content == rhs.content
     }
 
     func hash(into hasher: inout Hasher) {

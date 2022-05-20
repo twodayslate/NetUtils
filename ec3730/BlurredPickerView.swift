@@ -58,7 +58,7 @@ class BlurredPickerView: UIView {
         doneBar.translatesAutoresizingMaskIntoConstraints = false
         doneBar.items = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismiss(_:)))
+            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismiss(_:))),
         ]
 
         addSubview(doneBar)

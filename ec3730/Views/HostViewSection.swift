@@ -5,7 +5,7 @@ import SwiftUI
 @available(iOS 15.0, *)
 struct HostViewSection: View, Equatable, Identifiable, Hashable {
     static func == (lhs: HostViewSection, rhs: HostViewSection) -> Bool {
-        return lhs.sectionModel.service.name == rhs.sectionModel.service.name
+        lhs.sectionModel.service.name == rhs.sectionModel.service.name
     }
 
     func hash(into hasher: inout Hasher) {

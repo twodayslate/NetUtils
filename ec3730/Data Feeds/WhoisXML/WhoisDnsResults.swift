@@ -37,15 +37,15 @@ extension DnsCoordinate {
     func with(
         whoisRecord: DNSResults? = nil
     ) -> DnsCoordinate {
-        return DnsCoordinate(dnsData: whoisRecord ?? dnsData, error: nil)
+        DnsCoordinate(dnsData: whoisRecord ?? dnsData, error: nil)
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 
@@ -77,16 +77,16 @@ extension DNSResults {
         domainName: String? = nil, types: [Int]? = nil,
         dnsTypes: String? = nil, audit: WhoisRecordAudit? = nil, records: [DNSRecords]? = nil
     ) -> DNSResults {
-        return DNSResults(domainName: domainName ?? self.domainName, types: types ?? self.types,
-                          dnsTypes: dnsTypes ?? self.dnsTypes, audit: audit ?? self.audit, dnsRecords: records ?? dnsRecords)
+        DNSResults(domainName: domainName ?? self.domainName, types: types ?? self.types,
+                   dnsTypes: dnsTypes ?? self.dnsTypes, audit: audit ?? self.audit, dnsRecords: records ?? dnsRecords)
     }
 
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try jsonData(), encoding: encoding)
+        String(data: try jsonData(), encoding: encoding)
     }
 }
 

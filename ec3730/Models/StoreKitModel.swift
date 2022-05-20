@@ -42,7 +42,7 @@ class StoreKitModel: ObservableObject {
     }
 
     func listenForTransactions() -> Task<Void, Error> {
-        return Task.detached {
+        Task.detached {
             // Iterate through any transactions which didn't come from a direct call to `purchase()`.
             for await result in Transaction.updates {
                 do {
@@ -159,7 +159,7 @@ class StoreKitModel: ObservableObject {
     }
 
     var owned: Bool {
-        return !purchasedIdentifiers.isEmpty
+        !purchasedIdentifiers.isEmpty
     }
 }
 
