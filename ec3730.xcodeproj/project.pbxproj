@@ -536,8 +536,8 @@
 			buildConfigurationList = F6C8D8CB212E5AEB00309373 /* Build configuration list for PBXNativeTarget "ec3730" */;
 			buildPhases = (
 				AA821A7B2836D664000B9954 /* SwiftFormat */,
-				F6C8D89D212E5AE900309373 /* Sources */,
 				AA0006DE283730CA00971FE4 /* SwiftLint */,
+				F6C8D89D212E5AE900309373 /* Sources */,
 				F6C8D89E212E5AE900309373 /* Frameworks */,
 				F6C8D89F212E5AE900309373 /* Resources */,
 			);
