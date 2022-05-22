@@ -713,7 +713,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path)\nswift package update\n #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\n # comment out the bellow line if swiftlint execution not required\nswift run -c release swiftlint --config \"$SRCROOT/.swiftlint.yml\" \"$SRCROOT\" --fix #&& swift run -c release swiftlint --config \"$SRCROOT/.swiftlint.yml\" \"$SRCROOT\"\n";
+			shellScript = "cd BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path)\n# swift package update\n# Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\n # Comment out the bellow line if swiftlint execution not required\nswift run -c release swiftlint --config \"$SRCROOT/.swiftlint.yml\" \"$SRCROOT\" --fix #&& swift run -c release swiftlint --config \"$SRCROOT/.swiftlint.yml\" \"$SRCROOT\"\n";
 		};
 		AA821A7B2836D664000B9954 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -731,7 +731,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path)\nswift package update\n #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nswift run -c release swiftformat --config \"$SRCROOT/.swiftformat\" \"$SRCROOT\"\n";
+			shellScript = "cd BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path)\n# swift package update\n# Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nswift run -c release swiftformat --config \"$SRCROOT/.swiftformat\" \"$SRCROOT\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

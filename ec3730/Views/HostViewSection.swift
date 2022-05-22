@@ -64,13 +64,6 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                               }, label: {
                                   Label(self.isExpanded ? "Collapse" : "Expand", systemImage: self.isExpanded ? "rectangle.compress.vertical" : "rectangle.expand.vertical")
                               })
-                              Button(action: {
-                                  withAnimation {
-                                      self.focused.toggle()
-                                  }
-                              }, label: {
-                                  Label("Focus", systemImage: "f.circle")
-                              })
 
                               if self != self.model.sections.first, let index = self.model.sections.firstIndex(of: self) {
                                   Button(action: {
@@ -100,6 +93,15 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                               }, label: {
                                   Label("Hide", systemImage: "eye.slash")
                               })
+                              if !sectionModel.content.isEmpty, canQuery {
+                                  Button(action: {
+                                      withAnimation {
+                                          self.focused.toggle()
+                                      }
+                                  }, label: {
+                                      Label("Focus", systemImage: "rectangle.and.text.magnifyingglass")
+                                  })
+                              }
                               Divider()
                               Button(action: {
                                   UIPasteboard.general.string = self.sectionModel.dataToCopy
@@ -112,12 +114,15 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                           })
                           .sheet(isPresented: $shouldShare, content: {
                               ShareSheetView(activityItems: [self.sectionModel.dataToCopy ?? "Error"])
-                          }).sheet(isPresented: $focused, content: {
+                          })
+                          .sheet(isPresented: $focused, content: {
                               EZPanel(content: {
                                   ScrollView {
                                       HostViewSectionContent(sectionModel: sectionModel, canQuery: canQuery)
                                   }
-                              }, navigationTitle: sectionModel.service.name)
+                                  .navigationTitle(sectionModel.service.name)
+                                  .navigationBarTitleDisplayMode(.inline)
+                              })
                           })
     }
 

@@ -4,19 +4,27 @@ import SwiftUI
  */
 struct EZPanel<Content>: View where Content: View {
     let content: () -> Content
-    var navigationTitle: String
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    init(@ViewBuilder content: @escaping () -> Content, navigationTitle: String = "") {
+    init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
-        self.navigationTitle = navigationTitle
     }
 
     var body: some View {
         NavigationView {
             content().navigationBarItems(trailing: Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                 Image(systemName: "xmark.circle.fill").foregroundColor(Color(UIColor.systemGray3))
-            }).navigationTitle(Text(navigationTitle))
+            })
         }
     }
 }
+
+#if DEBUG
+    struct EZPanel_preview: PreviewProvider {
+        static var previews: some View {
+            EZPanel {
+                Text("Hello World")
+            }
+        }
+    }
+#endif
