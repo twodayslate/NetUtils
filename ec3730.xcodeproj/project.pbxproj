@@ -750,7 +750,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\n# swift package update\n# Uncomment the above line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\n";
+			shellScript = "SDKROOT=(xcrun --sdk macosx --show-sdk-path)\ncd BuildTools\n# rm -rf .build\n# swift package update\n# Uncomment the above 2 lines temporarily to update the version used to the latest matching your BuildTools/Package.swift file\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
