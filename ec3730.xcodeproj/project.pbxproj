@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA8FBAB9283AA6A000280377 /* HostViewSectionContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */; };
 		F60506742134B23F00DDF8A4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60506732134B23F00DDF8A4 /* UIViewController.swift */; };
 		F60FD36025E0607C00BCEF86 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F60FD35E25E0607C00BCEF86 /* DataModel.xcdatamodeld */; };
 		F60FD36525E060A800BCEF86 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60FD36425E060A800BCEF86 /* Persistence.swift */; };
@@ -133,6 +134,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewSectionContent.swift; sourceTree = "<group>"; };
 		F60506732134B23F00DDF8A4 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		F60FD35F25E0607C00BCEF86 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		F60FD36425E060A800BCEF86 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				F644A0F9279268BD0061C98B /* FSDisclosureGroup.swift */,
 				F644A0F727925CF60061C98B /* HostModelWrapperView.swift */,
 				F66643B426F02A8F000F17BC /* HostViewSection.swift */,
+				AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */,
 				F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */,
 				F6397FF125EF012300914B3F /* ShareSheetView.swift */,
 				F6397FF625EF045200914B3F /* PurchaseCellView.swift */,
@@ -535,6 +538,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F6C8D8CB212E5AEB00309373 /* Build configuration list for PBXNativeTarget "ec3730" */;
 			buildPhases = (
+				F69A2396283ACD6300645051 /* Update BuildTools */,
 				AA821A7B2836D664000B9954 /* SwiftFormat */,
 				F6C8D89D212E5AE900309373 /* Sources */,
 				AA0006DE283730CA00971FE4 /* SwiftLint */,
@@ -710,7 +714,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path)\nswift package update\n #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\n # comment out the bellow line if swiftlint execution not required\nswift run -c release swiftlint --config \"$SRCROOT/.swiftlint.yml\" \"$SRCROOT\" --fix #&& swift run -c release swiftlint --config \"$SRCROOT/.swiftlint.yml\" \"$SRCROOT\"\n";
+			shellScript = "SDKROOT=(xcrun --sdk macosx --show-sdk-path)\nCMD=$SRCROOT/BuildTools/.build/release/swiftlint\nif ! command -v ${CMD} &> /dev/null\nthen\n    cd BuildTools\n    CMD=\"swift run -c release swiftlint\"\nfi\n\n${CMD} --config \"$SRCROOT/.swiftlint.yml\" \"$SRCROOT\" --fix #&& swift run -c release swiftlint --config \"$SRCROOT/.swiftlint.yml\" \"$SRCROOT\"\n";
 		};
 		AA821A7B2836D664000B9954 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -728,7 +732,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path)\nswift package update\n #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nswift run -c release swiftformat --config \"$SRCROOT/.swiftformat\" \"$SRCROOT\"\n";
+			shellScript = "SDKROOT=(xcrun --sdk macosx --show-sdk-path)\nCMD=$SRCROOT/BuildTools/.build/release/swiftformat\nif ! command -v ${CMD} &> /dev/null\nthen\n    cd BuildTools\n    CMD=\"swift run -c release swiftformat\"\nfi\n${CMD} --config \"$SRCROOT/.swiftformat\" \"$SRCROOT\"\n";
+		};
+		F69A2396283ACD6300645051 /* Update BuildTools */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update BuildTools";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SDKROOT=(xcrun --sdk macosx --show-sdk-path)\ncd BuildTools\n# rm -rf .build && swift package update\n# Uncomment the above 2 lines temporarily to update the version used to the latest matching your BuildTools/Package.swift file\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -793,6 +815,7 @@
 				F650F749233CF15800BAA609 /* DataFeed.swift in Sources */,
 				F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */,
 				F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */,
+				AA8FBAB9283AA6A000280377 /* HostViewSectionContent.swift in Sources */,
 				F63540DB213E05E000605ABE /* HostViewController.swift in Sources */,
 				F668EB4523563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift in Sources */,
 				F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */,

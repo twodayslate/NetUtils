@@ -4,7 +4,6 @@ import SwiftUI
  */
 struct EZPanel<Content>: View where Content: View {
     let content: () -> Content
-
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     init(@ViewBuilder content: @escaping () -> Content) {
@@ -19,3 +18,13 @@ struct EZPanel<Content>: View where Content: View {
         }
     }
 }
+
+#if DEBUG
+    struct EZPanel_preview: PreviewProvider {
+        static var previews: some View {
+            EZPanel {
+                Text("Hello World")
+            }
+        }
+    }
+#endif

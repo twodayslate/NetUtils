@@ -14,6 +14,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
 
     @AppStorage var isExpanded: Bool
     @State var shouldShare: Bool = false
+    @State var focused: Bool = false
     @ObservedObject var model: HostViewModel
 
     @ObservedObject var sectionModel: HostSectionModel
@@ -41,24 +42,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
     var body: some View {
         FSDisclosureGroup(isExpanded: $isExpanded,
                           content: {
-                              LazyVStack(alignment: .leading, spacing: 0) {
-                                  if let storeModel = self.sectionModel.storeModel {
-                                      if self.canQuery {
-                                          // Need se-0309
-                                          ForEach(self.sectionModel.content) { row in
-                                              row
-                                          }
-                                      } else {
-                                          PurchaseCellView(model: storeModel, heading: sectionModel.dataFeed.name, subheading: sectionModel.service.description)
-                                      }
-                                  } else {
-                                      ForEach(self.sectionModel.content) { row in
-                                          row
-                                      }
-                                  }
-                              }
-                              .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
-                              .background(Color(UIColor.systemBackground))
+                              HostViewSectionContent(sectionModel: sectionModel, canQuery: canQuery)
                           },
                           label: {
                               HStack(alignment: .center) {
@@ -109,6 +93,15 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                               }, label: {
                                   Label("Hide", systemImage: "eye.slash")
                               })
+                              if !sectionModel.content.isEmpty, canQuery {
+                                  Button(action: {
+                                      withAnimation {
+                                          self.focused.toggle()
+                                      }
+                                  }, label: {
+                                      Label("Focus", systemImage: "rectangle.and.text.magnifyingglass")
+                                  })
+                              }
                               Divider()
                               Button(action: {
                                   UIPasteboard.general.string = self.sectionModel.dataToCopy
@@ -121,6 +114,15 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                           })
                           .sheet(isPresented: $shouldShare, content: {
                               ShareSheetView(activityItems: [self.sectionModel.dataToCopy ?? "Error"])
+                          })
+                          .sheet(isPresented: $focused, content: {
+                              EZPanel(content: {
+                                  ScrollView {
+                                      HostViewSectionContent(sectionModel: sectionModel, canQuery: canQuery)
+                                  }
+                                  .navigationTitle(sectionModel.service.name)
+                                  .navigationBarTitleDisplayMode(.inline)
+                              })
                           })
     }
 
