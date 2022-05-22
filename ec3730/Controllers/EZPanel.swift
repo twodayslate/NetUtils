@@ -4,7 +4,7 @@ import SwiftUI
  */
 struct EZPanel<Content>: View where Content: View {
     let content: () -> Content
-    var navigationTitle: String
+    let navigationTitle: String
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     init(@ViewBuilder content: @escaping () -> Content, navigationTitle: String = "") {
