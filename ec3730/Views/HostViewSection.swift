@@ -29,7 +29,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
         if let storeModel = sectionModel.storeModel {
             return (storeModel.owned || sectionModel.dataFeed.userKey != nil)
         }
-        return false
+        return true
     }
 
     init(model: HostViewModel, sectionModel: HostSectionModel) {
