@@ -1,0 +1,8 @@
+{
+  "threat": {
+    "threatTypes": [
+      "MALWARE"
+    ],
+    "expireTime": "2019-07-17T15:01:23.045123456Z"
+  }
+}

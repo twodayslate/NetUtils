@@ -5,9 +5,9 @@ import SwiftUI
 struct PurchaseCellView: View {
     @ObservedObject var model: StoreKitModel
     @State var isRestoring: Bool = false
-
     var heading: String
     var subheading: String
+    @Binding var showDemoData: Bool
 
     @State var imageSize: CGFloat = 64.0
 
@@ -46,17 +46,24 @@ struct PurchaseCellView: View {
                         Text("Restore")
                     })
                 }
-                Button(action: {
-                    Task {
-                        await self.buy()
-                    }
-                }, label: {
-                    if isOneTime {
-                        Text("Buy Now for only \(self.model.defaultProduct?.displayPrice ?? "-")")
-                    } else {
-                        Text("Subscibe Now for only \(self.model.defaultProduct?.displayPrice ?? "-")").bold()
-                    }
-                }).padding().frame(maxWidth: .infinity).background(Color.accentColor).foregroundColor(.white).cornerRadius(16.0)
+                VStack {
+                    Button(action: {
+                        Task {
+                            await self.buy()
+                        }
+                    }, label: {
+                        if isOneTime {
+                            Text("Buy Now for only \(self.model.defaultProduct?.displayPrice ?? "-")")
+                        } else {
+                            Text("Subscibe Now for only \(self.model.defaultProduct?.displayPrice ?? "-")").bold()
+                        }
+                    }).padding().frame(maxWidth: .infinity).background(Color.accentColor).foregroundColor(.white).cornerRadius(16.0)
+                    Button(action: {
+                        showDemoData.toggle()
+                    }, label: {
+                        Text("Show Demo Data")
+                    }).padding().frame(maxWidth: .infinity).background(Color.accentColor).foregroundColor(.white).cornerRadius(16.0)
+                }
             }.padding(.vertical, 4)
             if isOneTime {
                 Text("Payment will be charged to your Apple ID account at the confirmation of purchase.").font(.caption2).foregroundColor(Color(UIColor.systemGray2))
@@ -109,7 +116,7 @@ struct PurchaseCellView: View {
 struct LockedCellView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PurchaseCellView(model: StoreKitModel.whois, heading: "Whois", subheading: "Subheading")
+            PurchaseCellView(model: StoreKitModel.whois, heading: "Whois", subheading: "Subheading", showDemoData: .constant(false))
         }
     }
 }

@@ -25,6 +25,11 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
     }
 
     @MainActor
+    func initDemoData() throws -> Data? {
+        nil
+    }
+
+    @MainActor
     class func configure(with result: HostData) -> HostSectionModel? {
         let available_services = [
             LocalDnsModel(),

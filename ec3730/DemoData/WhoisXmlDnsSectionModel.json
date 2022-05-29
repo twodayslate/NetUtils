@@ -1,0 +1,182 @@
+[
+  {
+    "rawText" : "google.com.\t\t3600\tIN\tTXT\t\"google-site-verification=wD8N7i1JTNTkezJ49swvWW48f8_9xveREV4oB-0Hf5o\"",
+    "dnsType" : "TXT",
+    "ttl" : 3600,
+    "rRsetType" : 16,
+    "strings" : [
+      "google-site-verification=wD8N7i1JTNTkezJ49swvWW48f8_9xveREV4oB-0Hf5o"
+    ],
+    "type" : 16,
+    "name" : "google.com."
+  },
+  {
+    "rawText" : "google.com.\t\t3600\tIN\tTXT\t\"v=spf1 include:_spf.google.com ~all\"",
+    "dnsType" : "TXT",
+    "ttl" : 3600,
+    "rRsetType" : 16,
+    "strings" : [
+      "v=spf1 include:_spf.google.com ~all"
+    ],
+    "type" : 16,
+    "name" : "google.com."
+  },
+  {
+    "rawText" : "google.com.\t\t3600\tIN\tTXT\t\"MS=E4A68B9AB2BB9670BCE15412F62916164C0B20BB\"",
+    "dnsType" : "TXT",
+    "ttl" : 3600,
+    "rRsetType" : 16,
+    "strings" : [
+      "MS=E4A68B9AB2BB9670BCE15412F62916164C0B20BB"
+    ],
+    "type" : 16,
+    "name" : "google.com."
+  },
+  {
+    "rawText" : "google.com.\t\t3600\tIN\tTXT\t\"docusign=1b0a6754-49b1-4db5-8540-d2c12664b289\"",
+    "dnsType" : "TXT",
+    "ttl" : 3600,
+    "rRsetType" : 16,
+    "strings" : [
+      "docusign=1b0a6754-49b1-4db5-8540-d2c12664b289"
+    ],
+    "type" : 16,
+    "name" : "google.com."
+  },
+  {
+    "rawText" : "google.com.\t\t3600\tIN\tTXT\t\"apple-domain-verification=30afIBcvSuDV2PLX\"",
+    "dnsType" : "TXT",
+    "ttl" : 3600,
+    "rRsetType" : 16,
+    "strings" : [
+      "apple-domain-verification=30afIBcvSuDV2PLX"
+    ],
+    "type" : 16,
+    "name" : "google.com."
+  },
+  {
+    "rawText" : "google.com.\t\t3600\tIN\tTXT\t\"docusign=05958488-4752-4ef2-95eb-aa7ba8a3bd0e\"",
+    "dnsType" : "TXT",
+    "ttl" : 3600,
+    "rRsetType" : 16,
+    "strings" : [
+      "docusign=05958488-4752-4ef2-95eb-aa7ba8a3bd0e"
+    ],
+    "type" : 16,
+    "name" : "google.com."
+  },
+  {
+    "rawText" : "google.com.\t\t3600\tIN\tTXT\t\"globalsign-smime-dv=CDYX+XFHUw2wml6\/Gb8+59BsH31KzUr6c1l2BPvqKX8=\"",
+    "dnsType" : "TXT",
+    "ttl" : 3600,
+    "rRsetType" : 16,
+    "strings" : [
+      "globalsign-smime-dv=CDYX+XFHUw2wml6\/Gb8+59BsH31KzUr6c1l2BPvqKX8="
+    ],
+    "type" : 16,
+    "name" : "google.com."
+  },
+  {
+    "rawText" : "google.com.\t\t3600\tIN\tTXT\t\"facebook-domain-verification=22rm551cu4k0ab0bxsw536tlds4h95\"",
+    "dnsType" : "TXT",
+    "ttl" : 3600,
+    "rRsetType" : 16,
+    "strings" : [
+      "facebook-domain-verification=22rm551cu4k0ab0bxsw536tlds4h95"
+    ],
+    "type" : 16,
+    "name" : "google.com."
+  },
+  {
+    "rawText" : "google.com.\t\t3600\tIN\tTXT\t\"google-site-verification=TV9-DBe4R80X4v0M4U_bd_J9cpOJM0nikft0jAgjmsQ\"",
+    "dnsType" : "TXT",
+    "ttl" : 3600,
+    "rRsetType" : 16,
+    "strings" : [
+      "google-site-verification=TV9-DBe4R80X4v0M4U_bd_J9cpOJM0nikft0jAgjmsQ"
+    ],
+    "type" : 16,
+    "name" : "google.com."
+  },
+  {
+    "rawText" : "google.com.\t\t300\tIN\tA\t142.250.189.14",
+    "address" : "142.250.189.14",
+    "dnsType" : "A",
+    "ttl" : 300,
+    "rRsetType" : 1,
+    "type" : 1,
+    "name" : "google.com."
+  },
+  {
+    "rRsetType" : 257,
+    "rawText" : "google.com.\t\t21600\tIN\tCAA\t0 issue \"pki.goog\"",
+    "ttl" : 21600,
+    "type" : 257,
+    "dnsType" : "CAA",
+    "name" : "google.com."
+  },
+  {
+    "rRsetType" : 2,
+    "rawText" : "google.com.\t\t21600\tIN\tNS\tns2.google.com.",
+    "ttl" : 21600,
+    "type" : 2,
+    "dnsType" : "NS",
+    "name" : "google.com."
+  },
+  {
+    "rRsetType" : 2,
+    "rawText" : "google.com.\t\t21600\tIN\tNS\tns3.google.com.",
+    "ttl" : 21600,
+    "type" : 2,
+    "dnsType" : "NS",
+    "name" : "google.com."
+  },
+  {
+    "rRsetType" : 2,
+    "rawText" : "google.com.\t\t21600\tIN\tNS\tns4.google.com.",
+    "ttl" : 21600,
+    "type" : 2,
+    "dnsType" : "NS",
+    "name" : "google.com."
+  },
+  {
+    "rRsetType" : 2,
+    "rawText" : "google.com.\t\t21600\tIN\tNS\tns1.google.com.",
+    "ttl" : 21600,
+    "type" : 2,
+    "dnsType" : "NS",
+    "name" : "google.com."
+  },
+  {
+    "name" : "google.com.",
+    "rawText" : "google.com.\t\t31\tIN\tSOA\tns1.google.com. dns-admin.google.com. 451603066 900 900 1800 60",
+    "expire" : 1800,
+    "ttl" : 31,
+    "serial" : 451603066,
+    "type" : 6,
+    "host" : "ns1.google.com.",
+    "refresh" : 900,
+    "admin" : "dns-admin.google.com.",
+    "minimum" : 60,
+    "retry" : 900,
+    "dnsType" : "SOA",
+    "rRsetType" : 6
+  },
+  {
+    "rawText" : "google.com.\t\t300\tIN\tAAAA\t2607:f8b0:4007:817:0:0:0:200e",
+    "address" : "2607:f8b0:4007:817:0:0:0:200e",
+    "dnsType" : "AAAA",
+    "ttl" : 300,
+    "rRsetType" : 28,
+    "type" : 28,
+    "name" : "google.com."
+  },
+  {
+    "rRsetType" : 15,
+    "rawText" : "google.com.\t\t97\tIN\tMX\t10 smtp.google.com.",
+    "ttl" : 97,
+    "type" : 15,
+    "dnsType" : "MX",
+    "name" : "google.com."
+  }
+]

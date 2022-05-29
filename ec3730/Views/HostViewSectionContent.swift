@@ -11,6 +11,7 @@ import SwiftUI
 struct HostViewSectionContent: View {
     @ObservedObject var sectionModel: HostSectionModel
     var canQuery: Bool
+    @Binding var showDemoData: Bool
     var body: some View {
         LazyVStack(alignment: .leading, spacing: 0) {
             if let storeModel = self.sectionModel.storeModel {
@@ -20,7 +21,7 @@ struct HostViewSectionContent: View {
                         row
                     }
                 } else {
-                    PurchaseCellView(model: storeModel, heading: sectionModel.dataFeed.name, subheading: sectionModel.service.description)
+                    PurchaseCellView(model: storeModel, heading: sectionModel.dataFeed.name, subheading: sectionModel.service.description, showDemoData: $showDemoData)
                 }
             } else {
                 ForEach(self.sectionModel.content) { row in

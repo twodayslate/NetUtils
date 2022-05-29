@@ -9,6 +9,15 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
     }
 
     @MainActor
+    override func initDemoData() throws -> Data? {
+        reset()
+        guard let data = loadJson(filename: "WhoisXmlWhoisSectionModel") else {
+            return nil
+        }
+        return try configure(with: data)
+    }
+
+    @MainActor
     override func configure(with data: Data) throws -> Data? {
         reset()
         let result = try JSONDecoder().decode(WhoisRecord.self, from: data)

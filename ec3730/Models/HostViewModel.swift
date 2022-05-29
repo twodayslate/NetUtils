@@ -18,6 +18,13 @@ class HostViewModel: ObservableObject {
         }
     }
 
+    var demo_sections = [
+        LocalDnsModel(),
+        WhoisXmlWhoisSectionModel(),
+        WhoisXmlDnsSectionModel(),
+        WhoisXmlReputationSectionModel(),
+        GoogleWebRiskSectionModel(),
+    ]
     static var hiddenKey = "hostviewmodel.hidden"
     /** The key used to determine the section order */
     static var orderKey = "hostviewmodel.order"
@@ -35,10 +42,21 @@ class HostViewModel: ObservableObject {
         }
     }
 
+    private func initDemoSections() {
+        for section in demo_sections {
+            do {
+                _ = try section.initDemoData()
+            } catch {
+                print(error)
+            }
+        }
+    }
+
     init() {
         self.order = UserDefaults.standard.object(forKey: HostViewModel.orderKey) as? [String] ?? []
         self.hidden = UserDefaults.standard.object(forKey: HostViewModel.hiddenKey) as? [String] ?? []
         self.sections = []
+        self.initDemoSections()
         self.generateVisibleSections()
     }
 
@@ -65,8 +83,12 @@ class HostViewModel: ObservableObject {
         ordered_sections.append(contentsOf: all_sections)
 
         self.sections = ordered_sections.map {
-            return HostViewSection(model: self, sectionModel: $0)
+            return HostViewSection(model: self, sectionModel: $0, demoModel: getDemoModel(serviceName: $0.service.name))
         }
+    }
+
+    private func getDemoModel(serviceName: String) -> HostSectionModel {
+        demo_sections.first(where: { $0.service.name == serviceName })!
     }
 
     @Published var isQuerying: Bool = false

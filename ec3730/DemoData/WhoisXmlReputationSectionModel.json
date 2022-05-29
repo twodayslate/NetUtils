@@ -1,0 +1,50 @@
+{
+  "mode" : "fast",
+  "reputationScore" : 83.400000000000006,
+  "testResults" : [
+    {
+      "test" : "WHOIS Domain check",
+      "testCode" : 93,
+      "warningCodes" : [
+        2009
+      ],
+      "warnings" : [
+        "Owner details are publicly available"
+      ]
+    },
+    {
+      "test" : "Malware databases check",
+      "testCode" : 82,
+      "warningCodes" : [
+        4002
+      ],
+      "warnings" : [
+        "Phishing"
+      ]
+    },
+    {
+      "test" : "SSL certificate validity",
+      "testCode" : 87,
+      "warningCodes" : [
+        6001
+      ],
+      "warnings" : [
+        "Recently obtained certificate, valid from  2022-05-04 16:26:51"
+      ]
+    },
+    {
+      "test" : "SSL vulnerabilities",
+      "testCode" : 88,
+      "warningCodes" : [
+        6015,
+        6019,
+        6021
+      ],
+      "warnings" : [
+        "HTTP Strict Transport Security not set",
+        "TLSA record not configured or configured wrong",
+        "OCSP stapling not configured"
+      ]
+    }
+  ]
+}

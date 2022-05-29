@@ -19,6 +19,15 @@ class LocalDnsModel: HostSectionModel {
     }
 
     @MainActor
+    override func initDemoData() throws -> Data? {
+        reset()
+        guard let data = loadJson(filename: "LocalDnsModel") else {
+            return nil
+        }
+        return try configure(with: data)
+    }
+
+    @MainActor
     func configure(addresses: [String]) throws -> Data {
         reset()
 
