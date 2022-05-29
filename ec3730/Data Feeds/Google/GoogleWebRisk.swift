@@ -149,7 +149,49 @@ extension GoogleWebRisk: DataFeedService {
                 }
 
                 let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .iso8601WithFractionalSeconds
+                decoder.dateDecodingStrategy = .custom {
+                    decoder in
+                    let container = try decoder.singleValueContainer()
+                    let dateString = try container.decode(String.self)
+
+                    let formatter = DateFormatter()
+                    let formats = [
+                        "yyyy-MM-dd HH:mm:ss",
+                        "yyyy-MM-dd",
+                        "yyyy-MM-dd HH:mm:ss.SSS ZZZ",
+                        "yyyy-MM-dd HH:mm:ss ZZZ", // 1997-09-15 07:00:00 UTC
+                        "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXXXX", // 2019-10-17T06:38:04.993563079Z
+                    ]
+
+                    // 2019-10-17T06:38:04.993563079Z
+
+                    for format in formats {
+                        formatter.dateFormat = format
+                        if let date = formatter.date(from: dateString) {
+                            return date
+                        }
+                    }
+
+                    let iso = ISO8601DateFormatter()
+                    iso.timeZone = TimeZone(abbreviation: "UTC")
+                    if let date = iso.date(from: dateString) {
+                        return date
+                    }
+
+                    let isoProto = ISO8601DateFormatter()
+                    isoProto.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                    isoProto.timeZone = TimeZone(secondsFromGMT: 0)!
+                    if let date = isoProto.date(from: dateString) {
+                        return date
+                    }
+
+                    if let date = ISO8601DateFormatter().date(from: dateString) {
+                        return date
+                    }
+
+                    throw DecodingError.dataCorruptedError(in: container,
+                                                           debugDescription: "Cannot decode date string \(dateString)")
+                }
 
                 do {
                     let coordinator = try decoder.decode(T.self, from: data)
