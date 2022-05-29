@@ -15,11 +15,9 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
     @AppStorage var isExpanded: Bool
     @State var shouldShare: Bool = false
     @State var focused: Bool = false
-    @State var showDemo: Bool = false
     @ObservedObject var model: HostViewModel
 
     @ObservedObject var sectionModel: HostSectionModel
-    var demoModel: HostSectionModel
     // easy way to force get changes instead of having sectionmodel bubble them up
     // correctly
     @ObservedObject var storeModel: StoreKitModel
@@ -34,10 +32,9 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
         return false
     }
 
-    init(model: HostViewModel, sectionModel: HostSectionModel, demoModel: HostSectionModel) {
+    init(model: HostViewModel, sectionModel: HostSectionModel) {
         self.model = model
         self.sectionModel = sectionModel
-        self.demoModel = demoModel
         storeModel = sectionModel.storeModel ?? StoreKitModel(defaultId: "", ids: [])
         _isExpanded = AppStorage(wrappedValue: true, "\(Self.self).isExpanded." + sectionModel.service.name)
     }
@@ -45,7 +42,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
     var body: some View {
         FSDisclosureGroup(isExpanded: $isExpanded,
                           content: {
-                              HostViewSectionContent(sectionModel: sectionModel, canQuery: canQuery, showDemoData: $showDemo)
+                              HostViewSectionContent(sectionModel: sectionModel, canQuery: canQuery)
                           },
                           label: {
                               HStack(alignment: .center) {
@@ -121,15 +118,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                           .sheet(isPresented: $focused, content: {
                               EZPanel(content: {
                                   ScrollView {
-                                      HostViewSectionContent(sectionModel: sectionModel, canQuery: canQuery, showDemoData: $showDemo)
-                                  }
-                                  .navigationTitle(sectionModel.service.name)
-                                  .navigationBarTitleDisplayMode(.inline)
-                              })
-                          }).sheet(isPresented: $showDemo, content: {
-                              EZPanel(content: {
-                                  ScrollView {
-                                      HostViewSectionContent(sectionModel: demoModel, canQuery: true, showDemoData: $showDemo)
+                                      HostViewSectionContent(sectionModel: sectionModel, canQuery: canQuery)
                                   }
                                   .navigationTitle(sectionModel.service.name)
                                   .navigationBarTitleDisplayMode(.inline)

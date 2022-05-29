@@ -1,7 +1,7 @@
 import SwiftUI
 
 class LocalDnsModel: HostSectionModel {
-    convenience init() {
+    required convenience init() {
         self.init(LocalDns.current, service: LocalDns.lookupService)
     }
 
@@ -16,15 +16,6 @@ class LocalDnsModel: HostSectionModel {
         let addresses = try JSONDecoder().decode([String].self, from: data)
 
         return try configure(addresses: addresses)
-    }
-
-    @MainActor
-    override func initDemoData() throws -> Data? {
-        reset()
-        guard let data = loadJson(filename: "LocalDnsModel") else {
-            return nil
-        }
-        return try configure(with: data)
     }
 
     @MainActor

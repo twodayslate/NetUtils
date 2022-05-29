@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AA8FBAB9283AA6A000280377 /* HostViewSectionContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */; };
-		AAC727C02843AD2A00482D73 /* LocalDnsModel.json in Resources */ = {isa = PBXBuildFile; fileRef = AAC727BA2843AD2A00482D73 /* LocalDnsModel.json */; };
 		AAC727C12843AD2A00482D73 /* WhoisXmlWhoisSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = AAC727BB2843AD2A00482D73 /* WhoisXmlWhoisSectionModel.json */; };
 		AAC727C22843AD2A00482D73 /* WhoisXmlDnsSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = AAC727BC2843AD2A00482D73 /* WhoisXmlDnsSectionModel.json */; };
 		AAC727C32843AD2A00482D73 /* GoogleWebRiskSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = AAC727BD2843AD2A00482D73 /* GoogleWebRiskSectionModel.json */; };
@@ -141,7 +140,6 @@
 
 /* Begin PBXFileReference section */
 		AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewSectionContent.swift; sourceTree = "<group>"; };
-		AAC727BA2843AD2A00482D73 /* LocalDnsModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LocalDnsModel.json; sourceTree = "<group>"; };
 		AAC727BB2843AD2A00482D73 /* WhoisXmlWhoisSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoisXmlWhoisSectionModel.json; sourceTree = "<group>"; };
 		AAC727BC2843AD2A00482D73 /* WhoisXmlDnsSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoisXmlDnsSectionModel.json; sourceTree = "<group>"; };
 		AAC727BD2843AD2A00482D73 /* GoogleWebRiskSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GoogleWebRiskSectionModel.json; sourceTree = "<group>"; };
@@ -310,7 +308,6 @@
 		AAC727B92843AD2A00482D73 /* DemoData */ = {
 			isa = PBXGroup;
 			children = (
-				AAC727BA2843AD2A00482D73 /* LocalDnsModel.json */,
 				AAC727BB2843AD2A00482D73 /* WhoisXmlWhoisSectionModel.json */,
 				AAC727BC2843AD2A00482D73 /* WhoisXmlDnsSectionModel.json */,
 				AAC727BD2843AD2A00482D73 /* GoogleWebRiskSectionModel.json */,
@@ -708,7 +705,6 @@
 				AAC727C42843AD2A00482D73 /* WhoisXmlReputationSectionModel.json in Resources */,
 				F6C8D8AE212E5AEA00309373 /* Assets.xcassets in Resources */,
 				AAC727C22843AD2A00482D73 /* WhoisXmlDnsSectionModel.json in Resources */,
-				AAC727C02843AD2A00482D73 /* LocalDnsModel.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,7 +5,7 @@ import SwiftUI
 import SwiftUI
 
 class GoogleWebRiskSectionModel: HostSectionModel {
-    convenience init() {
+    required convenience init() {
         self.init(GoogleWebRisk.current, service: GoogleWebRisk.lookupService)
         storeModel = StoreKitModel.webrisk
     }
@@ -22,15 +22,6 @@ class GoogleWebRiskSectionModel: HostSectionModel {
             print(decodeError)
         }
         return try configure(with: result)
-    }
-
-    @MainActor
-    override func initDemoData() throws -> Data? {
-        reset()
-        guard let data = loadJson(filename: "GoogleWebRiskSectionModel") else {
-            return nil
-        }
-        return try configure(with: data)
     }
 
     @MainActor

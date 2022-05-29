@@ -2,18 +2,9 @@ import Cache
 import SwiftUI
 
 class WhoisXmlDnsSectionModel: HostSectionModel {
-    convenience init() {
+    required convenience init() {
         self.init(WhoisXml.current, service: WhoisXml.dnsService)
         storeModel = StoreKitModel.dns
-    }
-
-    @MainActor
-    override func initDemoData() throws -> Data? {
-        reset()
-        guard let data = loadJson(filename: "WhoisXmlDnsSectionModel") else {
-            return nil
-        }
-        return try configure(with: data)
     }
 
     @MainActor

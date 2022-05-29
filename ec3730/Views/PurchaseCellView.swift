@@ -4,10 +4,18 @@ import SwiftUI
 @available(iOS 15.0.0, *)
 struct PurchaseCellView: View {
     @ObservedObject var model: StoreKitModel
+    @ObservedObject var sectionModel: HostSectionModel
+
     @State var isRestoring: Bool = false
-    var heading: String
-    var subheading: String
-    @Binding var showDemoData: Bool
+    @State var showDemoData: Bool = false
+
+    var heading: String {
+        sectionModel.dataFeed.name
+    }
+
+    var subheading: String {
+        sectionModel.service.description
+    }
 
     @State var imageSize: CGFloat = 64.0
 
@@ -64,7 +72,7 @@ struct PurchaseCellView: View {
                     }
                 }
                 .padding(.vertical, 4)
-                
+
                 Button(action: {
                     showDemoData.toggle()
                 }, label: {
@@ -75,7 +83,7 @@ struct PurchaseCellView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, 4)
             }
-            
+
             if isOneTime {
                 Text("Payment will be charged to your Apple ID account at the confirmation of purchase.").font(.caption2).foregroundColor(Color(UIColor.systemGray2))
             } else {
@@ -94,13 +102,24 @@ struct PurchaseCellView: View {
                 Spacer()
             }.font(.caption2).foregroundColor(Color(UIColor.systemGray2))
         }
-        .padding().background(Color(UIColor.systemBackground)).contextMenu(menuItems: {
+        .padding()
+        .background(Color(UIColor.systemBackground))
+        .contextMenu(menuItems: {
             Button(action: {
                 Task {
                     await self.restore()
                 }
             }, label: {
                 Label("Restore", systemImage: "arrow.clockwise")
+            })
+        })
+        .sheet(isPresented: $showDemoData, content: {
+            EZPanel(content: {
+                ScrollView {
+                    HostViewSectionContent(sectionModel: sectionModel.demoModel, canQuery: true)
+                }
+                .navigationTitle(sectionModel.service.name)
+                .navigationBarTitleDisplayMode(.inline)
             })
         })
     }
@@ -127,7 +146,7 @@ struct PurchaseCellView: View {
 struct LockedCellView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PurchaseCellView(model: StoreKitModel.whois, heading: "Whois", subheading: "Subheading", showDemoData: .constant(false))
+            PurchaseCellView(model: StoreKitModel.whois, sectionModel: WhoisXmlDnsSectionModel())
         }
     }
 }

@@ -3,18 +3,9 @@ import StoreKit
 import SwiftUI
 
 class WhoisXmlWhoisSectionModel: HostSectionModel {
-    convenience init() {
+    required convenience init() {
         self.init(WhoisXml.current, service: WhoisXml.whoisService)
         storeModel = StoreKitModel.whois
-    }
-
-    @MainActor
-    override func initDemoData() throws -> Data? {
-        reset()
-        guard let data = loadJson(filename: "WhoisXmlWhoisSectionModel") else {
-            return nil
-        }
-        return try configure(with: data)
     }
 
     @MainActor

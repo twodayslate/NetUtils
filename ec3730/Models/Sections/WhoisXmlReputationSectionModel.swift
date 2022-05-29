@@ -2,18 +2,9 @@ import Cache
 import SwiftUI
 
 class WhoisXmlReputationSectionModel: HostSectionModel {
-    convenience init() {
+    required convenience init() {
         self.init(WhoisXml.current, service: WhoisXml.reputationService)
         storeModel = StoreKitModel.whois
-    }
-
-    @MainActor
-    override func initDemoData() throws -> Data? {
-        reset()
-        guard let data = loadJson(filename: "WhoisXmlReputationSectionModel") else {
-            return nil
-        }
-        return try configure(with: data)
     }
 
     @MainActor

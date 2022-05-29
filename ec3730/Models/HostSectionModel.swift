@@ -24,9 +24,24 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
         self.service = service
     }
 
+    required init() {
+        fatalError("Configure your model's init function")
+    }
+
+    @MainActor
+    var demoModel: Self {
+        let model = type(of: self).init()
+        _ = try? model.initDemoData()
+        return model
+    }
+
     @MainActor
     func initDemoData() throws -> Data? {
-        nil
+        reset()
+        guard let data = loadJson(filename: String(describing: type(of: self))) else {
+            return nil
+        }
+        return try configure(with: data)
     }
 
     @MainActor
