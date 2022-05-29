@@ -617,6 +617,8 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
             block?(URLError(URLError.badURL), nil)
             return
         }
+        latestQueriedUrl = url
+        latestQueryDate = .now
 
         if let record = try? cache.object(forKey: host) {
             do {

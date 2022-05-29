@@ -10,6 +10,10 @@ class GoogleWebRiskSectionModel: HostSectionModel {
         storeModel = StoreKitModel.webrisk
     }
 
+    override var demoUrl: URL {
+        URL(staticString: "http://testsafebrowsing.appspot.com/malware.html")
+    }
+
     @MainActor
     override func configure(with data: Data) throws -> Data? {
         reset()
@@ -50,6 +54,8 @@ class GoogleWebRiskSectionModel: HostSectionModel {
             block?(URLError(.badURL), nil)
             return
         }
+        latestQueriedUrl = url
+        latestQueryDate = .now
 
         guard dataFeed.userKey != nil || storeModel?.owned ?? false else {
             block?(MoreStoreKitError.NotPurchased, nil)

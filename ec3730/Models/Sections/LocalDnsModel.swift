@@ -42,6 +42,8 @@ class LocalDnsModel: HostSectionModel {
             block?(URLError(URLError.badURL), nil)
             return
         }
+        latestQueriedUrl = url
+        latestQueryDate = .now
 
         service.query(["host": host]) { (responseError, response: [String]?) in
             DispatchQueue.main.async {

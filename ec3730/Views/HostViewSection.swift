@@ -56,7 +56,8 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                                   try? await self.sectionModel.storeModel?.update()
                               }
                           }
-                          .background(Color(UIColor.systemGroupedBackground)).contextMenu(menuItems: {
+                          .background(Color(UIColor.systemGroupedBackground))
+                          .contextMenu(menuItems: {
                               Button(action: {
                                   withAnimation {
                                       self.isExpanded.toggle()
@@ -116,13 +117,17 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                               ShareSheetView(activityItems: [self.sectionModel.dataToCopy ?? "Error"])
                           })
                           .sheet(isPresented: $focused, content: {
-                              EZPanel(content: {
-                                  ScrollView {
-                                      HostViewSectionContent(sectionModel: sectionModel, canQuery: canQuery)
-                                  }
-                                  .navigationTitle(sectionModel.service.name)
-                                  .navigationBarTitleDisplayMode(.inline)
-                              })
+                              if let latestQueriedUrl = sectionModel.latestQueriedUrl, let latestDate = sectionModel.latestQueryDate {
+                                  HostViewSectionFocusView(model: sectionModel, url: latestQueriedUrl, date: latestDate)
+                              } else {
+                                  EZPanel(content: {
+                                      ScrollView {
+                                          HostViewSectionContent(sectionModel: sectionModel, canQuery: canQuery)
+                                      }
+                                      .navigationTitle(sectionModel.service.name)
+                                      .navigationBarTitleDisplayMode(.inline)
+                                  })
+                              }
                           })
     }
 

@@ -41,7 +41,8 @@ struct HostResultSection: View, Equatable, Identifiable, Hashable {
                                   Spacer()
                               }
                           })
-                          .background(Color(UIColor.systemGroupedBackground)).contextMenu(menuItems: {
+                          .background(Color(UIColor.systemGroupedBackground))
+                          .contextMenu(menuItems: {
                               Button(action: {
                                   withAnimation {
                                       self.isExpanded.toggle()

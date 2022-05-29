@@ -94,6 +94,8 @@
 		F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB982301DFCC00439562 /* LoadingCell.swift */; };
 		F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB9A2301E78E00439562 /* DNSResolver.swift */; };
 		F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */; };
+		F6A6410C2844235D00E00F7F /* HostBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A6410B2844235D00E00F7F /* HostBarView.swift */; };
+		F6A6410E2844246100E00F7F /* HostViewSectionFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A6410D2844246100E00F7F /* HostViewSectionFocusView.swift */; };
 		F6C38E8826FABEFB00BD9A71 /* StoreKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C38E8726FABEFB00BD9A71 /* StoreKitModel.swift */; };
 		F6C591BA235EC3A9009BA4B7 /* CenterTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C591B9235EC3A9009BA4B7 /* CenterTextTableViewCell.swift */; };
 		F6C87452234FE8030069A57C /* DataFeedsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C87451234FE8030069A57C /* DataFeedsTableViewController.swift */; };
@@ -221,6 +223,8 @@
 		F6A4EB9A2301E78E00439562 /* DNSResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
 		F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiSSID.swift; sourceTree = "<group>"; };
 		F6A4EB9E2301F31100439562 /* ec3730.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ec3730.entitlements; sourceTree = "<group>"; };
+		F6A6410B2844235D00E00F7F /* HostBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostBarView.swift; sourceTree = "<group>"; };
+		F6A6410D2844246100E00F7F /* HostViewSectionFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewSectionFocusView.swift; sourceTree = "<group>"; };
 		F6C38E8726FABEFB00BD9A71 /* StoreKitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitModel.swift; sourceTree = "<group>"; };
 		F6C591B9235EC3A9009BA4B7 /* CenterTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTextTableViewCell.swift; sourceTree = "<group>"; };
 		F6C87451234FE8030069A57C /* DataFeedsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedsTableViewController.swift; sourceTree = "<group>"; };
@@ -335,11 +339,13 @@
 				F6397FE425E8937900914B3F /* HostView.swift */,
 				F63B9227279BC31B007E845F /* HostHistoryList.swift */,
 				F63B922B279C9079007E845F /* HostResult.swift */,
+				F6A6410B2844235D00E00F7F /* HostBarView.swift */,
 				F63B9229279C8EE5007E845F /* HostResultSection.swift */,
 				F644A0F9279268BD0061C98B /* FSDisclosureGroup.swift */,
 				F644A0F727925CF60061C98B /* HostModelWrapperView.swift */,
 				F66643B426F02A8F000F17BC /* HostViewSection.swift */,
 				AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */,
+				F6A6410D2844246100E00F7F /* HostViewSectionFocusView.swift */,
 				F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */,
 				F6397FF125EF012300914B3F /* ShareSheetView.swift */,
 				F6397FF625EF045200914B3F /* PurchaseCellView.swift */,
@@ -802,6 +808,7 @@
 				F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */,
 				F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */,
 				F644A0FD279283300061C98B /* LocalDnsModel.swift in Sources */,
+				F6A6410C2844235D00E00F7F /* HostBarView.swift in Sources */,
 				F6D0B77A235902E3009E493B /* DataFeedPurchaseProtocol.swift in Sources */,
 				F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */,
 				F63B9224279BBA03007E845F /* HostData.swift in Sources */,
@@ -869,6 +876,7 @@
 				F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */,
 				F69E364A235806370017296E /* WhoisXMLDnsService.swift in Sources */,
 				F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */,
+				F6A6410E2844246100E00F7F /* HostViewSectionFocusView.swift in Sources */,
 				F6397FF725EF045200914B3F /* PurchaseCellView.swift in Sources */,
 				F63B9226279BBA87007E845F /* HostDataGroup.swift in Sources */,
 				F6FBB86723677FA700E023F2 /* DeviceController.swift in Sources */,

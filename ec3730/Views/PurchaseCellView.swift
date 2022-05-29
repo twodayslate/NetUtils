@@ -114,13 +114,7 @@ struct PurchaseCellView: View {
             })
         })
         .sheet(isPresented: $showDemoData, content: {
-            EZPanel(content: {
-                ScrollView {
-                    HostViewSectionContent(sectionModel: sectionModel.demoModel, canQuery: true)
-                }
-                .navigationTitle(sectionModel.service.name)
-                .navigationBarTitleDisplayMode(.inline)
-            })
+            HostViewSectionFocusView(model: sectionModel.demoModel, url: sectionModel.demoUrl, date: sectionModel.demoDate)
         })
     }
 

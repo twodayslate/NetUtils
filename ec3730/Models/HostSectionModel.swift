@@ -16,6 +16,10 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
 
     var dataToCopy: String?
     var latestData: Data?
+    /// The last URL queried
+    var latestQueriedUrl: URL?
+    /// The last time data was queried
+    var latestQueryDate: Date?
 
     @Published var storeModel: StoreKitModel?
 
@@ -33,6 +37,11 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
         let model = type(of: self).init()
         _ = try? model.initDemoData()
         return model
+    }
+
+    var demoDate: Date = .init(timeIntervalSince1970: 1_653_861_813)
+    var demoUrl: URL {
+        URL(staticString: "https://google.com")
     }
 
     @MainActor

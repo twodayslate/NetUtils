@@ -30,19 +30,7 @@ struct HostResult: View {
                     }
                 }
             }
-            VStack(alignment: .leading, spacing: 0.0) {
-                Divider()
-                HStack(alignment: .center) {
-                    // it would be great if this could be a .bottomBar toolbar but it is too buggy
-                    TextField("", text: $text, prompt: Text(group.url.absoluteString))
-                        .disabled(true).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.URL)
-                }.padding(.horizontal).padding([.vertical], 6)
-                HStack(alignment: .center) {
-                    Spacer()
-                    Text(group.date.ISO8601Format()).font(.footnote).foregroundColor(Color(UIColor.separator)).padding([.bottom], 6)
-                    Spacer()
-                }
-            }.background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)).ignoresSafeArea(.all, edges: .horizontal)).ignoresSafeArea()
+            HostBarView(url: group.url, date: group.date)
         }.navigationTitle(self.group.url.host ?? "Unknown Host")
     }
 }
