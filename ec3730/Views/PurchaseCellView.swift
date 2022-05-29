@@ -31,40 +31,51 @@ struct PurchaseCellView: View {
 
                 let unitType = self.model.defaultProduct?.subscription?.subscriptionPeriod.unit ?? .month
 
-                (Text("Start your free \(self.model.defaultProduct?.subscription?.introductoryOffer?.period.value ?? 3)-\(promoUnitType.debugDescription.lowercased()) trial").bold() + Text(" then all \(self.heading) Data is available for \(self.model.defaultProduct?.displayPrice ?? "-")/\(unitType.debugDescription.lowercased()) automatically")).font(.footnote)
+                (Text("Start your free \(self.model.defaultProduct?.subscription?.introductoryOffer?.period.value ?? 3)-\(promoUnitType.debugDescription.lowercased()) trial").bold() + Text(" then all \(self.heading) Data is available for \(self.model.defaultProduct?.displayPrice ?? "-")/\(unitType.debugDescription.lowercased()) automatically"))
+                    .font(.footnote)
+                    .multilineTextAlignment(.center)
             }
 
-            HStack {
-                if self.isRestoring {
-                    ProgressView().progressViewStyle(CircularProgressViewStyle())
-                } else {
-                    Button(action: {
-                        Task {
-                            await self.restore()
-                        }
-                    }, label: {
-                        Text("Restore")
-                    })
+            VStack {
+                HStack {
+                    if self.isRestoring {
+                        ProgressView().progressViewStyle(CircularProgressViewStyle())
+                    } else {
+                        Button(action: {
+                            Task {
+                                await self.restore()
+                            }
+                        }, label: {
+                            Text("Restore")
+                        })
+                    }
+                    VStack {
+                        Button(action: {
+                            Task {
+                                await self.buy()
+                            }
+                        }, label: {
+                            if isOneTime {
+                                Text("Buy Now for only \(self.model.defaultProduct?.displayPrice ?? "-")")
+                            } else {
+                                Text("Subscibe Now for only \(self.model.defaultProduct?.displayPrice ?? "-")").bold()
+                            }
+                        }).padding().frame(maxWidth: .infinity).background(Color.accentColor).foregroundColor(.white).cornerRadius(16.0)
+                    }
                 }
-                VStack {
-                    Button(action: {
-                        Task {
-                            await self.buy()
-                        }
-                    }, label: {
-                        if isOneTime {
-                            Text("Buy Now for only \(self.model.defaultProduct?.displayPrice ?? "-")")
-                        } else {
-                            Text("Subscibe Now for only \(self.model.defaultProduct?.displayPrice ?? "-")").bold()
-                        }
-                    }).padding().frame(maxWidth: .infinity).background(Color.accentColor).foregroundColor(.white).cornerRadius(16.0)
-                    Button(action: {
-                        showDemoData.toggle()
-                    }, label: {
-                        Text("Show Demo Data")
-                    }).padding().frame(maxWidth: .infinity).background(Color.accentColor).foregroundColor(.white).cornerRadius(16.0)
-                }
-            }.padding(.vertical, 4)
+                .padding(.vertical, 4)
+                
+                Button(action: {
+                    showDemoData.toggle()
+                }, label: {
+                    Text("See an example query result!")
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.accentColor)
+                })
+                .frame(maxWidth: .infinity)
+                .padding(.bottom, 4)
+            }
+            
             if isOneTime {
                 Text("Payment will be charged to your Apple ID account at the confirmation of purchase.").font(.caption2).foregroundColor(Color(UIColor.systemGray2))
             } else {
