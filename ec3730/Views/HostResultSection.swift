@@ -16,7 +16,7 @@ struct HostResultSection: View, Equatable, Identifiable, Hashable {
 
     @AppStorage var isExpanded: Bool
     @State var shouldShare: Bool = false
-    // @ObservedObject var model: HostViewModel
+    @State var focused: Bool = false
 
     @ObservedObject var sectionModel: HostSectionModel
 
@@ -51,6 +51,16 @@ struct HostResultSection: View, Equatable, Identifiable, Hashable {
                                   Label(self.isExpanded ? "Collapse" : "Expand", systemImage: self.isExpanded ? "rectangle.compress.vertical" : "rectangle.expand.vertical")
                               })
 
+                              if !sectionModel.content.isEmpty {
+                                  Button(action: {
+                                      withAnimation {
+                                          self.focused.toggle()
+                                      }
+                                  }, label: {
+                                      Label("Focus", systemImage: "rectangle.and.text.magnifyingglass")
+                                  })
+                              }
+
                               Divider()
                               Button(action: {
                                   UIPasteboard.general.string = self.sectionModel.dataToCopy
@@ -63,6 +73,19 @@ struct HostResultSection: View, Equatable, Identifiable, Hashable {
                           })
                           .sheet(isPresented: $shouldShare, content: {
                               ShareSheetView(activityItems: [self.sectionModel.dataToCopy ?? "Error"])
+                          })
+                          .sheet(isPresented: $focused, content: {
+                              if let latestQueriedUrl = sectionModel.latestQueriedUrl, let latestDate = sectionModel.latestQueryDate {
+                                  HostViewSectionFocusView(model: sectionModel, url: latestQueriedUrl, date: latestDate)
+                              } else {
+                                  EZPanel(content: {
+                                      ScrollView {
+                                          HostViewSectionContent(sectionModel: sectionModel, canQuery: true)
+                                      }
+                                      .navigationTitle(sectionModel.service.name)
+                                      .navigationBarTitleDisplayMode(.inline)
+                                  })
+                              }
                           })
     }
 

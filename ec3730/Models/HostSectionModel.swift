@@ -54,7 +54,7 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
     }
 
     @MainActor
-    class func configure(with result: HostData) -> HostSectionModel? {
+    class func configure(with result: HostData, group: HostDataGroup) -> HostSectionModel? {
         let available_services = [
             LocalDnsModel(),
             WhoisXmlWhoisSectionModel(),
@@ -67,6 +67,8 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
             if result.service == service.service.name {
                 do {
                     _ = try service.configure(with: result.data)
+                    service.latestQueriedUrl = group.url
+                    service.latestQueryDate = group.date
                     return service
                 } catch {}
             }

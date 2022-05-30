@@ -6,7 +6,7 @@ struct HostViewSectionFocusView: View {
     var date: Date
     var body: some View {
         EZPanel {
-            VStack {
+            VStack(spacing: 0) {
                 ScrollView {
                     HostViewSectionContent(sectionModel: model, canQuery: true)
                 }
