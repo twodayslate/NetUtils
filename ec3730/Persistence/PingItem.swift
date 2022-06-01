@@ -118,7 +118,7 @@ public class PingItem: NSManagedObject, Identifiable {
         if let error = response.error {
             self.error = error.localizedDescription
         }
-        duration = duration
+        duration = response.duration
         if let ipAddress = response.ipAddress {
             self.ipAddress = ipAddress
         }
