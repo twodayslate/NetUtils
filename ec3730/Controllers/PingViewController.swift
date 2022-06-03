@@ -307,7 +307,7 @@ struct PingSwiftUIViewController: View {
                                     }
                                 })
                             }.padding()
-                        }.background(Color.black).padding(.top, 1).onTapGesture(perform: {
+                        }.background(Color.black).clipped().onTapGesture(perform: {
                             dismissKeyboard = UUID()
                         })
                     }
