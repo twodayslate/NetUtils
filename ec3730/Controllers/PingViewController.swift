@@ -309,6 +309,8 @@ struct PingSwiftUIViewController: View {
                             }.padding()
                         }
                         .background(Color.black.ignoresSafeArea(.all, edges: .horizontal))
+                        // Temporary fix until something like https://stackoverflow.com/a/65218077 is implemented
+                        // See !92 for more information
                         .padding(.top, 0.15)
                         .onTapGesture {
                             dismissKeyboard = UUID()
