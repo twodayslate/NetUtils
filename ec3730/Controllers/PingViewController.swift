@@ -307,9 +307,12 @@ struct PingSwiftUIViewController: View {
                                     }
                                 })
                             }.padding()
-                        }.background(Color.black).clipped().onTapGesture(perform: {
+                        }
+                        .background(Color.black.ignoresSafeArea(.all, edges: .horizontal))
+                        .padding(.top, 0.15)
+                        .onTapGesture {
                             dismissKeyboard = UUID()
-                        })
+                        }
                     }
                     VStack(alignment: .leading, spacing: 0.0) {
                         Divider()
@@ -328,7 +331,8 @@ struct PingSwiftUIViewController: View {
                         }.padding(.horizontal).padding([.vertical], 6)
                     }.background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)).ignoresSafeArea(.all, edges: .horizontal)).ignoresSafeArea()
                 }.navigationBarTitle("Ping", displayMode: .inline)
-            }.toolbar(content: {
+            }
+            .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading, content: {
                     Button(action: { showSettings.toggle() }, label: {
                         Image(systemName: "gear")
@@ -351,7 +355,9 @@ struct PingSwiftUIViewController: View {
             }) // GeometryReader
         }.onDisappear(perform: {
             self.pinger?.stopPinging()
-        }).navigationViewStyle(StackNavigationViewStyle()).environment(\.managedObjectContext, persistenceController.container.viewContext) // NavigationView
+        })
+        .navigationViewStyle(StackNavigationViewStyle())
+        .environment(\.managedObjectContext, persistenceController.container.viewContext) // NavigationView
     }
 
     func cancel() {
