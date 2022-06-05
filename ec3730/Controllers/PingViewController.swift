@@ -40,11 +40,11 @@ struct PingNumberSettings: View {
                         }
                     }
 
-                    Picker("Number of pings", selection: Binding(get: { self.numberOfPings - 1 }, set: { newValue in
-                        self.numberOfPings = (newValue + 1)
-                    }), content: {
-                        ForEach(1 ..< 1000) { i in
-                            Text("\(i)").tag(i)
+                    Picker("Number of pings", selection: $numberOfPings, content: {
+                        ForEach(1 ..< 1000, id: \.self) { i in
+                            Text("\(i)")
+                                .tag(i)
+                                .id(i)
                         }
                     }).pickerStyle(WheelPickerStyle())
                 }

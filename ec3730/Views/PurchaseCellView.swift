@@ -19,19 +19,39 @@ struct PurchaseCellView: View {
 
     @State var imageSize: CGFloat = 64.0
 
+    enum Style {
+        static let termsOpacity: CGFloat = 0.8
+    }
+
     var body: some View {
         let isOneTime = (self.model.defaultProduct?.type == .nonConsumable)
 
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
-                // GeometryReader { geometry  in
-                Image(systemName: "lock.shield.fill").renderingMode(.template).resizable().foregroundColor(.accentColor).aspectRatio(contentMode: .fit).frame(width: imageSize)
-                // }.frame(width: imageSize)
+                Image(systemName: "lock.shield.fill")
+                    .renderingMode(.template)
+                    .resizable()
+                    .foregroundColor(.accentColor)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: imageSize)
                 VStack(alignment: .leading) {
-                    Text(self.heading).font(.headline)
-                    Text(self.subheading).font(.subheadline)
+                    Text(self.heading)
+                        .font(.headline)
+                    Text(self.subheading)
+                        .font(.subheadline)
                 }
+                .foregroundColor(Color(uiColor: UIColor.label))
             }
+
+            Button(action: {
+                showDemoData.toggle()
+            }, label: {
+                Text("See an example query result!")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.accentColor)
+            })
+            .frame(maxWidth: .infinity)
+            .padding(.bottom)
 
             if !isOneTime {
                 // we don't know what kind of product this is so let's just assume it is a trial so Apple doesn't yell at us
@@ -41,7 +61,8 @@ struct PurchaseCellView: View {
 
                 (Text("Start your free \(self.model.defaultProduct?.subscription?.introductoryOffer?.period.value ?? 3)-\(promoUnitType.debugDescription.lowercased()) trial").bold() + Text(" then all \(self.heading) Data is available for \(self.model.defaultProduct?.displayPrice ?? "-")/\(unitType.debugDescription.lowercased()) automatically"))
                     .font(.footnote)
-                    .multilineTextAlignment(.center)
+                    .foregroundColor(Color(uiColor: UIColor.secondaryLabel))
+                    .multilineTextAlignment(.leading)
             }
 
             VStack {
@@ -68,39 +89,37 @@ struct PurchaseCellView: View {
                             } else {
                                 Text("Subscibe Now for only \(self.model.defaultProduct?.displayPrice ?? "-")").bold()
                             }
-                        }).padding().frame(maxWidth: .infinity).background(Color.accentColor).foregroundColor(.white).cornerRadius(16.0)
+                        })
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.accentColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(16.0)
                     }
                 }
                 .padding(.vertical, 4)
-
-                Button(action: {
-                    showDemoData.toggle()
-                }, label: {
-                    Text("See an example query result!")
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.accentColor)
-                })
-                .frame(maxWidth: .infinity)
-                .padding(.bottom, 4)
             }
 
-            if isOneTime {
-                Text("Payment will be charged to your Apple ID account at the confirmation of purchase.").font(.caption2).foregroundColor(Color(UIColor.systemGray2))
-            } else {
-                Text("Payment will be charged to your Apple ID account at the confirmation of purchase. The subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase.").font(.caption2).foregroundColor(Color(UIColor.systemGray2))
-            }
+            Group {
+                if isOneTime {
+                    Text("Payment will be charged to your Apple ID account at the confirmation of purchase.")
+                } else {
+                    Text("Payment will be charged to your Apple ID account at the confirmation of purchase. The subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase.")
+                }
 
-            HStack {
-                Spacer()
-                Link(destination: URL(string: "https://zac.gorak.us/ios/privacy")!, label: {
-                    Text("Privacy Policy").underline().foregroundColor(Color(UIColor.systemGray))
-                })
-                Text("&")
-                Link(destination: URL(string: "https://zac.gorak.us/ios/terms")!, label: {
-                    Text("Terms of Use").underline().foregroundColor(Color(UIColor.systemGray))
-                })
-                Spacer()
-            }.font(.caption2).foregroundColor(Color(UIColor.systemGray2))
+                HStack {
+                    Spacer()
+                    Text("[Privacy Policy](https://zac.gorak.us/ios/privacy)")
+                        .underline() +
+                        Text(" & ") +
+                        Text("[Terms of Use](https://zac.gorak.us/ios/terms)")
+                        .underline()
+                    Spacer()
+                }
+            }
+            .font(.caption2)
+            .foregroundColor(Color(UIColor.systemGray2).opacity(Style.termsOpacity))
+            .tint(Color(UIColor.systemGray).opacity(Style.termsOpacity))
         }
         .padding()
         .background(Color(UIColor.systemBackground))
@@ -142,5 +161,9 @@ struct LockedCellView_Previews: PreviewProvider {
         Group {
             PurchaseCellView(model: StoreKitModel.whois, sectionModel: WhoisXmlDnsSectionModel())
         }
+
+        Group {
+            PurchaseCellView(model: StoreKitModel.whois, sectionModel: WhoisXmlDnsSectionModel())
+        }.preferredColorScheme(.dark)
     }
 }
