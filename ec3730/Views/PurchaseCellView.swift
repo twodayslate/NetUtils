@@ -20,12 +20,15 @@ struct PurchaseCellView: View {
     @State var imageSize: CGFloat = 64.0
 
     enum Style {
-        static let termsOpacity: CGFloat = 0.8
+        static let termsOpacity: CGFloat = 0.7
+        static let buyButtonCornerRadius: CGFloat = 16.0
+    }
+
+    var isOneTimePurchase: Bool {
+        model.defaultProduct?.type == .nonConsumable
     }
 
     var body: some View {
-        let isOneTime = (self.model.defaultProduct?.type == .nonConsumable)
-
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
                 Image(systemName: "lock.shield.fill")
@@ -53,7 +56,7 @@ struct PurchaseCellView: View {
             .frame(maxWidth: .infinity)
             .padding(.bottom)
 
-            if !isOneTime {
+            if !isOneTimePurchase {
                 // we don't know what kind of product this is so let's just assume it is a trial so Apple doesn't yell at us
                 let promoUnitType = self.model.defaultProduct?.subscription?.introductoryOffer?.period.unit ?? Product.SubscriptionPeriod.Unit.day
 
@@ -78,48 +81,12 @@ struct PurchaseCellView: View {
                             Text("Restore")
                         })
                     }
-                    VStack {
-                        Button(action: {
-                            Task {
-                                await self.buy()
-                            }
-                        }, label: {
-                            if isOneTime {
-                                Text("Buy Now for only \(self.model.defaultProduct?.displayPrice ?? "-")")
-                            } else {
-                                Text("Subscibe Now for only \(self.model.defaultProduct?.displayPrice ?? "-")").bold()
-                            }
-                        })
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.accentColor)
-                        .foregroundColor(.white)
-                        .cornerRadius(16.0)
-                    }
+                    buyButton()
                 }
                 .padding(.vertical, 4)
             }
 
-            Group {
-                if isOneTime {
-                    Text("Payment will be charged to your Apple ID account at the confirmation of purchase.")
-                } else {
-                    Text("Payment will be charged to your Apple ID account at the confirmation of purchase. The subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase.")
-                }
-
-                HStack {
-                    Spacer()
-                    Text("[Privacy Policy](https://zac.gorak.us/ios/privacy)")
-                        .underline() +
-                        Text(" & ") +
-                        Text("[Terms of Use](https://zac.gorak.us/ios/terms)")
-                        .underline()
-                    Spacer()
-                }
-            }
-            .font(.caption2)
-            .foregroundColor(Color(UIColor.systemGray2).opacity(Style.termsOpacity))
-            .tint(Color(UIColor.systemGray).opacity(Style.termsOpacity))
+            purchaseTerms()
         }
         .padding()
         .background(Color(UIColor.systemBackground))
@@ -135,6 +102,48 @@ struct PurchaseCellView: View {
         .sheet(isPresented: $showDemoData, content: {
             HostViewSectionFocusView(model: sectionModel.demoModel, url: sectionModel.demoUrl, date: sectionModel.demoDate)
         })
+    }
+
+    private func buyButton() -> some View {
+        Button(action: {
+            Task {
+                await self.buy()
+            }
+        }, label: {
+            if isOneTimePurchase {
+                Text("Buy Now for only \(self.model.defaultProduct?.displayPrice ?? "-")")
+            } else {
+                Text("Subscibe Now for only \(self.model.defaultProduct?.displayPrice ?? "-")").bold()
+            }
+        })
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(Color.accentColor)
+        .foregroundColor(.white)
+        .cornerRadius(Style.buyButtonCornerRadius)
+    }
+
+    private func purchaseTerms() -> some View {
+        Group {
+            if isOneTimePurchase {
+                Text("Payment will be charged to your Apple ID account at the confirmation of purchase. ") + privacyAndTerms()
+            } else {
+                Text("Payment will be charged to your Apple ID account at the confirmation of purchase. The subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase. ") + privacyAndTerms()
+            }
+        }
+        .font(.caption2)
+        .foregroundColor(Color(UIColor.tertiaryLabel))
+        .tint(Color(UIColor.secondaryLabel).opacity(Style.termsOpacity))
+    }
+
+    private func privacyAndTerms() -> Text {
+        Text("By using our services you agree to and have read our ") +
+            Text("[Privacy Policy](https://zac.gorak.us/ios/privacy)")
+            .underline() +
+            Text(" and ") +
+            Text("[Terms of Use](https://zac.gorak.us/ios/terms)")
+            .underline() +
+            Text(".")
     }
 
     func restore() async {
