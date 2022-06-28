@@ -15,7 +15,6 @@ class DeviceInfoModel: ObservableObject {
     init() {
         Task { @MainActor in
             sections.append(UIDeviceInfoModel())
-            sections.append(DeviceModel())
             sections.append(ProcessInfoModel())
             sections.append(MemoryInfoModel())
             sections.append(JavaScriptInfoModel())

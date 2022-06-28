@@ -59,7 +59,6 @@
 		F660FDDE2868EAAC0027C759 /* CarrierInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDDD2868EAAC0027C759 /* CarrierInfoModel.swift */; };
 		F660FDE02868F3310027C759 /* UIDeviceInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDDF2868F3310027C759 /* UIDeviceInfoModel.swift */; };
 		F660FDE2286900000027C759 /* ProcessInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDE1286900000027C759 /* ProcessInfoModel.swift */; };
-		F660FDE4286900F90027C759 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDE3286900F90027C759 /* DeviceModel.swift */; };
 		F660FDE6286902AF0027C759 /* MemoryInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDE5286902AF0027C759 /* MemoryInfoModel.swift */; };
 		F660FDE8286903DC0027C759 /* JavaScriptInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDE7286903DC0027C759 /* JavaScriptInfoModel.swift */; };
 		F660FDEA28692CFB0027C759 /* WebkitOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDE928692CFB0027C759 /* WebkitOverlayView.swift */; };
@@ -209,7 +208,6 @@
 		F660FDDD2868EAAC0027C759 /* CarrierInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrierInfoModel.swift; sourceTree = "<group>"; };
 		F660FDDF2868F3310027C759 /* UIDeviceInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceInfoModel.swift; sourceTree = "<group>"; };
 		F660FDE1286900000027C759 /* ProcessInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessInfoModel.swift; sourceTree = "<group>"; };
-		F660FDE3286900F90027C759 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		F660FDE5286902AF0027C759 /* MemoryInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryInfoModel.swift; sourceTree = "<group>"; };
 		F660FDE7286903DC0027C759 /* JavaScriptInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScriptInfoModel.swift; sourceTree = "<group>"; };
 		F660FDE928692CFB0027C759 /* WebkitOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebkitOverlayView.swift; sourceTree = "<group>"; };
@@ -430,7 +428,6 @@
 				F660FDE7286903DC0027C759 /* JavaScriptInfoModel.swift */,
 				F660FDE1286900000027C759 /* ProcessInfoModel.swift */,
 				F660FDED28693D010027C759 /* FingerprintInfoModel.swift */,
-				F660FDE3286900F90027C759 /* DeviceModel.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -858,7 +855,6 @@
 				F6FDDFC82304803100FBF75E /* UserDefaults.swift in Sources */,
 				F6397FED25EEFEAE00914B3F /* CopyCellView.swift in Sources */,
 				F650F74B233E62C100BAA609 /* BlurredPickerView.swift in Sources */,
-				F660FDE4286900F90027C759 /* DeviceModel.swift in Sources */,
 				F668EB4323563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift in Sources */,
 				F67425DB21363FFF00A79492 /* UITextView.swift in Sources */,
 				F66643B526F02A8F000F17BC /* HostViewSection.swift in Sources */,
