@@ -43,7 +43,12 @@ class SRCTabBarController: SplitTabBarViewController {
         host.tabBarItem = UITabBarItem(title: "Host", image: UIImage(named: "Network"), tag: 3)
         host.tabBarItem.selectedImage = UIImage(named: "Network_selected")
 
-        let device = DeviceViewController()
+        var device: UIViewController!
+        if #available(iOS 15.0, *) {
+            device = UIHostingController(rootView: HostModelWrapperView(view: DeviceInfoView()))
+        } else {
+            device = DeviceViewController()
+        }
         device.tabBarItem = UITabBarItem(title: "Device", image: UIImage(named: "Device"), tag: 3)
         device.tabBarItem.selectedImage = UIImage(named: "Device_selected")
 

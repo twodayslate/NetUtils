@@ -53,6 +53,18 @@
 		F650F74B233E62C100BAA609 /* BlurredPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F74A233E62C100BAA609 /* BlurredPickerView.swift */; };
 		F65FDA6527AB03BC0024521B /* WhoisXmlReputationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FDA6427AB03BC0024521B /* WhoisXmlReputationSectionModel.swift */; };
 		F65FDA6727AB06920024521B /* WhoisXmlReputationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FDA6627AB06920024521B /* WhoisXmlReputationRecord.swift */; };
+		F660FDD52868E9550027C759 /* DeviceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDD42868E9550027C759 /* DeviceInfoView.swift */; };
+		F660FDD82868E9A20027C759 /* DeviceInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDD72868E9A20027C759 /* DeviceInfoModel.swift */; };
+		F660FDDB2868EA8C0027C759 /* DeviceInfoSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDDA2868EA8C0027C759 /* DeviceInfoSectionModel.swift */; };
+		F660FDDE2868EAAC0027C759 /* CarrierInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDDD2868EAAC0027C759 /* CarrierInfoModel.swift */; };
+		F660FDE02868F3310027C759 /* UIDeviceInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDDF2868F3310027C759 /* UIDeviceInfoModel.swift */; };
+		F660FDE2286900000027C759 /* ProcessInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDE1286900000027C759 /* ProcessInfoModel.swift */; };
+		F660FDE6286902AF0027C759 /* MemoryInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDE5286902AF0027C759 /* MemoryInfoModel.swift */; };
+		F660FDE8286903DC0027C759 /* JavaScriptInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDE7286903DC0027C759 /* JavaScriptInfoModel.swift */; };
+		F660FDEA28692CFB0027C759 /* WebkitOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDE928692CFB0027C759 /* WebkitOverlayView.swift */; };
+		F660FDEC28692EB10027C759 /* FingerprintModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDEB28692EB10027C759 /* FingerprintModel.swift */; };
+		F660FDEE28693D020027C759 /* FingerprintInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDED28693D010027C759 /* FingerprintInfoModel.swift */; };
+		F660FDF0286953A00027C759 /* DeviceInfoSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDEF286953A00027C759 /* DeviceInfoSectionView.swift */; };
 		F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661A27F23020FCF0023FA50 /* UIAlertController.swift */; };
 		F66643B326F02A5B000F17BC /* HostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66643B226F02A5B000F17BC /* HostViewModel.swift */; };
 		F66643B526F02A8F000F17BC /* HostViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66643B426F02A8F000F17BC /* HostViewSection.swift */; };
@@ -190,6 +202,18 @@
 		F650F74A233E62C100BAA609 /* BlurredPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredPickerView.swift; sourceTree = "<group>"; };
 		F65FDA6427AB03BC0024521B /* WhoisXmlReputationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlReputationSectionModel.swift; sourceTree = "<group>"; };
 		F65FDA6627AB06920024521B /* WhoisXmlReputationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlReputationRecord.swift; sourceTree = "<group>"; };
+		F660FDD42868E9550027C759 /* DeviceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoView.swift; sourceTree = "<group>"; };
+		F660FDD72868E9A20027C759 /* DeviceInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoModel.swift; sourceTree = "<group>"; };
+		F660FDDA2868EA8C0027C759 /* DeviceInfoSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoSectionModel.swift; sourceTree = "<group>"; };
+		F660FDDD2868EAAC0027C759 /* CarrierInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrierInfoModel.swift; sourceTree = "<group>"; };
+		F660FDDF2868F3310027C759 /* UIDeviceInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceInfoModel.swift; sourceTree = "<group>"; };
+		F660FDE1286900000027C759 /* ProcessInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessInfoModel.swift; sourceTree = "<group>"; };
+		F660FDE5286902AF0027C759 /* MemoryInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryInfoModel.swift; sourceTree = "<group>"; };
+		F660FDE7286903DC0027C759 /* JavaScriptInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScriptInfoModel.swift; sourceTree = "<group>"; };
+		F660FDE928692CFB0027C759 /* WebkitOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebkitOverlayView.swift; sourceTree = "<group>"; };
+		F660FDEB28692EB10027C759 /* FingerprintModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintModel.swift; sourceTree = "<group>"; };
+		F660FDED28693D010027C759 /* FingerprintInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintInfoModel.swift; sourceTree = "<group>"; };
+		F660FDEF286953A00027C759 /* DeviceInfoSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoSectionView.swift; sourceTree = "<group>"; };
 		F661A27F23020FCF0023FA50 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		F66643B226F02A5B000F17BC /* HostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewModel.swift; sourceTree = "<group>"; };
 		F66643B426F02A8F000F17BC /* HostViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewSection.swift; sourceTree = "<group>"; };
@@ -337,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				F6397FE425E8937900914B3F /* HostView.swift */,
+				F660FDD62868E9590027C759 /* Device */,
 				F63B9227279BC31B007E845F /* HostHistoryList.swift */,
 				F63B922B279C9079007E845F /* HostResult.swift */,
 				F6A6410B2844235D00E00F7F /* HostBarView.swift */,
@@ -344,6 +369,7 @@
 				F644A0F9279268BD0061C98B /* FSDisclosureGroup.swift */,
 				F644A0F727925CF60061C98B /* HostModelWrapperView.swift */,
 				F66643B426F02A8F000F17BC /* HostViewSection.swift */,
+				F660FDE928692CFB0027C759 /* WebkitOverlayView.swift */,
 				AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */,
 				F6A6410D2844246100E00F7F /* HostViewSectionFocusView.swift */,
 				F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */,
@@ -374,10 +400,44 @@
 			path = Sections;
 			sourceTree = "<group>";
 		};
+		F660FDD62868E9590027C759 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				F660FDD42868E9550027C759 /* DeviceInfoView.swift */,
+				F660FDEF286953A00027C759 /* DeviceInfoSectionView.swift */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
+		F660FDD92868EA810027C759 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				F660FDD72868E9A20027C759 /* DeviceInfoModel.swift */,
+				F660FDDA2868EA8C0027C759 /* DeviceInfoSectionModel.swift */,
+				F660FDDC2868EA900027C759 /* Sections */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
+		F660FDDC2868EA900027C759 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				F660FDDD2868EAAC0027C759 /* CarrierInfoModel.swift */,
+				F660FDE5286902AF0027C759 /* MemoryInfoModel.swift */,
+				F660FDDF2868F3310027C759 /* UIDeviceInfoModel.swift */,
+				F660FDE7286903DC0027C759 /* JavaScriptInfoModel.swift */,
+				F660FDE1286900000027C759 /* ProcessInfoModel.swift */,
+				F660FDED28693D010027C759 /* FingerprintInfoModel.swift */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
 		F66643B126F02A4C000F17BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				F66643B226F02A5B000F17BC /* HostViewModel.swift */,
+				F660FDEB28692EB10027C759 /* FingerprintModel.swift */,
+				F660FDD92868EA810027C759 /* Device */,
 				F6C38E8726FABEFB00BD9A71 /* StoreKitModel.swift */,
 				F66643B626F030D5000F17BC /* HostSectionModel.swift */,
 				F644A0FB279283220061C98B /* Sections */,
@@ -803,9 +863,11 @@
 				F6FDDFD8230B106200FBF75E /* WhoisXmlDnsCells.swift in Sources */,
 				F60FD36A25E060D700BCEF86 /* PingItem.swift in Sources */,
 				F68CE56623031DA20068D104 /* DataFeedErrors.swift in Sources */,
+				F660FDD82868E9A20027C759 /* DeviceInfoModel.swift in Sources */,
 				F69E365423580A7D0017296E /* DataFeedSubscription.swift in Sources */,
 				F69E3652235808DF0017296E /* DFOneTimePurchase.swift in Sources */,
 				F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */,
+				F660FDE8286903DC0027C759 /* JavaScriptInfoModel.swift in Sources */,
 				F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */,
 				F644A0FD279283300061C98B /* LocalDnsModel.swift in Sources */,
 				F6A6410C2844235D00E00F7F /* HostBarView.swift in Sources */,
@@ -816,13 +878,17 @@
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F6C38E8826FABEFB00BD9A71 /* StoreKitModel.swift in Sources */,
 				F66643B726F030D5000F17BC /* HostSectionModel.swift in Sources */,
+				F660FDE02868F3310027C759 /* UIDeviceInfoModel.swift in Sources */,
 				F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */,
 				F619760922FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift in Sources */,
 				F69E3648235805180017296E /* GoogleWebRisk.swift in Sources */,
 				F6C87452234FE8030069A57C /* DataFeedsTableViewController.swift in Sources */,
 				F6FDDFCA23048DEF00FBF75E /* UIView.swift in Sources */,
 				F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */,
+				F660FDD52868E9550027C759 /* DeviceInfoView.swift in Sources */,
 				F6C591BA235EC3A9009BA4B7 /* CenterTextTableViewCell.swift in Sources */,
+				F660FDEC28692EB10027C759 /* FingerprintModel.swift in Sources */,
+				F660FDEE28693D020027C759 /* FingerprintInfoModel.swift in Sources */,
 				F63B9228279BC31B007E845F /* HostHistoryList.swift in Sources */,
 				F69E365623580AA00017296E /* DataFeedService.swift in Sources */,
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
@@ -832,7 +898,9 @@
 				F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */,
 				F65FDA6527AB03BC0024521B /* WhoisXmlReputationSectionModel.swift in Sources */,
 				F65FDA6727AB06920024521B /* WhoisXmlReputationRecord.swift in Sources */,
+				F660FDDE2868EAAC0027C759 /* CarrierInfoModel.swift in Sources */,
 				F644A103279284EE0061C98B /* GoogleWebRiskSectionModel.swift in Sources */,
+				F660FDE2286900000027C759 /* ProcessInfoModel.swift in Sources */,
 				F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */,
 				F63B922A279C8EE5007E845F /* HostResultSection.swift in Sources */,
 				F619760722FCA33B00CE39A0 /* WhoisXmlCells.swift in Sources */,
@@ -844,6 +912,7 @@
 				F668EB4B2356AE3800EEB379 /* IAPFooterView.swift in Sources */,
 				F668EB3C23501FA200EEB379 /* DataFeedEndpoint.swift in Sources */,
 				F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */,
+				F660FDE6286902AF0027C759 /* MemoryInfoModel.swift in Sources */,
 				F64418E6271CA13000E40F2C /* LocalDns.swift in Sources */,
 				F6D4BB0C23584E0C00FDAFF7 /* GoogleWebRiskCellManager.swift in Sources */,
 				F650F749233CF15800BAA609 /* DataFeed.swift in Sources */,
@@ -864,6 +933,7 @@
 				F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */,
 				F643030B25E47BA300109C92 /* EZPanel.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
+				F660FDF0286953A00027C759 /* DeviceInfoSectionView.swift in Sources */,
 				F644A0FA279268BD0061C98B /* FSDisclosureGroup.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
 				F644A0F827925CF60061C98B /* HostModelWrapperView.swift in Sources */,
@@ -873,8 +943,10 @@
 				F6397FF225EF012300914B3F /* ShareSheetView.swift in Sources */,
 				F60FD36525E060A800BCEF86 /* Persistence.swift in Sources */,
 				F6397FE525E8937A00914B3F /* HostView.swift in Sources */,
+				F660FDEA28692CFB0027C759 /* WebkitOverlayView.swift in Sources */,
 				F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */,
 				F69E364A235806370017296E /* WhoisXMLDnsService.swift in Sources */,
+				F660FDDB2868EA8C0027C759 /* DeviceInfoSectionModel.swift in Sources */,
 				F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */,
 				F6A6410E2844246100E00F7F /* HostViewSectionFocusView.swift in Sources */,
 				F6397FF725EF045200914B3F /* PurchaseCellView.swift in Sources */,
