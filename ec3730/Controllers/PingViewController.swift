@@ -371,6 +371,7 @@ struct PingSwiftUIViewController: View {
     @State var pinger: SwiftyPing?
 
     func ping() {
+        
         print("ping")
         dismissKeyboard = UUID()
         let saveThisSession = pingSave
@@ -385,89 +386,107 @@ struct PingSwiftUIViewController: View {
             config.timeToLive = pingTTL
         }
         config.payloadSize = pingPayloadSize
-        guard let pinger = try? SwiftyPing(host: host, configuration: config, queue: .global()) else {
-            alertMessage = "Unable to create ping. Please try again."
-            showAlert.toggle()
-            return
+        var stopPinging = false
+        let workGroup = DispatchGroup()
+        workGroup.enter()
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let pinger = try? SwiftyPing(host: host, configuration: config, queue: .global()) {
+                self.pinger = pinger
+                workGroup.leave()
+            } else {
+                alertMessage = "Unable to create ping. Please try again."
+                showAlert.toggle()
+                stopPinging = true
+                workGroup.leave()
+                return
+            }
         }
-        self.pinger = pinger
-        var ps: PingSet?
-        if saveThisSession {
-            ps = PingSet(context: persistenceController.container.viewContext, configuration: config)
-            ps?.host = host
-            try? ps?.managedObjectContext?.save()
-        }
-
-        if !pingIndefinity {
-            pinger.targetCount = pingCount
-        }
-
-        var count = 1
-
-        var latencySum = 0.0
-        var minLatency = Double.greatestFiniteMagnitude
-        var maxLatency = Double.leastNormalMagnitude
-        var errorCount = 0
-
-        entries.append("PING " + host)
-
-        pinger.observer = { response in
-            print(response)
+        workGroup.notify(queue: .main) {
+            if stopPinging {
+                return
+            }
+            var ps: PingSet?
             if saveThisSession {
-                let item = PingItem(context: persistenceController.container.viewContext, response: response)
-                ps?.pings.insert(item)
+                ps = PingSet(context: persistenceController.container.viewContext, configuration: config)
+                ps?.host = host
                 try? ps?.managedObjectContext?.save()
             }
 
-            if let error = response.error {
-                errorCount += 1
-                self.entries.append(error.localizedDescription)
-            } else {
-                let duration = response.duration
-                let latency = duration * 1000
-                latencySum += latency
-                if latency > maxLatency {
-                    maxLatency = latency
-                }
-                if latency < minLatency {
-                    minLatency = latency
-                }
-                self.entries.append("\(response.byteCount ?? 0) bytes from \(response.ipAddress ?? "") icmp_seq=\(response.sequenceNumber) time=\(latency) ms")
+            if !pingIndefinity {
+                pinger?.targetCount = pingCount
             }
 
-            if !self.pingIndefinity, count >= self.pingCount {
-                self.pinger?.stopPinging()
-                self.isPinging = false
+            var count = 1
 
-                self.entries.append("--- \(host) ping statistics ---")
+            var latencySum = 0.0
+            var minLatency = Double.greatestFiniteMagnitude
+            var maxLatency = Double.leastNormalMagnitude
+            var errorCount = 0
 
-                // 5 packets transmitted, 5 packets received, 0.0% packet loss
-                self.entries.append("\(count) packets transmitted, ")
-                let received = count - errorCount
-                self.entries.append("\(count - errorCount) received, ")
-                if count == received {
-                    self.entries.append("0.0% packet loss")
-                } else if received == 0 {
-                    self.entries.append("100% packet loss")
-                } else {
-                    self.entries.append(String(format: "%0.1f%% packet loss", Double(received) / Double(count) * 100.0))
+            entries.append("PING " + host)
+
+            pinger?.observer = { response in
+                print(response)
+                if saveThisSession {
+                    let item = PingItem(context: persistenceController.container.viewContext, response: response)
+                    ps?.pings.insert(item)
+                    do {
+                        try ps?.managedObjectContext?.save()
+                    } catch {
+                        print("error\(error)")
+                    }
                 }
 
-                // round-trip min/avg/max/stddev = 14.063/21.031/28.887/4.718 ms
-                var stats = "ronnd-trip min/avg/max = "
-                if errorCount == count {
-                    stats += "n/a"
+                if let error = response.error {
+                    errorCount += 1
+                    self.entries.append(error.localizedDescription)
                 } else {
-                    let avg = latencySum / Double(count)
-                    stats += String(format: "%0.3f/%0.3f/%0.4f ms", minLatency, avg, maxLatency)
+                    let duration = response.duration
+                    let latency = duration * 1000
+                    latencySum += latency
+                    if latency > maxLatency {
+                        maxLatency = latency
+                    }
+                    if latency < minLatency {
+                        minLatency = latency
+                    }
+                    self.entries.append("\(response.byteCount ?? 0) bytes from \(response.ipAddress ?? "") icmp_seq=\(response.sequenceNumber) time=\(latency) ms")
                 }
-                self.entries.append("\(stats)\n")
+
+                if !self.pingIndefinity, count >= self.pingCount {
+                    self.pinger?.stopPinging()
+                    self.isPinging = false
+
+                    self.entries.append("--- \(host) ping statistics ---")
+
+                    // 5 packets transmitted, 5 packets received, 0.0% packet loss
+                    self.entries.append("\(count) packets transmitted, ")
+                    let received = count - errorCount
+                    self.entries.append("\(count - errorCount) received, ")
+                    if count == received {
+                        self.entries.append("0.0% packet loss")
+                    } else if received == 0 {
+                        self.entries.append("100% packet loss")
+                    } else {
+                        self.entries.append(String(format: "%0.1f%% packet loss", Double(received) / Double(count) * 100.0))
+                    }
+
+                    // round-trip min/avg/max/stddev = 14.063/21.031/28.887/4.718 ms
+                    var stats = "ronnd-trip min/avg/max = "
+                    if errorCount == count {
+                        stats += "n/a"
+                    } else {
+                        let avg = latencySum / Double(count)
+                        stats += String(format: "%0.3f/%0.3f/%0.4f ms", minLatency, avg, maxLatency)
+                    }
+                    self.entries.append("\(stats)\n")
+                }
+                count += 1
             }
-            count += 1
+
+            isPinging = true
+            try? pinger?.startPinging()
         }
-
-        isPinging = true
-        try? pinger.startPinging()
     }
 }
 
