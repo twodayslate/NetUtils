@@ -70,6 +70,12 @@
             ReferencedContainer = "container:ec3730.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-com.apple.CoreData.ConcurrencyDebug 1"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <StoreKitConfigurationFileReference
          identifier = "../ec3730/Configuration.storekit">
       </StoreKitConfigurationFileReference>
