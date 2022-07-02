@@ -31,6 +31,7 @@ struct CopyCellView: CopyCellProtocol {
     var title: String
     var content: String?
     var rows: [CopyCellRow]?
+    var backgroundColor = Color(UIColor.systemBackground)
 
     @State var shouldShare: Bool = false
 
@@ -82,7 +83,7 @@ struct CopyCellView: CopyCellProtocol {
                 }).padding()
             }
         }
-        .background(Color(UIColor.systemBackground))
+        .background(backgroundColor)
         .contextMenu(menuItems: {
             Button(action: {
                 UIPasteboard.general.string = content

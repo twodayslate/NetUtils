@@ -293,69 +293,68 @@ struct PingSwiftUIViewController: View {
     @State var alertMessage: String?
 
     var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
-                VStack(alignment: .leading, spacing: 0.0) {
-                    ScrollViewReader { reader in
-                        ScrollView {
-                            LazyVStack(alignment: .leading, spacing: 0.0) {
-                                ForEach(0 ..< entries.count, id: \.self) { i in
-                                    Text(entries[i]).multilineTextAlignment(.leading).foregroundColor(.green).tag(i).font(Font.system(.footnote, design: .monospaced))
-                                }.onChange(of: entries, perform: { _ in
-                                    withAnimation {
-                                        reader.scrollTo(entries.count - 1, anchor: .bottom)
-                                    }
-                                })
-                            }.padding()
-                        }
-                        .background(Color.black.ignoresSafeArea(.all, edges: .horizontal))
-                        // Fix for the content going above the navigation
-                        // See !92 for more information
-                        .padding(.top, 0.15)
-                        .onTapGesture {
-                            dismissKeyboard = UUID()
-                        }
+        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: 0.0) {
+                ScrollViewReader { reader in
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 0.0) {
+                            ForEach(0 ..< entries.count, id: \.self) { i in
+                                Text(entries[i]).multilineTextAlignment(.leading).foregroundColor(.green).tag(i).font(Font.system(.footnote, design: .monospaced))
+                            }.onChange(of: entries, perform: { _ in
+                                withAnimation {
+                                    reader.scrollTo(entries.count - 1, anchor: .bottom)
+                                }
+                            })
+                        }.padding()
                     }
-                    VStack(alignment: .leading, spacing: 0.0) {
-                        Divider()
-                        HStack(alignment: .center) {
-                            // it would be great if this could be a .bottomBar toolbar but it is too buggy
-                            TextField(self.defaultPing, text: $text, onCommit: { self.ping() }).id(dismissKeyboard).disableAutocorrection(true).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.URL).padding(.leading, geometry.safeAreaInsets.leading)
-                            if self.isPinging {
-                                Button("Cancel", action: {
-                                    self.cancel()
-                                }).padding(.trailing, geometry.safeAreaInsets.trailing)
-                            } else {
-                                Button("ping", action: {
-                                    self.ping()
-                                }).padding(.trailing, geometry.safeAreaInsets.trailing)
-                            }
-                        }.padding(.horizontal).padding([.vertical], 6)
-                    }.background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)).ignoresSafeArea(.all, edges: .horizontal)).ignoresSafeArea()
-                }.navigationBarTitle("Ping", displayMode: .inline)
-            }
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarLeading, content: {
-                    Button(action: { showSettings.toggle() }, label: {
-                        Image(systemName: "gear")
-                    })
-                })
-                ToolbarItem(placement: .navigationBarTrailing, content: {
-                    NavigationLink(
-                        destination: PingSetList(),
-                        label: {
-                            Image(systemName: "clock")
-                        }
-                    )
-                })
-            }).sheet(isPresented: $showSettings, content: {
-                EZPanel {
-                    PingSettings(interval: $pingInterval, timeout: $pingTimeout, pingIndefinitly: $pingIndefinity, pingCount: $pingCount, savePings: $pingSave, payloadSize: $pingPayloadSize, enableTTL: $pingUseTTL, ttl: $pingTTL)
+                    .background(Color.black.ignoresSafeArea(.all, edges: .horizontal))
+                    // Fix for the content going above the navigation
+                    // See !92 for more information
+                    .padding(.top, 0.15)
+                    .onTapGesture {
+                        dismissKeyboard = UUID()
+                    }
                 }
-            }).alert(isPresented: $showAlert, content: {
-                Alert(title: Text("Error"), message: Text("\(self.alertMessage ?? "")"), dismissButton: .none)
-            }) // GeometryReader
-        }.onDisappear(perform: {
+                VStack(alignment: .leading, spacing: 0.0) {
+                    Divider()
+                    HStack(alignment: .center) {
+                        // it would be great if this could be a .bottomBar toolbar but it is too buggy
+                        TextField(self.defaultPing, text: $text, onCommit: { self.ping() }).id(dismissKeyboard).disableAutocorrection(true).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.URL).padding(.leading, geometry.safeAreaInsets.leading)
+                        if self.isPinging {
+                            Button("Cancel", action: {
+                                self.cancel()
+                            }).padding(.trailing, geometry.safeAreaInsets.trailing)
+                        } else {
+                            Button("ping", action: {
+                                self.ping()
+                            }).padding(.trailing, geometry.safeAreaInsets.trailing)
+                        }
+                    }.padding(.horizontal).padding([.vertical], 6)
+                }.background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)).ignoresSafeArea(.all, edges: .horizontal)).ignoresSafeArea()
+            }.navigationBarTitle("Ping", displayMode: .inline)
+        }
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarLeading, content: {
+                Button(action: { showSettings.toggle() }, label: {
+                    Image(systemName: "gear")
+                })
+            })
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                NavigationLink(
+                    destination: PingSetList(),
+                    label: {
+                        Image(systemName: "clock")
+                    }
+                )
+            })
+        }).sheet(isPresented: $showSettings, content: {
+            EZPanel {
+                PingSettings(interval: $pingInterval, timeout: $pingTimeout, pingIndefinitly: $pingIndefinity, pingCount: $pingCount, savePings: $pingSave, payloadSize: $pingPayloadSize, enableTTL: $pingUseTTL, ttl: $pingTTL)
+            }
+        }).alert(isPresented: $showAlert, content: {
+            Alert(title: Text("Error"), message: Text("\(self.alertMessage ?? "")"), dismissButton: .none)
+        }) // GeometryReader
+        .onDisappear(perform: {
             self.pinger?.stopPinging()
         })
         .navigationViewStyle(StackNavigationViewStyle())
@@ -371,7 +370,6 @@ struct PingSwiftUIViewController: View {
     @State var pinger: SwiftyPing?
 
     func ping() {
-        
         print("ping")
         dismissKeyboard = UUID()
         let saveThisSession = pingSave

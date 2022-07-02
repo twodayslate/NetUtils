@@ -20,7 +20,6 @@
 		F619760722FCA33B00CE39A0 /* WhoisXmlCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */; };
 		F619760922FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */; };
 		F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F619760A22FCA76200CE39A0 /* WhoisRecord.swift */; };
-		F6310273212FA66600F34E42 /* SRCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6310272212FA66600F34E42 /* SRCTabBarController.swift */; };
 		F63102752130C99D00F34E42 /* PingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63102742130C99D00F34E42 /* PingViewController.swift */; };
 		F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63102762130D76200F34E42 /* ReachabilityViewController.swift */; };
 		F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6310278213366BB00F34E42 /* SourceViewController.swift */; };
@@ -75,7 +74,6 @@
 		F668EB4523563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB4423563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift */; };
 		F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB462356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift */; };
 		F668EB4B2356AE3800EEB379 /* IAPFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */; };
-		F66BB7202453B85C00E86A93 /* SplitTabBar in Frameworks */ = {isa = PBXBuildFile; productRef = F66BB71F2453B85C00E86A93 /* SplitTabBar */; };
 		F671EF4C277553D6007AF79F /* HostSectionOrganizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671EF4B277553D6007AF79F /* HostSectionOrganizerView.swift */; };
 		F67425DB21363FFF00A79492 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67425DA21363FFF00A79492 /* UITextView.swift */; };
 		F67ED9F5240DF56100021F6C /* AddressURL in Frameworks */ = {isa = PBXBuildFile; productRef = F67ED9F4240DF56100021F6C /* AddressURL */; };
@@ -121,6 +119,15 @@
 		F6D0B781235A6C61009E493B /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6D0B780235A6C61009E493B /* CloudKit.framework */; };
 		F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D4BB0923583E6100FDAFF7 /* GoogleWebRiskRecord.swift */; };
 		F6D4BB0C23584E0C00FDAFF7 /* GoogleWebRiskCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D4BB0B23584E0B00FDAFF7 /* GoogleWebRiskCellManager.swift */; };
+		F6E53FB6286FB0210041A3DA /* NavigationSplitTab in Frameworks */ = {isa = PBXBuildFile; productRef = F6E53FB5286FB0210041A3DA /* NavigationSplitTab */; };
+		F6E53FB8286FB03F0041A3DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E53FB7286FB03F0041A3DA /* ContentView.swift */; };
+		F6E53FBA286FB09F0041A3DA /* ScreenId.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E53FB9286FB09F0041A3DA /* ScreenId.swift */; };
+		F6E53FC0287009270041A3DA /* UIViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E53FBF287009270041A3DA /* UIViewControllerView.swift */; };
+		F6E53FC2287015530041A3DA /* ReachabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E53FC1287015530041A3DA /* ReachabilityModel.swift */; };
+		F6E53FC42870196E0041A3DA /* InterfaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E53FC32870196E0041A3DA /* InterfaceListView.swift */; };
+		F6E53FC628701D360041A3DA /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E53FC528701D360041A3DA /* Interface.swift */; };
+		F6E53FC928701D630041A3DA /* InterfaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E53FC828701D630041A3DA /* InterfaceView.swift */; };
+		F6E53FCB287024A50041A3DA /* InterfaceConnectionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E53FCA287024A50041A3DA /* InterfaceConnectionBarView.swift */; };
 		F6F2017325DB6C18008BA024 /* SwiftyPing in Frameworks */ = {isa = PBXBuildFile; productRef = F6F2017225DB6C18008BA024 /* SwiftyPing */; };
 		F6FBB86723677FA700E023F2 /* DeviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FBB86623677FA700E023F2 /* DeviceController.swift */; };
 		F6FBB869236781AC00E023F2 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FBB868236781AC00E023F2 /* UIDevice.swift */; };
@@ -167,7 +174,6 @@
 		F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisLockedTableViewCell.swift; sourceTree = "<group>"; };
 		F619760A22FCA76200CE39A0 /* WhoisRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisRecord.swift; sourceTree = "<group>"; };
 		F6242CC1260185180051320F /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
-		F6310272212FA66600F34E42 /* SRCTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRCTabBarController.swift; sourceTree = "<group>"; };
 		F63102742130C99D00F34E42 /* PingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingViewController.swift; sourceTree = "<group>"; };
 		F63102762130D76200F34E42 /* ReachabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityViewController.swift; sourceTree = "<group>"; };
 		F6310278213366BB00F34E42 /* SourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewController.swift; sourceTree = "<group>"; };
@@ -268,6 +274,14 @@
 		F6D0B780235A6C61009E493B /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		F6D4BB0923583E6100FDAFF7 /* GoogleWebRiskRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleWebRiskRecord.swift; sourceTree = "<group>"; };
 		F6D4BB0B23584E0B00FDAFF7 /* GoogleWebRiskCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleWebRiskCellManager.swift; sourceTree = "<group>"; };
+		F6E53FB7286FB03F0041A3DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F6E53FB9286FB09F0041A3DA /* ScreenId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenId.swift; sourceTree = "<group>"; };
+		F6E53FBF287009270041A3DA /* UIViewControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerView.swift; sourceTree = "<group>"; };
+		F6E53FC1287015530041A3DA /* ReachabilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityModel.swift; sourceTree = "<group>"; };
+		F6E53FC32870196E0041A3DA /* InterfaceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceListView.swift; sourceTree = "<group>"; };
+		F6E53FC528701D360041A3DA /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
+		F6E53FC828701D630041A3DA /* InterfaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceView.swift; sourceTree = "<group>"; };
+		F6E53FCA287024A50041A3DA /* InterfaceConnectionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceConnectionBarView.swift; sourceTree = "<group>"; };
 		F6FBB86623677FA700E023F2 /* DeviceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceController.swift; sourceTree = "<group>"; };
 		F6FBB868236781AC00E023F2 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		F6FDDFC323047E7E00FBF75E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -290,10 +304,10 @@
 				F67EDA012411A1C000021F6C /* SwiftyStoreKit in Frameworks */,
 				F6F2017325DB6C18008BA024 /* SwiftyPing in Frameworks */,
 				F67ED9FB2411A0C200021F6C /* Reachability in Frameworks */,
+				F6E53FB6286FB0210041A3DA /* NavigationSplitTab in Frameworks */,
 				F67EDA072411EA7700021F6C /* SKVersion in Frameworks */,
 				F67ED9FE2411A0D400021F6C /* KeychainAccess in Frameworks */,
 				F67ED9F82411A09000021F6C /* NetUtils in Frameworks */,
-				F66BB7202453B85C00E86A93 /* SplitTabBar in Frameworks */,
 				F63B922F279C985B007E845F /* Cache in Frameworks */,
 				F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */,
 				F67EDA0A2411F42B00021F6C /* Highlightr in Frameworks */,
@@ -361,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				F6397FE425E8937900914B3F /* HostView.swift */,
+				F6E53FC728701D490041A3DA /* Interface */,
 				F660FDD62868E9590027C759 /* Device */,
 				F63B9227279BC31B007E845F /* HostHistoryList.swift */,
 				F63B922B279C9079007E845F /* HostResult.swift */,
@@ -376,6 +391,7 @@
 				F6397FF125EF012300914B3F /* ShareSheetView.swift */,
 				F6397FF625EF045200914B3F /* PurchaseCellView.swift */,
 				F671EF4B277553D6007AF79F /* HostSectionOrganizerView.swift */,
+				F6E53FBF287009270041A3DA /* UIViewControllerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -436,6 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				F66643B226F02A5B000F17BC /* HostViewModel.swift */,
+				F6E53FC1287015530041A3DA /* ReachabilityModel.swift */,
 				F660FDEB28692EB10027C759 /* FingerprintModel.swift */,
 				F660FDD92868EA810027C759 /* Device */,
 				F6C38E8726FABEFB00BD9A71 /* StoreKitModel.swift */,
@@ -494,7 +511,6 @@
 		F6A4EB942301C5DD00439562 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F6310272212FA66600F34E42 /* SRCTabBarController.swift */,
 				F63102742130C99D00F34E42 /* PingViewController.swift */,
 				F643030A25E47BA300109C92 /* EZPanel.swift */,
 				F6310278213366BB00F34E42 /* SourceViewController.swift */,
@@ -523,6 +539,7 @@
 				F668EB3E2355807100EEB379 /* SKProductSubscriptionPeriod.swift */,
 				F67425DA21363FFF00A79492 /* UITextView.swift */,
 				F63540D4213DEBDD00605ABE /* Reachability.swift */,
+				F6E53FC528701D360041A3DA /* Interface.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -555,6 +572,8 @@
 				F6A4EB9E2301F31100439562 /* ec3730.entitlements */,
 				F6242CC1260185180051320F /* Configuration.storekit */,
 				F6C8D8A4212E5AE900309373 /* AppDelegate.swift */,
+				F6E53FB7286FB03F0041A3DA /* ContentView.swift */,
+				F6E53FB9286FB09F0041A3DA /* ScreenId.swift */,
 				F6A4EB942301C5DD00439562 /* Controllers */,
 				F668EB3D23501FAC00EEB379 /* Data Feeds */,
 				F6FDDFDF230C4C7400FBF75E /* CellManager.swift */,
@@ -620,6 +639,16 @@
 			path = Google;
 			sourceTree = "<group>";
 		};
+		F6E53FC728701D490041A3DA /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				F6E53FC32870196E0041A3DA /* InterfaceListView.swift */,
+				F6E53FC828701D630041A3DA /* InterfaceView.swift */,
+				F6E53FCA287024A50041A3DA /* InterfaceConnectionBarView.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -648,10 +677,10 @@
 				F67EDA032411E70F00021F6C /* SplitView */,
 				F67EDA062411EA7700021F6C /* SKVersion */,
 				F67EDA092411F42B00021F6C /* Highlightr */,
-				F66BB71F2453B85C00E86A93 /* SplitTabBar */,
 				F6F2017225DB6C18008BA024 /* SwiftyPing */,
 				F643036725E6033D00109C92 /* DeviceKit */,
 				F63B922E279C985B007E845F /* Cache */,
+				F6E53FB5286FB0210041A3DA /* NavigationSplitTab */,
 			);
 			productName = ec3730;
 			productReference = F6C8D8A1212E5AE900309373 /* ec3730.app */;
@@ -744,10 +773,10 @@
 				F67EDA022411E70F00021F6C /* XCRemoteSwiftPackageReference "splitview" */,
 				F67EDA052411EA7700021F6C /* XCRemoteSwiftPackageReference "SKVersion" */,
 				F67EDA082411F42B00021F6C /* XCRemoteSwiftPackageReference "Highlightr" */,
-				F66BB71E2453B85C00E86A93 /* XCRemoteSwiftPackageReference "SplitTabBar" */,
 				F6F2017125DB6C18008BA024 /* XCRemoteSwiftPackageReference "SwiftyPing" */,
 				F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 				F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */,
+				F6E53FB4286FB0210041A3DA /* XCRemoteSwiftPackageReference "NavigationSplitTab" */,
 			);
 			productRefGroup = F6C8D8A2212E5AE900309373 /* Products */;
 			projectDirPath = "";
@@ -858,10 +887,10 @@
 				F668EB4323563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift in Sources */,
 				F67425DB21363FFF00A79492 /* UITextView.swift in Sources */,
 				F66643B526F02A8F000F17BC /* HostViewSection.swift in Sources */,
-				F6310273212FA66600F34E42 /* SRCTabBarController.swift in Sources */,
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
 				F6FDDFD8230B106200FBF75E /* WhoisXmlDnsCells.swift in Sources */,
 				F60FD36A25E060D700BCEF86 /* PingItem.swift in Sources */,
+				F6E53FB8286FB03F0041A3DA /* ContentView.swift in Sources */,
 				F68CE56623031DA20068D104 /* DataFeedErrors.swift in Sources */,
 				F660FDD82868E9A20027C759 /* DeviceInfoModel.swift in Sources */,
 				F69E365423580A7D0017296E /* DataFeedSubscription.swift in Sources */,
@@ -871,6 +900,7 @@
 				F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */,
 				F644A0FD279283300061C98B /* LocalDnsModel.swift in Sources */,
 				F6A6410C2844235D00E00F7F /* HostBarView.swift in Sources */,
+				F6E53FBA286FB09F0041A3DA /* ScreenId.swift in Sources */,
 				F6D0B77A235902E3009E493B /* DataFeedPurchaseProtocol.swift in Sources */,
 				F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */,
 				F63B9224279BBA03007E845F /* HostData.swift in Sources */,
@@ -881,6 +911,7 @@
 				F660FDE02868F3310027C759 /* UIDeviceInfoModel.swift in Sources */,
 				F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */,
 				F619760922FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift in Sources */,
+				F6E53FC42870196E0041A3DA /* InterfaceListView.swift in Sources */,
 				F69E3648235805180017296E /* GoogleWebRisk.swift in Sources */,
 				F6C87452234FE8030069A57C /* DataFeedsTableViewController.swift in Sources */,
 				F6FDDFCA23048DEF00FBF75E /* UIView.swift in Sources */,
@@ -890,6 +921,7 @@
 				F660FDEC28692EB10027C759 /* FingerprintModel.swift in Sources */,
 				F660FDEE28693D020027C759 /* FingerprintInfoModel.swift in Sources */,
 				F63B9228279BC31B007E845F /* HostHistoryList.swift in Sources */,
+				F6E53FC928701D630041A3DA /* InterfaceView.swift in Sources */,
 				F69E365623580AA00017296E /* DataFeedService.swift in Sources */,
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
 				F60FD36025E0607C00BCEF86 /* DataModel.xcdatamodeld in Sources */,
@@ -900,6 +932,7 @@
 				F65FDA6727AB06920024521B /* WhoisXmlReputationRecord.swift in Sources */,
 				F660FDDE2868EAAC0027C759 /* CarrierInfoModel.swift in Sources */,
 				F644A103279284EE0061C98B /* GoogleWebRiskSectionModel.swift in Sources */,
+				F6E53FC0287009270041A3DA /* UIViewControllerView.swift in Sources */,
 				F660FDE2286900000027C759 /* ProcessInfoModel.swift in Sources */,
 				F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */,
 				F63B922A279C8EE5007E845F /* HostResultSection.swift in Sources */,
@@ -929,12 +962,15 @@
 				F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */,
 				F668EB3F2355807100EEB379 /* SKProductSubscriptionPeriod.swift in Sources */,
 				F69E364E235808560017296E /* DFSubscription.swift in Sources */,
+				F6E53FC2287015530041A3DA /* ReachabilityModel.swift in Sources */,
 				F6D0B77E235A6A43009E493B /* NetUtilsCoreData.xcdatamodeld in Sources */,
 				F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */,
 				F643030B25E47BA300109C92 /* EZPanel.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
+				F6E53FC628701D360041A3DA /* Interface.swift in Sources */,
 				F660FDF0286953A00027C759 /* DeviceInfoSectionView.swift in Sources */,
 				F644A0FA279268BD0061C98B /* FSDisclosureGroup.swift in Sources */,
+				F6E53FCB287024A50041A3DA /* InterfaceConnectionBarView.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
 				F644A0F827925CF60061C98B /* HostModelWrapperView.swift in Sources */,
 				F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */,
@@ -1314,14 +1350,6 @@
 				minimumVersion = 4.6.0;
 			};
 		};
-		F66BB71E2453B85C00E86A93 /* XCRemoteSwiftPackageReference "SplitTabBar" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/twodayslate/SplitTabBar.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
-			};
-		};
 		F67ED9F3240DF56100021F6C /* XCRemoteSwiftPackageReference "AddressURL" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twodayslate/AddressURL";
@@ -1386,6 +1414,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		F6E53FB4286FB0210041A3DA /* XCRemoteSwiftPackageReference "NavigationSplitTab" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twodayslate/NavigationSplitTab";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		F6F2017125DB6C18008BA024 /* XCRemoteSwiftPackageReference "SwiftyPing" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/samiyr/SwiftyPing.git";
@@ -1406,11 +1442,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */;
 			productName = DeviceKit;
-		};
-		F66BB71F2453B85C00E86A93 /* SplitTabBar */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F66BB71E2453B85C00E86A93 /* XCRemoteSwiftPackageReference "SplitTabBar" */;
-			productName = SplitTabBar;
 		};
 		F67ED9F4240DF56100021F6C /* AddressURL */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1451,6 +1482,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F67EDA082411F42B00021F6C /* XCRemoteSwiftPackageReference "Highlightr" */;
 			productName = Highlightr;
+		};
+		F6E53FB5286FB0210041A3DA /* NavigationSplitTab */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F6E53FB4286FB0210041A3DA /* XCRemoteSwiftPackageReference "NavigationSplitTab" */;
+			productName = NavigationSplitTab;
 		};
 		F6F2017225DB6C18008BA024 /* SwiftyPing */ = {
 			isa = XCSwiftPackageProductDependency;

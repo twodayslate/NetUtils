@@ -3,7 +3,7 @@ import Foundation
 import SwiftUI
 
 @available(iOS 15.0, *)
-/// this is very similiar to \ref HostViewSection
+/// this is very similiar to \ref ``HostViewSection``
 /// it doesn't have move up/down or hide since these are saved in core data and no point in hiding
 struct HostResultSection: View, Equatable, Identifiable, Hashable {
     static func == (lhs: HostResultSection, rhs: HostResultSection) -> Bool {

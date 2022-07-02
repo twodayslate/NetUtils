@@ -17,84 +17,88 @@ struct HostView: View {
     @State var errors: [Error]?
 
     var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
-                VStack(alignment: .leading, spacing: 0) {
-                    ScrollView {
-                        // too jumpy if this is a lazy vstack
-                        // so we will make it a regular vstack until we have
-                        // more sections? can reinvestigate later
-                        VStack(alignment: .leading, spacing: 0) {
-                            ForEach(self.model.sections) { section in
-                                section
-                                    .id(section.id)
-                                    .onDrag {
-                                        self.dragging = section
+        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: 0) {
+                ScrollView {
+                    // too jumpy if this is a lazy vstack
+                    // so we will make it a regular vstack until we have
+                    // more sections? can reinvestigate later
+                    VStack(alignment: .leading, spacing: 0) {
+                        ForEach(self.model.sections) { section in
+                            section
+                                .id(section.id)
+                                .onDrag {
+                                    self.dragging = section
 
-                                        return NSItemProvider(item: String(section.id) as NSString, typeIdentifier: "com.twodayslate.netutils.hostview.header")
-                                    }
-                                    .onDrop(of: ["com.twodayslate.netutils.hostview.header"], delegate: HostDragRelocateDelegate(item: section, listData: $model.sections, current: $dragging))
+                                    return NSItemProvider(item: String(section.id) as NSString, typeIdentifier: "com.twodayslate.netutils.hostview.header")
+                                }
+                                .onDrop(of: ["com.twodayslate.netutils.hostview.header"], delegate: HostDragRelocateDelegate(item: section, listData: $model.sections, current: $dragging))
+                        }
+                    }
+                    .animation(.default, value: model.sections)
+                }
+                // Fix for the content going above the navigation
+                // See !92 for more information
+                .padding(.top, 0.15)
+                VStack(alignment: .leading, spacing: 0.0) {
+                    Divider()
+                    HStack(alignment: .center) {
+                        // it would be great if this could be a .bottomBar toolbar but it is too buggy
+                        TextField(self.defaultUrl, text: $text, onCommit: { Task {
+                            await self.query { errors in
+                                guard errors.count <= 0 else {
+                                    self.showErrors = true
+                                    self.errors = errors
+                                    return
+                                }
                             }
                         }
-                        .animation(.default, value: model.sections)
-                    }
-                    VStack(alignment: .leading, spacing: 0.0) {
-                        Divider()
-                        HStack(alignment: .center) {
-                            // it would be great if this could be a .bottomBar toolbar but it is too buggy
-                            TextField(self.defaultUrl, text: $text, onCommit: { Task {
-                                await self.query { errors in
-                                    guard errors.count <= 0 else {
-                                        self.showErrors = true
-                                        self.errors = errors
-                                        return
-                                    }
-                                }
-                            }
-                            })
-                            .textInputAutocapitalization(.never)
-                            .id(dismissKeyboard)
-                            .disableAutocorrection(true)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.URL)
-                            .padding(.leading, geometry.safeAreaInsets.leading)
-                            if self.model.isQuerying {
-                                Button("Cancel", action: {
-                                    self.cancel()
-                                }).padding(.trailing, geometry.safeAreaInsets.trailing)
-                            } else {
-                                Button("Lookup", action: {
-                                    Task {
-                                        await self.query { errors in
-                                            guard errors.count <= 0 else {
-                                                self.showErrors = true
-                                                self.errors = errors
-                                                return
-                                            }
+                        })
+                        .textInputAutocapitalization(.never)
+                        .id(dismissKeyboard)
+                        .disableAutocorrection(true)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.URL)
+                        .padding(.leading, geometry.safeAreaInsets.leading)
+                        if self.model.isQuerying {
+                            Button("Cancel", action: {
+                                self.cancel()
+                            }).padding(.trailing, geometry.safeAreaInsets.trailing)
+                        } else {
+                            Button("Lookup", action: {
+                                Task {
+                                    await self.query { errors in
+                                        guard errors.count <= 0 else {
+                                            self.showErrors = true
+                                            self.errors = errors
+                                            return
                                         }
                                     }
-                                }).padding(.trailing, geometry.safeAreaInsets.trailing)
-                            }
-                        }.padding(.horizontal).padding([.vertical], 6)
-                    }.background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)).ignoresSafeArea(.all, edges: .horizontal)).ignoresSafeArea()
-                }.navigationBarTitle("Host Information", displayMode: .inline)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing, content: {
-                            NavigationLink(
-                                destination: HostHistoryList(),
-                                label: {
-                                    Image(systemName: "clock")
                                 }
-                            )
-                        })
-                    }
-            }
-            .alert("Error", isPresented: $showErrors, presenting: self.errors, actions: { _ in
-                Button("Okay", role: .cancel) {}
-            }, message: { errors in
-                Text("\(errors.debugDescription)")
-            })
-        }.environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+                            }).padding(.trailing, geometry.safeAreaInsets.trailing)
+                        }
+                    }.padding(.horizontal).padding([.vertical], 6)
+                }.background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)).ignoresSafeArea(.all, edges: .horizontal)).ignoresSafeArea()
+            }.navigationBarTitle("Host Information", displayMode: .inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing, content: {
+                        NavigationLink(
+                            destination: {
+                                HostHistoryList()
+                                    .environmentObject(model)
+                            },
+                            label: {
+                                Image(systemName: "clock")
+                            }
+                        )
+                    })
+                }
+        }
+        .alert("Error", isPresented: $showErrors, presenting: self.errors, actions: { _ in
+            Button("Okay", role: .cancel) {}
+        }, message: { errors in
+            Text("\(errors.debugDescription)")
+        })
     }
 
     func cancel() {
