@@ -4,6 +4,8 @@ import SwiftUI
 struct HostSectionOrganizerView: View {
     @EnvironmentObject var model: HostViewModel
 
+    @Environment(\.editMode) var mode
+
     var body: some View {
         List {
             Section(header:
@@ -30,17 +32,19 @@ struct HostSectionOrganizerView: View {
                 }
             }
 
-            Section(header: Text("Hidden")) {
-                ForEach(model.hidden, id: \.self) { section in
-                    Text(section)
-                }
-                // would be great if instead of delete it said
-                // unhide or show
-                .onDelete { indexSet in
-                    if let index = indexSet.first {
-                        let section = model.hidden[index]
-                        withAnimation {
-                            self.model.hidden.removeAll(where: { $0 == section })
+            if self.mode?.wrappedValue.isEditing ?? true || !model.hidden.isEmpty {
+                Section(header: Text("Hidden")) {
+                    ForEach(model.hidden, id: \.self) { section in
+                        Text(section)
+                    }
+                    // would be great if instead of delete it said
+                    // unhide or show
+                    .onDelete { indexSet in
+                        if let index = indexSet.first {
+                            let section = model.hidden[index]
+                            withAnimation {
+                                self.model.hidden.removeAll(where: { $0 == section })
+                            }
                         }
                     }
                 }
