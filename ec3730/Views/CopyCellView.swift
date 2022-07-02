@@ -32,6 +32,7 @@ struct CopyCellView: CopyCellProtocol {
     var content: String?
     var rows: [CopyCellRow]?
     var backgroundColor = Color(UIColor.systemBackground)
+    var withChevron = false
 
     @State var shouldShare: Bool = false
 
@@ -66,6 +67,19 @@ struct CopyCellView: CopyCellProtocol {
                     Text(self.title)
                     Spacer()
                     Text(content).foregroundColor(.gray)
+                    if withChevron {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 14, weight: .semibold))
+                            // .imageScale(.small)
+                            .foregroundColor(Color(UIColor.systemGray3))
+                        /*
+                         height 14
+                         color:
+                             "0.9999999403953552",
+                             "0.9999999403953552",
+                             "0.9999999403953552"
+                         */
+                    }
                 }.padding()
             } else if let rows = self.rows {
                 DisclosureGroup(isExpanded: $expanded, content: {
