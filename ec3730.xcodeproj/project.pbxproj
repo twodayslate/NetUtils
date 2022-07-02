@@ -435,22 +435,15 @@
 		F6397FE325E8936600914B3F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F6397FE425E8937900914B3F /* HostView.swift */,
+				F6659EC92870CA9C00038ECA /* Host */,
 				F6E53FC728701D490041A3DA /* Interface */,
 				F660FDD62868E9590027C759 /* Device */,
-				F63B9227279BC31B007E845F /* HostHistoryList.swift */,
-				F63B922B279C9079007E845F /* HostResult.swift */,
-				F6A6410B2844235D00E00F7F /* HostBarView.swift */,
-				F63B9229279C8EE5007E845F /* HostResultSection.swift */,
 				F644A0F9279268BD0061C98B /* FSDisclosureGroup.swift */,
-				F644A0F727925CF60061C98B /* HostModelWrapperView.swift */,
-				F66643B426F02A8F000F17BC /* HostViewSection.swift */,
 				F660FDE928692CFB0027C759 /* WebkitOverlayView.swift */,
 				F6397FEC25EEFEAE00914B3F /* TappedText.swift */,
 				F6AF9574295E9BF1000F09D2 /* CopyCell */,
 				F6397FF125EF012300914B3F /* ShareSheetView.swift */,
 				F6397FF625EF045200914B3F /* PurchaseCellView.swift */,
-				F671EF4B277553D6007AF79F /* HostSectionOrganizerView.swift */,
 				F6E53FBF287009270041A3DA /* UIViewControllerView.swift */,
 			);
 			path = Views;
@@ -509,6 +502,23 @@
 				F660FDED28693D010027C759 /* FingerprintInfoModel.swift */,
 			);
 			path = Sections;
+			sourceTree = "<group>";
+		};
+		F6659EC92870CA9C00038ECA /* Host */ = {
+			isa = PBXGroup;
+			children = (
+				F6397FE425E8937900914B3F /* HostView.swift */,
+				F63B9227279BC31B007E845F /* HostHistoryList.swift */,
+				F63B922B279C9079007E845F /* HostResult.swift */,
+				F6A6410B2844235D00E00F7F /* HostBarView.swift */,
+				F63B9229279C8EE5007E845F /* HostResultSection.swift */,
+				F644A0F727925CF60061C98B /* HostModelWrapperView.swift */,
+				F66643B426F02A8F000F17BC /* HostViewSection.swift */,
+				AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */,
+				F6A6410D2844246100E00F7F /* HostViewSectionFocusView.swift */,
+				F671EF4B277553D6007AF79F /* HostSectionOrganizerView.swift */,
+			);
+			path = Host;
 			sourceTree = "<group>";
 		};
 		F66643B126F02A4C000F17BC /* Models */ = {
