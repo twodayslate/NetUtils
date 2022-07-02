@@ -33,8 +33,9 @@ struct ContentView: View {
 
     var body: some View {
         model.navigation()
-            .environmentObject(HostViewModel.shared)
-            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+            .onAppear {
+                updateTheme(theme)
+            }
             .onChange(of: model.selectedScreen) { value in
                 do {
                     let data = try JSONEncoder().encode(value)
@@ -44,28 +45,31 @@ struct ContentView: View {
                 }
             }
             .onChange(of: theme) { value in
-                // https://stackoverflow.com/a/68989580
-                UIApplication.shared.connectedScenes
-                    // Keep only active scenes, onscreen and visible to the user
-                    .filter { $0.activationState == .foregroundActive }
-                    // Keep only the first `UIWindowScene`
-                    .first(where: { $0 is UIWindowScene })
-                    // Get its associated windows
-                    .flatMap { $0 as? UIWindowScene }?.windows.forEach { window in
-
-                        switch value {
-                        case 1:
-                            window.rootViewController?.overrideUserInterfaceStyle = .light
-                        case 2:
-                            window.rootViewController?.overrideUserInterfaceStyle = .dark
-                        default:
-                            window.rootViewController?.overrideUserInterfaceStyle = .unspecified
-                        }
-                    }
+                updateTheme(value)
             }
             .onChange(of: reachability.connection) { _ in
                 // Update the modal so we get new icons for connectivity
                 model.objectWillChange.send()
+            }
+            .environmentObject(HostViewModel.shared)
+            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+    }
+
+    func updateTheme(_ value: Int) {
+        // https://stackoverflow.com/a/68989580
+        UIApplication.shared.connectedScenes
+            // Get its associated windows
+            .compactMap { $0 as? UIWindowScene }.forEach { scene in
+                scene.windows.forEach { window in
+                    switch value {
+                    case 1:
+                        window.rootViewController?.overrideUserInterfaceStyle = .light
+                    case 2:
+                        window.rootViewController?.overrideUserInterfaceStyle = .dark
+                    default:
+                        window.rootViewController?.overrideUserInterfaceStyle = .unspecified
+                    }
+                }
             }
     }
 }
