@@ -23,7 +23,6 @@ extension Service {
     var usage: Int {
         get {
             let search = NSPredicate(format: "serviceName like %@", argumentArray: [name])
-            print("usage DFService: \(Thread.current)")
             // It's being used from the main thread no change is required
             var result: [ServiceUsage]?
             if let context = AppDelegate.persistantStore?.viewContext {
@@ -39,7 +38,6 @@ extension Service {
 
         set {
             if let context = AppDelegate.persistantStore?.viewContext {
-                print("set usage DFService: \(Thread.current)")
                 context.performAndWait {
                     if let object = NSEntityDescription.insertNewObject(forEntityName: "ServiceUsage", into: context) as? ServiceUsage {
                         object.date = Date()
@@ -57,11 +55,9 @@ extension Service {
         if let context = AppDelegate.persistantStore?.newBackgroundContext() {
             let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
             request.predicate = search
-            print("clearUsage DFService: \(Thread.current)")
             // this is async block
             context.perform {
                 let results = try? context.fetch(request)
-                print("clearUsage DFService: \(Thread.current)")
                 guard let objects = results else {
                     block?()
                     return
@@ -82,14 +78,11 @@ extension Service {
         let endDate = NSDate()
         let startDate = calendar.date(byAdding: .day, value: -1, to: endDate as Date)! as NSDate
         let search = NSPredicate(format: "(date >= %@) AND serviceName like %@", argumentArray: [startDate, name])
-        print("usageToday DFService: \(Thread.current)")
-
         if let context = AppDelegate.persistantStore?.viewContext {
             var result: [ServiceUsage]?
             context.performAndWait {
                 let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
                 request.predicate = search
-                print("usageToday DFService: \(Thread.current)")
                 result = try? context.fetch(request)
             }
             return result?.count ?? 0
@@ -102,15 +95,11 @@ extension Service {
         let endDate = NSDate()
         let startDate = calendar.date(byAdding: .month, value: -1, to: endDate as Date)! as NSDate
         let search = NSPredicate(format: "date >= %@ AND serviceName like %@", argumentArray: [startDate, name])
-        print("usageMonth DFService: \(Thread.current)")
-
         if let context = AppDelegate.persistantStore?.viewContext {
             var result: [ServiceUsage]?
-            print("usageMonth DFService: \(Thread.current)")
             context.performAndWait {
                 let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
                 request.predicate = search
-                print("usageMonth DFService: \(Thread.current)")
                 result = try? context.fetch(request)
             }
             return result?.count ?? 0
@@ -123,15 +112,11 @@ extension Service {
         let endDate = NSDate()
         let startDate = calendar.date(byAdding: .year, value: -1, to: endDate as Date)! as NSDate
         let search = NSPredicate(format: "date >= %@ AND serviceName like %@", argumentArray: [startDate, name])
-        print("usageYear DFService: \(Thread.current)")
-
         if let context = AppDelegate.persistantStore?.viewContext {
             var result: [ServiceUsage]?
-            print("usageYear DFService: \(Thread.current)")
             context.performAndWait {
                 let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
                 request.predicate = search
-                print("usageYear DFService: \(Thread.current)")
                 result = try? context.fetch(request)
             }
             return result?.count ?? 0
