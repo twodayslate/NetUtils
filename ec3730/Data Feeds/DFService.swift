@@ -58,6 +58,7 @@ extension Service {
             let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
             request.predicate = search
             print("clearUsage DFService: \(Thread.current)")
+            // this is async block
             context.perform {
                 let results = try? context.fetch(request)
                 print("clearUsage DFService: \(Thread.current)")
@@ -84,10 +85,14 @@ extension Service {
         print("usageToday DFService: \(Thread.current)")
 
         if let context = AppDelegate.persistantStore?.viewContext {
-            let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
-            request.predicate = search
-            print("usageToday DFService: \(Thread.current)")
-            return (try? context.fetch(request).count) ?? 0
+            var result: [ServiceUsage]?
+            context.performAndWait {
+                let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
+                request.predicate = search
+                print("usageToday DFService: \(Thread.current)")
+                result = try? context.fetch(request)
+            }
+            return result?.count ?? 0
         }
         return 0
     }
@@ -100,10 +105,15 @@ extension Service {
         print("usageMonth DFService: \(Thread.current)")
 
         if let context = AppDelegate.persistantStore?.viewContext {
+            var result: [ServiceUsage]?
             print("usageMonth DFService: \(Thread.current)")
-            let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
-            request.predicate = search
-            return (try? context.fetch(request).count) ?? 0
+            context.performAndWait {
+                let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
+                request.predicate = search
+                print("usageMonth DFService: \(Thread.current)")
+                result = try? context.fetch(request)
+            }
+            return result?.count ?? 0
         }
         return 0
     }
@@ -116,10 +126,15 @@ extension Service {
         print("usageYear DFService: \(Thread.current)")
 
         if let context = AppDelegate.persistantStore?.viewContext {
+            var result: [ServiceUsage]?
             print("usageYear DFService: \(Thread.current)")
-            let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
-            request.predicate = search
-            return (try? context.fetch(request).count) ?? 0
+            context.performAndWait {
+                let request = NSFetchRequest<ServiceUsage>(entityName: "ServiceUsage")
+                request.predicate = search
+                print("usageYear DFService: \(Thread.current)")
+                result = try? context.fetch(request)
+            }
+            return result?.count ?? 0
         }
         return 0
     }
