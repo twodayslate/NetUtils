@@ -20,7 +20,7 @@ enum ScreenId: ScreenIdentifierProtocol, Codable {
         case .ping:
             PingSwiftUIViewController()
         case .viewSource:
-            UIViewControllerView(SourceViewController())
+            SourceCardView()
         case .device:
             DeviceInfoView()
         case .settings:
