@@ -23,7 +23,6 @@ extension Service {
     var usage: Int {
         get {
             let search = NSPredicate(format: "serviceName like %@", argumentArray: [name])
-            // It's being used from the main thread no change is required
             var result: [ServiceUsage]?
             if let context = AppDelegate.persistantStore?.viewContext {
                 context.performAndWait {
