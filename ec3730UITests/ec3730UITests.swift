@@ -33,65 +33,49 @@ class EC3730UITests: XCTestCase {
 
     func testSnapshots() {
         openVC("Host")
-
-        app.toolbars["Toolbar"].buttons["Lookup"].tap()
-
-        waitForElementToAppear(element: app.tables.cells.firstMatch)
+        app.buttons["Lookup"].tap()
+        sleep(1)
         snapshot("Host")
-        scrollToElement(app.tables.staticTexts["DNS"])
-        app.swipeUp()
-        app.swipeUp()
-        snapshot("DNS")
+
+        openVC("Device")
+        snapshot("Device")
+
+        openVC("Ping")
+        app.buttons["ping"].tap()
+        sleep(1)
+        snapshot("Ping")
 
         openVC("Connectivity")
         snapshot("Connectivity")
-        app.tables.cells.containing(.staticText, identifier: "en0").firstMatch.staticTexts["en0"].tap()
-        snapshot("Interface")
-
-        openVC("Ping")
-        app.toolbars["Toolbar"].buttons["ping"].tap()
-
-        // swiftlint:disable line_length
-        waitForElementToAppear(element:
-            app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .textView).element)
-        // swiftlint:enable vertical_whitespace line_length
-        snapshot("Ping")
 
         openVC("View Source")
-        app.toolbars["Toolbar"].buttons["View Source"].tap()
-        snapshot("View Source")
+        sleep(1)
+        snapshot("ViewSource")
     }
 
     private func openVC(_ key: String) {
-        let tabBarsQuery = app.tabBars
+        // First we try the tab bar
+        let scrollViewsQuery = app.scrollViews
+        let elementsQuery = scrollViewsQuery.otherElements
+        let hostButton = elementsQuery.buttons[key]
 
-        if tabBarsQuery.buttons[key].exists {
-            tabBarsQuery.buttons[key].tap()
-        } else if tabBarsQuery.buttons["More"].exists {
-            tabBarsQuery.buttons["More"].tap()
-
-            if app.staticTexts[key].exists {
-                app.staticTexts[key].tap()
-            } else {
-                XCTAssert(false, "Unable to find '\(key)' View Controller (even inside the 'More' controller)")
-            }
-        } else {
-            XCTAssert(false, "Unable to find '\(key)' View Controller")
+        if hostButton.exists, hostButton.isHittable {
+            hostButton.tap()
+            return
         }
-    }
 
-    func waitForElementToAppear(element: XCUIElement, timeout: TimeInterval = 5, file: String = #file, line: UInt = #line) {
-        let existsPredicate = NSPredicate(format: "exists == true")
-
-        expectation(for: existsPredicate,
-                    evaluatedWith: element, handler: nil)
-
-        waitForExpectations(timeout: timeout) { error in
-            if error != nil {
-                let message = "Failed to find \(element) after \(timeout) seconds."
-                self.recordFailure(withDescription: message, inFile: file, atLine: Int(line), expected: true)
-            }
+        // Then we try the more tab
+        let tablesQuery = app.tables
+        let button = tablesQuery.buttons[key]
+        if button.exists, button.isHittable {
+            button.tap()
+            return
         }
+
+        // lastly we try the sidebar
+        let sidebarButton = app.tables.buttons[key]
+        XCTAssert(sidebarButton.exists)
+        sidebarButton.tap()
     }
 }
 
