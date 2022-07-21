@@ -13,6 +13,7 @@ import Version
 
 import CloudKit
 import CoreData
+import SwiftUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -55,8 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window?.backgroundColor = UIColor.black
 
-        let tabViewController = SRCTabBarController()
-        tabViewController.delegate = tabViewController
+        let tabViewController = UIHostingController(rootView: ContentView())
 
         window!.rootViewController = tabViewController
 
