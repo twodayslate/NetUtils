@@ -71,12 +71,10 @@ extension SnapPointCalculator {
     }
 
     init(snaps: [Input], height: CGFloat) {
-        // let safeAreaInsets = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.safeAreaInsets ?? .zero
-        let deviceHeight = height
+        let deviceHeight: CGFloat = max(CGFloat(snaps.count), height)
 
         let results = snaps.map { input -> SnapResult in
             let offset = input.point.offset(deviceHeight: deviceHeight, safeAreaInsets: .zero)
-//            let contentHeight = deviceHeight - handleThickness - 3 * handleVerticalPadding - offset
             return SnapResult(state: input.state,
                               offset: offset,
                               contentHeight: deviceHeight - offset)
