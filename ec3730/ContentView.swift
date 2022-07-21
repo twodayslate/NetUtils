@@ -37,12 +37,7 @@ struct ContentView: View {
                 updateTheme(theme)
             }
             .onChange(of: model.selectedScreen) { value in
-                do {
-                    let data = try JSONEncoder().encode(value)
-                    UserDefaults.standard.set(data, forKey: "lastScreen")
-                } catch {
-                    print("Failed to encode", value)
-                }
+                setScreen(value)
             }
             .onChange(of: theme) { value in
                 updateTheme(value)
@@ -53,6 +48,15 @@ struct ContentView: View {
             }
             .environmentObject(HostViewModel.shared)
             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+    }
+
+    private func setScreen(_ value: ScreenId) {
+        do {
+            let data = try JSONEncoder().encode(value)
+            UserDefaults.standard.set(data, forKey: "lastScreen")
+        } catch {
+            print("Failed to encode", value)
+        }
     }
 
     func updateTheme(_ value: Int) {

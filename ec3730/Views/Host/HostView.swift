@@ -67,13 +67,7 @@ struct HostView: View {
                         } else {
                             Button("Lookup", action: {
                                 Task {
-                                    await self.query { errors in
-                                        guard errors.count <= 0 else {
-                                            self.showErrors = true
-                                            self.errors = errors
-                                            return
-                                        }
-                                    }
+                                    await lookup()
                                 }
                             }).padding(.trailing, geometry.safeAreaInsets.trailing)
                         }
@@ -99,6 +93,17 @@ struct HostView: View {
         }, message: { errors in
             Text("\(errors.debugDescription)")
         })
+    }
+
+    /// query and set errors (if applicable)  upon completion
+    func lookup() async {
+        await query { errors in
+            guard errors.count <= 0 else {
+                self.showErrors = true
+                self.errors = errors
+                return
+            }
+        }
     }
 
     func cancel() {

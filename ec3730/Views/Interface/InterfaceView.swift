@@ -33,22 +33,26 @@ struct InterfaceView: View {
 
             if let proxyInfo = proxyInformation {
                 ForEach(proxyKeys, id: \.key) { item in
-                    if let value = proxyInfo[item.key] as? String {
-                        CopyCellView(title: item.title, content: value)
-                    } else if let values = proxyInfo[item.key] as? [String] {
-                        CopyCellView(title: item.title, rows: values.map { CopyCellRow(content: $0) })
-                    } else if let value = proxyInfo[item.key] as? Int {
-                        CopyCellView(title: item.title, content: String(describing: value))
-                    } else if let value = proxyInfo[item.key] as? Bool {
-                        CopyCellView(title: item.title, content: value ? "Yes" : "No")
-                    } else if let value = proxyInfo[item.key] {
-                        CopyCellView(title: item.key, content: String(describing: value))
-                    }
+                    proxyView(item, info: proxyInfo)
                 }
             }
         }
         .listStyle(.plain)
         .navigationTitle(interface.name)
+    }
+
+    @ViewBuilder private func proxyView(_ item: (key: String, title: String), info proxyInfo: [String: Any?]) -> some View {
+        if let value = proxyInfo[item.key] as? String {
+            CopyCellView(title: item.title, content: value)
+        } else if let values = proxyInfo[item.key] as? [String] {
+            CopyCellView(title: item.title, rows: values.map { CopyCellRow(content: $0) })
+        } else if let value = proxyInfo[item.key] as? Int {
+            CopyCellView(title: item.title, content: String(describing: value))
+        } else if let value = proxyInfo[item.key] as? Bool {
+            CopyCellView(title: item.title, content: value ? "Yes" : "No")
+        } else if let value = proxyInfo[item.key] {
+            CopyCellView(title: item.key, content: String(describing: value))
+        }
     }
 
     @ViewBuilder func basicInfo() -> some View {
