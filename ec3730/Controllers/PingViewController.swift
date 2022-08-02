@@ -209,31 +209,40 @@ struct PingSetView: View {
 @available(iOS 14.0, *)
 struct PingSetList: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    @State var mode: EditMode = .inactive
     @FetchRequest(fetchRequest: PingSet.fetchAllRequest()) var pings: FetchedResults<PingSet>
 
     var body: some View {
-        List {
-            ForEach(pings) { ping in
-                NavigationLink(
-                    destination: PingSetView(ping: ping),
-                    label: {
-                        VStack(alignment: .leading) {
-                            HStack(alignment: .center) {
-                                Text("\(ping.host)").font(.headline)
-                                Spacer()
-                                Text("\(ping.pings.count)").font(.footnote).foregroundColor(.gray)
+        VStack {
+            if mode == .active, pings.count > 1 {
+                Button {
+                    deleteAllItems()
+                } label: {
+                    Text("Delete All")
+                }
+            }
+            List {
+                ForEach(pings) { ping in
+                    NavigationLink(
+                        destination: PingSetView(ping: ping),
+                        label: {
+                            VStack(alignment: .leading) {
+                                HStack(alignment: .center) {
+                                    Text("\(ping.host)").font(.headline)
+                                    Spacer()
+                                    Text("\(ping.pings.count)").font(.footnote).foregroundColor(.gray)
+                                }
+                                Text("\(ping.timestamp)").font(.caption)
                             }
-                            Text("\(ping.timestamp)").font(.caption)
                         }
-                    }
-                )
-            }.onDelete(perform: deleteItems)
-        }.listStyle(PlainListStyle()).navigationTitle("History").toolbar {
-            #if os(iOS)
-                EditButton()
-            #endif
-        }
+                    )
+                }.onDelete(perform: deleteItems)
+            }.listStyle(PlainListStyle()).navigationTitle("History").toolbar {
+                #if os(iOS)
+                    EditButton()
+                #endif
+            }
+        }.environment(\.editMode, $mode)
     }
 
     private func deleteItems(offsets: IndexSet) {
@@ -241,6 +250,18 @@ struct PingSetList: View {
             withAnimation {
                 offsets.map { pings[$0] }.forEach(viewContext.delete)
                 _ = try? viewContext.save()
+            }
+        }
+    }
+
+    private func deleteAllItems() {
+        viewContext.perform {
+            withAnimation {
+                for object in pings {
+                    viewContext.delete(object)
+                    try? viewContext.save()
+                    mode = .inactive
+                }
             }
         }
     }
