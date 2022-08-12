@@ -211,16 +211,9 @@ struct PingSetList: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State var mode: EditMode = .inactive
     @FetchRequest(fetchRequest: PingSet.fetchAllRequest()) var pings: FetchedResults<PingSet>
-
+    @State var isPresentigDeleteConfirm = false
     var body: some View {
         VStack {
-            if mode == .active, pings.count > 1 {
-                Button {
-                    deleteAllItems()
-                } label: {
-                    Text("Delete All")
-                }
-            }
             List {
                 ForEach(pings) { ping in
                     NavigationLink(
@@ -241,6 +234,21 @@ struct PingSetList: View {
                 #if os(iOS)
                     EditButton()
                 #endif
+            }.toolbar { ToolbarItem(placement: .bottomBar, content: {
+                if mode == .active, pings.count > 1 {
+                    Button {
+                        isPresentigDeleteConfirm.toggle()
+                    } label: {
+                        Text("Delete All")
+                    }
+                }
+            }) }.confirmationDialog("Are you sure?",
+                                    isPresented: $isPresentigDeleteConfirm, titleVisibility: .visible) {
+                Button("Delete all \(pings.count) items?", role: .destructive) {
+                    deleteAllItems()
+                }
+            } message: {
+                Text("You cannot undo this action")
             }
         }.environment(\.editMode, $mode)
     }

@@ -4,16 +4,9 @@ struct HostHistoryList: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State var mode: EditMode = .inactive
     @FetchRequest(fetchRequest: HostDataGroup.fetchAllRequest()) var entries: FetchedResults<HostDataGroup>
-
+    @State var isPresentigDeleteConfirm = false
     var body: some View {
         VStack {
-            if mode == .active, entries.count > 1 {
-                Button {
-                    deleteAllItems()
-                } label: {
-                    Text("Delete All")
-                }
-            }
             List {
                 ForEach(entries) { entry in
                     NavigationLink(
@@ -41,6 +34,21 @@ struct HostHistoryList: View {
                 #if os(iOS)
                     EditButton()
                 #endif
+            }.toolbar { ToolbarItem(placement: .bottomBar, content: {
+                if mode == .active, entries.count > 1 {
+                    Button {
+                        isPresentigDeleteConfirm.toggle()
+                    } label: {
+                        Text("Delete All")
+                    }
+                }
+            }) }.confirmationDialog("Are you sure?",
+                                    isPresented: $isPresentigDeleteConfirm, titleVisibility: .visible) {
+                Button("Delete all \(entries.count) items?", role: .destructive) {
+                    deleteAllItems()
+                }
+            } message: {
+                Text("You cannot undo this action")
             }
         }.environment(\.editMode, $mode)
     }
