@@ -23,7 +23,7 @@ format:
 
 .PHONY: snapshot
 snapshot:
-	fastlane snapshot && fastlane ios deliver_snapshots
+	fastlane snapshot && fastlane deliver --overwrite_screenshots
 
 .PHONY: open
 open:

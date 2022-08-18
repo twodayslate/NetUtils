@@ -35,9 +35,11 @@ class EC3730UITests: XCTestCase {
         openVC("Host")
         app.buttons["Lookup"].tap()
         sleep(1)
+        expandFirstItem()
         snapshot("Host")
 
         openVC("Device")
+        expandFirstItem()
         snapshot("Device")
 
         openVC("Ping")
@@ -49,8 +51,16 @@ class EC3730UITests: XCTestCase {
         snapshot("Connectivity")
 
         openVC("View Source")
-        sleep(1)
+        sleep(2)
         snapshot("ViewSource")
+    }
+
+    private func expandFirstItem() {
+        app.scrollViews.otherElements.firstMatch.press(forDuration: 1.1)
+        let expandButton = app.collectionViews/*@START_MENU_TOKEN@*/ .buttons["Expand"]/*[[".cells.buttons[\"Expand\"]",".buttons[\"Expand\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        if expandButton.isHittable {
+            expandButton.tap()
+        }
     }
 
     private func openVC(_ key: String) {
@@ -65,6 +75,8 @@ class EC3730UITests: XCTestCase {
         }
 
         // Then we try the more tab
+        app.scrollViews.otherElements.buttons["More"].tap()
+
         let tablesQuery = app.tables
         let button = tablesQuery.buttons[key]
         if button.exists, button.isHittable {

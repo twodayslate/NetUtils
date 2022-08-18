@@ -1,0 +1,44 @@
+The all-in-one Network Utility application!
+
+• Network connectivity status
+• Network interface information
+   • WiFi information
+   • VPN information
+• Host information
+• Google Web Risk Information (purchase or API key required)
+• WHOIS information from Whois XML API (subscription or API key required)
+• DNS information from Whois XML API (subscription  or API key required)
+• Domain and IP reputation information from Whois XML API (subscription  or API key required)
+• Ping utility
+• Device information
+• View page source
+
+Information used by cyber security professionals, payment processors, law enforcement, website owners, and domain investors. 
+
+Find ties to cybercrime and enhance your cyber defense. This information could be particularly useful in mitigating phishing and other malware-enabled attacks.
+
+► WHOIS Information (Subscription required or bring your own API key)
+◆ Get registrant name, organization, e-mail address, registration address, registrar information, creation date, expiration date, updated date, domain availability, domain age, and much more.
+◆ Real-time WHOIS data, ensuring that only the most up to date and accurate information is available
+▸ Check domain names availability and to track domain registration changes.
+▸ Ensure reliable and secure domain name ownership transfer and management.
+▸ Protect your intellectual property and to check potential trademark infringements. They also use Whois searches to scope domain name similarities, duplicates, or copycats.
+▸ Domain investors use the information gained from Whois searches to learn about their competition and to identify investment opportunities.
+▸ Identify all the connected domains, websites and IP addresses associated with fraudulent activities and criminals.
+▸ Identify new business and partnership opportunities and to locate potential buyers through the contact details provided in the Whois records.
+▸ Obtain more insights on your user base with statistical analyses, helping you create better marketing strategies and campaigns, focus on the right customers, and cater to formerly untapped markets
+
+► DNS Information (Subscription required or bring your own API key)
+A domain has a number of records associated with it, a DNS server can be queried to determine the IP address of the primary domain (A record), mail servers (MX records), DNS servers (NS nameservers) and other items such as SPF records (TXT records). 
+◆ Displays the DNS information critical for identifying who is hosting a particular domain name or website. 
+◆ Determine the Mail Servers for Particular Domain You might use this API to find out what server(s) accept email for a specific domain (by doing an MX record lookup). 
+◆ Determine the IP address of the primary domain (A record), mail servers (MX records), DNS servers (name servers) and other items such as SPF records (TXT records). 
+◆ Determine whether the domain restricts who can send email - You might use this API to determine the SPF record for a domain (by looking up the TXT record for the domain), to see if the domain tries to restrict who can send email using the domain
+
+► Reputation Information (Subscription required or bring your own API key)
+◆ Instantly audit your or someone else’s domain or IP address with Domain Reputation API. The tool uses hundreds of parameters to calculate reputation scores.
+
+► Web Risk (Purchase required or bring your own API key)
+◆ Check URLs against Google's constantly updated lists of unsafe web resources
+
+Open source: https://github.com/twodayslate/NetUtils
