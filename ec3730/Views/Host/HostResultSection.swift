@@ -32,8 +32,9 @@ struct HostResultSection: View, Equatable, Identifiable, Hashable {
                                   ForEach(self.sectionModel.content) { row in
                                       row
                                   }
-
-                              }.listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)).background(Color(UIColor.systemBackground))
+                              }.listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                                  .background(Color(UIColor.systemBackground))
+                                  .cornerRadius(6)
                           },
                           label: {
                               HStack(alignment: .center) {
