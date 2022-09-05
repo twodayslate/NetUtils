@@ -20,8 +20,9 @@ class DataUsageInfoModel: DeviceInfoSectionModel {
 
     @MainActor override func reload() {
         enabled = true
+        SystemDataUsage.reload()
         rows.removeAll()
-        rows.append(CopyCellView(title: "Wi-Fi", content: SystemDataUsage.wifiCompelete))
-        rows.append(CopyCellView(title: "Cellular", content: SystemDataUsage.wwanCompelete))
+        rows.append(CopyCellView(title: "Wifi", rows: [CopyCellRow(title: "Send / Recieve", content: SystemDataUsage.wifiTotal)]))
+        rows.append(CopyCellView(title: "Cellular", rows: [CopyCellRow(title: "Send / Recieve", content: SystemDataUsage.wwanTotal)]))
     }
 }

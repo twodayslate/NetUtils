@@ -7,20 +7,28 @@
 //
 
 import Foundation
+import NetUtils
 
 extension SystemDataUsage {
-    static var wifiCompelete: String {
+    static var wifiTotal: String {
         let usage = dataUsage.wifiSent + dataUsage.wifiReceived
         return humanReadableByteCount(bytes: usage)
     }
 
-    static var wwanCompelete: String {
+    static var wwanTotal: String {
         let usage = dataUsage.wirelessWanDataSent + dataUsage.wirelessWanDataReceived
         return humanReadableByteCount(bytes: usage)
     }
 
-    static var dataUsage: DataUsageInfo {
-        SystemDataUsage.getDataUsage()
+    static var totalUsage: String {
+        let usage = dataUsage.wirelessWanDataSent + dataUsage.wirelessWanDataReceived + dataUsage.wifiSent + dataUsage.wifiReceived
+        return humanReadableByteCount(bytes: usage)
+    }
+
+    static var dataUsage: DataUsageInfo = SystemDataUsage.getDataUsage()
+
+    static func reload() {
+        dataUsage = SystemDataUsage.getDataUsage()
     }
 
     static func humanReadableByteCount(bytes: UInt64) -> String {
@@ -39,8 +47,8 @@ extension SystemDataUsage {
 }
 
 class SystemDataUsage {
-    private static let wwanInterfacePrefix = "pdp_ip"
-    private static let wifiInterfacePrefix = "en"
+    public static let wwanInterfacePrefix = "pdp_ip"
+    public static let wifiInterfacePrefix = "en"
 
     class func getDataUsage() -> DataUsageInfo {
         var ifaddr: UnsafeMutablePointer<ifaddrs>?
@@ -61,7 +69,7 @@ class SystemDataUsage {
         return dataUsageInfo
     }
 
-    private class func getDataUsageInfo(from infoPointer: UnsafeMutablePointer<ifaddrs>) -> DataUsageInfo? {
+    class func getDataUsageInfo(from infoPointer: UnsafeMutablePointer<ifaddrs>) -> DataUsageInfo? {
         let pointer = infoPointer
         let name: String! = String(cString: pointer.pointee.ifa_name)
         let addr = pointer.pointee.ifa_addr.pointee
