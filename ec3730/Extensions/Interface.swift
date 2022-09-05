@@ -38,18 +38,21 @@ extension Interface: Identifiable {
         if getifaddrs(&ifaddrsPtr) == 0 {
             var ifaddrPtr = ifaddrsPtr
             while ifaddrPtr != nil, !found {
-                if let data = ifaddrPtr?.pointee {
-                    let name = String(cString: data.ifa_name)
-                    let address = Interface.extractAddress(data.ifa_addr)
-                    if address == self.address, name == self.name {
-                        found = true
-                        if name.hasPrefix(SystemDataUsage.wifiInterfacePrefix) {
-                            if let dataUsage = SystemDataUsage.getDataUsageInfo(from: ifaddrPtr!) {
-                                usage = dataUsage.wifiSent + dataUsage.wifiReceived
-                            }
-                        } else if name.hasPrefix(SystemDataUsage.wwanInterfacePrefix) {
-                            if let dataUsage = SystemDataUsage.getDataUsageInfo(from: ifaddrPtr!) {
-                                usage = dataUsage.wirelessWanDataSent + dataUsage.wirelessWanDataReceived
+                let addr = ifaddrPtr?.pointee.ifa_addr.pointee
+                if addr?.sa_family == InetFamily(AF_INET) || addr?.sa_family == InetFamily(AF_INET6) {
+                    if let data = ifaddrPtr?.pointee {
+                        let name = String(cString: data.ifa_name)
+                        let address = Interface.extractAddress(data.ifa_addr)
+                        if address == self.address, name == self.name {
+                            found = true
+                            if name.hasPrefix(SystemDataUsage.wifiInterfacePrefix) {
+                                if let dataUsage = SystemDataUsage.getDataUsageInfo(from: ifaddrPtr!) {
+                                    usage = dataUsage.wifiSent + dataUsage.wifiReceived
+                                }
+                            } else if name.hasPrefix(SystemDataUsage.wwanInterfacePrefix) {
+                                if let dataUsage = SystemDataUsage.getDataUsageInfo(from: ifaddrPtr!) {
+                                    usage = dataUsage.wirelessWanDataSent + dataUsage.wirelessWanDataReceived
+                                }
                             }
                         }
                     }
