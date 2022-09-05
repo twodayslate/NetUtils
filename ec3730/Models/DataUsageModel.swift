@@ -15,9 +15,25 @@ extension SystemDataUsage {
         return humanReadableByteCount(bytes: usage)
     }
 
+    static var wifiSent: String {
+        humanReadableByteCount(bytes: dataUsage.wifiSent)
+    }
+
+    static var wifiReceived: String {
+        humanReadableByteCount(bytes: dataUsage.wifiReceived)
+    }
+
     static var wwanTotal: String {
         let usage = dataUsage.wirelessWanDataSent + dataUsage.wirelessWanDataReceived
         return humanReadableByteCount(bytes: usage)
+    }
+
+    static var wwanSent: String {
+        humanReadableByteCount(bytes: dataUsage.wirelessWanDataSent)
+    }
+
+    static var wwanReceived: String {
+        humanReadableByteCount(bytes: dataUsage.wirelessWanDataReceived)
     }
 
     static var totalUsage: String {

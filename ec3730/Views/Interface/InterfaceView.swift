@@ -71,7 +71,6 @@ struct InterfaceView: View {
         CopyCellView(title: "Runing", content: interface.isRunning ? "Yes" : "No")
         CopyCellView(title: "Up", content: interface.isUp ? "Yes" : "No")
         CopyCellView(title: "Supports Multicast", content: interface.supportsMulticast ? "Yes" : "No")
-        CopyCellView(title: "Data Usage", rows: [CopyCellRow(title: "Send / Recieve", content: interface.dataUsage)])
     }
 
     @ViewBuilder func wifiInfo() -> some View {
