@@ -590,6 +590,7 @@
 				F660FDE7286903DC0027C759 /* JavaScriptInfoModel.swift */,
 				F660FDE1286900000027C759 /* ProcessInfoModel.swift */,
 				F660FDED28693D010027C759 /* FingerprintInfoModel.swift */,
+				AA1595D228B24AC2003819A1 /* DataUsageInfoModel.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -653,6 +654,7 @@
 				F6C38E8726FABEFB00BD9A71 /* StoreKitModel.swift */,
 				F66643B626F030D5000F17BC /* HostSectionModel.swift */,
 				F644A0FB279283220061C98B /* Sections */,
+				AA1595D428B24D2A003819A1 /* DataUsageModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1239,6 +1241,7 @@
 				F650F749233CF15800BAA609 /* DataFeed.swift in Sources */,
 				F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */,
 				F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */,
+				AA1595D528B24D2A003819A1 /* DataUsageModel.swift in Sources */,
 				AA8FBAB9283AA6A000280377 /* HostViewSectionContent.swift in Sources */,
 				F63540DB213E05E000605ABE /* HostViewController.swift in Sources */,
 				F668EB4523563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift in Sources */,
