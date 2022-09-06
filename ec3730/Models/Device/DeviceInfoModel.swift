@@ -20,6 +20,7 @@ class DeviceInfoModel: ObservableObject {
             sections.append(JavaScriptInfoModel())
             sections.append(CarrierInfoModel())
             sections.append(FingerprintInfoModel())
+            sections.append(DataUsageInfoModel())
             self.reload()
         }
     }
