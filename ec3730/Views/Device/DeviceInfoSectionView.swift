@@ -12,9 +12,12 @@ struct DeviceInfoSectionView: View {
 
     var body: some View {
         FSDisclosureGroup(isExpanded: $isExpanded, content: {
-            ForEach(section.rows) { row in
-                row
+            VStack(spacing: 0) {
+                ForEach(section.rows) { row in
+                    row
+                }
             }
+            .cornerRadius(6)
         }, label: {
             HStack(alignment: .center) {
                 Text(section.title).font(.headline).padding()

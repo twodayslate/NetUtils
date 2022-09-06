@@ -43,6 +43,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
         FSDisclosureGroup(isExpanded: $isExpanded,
                           content: {
                               HostViewSectionContent(sectionModel: sectionModel, canQuery: canQuery)
+                                  .cornerRadius(6)
                           },
                           label: {
                               HStack(alignment: .center) {
