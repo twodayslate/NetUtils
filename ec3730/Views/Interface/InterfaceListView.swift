@@ -13,10 +13,13 @@ struct InterfaceListView: View {
                 VStack(spacing: 0) {
                     let enabled = model.interfaces.filter(\.isUp)
                     FSDisclosureGroup(isExpanded: $upEnabled, content: {
-                        ForEach(enabled) { interface in
-                            row(for: interface)
-                                .listRowInsets(.none)
+                        VStack(spacing: 0) {
+                            ForEach(enabled) { interface in
+                                row(for: interface)
+                                    .listRowInsets(.none)
+                            }
                         }
+                        .cornerRadius(6)
                     }, label: {
                         HStack(alignment: .center) {
                             Text("Enabled (Up)").font(.headline).padding()
@@ -26,10 +29,13 @@ struct InterfaceListView: View {
 
                     let disabled = model.interfaces.filter { !$0.isUp }
                     FSDisclosureGroup(isExpanded: $downEnabled, content: {
-                        ForEach(disabled) { interface in
-                            row(for: interface)
-                                .listRowInsets(.none)
+                        VStack(spacing: 0) {
+                            ForEach(disabled) { interface in
+                                row(for: interface)
+                                    .listRowInsets(.none)
+                            }
                         }
+                        .cornerRadius(6)
                     }, label: {
                         HStack(alignment: .center) {
                             Text("Disabled (Down)").font(.headline).padding()

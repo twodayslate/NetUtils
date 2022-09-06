@@ -316,46 +316,30 @@ struct PingSwiftUIViewController: View {
     @State var alertMessage: String?
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack(alignment: .leading, spacing: 0.0) {
-                ScrollViewReader { reader in
-                    ScrollView {
-                        LazyVStack(alignment: .leading, spacing: 0.0) {
-                            ForEach(0 ..< entries.count, id: \.self) { i in
-                                Text(entries[i]).multilineTextAlignment(.leading).foregroundColor(.green).tag(i).font(Font.system(.footnote, design: .monospaced))
-                            }.onChange(of: entries, perform: { _ in
-                                withAnimation {
-                                    reader.scrollTo(entries.count - 1, anchor: .bottom)
-                                }
-                            })
-                        }.padding()
-                    }
-                    .background(Color.black.ignoresSafeArea(.all, edges: .horizontal))
-                    // Fix for the content going above the navigation
-                    // See !92 for more information
-                    .padding(.top, 0.15)
-                    .onTapGesture {
-                        dismissKeyboard = UUID()
-                    }
+        VStack(alignment: .leading, spacing: 0.0) {
+            ScrollViewReader { reader in
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 0.0) {
+                        ForEach(0 ..< entries.count, id: \.self) { i in
+                            Text(entries[i]).multilineTextAlignment(.leading).foregroundColor(.green).tag(i).font(Font.system(.footnote, design: .monospaced))
+                        }.onChange(of: entries, perform: { _ in
+                            withAnimation {
+                                reader.scrollTo(entries.count - 1, anchor: .bottom)
+                            }
+                        })
+                    }.padding()
                 }
-                VStack(alignment: .leading, spacing: 0.0) {
-                    Divider()
-                    HStack(alignment: .center) {
-                        // it would be great if this could be a .bottomBar toolbar but it is too buggy
-                        TextField(self.defaultPing, text: $text, onCommit: { self.ping() }).id(dismissKeyboard).disableAutocorrection(true).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.URL).padding(.leading, geometry.safeAreaInsets.leading)
-                        if self.isPinging {
-                            Button("Cancel", action: {
-                                self.cancel()
-                            }).padding(.trailing, geometry.safeAreaInsets.trailing)
-                        } else {
-                            Button("ping", action: {
-                                self.ping()
-                            }).padding(.trailing, geometry.safeAreaInsets.trailing)
-                        }
-                    }.padding(.horizontal).padding([.vertical], 6)
-                }.background(VisualEffectView(effect: UIBlurEffect(style: .systemMaterial)).ignoresSafeArea(.all, edges: .horizontal)).ignoresSafeArea()
-            }.navigationBarTitle("Ping", displayMode: .inline)
+                .background(Color.black.ignoresSafeArea(.all, edges: .horizontal))
+                // Fix for the content going above the navigation
+                // See !92 for more information
+                .padding(.top, 0.15)
+                .onTapGesture {
+                    dismissKeyboard = UUID()
+                }
+            }
+            SourceUrlBarView(text: $text, refresh: nil, go: ping, defaultText: defaultPing, goText: "ping", isQuerying: $isPinging, cancel: cancel)
         }
+        .navigationBarTitle("Ping", displayMode: .inline)
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarLeading, content: {
                 Button(action: { showSettings.toggle() }, label: {

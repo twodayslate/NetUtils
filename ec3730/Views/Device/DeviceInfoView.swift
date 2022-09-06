@@ -53,6 +53,7 @@ struct DeviceInfoView: View {
             }
             .id(date)
         }
+        .background(Color(UIColor.systemGroupedBackground))
         .background {
             ZStack {
                 WebkitOverlayView(model: fingerprint)
