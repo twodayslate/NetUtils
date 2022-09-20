@@ -20,6 +20,7 @@ class EC3730UITests: XCTestCase {
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         app = XCUIApplication()
+        app.launchArguments += ["UI-Testing"]
         setupSnapshot(app)
         app.launch()
 
@@ -35,11 +36,9 @@ class EC3730UITests: XCTestCase {
         openVC("Host")
         app.buttons["Lookup"].tap()
         sleep(1)
-        expandFirstItem()
         snapshot("Host")
 
         openVC("Device")
-        expandFirstItem()
         snapshot("Device")
 
         openVC("Ping")
@@ -53,14 +52,6 @@ class EC3730UITests: XCTestCase {
         openVC("View Source")
         sleep(2)
         snapshot("ViewSource")
-    }
-
-    private func expandFirstItem() {
-        app.scrollViews.otherElements.firstMatch.press(forDuration: 1.1)
-        let expandButton = app.collectionViews/*@START_MENU_TOKEN@*/ .buttons["Expand"]/*[[".cells.buttons[\"Expand\"]",".buttons[\"Expand\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        if expandButton.isHittable {
-            expandButton.tap()
-        }
     }
 
     private func openVC(_ key: String) {

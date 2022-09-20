@@ -82,6 +82,7 @@ struct SourceCardView: View {
                                                     Text("HTML")
                                                         .bold()
                                                 })
+                                                .pickerStyle(.menu)
                                                 Spacer()
                                             }
 
@@ -112,6 +113,7 @@ struct SourceCardView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("View Source")
         .padding(.top, 0.5)
+        .background(Color(UIColor.systemGroupedBackground))
         .onChange(of: url) { _ in
             urlText = url.absoluteString
         }

@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if ProcessInfo().arguments.contains("SKIP_ANIMATIONS") {
                 UIView.setAnimationsEnabled(false)
             }
+
+            handleUITests()
         #endif
 
         UIDevice.current.isBatteryMonitoringEnabled = true
@@ -78,6 +80,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
+    }
+
+    func handleUITests() {
+        if ProcessInfo.processInfo.arguments.contains("UI-Testing") {
+            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+            UserDefaults.standard.dictionaryRepresentation().keys.forEach(UserDefaults.standard.removeObject(forKey:))
+            UserDefaults.standard.synchronize()
+        }
     }
 
     public static var persistantStore: NSPersistentCloudKitContainer? = {

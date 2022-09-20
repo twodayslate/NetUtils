@@ -30,8 +30,9 @@ struct HostResult: View {
                     }
                 }
             }
-            .background(Color(UIColor.systemGroupedBackground))
             HostBarView(url: group.url, date: group.date)
-        }.navigationTitle(self.group.url.host ?? "Unknown Host")
+        }
+        .background(Color(UIColor.systemGroupedBackground))
+        .navigationTitle(self.group.url.host ?? "Unknown Host")
     }
 }

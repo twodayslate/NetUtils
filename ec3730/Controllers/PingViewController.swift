@@ -364,6 +364,7 @@ struct PingSwiftUIViewController: View {
         .onDisappear(perform: {
             self.pinger?.stopPinging()
         })
+        .background(Color(UIColor.systemGroupedBackground))
         .navigationViewStyle(StackNavigationViewStyle())
         .environment(\.managedObjectContext, persistenceController.container.viewContext) // NavigationView
     }
