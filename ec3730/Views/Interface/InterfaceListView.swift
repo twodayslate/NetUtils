@@ -44,11 +44,11 @@ struct InterfaceListView: View {
                     })
                 }
             }
-            .background(Color(UIColor.systemGroupedBackground))
             .padding(.top, 0.15)
             .layoutPriority(1.0)
             InterfaceConnectionBarView(model: model)
         }
+        .background(Color(UIColor.systemGroupedBackground))
         .onAppear {
             model.reload()
         }

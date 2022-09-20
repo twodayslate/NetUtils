@@ -36,7 +36,6 @@ struct HostView: View {
                 }
                 .animation(.default, value: model.sections)
             }
-            .background(Color(UIColor.systemGroupedBackground))
             // Fix for the content going above the navigation
             // See !92 for more information
             .padding(.top, 0.15)
@@ -61,6 +60,7 @@ struct HostView: View {
                 cancel: cancel
             )
         }
+        .background(Color(UIColor.systemGroupedBackground))
         .navigationBarTitle("Host Information", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing, content: {
