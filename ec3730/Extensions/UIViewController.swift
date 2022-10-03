@@ -56,11 +56,11 @@ extension UIViewController {
     }
 }
 
-extension UIViewController {
+public extension UIViewController {
     /**
      - seealso: https://stackoverflow.com/a/54932223/193772
      */
-    public func addActionSheetForiPad(sourceView aView: UIView? = nil, sourceRect rect: CGRect? = nil, permittedArrowDirections arrowDirections: UIPopoverArrowDirection? = nil) {
+    func addActionSheetForiPad(sourceView aView: UIView? = nil, sourceRect rect: CGRect? = nil, permittedArrowDirections arrowDirections: UIPopoverArrowDirection? = nil) {
         let useView = (aView ?? view) as UIView
         let useRect = (rect ?? CGRect(x: useView.bounds.midX, y: useView.bounds.midY, width: 0, height: 0)) as CGRect
         let useArrows = (arrowDirections ?? []) as UIPopoverArrowDirection
@@ -70,7 +70,7 @@ extension UIViewController {
         popoverPresentationController?.permittedArrowDirections = useArrows
     }
 
-    open func showError(_ title: String = "Error", message: String) {
+    func showError(_ title: String = "Error", message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
@@ -79,7 +79,7 @@ extension UIViewController {
         }
     }
 
-    open func alert(with message: String, title _: String? = nil, cancelTitle: String = "Okay") {
+    func alert(with message: String, title _: String? = nil, cancelTitle: String = "Okay") {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
@@ -88,7 +88,7 @@ extension UIViewController {
         }
     }
 
-    open func alert(with error: Error, cancelTitle: String = "Okay") {
+    func alert(with error: Error, cancelTitle: String = "Okay") {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: error.title, message: error.localizedDescription, preferredStyle: .alert)
 
