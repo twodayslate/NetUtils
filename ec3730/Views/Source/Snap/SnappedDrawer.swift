@@ -68,7 +68,8 @@ struct SnapDrawer<StateType: SnapState, Background: View, Content: View>: View {
                 }
                 .frame(height: currentResult.contentHeight)
 
-                Spacer(minLength: 0)
+                // this spacer is necessary so we don't see the bottom corners
+                Spacer(minLength: height)
             }
 
 //            Text("min: \(minDrag) max: \(maxDrag) height: \(height) conOff: \(self.currentResult.offset) conHeight: \(currentResult.contentHeight) trans: \(self.dragState.translation.height) offset: \(offset)")
