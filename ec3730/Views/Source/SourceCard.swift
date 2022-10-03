@@ -52,7 +52,7 @@ struct SourceCardView: View {
             ZStack(alignment: .bottom) {
                 GeometryReader { reader in
                     WebWrapperView(webView: $webView, source: $source, url: $url, isLoading: $isLoading)
-                        .padding(.bottom, reader.size.height * Style.minimumSizeFration)
+                        .padding(.bottom, max(0, reader.size.height * Style.minimumSizeFration - 10)) // 10 is the shadow of the SnapDrawer
                 }
                 GeometryReader { reader in
                     VStack {
@@ -83,6 +83,7 @@ struct SourceCardView: View {
                                                         .bold()
                                                 })
                                                 .pickerStyle(.menu)
+                                                .labelsHidden()
                                                 Spacer()
                                             }
 
