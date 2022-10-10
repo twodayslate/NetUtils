@@ -307,7 +307,7 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
 
             content.append(CopyCellView(title: "Administrative Contact", rows: rows))
         }
-//
+        //
         if let contact = record.technicalContact {
             var rows = [CopyCellRow]()
             if let name = contact.name {
@@ -445,7 +445,7 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
 
             content.append(CopyCellView(title: "Technical Contact", rows: rows))
         }
-//
+        //
         if let contact = record.billingContact {
             var rows = [CopyCellRow]()
             if let name = contact.name {
@@ -609,52 +609,28 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
 
     private let cache = MemoryStorage<String, WhoisRecord>(config: .init(expiry: .seconds(15), countLimit: 3, totalCostLimit: 0))
 
-    @MainActor
-    override func query(url: URL? = nil, completion block: ((Error?, Data?) -> Void)? = nil) {
+    @discardableResult
+    override func query(url: URL? = nil) async throws -> Data {
         reset()
 
         guard let host = url?.host else {
-            block?(URLError(URLError.badURL), nil)
-            return
+            throw URLError(URLError.badURL)
         }
         latestQueriedUrl = url
         latestQueryDate = .now
 
         if let record = try? cache.object(forKey: host) {
-            do {
-                block?(nil, try configure(with: record))
-            } catch {
-                block?(error, nil)
-            }
-            return
+            return try configure(with: record)
         }
 
         guard dataFeed.userKey != nil || storeModel?.owned ?? false else {
-            block?(MoreStoreKitError.NotPurchased, nil)
-            return
+            throw MoreStoreKitError.NotPurchased
         }
 
-        WhoisXml.whoisService.query(["domain": host]) { (responseError, response: Coordinate?) in
-            DispatchQueue.main.async {
-                print(response.debugDescription)
+        let response: Coordinate = try await WhoisXml.whoisService.query(["domain": host])
 
-                guard responseError == nil else {
-                    block?(responseError, nil)
-                    return
-                }
+        cache.setObject(response.whoisRecord, forKey: host)
 
-                guard let response = response else {
-                    block?(URLError(URLError.badServerResponse), nil)
-                    return
-                }
-                self.cache.setObject(response.whoisRecord, forKey: host)
-
-                do {
-                    block?(nil, try self.configure(with: response.whoisRecord))
-                } catch {
-                    block?(error, nil)
-                }
-            }
-        }
+        return try configure(with: response.whoisRecord)
     }
 }

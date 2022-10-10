@@ -1,10 +1,10 @@
 import Cache
 import SwiftUI
 
+@MainActor
 class WhoisXmlDnsSectionModel: HostSectionModel {
     required convenience init() {
-        self.init(WhoisXml.current, service: WhoisXml.dnsService)
-        storeModel = StoreKitModel.dns
+        self.init(WhoisXml.current, service: WhoisXml.dnsService, storeModel: StoreKitModel.dns)
     }
 
     @MainActor
@@ -17,7 +17,7 @@ class WhoisXmlDnsSectionModel: HostSectionModel {
     }
 
     @MainActor
-    func configure(with records: [DNSRecords]) throws -> Data? {
+    func configure(with records: [DNSRecords]) throws -> Data {
         reset()
 
         let copyData = try JSONEncoder().encode(records)
@@ -65,63 +65,36 @@ class WhoisXmlDnsSectionModel: HostSectionModel {
             content.append(CopyCellView(title: record.dnsType, rows: rows))
         }
 
-        return latestData
+        return copyData
     }
 
     private let cache = MemoryStorage<String, [DNSRecords]>(config: .init(expiry: .seconds(15), countLimit: 3, totalCostLimit: 0))
 
-    @MainActor
-    override func query(url: URL? = nil, completion block: ((Error?, Data?) -> Void)? = nil) {
+    @discardableResult
+    override func query(url: URL? = nil) async throws -> Data {
         reset()
 
         guard let host = url?.host else {
-            block?(URLError(.badURL), nil)
-            return
+            throw URLError(.badURL)
         }
         latestQueriedUrl = url
         latestQueryDate = .now
 
         if let record = try? cache.object(forKey: host) {
-            do {
-                block?(nil, try configure(with: record))
-            } catch {
-                block?(error, nil)
-            }
-            return
+            return try configure(with: record)
         }
 
         guard dataFeed.userKey != nil || storeModel?.owned ?? false else {
-            block?(MoreStoreKitError.NotPurchased, nil)
-            return
+            throw MoreStoreKitError.NotPurchased
         }
 
-        WhoisXml.dnsService.query(["domain": host]) { (error, response: DnsCoordinate?) in
-            DispatchQueue.main.async {
-                print(response.debugDescription)
+        let response: DnsCoordinate = try await WhoisXml.dnsService.query(["domain": host])
 
-                guard error == nil else {
-                    // todo show error
-                    block?(error, nil)
-                    return
-                }
-
-                guard let response = response else {
-                    // todo show error
-                    block?(URLError(URLError.badServerResponse), nil)
-                    return
-                }
-
-                guard let record = response.dnsData.dnsRecords else {
-                    block?(URLError(URLError.badServerResponse), nil)
-                    return
-                }
-                self.cache.setObject(record, forKey: host)
-                do {
-                    block?(nil, try self.configure(with: record))
-                } catch {
-                    block?(error, nil)
-                }
-            }
+        guard let record = response.dnsData.dnsRecords else {
+            throw URLError(URLError.badServerResponse)
         }
+        cache.setObject(record, forKey: host)
+
+        return try configure(with: record)
     }
 }

@@ -21,27 +21,6 @@ final class SimpleDNSResolver: DataFeedSingleton {
     var webpage: URL = .init(staticString: "https://zac.gorak.us")
 }
 
-extension SimpleDNSResolver: DataFeedService {
-    var services: [Service] {
-        [Self.resolver]
-    }
-
-    class DNSResolverService: Service {
-        var name: String = "Simple IP Lookup"
-        var description: String = "Simple IP Lookup"
-
-        func endpoint(_: [String: Any?]?) -> DataFeedEndpoint? {
-            nil
-        }
-
-        func query<T>(_: [String: Any?]?, completion block: ((Error?, T?) -> Void)?) where T: Decodable, T: Encodable {
-            block?(nil, nil)
-        }
-    }
-
-    static var resolver = DNSResolverService()
-}
-
 final class DNSResolver {
     private var completion: ((Error?, [String]?) -> Void)?
     private var timer: Timer?

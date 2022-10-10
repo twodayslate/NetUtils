@@ -86,16 +86,13 @@ class HostViewModel: ObservableObject {
 
             Task {
                 DispatchWorkItem {
-                    section.sectionModel.query(url: url) { error, _ in
-
-                        Task {
-                            guard let error = error else {
-                                group.leave()
-                                return
-                            }
+                    Task {
+                        do {
+                            _ = try await section.sectionModel.query(url: url)
+                        } catch {
                             await errors.append([error])
-                            group.leave()
                         }
+                        group.leave()
                     }
                 }.perform()
             }

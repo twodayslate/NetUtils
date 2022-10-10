@@ -1,11 +1,11 @@
 import SwiftUI
 
+@MainActor
 class LocalDnsModel: HostSectionModel {
     required convenience init() {
         self.init(LocalDns.current, service: LocalDns.lookupService)
     }
 
-    @MainActor
     override func configure(with data: Data?) throws -> Data? {
         reset()
 
@@ -18,7 +18,6 @@ class LocalDnsModel: HostSectionModel {
         return try configure(addresses: addresses)
     }
 
-    @MainActor
     func configure(addresses: [String]) throws -> Data {
         reset()
 
@@ -33,36 +32,18 @@ class LocalDnsModel: HostSectionModel {
         return copyData
     }
 
-    @MainActor
-    override func query(url: URL? = nil, completion block: ((Error?, Data?) -> Void)? = nil) {
-        // we are already on the main queue
+    @discardableResult
+    override func query(url: URL? = nil) async throws -> Data {
         reset()
 
         guard let host = url?.host else {
-            block?(URLError(URLError.badURL), nil)
-            return
+            throw URLError(URLError.badURL)
         }
         latestQueriedUrl = url
         latestQueryDate = .now
 
-        service.query(["host": host]) { (responseError, response: [String]?) in
-            DispatchQueue.main.async {
-                guard responseError == nil else {
-                    block?(responseError, nil)
-                    return
-                }
+        let addresses: [String] = try await service.query(["host": host])
 
-                guard let addresses = response else {
-                    block?(URLError(URLError.badServerResponse), nil)
-                    return
-                }
-
-                do {
-                    block?(nil, try self.configure(addresses: addresses))
-                } catch {
-                    block?(error, nil)
-                }
-            }
-        }
+        return try configure(addresses: addresses)
     }
 }

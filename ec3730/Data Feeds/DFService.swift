@@ -16,7 +16,7 @@ protocol Service: AnyObject {
 
     var usage: Int { get set }
 
-    func query<T: Codable>(_ userData: [String: Any?]?, completion block: ((Error?, T?) -> Void)?)
+    func query<T: Codable>(_ userData: [String: Any?]?) async throws -> T
 }
 
 extension Service {

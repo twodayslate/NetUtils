@@ -58,5 +58,26 @@ extension LocalDns: DataFeedService {
                 block?(nil, addresses)
             }
         }
+
+        func query<T: Codable>(_ userData: [String: Any?]?) async throws -> T {
+            guard let host = userData?["host"] as? String else {
+                throw URLError(.badURL)
+            }
+
+            return try await withCheckedThrowingContinuation { continuation in
+                DNSResolver.resolve(host: host) { error, addresses in
+                    if let error {
+                        continuation.resume(with: .failure(error))
+                        return
+                    }
+                    guard let addresses = addresses as? T else {
+                        continuation.resume(with: .failure(URLError(.badURL)))
+                        return
+                    }
+
+                    continuation.resume(with: .success(addresses))
+                }
+            }
+        }
     }
 }

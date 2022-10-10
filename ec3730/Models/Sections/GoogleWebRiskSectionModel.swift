@@ -46,45 +46,23 @@ class GoogleWebRiskSectionModel: HostSectionModel {
         return copyData
     }
 
-    @MainActor
-    override func query(url: URL? = nil, completion block: ((Error?, Data?) -> Void)? = nil) {
+    @discardableResult
+    override func query(url: URL? = nil) async throws -> Data {
         reset()
 
         guard let host = url?.absoluteString else {
-            block?(URLError(.badURL), nil)
-            return
+            throw URLError(.badURL)
         }
         latestQueriedUrl = url
         latestQueryDate = .now
 
         guard dataFeed.userKey != nil || storeModel?.owned ?? false else {
-            block?(MoreStoreKitError.NotPurchased, nil)
-            return
+            throw MoreStoreKitError.NotPurchased
         }
 
-        GoogleWebRisk.lookupService.query(["uri": host]) { (responseError, response: GoogleWebRiskRecordWrapper?) in
-            DispatchQueue.main.async {
-                print(response.debugDescription)
+        let response: GoogleWebRiskRecordWrapper = try await GoogleWebRisk.lookupService.query(["uri": host])
 
-                guard responseError == nil else {
-                    // todo show error
-                    block?(responseError, nil)
-                    return
-                }
-
-                guard let response = response else {
-                    // todo show error
-                    block?(URLError(.badServerResponse), nil)
-                    return
-                }
-
-                do {
-                    try block?(nil, self.configure(with: response))
-                } catch {
-                    block?(error, nil)
-                }
-            }
-        }
+        return try configure(with: response)
     }
 }
 
