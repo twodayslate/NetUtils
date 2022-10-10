@@ -194,6 +194,86 @@ class WhoisXMLService: Service {
             block?(nil, balance)
         }.resume()
     }
+
+    func query<T>(_ userData: [String: Any?]?) async throws -> T where T: Decodable, T: Encodable {
+        guard let endpoint = endpoint(userData), let endpointURL = endpoint.url else {
+            throw DataFeedError.invalidUrl
+        }
+
+        let minimumBalance = userData?["minimumBalance"] as? Int ?? 100
+
+        if let cached: T = cache.value(for: endpointURL.absoluteString) {
+            usage += 1
+            return cached
+        }
+
+        let balance = try await balance(for: WhoisXml.current.userKey)
+
+        guard balance > minimumBalance else {
+            throw DataFeedError.lowBalance(balance: balance)
+        }
+
+        usage += 1
+
+        let (data, _) = try await WhoisXml.session.data(from: endpointURL)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .custom {
+            decoder in
+            let container = try decoder.singleValueContainer()
+            let dateString = try container.decode(String.self)
+
+            let formatter = DateFormatter()
+            let formats = [
+                "yyyy-MM-dd HH:mm:ss",
+                "yyyy-MM-dd",
+                "yyyy-MM-dd HH:mm:ss.SSS ZZZ",
+                "yyyy-MM-dd HH:mm:ss ZZZ", // 1997-09-15 07:00:00 UTC,
+                "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", // 2016-11-05T04:45:03.00Z
+            ]
+
+            for format in formats {
+                formatter.dateFormat = format
+                if let date = formatter.date(from: dateString) {
+                    return date
+                }
+            }
+
+            let iso = ISO8601DateFormatter()
+            iso.timeZone = TimeZone(abbreviation: "UTC")
+            if let date = iso.date(from: dateString) {
+                return date
+            }
+
+            if let date = ISO8601DateFormatter().date(from: dateString) {
+                return date
+            }
+
+            throw DecodingError.dataCorruptedError(in: container,
+                                                   debugDescription: "Cannot decode date string \(dateString)")
+        }
+
+        let coordinator = try decoder.decode(T.self, from: data)
+        cache.add(coordinator, for: endpointURL.absoluteString)
+        return coordinator
+    }
+
+    func balance(for key: String?) async throws -> Int {
+        guard let balanceURL = WhoisXml.Endpoint.balanceUrl(for: id, with: key) else {
+            throw DataFeedError.invalidUrl
+        }
+
+        let (data, _) = try await WhoisXml.session.data(from: balanceURL)
+
+        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+            throw DataFeedError.parse
+        }
+
+        guard let jsonDataArray = json["data"] as? [Any?], jsonDataArray.count == 1, let first = jsonDataArray[0] as? [String: Any?], let balance = first["credits"] as? Int else {
+            throw DataFeedError.parse
+        }
+
+        return balance
+    }
 }
 
 extension WhoisXMLService: Equatable {

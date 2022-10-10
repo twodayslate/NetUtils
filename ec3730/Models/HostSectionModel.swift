@@ -7,25 +7,31 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
     @MainActor
     @Published var content = [CopyCellView]()
 
+    @MainActor
     @Published var isVisible = false
 
     var section: HostViewSection?
 
-    var dataFeed: DataFeed
-    var service: Service
+    let dataFeed: DataFeed
+    let service: Service
 
+    @MainActor @Published
     var dataToCopy: String?
+    @MainActor @Published
     var latestData: Data?
     /// The last URL queried
+    @MainActor @Published
     var latestQueriedUrl: URL?
     /// The last time data was queried
+    @MainActor @Published
     var latestQueryDate: Date?
 
     @Published var storeModel: StoreKitModel?
 
-    init(_ feed: DataFeed, service: Service) {
+    init(_ feed: DataFeed, service: Service, storeModel: StoreKitModel? = nil) {
         dataFeed = feed
         self.service = service
+        self.storeModel = storeModel
     }
 
     required init() {
@@ -82,9 +88,9 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
         fatalError("Configure your section configure data function")
     }
 
-    // completion block has an error and or data
     @MainActor
-    func query(url _: URL? = nil, completion _: ((Error?, Data?) -> Void)? = nil) {
+    @discardableResult
+    func query(url _: URL? = nil) async throws -> Data {
         fatalError("Configure your section query")
     }
 
