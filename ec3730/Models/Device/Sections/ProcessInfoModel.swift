@@ -41,7 +41,12 @@ class ProcessInfoModel: DeviceInfoSectionModel {
         rows.append(CopyCellView(title: "Hostname", content: "\(info.hostName)"))
         rows.append(CopyCellView(title: "Process Arguments", content: "\(info.arguments.joined(separator: " "))"))
         rows.append(CopyCellView(title: "Low Power Mode", content: info.isLowPowerModeEnabled ? "Enabled" : "Disabled"))
-        rows.append(CopyCellView(title: "Physical Memory", content: "\(info.physicalMemory) bytes"))
+        rows.append(CopyCellView(title: "Physical Memory", contents: [
+            "\(info.physicalMemory) bytes",
+            "\(String(format: "%0.1f", Double(info.physicalMemory) / 1024.0)) kiB",
+            "\(String(format: "%0.1f", Double(info.physicalMemory) / 1024.0 / 1024.0)) MiB",
+            "\(String(format: "%0.1f", Double(info.physicalMemory) / 1024.0 / 1024.0 / 1024.0)) GiB",
+        ]))
         rows.append(CopyCellView(title: "Globally Unique String", content: "\(info.globallyUniqueString)"))
         rows.append(CopyCellView(title: "OS Version", content: info.operatingSystemVersionString))
         rows.append(CopyCellView(title: "System Uptime", content: "\(info.systemUptime)"))

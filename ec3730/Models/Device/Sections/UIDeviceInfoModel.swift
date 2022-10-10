@@ -27,14 +27,42 @@ class UIDeviceInfoModel: DeviceInfoSectionModel {
         rows.append(CopyCellView(title: "Hardware Model", content: UIDevice.current.hwModel))
         rows.append(CopyCellView(title: "Hardware Machine", content: UIDevice.current.hwMachine))
 
+        // "kB", "MB", "GB", "TB", "PB", "EB", "ZB", and "YB" for SI units (base 1000).
+        // "kiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", and "YiB" for binary units (base 1024).
+
         rows.append(CopyCellView(title: "Disk Space Available", rows: [
-            CopyCellRow(title: "Important", content: "\(UIDevice.current.importantFreeDiskSpaceInBytes) bytes"),
-            CopyCellRow(title: "Opportunistic", content: "\(UIDevice.current.opportunisticFreeDiskSpaceInBytes) bytes"),
-            CopyCellRow(title: "Real", content: "\(UIDevice.current.realFreeDiskSpaceInBytes) bytes"),
+            CopyCellRow(title: "Important", contents: [
+                "\(UIDevice.current.importantFreeDiskSpaceInBytes) bytes",
+                "\(String(format: "%0.2f", Double(UIDevice.current.importantFreeDiskSpaceInBytes) / 1000.0)) kB",
+                "\(String(format: "%0.2f", Double(UIDevice.current.importantFreeDiskSpaceInBytes) / 1000.0 / 1000.0)) MB",
+                "\(String(format: "%0.2f", Double(UIDevice.current.importantFreeDiskSpaceInBytes) / 1000.0 / 1000.0 / 1000.0)) GB",
+            ]),
+            CopyCellRow(title: "Opportunistic", contents: [
+                "\(UIDevice.current.opportunisticFreeDiskSpaceInBytes) bytes",
+                "\(String(format: "%0.2f", Double(UIDevice.current.opportunisticFreeDiskSpaceInBytes) / 1000.0)) kB",
+                "\(String(format: "%0.2f", Double(UIDevice.current.opportunisticFreeDiskSpaceInBytes) / 1000.0 / 1000.0)) MB",
+                "\(String(format: "%0.2f", Double(UIDevice.current.opportunisticFreeDiskSpaceInBytes) / 1000.0 / 1000.0 / 1000.0)) GB",
+            ]),
+            CopyCellRow(title: "Real", contents: [
+                "\(UIDevice.current.realFreeDiskSpaceInBytes) bytes",
+                "\(String(format: "%0.2f", Double(UIDevice.current.realFreeDiskSpaceInBytes) / 1000.0)) kB",
+                "\(String(format: "%0.2f", Double(UIDevice.current.realFreeDiskSpaceInBytes) / 1000.0 / 1000.0)) MB",
+                "\(String(format: "%0.2f", Double(UIDevice.current.realFreeDiskSpaceInBytes) / 1000.0 / 1000.0 / 1000.0)) GB",
+            ]),
         ]))
 
-        rows.append(CopyCellView(title: "Volume Capacity", content: "\(UIDevice.current.volumeCapacityInBytes) bytes"))
-        rows.append(CopyCellView(title: "Total Disk Space", content: "\(UIDevice.current.totalDiskSpaceInBytes) bytes"))
+        rows.append(CopyCellView(title: "Volume Capacity", contents: [
+            "\(UIDevice.current.volumeCapacityInBytes) bytes",
+            "\(String(format: "%0.2f", Double(UIDevice.current.volumeCapacityInBytes) / 1000.0)) kB",
+            "\(String(format: "%0.2f", Double(UIDevice.current.volumeCapacityInBytes) / 1000.0 / 1000.0)) MB",
+            "\(String(format: "%0.2f", Double(UIDevice.current.volumeCapacityInBytes) / 1000.0 / 1000.0 / 1000.0)) GB",
+        ]))
+        rows.append(CopyCellView(title: "Total Disk Space", contents: [
+            "\(UIDevice.current.totalDiskSpaceInBytes) bytes",
+            "\(String(format: "%0.2f", Double(UIDevice.current.totalDiskSpaceInBytes) / 1000.0)) kB",
+            "\(String(format: "%0.2f", Double(UIDevice.current.totalDiskSpaceInBytes) / 1000.0 / 1000.0)) MB",
+            "\(String(format: "%0.2f", Double(UIDevice.current.totalDiskSpaceInBytes) / 1000.0 / 1000.0 / 1000.0)) GB",
+        ]))
         rows.append(CopyCellView(title: "Supports Multitasking", content: UIDevice.current.isMultitaskingSupported ? "Yes" : "No"))
 
         if let bootTime = UIDevice.current.boottime {
