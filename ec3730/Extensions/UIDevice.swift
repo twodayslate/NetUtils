@@ -18,7 +18,7 @@ extension UIDevice {
               let space = (systemAttributes[FileAttributeKey.systemSize] as? NSNumber)?.int64Value else { return 0 }
         return space
     }
-    
+
     var volumeCapacityInBytes: Int {
         let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
         do {
@@ -55,7 +55,7 @@ extension UIDevice {
             }
         }
     }
-    
+
     var opportunisticFreeDiskSpaceInBytes: Int64 {
         let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
         do {
@@ -69,7 +69,7 @@ extension UIDevice {
 
         return 0
     }
-    
+
     var realFreeDiskSpaceInBytes: Int {
         let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
         do {
