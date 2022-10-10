@@ -36,7 +36,7 @@ class MemoryInfoModel: DeviceInfoSectionModel {
     func formattedMemoryFootprint() -> String {
         let usedBytes: UInt64? = UInt64(memoryFootprint() ?? 0)
         let usedMB = Double(usedBytes ?? 0) / 1024 / 1024
-        let usedMBAsString = String(format: "%0.02f MB", usedMB)
+        let usedMBAsString = String(format: "%0.02f MiB", usedMB)
         return usedMBAsString
     }
 

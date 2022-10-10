@@ -10,7 +10,8 @@ struct CopyCellRow: Identifiable, Hashable, Codable {
     }
 
     var title: String?
-    var content: String
+    var content: String?
+    var contents: [String]?
 }
 
 @available(iOS 15.0, *)
@@ -30,6 +31,7 @@ struct CopyCellView: CopyCellProtocol {
 
     var title: String
     var content: String?
+    var contents: [String]?
     var rows: [CopyCellRow]?
     var backgroundColor = Color(UIColor.systemBackground)
     var withChevron = false
@@ -89,12 +91,38 @@ struct CopyCellView: CopyCellProtocol {
                                 Text(title)
                             }
                             Spacer()
-                            Text(row.content)
+                            if let content = row.content {
+                                Text(content)
+                            }
+                            if let contents = row.contents {
+                                TappedText(content: contents)
+                            }
                         }.padding([.leading, .trailing]).padding(.top, 4)
                     }
                 }, label: {
                     Text(self.title)
                 }).padding()
+            } else if let contents = contents {
+                HStack(alignment: .center) {
+                    Text(self.title)
+                    Spacer()
+                    TappedText(content: contents)
+                        .foregroundColor(.gray)
+
+                    if withChevron {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 14, weight: .semibold))
+                            // .imageScale(.small)
+                            .foregroundColor(Color(UIColor.systemGray3))
+                        /*
+                         height 14
+                         color:
+                             "0.9999999403953552",
+                             "0.9999999403953552",
+                             "0.9999999403953552"
+                         */
+                    }
+                }.padding()
             }
         }
         .background(backgroundColor)
@@ -110,6 +138,21 @@ struct CopyCellView: CopyCellProtocol {
         }).sheet(isPresented: $shouldShare, content: {
             ShareSheetView(activityItems: [self.contentsToShare])
         })
+    }
+}
+
+struct TappedText: View {
+    @State private var selectedTextIndex: Int = 0
+
+    var content: [String]
+
+    var body: some View {
+        Text(content[selectedTextIndex])
+            .onTapGesture {
+                let temp = selectedTextIndex + 1
+
+                selectedTextIndex = temp >= content.count ? 0 : temp
+            }
     }
 }
 
