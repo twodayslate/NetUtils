@@ -103,7 +103,7 @@ class UIDeviceTableViewController: UITableViewController {
             ("System Uptime", "\(info.systemUptime)"),
             ("Hardware Model", UIDevice.current.hwModel),
             ("Hardware Machine", UIDevice.current.hwMachine),
-            ("Disk Space Available", "\(UIDevice.current.freeDiskSpaceInBytes) bytes"),
+            ("Disk Space Available", "\(UIDevice.current.importantFreeDiskSpaceInBytes) bytes"),
             ("Total Disk Space", "\(UIDevice.current.totalDiskSpaceInBytes) bytes"),
             ("Device", "\(Device.current.safeDescription)"),
             ("Supports 3D Touch", Device.current.has3dTouchSupport ? "Yes" : "No"),
