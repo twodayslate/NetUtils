@@ -26,7 +26,14 @@ class UIDeviceInfoModel: DeviceInfoSectionModel {
         rows.append(CopyCellView(title: "Idiom", content: UIDevice.current.userInterfaceIdiom.description ?? "?"))
         rows.append(CopyCellView(title: "Hardware Model", content: UIDevice.current.hwModel))
         rows.append(CopyCellView(title: "Hardware Machine", content: UIDevice.current.hwMachine))
-        rows.append(CopyCellView(title: "Disk Space Available", content: "\(UIDevice.current.freeDiskSpaceInBytes) bytes"))
+
+        rows.append(CopyCellView(title: "Disk Space Available", rows: [
+            CopyCellRow(title: "Important", content: "\(UIDevice.current.importantFreeDiskSpaceInBytes) bytes"),
+            CopyCellRow(title: "Opportunistic", content: "\(UIDevice.current.opportunisticFreeDiskSpaceInBytes) bytes"),
+            CopyCellRow(title: "Real", content: "\(UIDevice.current.realFreeDiskSpaceInBytes) bytes"),
+        ]))
+
+        rows.append(CopyCellView(title: "Volume Capacity", content: "\(UIDevice.current.volumeCapacityInBytes) bytes"))
         rows.append(CopyCellView(title: "Total Disk Space", content: "\(UIDevice.current.totalDiskSpaceInBytes) bytes"))
         rows.append(CopyCellView(title: "Supports Multitasking", content: UIDevice.current.isMultitaskingSupported ? "Yes" : "No"))
 

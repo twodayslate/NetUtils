@@ -10,20 +10,35 @@ import Foundation
 import UIKit
 
 extension UIDevice {
+    /// The system size
+    ///
     /// https://stackoverflow.com/a/47463829/193772
     var totalDiskSpaceInBytes: Int64 {
         guard let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory() as String),
               let space = (systemAttributes[FileAttributeKey.systemSize] as? NSNumber)?.int64Value else { return 0 }
         return space
     }
+    
+    var volumeCapacityInBytes: Int {
+        let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
+        do {
+            let values = try fileURL.resourceValues(forKeys: [.volumeTotalCapacityKey])
+            if let capacity = values.volumeTotalCapacity {
+                return capacity
+            }
+        } catch {
+            // no-op
+        }
 
-    /*
-     Total available capacity in bytes for "Important" resources, including space expected to be cleared by purging non-essential and cached resources. "Important" means something that the user or application clearly expects to be present on the local system, but is ultimately replaceable. This would include items that the user has explicitly requested via the UI, and resources that an application requires in order to provide functionality.
-     Examples: A video that the user has explicitly requested to watch but has not yet finished watching or an audio file that the user has requested to download.
-     This value should not be used in determining if there is room for an irreplaceable resource. In the case of irreplaceable resources, always attempt to save the resource regardless of available capacity and handle failure as gracefully as possible.
-     */
+        return 0
+    }
+
+    /// Total available capacity in bytes for "Important" resources, including space expected to be cleared by purging non-essential and cached resources. "Important" means something that the user or application clearly expects to be present on the local system, but is ultimately replaceable. This would include items that the user has explicitly requested via the UI, and resources that an application requires in order to provide functionality.
+    ///
+    /// Examples: A video that the user has explicitly requested to watch but has not yet finished watching or an audio file that the user has requested to download.
+    /// This value should not be used in determining if there is room for an irreplaceable resource. In the case of irreplaceable resources, always attempt to save the resource regardless of available capacity and handle failure as gracefully as possible.
     /// https://stackoverflow.com/a/47463829/193772
-    var freeDiskSpaceInBytes: Int64 {
+    var importantFreeDiskSpaceInBytes: Int64 {
         if #available(iOS 11.0, *) {
             // swiftlint:disable:next line_length
             if let space = try? URL(fileURLWithPath: NSHomeDirectory() as String).resourceValues(forKeys: [URLResourceKey.volumeAvailableCapacityForImportantUsageKey]).volumeAvailableCapacityForImportantUsage {
@@ -39,6 +54,34 @@ extension UIDevice {
                 return 0
             }
         }
+    }
+    
+    var opportunisticFreeDiskSpaceInBytes: Int64 {
+        let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
+        do {
+            let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForOpportunisticUsageKey])
+            if let capacity: Int64 = values.volumeAvailableCapacityForOpportunisticUsage {
+                return capacity
+            }
+        } catch {
+            // no-op
+        }
+
+        return 0
+    }
+    
+    var realFreeDiskSpaceInBytes: Int {
+        let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
+        do {
+            let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
+            if let capacity = values.volumeAvailableCapacity {
+                return capacity
+            }
+        } catch {
+            // no-op
+        }
+
+        return 0
     }
 
     var boottime: Date? {
