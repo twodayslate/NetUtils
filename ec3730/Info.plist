@@ -85,5 +85,7 @@
 			<dict/>
 		</dict>
 	</array>
+    <key>aps-connection-initiate</key>
+       <true/>
 </dict>
 </plist>
