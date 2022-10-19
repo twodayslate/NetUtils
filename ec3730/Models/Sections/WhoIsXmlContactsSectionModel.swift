@@ -30,14 +30,12 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
                 let row = CopyCellType.multiple(title: "Company Names", contents: names.compactMap { .content($0, style: .expandable) })
                 content.append(row)
             } else if names.count == 1 {
-
                 let row = CopyCellType.row(title: "Company Name", content: names[0])
                 content.append(row)
             }
         }
 
         if let title = records.meta?.title {
-
             content.append(.row(title: "Title", content: title))
         }
 
@@ -66,7 +64,6 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             }
 
             if emailsArr.count > 1 {
-
                 let row = CopyCellType.multiple(title: "Emails", contents: emailsArr.map { .content($0, style: .expandable) })
                 content.append(row)
             } else if emailsArr.count == 1 {
@@ -83,7 +80,6 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             }
 
             if phoneArr.count > 1 {
-
                 let row = CopyCellType.multiple(title: "Phone Numbers", contents: phoneArr.map { .content($0, style: .expandable) })
                 content.append(row)
             } else if phoneArr.count == 1 {
@@ -143,13 +139,11 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             throw MoreStoreKitError.NotPurchased
         }
 
-        let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(
-            [
-                "domain": host,
-                "minimumBalance": 25,
-            ]
-        )
-
+        let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(["domain": host])
+      
+//        guard let record = response.dnsData.dnsRecords else {
+//            throw URLError(URLError.badServerResponse)
+//        }
         cache.setObject(response, forKey: host)
 
         return try configure(with: response)

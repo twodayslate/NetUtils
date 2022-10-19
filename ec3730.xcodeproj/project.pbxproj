@@ -40,7 +40,6 @@
 		F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63102762130D76200F34E42 /* ReachabilityViewController.swift */; };
 		F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6310278213366BB00F34E42 /* SourceViewController.swift */; };
 		F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63540D4213DEBDD00605ABE /* Reachability.swift */; };
-		F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63540D8213DFE8300605ABE /* ApiKeys.swift */; };
 		F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63540DC213E1D1B00605ABE /* StoreKit.framework */; };
 		F6397FE525E8937A00914B3F /* HostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FE425E8937900914B3F /* HostView.swift */; };
 		F6397FED25EEFEAE00914B3F /* TappedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FEC25EEFEAE00914B3F /* TappedText.swift */; };
@@ -265,7 +264,6 @@
 		F63102762130D76200F34E42 /* ReachabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityViewController.swift; sourceTree = "<group>"; };
 		F6310278213366BB00F34E42 /* SourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewController.swift; sourceTree = "<group>"; };
 		F63540D4213DEBDD00605ABE /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		F63540D8213DFE8300605ABE /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		F63540DC213E1D1B00605ABE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F63540DE213E4DB900605ABE /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		F63540E0213E4DD200605ABE /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
@@ -496,6 +494,7 @@
 				AAC727BB2843AD2A00482D73 /* WhoisXmlWhoisSectionModel.json */,
 				AAC727BC2843AD2A00482D73 /* WhoisXmlDnsSectionModel.json */,
 				AAC727BD2843AD2A00482D73 /* GoogleWebRiskSectionModel.json */,
+				2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */,
 				AAC727BE2843AD2A00482D73 /* WhoisXmlReputationSectionModel.json */,
 
 				846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */,
@@ -1164,13 +1163,13 @@
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
 				F6FDDFD8230B106200FBF75E /* WhoisXmlDnsCells.swift in Sources */,
 				F60FD36A25E060D700BCEF86 /* PingItem.swift in Sources */,
+				2E07167528FEB055009C3844 /* WhoIsXmlContactsResult.swift in Sources */,
 				F6E53FB8286FB03F0041A3DA /* ContentView.swift in Sources */,
 				F68CE56623031DA20068D104 /* DataFeedErrors.swift in Sources */,
 				F6AF9578295E9C22000F09D2 /* CopyCellStyleConfig.swift in Sources */,
 				F660FDD82868E9A20027C759 /* DeviceInfoModel.swift in Sources */,
 				F69E365423580A7D0017296E /* DataFeedSubscription.swift in Sources */,
 				F69E3652235808DF0017296E /* DFOneTimePurchase.swift in Sources */,
-				F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */,
 				F660FDE8286903DC0027C759 /* JavaScriptInfoModel.swift in Sources */,
 				F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */,
 				F644A0FD279283300061C98B /* LocalDnsModel.swift in Sources */,
@@ -1184,7 +1183,7 @@
 				F66643B326F02A5B000F17BC /* HostViewModel.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F6C38E8826FABEFB00BD9A71 /* StoreKitModel.swift in Sources */,
-				F6AF9586295F863B000F09D2 /* CopyCellContentView.swift in Sources */,
+				F6AF9586295F863B000F09D2 /* CopyCellContentView.swift in Sources */
 				F66643B726F030D5000F17BC /* HostSectionModel.swift in Sources */,
 				F660FDE02868F3310027C759 /* UIDeviceInfoModel.swift in Sources */,
 				F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */,
@@ -1256,6 +1255,7 @@
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
 				F6E53FC628701D360041A3DA /* Interface.swift in Sources */,
 				F660FDF0286953A00027C759 /* DeviceInfoSectionView.swift in Sources */,
+				2E07168128FEC3F3009C3844 /* WhoisXmlContactsService.swift in Sources */,
 				F644A0FA279268BD0061C98B /* FSDisclosureGroup.swift in Sources */,
 				F6AF958A295F86AB000F09D2 /* CopyCellToggleableItemRowView.swift in Sources */,
 				F6E53FCB287024A50041A3DA /* InterfaceConnectionBarView.swift in Sources */,
@@ -1651,8 +1651,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/simonbs/Runestone";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.2;
+				kind = exactVersion;
+				version = 0.1.2;
 			};
 		};
 		F6659ED5287A33BA00038ECA /* XCRemoteSwiftPackageReference "treesitterlanguages" */ = {

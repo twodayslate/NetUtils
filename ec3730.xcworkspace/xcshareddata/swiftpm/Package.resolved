@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/simonbs/Runestone",
         "state": {
           "branch": null,
-          "revision": "7cd1833a17ccd81719c69d9b134a35939eb267cb",
-          "version": "0.2.7"
+          "revision": "cfedaa892d79935c0d6c2e599c60e2af6e5ceaf0",
+          "version": "0.1.2"
         }
       },
       {
@@ -150,8 +150,8 @@
         "repositoryURL": "https://github.com/simonbs/treesitterlanguages",
         "state": {
           "branch": null,
-          "revision": "36050fa1873c4c475769845a268088b67306a746",
-          "version": "0.1.2"
+          "revision": "222727ef52defbebbfdfb81463ba93c5e6e6982b",
+          "version": "0.1.1"
         }
       },
       {
