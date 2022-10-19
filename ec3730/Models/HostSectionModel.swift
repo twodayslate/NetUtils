@@ -64,11 +64,10 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
         let available_services = [
             LocalDnsModel(),
             WhoisXmlWhoisSectionModel(),
-            WhoisXmlDnsSectionModel(),
-            WhoisXmlReputationSectionModel(),
-            WhoIsXmlContactsSectionModel(),
-            WhoIsXmlCategorizationSectionModel(),
             GoogleWebRiskSectionModel(),
+            WhoisXmlReputationSectionModel(),
+            WhoisXmlDnsSectionModel(),
+            WhoIsXmlContactsSectionModel(),
         ]
 
         for service in available_services {

@@ -24,52 +24,34 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
         let copyData = try JSONEncoder().encode(records)
         latestData = copyData
         dataToCopy = String(data: copyData, encoding: .utf8)
-
-        if let names = records.companyNames, !names.isEmpty {
-            if names.count > 1 {
-                let row = CopyCellView(title: "Company Names", rows: names.map { CopyCellRow(content: $0) })
-                content.append(row)
-            } else if names.count == 1 {
-                let row = CopyCellView(title: "Company Name", content: names[0])
-                content.append(row)
-            }
+        var rows = [CopyCellRow]()
+        
+        if let names = records.companyNames {
+            let row = CopyCellRow(title: "Company Names", content: names.joined(separator: "\n"))
+            rows.append(row)
         }
-
-        if let title = records.meta?.title {
-            content.append(CopyCellView(title: "Title", content: title))
-        }
-
-        if let value = records.meta?.metaDescription, !value.isEmpty {
-            content.append(CopyCellView(title: "Description", content: value))
-        }
+        
+        rows.append(CopyCellRow(title: "Title", content: records.meta?.title))
+        
+        rows.append(CopyCellRow(title: "Description", content: records.meta?.metaDescription))
 
         if let postal = records.postalAddresses {
-            if postal.count > 1 {
-                let row = CopyCellView(title: "Postal Addresses", rows: postal.map { CopyCellRow(content: $0) })
-                content.append(row)
-            } else if postal.count == 1 {
-                let row = CopyCellView(title: "Postal Address", content: postal[0])
-                content.append(row)
-            }
+            let row = CopyCellRow(title: "Postal Addresses", content: postal.joined(separator: "\n"))
+            rows.append(row)
         }
-
-        content.append(CopyCellView(title: "Country code", content: records.countryCode))
-
+        
+        rows.append(CopyCellRow(title: "Country code", content: records.countryCode))
+        
         if let emails = records.emails {
             var emailsArr = [String]()
             for email in emails {
                 emailsArr.append(email.email ?? "")
             }
 
-            if emailsArr.count > 1 {
-                let row = CopyCellView(title: "Emails", rows: emailsArr.map { CopyCellRow(content: $0) })
-                content.append(row)
-            } else if emailsArr.count == 1 {
-                let row = CopyCellView(title: "Email", content: emailsArr[0])
-                content.append(row)
-            }
+            let row = CopyCellRow(title: "Emails", content: emailsArr.joined(separator: "\n"))
+            rows.append(row)
         }
-
+        
         if let phones = records.phones {
             var phoneArr = [String]()
             for phone in phones {
@@ -77,41 +59,36 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
                 phoneArr.append(str)
             }
 
-            if phoneArr.count > 1 {
-                let row = CopyCellView(title: "Phone Numbers", rows: phoneArr.map { CopyCellRow(content: $0) })
-                content.append(row)
-            } else if phoneArr.count == 1 {
-                let row = CopyCellView(title: "Phone Number", content: phoneArr[0])
-                content.append(row)
-            }
+            let row = CopyCellRow(title: "Phone", content: phoneArr.joined(separator: "\n"))
+            rows.append(row)
         }
+        
+        rows.append(CopyCellRow(title: "Domain name", content: records.domainName))
 
-        content.append(CopyCellView(title: "Domain name", content: records.domainName))
-
-        content.append(CopyCellView(title: "Website responed", content: "\(records.websiteResponded ?? false)"))
+        rows.append(CopyCellRow(title: "Website responed", content: "\(records.websiteResponded ?? false)"))
 
         var socialRows = [CopyCellRow]()
 
-        if let facebook = records.socialLinks?.facebook, !facebook.isEmpty {
+        if let facebook = records.socialLinks?.facebook {
             socialRows.append(CopyCellRow(title: "Facebook", content: facebook))
         }
-
-        if let twitter = records.socialLinks?.twitter, !twitter.isEmpty {
+        
+        if let twitter = records.socialLinks?.twitter {
             socialRows.append(CopyCellRow(title: "Twitter", content: twitter))
         }
-
-        if let instagram = records.socialLinks?.instagram, !instagram.isEmpty {
+        
+        if let instagram = records.socialLinks?.instagram {
             socialRows.append(CopyCellRow(title: "Instagram", content: instagram))
         }
-
-        if let linkedIn = records.socialLinks?.linkedIn, !linkedIn.isEmpty {
+        
+        if let linkedIn = records.socialLinks?.linkedIn {
             socialRows.append(CopyCellRow(title: "LinkedIn", content: linkedIn))
         }
-
-        if !socialRows.isEmpty {
-            content.append(CopyCellView(title: "Social Links", rows: socialRows))
-        }
-
+        
+        content.append(CopyCellView(title: "Contacts", rows: rows))
+        
+        content.append(CopyCellView(title: "Social Links", rows: socialRows))
+        
         return copyData
     }
 
@@ -135,13 +112,11 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             throw MoreStoreKitError.NotPurchased
         }
 
-        let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(
-            [
-                "domain": host,
-                "minimumBalance": 25,
-            ]
-        )
-
+        let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(["domain": host])
+      
+//        guard let record = response.dnsData.dnsRecords else {
+//            throw URLError(URLError.badServerResponse)
+//        }
         cache.setObject(response, forKey: host)
 
         return try configure(with: response)

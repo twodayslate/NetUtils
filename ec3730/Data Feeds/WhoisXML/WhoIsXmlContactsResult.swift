@@ -37,24 +37,8 @@ extension WhoIsXmlContactsResult {
         try self.init(data: try Data(contentsOf: url))
     }
 
-    func with(companyNames: [String]? = nil,
-              countryCode: String? = nil,
-              domainName: String? = nil,
-              emails: [EmailData]? = nil,
-              meta: Meta? = nil,
-              phones: [PhoneData]? = nil,
-              postalAddresses: [String]? = nil,
-              socialLinks: SocialLinks? = nil,
-              websiteResponded: Bool? = nil) -> WhoIsXmlContactsResult {
-        WhoIsXmlContactsResult(companyNames: companyNames ?? self.companyNames,
-                               countryCode: countryCode ?? self.countryCode,
-                               domainName: domainName ?? self.domainName,
-                               emails: emails ?? self.emails,
-                               meta: meta ?? self.meta,
-                               phones: phones ?? self.phones,
-                               postalAddresses: postalAddresses ?? self.postalAddresses,
-                               socialLinks: socialLinks ?? self.socialLinks,
-                               websiteResponded: websiteResponded ?? self.websiteResponded)
+    func with(companyNames: [String]? = nil, countryCode: String? = nil, domainName: String? = nil, emails: [EmailData]? = nil, meta: Meta? = nil, phones: [PhoneData]? = nil, postalAddresses: [String]? = nil, socialLinks: SocialLinks? = nil, websiteResponded: Bool? = nil) -> WhoIsXmlContactsResult {
+        WhoIsXmlContactsResult(companyNames: companyNames ?? self.companyNames, countryCode: countryCode ?? self.countryCode, domainName: domainName ?? self.domainName, emails: emails ?? self.emails, meta: meta ?? self.meta, phones: phones ?? self.phones, postalAddresses: postalAddresses ?? self.postalAddresses, socialLinks: socialLinks ?? self.socialLinks, websiteResponded: websiteResponded ?? self.websiteResponded)
     }
 
     func jsonData() throws -> Data {
