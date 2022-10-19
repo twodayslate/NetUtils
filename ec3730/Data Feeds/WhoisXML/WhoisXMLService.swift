@@ -199,7 +199,12 @@ class WhoisXMLService: Service {
         guard let endpoint = endpoint(userData), let endpointURL = endpoint.url else {
             throw DataFeedError.invalidUrl
         }
-
+        print("endpoint-----------")
+        print(endpoint.url!)
+        print(endpoint.host)
+        print(endpoint.path)
+        print(endpoint.queryItems)
+        print(endpoint.schema)
         let minimumBalance = userData?["minimumBalance"] as? Int ?? 100
 
         if let cached: T = cache.value(for: endpointURL.absoluteString) {

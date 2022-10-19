@@ -1,0 +1,30 @@
+{
+    "companyNames": ["CNN"],
+    "countryCode": "US",
+    "domainName": "cnn.com",
+    "emails": [{
+        "description": "",
+        "email": "copyrightagent@turner.com"
+    }],
+    "meta": {
+        "description": "View the latest news and breaking news today for U.S., world, weather, entertainment, politics and health at CNN.com.",
+        "title": "CNN - Breaking News, Latest News and Videos"
+    },
+    "phones": [{
+        "callHours": "",
+        "description": "",
+        "phoneNumber": "404 878-2276"
+    }, {
+        "callHours": "",
+        "description": "",
+        "phoneNumber": "404 827-1995"
+    }],
+    "postalAddresses": [],
+    "socialLinks": {
+        "facebook": "",
+        "instagram": "",
+        "linkedIn": "",
+        "twitter": ""
+    },
+    "websiteResponded": true
+}

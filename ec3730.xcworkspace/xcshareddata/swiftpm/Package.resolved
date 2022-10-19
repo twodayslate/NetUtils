@@ -1,0 +1,169 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AddressURL",
+        "repositoryURL": "https://github.com/twodayslate/AddressURL",
+        "state": {
+          "branch": null,
+          "revision": "123bd63cbda959f8cea6f72cb10f2c0e968bfcda",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "Cache",
+        "repositoryURL": "https://github.com/hyperoslo/Cache",
+        "state": {
+          "branch": null,
+          "revision": "c7f4d633049c3bd649a353bad36f6c17e9df085f",
+          "version": "6.0.0"
+        }
+      },
+      {
+        "package": "DeviceKit",
+        "repositoryURL": "https://github.com/devicekit/DeviceKit",
+        "state": {
+          "branch": null,
+          "revision": "20e0991f3975916ab0f6d58db84d8bc64f883537",
+          "version": "4.7.0"
+        }
+      },
+      {
+        "package": "EmailValidator",
+        "repositoryURL": "https://github.com/evanrobertson/EmailValidator.git",
+        "state": {
+          "branch": null,
+          "revision": "ff809780f4a34fd609ccd34b7611157c9e043763",
+          "version": "1.0.3"
+        }
+      },
+      {
+        "package": "Gzip",
+        "repositoryURL": "https://github.com/1024jp/GzipSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "7a7f17761c76a932662ab77028a4329f67d645a4",
+          "version": "5.2.0"
+        }
+      },
+      {
+        "package": "HighlightJS",
+        "repositoryURL": "https://github.com/SwiftWebResources/HighlightJS-Swift.git",
+        "state": {
+          "branch": null,
+          "revision": "392c6dbd569817864ff7112a11e41db477468309",
+          "version": "9.18.1"
+        }
+      },
+      {
+        "package": "Highlightr",
+        "repositoryURL": "https://github.com/helje5/Highlightr",
+        "state": {
+          "branch": null,
+          "revision": "c2ecdec085f78cdbc0323ec4d44d297e5e6a0379",
+          "version": "3.0.0"
+        }
+      },
+      {
+        "package": "KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess",
+        "state": {
+          "branch": null,
+          "revision": "84e546727d66f1adc5439debad16270d0fdd04e7",
+          "version": "4.2.2"
+        }
+      },
+      {
+        "package": "NavigationSplitTab",
+        "repositoryURL": "https://github.com/twodayslate/NavigationSplitTab",
+        "state": {
+          "branch": "main",
+          "revision": "2942ff8133b10b12fa7ea2c255a916b3c9541bb7",
+          "version": null
+        }
+      },
+      {
+        "package": "Reachability",
+        "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
+        "state": {
+          "branch": null,
+          "revision": "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
+          "version": "5.1.0"
+        }
+      },
+      {
+        "package": "Runestone",
+        "repositoryURL": "https://github.com/simonbs/Runestone",
+        "state": {
+          "branch": null,
+          "revision": "cfedaa892d79935c0d6c2e599c60e2af6e5ceaf0",
+          "version": "0.1.2"
+        }
+      },
+      {
+        "package": "SKVersion",
+        "repositoryURL": "https://github.com/twodayslate/SKVersion",
+        "state": {
+          "branch": null,
+          "revision": "e203d9ffddacc5e8aef7184f0318d599501be815",
+          "version": "2.0.0"
+        }
+      },
+      {
+        "package": "SplitView",
+        "repositoryURL": "https://github.com/twodayslate/splitview",
+        "state": {
+          "branch": null,
+          "revision": "650fe75bd8a8844d7269a3370d23fbc7a0b94902",
+          "version": "2.0.3"
+        }
+      },
+      {
+        "package": "NetUtils",
+        "repositoryURL": "https://github.com/svdo/swift-netutils",
+        "state": {
+          "branch": null,
+          "revision": "28eb6f86a84e34e97dd3bea7e9658da15e8a1767",
+          "version": "4.2.1"
+        }
+      },
+      {
+        "package": "SwiftyPing",
+        "repositoryURL": "https://github.com/samiyr/SwiftyPing.git",
+        "state": {
+          "branch": null,
+          "revision": "05591bc0047e41e0e1d98135c6bc457192a72d39",
+          "version": "1.2.1"
+        }
+      },
+      {
+        "package": "SwiftyStoreKit",
+        "repositoryURL": "https://github.com/bizz84/SwiftyStoreKit",
+        "state": {
+          "branch": null,
+          "revision": "9ce911639680113dac9b554d6243e406a9758ebe",
+          "version": "0.16.4"
+        }
+      },
+      {
+        "package": "TreeSitterLanguages",
+        "repositoryURL": "https://github.com/simonbs/treesitterlanguages",
+        "state": {
+          "branch": null,
+          "revision": "222727ef52defbebbfdfb81463ba93c5e6e6982b",
+          "version": "0.1.1"
+        }
+      },
+      {
+        "package": "Version",
+        "repositoryURL": "https://github.com/mrackwitz/Version",
+        "state": {
+          "branch": null,
+          "revision": "fd4b0eb5756aa7f1c33977fb626cf37d2140a3a0",
+          "version": "0.8.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

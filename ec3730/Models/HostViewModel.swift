@@ -51,6 +51,7 @@ class HostViewModel: ObservableObject {
             WhoisXmlDnsSectionModel(),
             WhoisXmlReputationSectionModel(),
             GoogleWebRiskSectionModel(),
+            WhoIsXmlContactsSectionModel(),
         ]
         all_sections.removeAll(where: { self.hidden.contains($0.service.name) })
 
