@@ -12,15 +12,6 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
     override func configure(with data: Data) throws -> Data? {
         reset()
 
-        let result = try JSONDecoder().decode(WhoIsXmlContactsResult.self, from: data)
-
-        return try configure(with: result)
-    }
-
-    @MainActor
-    func configure(with records: WhoIsXmlContactsResult) throws -> Data {
-        reset()
-
         let copyData = try JSONEncoder().encode(records)
         latestData = copyData
         dataToCopy = String(data: copyData, encoding: .utf8)
@@ -140,7 +131,7 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
         }
 
         let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(["domain": host])
-      
+
 //        guard let record = response.dnsData.dnsRecords else {
 //            throw URLError(URLError.badServerResponse)
 //        }
