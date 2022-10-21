@@ -200,18 +200,18 @@ class WhoisXMLService: Service {
             throw DataFeedError.invalidUrl
         }
 
-        let minimumBalance = userData?["minimumBalance"] as? Int ?? 100
+        // let minimumBalance = userData?["minimumBalance"] as? Int ?? 100
 
         if let cached: T = cache.value(for: endpointURL.absoluteString) {
             usage += 1
             return cached
         }
 
-        let balance = try await balance(for: WhoisXml.current.userKey)
+        // let balance = try await balance(for: WhoisXml.current.userKey)
 
-        guard balance > minimumBalance else {
-            throw DataFeedError.lowBalance(balance: balance)
-        }
+//        guard balance > minimumBalance else {
+//            throw DataFeedError.lowBalance(balance: balance)
+//        }
 
         usage += 1
 

@@ -69,19 +69,19 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
 
         var socialRows = [CopyCellRow]()
 
-        if let facebook = records.socialLinks?.facebook {
+        if let facebook = records.socialLinks?.facebook, !facebook.isEmpty {
             socialRows.append(CopyCellRow(title: "Facebook", content: facebook))
         }
 
-        if let twitter = records.socialLinks?.twitter {
+        if let twitter = records.socialLinks?.twitter, !twitter.isEmpty {
             socialRows.append(CopyCellRow(title: "Twitter", content: twitter))
         }
 
-        if let instagram = records.socialLinks?.instagram {
+        if let instagram = records.socialLinks?.instagram, !instagram.isEmpty {
             socialRows.append(CopyCellRow(title: "Instagram", content: instagram))
         }
 
-        if let linkedIn = records.socialLinks?.linkedIn {
+        if let linkedIn = records.socialLinks?.linkedIn, !linkedIn.isEmpty {
             socialRows.append(CopyCellRow(title: "LinkedIn", content: linkedIn))
         }
 
