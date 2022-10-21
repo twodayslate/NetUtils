@@ -16,17 +16,9 @@ class WhoisXmlContactsService: WhoisXMLService {
             return nil
         }
 
-        var params = [URLQueryItem(name: "domainName", value: domain),
-                      URLQueryItem(name: "outputFormat", value: "JSON"),
-                      URLQueryItem(name: "type", value: "_all"),
-                      URLQueryItem(name: "api", value: "whoisXml"),
-                      URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
-                      URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier)]
+        let params = [URLQueryItem(name: "domainName", value: domain),
+                      URLQueryItem(name: "apiKey", value: "at_l54dNyKOiaxH5KV9BWZbNPiOkksmK")]
 
-        if let key = WhoisXml.current.userKey {
-            params.append(URLQueryItem(name: "apiKey", value: key))
-        }
-
-        return WhoisXml.Endpoint(host: "api.netutils.workers.dev", path: "/whoisserver/DNSService", queryItems: params)
+        return WhoisXml.Endpoint(host: "website-contacts.whoisxmlapi.com", path: "/api/v1", queryItems: params)
     }
 }
