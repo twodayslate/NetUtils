@@ -132,9 +132,6 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
 
         let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(["domain": host])
 
-//        guard let record = response.dnsData.dnsRecords else {
-//            throw URLError(URLError.badServerResponse)
-//        }
         cache.setObject(response, forKey: host)
 
         return try configure(with: response)
