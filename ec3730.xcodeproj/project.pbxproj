@@ -80,7 +80,6 @@
 		F660FDF0286953A00027C759 /* DeviceInfoSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDEF286953A00027C759 /* DeviceInfoSectionView.swift */; };
 		F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661A27F23020FCF0023FA50 /* UIAlertController.swift */; };
 		F6659ECC287A298D00038ECA /* SourceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6659ECB287A298D00038ECA /* SourceCard.swift */; };
-		F6659ED2287A2DAD00038ECA /* Runestone in Frameworks */ = {isa = PBXBuildFile; productRef = F6659ED1287A2DAD00038ECA /* Runestone */; };
 		F6659ED4287A2DC300038ECA /* WebWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6659ED3287A2DC300038ECA /* WebWrapperView.swift */; };
 		F6659ED7287A33BA00038ECA /* TreeSitterBashRunestone in Frameworks */ = {isa = PBXBuildFile; productRef = F6659ED6287A33BA00038ECA /* TreeSitterBashRunestone */; };
 		F6659ED9287A33BA00038ECA /* TreeSitterCPPRunestone in Frameworks */ = {isa = PBXBuildFile; productRef = F6659ED8287A33BA00038ECA /* TreeSitterCPPRunestone */; };
@@ -444,7 +443,6 @@
 				F6659F17287A33BA00038ECA /* TreeSitterYAMLRunestone in Frameworks */,
 				F6659EFB287A33BA00038ECA /* TreeSitterOCamlRunestone in Frameworks */,
 				F67EDA0A2411F42B00021F6C /* Highlightr in Frameworks */,
-				F6659ED2287A2DAD00038ECA /* Runestone in Frameworks */,
 				F6659EE5287A33BA00038ECA /* TreeSitterElmRunestone in Frameworks */,
 				F67ED9F5240DF56100021F6C /* AddressURL in Frameworks */,
 				F6659F05287A33BA00038ECA /* TreeSitterRegexRunestone in Frameworks */,
@@ -452,6 +450,7 @@
 				F643036825E6033D00109C92 /* DeviceKit in Frameworks */,
 				F6659EEF287A33BA00038ECA /* TreeSitterJSONRunestone in Frameworks */,
 				F6659F07287A33BA00038ECA /* TreeSitterRubyRunestone in Frameworks */,
+				84A16C1D290A9FC800A7EBF4 /* Runestone in Frameworks */,
 				F6659F03287A33BA00038ECA /* TreeSitterRRunestone in Frameworks */,
 				F6659EE3287A33BA00038ECA /* TreeSitterElixirRunestone in Frameworks */,
 				F67EDA042411E70F00021F6C /* SplitView in Frameworks */,
@@ -818,6 +817,7 @@
 				F6A4EB932301C5CB00439562 /* Protocols */,
 				F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */,
 				F6C8D8AD212E5AEA00309373 /* Assets.xcassets */,
+				84A16C1E290AA0CE00A7EBF4 /* ApiKeys.swift */,
 				F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */,
 				846CDA84291CF6A800DDB5AA /* ApiKeys.swift */,
 				F60FD36E25E060DC00BCEF86 /* Persistence */,
@@ -906,7 +906,6 @@
 				F643036725E6033D00109C92 /* DeviceKit */,
 				F63B922E279C985B007E845F /* Cache */,
 				F6E53FB5286FB0210041A3DA /* NavigationSplitTab */,
-				F6659ED1287A2DAD00038ECA /* Runestone */,
 				F6659ED6287A33BA00038ECA /* TreeSitterBashRunestone */,
 				F6659ED8287A33BA00038ECA /* TreeSitterCPPRunestone */,
 				F6659EDA287A33BA00038ECA /* TreeSitterCRunestone */,
@@ -941,6 +940,7 @@
 				F6659F14287A33BA00038ECA /* TreeSitterTypeScriptRunestone */,
 				F6659F16287A33BA00038ECA /* TreeSitterYAMLRunestone */,
 				F6659F2E287A8C7F00038ECA /* RunestoneTomorrowTheme */,
+				84A16C1C290A9FC800A7EBF4 /* Runestone */,
 			);
 			productName = ec3730;
 			productReference = F6C8D8A1212E5AE900309373 /* ec3730.app */;
@@ -1037,8 +1037,8 @@
 				F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 				F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */,
 				F6E53FB4286FB0210041A3DA /* XCRemoteSwiftPackageReference "NavigationSplitTab" */,
-				F6659ED0287A2DAD00038ECA /* XCRemoteSwiftPackageReference "Runestone" */,
 				F6659ED5287A33BA00038ECA /* XCRemoteSwiftPackageReference "treesitterlanguages" */,
+				84A16C1B290A9FC800A7EBF4 /* XCRemoteSwiftPackageReference "Runestone" */,
 			);
 			productRefGroup = F6C8D8A2212E5AE900309373 /* Products */;
 			projectDirPath = "";
@@ -1253,6 +1253,7 @@
 				F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */,
 				F643030B25E47BA300109C92 /* EZPanel.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
+				84A16C1F290AA0CE00A7EBF4 /* ApiKeys.swift in Sources */,
 				F6E53FC628701D360041A3DA /* Interface.swift in Sources */,
 				F660FDF0286953A00027C759 /* DeviceInfoSectionView.swift in Sources */,
 				2E07168128FEC3F3009C3844 /* WhoisXmlContactsService.swift in Sources */,
@@ -1631,6 +1632,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		84A16C1B290A9FC800A7EBF4 /* XCRemoteSwiftPackageReference "Runestone" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simonbs/Runestone";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.7;
+			};
+		};
 		F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hyperoslo/Cache";
@@ -1645,14 +1654,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.6.0;
-			};
-		};
-		F6659ED0287A2DAD00038ECA /* XCRemoteSwiftPackageReference "Runestone" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/simonbs/Runestone";
-			requirement = {
-				kind = exactVersion;
-				version = 0.1.2;
 			};
 		};
 		F6659ED5287A33BA00038ECA /* XCRemoteSwiftPackageReference "treesitterlanguages" */ = {
@@ -1746,6 +1747,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		84A16C1C290A9FC800A7EBF4 /* Runestone */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84A16C1B290A9FC800A7EBF4 /* XCRemoteSwiftPackageReference "Runestone" */;
+			productName = Runestone;
+		};
 		F63B922E279C985B007E845F /* Cache */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */;
@@ -1755,11 +1761,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */;
 			productName = DeviceKit;
-		};
-		F6659ED1287A2DAD00038ECA /* Runestone */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F6659ED0287A2DAD00038ECA /* XCRemoteSwiftPackageReference "Runestone" */;
-			productName = Runestone;
 		};
 		F6659ED6287A33BA00038ECA /* TreeSitterBashRunestone */ = {
 			isa = XCSwiftPackageProductDependency;
