@@ -30,7 +30,7 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
                 let row = CopyCellView(title: "Company Names", rows: names.map { CopyCellRow(content: $0) })
                 content.append(row)
             } else {
-                let row = CopyCellView(title: "Company Names", content: names.first)
+                let row = CopyCellView(title: "Company Names", content: names[0])
                 content.append(row)
             }
         }
@@ -47,13 +47,13 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
         content.append(CopyCellView(title: "Country code", content: records.countryCode))
 
         if let emails = records.emails {
-            if emails.count > 1 {
-                let row = CopyCellView(title: "Emails", rows: emails.map { CopyCellRow(content: $0.email) })
-                content.append(row)
-            } else {
-                let row = CopyCellView(title: "Emails", content: emails.first?.email)
-                content.append(row)
+            var emailsArr = [String]()
+            for email in emails {
+                emailsArr.append(email.email ?? "")
             }
+
+            let row = CopyCellView(title: "Emails", content: emailsArr.joined(separator: "\n"))
+            content.append(row)
         }
 
         if let phones = records.phones {
@@ -118,9 +118,6 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
 
         let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(["domain": host])
 
-//        guard let record = response.dnsData.dnsRecords else {
-//            throw URLError(URLError.badServerResponse)
-//        }
         cache.setObject(response, forKey: host)
 
         return try configure(with: response)
