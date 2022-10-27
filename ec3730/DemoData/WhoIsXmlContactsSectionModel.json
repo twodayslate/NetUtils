@@ -1,24 +1,45 @@
 {
-    "companyNames": ["CNN"],
+    "companyNames": [
+        "Play Store",
+        "Morgan Calderini",
+        "Google LLC",
+        "Google Analytics a Google Analytics",
+        "Cloud Build",
+        "NASA Camp",
+        "Grand Canyon National Park",
+        "Devon Island Canada"
+    ],
     "countryCode": "US",
-    "domainName": "cnn.com",
-    "emails": [{
-        "description": "",
-        "email": "copyrightagent@turner.com"
-    }],
+    "domainName": "google.com",
+    "emails": [
+        {
+            "description": "",
+            "email": "investor-relations@abc.xyz"
+        },
+        {
+            "description": "",
+            "email": "press@google.com"
+        },
+        {
+            "description": "",
+            "email": "Tina@ink-42.com"
+        },
+        {
+            "description": "",
+            "email": "joe@yourcompany.com"
+        }
+    ],
     "meta": {
-        "description": "View the latest news and breaking news today for U.S., world, weather, entertainment, politics and health at CNN.com.",
-        "title": "CNN - Breaking News, Latest News and Videos"
+        "description": "",
+        "title": "Google"
     },
-    "phones": [{
-        "callHours": "",
-        "description": "",
-        "phoneNumber": "404 878-2276"
-    }, {
-        "callHours": "",
-        "description": "",
-        "phoneNumber": "404 827-1995"
-    }],
+    "phones": [
+        {
+            "callHours": "",
+            "description": "",
+            "phoneNumber": "650 253-0000"
+        }
+    ],
     "postalAddresses": [],
     "socialLinks": {
         "facebook": "",

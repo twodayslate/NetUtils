@@ -87,7 +87,9 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
 
         content.append(CopyCellView(title: "Contacts", rows: rows))
 
-        content.append(CopyCellView(title: "Social Links", rows: socialRows))
+        if !socialRows.isEmpty {
+            content.append(CopyCellView(title: "Social Links", rows: socialRows))
+        }
 
         return copyData
     }
