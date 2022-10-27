@@ -24,23 +24,27 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
         let copyData = try JSONEncoder().encode(records)
         latestData = copyData
         dataToCopy = String(data: copyData, encoding: .utf8)
-        var rows = [CopyCellRow]()
 
-        if let names = records.companyNames {
-            let row = CopyCellRow(title: "Company Names", content: names.joined(separator: "\n"))
-            rows.append(row)
+        if let names = records.companyNames, !names.isEmpty {
+            if names.count > 1 {
+                let row = CopyCellView(title: "Company Names", rows: names.map { CopyCellRow(content: $0) })
+                content.append(row)
+            } else {
+                let row = CopyCellView(title: "Company Names", content: names[0])
+                content.append(row)
+            }
         }
 
-        rows.append(CopyCellRow(title: "Title", content: records.meta?.title))
+        content.append(CopyCellView(title: "Title", content: records.meta?.title))
 
-        rows.append(CopyCellRow(title: "Description", content: records.meta?.metaDescription))
+        content.append(CopyCellView(title: "Description", content: records.meta?.metaDescription))
 
         if let postal = records.postalAddresses {
-            let row = CopyCellRow(title: "Postal Addresses", content: postal.joined(separator: "\n"))
-            rows.append(row)
+            let row = CopyCellView(title: "Postal Addresses", content: postal.joined(separator: "\n"))
+            content.append(row)
         }
 
-        rows.append(CopyCellRow(title: "Country code", content: records.countryCode))
+        content.append(CopyCellView(title: "Country code", content: records.countryCode))
 
         if let emails = records.emails {
             var emailsArr = [String]()
@@ -48,8 +52,8 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
                 emailsArr.append(email.email ?? "")
             }
 
-            let row = CopyCellRow(title: "Emails", content: emailsArr.joined(separator: "\n"))
-            rows.append(row)
+            let row = CopyCellView(title: "Emails", content: emailsArr.joined(separator: "\n"))
+            content.append(row)
         }
 
         if let phones = records.phones {
@@ -59,13 +63,13 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
                 phoneArr.append(str)
             }
 
-            let row = CopyCellRow(title: "Phone", content: phoneArr.joined(separator: "\n"))
-            rows.append(row)
+            let row = CopyCellView(title: "Phone", content: phoneArr.joined(separator: "\n"))
+            content.append(row)
         }
 
-        rows.append(CopyCellRow(title: "Domain name", content: records.domainName))
+        content.append(CopyCellView(title: "Domain name", content: records.domainName))
 
-        rows.append(CopyCellRow(title: "Website responed", content: "\(records.websiteResponded ?? false)"))
+        content.append(CopyCellView(title: "Website responed", content: "\(records.websiteResponded ?? false)"))
 
         var socialRows = [CopyCellRow]()
 
@@ -84,8 +88,6 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
         if let linkedIn = records.socialLinks?.linkedIn, !linkedIn.isEmpty {
             socialRows.append(CopyCellRow(title: "LinkedIn", content: linkedIn))
         }
-
-        content.append(CopyCellView(title: "Contacts", rows: rows))
 
         if !socialRows.isEmpty {
             content.append(CopyCellView(title: "Social Links", rows: socialRows))
@@ -116,9 +118,6 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
 
         let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(["domain": host])
 
-//        guard let record = response.dnsData.dnsRecords else {
-//            throw URLError(URLError.badServerResponse)
-//        }
         cache.setObject(response, forKey: host)
 
         return try configure(with: response)
