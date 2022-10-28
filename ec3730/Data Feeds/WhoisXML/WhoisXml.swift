@@ -96,7 +96,11 @@ extension WhoisXml: DataFeedService {
 
     static var reputationService: WhoisXMLService = .init(name: "Reputation", description: "Our hosted lookup uses hundreds of parameters to calculate reputation scores.", id: "20")
 
-    static var contactsService: WhoisXMLService = WhoisXmlContactsService(name: "Contacts", description: "Contacts service", id: "")
+    static var contactsService: WhoisXMLService = WhoisXmlContactsService(
+        name: "Contacts",
+        description: "Our hosted domain owner contact information lookup includes company name and key contacts with direct-dial phone numbers, email addresses, and social media links based on data parsed from website content, social networks, Secure Sockets Layer (SSL) certificates, and other sources.",
+        id: "29"
+    )
 
     var services: [Service] {
         [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService]

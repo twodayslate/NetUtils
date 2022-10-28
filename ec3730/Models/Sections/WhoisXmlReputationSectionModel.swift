@@ -60,7 +60,11 @@ class WhoisXmlReputationSectionModel: HostSectionModel {
             throw MoreStoreKitError.NotPurchased
         }
 
-        let response: WhoisXmlReputationRecord = try await WhoisXml.reputationService.query(["domain": host, "mode": "fast", "minimumBalance": 50])
+        let response: WhoisXmlReputationRecord = try await WhoisXml.reputationService.query([
+            "domain": host,
+            "mode": "fast",
+            "minimumBalance": 25
+        ])
 
         return try configure(with: response)
     }
