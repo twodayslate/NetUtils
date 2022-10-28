@@ -98,7 +98,7 @@ extension WhoisXml: DataFeedService {
 
     static var contactsService: WhoisXMLService = WhoisXmlContactsService(
         name: "Contacts",
-        description: "Our hosted domain owner contact information lookup includes company name and key contacts with direct-dial phone numbers, email addresses, and social media links based on data parsed from website content, social networks, Secure Sockets Layer (SSL) certificates, and other sources.",
+        description: "Our hosted domain contact information lookup includes company name, direct-dial phone numbers, email addresses, and social media links.",
         id: "29"
     )
 
