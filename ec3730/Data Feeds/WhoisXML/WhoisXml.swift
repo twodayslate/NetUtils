@@ -14,6 +14,9 @@ import SwiftyStoreKit
 /// API wrapper for https://whoisxmlapi.com/
 final class WhoisXml: DataFeedSingleton, DataFeedOneTimePurchase {
     public let name: String = "Whois XML API"
+
+    public let contactApiKey: String = "at_l54dNyKOiaxH5KV9BWZbNPiOkksmK"
+
     public var webpage: URL { URL(string: "https://www.whoisxmlapi.com/")! }
 
     public var userKey: String? {
@@ -96,10 +99,12 @@ extension WhoisXml: DataFeedService {
 
     static var reputationService: WhoisXMLService = .init(name: "Reputation", description: "Our hosted lookup uses hundreds of parameters to calculate reputation scores.", id: "20")
 
-    static var contactsService: WhoisXMLService = WhoisXmlContactsService(name: "Contacts", description: "Contacts service", id: "")
+    static var contactsService: WhoisXMLService = WhoisXmlContactsService(name: "Contacts", description: "Contacts service", id: "29")
 
     var services: [Service] {
-        [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService]
+        [WhoisXml.contactsService]
+
+        // [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService]
     }
 }
 
