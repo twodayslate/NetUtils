@@ -106,9 +106,7 @@ extension WhoisXml: DataFeedService {
     )
 
     var services: [Service] {
-        [WhoisXml.contactsService]
-
-        // [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService]
+        [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService]
     }
 }
 
