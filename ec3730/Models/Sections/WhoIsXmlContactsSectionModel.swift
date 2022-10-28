@@ -43,12 +43,7 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             content.append(.row(title: "Description", content: value))
         }
 
-        rows.append(CopyCellRow(title: "Title", content: records.meta?.title))
-
-        rows.append(CopyCellRow(title: "Description", content: records.meta?.metaDescription))
-
         if let postal = records.postalAddresses {
-
             if postal.count > 1 {
                 let row = CopyCellType.multiple(title: "Postal Addresses", contents: postal.map { .content($0, style: .expandable) })
                 content.append(row)
@@ -57,7 +52,6 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
                 content.append(row)
             }
         }
-
 
         if let countryCode = records.countryCode {
             content.append(.row(title: "Country code", content: countryCode))
@@ -93,9 +87,6 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
                 content.append(row)
             }
         }
-
-        rows.append(CopyCellRow(title: "Domain name", content: records.domainName))
-
 
         if let domainName = records.domainName {
             content.append(.row(title: "Domain name", content: domainName))
