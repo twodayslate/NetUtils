@@ -130,7 +130,12 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             throw MoreStoreKitError.NotPurchased
         }
 
-        let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(["domain": host])
+        let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(
+            [
+                "domain": host,
+                "minimumBalance": 25,
+            ]
+        )
 
         cache.setObject(response, forKey: host)
 
