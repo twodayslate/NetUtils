@@ -29,19 +29,29 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             if names.count > 1 {
                 let row = CopyCellView(title: "Company Names", rows: names.map { CopyCellRow(content: $0) })
                 content.append(row)
-            } else {
-                let row = CopyCellView(title: "Company Names", content: names.first)
+
+            } else if names.count == 1 {
+                let row = CopyCellView(title: "Company Name", content: names[0])
                 content.append(row)
             }
         }
 
-        content.append(CopyCellView(title: "Title", content: records.meta?.title))
+        if let title = records.meta?.title {
+            content.append(CopyCellView(title: "Title", content: title))
+        }
 
-        content.append(CopyCellView(title: "Description", content: records.meta?.metaDescription))
+        if let value = records.meta?.metaDescription, !value.isEmpty {
+            content.append(CopyCellView(title: "Description", content: value))
+        }
 
         if let postal = records.postalAddresses {
-            let row = CopyCellView(title: "Postal Addresses", content: postal.joined(separator: "\n"))
-            content.append(row)
+            if postal.count > 1 {
+                let row = CopyCellView(title: "Postal Addresses", rows: postal.map { CopyCellRow(content: $0) })
+                content.append(row)
+            } else if postal.count == 1 {
+                let row = CopyCellView(title: "Postal Address", content: postal[0])
+                content.append(row)
+            }
         }
 
         content.append(CopyCellView(title: "Country code", content: records.countryCode))
@@ -63,8 +73,13 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
                 phoneArr.append(str)
             }
 
-            let row = CopyCellView(title: "Phone", content: phoneArr.joined(separator: "\n"))
-            content.append(row)
+            if phoneArr.count > 1 {
+                let row = CopyCellView(title: "Phone Numbers", rows: phoneArr.map { CopyCellRow(content: $0) })
+                content.append(row)
+            } else if phoneArr.count == 1 {
+                let row = CopyCellView(title: "Phone Number", content: phoneArr[0])
+                content.append(row)
+            }
         }
 
         content.append(CopyCellView(title: "Domain name", content: records.domainName))
@@ -116,11 +131,13 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             throw MoreStoreKitError.NotPurchased
         }
 
-        let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(["domain": host])
+        let response: WhoIsXmlContactsResult = try await WhoisXml.contactsService.query(
+            [
+                "domain": host,
+                "minimumBalance": 25,
+            ]
+        )
 
-//        guard let record = response.dnsData.dnsRecords else {
-//            throw URLError(URLError.badServerResponse)
-//        }
         cache.setObject(response, forKey: host)
 
         return try configure(with: response)
