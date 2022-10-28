@@ -25,6 +25,9 @@ extension UserDefaults {
             public static func keyFor(service: Service) -> String {
                 "service." + service.name.lowercased().replacingOccurrences(of: " ", with: ".") + ".usage.key"
             }
+
+            /// Key to contact service usuage apiKey
+            public static var contactsApiKey: String { "contactService.usage.apiKey" }
         }
     }
 }
