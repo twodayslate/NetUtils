@@ -15,15 +15,14 @@ class WhoisXmlContactsService: WhoisXMLService {
         guard let userData = userData, let userInput = userData["domain"] as? String, let domain = userInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
             return nil
         }
-
+        
         let params = [URLQueryItem(name: "domainName", value: domain),
                       URLQueryItem(name: "outputFormat", value: "JSON"),
                       URLQueryItem(name: "type", value: "_all"),
-                      URLQueryItem(name: "api", value: "whoisXmlcontact"),
+                      URLQueryItem(name: "api", value: "whoisXmlWebsiteContact"),
                       URLQueryItem(name: "identifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString),
-                      URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier),
-                      URLQueryItem(name: "apiKey", value: WhoisXml.current.contactApiKey)]
-
-        return WhoisXml.Endpoint(host: "website-contacts.whoisxmlapi.com", path: "/api/v1", queryItems: params)
+                      URLQueryItem(name: "bundleIdentifier", value: Bundle.main.bundleIdentifier)]
+        
+        return WhoisXml.Endpoint(host: "api.netutils.workers.dev", path: "/api/v1", queryItems: params)
     }
 }
