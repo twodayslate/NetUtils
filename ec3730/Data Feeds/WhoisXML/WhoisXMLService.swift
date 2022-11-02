@@ -81,7 +81,7 @@ class WhoisXMLService: Service {
             return
         }
 
-        let minimumBalance = userData?["minimumBalance"] as? Int ?? 100
+        let minimumBalance = userData?["minimumBalance"] as? Int ?? 50
 
         usage += 1
 
@@ -200,7 +200,7 @@ class WhoisXMLService: Service {
             throw DataFeedError.invalidUrl
         }
 
-        let minimumBalance = userData?["minimumBalance"] as? Int ?? 100
+        let minimumBalance = userData?["minimumBalance"] as? Int ?? 50
 
         if let cached: T = cache.value(for: endpointURL.absoluteString) {
             usage += 1

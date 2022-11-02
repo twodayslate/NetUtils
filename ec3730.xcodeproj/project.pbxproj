@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E07167328FEA629009C3844 /* WhoIsXmlContactsSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07167228FEA629009C3844 /* WhoIsXmlContactsSectionModel.swift */; };
+		2E07167528FEB055009C3844 /* WhoIsXmlContactsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07167428FEB055009C3844 /* WhoIsXmlContactsResult.swift */; };
+		2E07167F28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */; };
+		2E07168128FEC3F3009C3844 /* WhoisXmlContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */; };
+		3D41F20D28FE95200048D5F9 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41F20C28FE95200048D5F9 /* ApiKeys.swift */; };
+		84A16C1D290A9FC800A7EBF4 /* Runestone in Frameworks */ = {isa = PBXBuildFile; productRef = 84A16C1C290A9FC800A7EBF4 /* Runestone */; };
+		84A16C1F290AA0CE00A7EBF4 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A16C1E290AA0CE00A7EBF4 /* ApiKeys.swift */; };
 		AA1595D328B24AC2003819A1 /* DataUsageInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1595D228B24AC2003819A1 /* DataUsageInfoModel.swift */; };
 		AA1595D528B24D2A003819A1 /* DataUsageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1595D428B24D2A003819A1 /* DataUsageModel.swift */; };
 		AA8FBAB9283AA6A000280377 /* HostViewSectionContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */; };
@@ -26,7 +33,6 @@
 		F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63102762130D76200F34E42 /* ReachabilityViewController.swift */; };
 		F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6310278213366BB00F34E42 /* SourceViewController.swift */; };
 		F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63540D4213DEBDD00605ABE /* Reachability.swift */; };
-		F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63540D8213DFE8300605ABE /* ApiKeys.swift */; };
 		F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63540DC213E1D1B00605ABE /* StoreKit.framework */; };
 		F6397FE525E8937A00914B3F /* HostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FE425E8937900914B3F /* HostView.swift */; };
 		F6397FED25EEFEAE00914B3F /* CopyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */; };
@@ -67,7 +73,6 @@
 		F660FDF0286953A00027C759 /* DeviceInfoSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDEF286953A00027C759 /* DeviceInfoSectionView.swift */; };
 		F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661A27F23020FCF0023FA50 /* UIAlertController.swift */; };
 		F6659ECC287A298D00038ECA /* SourceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6659ECB287A298D00038ECA /* SourceCard.swift */; };
-		F6659ED2287A2DAD00038ECA /* Runestone in Frameworks */ = {isa = PBXBuildFile; productRef = F6659ED1287A2DAD00038ECA /* Runestone */; };
 		F6659ED4287A2DC300038ECA /* WebWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6659ED3287A2DC300038ECA /* WebWrapperView.swift */; };
 		F6659ED7287A33BA00038ECA /* TreeSitterBashRunestone in Frameworks */ = {isa = PBXBuildFile; productRef = F6659ED6287A33BA00038ECA /* TreeSitterBashRunestone */; };
 		F6659ED9287A33BA00038ECA /* TreeSitterCPPRunestone in Frameworks */ = {isa = PBXBuildFile; productRef = F6659ED8287A33BA00038ECA /* TreeSitterCPPRunestone */; };
@@ -204,6 +209,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E07167228FEA629009C3844 /* WhoIsXmlContactsSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlContactsSectionModel.swift; sourceTree = "<group>"; };
+		2E07167428FEB055009C3844 /* WhoIsXmlContactsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlContactsResult.swift; sourceTree = "<group>"; };
+		2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlContactsSectionModel.json; sourceTree = "<group>"; };
+		2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlContactsService.swift; sourceTree = "<group>"; };
+		3D41F20C28FE95200048D5F9 /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
+		84A16C1E290AA0CE00A7EBF4 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		AA1595D228B24AC2003819A1 /* DataUsageInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageInfoModel.swift; sourceTree = "<group>"; };
 		AA1595D428B24D2A003819A1 /* DataUsageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageModel.swift; sourceTree = "<group>"; };
 		AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewSectionContent.swift; sourceTree = "<group>"; };
@@ -224,7 +235,6 @@
 		F63102762130D76200F34E42 /* ReachabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityViewController.swift; sourceTree = "<group>"; };
 		F6310278213366BB00F34E42 /* SourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewController.swift; sourceTree = "<group>"; };
 		F63540D4213DEBDD00605ABE /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		F63540D8213DFE8300605ABE /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		F63540DC213E1D1B00605ABE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F63540DE213E4DB900605ABE /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		F63540E0213E4DD200605ABE /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
@@ -392,7 +402,6 @@
 				F6659F17287A33BA00038ECA /* TreeSitterYAMLRunestone in Frameworks */,
 				F6659EFB287A33BA00038ECA /* TreeSitterOCamlRunestone in Frameworks */,
 				F67EDA0A2411F42B00021F6C /* Highlightr in Frameworks */,
-				F6659ED2287A2DAD00038ECA /* Runestone in Frameworks */,
 				F6659EE5287A33BA00038ECA /* TreeSitterElmRunestone in Frameworks */,
 				F67ED9F5240DF56100021F6C /* AddressURL in Frameworks */,
 				F6659F05287A33BA00038ECA /* TreeSitterRegexRunestone in Frameworks */,
@@ -400,6 +409,7 @@
 				F643036825E6033D00109C92 /* DeviceKit in Frameworks */,
 				F6659EEF287A33BA00038ECA /* TreeSitterJSONRunestone in Frameworks */,
 				F6659F07287A33BA00038ECA /* TreeSitterRubyRunestone in Frameworks */,
+				84A16C1D290A9FC800A7EBF4 /* Runestone in Frameworks */,
 				F6659F03287A33BA00038ECA /* TreeSitterRRunestone in Frameworks */,
 				F6659EE3287A33BA00038ECA /* TreeSitterElixirRunestone in Frameworks */,
 				F67EDA042411E70F00021F6C /* SplitView in Frameworks */,
@@ -442,6 +452,7 @@
 				AAC727BB2843AD2A00482D73 /* WhoisXmlWhoisSectionModel.json */,
 				AAC727BC2843AD2A00482D73 /* WhoisXmlDnsSectionModel.json */,
 				AAC727BD2843AD2A00482D73 /* GoogleWebRiskSectionModel.json */,
+				2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */,
 				AAC727BE2843AD2A00482D73 /* WhoisXmlReputationSectionModel.json */,
 				AAC727BF2843AD2A00482D73 /* Utility.swift */,
 			);
@@ -493,6 +504,7 @@
 				F644A102279284EE0061C98B /* GoogleWebRiskSectionModel.swift */,
 				F644A100279283E30061C98B /* WhoisXmlDnsSectionModel.swift */,
 				F65FDA6427AB03BC0024521B /* WhoisXmlReputationSectionModel.swift */,
+				2E07167228FEA629009C3844 /* WhoIsXmlContactsSectionModel.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -628,6 +640,8 @@
 				F65FDA6627AB06920024521B /* WhoisXmlReputationRecord.swift */,
 				F6FDDFDB230B2BB900FBF75E /* WhoisDnsResults.swift */,
 				F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */,
+				2E07167428FEB055009C3844 /* WhoIsXmlContactsResult.swift */,
+				2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */,
 			);
 			path = WhoisXML;
 			sourceTree = "<group>";
@@ -724,11 +738,12 @@
 				F6A4EB932301C5CB00439562 /* Protocols */,
 				F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */,
 				F6C8D8AD212E5AEA00309373 /* Assets.xcassets */,
+				84A16C1E290AA0CE00A7EBF4 /* ApiKeys.swift */,
 				F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */,
 				F60FD36E25E060DC00BCEF86 /* Persistence */,
 				F6C8D8B2212E5AEA00309373 /* Info.plist */,
 				F6A4EB952301C5EF00439562 /* Extensions */,
-				F63540D8213DFE8300605ABE /* ApiKeys.swift */,
+				3D41F20C28FE95200048D5F9 /* ApiKeys.swift */,
 			);
 			path = ec3730;
 			sourceTree = "<group>";
@@ -812,7 +827,6 @@
 				F643036725E6033D00109C92 /* DeviceKit */,
 				F63B922E279C985B007E845F /* Cache */,
 				F6E53FB5286FB0210041A3DA /* NavigationSplitTab */,
-				F6659ED1287A2DAD00038ECA /* Runestone */,
 				F6659ED6287A33BA00038ECA /* TreeSitterBashRunestone */,
 				F6659ED8287A33BA00038ECA /* TreeSitterCPPRunestone */,
 				F6659EDA287A33BA00038ECA /* TreeSitterCRunestone */,
@@ -847,6 +861,7 @@
 				F6659F14287A33BA00038ECA /* TreeSitterTypeScriptRunestone */,
 				F6659F16287A33BA00038ECA /* TreeSitterYAMLRunestone */,
 				F6659F2E287A8C7F00038ECA /* RunestoneTomorrowTheme */,
+				84A16C1C290A9FC800A7EBF4 /* Runestone */,
 			);
 			productName = ec3730;
 			productReference = F6C8D8A1212E5AE900309373 /* ec3730.app */;
@@ -943,8 +958,8 @@
 				F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 				F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */,
 				F6E53FB4286FB0210041A3DA /* XCRemoteSwiftPackageReference "NavigationSplitTab" */,
-				F6659ED0287A2DAD00038ECA /* XCRemoteSwiftPackageReference "Runestone" */,
 				F6659ED5287A33BA00038ECA /* XCRemoteSwiftPackageReference "treesitterlanguages" */,
+				84A16C1B290A9FC800A7EBF4 /* XCRemoteSwiftPackageReference "Runestone" */,
 			);
 			productRefGroup = F6C8D8A2212E5AE900309373 /* Products */;
 			projectDirPath = "";
@@ -965,6 +980,7 @@
 				F6C8D8B1212E5AEA00309373 /* LaunchScreen.storyboard in Resources */,
 				AAC727C12843AD2A00482D73 /* WhoisXmlWhoisSectionModel.json in Resources */,
 				AAC727C32843AD2A00482D73 /* GoogleWebRiskSectionModel.json in Resources */,
+				2E07167F28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json in Resources */,
 				AAC727C42843AD2A00482D73 /* WhoisXmlReputationSectionModel.json in Resources */,
 				F6C8D8AE212E5AEA00309373 /* Assets.xcassets in Resources */,
 				AAC727C22843AD2A00482D73 /* WhoisXmlDnsSectionModel.json in Resources */,
@@ -1053,6 +1069,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6FDDFC82304803100FBF75E /* UserDefaults.swift in Sources */,
+				2E07167328FEA629009C3844 /* WhoIsXmlContactsSectionModel.swift in Sources */,
 				F6397FED25EEFEAE00914B3F /* CopyCellView.swift in Sources */,
 				F650F74B233E62C100BAA609 /* BlurredPickerView.swift in Sources */,
 				F6659F20287A4D8000038ECA /* SnapCalculator.swift in Sources */,
@@ -1063,12 +1080,12 @@
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
 				F6FDDFD8230B106200FBF75E /* WhoisXmlDnsCells.swift in Sources */,
 				F60FD36A25E060D700BCEF86 /* PingItem.swift in Sources */,
+				2E07167528FEB055009C3844 /* WhoIsXmlContactsResult.swift in Sources */,
 				F6E53FB8286FB03F0041A3DA /* ContentView.swift in Sources */,
 				F68CE56623031DA20068D104 /* DataFeedErrors.swift in Sources */,
 				F660FDD82868E9A20027C759 /* DeviceInfoModel.swift in Sources */,
 				F69E365423580A7D0017296E /* DataFeedSubscription.swift in Sources */,
 				F69E3652235808DF0017296E /* DFOneTimePurchase.swift in Sources */,
-				F63540D9213DFE8300605ABE /* ApiKeys.swift in Sources */,
 				F660FDE8286903DC0027C759 /* JavaScriptInfoModel.swift in Sources */,
 				F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */,
 				F644A0FD279283300061C98B /* LocalDnsModel.swift in Sources */,
@@ -1081,6 +1098,7 @@
 				F66643B326F02A5B000F17BC /* HostViewModel.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F6C38E8826FABEFB00BD9A71 /* StoreKitModel.swift in Sources */,
+				3D41F20D28FE95200048D5F9 /* ApiKeys.swift in Sources */,
 				F66643B726F030D5000F17BC /* HostSectionModel.swift in Sources */,
 				F660FDE02868F3310027C759 /* UIDeviceInfoModel.swift in Sources */,
 				F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */,
@@ -1145,8 +1163,10 @@
 				F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */,
 				F643030B25E47BA300109C92 /* EZPanel.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
+				84A16C1F290AA0CE00A7EBF4 /* ApiKeys.swift in Sources */,
 				F6E53FC628701D360041A3DA /* Interface.swift in Sources */,
 				F660FDF0286953A00027C759 /* DeviceInfoSectionView.swift in Sources */,
+				2E07168128FEC3F3009C3844 /* WhoisXmlContactsService.swift in Sources */,
 				F644A0FA279268BD0061C98B /* FSDisclosureGroup.swift in Sources */,
 				F6E53FCB287024A50041A3DA /* InterfaceConnectionBarView.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
@@ -1514,6 +1534,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		84A16C1B290A9FC800A7EBF4 /* XCRemoteSwiftPackageReference "Runestone" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simonbs/Runestone";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.7;
+			};
+		};
 		F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hyperoslo/Cache";
@@ -1528,14 +1556,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.6.0;
-			};
-		};
-		F6659ED0287A2DAD00038ECA /* XCRemoteSwiftPackageReference "Runestone" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/simonbs/Runestone";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.2;
 			};
 		};
 		F6659ED5287A33BA00038ECA /* XCRemoteSwiftPackageReference "treesitterlanguages" */ = {
@@ -1629,6 +1649,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		84A16C1C290A9FC800A7EBF4 /* Runestone */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84A16C1B290A9FC800A7EBF4 /* XCRemoteSwiftPackageReference "Runestone" */;
+			productName = Runestone;
+		};
 		F63B922E279C985B007E845F /* Cache */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */;
@@ -1638,11 +1663,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F643036625E6033D00109C92 /* XCRemoteSwiftPackageReference "DeviceKit" */;
 			productName = DeviceKit;
-		};
-		F6659ED1287A2DAD00038ECA /* Runestone */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F6659ED0287A2DAD00038ECA /* XCRemoteSwiftPackageReference "Runestone" */;
-			productName = Runestone;
 		};
 		F6659ED6287A33BA00038ECA /* TreeSitterBashRunestone */ = {
 			isa = XCSwiftPackageProductDependency;
