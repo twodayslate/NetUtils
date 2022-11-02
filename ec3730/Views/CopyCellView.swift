@@ -135,6 +135,13 @@ struct CopyCellView: CopyCellProtocol {
             Button(action: { self.shouldShare.toggle() }, label: {
                 Label("Share", systemImage: "square.and.arrow.up")
             })
+            if let _ = self.rows {
+                Button {
+                    expanded.toggle()
+                } label: {
+                    Label(expanded ? "Collapse" : "Expand", systemImage: expanded ? "rectangle.compress.vertical" : "rectangle.expand.vertical")
+                }
+            }
         }).sheet(isPresented: $shouldShare, content: {
             ShareSheetView(activityItems: [self.contentsToShare])
         })

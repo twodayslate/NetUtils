@@ -1,9 +1,5 @@
 import SwiftUI
 
-import SwiftUI
-
-import SwiftUI
-
 class GoogleWebRiskSectionModel: HostSectionModel {
     required convenience init() {
         self.init(GoogleWebRisk.current, service: GoogleWebRisk.lookupService)

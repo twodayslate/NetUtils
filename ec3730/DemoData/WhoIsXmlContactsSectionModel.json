@@ -1,0 +1,51 @@
+{
+    "companyNames": [
+        "Play Store",
+        "Morgan Calderini",
+        "Google LLC",
+        "Google Analytics a Google Analytics",
+        "Cloud Build",
+        "NASA Camp",
+        "Grand Canyon National Park",
+        "Devon Island Canada"
+    ],
+    "countryCode": "US",
+    "domainName": "google.com",
+    "emails": [
+        {
+            "description": "",
+            "email": "investor-relations@abc.xyz"
+        },
+        {
+            "description": "",
+            "email": "press@google.com"
+        },
+        {
+            "description": "",
+            "email": "Tina@ink-42.com"
+        },
+        {
+            "description": "",
+            "email": "joe@yourcompany.com"
+        }
+    ],
+    "meta": {
+        "description": "",
+        "title": "Google"
+    },
+    "phones": [
+        {
+            "callHours": "",
+            "description": "",
+            "phoneNumber": "650 253-0000"
+        }
+    ],
+    "postalAddresses": [],
+    "socialLinks": {
+        "facebook": "",
+        "instagram": "",
+        "linkedIn": "",
+        "twitter": ""
+    },
+    "websiteResponded": true
+}
