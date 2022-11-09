@@ -51,6 +51,7 @@ class HostViewModel: ObservableObject {
             WhoisXmlDnsSectionModel(),
             WhoisXmlReputationSectionModel(),
             WhoIsXmlContactsSectionModel(),
+            WhoIsXmlCategorizationSectionModel(),
             GoogleWebRiskSectionModel(),
             WhoIsXmlContactsSectionModel(),
         ]

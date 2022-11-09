@@ -1,0 +1,49 @@
+{
+    "categories": [{
+        "tier1": {
+            "confidence": 0.9750956680990432,
+            "id": "IAB-596",
+            "name": "Technology & Computing"
+        },
+        "tier2": {
+            "confidence": 0.9242695836674197,
+            "id": "IAB-619",
+            "name": "Internet"
+        }
+    }, {
+        "tier1": {
+            "confidence": 0.9750956680990432,
+            "id": "IAB-52",
+            "name": "Business and Finance"
+        },
+        "tier2": {
+            "confidence": 0.9242695836674197,
+            "id": "IAB-99",
+            "name": "Information Services Industry"
+        }
+    }, {
+        "tier1": {
+            "confidence": 0.9750956680990432,
+            "id": "IAB-52",
+            "name": "Business and Finance"
+        },
+        "tier2": {
+            "confidence": 0.9242695836674197,
+            "id": "IAB-115",
+            "name": "Technology Industry"
+        }
+    }, {
+        "tier1": {
+            "confidence": 0.9750956680990432,
+            "id": "IAB-52",
+            "name": "Business and Finance"
+        },
+        "tier2": {
+            "confidence": 0.9242695836674197,
+            "id": "IAB-116",
+            "name": "Telecommunications Industry"
+        }
+    }],
+    "domainName": "google.com",
+    "websiteResponded": true
+}
