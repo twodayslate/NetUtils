@@ -233,6 +233,7 @@
 		2E07167428FEB055009C3844 /* WhoIsXmlContactsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlContactsResult.swift; sourceTree = "<group>"; };
 		2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlContactsSectionModel.json; sourceTree = "<group>"; };
 		2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlContactsService.swift; sourceTree = "<group>"; };
+
 		846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlGeoLocationSectionModel.json; sourceTree = "<group>"; };
 		846CDA84291CF6A800DDB5AA /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLocationSectionModel.swift; sourceTree = "<group>"; };
@@ -494,6 +495,7 @@
 				AAC727BD2843AD2A00482D73 /* GoogleWebRiskSectionModel.json */,
 				2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */,
 				AAC727BE2843AD2A00482D73 /* WhoisXmlReputationSectionModel.json */,
+
 				846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */,
 				84CECCCE29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json */,
 				AAC727BF2843AD2A00482D73 /* Utility.swift */,
@@ -1057,7 +1059,7 @@
 				F6C8D8B1212E5AEA00309373 /* LaunchScreen.storyboard in Resources */,
 				AAC727C12843AD2A00482D73 /* WhoisXmlWhoisSectionModel.json in Resources */,
 				AAC727C32843AD2A00482D73 /* GoogleWebRiskSectionModel.json in Resources */,
-				84CECCCF29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json in Resources */,
+                84CECCCF29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json in Resources */,
 				2E07167F28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json in Resources */,
 				846CDA83291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json in Resources */,
 				AAC727C42843AD2A00482D73 /* WhoisXmlReputationSectionModel.json in Resources */,
