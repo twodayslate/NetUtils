@@ -4,7 +4,7 @@ import Foundation
 @MainActor
 class WhoIsXmlGeoLocationSectionModel: HostSectionModel {
     required convenience init() {
-        self.init(WhoisXml.current, service: WhoisXml.GeoLoactionService, storeModel: StoreKitModel.geoLocation)
+        self.init(WhoisXml.current, service: WhoisXml.GeoLocationService, storeModel: StoreKitModel.geoLocation)
     }
 
     @MainActor
@@ -23,87 +23,87 @@ class WhoIsXmlGeoLocationSectionModel: HostSectionModel {
         let copyData = try JSONEncoder().encode(records)
         latestData = copyData
         dataToCopy = String(data: copyData, encoding: .utf8)
-    
+
         if let ip = records.ip, !ip.isEmpty {
-            let row = CopyCellView(title: "ip", content: ip)
+            let row = CopyCellView(title: "IP", content: ip)
             content.append(row)
         }
         if let isp = records.isp, !isp.isEmpty {
-            let row = CopyCellView(title: "isp", content: isp)
+            let row = CopyCellView(title: "Isp", content: isp)
             content.append(row)
         }
-        
+
         if let domains = records.domains, !domains.isEmpty {
             if domains.count > 1 {
-                let row = CopyCellView(title: "domains", rows: domains.map { CopyCellRow(content: $0) })
+                let row = CopyCellView(title: "Domains", rows: domains.map { CopyCellRow(content: $0) })
                 content.append(row)
             } else if domains.count == 1 {
-                let row = CopyCellView(title: "domains", content: domains[0])
+                let row = CopyCellView(title: "Domain", content: domains[0])
                 content.append(row)
             }
         }
-        
+
         var locationRows = [CopyCellRow]()
 
         if let country = records.location?.country, !country.isEmpty {
-            locationRows.append(CopyCellRow(title: "country", content: country))
+            locationRows.append(CopyCellRow(title: "Country", content: country))
         }
 
         if let region = records.location?.region, !region.isEmpty {
-            locationRows.append(CopyCellRow(title: "region", content: region))
+            locationRows.append(CopyCellRow(title: "Region", content: region))
         }
 
         if let city = records.location?.city, !city.isEmpty {
-            locationRows.append(CopyCellRow(title: "city", content: city))
+            locationRows.append(CopyCellRow(title: "City", content: city))
         }
 
         if let lat = records.location?.lat {
-            locationRows.append(CopyCellRow(title: "lat", content: "\(lat)"))
+            locationRows.append(CopyCellRow(title: "Latitude", content: "\(lat)"))
         }
 
         if let lng = records.location?.lng {
-            locationRows.append(CopyCellRow(title: "lng", content: "\(lng)"))
+            locationRows.append(CopyCellRow(title: "Longitude", content: "\(lng)"))
         }
 
         if let postalCode = records.location?.postalCode, !postalCode.isEmpty {
-            locationRows.append(CopyCellRow(title: "postalCode", content: postalCode))
+            locationRows.append(CopyCellRow(title: "Postal Code", content: postalCode))
         }
 
         if let timezone = records.location?.timezone, !timezone.isEmpty {
-            locationRows.append(CopyCellRow(title: "timezone", content: timezone))
+            locationRows.append(CopyCellRow(title: "Timezone", content: timezone))
         }
 
         if let geonameId = records.location?.geonameID, geonameId != 0 {
-            locationRows.append(CopyCellRow(title: "geonameId", content: "\(geonameId)"))
+            locationRows.append(CopyCellRow(title: "GeonameId", content: "\(geonameId)"))
         }
 
         if !locationRows.isEmpty {
-            content.append(CopyCellView(title: "Loaction", rows: locationRows))
+            content.append(CopyCellView(title: "Location", rows: locationRows))
         }
 
         if let geoLocationModelClassAs = records.geoLocationModelClassAs {
-            var geoLoactionAsRows = [CopyCellRow]()
+            var geoLocationAsRows = [CopyCellRow]()
             if let asn = geoLocationModelClassAs.asn {
-                geoLoactionAsRows.append(CopyCellRow(title: "asn", content: "\(asn)"))
+                geoLocationAsRows.append(CopyCellRow(title: "Asn", content: "\(asn)"))
             }
 
             if let name = geoLocationModelClassAs.name, !name.isEmpty {
-                geoLoactionAsRows.append(CopyCellRow(title: "name", content: name))
+                geoLocationAsRows.append(CopyCellRow(title: "Name", content: name))
             }
 
             if let domain = geoLocationModelClassAs.domain, !domain.isEmpty {
-                geoLoactionAsRows.append(CopyCellRow(title: "domain", content: domain))
+                geoLocationAsRows.append(CopyCellRow(title: "Domain", content: domain))
             }
 
             if let route = geoLocationModelClassAs.route, !route.isEmpty {
-                geoLoactionAsRows.append(CopyCellRow(title: "route", content: "\(route)"))
+                geoLocationAsRows.append(CopyCellRow(title: "Route", content: "\(route)"))
             }
             if let type = geoLocationModelClassAs.type, !type.isEmpty {
-                geoLoactionAsRows.append(CopyCellRow(title: "type", content: "\(type)"))
+                geoLocationAsRows.append(CopyCellRow(title: "Type", content: "\(type)"))
             }
 
-            if !geoLoactionAsRows.isEmpty {
-                content.append(CopyCellView(title: "geoLoactionAsRows", rows: geoLoactionAsRows))
+            if !geoLocationAsRows.isEmpty {
+                content.append(CopyCellView(title: "GeoLocationAsRows", rows: geoLocationAsRows))
             }
         }
 
@@ -130,7 +130,7 @@ class WhoIsXmlGeoLocationSectionModel: HostSectionModel {
             throw MoreStoreKitError.NotPurchased
         }
 
-        let response: WhoIsXmlGeoLocationResult = try await WhoisXml.GeoLoactionService.query(
+        let response: WhoIsXmlGeoLocationResult = try await WhoisXml.GeoLocationService.query(
             [
                 "domain": host,
                 "minimumBalance": 25,
