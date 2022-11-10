@@ -1,15 +1,7 @@
-//
-//  WhoIsXmlGeoLoactionService.swift
-//  ec3730
-//
-//  Created by admin on 10/11/22.
-//  Copyright © 2022 Zachary Gorak. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
-class WhoIsXmlGeoLoactionService: WhoisXMLService {
+class WhoIsXmlGeoLocationService: WhoisXMLService {
     override func endpoint(_ userData: [String: Any?]?) -> DataFeedEndpoint? {
         guard let userData = userData, let userInput = userData["domain"] as? String, let domain = userInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
             return nil
