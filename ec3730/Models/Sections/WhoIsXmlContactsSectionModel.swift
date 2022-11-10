@@ -29,7 +29,6 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             if names.count > 1 {
                 let row = CopyCellView(title: "Company Names", rows: names.map { CopyCellRow(content: $0) })
                 content.append(row)
-
             } else if names.count == 1 {
                 let row = CopyCellView(title: "Company Name", content: names[0])
                 content.append(row)
@@ -57,11 +56,16 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
         content.append(CopyCellView(title: "Country code", content: records.countryCode))
 
         if let emails = records.emails {
-            if emails.count > 1 {
-                let row = CopyCellView(title: "Emails", rows: emails.map { CopyCellRow(content: $0.email) })
+            var emailsArr = [String]()
+            for email in emails {
+                emailsArr.append(email.email ?? "")
+            }
+
+            if emailsArr.count > 1 {
+                let row = CopyCellView(title: "Emails", rows: emailsArr.map { CopyCellRow(content: $0) })
                 content.append(row)
-            } else {
-                let row = CopyCellView(title: "Emails", content: emails.first?.email)
+            } else if emailsArr.count == 1 {
+                let row = CopyCellView(title: "Email", content: emailsArr[0])
                 content.append(row)
             }
         }
