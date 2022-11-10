@@ -107,9 +107,14 @@ extension WhoisXml: DataFeedService {
         description: "Website Categorization API",
         id: "21"
     )
+    static var GeoLoactionService: WhoisXMLService = WhoIsXmlGeoLoactionService(
+        name: "GeoLoaction",
+        description: "IP Geolocation API",
+        id: "8"
+    )
 
     var services: [Service] {
-        [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService, WhoisXml.CategorizationService]
+        [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService, WhoisXml.CategorizationService, WhoisXml.GeoLoactionService]
     }
 }
 
