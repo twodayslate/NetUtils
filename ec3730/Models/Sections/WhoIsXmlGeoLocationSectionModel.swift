@@ -24,7 +24,6 @@ class WhoIsXmlGeoLocationSectionModel: HostSectionModel {
         latestData = copyData
         dataToCopy = String(data: copyData, encoding: .utf8)
 
-
         if let ip = records.ip, !ip.isEmpty {
             let row = CopyCellType.row(title: "IP", content: ip)
             content.append(row)

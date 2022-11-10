@@ -107,8 +107,8 @@ extension WhoisXml: DataFeedService {
         description: "Our hosted lookup uses a machine learning (ML) engine to scan a website’s content and meta tags to classify the site.",
         id: "21"
     )
-    static var GeoLoactionService: WhoisXMLService = WhoIsXmlGeoLoactionService(
-        name: "GeoLoaction",
+    static var GeoLocationService: WhoisXMLService = WhoIsXmlGeoLocationService(
+        name: "Geo Location",
         description: "IP Geolocation API",
         id: "8"
     )
