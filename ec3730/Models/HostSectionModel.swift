@@ -69,6 +69,7 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
             WhoIsXmlContactsSectionModel(),
             WhoIsXmlGeoLocationSectionModel(),
             WhoIsXmlCategorizationSectionModel(),
+            WhoIsXmlGeoLocationSectionModel(),
             GoogleWebRiskSectionModel(),
         ]
 

@@ -18,6 +18,7 @@
 		846CDA8B291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */; };
 		84A16C1D290A9FC800A7EBF4 /* Runestone in Frameworks */ = {isa = PBXBuildFile; productRef = 84A16C1C290A9FC800A7EBF4 /* Runestone */; };
 		84CECCCF29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 84CECCCE29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json */; };
+
 		84CECCD129151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CECCD029151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift */; };
 		84CECCD329151C1D00FB0F0D /* WhoIsXmlCategorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CECCD229151C1D00FB0F0D /* WhoIsXmlCategorizationService.swift */; };
 		84CECCD5291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CECCD4291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift */; };
@@ -552,6 +553,7 @@
 				2E07167228FEA629009C3844 /* WhoIsXmlContactsSectionModel.swift */,
 				846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */,
 				84CECCD4291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift */,
+				846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -693,6 +695,8 @@
 				846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */,
 				84CECCD029151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift */,
 				84CECCD229151C1D00FB0F0D /* WhoIsXmlCategorizationService.swift */,
+				846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */,
+				846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */,
 			);
 			path = WhoisXML;
 			sourceTree = "<group>";
@@ -817,7 +821,6 @@
 				F6A4EB932301C5CB00439562 /* Protocols */,
 				F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */,
 				F6C8D8AD212E5AEA00309373 /* Assets.xcassets */,
-				84A16C1E290AA0CE00A7EBF4 /* ApiKeys.swift */,
 				F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */,
 				846CDA84291CF6A800DDB5AA /* ApiKeys.swift */,
 				F60FD36E25E060DC00BCEF86 /* Persistence */,
@@ -1255,7 +1258,6 @@
 				F650F747233CECD900BAA609 /* DataFeedCell.swift in Sources */,
 				F643030B25E47BA300109C92 /* EZPanel.swift in Sources */,
 				F68CE5682303291A0068D104 /* Error.swift in Sources */,
-				84A16C1F290AA0CE00A7EBF4 /* ApiKeys.swift in Sources */,
 				F6E53FC628701D360041A3DA /* Interface.swift in Sources */,
 				F660FDF0286953A00027C759 /* DeviceInfoSectionView.swift in Sources */,
 				2E07168128FEC3F3009C3844 /* WhoisXmlContactsService.swift in Sources */,
