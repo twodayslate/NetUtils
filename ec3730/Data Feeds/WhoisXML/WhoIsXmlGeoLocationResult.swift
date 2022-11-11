@@ -38,7 +38,12 @@ extension WhoIsXmlGeoLocationResult {
               geoLocationModelClassAs: GeoLocationAs? = nil,
               isp: String? = nil,
               connectionType: String? = nil) -> WhoIsXmlGeoLocationResult {
-        WhoIsXmlGeoLocationResult(ip: ip ?? self.ip, location: location ?? self.location, domains: domains ?? self.domains, geoLocationModelClassAs: geoLocationModelClassAs ?? self.geoLocationModelClassAs, isp: isp ?? self.isp, connectionType: connectionType ?? self.connectionType)
+        WhoIsXmlGeoLocationResult(ip: ip ?? self.ip,
+                                  location: location ?? self.location,
+                                  domains: domains ?? self.domains,
+                                  geoLocationModelClassAs: geoLocationModelClassAs ?? self.geoLocationModelClassAs,
+                                  isp: isp ?? self.isp,
+                                  connectionType: connectionType ?? self.connectionType)
     }
 
     func jsonData() throws -> Data {
