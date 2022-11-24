@@ -177,8 +177,6 @@ extension StoreKitModel {
 
     static var categorization: StoreKitModel = .whois
 
-    static var geoLocation: StoreKitModel = .whois
-
     static var monapi: StoreKitModel = {
         StoreKitModel(defaultId: "monapi.monthly.auto", ids: ["monapi.yearly.auto", "monapi.onetime"])
     }()
