@@ -102,11 +102,7 @@ extension WhoisXml: DataFeedService {
         description: "Our hosted domain contact information lookup includes company name, direct-dial phone numbers, email addresses, and social media links.",
         id: "29"
     )
-    static var CategorizationService: WhoisXMLService = WhoIsXmlCategorizationService(
-        name: "Categorization",
-        description: "Website Categorization API",
-        id: "21"
-    )
+
     static var GeoLocationService: WhoisXMLService = WhoIsXmlGeoLocationService(
         name: "Geo Location",
         description: "IP Geolocation API",
@@ -114,7 +110,7 @@ extension WhoisXml: DataFeedService {
     )
 
     var services: [Service] {
-        [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService, WhoisXml.CategorizationService, WhoisXml.GeoLocationService]
+        [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService, WhoisXml.GeoLocationService]
     }
 }
 
