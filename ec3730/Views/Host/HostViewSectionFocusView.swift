@@ -10,7 +10,7 @@ struct HostViewSectionFocusView: View {
                 ScrollView {
                     HostViewSectionContent(sectionModel: model, canQuery: true)
                 }
-                HostBarView(url: url, date: date)
+                HostBarView(url: url, date: date).background(Color(UIColor.systemGroupedBackground))
             }
             .navigationTitle(model.service.name)
             .navigationBarTitleDisplayMode(.inline)

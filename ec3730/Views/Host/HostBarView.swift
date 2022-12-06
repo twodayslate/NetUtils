@@ -40,12 +40,7 @@ struct HostBarView: View {
                     }
                 Spacer()
             }
-        }
-        .background(
-            VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
-                .ignoresSafeArea(.all, edges: .horizontal)
-        )
-        .ignoresSafeArea()
+        }.ignoresSafeArea()
         .confirmationDialog("Information", isPresented: $showInfo) {
             Button(action: {
                 UIPasteboard.general.string = url.absoluteString
