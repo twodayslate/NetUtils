@@ -30,6 +30,7 @@ struct HostResult: View {
                     }
                 }
             }
+            .background(Color(UIColor.systemGroupedBackground))
             HostBarView(url: group.url, date: group.date)
         }
         .background(Color(UIColor.systemGroupedBackground))
