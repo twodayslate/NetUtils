@@ -5,13 +5,17 @@ The all-in-one Network Utility application!
    • WiFi information
    • VPN information
 • Host information
-• Google Web Risk Information (purchase or API key required)
-• WHOIS information from Whois XML API (subscription or API key required)
-• DNS information from Whois XML API (subscription  or API key required)
-• Domain and IP reputation information from Whois XML API (subscription  or API key required)
+• Google Web Risk Information*
+• WHOIS information from Whois XML API*
+• DNS information from Whois XML API*
+• Domain and IP reputation information from Whois XML API*
+• Website contact information from Whois XML API*
+• Website categorization information from Whois XML API*
 • Ping utility
 • Device information
 • View page source
+
+* Purchase, subscription, or API key required
 
 Information used by cyber security professionals, payment processors, law enforcement, website owners, and domain investors. 
 
@@ -22,8 +26,8 @@ Find ties to cybercrime and enhance your cyber defense. This information could b
 ◆ Real-time WHOIS data, ensuring that only the most up to date and accurate information is available
 ▸ Check domain names availability and to track domain registration changes.
 ▸ Ensure reliable and secure domain name ownership transfer and management.
-▸ Protect your intellectual property and to check potential trademark infringements. They also use Whois searches to scope domain name similarities, duplicates, or copycats.
-▸ Domain investors use the information gained from Whois searches to learn about their competition and to identify investment opportunities.
+▸ Protect your intellectual property and to check potential trademark infringements.
+▸ Learn about your competition and identify investment opportunities.
 ▸ Identify all the connected domains, websites and IP addresses associated with fraudulent activities and criminals.
 ▸ Identify new business and partnership opportunities and to locate potential buyers through the contact details provided in the Whois records.
 ▸ Obtain more insights on your user base with statistical analyses, helping you create better marketing strategies and campaigns, focus on the right customers, and cater to formerly untapped markets
@@ -37,6 +41,12 @@ A domain has a number of records associated with it, a DNS server can be queried
 
 ► Reputation Information (Subscription required or bring your own API key)
 ◆ Instantly audit your or someone else’s domain or IP address with Domain Reputation API. The tool uses hundreds of parameters to calculate reputation scores.
+
+► Contact Information (Subscription required or bring your own API key)
+◆ Get well-parsed contact information from 235+ million active domain names without the hassle and expense of web scraping or doing manual research.
+
+► Categorization Information (Subscription required or bring your own API key)
+◆ Use our machine learning engine to scan a website’s content and meta tags. Our lookup extracts text to classify the site and assign the top IAB categories applicable to it with associated confidence scores aided by language processing.
 
 ► Web Risk (Purchase required or bring your own API key)
 ◆ Check URLs against Google's constantly updated lists of unsafe web resources
