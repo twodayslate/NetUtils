@@ -103,8 +103,8 @@ extension WhoisXml: DataFeedService {
         id: "29"
     )
     static var CategorizationService: WhoisXMLService = WhoIsXmlCategorizationService(
-        name: "Categorization",
-        description: "Website Categorization API",
+        name: "Website Categorization",
+        description: "Our hosted lookup uses a machine learning (ML) engine to scan a website’s content and meta tags to classify the site.",
         id: "21"
     )
     static var GeoLocationService: WhoisXMLService = WhoIsXmlGeoLocationService(
