@@ -12,11 +12,15 @@
 		2E07167F28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */; };
 		2E07168128FEC3F3009C3844 /* WhoisXmlContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */; };
 		846CDA83291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */; };
-		846CDA85291CF6A800DDB5AA /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA84291CF6A800DDB5AA /* ApiKeys.swift */; };
 		846CDA87291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */; };
 		846CDA89291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */; };
 		846CDA8B291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */; };
+		846CDA85291CF6A800DDB5AA /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA84291CF6A800DDB5AA /* ApiKeys.swift */; };
 		84A16C1D290A9FC800A7EBF4 /* Runestone in Frameworks */ = {isa = PBXBuildFile; productRef = 84A16C1C290A9FC800A7EBF4 /* Runestone */; };
+		84CECCCF29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 84CECCCE29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json */; };
+		84CECCD129151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CECCD029151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift */; };
+		84CECCD329151C1D00FB0F0D /* WhoIsXmlCategorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CECCD229151C1D00FB0F0D /* WhoIsXmlCategorizationService.swift */; };
+		84CECCD5291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CECCD4291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift */; };
 		AA1595D328B24AC2003819A1 /* DataUsageInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1595D228B24AC2003819A1 /* DataUsageInfoModel.swift */; };
 		AA1595D528B24D2A003819A1 /* DataUsageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1595D428B24D2A003819A1 /* DataUsageModel.swift */; };
 		AA8FBAB9283AA6A000280377 /* HostViewSectionContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */; };
@@ -217,10 +221,14 @@
 		2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlContactsSectionModel.json; sourceTree = "<group>"; };
 		2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlContactsService.swift; sourceTree = "<group>"; };
 		846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlGeoLocationSectionModel.json; sourceTree = "<group>"; };
-		846CDA84291CF6A800DDB5AA /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLocationSectionModel.swift; sourceTree = "<group>"; };
 		846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLoactionService.swift; sourceTree = "<group>"; };
 		846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLocationResult.swift; sourceTree = "<group>"; };
+		846CDA84291CF6A800DDB5AA /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
+		84CECCCE29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlCategorizationSectionModel.json; sourceTree = "<group>"; };
+		84CECCD029151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlCategorizationResult.swift; sourceTree = "<group>"; };
+		84CECCD229151C1D00FB0F0D /* WhoIsXmlCategorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlCategorizationService.swift; sourceTree = "<group>"; };
+		84CECCD4291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlCategorizationSectionModel.swift; sourceTree = "<group>"; };
 		AA1595D228B24AC2003819A1 /* DataUsageInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageInfoModel.swift; sourceTree = "<group>"; };
 		AA1595D428B24D2A003819A1 /* DataUsageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageModel.swift; sourceTree = "<group>"; };
 		AA8FBAB8283AA6A000280377 /* HostViewSectionContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewSectionContent.swift; sourceTree = "<group>"; };
@@ -461,6 +469,7 @@
 				2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */,
 				AAC727BE2843AD2A00482D73 /* WhoisXmlReputationSectionModel.json */,
 				846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */,
+				84CECCCE29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json */,
 				AAC727BF2843AD2A00482D73 /* Utility.swift */,
 			);
 			path = DemoData;
@@ -513,6 +522,7 @@
 				F65FDA6427AB03BC0024521B /* WhoisXmlReputationSectionModel.swift */,
 				2E07167228FEA629009C3844 /* WhoIsXmlContactsSectionModel.swift */,
 				846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */,
+				84CECCD4291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -652,6 +662,8 @@
 				2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */,
 				846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */,
 				846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */,
+				84CECCD029151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift */,
+				84CECCD229151C1D00FB0F0D /* WhoIsXmlCategorizationService.swift */,
 			);
 			path = WhoisXML;
 			sourceTree = "<group>";
@@ -989,6 +1001,7 @@
 				F6C8D8B1212E5AEA00309373 /* LaunchScreen.storyboard in Resources */,
 				AAC727C12843AD2A00482D73 /* WhoisXmlWhoisSectionModel.json in Resources */,
 				AAC727C32843AD2A00482D73 /* GoogleWebRiskSectionModel.json in Resources */,
+				84CECCCF29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json in Resources */,
 				2E07167F28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json in Resources */,
 				846CDA83291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json in Resources */,
 				AAC727C42843AD2A00482D73 /* WhoisXmlReputationSectionModel.json in Resources */,
@@ -1118,6 +1131,7 @@
 				F6C87452234FE8030069A57C /* DataFeedsTableViewController.swift in Sources */,
 				F6FDDFCA23048DEF00FBF75E /* UIView.swift in Sources */,
 				F6FDDFC623047EE300FBF75E /* DefaultsSwitch.swift in Sources */,
+				84CECCD329151C1D00FB0F0D /* WhoIsXmlCategorizationService.swift in Sources */,
 				F660FDD52868E9550027C759 /* DeviceInfoView.swift in Sources */,
 				F6C591BA235EC3A9009BA4B7 /* CenterTextTableViewCell.swift in Sources */,
 				F6659F1D287A4CF900038ECA /* SnappedDrawer.swift in Sources */,
@@ -1149,6 +1163,7 @@
 				F60506742134B23F00DDF8A4 /* UIViewController.swift in Sources */,
 				F691B09A2147449200BDE0F4 /* WhoisXml.swift in Sources */,
 				F6310279213366BB00F34E42 /* SourceViewController.swift in Sources */,
+				84CECCD129151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift in Sources */,
 				F668EB4B2356AE3800EEB379 /* IAPFooterView.swift in Sources */,
 				F668EB3C23501FA200EEB379 /* DataFeedEndpoint.swift in Sources */,
 				F68CE56023021AC70068D104 /* CopyLabel.swift in Sources */,
@@ -1183,6 +1198,7 @@
 				846CDA8B291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
 				F644A0F827925CF60061C98B /* HostModelWrapperView.swift in Sources */,
+				84CECCD5291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift in Sources */,
 				F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */,
 				F69E364C235806720017296E /* WhoisXMLService.swift in Sources */,
 				F6FBB869236781AC00E023F2 /* UIDevice.swift in Sources */,
@@ -1373,7 +1389,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -1382,7 +1398,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.7.1;
+				MARKETING_VERSION = 2.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1401,7 +1417,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -1410,7 +1426,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.7.1;
+				MARKETING_VERSION = 2.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
