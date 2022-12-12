@@ -85,9 +85,7 @@ struct CopyCellView: CopyCellProtocol {
                              */
                         }
                     }.padding()
-                    if image != nil {
-                        Image(uiImage: image!)
-                    }
+                    ImageView(imageVal: image)
                 }
             } else if let rows = self.rows {
                 DisclosureGroup(isExpanded: $expanded, content: {
@@ -105,26 +103,24 @@ struct CopyCellView: CopyCellProtocol {
                                     TappedText(content: contents)
                                 }
                             }.padding([.leading, .trailing]).padding(.top, 4)
-                            if image != nil {
-                                Image(uiImage: image!)
-                            }
+                            ImageView(imageVal: image)
                         }
                     }
                 }, label: {
                     Text(self.title)
                 }).padding()
             } else if let contents = contents {
-                VStack{
+                VStack {
                     HStack(alignment: .center) {
                         Text(self.title)
                         Spacer()
                         TappedText(content: contents)
                             .foregroundColor(.gray)
-                        
+
                         if withChevron {
                             Image(systemName: "chevron.right")
                                 .font(.system(size: 14, weight: .semibold))
-                            // .imageScale(.small)
+                                // .imageScale(.small)
                                 .foregroundColor(Color(UIColor.systemGray3))
                             /*
                              height 14
@@ -135,9 +131,7 @@ struct CopyCellView: CopyCellProtocol {
                              */
                         }
                     }.padding()
-                    if image != nil {
-                        Image(uiImage: image!)
-                    }
+                    ImageView(imageVal: image)
                 }
             }
         }
@@ -161,6 +155,18 @@ struct CopyCellView: CopyCellProtocol {
         }).sheet(isPresented: $shouldShare, content: {
             ShareSheetView(activityItems: [self.contentsToShare])
         })
+    }
+}
+
+struct ImageView: View {
+    var imageVal: UIImage?
+    var body: some View {
+        if imageVal != nil {
+            HStack {
+                Spacer()
+                Image(uiImage: imageVal!).padding(.trailing)
+            }
+        }
     }
 }
 

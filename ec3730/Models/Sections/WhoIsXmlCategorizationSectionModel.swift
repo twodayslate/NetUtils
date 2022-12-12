@@ -1,5 +1,6 @@
 import Cache
 import Foundation
+import UIKit
 
 @MainActor
 class WhoIsXmlCategorizationSectionModel: HostSectionModel {
