@@ -175,6 +175,8 @@ extension StoreKitModel {
 
     static var contacts: StoreKitModel = .whois
 
+    static var categorization: StoreKitModel = .whois
+
     static var monapi: StoreKitModel = {
         StoreKitModel(defaultId: "monapi.monthly.auto", ids: ["monapi.yearly.auto", "monapi.onetime"])
     }()
