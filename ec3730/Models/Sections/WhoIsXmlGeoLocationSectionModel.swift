@@ -1,5 +1,6 @@
 import Cache
 import Foundation
+import UIKit
 
 @MainActor
 class WhoIsXmlGeoLocationSectionModel: HostSectionModel {
@@ -29,7 +30,7 @@ class WhoIsXmlGeoLocationSectionModel: HostSectionModel {
             content.append(row)
         }
         if let isp = records.isp, !isp.isEmpty {
-            let row = CopyCellView(title: "Isp", content: isp)
+            let row = CopyCellView(title: "Isp", content: isp, image: UIImage(named: "star"))
             content.append(row)
         }
 

@@ -31,6 +31,7 @@ struct CopyCellView: CopyCellProtocol {
 
     var title: String
     var content: String?
+    var image: UIImage?
     var contents: [String]?
     var rows: [CopyCellRow]?
     var backgroundColor = Color(UIColor.systemBackground)
@@ -65,64 +66,79 @@ struct CopyCellView: CopyCellProtocol {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if let content = self.content {
-                HStack(alignment: .center) {
-                    Text(self.title)
-                    Spacer()
-                    Text(content).foregroundColor(.gray)
-                    if withChevron {
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 14, weight: .semibold))
-                            // .imageScale(.small)
-                            .foregroundColor(Color(UIColor.systemGray3))
-                        /*
-                         height 14
-                         color:
+                VStack {
+                    HStack(alignment: .center) {
+                        Text(self.title)
+                        Spacer()
+                        Text(content).foregroundColor(.gray)
+                        if withChevron {
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 14, weight: .semibold))
+                                // .imageScale(.small)
+                                .foregroundColor(Color(UIColor.systemGray3))
+                            /*
+                             height 14
+                             color:
                              "0.9999999403953552",
                              "0.9999999403953552",
                              "0.9999999403953552"
-                         */
+                             */
+                        }
+                    }.padding()
+                    if image != nil {
+                        Image(uiImage: image!)
                     }
-                }.padding()
+                }
             } else if let rows = self.rows {
                 DisclosureGroup(isExpanded: $expanded, content: {
                     ForEach(rows, id: \.self) { row in
-                        HStack(alignment: .center) {
-                            if let title = row.title {
-                                Text(title)
+                        VStack {
+                            HStack(alignment: .center) {
+                                if let title = row.title {
+                                    Text(title)
+                                }
+                                Spacer()
+                                if let content = row.content {
+                                    Text(content)
+                                }
+                                if let contents = row.contents {
+                                    TappedText(content: contents)
+                                }
+                            }.padding([.leading, .trailing]).padding(.top, 4)
+                            if image != nil {
+                                Image(uiImage: image!)
                             }
-                            Spacer()
-                            if let content = row.content {
-                                Text(content)
-                            }
-                            if let contents = row.contents {
-                                TappedText(content: contents)
-                            }
-                        }.padding([.leading, .trailing]).padding(.top, 4)
+                        }
                     }
                 }, label: {
                     Text(self.title)
                 }).padding()
             } else if let contents = contents {
-                HStack(alignment: .center) {
-                    Text(self.title)
-                    Spacer()
-                    TappedText(content: contents)
-                        .foregroundColor(.gray)
-
-                    if withChevron {
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 14, weight: .semibold))
+                VStack{
+                    HStack(alignment: .center) {
+                        Text(self.title)
+                        Spacer()
+                        TappedText(content: contents)
+                            .foregroundColor(.gray)
+                        
+                        if withChevron {
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 14, weight: .semibold))
                             // .imageScale(.small)
-                            .foregroundColor(Color(UIColor.systemGray3))
-                        /*
-                         height 14
-                         color:
+                                .foregroundColor(Color(UIColor.systemGray3))
+                            /*
+                             height 14
+                             color:
                              "0.9999999403953552",
                              "0.9999999403953552",
                              "0.9999999403953552"
-                         */
+                             */
+                        }
+                    }.padding()
+                    if image != nil {
+                        Image(uiImage: image!)
                     }
-                }.padding()
+                }
             }
         }
         .background(backgroundColor)
