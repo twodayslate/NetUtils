@@ -102,15 +102,14 @@ extension WhoisXml: DataFeedService {
         description: "Our hosted domain contact information lookup includes company name, direct-dial phone numbers, email addresses, and social media links.",
         id: "29"
     )
-
-    static var GeoLocationService: WhoisXMLService = WhoIsXmlGeoLocationService(
-        name: "Geo Location",
-        description: "IP Geolocation API",
-        id: "8"
+    static var CategorizationService: WhoisXMLService = WhoIsXmlCategorizationService(
+        name: "Website Categorization",
+        description: "Our hosted lookup uses a machine learning (ML) engine to scan a website’s content and meta tags to classify the site.",
+        id: "21"
     )
 
     var services: [Service] {
-        [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService, WhoisXml.GeoLocationService]
+        [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService, WhoisXml.CategorizationService]
     }
 }
 
