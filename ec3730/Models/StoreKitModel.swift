@@ -175,6 +175,8 @@ extension StoreKitModel {
 
     static var contacts: StoreKitModel = .whois
 
+    static var geoLocation: StoreKitModel = .whois
+
     static var categorization: StoreKitModel = .whois
 
     static var geoLocation: StoreKitModel = .whois

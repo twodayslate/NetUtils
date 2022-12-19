@@ -113,6 +113,12 @@ extension WhoisXml: DataFeedService {
         id: "8"
     )
 
+    static var GeoLocationService: WhoisXMLService = WhoIsXmlGeoLocationService(
+        name: "Geo Location",
+        description: "IP Geolocation API",
+        id: "8"
+    )
+
     var services: [Service] {
         [WhoisXml.whoisService, WhoisXml.dnsService, WhoisXml.reputationService, WhoisXml.contactsService, WhoisXml.CategorizationService, WhoisXml.GeoLocationService]
     }
