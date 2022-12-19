@@ -11,6 +11,7 @@ The all-in-one Network Utility application!
 • Domain and IP reputation information from Whois XML API*
 • Website contact information from Whois XML API*
 • Website categorization information from Whois XML API*
+• IP geolocation information from Whois XML API*
 • Ping utility
 • Device information
 • View page source
