@@ -121,7 +121,7 @@ extension WhoisXml: DataFeedService {
             WhoisXml.reputationService,
             WhoisXml.contactsService,
             WhoisXml.CategorizationService,
-            WhoisXml.GeoLocationService
+            WhoisXml.GeoLocationService,
         ]
     }
 }
