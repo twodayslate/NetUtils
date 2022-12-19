@@ -11,6 +11,10 @@
 		2E07167528FEB055009C3844 /* WhoIsXmlContactsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07167428FEB055009C3844 /* WhoIsXmlContactsResult.swift */; };
 		2E07167F28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */; };
 		2E07168128FEC3F3009C3844 /* WhoisXmlContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */; };
+		846CDA83291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */; };
+		846CDA87291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */; };
+		846CDA89291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */; };
+		846CDA8B291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */; };
 		846CDA85291CF6A800DDB5AA /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA84291CF6A800DDB5AA /* ApiKeys.swift */; };
 		84A16C1D290A9FC800A7EBF4 /* Runestone in Frameworks */ = {isa = PBXBuildFile; productRef = 84A16C1C290A9FC800A7EBF4 /* Runestone */; };
 		84CECCCF29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 84CECCCE29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json */; };
@@ -216,6 +220,10 @@
 		2E07167428FEB055009C3844 /* WhoIsXmlContactsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlContactsResult.swift; sourceTree = "<group>"; };
 		2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlContactsSectionModel.json; sourceTree = "<group>"; };
 		2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlContactsService.swift; sourceTree = "<group>"; };
+		846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlGeoLocationSectionModel.json; sourceTree = "<group>"; };
+		846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLocationSectionModel.swift; sourceTree = "<group>"; };
+		846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLoactionService.swift; sourceTree = "<group>"; };
+		846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLocationResult.swift; sourceTree = "<group>"; };
 		846CDA84291CF6A800DDB5AA /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		84CECCCE29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlCategorizationSectionModel.json; sourceTree = "<group>"; };
 		84CECCD029151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlCategorizationResult.swift; sourceTree = "<group>"; };
@@ -460,6 +468,7 @@
 				AAC727BD2843AD2A00482D73 /* GoogleWebRiskSectionModel.json */,
 				2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */,
 				AAC727BE2843AD2A00482D73 /* WhoisXmlReputationSectionModel.json */,
+				846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */,
 				84CECCCE29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json */,
 				AAC727BF2843AD2A00482D73 /* Utility.swift */,
 			);
@@ -512,6 +521,7 @@
 				F644A100279283E30061C98B /* WhoisXmlDnsSectionModel.swift */,
 				F65FDA6427AB03BC0024521B /* WhoisXmlReputationSectionModel.swift */,
 				2E07167228FEA629009C3844 /* WhoIsXmlContactsSectionModel.swift */,
+				846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */,
 				84CECCD4291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift */,
 			);
 			path = Sections;
@@ -650,6 +660,8 @@
 				F6FDDFD7230B106200FBF75E /* WhoisXmlDnsCells.swift */,
 				2E07167428FEB055009C3844 /* WhoIsXmlContactsResult.swift */,
 				2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */,
+				846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */,
+				846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */,
 				84CECCD029151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift */,
 				84CECCD229151C1D00FB0F0D /* WhoIsXmlCategorizationService.swift */,
 			);
@@ -991,6 +1003,7 @@
 				AAC727C32843AD2A00482D73 /* GoogleWebRiskSectionModel.json in Resources */,
 				84CECCCF29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json in Resources */,
 				2E07167F28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json in Resources */,
+				846CDA83291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json in Resources */,
 				AAC727C42843AD2A00482D73 /* WhoisXmlReputationSectionModel.json in Resources */,
 				F6C8D8AE212E5AEA00309373 /* Assets.xcassets in Resources */,
 				AAC727C22843AD2A00482D73 /* WhoisXmlDnsSectionModel.json in Resources */,
@@ -1086,6 +1099,7 @@
 				F668EB4323563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift in Sources */,
 				F67425DB21363FFF00A79492 /* UITextView.swift in Sources */,
 				F66643B526F02A8F000F17BC /* HostViewSection.swift in Sources */,
+				846CDA89291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift in Sources */,
 				AA1595D328B24AC2003819A1 /* DataUsageInfoModel.swift in Sources */,
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
 				F6FDDFD8230B106200FBF75E /* WhoisXmlDnsCells.swift in Sources */,
@@ -1125,6 +1139,7 @@
 				F6659ECC287A298D00038ECA /* SourceCard.swift in Sources */,
 				F660FDEE28693D020027C759 /* FingerprintInfoModel.swift in Sources */,
 				F63B9228279BC31B007E845F /* HostHistoryList.swift in Sources */,
+				846CDA87291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift in Sources */,
 				F6E53FC928701D630041A3DA /* InterfaceView.swift in Sources */,
 				F69E365623580AA00017296E /* DataFeedService.swift in Sources */,
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
@@ -1180,6 +1195,7 @@
 				2E07168128FEC3F3009C3844 /* WhoisXmlContactsService.swift in Sources */,
 				F644A0FA279268BD0061C98B /* FSDisclosureGroup.swift in Sources */,
 				F6E53FCB287024A50041A3DA /* InterfaceConnectionBarView.swift in Sources */,
+				846CDA8B291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
 				F644A0F827925CF60061C98B /* HostModelWrapperView.swift in Sources */,
 				84CECCD5291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift in Sources */,
