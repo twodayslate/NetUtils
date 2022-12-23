@@ -62,7 +62,7 @@ class WhoisXmlDnsSectionModel: HostSectionModel {
 
             rows.append(CopyCellRow(title: "Raw", content: record.rawText))
 
-            content.append(CopyCellView(title: record.dnsType, rows: rows))
+            content.append(CopyCellView<Any>(title: record.dnsType, rows: rows))
         }
 
         return copyData

@@ -27,10 +27,10 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
 
         if let names = records.companyNames, !names.isEmpty {
             if names.count > 1 {
-                let row = CopyCellView(title: "Company Names", rows: names.map { CopyCellRow(content: $0) })
+                let row = CopyCellView<Any>(title: "Company Names", rows: names.map { CopyCellRow(content: $0) })
                 content.append(row)
             } else if names.count == 1 {
-                let row = CopyCellView(title: "Company Name", content: names[0])
+                let row = CopyCellView<Any>(title: "Company Name", content: names[0])
                 content.append(row)
             }
         }
@@ -45,15 +45,15 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
 
         if let postal = records.postalAddresses {
             if postal.count > 1 {
-                let row = CopyCellView(title: "Postal Addresses", rows: postal.map { CopyCellRow(content: $0) })
+                let row = CopyCellView<Any>(title: "Postal Addresses", rows: postal.map { CopyCellRow(content: $0) })
                 content.append(row)
             } else if postal.count == 1 {
-                let row = CopyCellView(title: "Postal Address", content: postal[0])
+                let row = CopyCellView<Any>(title: "Postal Address", content: postal[0])
                 content.append(row)
             }
         }
 
-        //TODO: #57 - like this (image: UIImage(named: "star")) now we can pass image and populate anywhere in cell
+        // TODO: #57 - like this (image: UIImage(named: "star")) now we can pass image and populate anywhere in cell
         content.append(CopyCellView(title: "Country code", content: records.countryCode, image: UIImage(named: "star")))
 
         if let emails = records.emails {
@@ -63,10 +63,10 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             }
 
             if emailsArr.count > 1 {
-                let row = CopyCellView(title: "Emails", rows: emailsArr.map { CopyCellRow(content: $0) })
+                let row = CopyCellView<Any>(title: "Emails", rows: emailsArr.map { CopyCellRow(content: $0) })
                 content.append(row)
             } else if emailsArr.count == 1 {
-                let row = CopyCellView(title: "Email", content: emailsArr[0])
+                let row = CopyCellView<Any>(title: "Email", content: emailsArr[0])
                 content.append(row)
             }
         }
@@ -79,10 +79,10 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             }
 
             if phoneArr.count > 1 {
-                let row = CopyCellView(title: "Phone Numbers", rows: phoneArr.map { CopyCellRow(content: $0) })
+                let row = CopyCellView<Any>(title: "Phone Numbers", rows: phoneArr.map { CopyCellRow(content: $0) })
                 content.append(row)
             } else if phoneArr.count == 1 {
-                let row = CopyCellView(title: "Phone Number", content: phoneArr[0])
+                let row = CopyCellView<Any>(title: "Phone Number", content: phoneArr[0])
                 content.append(row)
             }
         }

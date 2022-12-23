@@ -4,6 +4,12 @@ protocol CopyCellProtocol: View, Hashable, Identifiable {
     var contentsToShare: String { get }
 }
 
+public protocol ContentToShareProtocol {
+    associatedtype T
+    func contentToShare<T>(content: T) -> T?
+    var contentToShareViaComputedPropery: T { get }
+}
+
 struct CopyCellRow: Identifiable, Hashable, Codable {
     var id: Int {
         hashValue
@@ -15,9 +21,14 @@ struct CopyCellRow: Identifiable, Hashable, Codable {
 }
 
 @available(iOS 15.0, *)
-struct CopyCellView: CopyCellProtocol {
+struct CopyCellView<T>: CopyCellProtocol, ContentToShareProtocol {
     var id: String {
-        contentsToShare + "\(hashValue)"
+        if let content = contentToShareViaComputedPropery as? String {
+            return content + "\(hashValue)"
+        } else {
+            return "\(hashValue)"
+        }
+        // contentsToShare + "\(hashValue)"
     }
 
     static func == (lhs: CopyCellView, rhs: CopyCellView) -> Bool {
@@ -59,6 +70,36 @@ struct CopyCellView: CopyCellProtocol {
         }
 
         return "{}"
+    }
+
+    func contentToShare<T>(content: T) -> T? {
+        content.self
+    }
+
+    var contentToShareViaComputedPropery: T {
+        if let content = contentToShare(content: "NetUtils") {
+            print("generic value is : \(content)")
+        }
+
+        if let content = content {
+            let dict = [title: content]
+            guard let data = try? JSONSerialization.data(withJSONObject: dict), let string = String(data: data, encoding: .utf8) else {
+                return "{}" as! T
+            }
+
+            return string as! T
+        }
+
+        if let rows = rows {
+            let dict = [title: rows]
+            guard let data = try? JSONEncoder().encode(dict), let string = String(data: data, encoding: .utf8) else {
+                return "{}" as! T
+            }
+
+            return string as! T
+        }
+
+        return "{}" as! T
     }
 
     @State var expanded = true
@@ -153,7 +194,7 @@ struct CopyCellView: CopyCellProtocol {
                 }
             }
         }).sheet(isPresented: $shouldShare, content: {
-            ShareSheetView(activityItems: [self.contentsToShare])
+            ShareSheetView(activityItems: [self.contentToShareViaComputedPropery])
         })
     }
 }
@@ -189,10 +230,10 @@ struct TappedText: View {
 struct CopyCellView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CopyCellView(title: "Title", content: "Detail")
-            CopyCellView(title: "Test", rows: [CopyCellRow(title: "", content: "whatever")])
-            CopyCellView(title: "Test", rows: [CopyCellRow(title: "", content: "whatever"), CopyCellRow(title: "", content: "whatever"), CopyCellRow(title: "", content: "whatever2"), CopyCellRow(title: "", content: "whatever3")])
-            CopyCellView(title: "Test", rows: [CopyCellRow(title: "t1", content: "whatever"), CopyCellRow(title: "t2", content: "whatever2")])
+            CopyCellView<Any>(title: "Title", content: "Detail")
+            CopyCellView<Any>(title: "Test", rows: [CopyCellRow(title: "", content: "whatever")])
+            CopyCellView<Any>(title: "Test", rows: [CopyCellRow(title: "", content: "whatever"), CopyCellRow(title: "", content: "whatever"), CopyCellRow(title: "", content: "whatever2"), CopyCellRow(title: "", content: "whatever3")])
+            CopyCellView<Any>(title: "Test", rows: [CopyCellRow(title: "t1", content: "whatever"), CopyCellRow(title: "t2", content: "whatever2")])
         }.previewLayout(.sizeThatFits)
     }
 }

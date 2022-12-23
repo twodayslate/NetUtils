@@ -591,17 +591,17 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
         content.append(CopyCellView(title: "Status", content: status))
 
         if let customFieldName = record.customField1Name, let customFieldValue = record.customField1Value {
-            let customCell = CopyCellView(title: customFieldName, content: customFieldValue)
+            let customCell = CopyCellView<Any>(title: customFieldName, content: customFieldValue)
             content.append(customCell)
         }
 
         if let customFieldName = record.customField2Name, let customFieldValue = record.customField2Value {
-            let customCell = CopyCellView(title: customFieldName, content: customFieldValue)
+            let customCell = CopyCellView<Any>(title: customFieldName, content: customFieldValue)
             content.append(customCell)
         }
 
         if let customFieldName = record.customField3Name, let customFieldValue = record.customField3Value {
-            let customCell = CopyCellView(title: customFieldName, content: customFieldValue)
+            let customCell = CopyCellView<Any>(title: customFieldName, content: customFieldValue)
             content.append(customCell)
         }
         return copyData

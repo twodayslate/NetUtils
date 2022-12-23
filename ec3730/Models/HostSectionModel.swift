@@ -5,7 +5,7 @@ import SwiftUI
 @available(iOS 15.0, *)
 class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
     @MainActor
-    @Published var content = [CopyCellView]()
+    @Published var content = [CopyCellView<Any>]()
 
     @MainActor
     @Published var isVisible = false
