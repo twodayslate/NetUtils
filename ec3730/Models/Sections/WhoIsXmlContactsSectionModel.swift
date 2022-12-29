@@ -54,7 +54,7 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
         }
 
         // TODO: #57 - like this (image: UIImage(named: "star")) now we can pass image and populate anywhere in cell
-        content.append(CopyCellView(title: "Country code", content: records.countryCode, image: UIImage(named: "star")))
+        content.append(CopyCellView(title: "Country code", content: records.countryCode))
 
         if let emails = records.emails {
             var emailsArr = [String]()

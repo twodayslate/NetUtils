@@ -25,20 +25,20 @@ class WhoIsXmlGeoLocationSectionModel: HostSectionModel {
         dataToCopy = String(data: copyData, encoding: .utf8)
 
         if let ip = records.ip, !ip.isEmpty {
-            let row = CopyCellView(title: "IP", content: ip)
+            let row = CopyCellView<Any>(title: "IP", content: ip)
             content.append(row)
         }
         if let isp = records.isp, !isp.isEmpty {
-            let row = CopyCellView(title: "Isp", content: isp)
+            let row = CopyCellView<Any>(title: "Isp", content: isp)
             content.append(row)
         }
 
         if let domains = records.domains, !domains.isEmpty {
             if domains.count > 1 {
-                let row = CopyCellView(title: "Domains", rows: domains.map { CopyCellRow(content: $0) })
+                let row = CopyCellView<Any>(title: "Domains", rows: domains.map { CopyCellRow(content: $0) })
                 content.append(row)
             } else if domains.count == 1 {
-                let row = CopyCellView(title: "Domain", content: domains[0])
+                let row = CopyCellView<Any>(title: "Domain", content: domains[0])
                 content.append(row)
             }
         }

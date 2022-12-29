@@ -1,13 +1,8 @@
 import SwiftUI
 
-protocol CopyCellProtocol: View, Hashable, Identifiable {
-    var contentsToShare: String { get }
-}
-
-public protocol ContentToShareProtocol {
+public protocol CopyCellProtocol: View, Hashable, Identifiable {
     associatedtype T
-    func contentToShare<T>(content: T) -> T?
-    var contentToShareViaComputedPropery: T { get }
+    var contentsToShare: T { get }
 }
 
 struct CopyCellRow: Identifiable, Hashable, Codable {
@@ -21,28 +16,26 @@ struct CopyCellRow: Identifiable, Hashable, Codable {
 }
 
 @available(iOS 15.0, *)
-struct CopyCellView<T>: CopyCellProtocol, ContentToShareProtocol {
+struct CopyCellView<T>: CopyCellProtocol {
     var id: String {
-        if let content = contentToShareViaComputedPropery as? String {
+        if let content = contentsToShare as? String {
             return content + "\(hashValue)"
         } else {
             return "\(hashValue)"
         }
-        // contentsToShare + "\(hashValue)"
     }
 
     static func == (lhs: CopyCellView, rhs: CopyCellView) -> Bool {
-        lhs.title == rhs.title && lhs.content == rhs.content
+        lhs.title == rhs.title // && lhs.content == rhs.content
     }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(title)
-        hasher.combine(content)
+        // hasher.combine(content)
     }
 
     var title: String
-    var content: String?
-    var image: UIImage?
+    var content: Any?
     var contents: [String]?
     var rows: [CopyCellRow]?
     var backgroundColor = Color(UIColor.systemBackground)
@@ -50,37 +43,7 @@ struct CopyCellView<T>: CopyCellProtocol, ContentToShareProtocol {
 
     @State var shouldShare: Bool = false
 
-    var contentsToShare: String {
-        if let content = content {
-            let dict = [title: content]
-            guard let data = try? JSONSerialization.data(withJSONObject: dict), let string = String(data: data, encoding: .utf8) else {
-                return "{}"
-            }
-
-            return string
-        }
-
-        if let rows = rows {
-            let dict = [title: rows]
-            guard let data = try? JSONEncoder().encode(dict), let string = String(data: data, encoding: .utf8) else {
-                return "{}"
-            }
-
-            return string
-        }
-
-        return "{}"
-    }
-
-    func contentToShare<T>(content: T) -> T? {
-        content.self
-    }
-
-    var contentToShareViaComputedPropery: T {
-        if let content = contentToShare(content: "NetUtils") {
-            print("generic value is : \(content)")
-        }
-
+    var contentsToShare: T {
         if let content = content {
             let dict = [title: content]
             guard let data = try? JSONSerialization.data(withJSONObject: dict), let string = String(data: data, encoding: .utf8) else {
@@ -111,14 +74,15 @@ struct CopyCellView<T>: CopyCellProtocol, ContentToShareProtocol {
                     HStack(alignment: .center) {
                         Text(self.title)
                         Spacer()
-                        Text(content).foregroundColor(.gray)
-                        if withChevron {
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, weight: .semibold))
-                                .foregroundColor(Color(UIColor.systemGray3))
+                        if let contentAsString = content as? String {
+                            Text(contentAsString).foregroundColor(.gray)
+                            if withChevron {
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14, weight: .semibold))
+                                    .foregroundColor(Color(UIColor.systemGray3))
+                            }
                         }
                     }.padding()
-                    ImageView(imageVal: image)
                 }
             } else if let rows = self.rows {
                 DisclosureGroup(isExpanded: $expanded, content: {
@@ -136,7 +100,6 @@ struct CopyCellView<T>: CopyCellProtocol, ContentToShareProtocol {
                                     TappedText(content: contents)
                                 }
                             }.padding([.leading, .trailing]).padding(.top, 4)
-                            ImageView(imageVal: image)
                         }
                     }
                 }, label: {
@@ -156,14 +119,19 @@ struct CopyCellView<T>: CopyCellProtocol, ContentToShareProtocol {
                                 .foregroundColor(Color(UIColor.systemGray3))
                         }
                     }.padding()
-                    ImageView(imageVal: image)
                 }
             }
         }
         .background(backgroundColor)
         .contextMenu(menuItems: {
             Button(action: {
-                UIPasteboard.general.string = content
+                if let contentAsString = content as? String {
+                    UIPasteboard.general.string = contentAsString
+                } else if let contentAsImage = content as? UIImage {
+                    UIPasteboard.general.image = contentAsImage
+                } else {
+                    UIPasteboard.general.string = "\(content ?? "")"
+                }
             }, label: {
                 Label("Copy", systemImage: "doc.on.doc")
             })
@@ -178,7 +146,7 @@ struct CopyCellView<T>: CopyCellProtocol, ContentToShareProtocol {
                 }
             }
         }).sheet(isPresented: $shouldShare, content: {
-            ShareSheetView(activityItems: [self.contentToShareViaComputedPropery])
+            ShareSheetView(activityItems: [self.contentsToShare])
         })
     }
 }
@@ -216,8 +184,12 @@ struct CopyCellView_Previews: PreviewProvider {
         Group {
             CopyCellView<Any>(title: "Title", content: "Detail")
             CopyCellView<Any>(title: "Test", rows: [CopyCellRow(title: "", content: "whatever")])
-            CopyCellView<Any>(title: "Test", rows: [CopyCellRow(title: "", content: "whatever"), CopyCellRow(title: "", content: "whatever"), CopyCellRow(title: "", content: "whatever2"), CopyCellRow(title: "", content: "whatever3")])
-            CopyCellView<Any>(title: "Test", rows: [CopyCellRow(title: "t1", content: "whatever"), CopyCellRow(title: "t2", content: "whatever2")])
+            CopyCellView<Any>(title: "Test", rows: [CopyCellRow(title: "", content: "whatever"),
+                                                    CopyCellRow(title: "", content: "whatever"),
+                                                    CopyCellRow(title: "", content: "whatever2"),
+                                                    CopyCellRow(title: "", content: "whatever3")])
+            CopyCellView<Any>(title: "Test", rows: [CopyCellRow(title: "t1", content: "whatever"),
+                                                    CopyCellRow(title: "t2", content: "whatever2")])
         }.previewLayout(.sizeThatFits)
     }
 }
