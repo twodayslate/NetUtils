@@ -26,24 +26,24 @@ class WhoIsXmlCategorizationSectionModel: HostSectionModel {
 
         if let categories = records.categories {
             for (index, category) in categories.enumerated() {
-                var rows = [CopyCellRow]()
+                var rows = [CopyCellType]()
                 if let tier1 = category.tier1 {
                     let name = tier1.name ?? ""
                     let confidence = tier1.confidence ?? 0.0
                     let id = tier1.id ?? ""
 
-                    rows.append(CopyCellRow(title: "Tier1", content: "Name - \(name)\n Id - \(id)\n Confidence - \(confidence)"))
+                    rows.append(.row(title: "Tier1", content: "Name - \(name)\n Id - \(id)\n Confidence - \(confidence)", style: .expandable))
                 }
 
                 if let tier2 = category.tier2 {
                     let name = tier2.name ?? ""
                     let confidence = tier2.confidence ?? 0.0
                     let id = tier2.id ?? ""
-                    rows.append(CopyCellRow(title: "Tier2", content: "Name - \(name)\n Id - \(id)\n Confidence - \(confidence)"))
+                    rows.append(.row(title: "Tier2", content: "Name - \(name)\n Id - \(id)\n Confidence - \(confidence)", style: .expandable))
                 }
 
                 if !rows.isEmpty {
-                    content.append(CopyCellView(title: "Category \(index + 1)", rows: rows))
+                    content.append(.multiple(title: "Category \(index + 1)", contents: rows))
                 }
             }
         }

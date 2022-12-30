@@ -70,7 +70,7 @@ struct InterfaceListView: View {
         NavigationLink(destination: {
             InterfaceView(model: model, interface: interface)
         }, label: {
-            CopyCellView(title: interface.name, content: interface.address, withChevron: true)
+            CopyCellType.row(title: interface.name, content: interface.address ?? "-", style: .chevron)
         })
     }
 }
