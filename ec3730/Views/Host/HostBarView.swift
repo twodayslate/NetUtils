@@ -40,7 +40,7 @@ struct HostBarView: View {
                     }
                 Spacer()
             }
-        }.ignoresSafeArea()
+        }
         .confirmationDialog("Information", isPresented: $showInfo) {
             Button(action: {
                 UIPasteboard.general.string = url.absoluteString
@@ -52,7 +52,10 @@ struct HostBarView: View {
             }, label: {
                 Label("Copy Date", systemImage: "doc.on.doc")
             })
-        }
+        }.background(
+            VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                .ignoresSafeArea()
+        )
     }
 }
 

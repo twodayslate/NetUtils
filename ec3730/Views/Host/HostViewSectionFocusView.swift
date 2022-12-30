@@ -10,7 +10,7 @@ struct HostViewSectionFocusView: View {
                 ScrollView {
                     HostViewSectionContent(sectionModel: model, canQuery: true)
                 }.safeAreaInset(edge: .bottom) {
-                    HostBarView(url: url, date: date).background(Color(UIColor.systemGroupedBackground))
+                    HostBarView(url: url, date: date)
                 }
             }
             .navigationTitle(model.service.name)
