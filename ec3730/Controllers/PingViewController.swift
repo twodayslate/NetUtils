@@ -315,6 +315,9 @@ struct PingSwiftUIViewController: View {
     @State var showAlert: Bool = false
     @State var alertMessage: String?
 
+    @State var isActive = false
+    @FetchRequest(fetchRequest: PingSet.fetchAllRequest()) var pings: FetchedResults<PingSet>
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0.0) {
             ScrollViewReader { reader in
@@ -347,12 +350,20 @@ struct PingSwiftUIViewController: View {
                 })
             })
             ToolbarItem(placement: .navigationBarTrailing, content: {
-                NavigationLink(
-                    destination: PingSetList(),
-                    label: {
+                NavigationLink(isActive: $isActive) {
+                    PingSetList()
+                } label: {
+                    Button {
+                        if pings.isEmpty {
+                            isActive = false
+                        } else {
+                            isActive = true
+                        }
+                    } label: {
                         Image(systemName: "clock")
                     }
-                )
+                }
+
             })
         }).sheet(isPresented: $showSettings, content: {
             EZPanel {
