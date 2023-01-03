@@ -34,10 +34,10 @@ class GoogleWebRiskSectionModel: HostSectionModel {
 
         if let threats = record.threat {
             for threat in threats.threatTypes {
-                content.append(CopyCellView(title: "Risk", content: threat.description))
+                content.append(.row(title: "Risk", content: threat.description))
             }
         } else {
-            content.append(CopyCellView(title: "Risk", content: "None detected"))
+            content.append(.row(title: "Risk", content: "None detected"))
         }
         return copyData
     }

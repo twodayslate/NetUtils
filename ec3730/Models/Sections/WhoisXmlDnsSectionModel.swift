@@ -25,44 +25,44 @@ class WhoisXmlDnsSectionModel: HostSectionModel {
         dataToCopy = String(data: copyData, encoding: .utf8)
 
         for record in records {
-            var rows = [CopyCellRow]()
+            var rows = [CopyCellType]()
 
-            rows.append(CopyCellRow(title: "name", content: record.name))
-            rows.append(CopyCellRow(title: "ttl", content: "\(record.ttl)"))
-            rows.append(CopyCellRow(title: "RRset Type", content: "\(record.rRsetType)"))
+            rows.append(.row(title: "name", content: record.name, style: .expandable))
+            rows.append(.row(title: "ttl", content: "\(record.ttl)", style: .expandable))
+            rows.append(.row(title: "RRset Type", content: "\(record.rRsetType)", style: .expandable))
 
             if let admin = record.admin {
-                rows.append(CopyCellRow(title: "Admin", content: admin))
+                rows.append(.row(title: "Admin", content: admin, style: .expandable))
             }
             if let host = record.host {
-                rows.append(CopyCellRow(title: "Host", content: host))
+                rows.append(.row(title: "Host", content: host, style: .expandable))
             }
             if let address = record.address {
-                rows.append(CopyCellRow(title: "Address", content: address))
+                rows.append(.row(title: "Address", content: address, style: .expandable))
             }
             if let strings = record.strings {
-                let row = CopyCellRow(title: "Strings", content: strings.joined(separator: "\n"))
+                let row = CopyCellType.row(title: "Strings", content: strings.joined(separator: "\n"), style: .expandable)
                 rows.append(row)
             }
             if let expire = record.expire {
-                rows.append(CopyCellRow(title: "Expire", content: "\(expire)"))
+                rows.append(.row(title: "Expire", content: "\(expire)", style: .expandable))
             }
             if let value = record.minimum {
-                rows.append(CopyCellRow(title: "Minimum", content: "\(value)"))
+                rows.append(.row(title: "Minimum", content: "\(value)", style: .expandable))
             }
             if let value = record.refresh {
-                rows.append(CopyCellRow(title: "Refresh", content: "\(value)"))
+                rows.append(.row(title: "Refresh", content: "\(value)", style: .expandable))
             }
             if let value = record.retry {
-                rows.append(CopyCellRow(title: "Retry", content: "\(value)"))
+                rows.append(.row(title: "Retry", content: "\(value)", style: .expandable))
             }
             if let value = record.serial {
-                rows.append(CopyCellRow(title: "Serial", content: "\(value)"))
+                rows.append(.row(title: "Serial", content: "\(value)", style: .expandable))
             }
 
-            rows.append(CopyCellRow(title: "Raw", content: record.rawText))
+            rows.append(.row(title: "Raw", content: record.rawText, style: .expandable))
 
-            content.append(CopyCellView(title: record.dnsType, rows: rows))
+            content.append(.multiple(title: record.dnsType, contents: rows))
         }
 
         return copyData

@@ -22,7 +22,15 @@ class DataUsageInfoModel: DeviceInfoSectionModel {
         enabled = true
         SystemDataUsage.reload()
         rows.removeAll()
-        rows.append(CopyCellView(title: "Wifi", rows: [CopyCellRow(title: "Sent", content: SystemDataUsage.wifiSent), CopyCellRow(title: "Received", content: SystemDataUsage.wifiReceived), CopyCellRow(title: "Total", content: SystemDataUsage.wifiTotal)]))
-        rows.append(CopyCellView(title: "Cellular", rows: [CopyCellRow(title: "Sent", content: SystemDataUsage.wwanSent), CopyCellRow(title: "Received", content: SystemDataUsage.wwanReceived), CopyCellRow(title: "Total", content: SystemDataUsage.wwanTotal)]))
+        rows.append(.multiple(title: "Wifi", contents: [
+            .row(title: "Sent", content: SystemDataUsage.wifiSent, style: .expandable),
+            .row(title: "Received", content: SystemDataUsage.wifiReceived, style: .expandable),
+            .row(title: "Total", content: SystemDataUsage.wifiTotal, style: .expandable),
+        ]))
+        rows.append(.multiple(title: "Cellular", contents: [
+            .row(title: "Sent", content: SystemDataUsage.wwanSent, style: .expandable),
+            .row(title: "Received", content: SystemDataUsage.wwanReceived, style: .expandable),
+            .row(title: "Total", content: SystemDataUsage.wwanTotal, style: .expandable),
+        ]))
     }
 }

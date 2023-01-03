@@ -26,7 +26,7 @@ class LocalDnsModel: HostSectionModel {
         dataToCopy = String(data: copyData, encoding: .utf8)
 
         for address in addresses {
-            content.append(CopyCellView(title: "Address", content: address))
+            content.append(.row(title: "Address", content: address))
         }
 
         return copyData
