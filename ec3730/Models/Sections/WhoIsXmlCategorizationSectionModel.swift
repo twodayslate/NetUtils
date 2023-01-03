@@ -26,9 +26,8 @@ class WhoIsXmlCategorizationSectionModel: HostSectionModel {
 
         if let categories = records.categories {
             for (index, category) in categories.enumerated() {
-
                 var rows = [CopyCellType]()
-                
+
                 if let tier1 = category.tier1 {
                     let name = tier1.name ?? ""
                     let confidence = tier1.confidence ?? 0.0
