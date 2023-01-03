@@ -39,29 +39,29 @@ class CarrierInfoModel: DeviceInfoSectionModel {
         }
 
         if let value = networkInfo.dataServiceIdentifier {
-            rows.append(CopyCellView(title: "Data Service Identifier", content: value))
+            rows.append(.row(title: "Data Service Identifier", content: value))
         }
 
         if let value = networkInfo.serviceCurrentRadioAccessTechnology {
             for item in value {
-                rows.append(CopyCellView(title: "Data Service \(item.key) Radio Access Technology", content: item.value))
+                rows.append(.row(title: "Data Service \(item.key) Radio Access Technology", content: item.value))
             }
         }
 
         for (i, carrier) in providers.enumerated() {
             if let name = carrier.value.carrierName {
-                rows.append(CopyCellView(title: "Provider \(i) Carrier Name", content: name))
+                rows.append(.row(title: "Provider \(i) Carrier Name", content: name))
             }
-            rows.append(CopyCellView(title: "Provider \(i) Service", content: carrier.key))
-            rows.append(CopyCellView(title: "Provider \(i) Allows VOIP", content: carrier.value.allowsVOIP ? "Yes" : "No"))
+            rows.append(.row(title: "Provider \(i) Service", content: carrier.key))
+            rows.append(.row(title: "Provider \(i) Allows VOIP", content: carrier.value.allowsVOIP ? "Yes" : "No"))
             if let value = carrier.value.isoCountryCode {
-                rows.append(CopyCellView(title: "Provider \(i) ISO Country Code", content: value))
+                rows.append(.row(title: "Provider \(i) ISO Country Code", content: value))
             }
             if let value = carrier.value.mobileCountryCode {
-                rows.append(CopyCellView(title: "Provider \(i) Mobile Country Code", content: value))
+                rows.append(.row(title: "Provider \(i) Mobile Country Code", content: value))
             }
             if let value = carrier.value.mobileNetworkCode {
-                rows.append(CopyCellView(title: "Provider \(i) Mobile Network Code", content: value))
+                rows.append(.row(title: "Provider \(i) Mobile Network Code", content: value))
             }
         }
     }

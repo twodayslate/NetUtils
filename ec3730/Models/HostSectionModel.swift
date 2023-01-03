@@ -5,7 +5,7 @@ import SwiftUI
 @available(iOS 15.0, *)
 class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
     @MainActor
-    @Published var content = [CopyCellView]()
+    @Published var content = [CopyCellType]()
 
     @MainActor
     @Published var isVisible = false
@@ -67,8 +67,8 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
             WhoisXmlDnsSectionModel(),
             WhoisXmlReputationSectionModel(),
             WhoIsXmlContactsSectionModel(),
-            WhoIsXmlCategorizationSectionModel(),
             WhoIsXmlGeoLocationSectionModel(),
+            WhoIsXmlCategorizationSectionModel(),
             GoogleWebRiskSectionModel(),
         ]
 

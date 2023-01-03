@@ -74,17 +74,17 @@ class MemoryInfoModel: DeviceInfoSectionModel {
         enabled = true
         rows.removeAll()
 
-        rows.append(CopyCellView(title: "Memory Footprint", content: formattedMemoryFootprint()))
+        rows.append(.row(title: "Memory Footprint", content: formattedMemoryFootprint()))
 
         let (kern_result, page_size) = ggsdf()
         if kern_result == KERN_SUCCESS {
-            rows.append(CopyCellView(title: "Page Size", content: "\(page_size) bytes"))
+            rows.append(.row(title: "Page Size", content: "\(page_size) bytes"))
         }
         let stats = vm_stat()
 
         for key in tags {
             if let val = stats[key] {
-                rows.append(CopyCellView(title: key, content: String(format: "%d MB", val)))
+                rows.append(.row(title: key, content: String(format: "%d MB", val)))
             }
         }
     }

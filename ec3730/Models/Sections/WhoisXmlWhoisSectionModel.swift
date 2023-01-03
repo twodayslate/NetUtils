@@ -24,49 +24,51 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
         dataToCopy = String(data: copyData, encoding: .utf8)
 
         if let error = record.dataError {
-            content.append(CopyCellView(title: "Error", content: error))
+            content.append(.row(title: "Error", content: error))
         }
 
-        content.append(CopyCellView(title: "Created", content: "\(record.createdDate ?? record.registryData.createdDate ?? record.audit.createdDate)"))
+        content.append(.row(title: "Created", content: "\(record.createdDate ?? record.registryData.createdDate ?? record.audit.createdDate)"))
 
-        content.append(CopyCellView(title: "Updated", content: "\(record.updatedDate ?? record.registryData.updatedDate ?? record.audit.updatedDate)"))
+        content.append(.row(title: "Updated", content: "\(record.updatedDate ?? record.registryData.updatedDate ?? record.audit.updatedDate)"))
 
         if let expiresDate = record.expiresDate ?? record.registryData.expiresDate {
-            content.append(CopyCellView(title: "Expires", content: "\(expiresDate)"))
+            content.append(.row(title: "Expires", content: "\(expiresDate)"))
         }
 
-        content.append(CopyCellView(title: "Registrar", content: record.registrarName))
+        if let registrarName = record.registrarName {
+            content.append(.row(title: "Registrar", content: registrarName))
+        }
 
-        content.append(CopyCellView(title: "IANAID", content: record.registrarIANAID))
+        if let registrarIANAID = record.registrarIANAID {
+            content.append(.row(title: "IANAID", content: registrarIANAID))
+        }
 
         if let whoisServer = record.whoisServer {
-            content.append(CopyCellView(title: "WHOIS Server", content: whoisServer))
+            content.append(.row(title: "WHOIS Server", content: whoisServer))
         }
 
         if let estimatedAge = record.estimatedDomainAge {
-            content.append(CopyCellView(title: "Estimated Age", content: "\(estimatedAge) day(s)"))
+            content.append(.row(title: "Estimated Age", content: "\(estimatedAge) day(s)"))
         }
 
-        content.append(CopyCellView(title: "Contact Email", content: record.contactEmail))
+        if let contactEmail = record.contactEmail {
+            content.append(.row(title: "Contact Email", content: contactEmail))
+        }
 
         let hostNames = record.nameServers?.hostNames ?? record.registryData.nameServers?.hostNames ?? []
         if !hostNames.isEmpty {
-            var cells = [CopyCellRow]()
-            for host in hostNames.sorted() {
-                cells.append(CopyCellRow(title: nil, content: host))
-            }
-            content.append(CopyCellView(title: "Host Names", rows: cells))
+            content.append(.multiple(title: "Host Names", contents: hostNames.sorted().map { .content($0, style: .expandable) }))
         }
 
         if let contact = record.registrant {
-            var rows = [CopyCellRow]()
+            var rows = [CopyCellType]()
 
             if let name = contact.name {
-                rows.append(CopyCellRow(title: "Name", content: name))
+                rows.append(.row(title: "Name", content: name, style: .expandable))
             }
 
             if let org = contact.organization {
-                rows.append(CopyCellRow(title: "Organization", content: org))
+                rows.append(.row(title: "Organization", content: org, style: .expandable))
             }
 
             var street = [String]()
@@ -83,31 +85,31 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 street.append(address)
             }
             if !street.isEmpty {
-                rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                rows.append(.row(title: "Street", content: street.joined(separator: "\n"), style: .expandable))
             }
 
             if let city = contact.city {
-                rows.append(CopyCellRow(title: "City", content: city))
+                rows.append(.row(title: "City", content: city, style: .expandable))
             }
 
             if let postCode = contact.postalCode {
-                rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                rows.append(.row(title: "Postal Code", content: postCode, style: .expandable))
             }
 
             if let state = contact.state {
-                rows.append(CopyCellRow(title: "State", content: state))
+                rows.append(.row(title: "State", content: state, style: .expandable))
             }
 
             if let country = contact.country {
                 if let countryCode = contact.countryCode {
-                    rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    rows.append(.row(title: "Country", content: country + "(\(countryCode))", style: .expandable))
                 } else {
-                    rows.append(CopyCellRow(title: "Country", content: country))
+                    rows.append(.row(title: "Country", content: country, style: .expandable))
                 }
             }
 
             if let email = contact.email {
-                rows.append(CopyCellRow(title: "Email", content: email))
+                rows.append(.row(title: "Email", content: email, style: .expandable))
             }
 
             if var phone = contact.telephone {
@@ -115,7 +117,7 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     phone += " \(phoneExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: phone))
+                rows.append(.row(title: "Fax", content: phone, style: .expandable))
             }
 
             if var fax = contact.fax {
@@ -123,19 +125,19 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     fax += " \(faxExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: fax))
+                rows.append(.row(title: "Fax", content: fax, style: .expandable))
             }
 
-            content.append(CopyCellView(title: "Registrant", rows: rows))
+            content.append(.multiple(title: "Registrant", contents: rows))
         } else if let contact = record.registryData.regustrant {
-            var rows = [CopyCellRow]()
+            var rows = [CopyCellType]()
 
             if let name = contact.name {
-                rows.append(CopyCellRow(title: "Name", content: name))
+                rows.append(.row(title: "Name", content: name, style: .expandable))
             }
 
             if let org = contact.organization {
-                rows.append(CopyCellRow(title: "Organization", content: org))
+                rows.append(.row(title: "Organization", content: org, style: .expandable))
             }
 
             var street = [String]()
@@ -152,32 +154,32 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 street.append(address)
             }
             if !street.isEmpty {
-                rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                rows.append(.row(title: "Street", content: street.joined(separator: "\n"), style: .expandable))
             }
 
             if let city = contact.city {
-                rows.append(CopyCellRow(title: "City", content: city))
+                rows.append(.row(title: "City", content: city, style: .expandable))
             }
 
             if let postCode = contact.postalCode {
-                rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                rows.append(.row(title: "Postal Code", content: postCode, style: .expandable))
             }
 
             if let state = contact.state {
-                rows.append(CopyCellRow(title: "State", content: state))
+                rows.append(.row(title: "State", content: state, style: .expandable))
             }
 
-            content.append(CopyCellView(title: "Registrant", rows: rows))
+            content.append(.multiple(title: "Registrant", contents: rows))
         }
 
         if let contact = record.administrativeContact {
-            var rows = [CopyCellRow]()
+            var rows = [CopyCellType]()
             if let name = contact.name {
-                rows.append(CopyCellRow(title: "Name", content: name))
+                rows.append(.row(title: "Name", content: name, style: .expandable))
             }
 
             if let org = contact.organization {
-                rows.append(CopyCellRow(title: "Organization", content: org))
+                rows.append(.row(title: "Organization", content: org, style: .expandable))
             }
 
             var street = [String]()
@@ -194,31 +196,31 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 street.append(address)
             }
             if !street.isEmpty {
-                rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                rows.append(.row(title: "Street", content: street.joined(separator: "\n"), style: .expandable))
             }
 
             if let city = contact.city {
-                rows.append(CopyCellRow(title: "City", content: city))
+                rows.append(.row(title: "City", content: city, style: .expandable))
             }
 
             if let postCode = contact.postalCode {
-                rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                rows.append(.row(title: "Postal Code", content: postCode, style: .expandable))
             }
 
             if let state = contact.state {
-                rows.append(CopyCellRow(title: "State", content: state))
+                rows.append(.row(title: "State", content: state, style: .expandable))
             }
 
             if let country = contact.country {
                 if let countryCode = contact.countryCode {
-                    rows.append(CopyCellRow(title: "Country", content: "\(country) (\(countryCode))"))
+                    rows.append(.row(title: "Country", content: "\(country) (\(countryCode))", style: .expandable))
                 } else {
-                    rows.append(CopyCellRow(title: "Country", content: country))
+                    rows.append(.row(title: "Country", content: country, style: .expandable))
                 }
             }
 
             if let email = contact.email {
-                rows.append(CopyCellRow(title: "Email", content: email))
+                rows.append(.row(title: "Email", content: email, style: .expandable))
             }
 
             if var phone = contact.telephone {
@@ -226,7 +228,7 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     phone += " \(phoneExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: phone))
+                rows.append(.row(title: "Fax", content: phone, style: .expandable))
             }
 
             if var fax = contact.fax {
@@ -234,18 +236,18 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     fax += " \(faxExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: fax))
+                rows.append(.row(title: "Fax", content: fax, style: .expandable))
             }
 
-            content.append(CopyCellView(title: "Administrative Contact", rows: rows))
+            content.append(.multiple(title: "Administrative Contact", contents: rows))
         } else if let contact = record.registryData.administrativeContact {
-            var rows = [CopyCellRow]()
+            var rows = [CopyCellType]()
             if let name = contact.name {
-                rows.append(CopyCellRow(title: "Name", content: name))
+                rows.append(.row(title: "Name", content: name, style: .expandable))
             }
 
             if let org = contact.organization {
-                rows.append(CopyCellRow(title: "Organization", content: org))
+                rows.append(.row(title: "Organization", content: org, style: .expandable))
             }
 
             var street = [String]()
@@ -262,31 +264,31 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 street.append(address)
             }
             if !street.isEmpty {
-                rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                rows.append(.row(title: "Street", content: street.joined(separator: "\n"), style: .expandable))
             }
 
             if let city = contact.city {
-                rows.append(CopyCellRow(title: "City", content: city))
+                rows.append(.row(title: "City", content: city, style: .expandable))
             }
 
             if let postCode = contact.postalCode {
-                rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                rows.append(.row(title: "Postal Code", content: postCode, style: .expandable))
             }
 
             if let state = contact.state {
-                rows.append(CopyCellRow(title: "State", content: state))
+                rows.append(.row(title: "State", content: state, style: .expandable))
             }
 
             if let country = contact.country {
                 if let countryCode = contact.countryCode {
-                    rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    rows.append(.row(title: "Country", content: country + "(\(countryCode))", style: .expandable))
                 } else {
-                    rows.append(CopyCellRow(title: "Country", content: country))
+                    rows.append(.row(title: "Country", content: country, style: .expandable))
                 }
             }
 
             if let email = contact.email {
-                rows.append(CopyCellRow(title: "Email", content: email))
+                rows.append(.row(title: "Email", content: email, style: .expandable))
             }
 
             if var phone = contact.telephone {
@@ -294,7 +296,7 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     phone += " \(phoneExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: phone))
+                rows.append(.row(title: "Fax", content: phone, style: .expandable))
             }
 
             if var fax = contact.fax {
@@ -302,20 +304,20 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     fax += " \(faxExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: fax))
+                rows.append(.row(title: "Fax", content: fax, style: .expandable))
             }
 
-            content.append(CopyCellView(title: "Administrative Contact", rows: rows))
+            content.append(.multiple(title: "Administrative Contact", contents: rows))
         }
         //
         if let contact = record.technicalContact {
-            var rows = [CopyCellRow]()
+            var rows = [CopyCellType]()
             if let name = contact.name {
-                rows.append(CopyCellRow(title: "Name", content: name))
+                rows.append(.row(title: "Name", content: name, style: .expandable))
             }
 
             if let org = contact.organization {
-                rows.append(CopyCellRow(title: "Organization", content: org))
+                rows.append(.row(title: "Organization", content: org, style: .expandable))
             }
 
             var street = [String]()
@@ -332,31 +334,31 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 street.append(address)
             }
             if !street.isEmpty {
-                rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                rows.append(.row(title: "Street", content: street.joined(separator: "\n"), style: .expandable))
             }
 
             if let city = contact.city {
-                rows.append(CopyCellRow(title: "City", content: city))
+                rows.append(.row(title: "City", content: city, style: .expandable))
             }
 
             if let postCode = contact.postalCode {
-                rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                rows.append(.row(title: "Postal Code", content: postCode, style: .expandable))
             }
 
             if let state = contact.state {
-                rows.append(CopyCellRow(title: "State", content: state))
+                rows.append(.row(title: "State", content: state, style: .expandable))
             }
 
             if let country = contact.country {
                 if let countryCode = contact.countryCode {
-                    rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    rows.append(.row(title: "Country", content: country + "(\(countryCode))", style: .expandable))
                 } else {
-                    rows.append(CopyCellRow(title: "Country", content: country))
+                    rows.append(.row(title: "Country", content: country, style: .expandable))
                 }
             }
 
             if let email = contact.email {
-                rows.append(CopyCellRow(title: "Email", content: email))
+                rows.append(.row(title: "Email", content: email, style: .expandable))
             }
 
             if var phone = contact.telephone {
@@ -364,7 +366,7 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     phone += " \(phoneExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: phone))
+                rows.append(.row(title: "Fax", content: phone, style: .expandable))
             }
 
             if var fax = contact.fax {
@@ -372,18 +374,18 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     fax += " \(faxExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: fax))
+                rows.append(.row(title: "Fax", content: fax, style: .expandable))
             }
 
-            content.append(CopyCellView(title: "Technical Contact", rows: rows))
+            content.append(.multiple(title: "Technical Contact", contents: rows))
         } else if let contact = record.registryData.technicalContact {
-            var rows = [CopyCellRow]()
+            var rows = [CopyCellType]()
             if let name = contact.name {
-                rows.append(CopyCellRow(title: "Name", content: name))
+                rows.append(.row(title: "Name", content: name, style: .expandable))
             }
 
             if let org = contact.organization {
-                rows.append(CopyCellRow(title: "Organization", content: org))
+                rows.append(.row(title: "Organization", content: org, style: .expandable))
             }
 
             var street = [String]()
@@ -400,31 +402,31 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 street.append(address)
             }
             if !street.isEmpty {
-                rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                rows.append(.row(title: "Street", content: street.joined(separator: "\n"), style: .expandable))
             }
 
             if let city = contact.city {
-                rows.append(CopyCellRow(title: "City", content: city))
+                rows.append(.row(title: "City", content: city, style: .expandable))
             }
 
             if let postCode = contact.postalCode {
-                rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                rows.append(.row(title: "Postal Code", content: postCode, style: .expandable))
             }
 
             if let state = contact.state {
-                rows.append(CopyCellRow(title: "State", content: state))
+                rows.append(.row(title: "State", content: state, style: .expandable))
             }
 
             if let country = contact.country {
                 if let countryCode = contact.countryCode {
-                    rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    rows.append(.row(title: "Country", content: country + "(\(countryCode))", style: .expandable))
                 } else {
-                    rows.append(CopyCellRow(title: "Country", content: country))
+                    rows.append(.row(title: "Country", content: country, style: .expandable))
                 }
             }
 
             if let email = contact.email {
-                rows.append(CopyCellRow(title: "Email", content: email))
+                rows.append(.row(title: "Email", content: email, style: .expandable))
             }
 
             if var phone = contact.telephone {
@@ -432,7 +434,7 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     phone += " \(phoneExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: phone))
+                rows.append(.row(title: "Fax", content: phone, style: .expandable))
             }
 
             if var fax = contact.fax {
@@ -440,20 +442,20 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     fax += " \(faxExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: fax))
+                rows.append(.row(title: "Fax", content: fax, style: .expandable))
             }
 
-            content.append(CopyCellView(title: "Technical Contact", rows: rows))
+            content.append(.multiple(title: "Technical Contact", contents: rows))
         }
         //
         if let contact = record.billingContact {
-            var rows = [CopyCellRow]()
+            var rows = [CopyCellType]()
             if let name = contact.name {
-                rows.append(CopyCellRow(title: "Name", content: name))
+                rows.append(.row(title: "Name", content: name, style: .expandable))
             }
 
             if let org = contact.organization {
-                rows.append(CopyCellRow(title: "Organization", content: org))
+                rows.append(.row(title: "Organization", content: org, style: .expandable))
             }
 
             var street = [String]()
@@ -470,31 +472,31 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 street.append(address)
             }
             if !street.isEmpty {
-                rows.append(CopyCellRow(title: "Street", content: street.joined(separator: "\n")))
+                rows.append(.row(title: "Street", content: street.joined(separator: "\n"), style: .expandable))
             }
 
             if let city = contact.city {
-                rows.append(CopyCellRow(title: "City", content: city))
+                rows.append(.row(title: "City", content: city, style: .expandable))
             }
 
             if let postCode = contact.postalCode {
-                rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                rows.append(.row(title: "Postal Code", content: postCode, style: .expandable))
             }
 
             if let state = contact.state {
-                rows.append(CopyCellRow(title: "State", content: state))
+                rows.append(.row(title: "State", content: state, style: .expandable))
             }
 
             if let country = contact.country {
                 if let countryCode = contact.countryCode {
-                    rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    rows.append(.row(title: "Country", content: country + "(\(countryCode))", style: .expandable))
                 } else {
-                    rows.append(CopyCellRow(title: "Country", content: country))
+                    rows.append(.row(title: "Country", content: country, style: .expandable))
                 }
             }
 
             if let email = contact.email {
-                rows.append(CopyCellRow(title: "Email", content: email))
+                rows.append(.row(title: "Email", content: email, style: .expandable))
             }
 
             if var phone = contact.telephone {
@@ -502,7 +504,7 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     phone += " \(phoneExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: phone))
+                rows.append(.row(title: "Fax", content: phone, style: .expandable))
             }
 
             if var fax = contact.fax {
@@ -510,18 +512,18 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     fax += " \(faxExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: fax))
+                rows.append(.row(title: "Fax", content: fax, style: .expandable))
             }
 
-            content.append(CopyCellView(title: "Billing Contact", rows: rows))
+            content.append(.multiple(title: "Billing Contact", contents: rows))
         } else if let contact = record.registryData.billingContact {
-            var rows = [CopyCellRow]()
+            var rows = [CopyCellType]()
             if let name = contact.name {
-                rows.append(CopyCellRow(title: "Name", content: name))
+                rows.append(.row(title: "Name", content: name, style: .expandable))
             }
 
             if let org = contact.organization {
-                rows.append(CopyCellRow(title: "Organization", content: org))
+                rows.append(.row(title: "Organization", content: org, style: .expandable))
             }
 
             var street = [String]()
@@ -538,32 +540,32 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                 street.append(address)
             }
             if !street.isEmpty {
-                let streetCell = CopyCellRow(title: "Street", content: street.joined(separator: "\n"))
+                let streetCell = CopyCellType.row(title: "Street", content: street.joined(separator: "\n"), style: .expandable)
                 rows.append(streetCell)
             }
 
             if let city = contact.city {
-                rows.append(CopyCellRow(title: "City", content: city))
+                rows.append(.row(title: "City", content: city, style: .expandable))
             }
 
             if let postCode = contact.postalCode {
-                rows.append(CopyCellRow(title: "Postal Code", content: postCode))
+                rows.append(.row(title: "Postal Code", content: postCode, style: .expandable))
             }
 
             if let state = contact.state {
-                rows.append(CopyCellRow(title: "State", content: state))
+                rows.append(.row(title: "State", content: state, style: .expandable))
             }
 
             if let country = contact.country {
                 if let countryCode = contact.countryCode {
-                    rows.append(CopyCellRow(title: "Country", content: country + "(\(countryCode))"))
+                    rows.append(.row(title: "Country", content: country + "(\(countryCode))", style: .expandable))
                 } else {
-                    rows.append(CopyCellRow(title: "Country", content: country))
+                    rows.append(.row(title: "Country", content: country, style: .expandable))
                 }
             }
 
             if let email = contact.email {
-                rows.append(CopyCellRow(title: "Email", content: email))
+                rows.append(.row(title: "Email", content: email, style: .expandable))
             }
 
             if var phone = contact.telephone {
@@ -571,7 +573,7 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     phone += " \(phoneExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Phone", content: phone))
+                rows.append(.row(title: "Phone", content: phone, style: .expandable))
             }
 
             if var fax = contact.fax {
@@ -579,29 +581,31 @@ class WhoisXmlWhoisSectionModel: HostSectionModel {
                     fax += " \(faxExt)"
                 }
 
-                rows.append(CopyCellRow(title: "Fax", content: fax))
+                rows.append(.row(title: "Fax", content: fax, style: .expandable))
             }
 
-            content.append(CopyCellView(title: "Billing Contact", rows: rows))
+            content.append(.multiple(title: "Billing Contact", contents: rows))
         }
 
-        content.append(CopyCellView(title: "Availability", content: record.domainAvailability))
+        if let domainAvailability = record.domainAvailability {
+            content.append(.row(title: "Availability", content: domainAvailability))
+        }
 
-        let status = record.status ?? record.registryData.status
-        content.append(CopyCellView(title: "Status", content: status))
+        let status = record.status ?? record.registryData.status ?? "Unknown"
+        content.append(.row(title: "Status", content: status))
 
         if let customFieldName = record.customField1Name, let customFieldValue = record.customField1Value {
-            let customCell = CopyCellView(title: customFieldName, content: customFieldValue)
+            let customCell = CopyCellType.row(title: customFieldName, content: customFieldValue)
             content.append(customCell)
         }
 
         if let customFieldName = record.customField2Name, let customFieldValue = record.customField2Value {
-            let customCell = CopyCellView(title: customFieldName, content: customFieldValue)
+            let customCell = CopyCellType.row(title: customFieldName, content: customFieldValue)
             content.append(customCell)
         }
 
         if let customFieldName = record.customField3Name, let customFieldValue = record.customField3Value {
-            let customCell = CopyCellView(title: customFieldName, content: customFieldValue)
+            let customCell = CopyCellType.row(title: customFieldName, content: customFieldValue)
             content.append(customCell)
         }
         return copyData

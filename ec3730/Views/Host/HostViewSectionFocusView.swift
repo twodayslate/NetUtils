@@ -9,8 +9,9 @@ struct HostViewSectionFocusView: View {
             VStack(spacing: 0) {
                 ScrollView {
                     HostViewSectionContent(sectionModel: model, canQuery: true)
+                }.safeAreaInset(edge: .bottom) {
+                    HostBarView(url: url, date: date)
                 }
-                HostBarView(url: url, date: date)
             }
             .navigationTitle(model.service.name)
             .navigationBarTitleDisplayMode(.inline)
