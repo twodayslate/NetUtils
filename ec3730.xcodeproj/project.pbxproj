@@ -42,7 +42,7 @@
 		F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63540D4213DEBDD00605ABE /* Reachability.swift */; };
 		F63540DD213E1D1B00605ABE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63540DC213E1D1B00605ABE /* StoreKit.framework */; };
 		F6397FE525E8937A00914B3F /* HostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FE425E8937900914B3F /* HostView.swift */; };
-		F6397FED25EEFEAE00914B3F /* CopyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */; };
+		F6397FED25EEFEAE00914B3F /* TappedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FEC25EEFEAE00914B3F /* TappedText.swift */; };
 		F6397FF225EF012300914B3F /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FF125EF012300914B3F /* ShareSheetView.swift */; };
 		F6397FF725EF045200914B3F /* PurchaseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6397FF625EF045200914B3F /* PurchaseCellView.swift */; };
 		F63B9224279BBA03007E845F /* HostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B9223279BBA03007E845F /* HostData.swift */; };
@@ -163,6 +163,19 @@
 		F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4EB9C2301F1B900439562 /* WiFiSSID.swift */; };
 		F6A6410C2844235D00E00F7F /* HostBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A6410B2844235D00E00F7F /* HostBarView.swift */; };
 		F6A6410E2844246100E00F7F /* HostViewSectionFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A6410D2844246100E00F7F /* HostViewSectionFocusView.swift */; };
+		F6AF9576295E9C01000F09D2 /* CopyCellDetailStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF9575295E9C01000F09D2 /* CopyCellDetailStyle.swift */; };
+		F6AF9578295E9C22000F09D2 /* CopyCellStyleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF9577295E9C22000F09D2 /* CopyCellStyleConfig.swift */; };
+		F6AF957A295E9C40000F09D2 /* CopyCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF9579295E9C40000F09D2 /* CopyCellType.swift */; };
+		F6AF957C295E9C60000F09D2 /* NewCopyCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF957B295E9C60000F09D2 /* NewCopyCellProtocol.swift */; };
+		F6AF957E295E9CD2000F09D2 /* CopyCellTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF957D295E9CD2000F09D2 /* CopyCellTypeView.swift */; };
+		F6AF9580295E9E9E000F09D2 /* Encodable+dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF957F295E9E9E000F09D2 /* Encodable+dictionary.swift */; };
+		F6AF9582295EA35F000F09D2 /* UIImage+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF9581295EA35F000F09D2 /* UIImage+Codable.swift */; };
+		F6AF9584295F8627000F09D2 /* CopyCellChevronView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF9583295F8627000F09D2 /* CopyCellChevronView.swift */; };
+		F6AF9586295F863B000F09D2 /* CopyCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF9585295F863B000F09D2 /* CopyCellContentView.swift */; };
+		F6AF9588295F8695000F09D2 /* CopyCellSingleItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF9587295F8695000F09D2 /* CopyCellSingleItemRowView.swift */; };
+		F6AF958A295F86AB000F09D2 /* CopyCellToggleableItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF9589295F86AB000F09D2 /* CopyCellToggleableItemRowView.swift */; };
+		F6AF958C295F86D0000F09D2 /* CopyCellMultipleTypesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF958B295F86D0000F09D2 /* CopyCellMultipleTypesView.swift */; };
+		F6AF958F295F8749000F09D2 /* PaddingListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AF958E295F8749000F09D2 /* PaddingListModifier.swift */; };
 		F6C38E8826FABEFB00BD9A71 /* StoreKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C38E8726FABEFB00BD9A71 /* StoreKitModel.swift */; };
 		F6C591BA235EC3A9009BA4B7 /* CenterTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C591B9235EC3A9009BA4B7 /* CenterTextTableViewCell.swift */; };
 		F6C87452234FE8030069A57C /* DataFeedsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C87451234FE8030069A57C /* DataFeedsTableViewController.swift */; };
@@ -255,7 +268,7 @@
 		F63540E2213E4E7800605ABE /* Xcode.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Xcode.app; path = ../../../../Applications/Xcode.app; sourceTree = "<group>"; };
 		F63540E4213E4F8400605ABE /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = ../../../../usr/lib/libresolv.9.dylib; sourceTree = "<group>"; };
 		F6397FE425E8937900914B3F /* HostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostView.swift; sourceTree = "<group>"; };
-		F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellView.swift; sourceTree = "<group>"; };
+		F6397FEC25EEFEAE00914B3F /* TappedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappedText.swift; sourceTree = "<group>"; };
 		F6397FF125EF012300914B3F /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		F6397FF625EF045200914B3F /* PurchaseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCellView.swift; sourceTree = "<group>"; };
 		F63B9223279BBA03007E845F /* HostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostData.swift; sourceTree = "<group>"; };
@@ -334,6 +347,19 @@
 		F6A4EB9E2301F31100439562 /* ec3730.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ec3730.entitlements; sourceTree = "<group>"; };
 		F6A6410B2844235D00E00F7F /* HostBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostBarView.swift; sourceTree = "<group>"; };
 		F6A6410D2844246100E00F7F /* HostViewSectionFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewSectionFocusView.swift; sourceTree = "<group>"; };
+		F6AF9575295E9C01000F09D2 /* CopyCellDetailStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellDetailStyle.swift; sourceTree = "<group>"; };
+		F6AF9577295E9C22000F09D2 /* CopyCellStyleConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellStyleConfig.swift; sourceTree = "<group>"; };
+		F6AF9579295E9C40000F09D2 /* CopyCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellType.swift; sourceTree = "<group>"; };
+		F6AF957B295E9C60000F09D2 /* NewCopyCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCopyCellProtocol.swift; sourceTree = "<group>"; };
+		F6AF957D295E9CD2000F09D2 /* CopyCellTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellTypeView.swift; sourceTree = "<group>"; };
+		F6AF957F295E9E9E000F09D2 /* Encodable+dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+dictionary.swift"; sourceTree = "<group>"; };
+		F6AF9581295EA35F000F09D2 /* UIImage+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Codable.swift"; sourceTree = "<group>"; };
+		F6AF9583295F8627000F09D2 /* CopyCellChevronView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellChevronView.swift; sourceTree = "<group>"; };
+		F6AF9585295F863B000F09D2 /* CopyCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellContentView.swift; sourceTree = "<group>"; };
+		F6AF9587295F8695000F09D2 /* CopyCellSingleItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellSingleItemRowView.swift; sourceTree = "<group>"; };
+		F6AF9589295F86AB000F09D2 /* CopyCellToggleableItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellToggleableItemRowView.swift; sourceTree = "<group>"; };
+		F6AF958B295F86D0000F09D2 /* CopyCellMultipleTypesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellMultipleTypesView.swift; sourceTree = "<group>"; };
+		F6AF958E295F8749000F09D2 /* PaddingListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingListModifier.swift; sourceTree = "<group>"; };
 		F6C38E8726FABEFB00BD9A71 /* StoreKitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitModel.swift; sourceTree = "<group>"; };
 		F6C591B9235EC3A9009BA4B7 /* CenterTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTextTableViewCell.swift; sourceTree = "<group>"; };
 		F6C87451234FE8030069A57C /* DataFeedsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFeedsTableViewController.swift; sourceTree = "<group>"; };
@@ -496,7 +522,8 @@
 				F660FDD62868E9590027C759 /* Device */,
 				F644A0F9279268BD0061C98B /* FSDisclosureGroup.swift */,
 				F660FDE928692CFB0027C759 /* WebkitOverlayView.swift */,
-				F6397FEC25EEFEAE00914B3F /* CopyCellView.swift */,
+				F6397FEC25EEFEAE00914B3F /* TappedText.swift */,
+				F6AF9574295E9BF1000F09D2 /* CopyCell */,
 				F6397FF125EF012300914B3F /* ShareSheetView.swift */,
 				F6397FF625EF045200914B3F /* PurchaseCellView.swift */,
 				F6E53FBF287009270041A3DA /* UIViewControllerView.swift */,
@@ -699,6 +726,7 @@
 				F60506732134B23F00DDF8A4 /* UIViewController.swift */,
 				F6FDDFC923048DEF00FBF75E /* UIView.swift */,
 				F6FDDFC72304803100FBF75E /* UserDefaults.swift */,
+				F6AF9581295EA35F000F09D2 /* UIImage+Codable.swift */,
 				F68CE5672303291A0068D104 /* Error.swift */,
 				F6FBB868236781AC00E023F2 /* UIDevice.swift */,
 				F661A27F23020FCF0023FA50 /* UIAlertController.swift */,
@@ -706,8 +734,34 @@
 				F67425DA21363FFF00A79492 /* UITextView.swift */,
 				F63540D4213DEBDD00605ABE /* Reachability.swift */,
 				F6E53FC528701D360041A3DA /* Interface.swift */,
+				F6AF957F295E9E9E000F09D2 /* Encodable+dictionary.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F6AF9574295E9BF1000F09D2 /* CopyCell */ = {
+			isa = PBXGroup;
+			children = (
+				F6AF9575295E9C01000F09D2 /* CopyCellDetailStyle.swift */,
+				F6AF9589295F86AB000F09D2 /* CopyCellToggleableItemRowView.swift */,
+				F6AF958B295F86D0000F09D2 /* CopyCellMultipleTypesView.swift */,
+				F6AF9587295F8695000F09D2 /* CopyCellSingleItemRowView.swift */,
+				F6AF9585295F863B000F09D2 /* CopyCellContentView.swift */,
+				F6AF957D295E9CD2000F09D2 /* CopyCellTypeView.swift */,
+				F6AF9583295F8627000F09D2 /* CopyCellChevronView.swift */,
+				F6AF957B295E9C60000F09D2 /* NewCopyCellProtocol.swift */,
+				F6AF9579295E9C40000F09D2 /* CopyCellType.swift */,
+				F6AF9577295E9C22000F09D2 /* CopyCellStyleConfig.swift */,
+			);
+			path = CopyCell;
+			sourceTree = "<group>";
+		};
+		F6AF958D295F8737000F09D2 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				F6AF958E295F8749000F09D2 /* PaddingListModifier.swift */,
+			);
+			path = Modifiers;
 			sourceTree = "<group>";
 		};
 		F6C8D898212E5AE900309373 = {
@@ -747,6 +801,7 @@
 				F66643B126F02A4C000F17BC /* Models */,
 				F6397FE325E8936600914B3F /* Views */,
 				F668EB4A2356AE3800EEB379 /* IAPFooterView.swift */,
+				F6AF958D295F8737000F09D2 /* Modifiers */,
 				F650F74A233E62C100BAA609 /* BlurredPickerView.swift */,
 				F6FDDFC523047EE300FBF75E /* DefaultsSwitch.swift */,
 				F68CE5612302203B0068D104 /* CopyDetailCell.swift */,
@@ -1093,13 +1148,14 @@
 			files = (
 				F6FDDFC82304803100FBF75E /* UserDefaults.swift in Sources */,
 				2E07167328FEA629009C3844 /* WhoIsXmlContactsSectionModel.swift in Sources */,
-				F6397FED25EEFEAE00914B3F /* CopyCellView.swift in Sources */,
+				F6397FED25EEFEAE00914B3F /* TappedText.swift in Sources */,
 				F650F74B233E62C100BAA609 /* BlurredPickerView.swift in Sources */,
 				F6659F20287A4D8000038ECA /* SnapCalculator.swift in Sources */,
 				F668EB4323563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift in Sources */,
 				F67425DB21363FFF00A79492 /* UITextView.swift in Sources */,
 				F66643B526F02A8F000F17BC /* HostViewSection.swift in Sources */,
 				846CDA89291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift in Sources */,
+				F6AF9588295F8695000F09D2 /* CopyCellSingleItemRowView.swift in Sources */,
 				AA1595D328B24AC2003819A1 /* DataUsageInfoModel.swift in Sources */,
 				F6A4EB972301C70000439562 /* TimedCache.swift in Sources */,
 				F6FDDFD8230B106200FBF75E /* WhoisXmlDnsCells.swift in Sources */,
@@ -1107,6 +1163,7 @@
 				2E07167528FEB055009C3844 /* WhoIsXmlContactsResult.swift in Sources */,
 				F6E53FB8286FB03F0041A3DA /* ContentView.swift in Sources */,
 				F68CE56623031DA20068D104 /* DataFeedErrors.swift in Sources */,
+				F6AF9578295E9C22000F09D2 /* CopyCellStyleConfig.swift in Sources */,
 				F660FDD82868E9A20027C759 /* DeviceInfoModel.swift in Sources */,
 				F69E365423580A7D0017296E /* DataFeedSubscription.swift in Sources */,
 				F69E3652235808DF0017296E /* DFOneTimePurchase.swift in Sources */,
@@ -1117,11 +1174,13 @@
 				F6E53FBA286FB09F0041A3DA /* ScreenId.swift in Sources */,
 				F6D0B77A235902E3009E493B /* DataFeedPurchaseProtocol.swift in Sources */,
 				F6659F22287A4D9D00038ECA /* SnapPoint.swift in Sources */,
+				F6AF9582295EA35F000F09D2 /* UIImage+Codable.swift in Sources */,
 				F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */,
 				F63B9224279BBA03007E845F /* HostData.swift in Sources */,
 				F66643B326F02A5B000F17BC /* HostViewModel.swift in Sources */,
 				F63102752130C99D00F34E42 /* PingViewController.swift in Sources */,
 				F6C38E8826FABEFB00BD9A71 /* StoreKitModel.swift in Sources */,
+				F6AF9586295F863B000F09D2 /* CopyCellContentView.swift in Sources */,
 				F66643B726F030D5000F17BC /* HostSectionModel.swift in Sources */,
 				F660FDE02868F3310027C759 /* UIDeviceInfoModel.swift in Sources */,
 				F668EB472356616900EEB379 /* DataFeedUserApiKeyTableViewController.swift in Sources */,
@@ -1135,6 +1194,7 @@
 				F660FDD52868E9550027C759 /* DeviceInfoView.swift in Sources */,
 				F6C591BA235EC3A9009BA4B7 /* CenterTextTableViewCell.swift in Sources */,
 				F6659F1D287A4CF900038ECA /* SnappedDrawer.swift in Sources */,
+				F6AF957E295E9CD2000F09D2 /* CopyCellTypeView.swift in Sources */,
 				F660FDEC28692EB10027C759 /* FingerprintModel.swift in Sources */,
 				F6659ECC287A298D00038ECA /* SourceCard.swift in Sources */,
 				F660FDEE28693D020027C759 /* FingerprintInfoModel.swift in Sources */,
@@ -1143,6 +1203,7 @@
 				F6E53FC928701D630041A3DA /* InterfaceView.swift in Sources */,
 				F69E365623580AA00017296E /* DataFeedService.swift in Sources */,
 				F68CE5622302203B0068D104 /* CopyDetailCell.swift in Sources */,
+				F6AF958F295F8749000F09D2 /* PaddingListModifier.swift in Sources */,
 				F60FD36025E0607C00BCEF86 /* DataModel.xcdatamodeld in Sources */,
 				F69E36502358089C0017296E /* DFService.swift in Sources */,
 				F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */,
@@ -1182,6 +1243,7 @@
 				F644A101279283E30061C98B /* WhoisXmlDnsSectionModel.swift in Sources */,
 				F6A4EB922301C5B800439562 /* InAppPurchaseUpdateDelegate.swift in Sources */,
 				F6A4EB9D2301F1B900439562 /* WiFiSSID.swift in Sources */,
+				F6AF9580295E9E9E000F09D2 /* Encodable+dictionary.swift in Sources */,
 				F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */,
 				F668EB3F2355807100EEB379 /* SKProductSubscriptionPeriod.swift in Sources */,
 				F69E364E235808560017296E /* DFSubscription.swift in Sources */,
@@ -1194,10 +1256,13 @@
 				F660FDF0286953A00027C759 /* DeviceInfoSectionView.swift in Sources */,
 				2E07168128FEC3F3009C3844 /* WhoisXmlContactsService.swift in Sources */,
 				F644A0FA279268BD0061C98B /* FSDisclosureGroup.swift in Sources */,
+				F6AF958A295F86AB000F09D2 /* CopyCellToggleableItemRowView.swift in Sources */,
 				F6E53FCB287024A50041A3DA /* InterfaceConnectionBarView.swift in Sources */,
 				846CDA8B291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift in Sources */,
 				F63102772130D76200F34E42 /* ReachabilityViewController.swift in Sources */,
+				F6AF958C295F86D0000F09D2 /* CopyCellMultipleTypesView.swift in Sources */,
 				F644A0F827925CF60061C98B /* HostModelWrapperView.swift in Sources */,
+				F6AF957A295E9C40000F09D2 /* CopyCellType.swift in Sources */,
 				84CECCD5291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift in Sources */,
 				F6D4BB0A23583E6100FDAFF7 /* GoogleWebRiskRecord.swift in Sources */,
 				F69E364C235806720017296E /* WhoisXMLService.swift in Sources */,
@@ -1208,9 +1273,12 @@
 				F660FDEA28692CFB0027C759 /* WebkitOverlayView.swift in Sources */,
 				F6FDDFC423047E7E00FBF75E /* SettingsViewController.swift in Sources */,
 				F6659F24287A4DD100038ECA /* SnapState.swift in Sources */,
+				F6AF957C295E9C60000F09D2 /* NewCopyCellProtocol.swift in Sources */,
 				F69E364A235806370017296E /* WhoisXMLDnsService.swift in Sources */,
 				F660FDDB2868EA8C0027C759 /* DeviceInfoSectionModel.swift in Sources */,
 				F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */,
+				F6AF9576295E9C01000F09D2 /* CopyCellDetailStyle.swift in Sources */,
+				F6AF9584295F8627000F09D2 /* CopyCellChevronView.swift in Sources */,
 				F6A6410E2844246100E00F7F /* HostViewSectionFocusView.swift in Sources */,
 				F6397FF725EF045200914B3F /* PurchaseCellView.swift in Sources */,
 				F63B9226279BBA87007E845F /* HostDataGroup.swift in Sources */,

@@ -26,7 +26,7 @@ class FingerprintInfoModel: DeviceInfoSectionModel {
         rows.removeAll()
 
         for (i, model) in models.enumerated() {
-            rows.append(CopyCellView(title: "Fingerprint \(i)", content: model.fingerprint ?? "-"))
+            rows.append(.row(title: "Fingerprint \(i)", content: model.fingerprint ?? "-"))
         }
     }
 }

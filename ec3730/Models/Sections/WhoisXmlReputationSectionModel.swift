@@ -25,22 +25,22 @@ class WhoisXmlReputationSectionModel: HostSectionModel {
         dataToCopy = String(data: copyData, encoding: .utf8)
 
         if let score = record.reputationScore {
-            content.append(CopyCellView(title: "Score", content: "\(score)"))
+            content.append(.row(title: "Score", content: "\(score)"))
         } else {
-            content.append(CopyCellView(title: "Score", content: "-"))
+            content.append(.row(title: "Score", content: "-"))
         }
-        content.append(CopyCellView(title: "Mode", content: "\(record.mode ?? "-")"))
+        content.append(.row(title: "Mode", content: "\(record.mode ?? "-")"))
 
         guard let tests = record.testResults else {
             return copyData
         }
 
         for test in tests {
-            var rows = [CopyCellRow]()
+            var rows = [CopyCellType]()
             for warning in test.warnings {
-                rows.append(CopyCellRow(title: "", content: warning))
+                rows.append(.row(title: "", content: warning, style: .expandable))
             }
-            content.append(CopyCellView(title: test.test, rows: rows))
+            content.append(.multiple(title: test.test, contents: rows))
         }
 
         return copyData

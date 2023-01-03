@@ -43,43 +43,43 @@ struct InterfaceView: View {
 
     @ViewBuilder private func proxyView(_ item: (key: String, title: String), info proxyInfo: [String: Any?]) -> some View {
         if let value = proxyInfo[item.key] as? String {
-            CopyCellView(title: item.title, content: value)
+            CopyCellType.row(title: item.title, content: value)
         } else if let values = proxyInfo[item.key] as? [String] {
-            CopyCellView(title: item.title, rows: values.map { CopyCellRow(content: $0) })
+            CopyCellType.multiple(title: item.title, contents: values.map { .content($0, style: .expandable) })
         } else if let value = proxyInfo[item.key] as? Int {
-            CopyCellView(title: item.title, content: String(describing: value))
+            CopyCellType.row(title: item.title, content: String(describing: value))
         } else if let value = proxyInfo[item.key] as? Bool {
-            CopyCellView(title: item.title, content: value ? "Yes" : "No")
+            CopyCellType.row(title: item.title, content: value ? "Yes" : "No")
         } else if let value = proxyInfo[item.key] {
-            CopyCellView(title: item.key, content: String(describing: value))
+            CopyCellType.row(title: item.key, content: String(describing: value))
         }
     }
 
     @ViewBuilder func basicInfo() -> some View {
-        CopyCellView(title: "Name", content: interface.name)
+        CopyCellType.row(title: "Name", content: interface.name)
         if let address = interface.address {
-            CopyCellView(title: "Address", content: address)
+            CopyCellType.row(title: "Address", content: address)
         }
         if let netmask = interface.netmask {
-            CopyCellView(title: "Netmask", content: netmask)
+            CopyCellType.row(title: "Netmask", content: netmask)
         }
         if let broadcastAddress = interface.broadcastAddress {
-            CopyCellView(title: "Broadcast Address", content: broadcastAddress)
+            CopyCellType.row(title: "Broadcast Address", content: broadcastAddress)
         }
-        CopyCellView(title: "Family", content: interface.family.toString())
-        CopyCellView(title: "Loopback", content: interface.isLoopback ? "Yes" : "No")
-        CopyCellView(title: "Runing", content: interface.isRunning ? "Yes" : "No")
-        CopyCellView(title: "Up", content: interface.isUp ? "Yes" : "No")
-        CopyCellView(title: "Supports Multicast", content: interface.supportsMulticast ? "Yes" : "No")
+        CopyCellType.row(title: "Family", content: interface.family.toString())
+        CopyCellType.row(title: "Loopback", content: interface.isLoopback ? "Yes" : "No")
+        CopyCellType.row(title: "Runing", content: interface.isRunning ? "Yes" : "No")
+        CopyCellType.row(title: "Up", content: interface.isUp ? "Yes" : "No")
+        CopyCellType.row(title: "Supports Multicast", content: interface.supportsMulticast ? "Yes" : "No")
     }
 
     @ViewBuilder func wifiInfo() -> some View {
         if isCurrentWifiInterface, let interfaceInfo = model.wifiInterfaceInfo {
             if let SSID = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String {
-                CopyCellView(title: "SSID", content: SSID)
+                CopyCellType.row(title: "SSID", content: SSID)
             }
             if let BSSID = interfaceInfo[kCNNetworkInfoKeyBSSID as String] as? String {
-                CopyCellView(title: "BSSID", content: BSSID)
+                CopyCellType.row(title: "BSSID", content: BSSID)
             }
         }
     }

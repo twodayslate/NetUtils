@@ -25,85 +25,85 @@ class WhoIsXmlGeoLocationSectionModel: HostSectionModel {
         dataToCopy = String(data: copyData, encoding: .utf8)
 
         if let ip = records.ip, !ip.isEmpty {
-            let row = CopyCellView(title: "IP", content: ip)
+            let row = CopyCellType.row(title: "IP", content: ip)
             content.append(row)
         }
         if let isp = records.isp, !isp.isEmpty {
-            let row = CopyCellView(title: "Isp", content: isp)
+            let row = CopyCellType.row(title: "Isp", content: isp)
             content.append(row)
         }
 
         if let domains = records.domains, !domains.isEmpty {
             if domains.count > 1 {
-                let row = CopyCellView(title: "Domains", rows: domains.map { CopyCellRow(content: $0) })
+                let row = CopyCellType.multiple(title: "Domains", contents: domains.map { .content($0, style: .expandable) })
                 content.append(row)
             } else if domains.count == 1 {
-                let row = CopyCellView(title: "Domain", content: domains[0])
+                let row = CopyCellType.row(title: "Domain", content: domains[0])
                 content.append(row)
             }
         }
 
-        var locationRows = [CopyCellRow]()
+        var locationRows = [CopyCellType]()
 
         if let country = records.location?.country, !country.isEmpty {
-            locationRows.append(CopyCellRow(title: "Country", content: country))
+            locationRows.append(.row(title: "Country", content: country, style: .expandable))
         }
 
         if let region = records.location?.region, !region.isEmpty {
-            locationRows.append(CopyCellRow(title: "Region", content: region))
+            locationRows.append(.row(title: "Region", content: region, style: .expandable))
         }
 
         if let city = records.location?.city, !city.isEmpty {
-            locationRows.append(CopyCellRow(title: "City", content: city))
+            locationRows.append(.row(title: "City", content: city, style: .expandable))
         }
 
         if let lat = records.location?.lat {
-            locationRows.append(CopyCellRow(title: "Latitude", content: "\(lat)"))
+            locationRows.append(.row(title: "Latitude", content: "\(lat)", style: .expandable))
         }
 
         if let lng = records.location?.lng {
-            locationRows.append(CopyCellRow(title: "Longitude", content: "\(lng)"))
+            locationRows.append(.row(title: "Longitude", content: "\(lng)", style: .expandable))
         }
 
         if let postalCode = records.location?.postalCode, !postalCode.isEmpty {
-            locationRows.append(CopyCellRow(title: "Postal Code", content: postalCode))
+            locationRows.append(.row(title: "Postal Code", content: postalCode, style: .expandable))
         }
 
         if let timezone = records.location?.timezone, !timezone.isEmpty {
-            locationRows.append(CopyCellRow(title: "Timezone", content: timezone))
+            locationRows.append(.row(title: "Timezone", content: timezone, style: .expandable))
         }
 
         if let geonameId = records.location?.geonameID, geonameId != 0 {
-            locationRows.append(CopyCellRow(title: "GeonameId", content: "\(geonameId)"))
+            locationRows.append(.row(title: "GeonameId", content: "\(geonameId)", style: .expandable))
         }
 
         if !locationRows.isEmpty {
-            content.append(CopyCellView(title: "Location", rows: locationRows))
+            content.append(.multiple(title: "Location", contents: locationRows))
         }
 
         if let geoLocationModelClassAs = records.geoLocationModelClassAs {
-            var geoLocationAsRows = [CopyCellRow]()
+            var geoLocationAsRows = [CopyCellType]()
             if let asn = geoLocationModelClassAs.asn {
-                geoLocationAsRows.append(CopyCellRow(title: "Asn", content: "\(asn)"))
+                geoLocationAsRows.append(.row(title: "Asn", content: "\(asn)", style: .expandable))
             }
 
             if let name = geoLocationModelClassAs.name, !name.isEmpty {
-                geoLocationAsRows.append(CopyCellRow(title: "Name", content: name))
+                geoLocationAsRows.append(.row(title: "Name", content: name, style: .expandable))
             }
 
             if let domain = geoLocationModelClassAs.domain, !domain.isEmpty {
-                geoLocationAsRows.append(CopyCellRow(title: "Domain", content: domain))
+                geoLocationAsRows.append(.row(title: "Domain", content: domain, style: .expandable))
             }
 
             if let route = geoLocationModelClassAs.route, !route.isEmpty {
-                geoLocationAsRows.append(CopyCellRow(title: "Route", content: "\(route)"))
+                geoLocationAsRows.append(.row(title: "Route", content: "\(route)", style: .expandable))
             }
             if let type = geoLocationModelClassAs.type, !type.isEmpty {
-                geoLocationAsRows.append(CopyCellRow(title: "Type", content: "\(type)"))
+                geoLocationAsRows.append(.row(title: "Type", content: "\(type)", style: .expandable))
             }
 
             if !geoLocationAsRows.isEmpty {
-                content.append(CopyCellView(title: "GeoLocationAsRows", rows: geoLocationAsRows))
+                content.append(.multiple(title: "GeoLocationAsRows", contents: geoLocationAsRows))
             }
         }
 

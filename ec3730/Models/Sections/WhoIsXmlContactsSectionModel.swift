@@ -27,33 +27,35 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
 
         if let names = records.companyNames, !names.isEmpty {
             if names.count > 1 {
-                let row = CopyCellView(title: "Company Names", rows: names.map { CopyCellRow(content: $0) })
+                let row = CopyCellType.multiple(title: "Company Names", contents: names.compactMap { .content($0, style: .expandable) })
                 content.append(row)
             } else if names.count == 1 {
-                let row = CopyCellView(title: "Company Name", content: names[0])
+                let row = CopyCellType.row(title: "Company Name", content: names[0])
                 content.append(row)
             }
         }
 
         if let title = records.meta?.title {
-            content.append(CopyCellView(title: "Title", content: title))
+            content.append(.row(title: "Title", content: title))
         }
 
         if let value = records.meta?.metaDescription, !value.isEmpty {
-            content.append(CopyCellView(title: "Description", content: value))
+            content.append(.row(title: "Description", content: value))
         }
 
         if let postal = records.postalAddresses {
             if postal.count > 1 {
-                let row = CopyCellView(title: "Postal Addresses", rows: postal.map { CopyCellRow(content: $0) })
+                let row = CopyCellType.multiple(title: "Postal Addresses", contents: postal.map { .content($0, style: .expandable) })
                 content.append(row)
             } else if postal.count == 1 {
-                let row = CopyCellView(title: "Postal Address", content: postal[0])
+                let row = CopyCellType.row(title: "Postal Address", content: postal[0])
                 content.append(row)
             }
         }
 
-        content.append(CopyCellView(title: "Country code", content: records.countryCode))
+        if let countryCode = records.countryCode {
+            content.append(.row(title: "Country code", content: countryCode))
+        }
 
         if let emails = records.emails {
             var emailsArr = [String]()
@@ -62,10 +64,10 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             }
 
             if emailsArr.count > 1 {
-                let row = CopyCellView(title: "Emails", rows: emailsArr.map { CopyCellRow(content: $0) })
+                let row = CopyCellType.multiple(title: "Emails", contents: emailsArr.map { .content($0, style: .expandable) })
                 content.append(row)
             } else if emailsArr.count == 1 {
-                let row = CopyCellView(title: "Email", content: emailsArr[0])
+                let row = CopyCellType.row(title: "Email", content: emailsArr[0])
                 content.append(row)
             }
         }
@@ -78,38 +80,40 @@ class WhoIsXmlContactsSectionModel: HostSectionModel {
             }
 
             if phoneArr.count > 1 {
-                let row = CopyCellView(title: "Phone Numbers", rows: phoneArr.map { CopyCellRow(content: $0) })
+                let row = CopyCellType.multiple(title: "Phone Numbers", contents: phoneArr.map { .content($0, style: .expandable) })
                 content.append(row)
             } else if phoneArr.count == 1 {
-                let row = CopyCellView(title: "Phone Number", content: phoneArr[0])
+                let row = CopyCellType.row(title: "Phone Number", content: phoneArr[0])
                 content.append(row)
             }
         }
 
-        content.append(CopyCellView(title: "Domain name", content: records.domainName))
+        if let domainName = records.domainName {
+            content.append(.row(title: "Domain name", content: domainName))
+        }
 
-        content.append(CopyCellView(title: "Website responed", content: "\(records.websiteResponded ?? false)"))
+        content.append(.row(title: "Website responed", content: "\(records.websiteResponded ?? false)"))
 
-        var socialRows = [CopyCellRow]()
+        var socialRows = [CopyCellType]()
 
         if let facebook = records.socialLinks?.facebook, !facebook.isEmpty {
-            socialRows.append(CopyCellRow(title: "Facebook", content: facebook))
+            socialRows.append(.row(title: "Facebook", content: facebook, style: .expandable))
         }
 
         if let twitter = records.socialLinks?.twitter, !twitter.isEmpty {
-            socialRows.append(CopyCellRow(title: "Twitter", content: twitter))
+            socialRows.append(.row(title: "Twitter", content: twitter, style: .expandable))
         }
 
         if let instagram = records.socialLinks?.instagram, !instagram.isEmpty {
-            socialRows.append(CopyCellRow(title: "Instagram", content: instagram))
+            socialRows.append(.row(title: "Instagram", content: instagram, style: .expandable))
         }
 
         if let linkedIn = records.socialLinks?.linkedIn, !linkedIn.isEmpty {
-            socialRows.append(CopyCellRow(title: "LinkedIn", content: linkedIn))
+            socialRows.append(.row(title: "LinkedIn", content: linkedIn, style: .expandable))
         }
 
         if !socialRows.isEmpty {
-            content.append(CopyCellView(title: "Social Links", rows: socialRows))
+            content.append(.multiple(title: "Social Links", contents: socialRows))
         }
 
         return copyData
