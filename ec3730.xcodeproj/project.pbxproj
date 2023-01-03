@@ -16,9 +16,10 @@
 		846CDA87291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */; };
 		846CDA89291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */; };
 		846CDA8B291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */; };
+		84700BC729640F2F00113314 /* WhoIsXmlGeoLocationSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 84700BC529640F2E00113314 /* WhoIsXmlGeoLocationSectionModel.json */; };
+		84700BC829640F2F00113314 /* WhoIsXmlCategorizationSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 84700BC629640F2E00113314 /* WhoIsXmlCategorizationSectionModel.json */; };
 		84A16C1D290A9FC800A7EBF4 /* Runestone in Frameworks */ = {isa = PBXBuildFile; productRef = 84A16C1C290A9FC800A7EBF4 /* Runestone */; };
 		84CECCCF29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 84CECCCE29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json */; };
-
 		84CECCD129151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CECCD029151C0400FB0F0D /* WhoIsXmlCategorizationResult.swift */; };
 		84CECCD329151C1D00FB0F0D /* WhoIsXmlCategorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CECCD229151C1D00FB0F0D /* WhoIsXmlCategorizationService.swift */; };
 		84CECCD5291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CECCD4291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift */; };
@@ -1060,12 +1061,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6C8D8B1212E5AEA00309373 /* LaunchScreen.storyboard in Resources */,
+				84700BC729640F2F00113314 /* WhoIsXmlGeoLocationSectionModel.json in Resources */,
 				AAC727C12843AD2A00482D73 /* WhoisXmlWhoisSectionModel.json in Resources */,
 				AAC727C32843AD2A00482D73 /* GoogleWebRiskSectionModel.json in Resources */,
                 84CECCCF29151BD300FB0F0D /* WhoIsXmlCategorizationSectionModel.json in Resources */,
 				2E07167F28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json in Resources */,
 				846CDA83291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json in Resources */,
 				AAC727C42843AD2A00482D73 /* WhoisXmlReputationSectionModel.json in Resources */,
+				84700BC829640F2F00113314 /* WhoIsXmlCategorizationSectionModel.json in Resources */,
 				F6C8D8AE212E5AEA00309373 /* Assets.xcassets in Resources */,
 				AAC727C22843AD2A00482D73 /* WhoisXmlDnsSectionModel.json in Resources */,
 			);
