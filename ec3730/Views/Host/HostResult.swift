@@ -29,9 +29,9 @@ struct HostResult: View {
                         }
                     }
                 }
+            }.safeAreaInset(edge: .bottom) {
+                HostBarView(url: group.url, date: group.date)
             }
-            .background(Color(UIColor.systemGroupedBackground))
-            HostBarView(url: group.url, date: group.date)
         }
         .background(Color(UIColor.systemGroupedBackground))
         .padding(.top, 0.15)
