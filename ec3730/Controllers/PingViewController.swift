@@ -350,20 +350,11 @@ struct PingSwiftUIViewController: View {
                 })
             })
             ToolbarItem(placement: .navigationBarTrailing, content: {
-                NavigationLink(isActive: $isActive) {
+                NavigationLink {
                     PingSetList()
                 } label: {
-                    Button {
-                        if pings.isEmpty {
-                            isActive = false
-                        } else {
-                            isActive = true
-                        }
-                    } label: {
-                        Image(systemName: "clock")
-                    }
-                }
-
+                    Image(systemName: "clock")
+                }.disabled(pings.isEmpty ? true : false)
             })
         }).sheet(isPresented: $showSettings, content: {
             EZPanel {
