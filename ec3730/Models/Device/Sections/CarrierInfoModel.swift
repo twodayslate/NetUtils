@@ -17,7 +17,7 @@ class CarrierInfoModel: DeviceInfoSectionModel {
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: NSNotification.Name.CTServiceRadioAccessTechnologyDidChange, object: nil)
     }
 
-    @MainActor private func setEnabled(_ completion: (@MainActor () -> Void)? = nil) {
+    @MainActor private func setEnabled(_ completion: (@MainActor() -> Void)? = nil) {
         getProviderTask?.cancel()
         getProviderTask = Task.detached(priority: .userInitiated) {
             self.networkInfo = CTTelephonyNetworkInfo()
