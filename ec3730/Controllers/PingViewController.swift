@@ -314,6 +314,7 @@ struct PingSwiftUIViewController: View {
 
     @State var showAlert: Bool = false
     @State var alertMessage: String?
+    @FetchRequest(fetchRequest: PingSet.fetchAllRequest(limit: 1)) var pings: FetchedResults<PingSet>
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0.0) {
@@ -352,7 +353,7 @@ struct PingSwiftUIViewController: View {
                     label: {
                         Image(systemName: "clock")
                     }
-                )
+                ).disabled(pings.isEmpty)
             })
         }).sheet(isPresented: $showSettings, content: {
             EZPanel {
