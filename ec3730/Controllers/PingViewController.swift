@@ -353,7 +353,8 @@ struct PingSwiftUIViewController: View {
                     label: {
                         Image(systemName: "clock")
                     }
-                ).disabled(pings.isEmpty)
+                )
+                .disabled(pings.isEmpty)
             })
         }).sheet(isPresented: $showSettings, content: {
             EZPanel {

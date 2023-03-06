@@ -16,6 +16,8 @@ struct HostView: View {
     @State var showErrors = false
     @State var errors: [Error]?
 
+    @FetchRequest(fetchRequest: HostDataGroup.fetchAllRequest(limit: 1)) var entries: FetchedResults<HostDataGroup>
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ScrollView {
@@ -73,6 +75,7 @@ struct HostView: View {
                         Image(systemName: "clock")
                     }
                 )
+                .disabled(entries.isEmpty)
             })
         }
 

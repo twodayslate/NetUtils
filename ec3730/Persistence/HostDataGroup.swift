@@ -20,9 +20,11 @@ public class HostDataGroup: NSManagedObject, Identifiable {
 
 extension HostDataGroup {
     // ❇️ The @FetchRequest property wrapper in the ContentView will call this function
-    static func fetchAllRequest() -> NSFetchRequest<HostDataGroup> {
+    static func fetchAllRequest(limit: Int? = nil) -> NSFetchRequest<HostDataGroup> {
         let request: NSFetchRequest<HostDataGroup> = HostDataGroup.fetchRequest() as! NSFetchRequest<HostDataGroup>
-
+        if let limit {
+            request.fetchLimit = limit
+        }
         // ❇️ The @FetchRequest property wrapper in the ContentView requires a sort descriptor
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
 
