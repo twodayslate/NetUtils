@@ -72,9 +72,11 @@ public class PingSet: NSManagedObject, Identifiable {
 
 extension PingSet {
     // ❇️ The @FetchRequest property wrapper in the ContentView will call this function
-    static func fetchAllRequest() -> NSFetchRequest<PingSet> {
+    static func fetchAllRequest(limit: Int? = nil) -> NSFetchRequest<PingSet> {
         let request: NSFetchRequest<PingSet> = PingSet.fetchRequest() as! NSFetchRequest<PingSet>
-
+        if let limit {
+            request.fetchLimit = limit
+        }
         // ❇️ The @FetchRequest property wrapper in the ContentView requires a sort descriptor
         request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
 

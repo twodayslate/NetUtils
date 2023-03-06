@@ -11,8 +11,8 @@
 		2E07167528FEB055009C3844 /* WhoIsXmlContactsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07167428FEB055009C3844 /* WhoIsXmlContactsResult.swift */; };
 		2E07167F28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */; };
 		2E07168128FEC3F3009C3844 /* WhoisXmlContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */; };
+		8460952C296FD50D0066F637 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460952B296FD50D0066F637 /* ApiKeys.swift */; };
 		846CDA83291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */; };
-		846CDA85291CF6A800DDB5AA /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA84291CF6A800DDB5AA /* ApiKeys.swift */; };
 		846CDA87291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */; };
 		846CDA89291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */; };
 		846CDA8B291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */; };
@@ -233,8 +233,8 @@
 		2E07167428FEB055009C3844 /* WhoIsXmlContactsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlContactsResult.swift; sourceTree = "<group>"; };
 		2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlContactsSectionModel.json; sourceTree = "<group>"; };
 		2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlContactsService.swift; sourceTree = "<group>"; };
+		8460952B296FD50D0066F637 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlGeoLocationSectionModel.json; sourceTree = "<group>"; };
-		846CDA84291CF6A800DDB5AA /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLocationSectionModel.swift; sourceTree = "<group>"; };
 		846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLoactionService.swift; sourceTree = "<group>"; };
 		846CDA8A291CF88B00DDB5AA /* WhoIsXmlGeoLocationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLocationResult.swift; sourceTree = "<group>"; };
@@ -816,7 +816,7 @@
 				F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */,
 				F6C8D8AD212E5AEA00309373 /* Assets.xcassets */,
 				F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */,
-				846CDA84291CF6A800DDB5AA /* ApiKeys.swift */,
+				8460952B296FD50D0066F637 /* ApiKeys.swift */,
 				F60FD36E25E060DC00BCEF86 /* Persistence */,
 				F6C8D8B2212E5AEA00309373 /* Info.plist */,
 				F6A4EB952301C5EF00439562 /* Extensions */,
@@ -1231,7 +1231,6 @@
 				F660FDE6286902AF0027C759 /* MemoryInfoModel.swift in Sources */,
 				F64418E6271CA13000E40F2C /* LocalDns.swift in Sources */,
 				F6D4BB0C23584E0C00FDAFF7 /* GoogleWebRiskCellManager.swift in Sources */,
-				846CDA85291CF6A800DDB5AA /* ApiKeys.swift in Sources */,
 				F650F749233CF15800BAA609 /* DataFeed.swift in Sources */,
 				F68CE56423023F7E0068D104 /* CopyCell.swift in Sources */,
 				F6A4EB992301DFCC00439562 /* LoadingCell.swift in Sources */,
@@ -1278,6 +1277,7 @@
 				F660FDDB2868EA8C0027C759 /* DeviceInfoSectionModel.swift in Sources */,
 				F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */,
 				F6AF9576295E9C01000F09D2 /* CopyCellDetailStyle.swift in Sources */,
+				8460952C296FD50D0066F637 /* ApiKeys.swift in Sources */,
 				F6AF9584295F8627000F09D2 /* CopyCellChevronView.swift in Sources */,
 				F6A6410E2844246100E00F7F /* HostViewSectionFocusView.swift in Sources */,
 				F6397FF725EF045200914B3F /* PurchaseCellView.swift in Sources */,
