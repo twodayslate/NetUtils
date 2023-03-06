@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/devicekit/DeviceKit",
         "state": {
           "branch": null,
-          "revision": "20e0991f3975916ab0f6d58db84d8bc64f883537",
-          "version": "4.7.0"
+          "revision": "d37e70cb2646666dcf276d7d3d4a9760a41ff8a6",
+          "version": "4.9.0"
         }
       },
       {
@@ -78,7 +78,7 @@
         "repositoryURL": "https://github.com/twodayslate/NavigationSplitTab",
         "state": {
           "branch": "main",
-          "revision": "2942ff8133b10b12fa7ea2c255a916b3c9541bb7",
+          "revision": "d5803181d4a05015deb6b834706dd83e3046677b",
           "version": null
         }
       },
@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/simonbs/Runestone",
         "state": {
           "branch": null,
-          "revision": "7cd1833a17ccd81719c69d9b134a35939eb267cb",
-          "version": "0.2.7"
+          "revision": "1d0e79051a18d79f12882e9fad0b130e47d4a06b",
+          "version": "0.3.0"
         }
       },
       {
@@ -150,8 +150,8 @@
         "repositoryURL": "https://github.com/simonbs/treesitterlanguages",
         "state": {
           "branch": null,
-          "revision": "36050fa1873c4c475769845a268088b67306a746",
-          "version": "0.1.2"
+          "revision": "a15ab30453d14097355d7d78ec7c0feb008cfbba",
+          "version": "0.1.7"
         }
       },
       {
