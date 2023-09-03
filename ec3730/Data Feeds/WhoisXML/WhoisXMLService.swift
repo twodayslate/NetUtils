@@ -18,13 +18,17 @@ class WhoisXMLService: Service {
     var description: String
 
     static var cache = [String: TimedCache]()
+    static let queue = DispatchQueue(label: "WhoisXMLService")
 
     var cache: TimedCache {
-        if let currentCache = WhoisXMLService.cache[id] {
-            return currentCache
+        Self.queue.sync {
+            if let currentCache = Self.cache[id] {
+                return currentCache
+            }
+            let newCache = TimedCache(expiresIn: 600) // 10 minutes
+            Self.cache[id] = newCache
+            return newCache
         }
-        WhoisXMLService.cache[id] = TimedCache(expiresIn: 600) // 10 minutes
-        return WhoisXMLService.cache[id]!
     }
 
     // MARK: - Initializers

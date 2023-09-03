@@ -70,6 +70,7 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
             WhoIsXmlGeoLocationSectionModel(),
             WhoIsXmlCategorizationSectionModel(),
             GoogleWebRiskSectionModel(),
+            UrlParsedModel(),
         ]
 
         for service in available_services {

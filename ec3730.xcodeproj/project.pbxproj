@@ -79,6 +79,8 @@
 		F660FDEE28693D020027C759 /* FingerprintInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDED28693D010027C759 /* FingerprintInfoModel.swift */; };
 		F660FDF0286953A00027C759 /* DeviceInfoSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F660FDEF286953A00027C759 /* DeviceInfoSectionView.swift */; };
 		F661A28023020FCF0023FA50 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F661A27F23020FCF0023FA50 /* UIAlertController.swift */; };
+		F66573952AA515440043B0C6 /* UrlParsedFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66573942AA515440043B0C6 /* UrlParsedFeed.swift */; };
+		F66573972AA52F7E0043B0C6 /* UrlParsedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66573962AA52F7E0043B0C6 /* UrlParsedModel.swift */; };
 		F6659ECC287A298D00038ECA /* SourceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6659ECB287A298D00038ECA /* SourceCard.swift */; };
 		F6659ED4287A2DC300038ECA /* WebWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6659ED3287A2DC300038ECA /* WebWrapperView.swift */; };
 		F6659ED7287A33BA00038ECA /* TreeSitterBashRunestone in Frameworks */ = {isa = PBXBuildFile; productRef = F6659ED6287A33BA00038ECA /* TreeSitterBashRunestone */; };
@@ -303,6 +305,8 @@
 		F660FDED28693D010027C759 /* FingerprintInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintInfoModel.swift; sourceTree = "<group>"; };
 		F660FDEF286953A00027C759 /* DeviceInfoSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoSectionView.swift; sourceTree = "<group>"; };
 		F661A27F23020FCF0023FA50 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		F66573942AA515440043B0C6 /* UrlParsedFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlParsedFeed.swift; sourceTree = "<group>"; };
+		F66573962AA52F7E0043B0C6 /* UrlParsedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlParsedModel.swift; sourceTree = "<group>"; };
 		F6659ECB287A298D00038ECA /* SourceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCard.swift; sourceTree = "<group>"; };
 		F6659ED3287A2DC300038ECA /* WebWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebWrapperView.swift; sourceTree = "<group>"; };
 		F6659F18287A400300038ECA /* RunestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunestoneView.swift; sourceTree = "<group>"; };
@@ -550,6 +554,7 @@
 				2E07167228FEA629009C3844 /* WhoIsXmlContactsSectionModel.swift */,
 				846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */,
 				84CECCD4291521E500FB0F0D /* WhoIsXmlCategorizationSectionModel.swift */,
+				F66573962AA52F7E0043B0C6 /* UrlParsedModel.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -585,6 +590,14 @@
 				AA1595D228B24AC2003819A1 /* DataUsageInfoModel.swift */,
 			);
 			path = Sections;
+			sourceTree = "<group>";
+		};
+		F66573932AA515300043B0C6 /* URL Parse */ = {
+			isa = PBXGroup;
+			children = (
+				F66573942AA515440043B0C6 /* UrlParsedFeed.swift */,
+			);
+			path = "URL Parse";
 			sourceTree = "<group>";
 		};
 		F6659EC92870CA9C00038ECA /* Host */ = {
@@ -654,6 +667,7 @@
 		F668EB3D23501FAC00EEB379 /* Data Feeds */ = {
 			isa = PBXGroup;
 			children = (
+				F66573932AA515300043B0C6 /* URL Parse */,
 				F650F748233CF15800BAA609 /* DataFeed.swift */,
 				F69E364D235808560017296E /* DFSubscription.swift */,
 				F6D0B77F235A6C32009E493B /* CoreData */,
@@ -1207,6 +1221,7 @@
 				F60FD36025E0607C00BCEF86 /* DataModel.xcdatamodeld in Sources */,
 				F69E36502358089C0017296E /* DFService.swift in Sources */,
 				F619760B22FCA76200CE39A0 /* WhoisRecord.swift in Sources */,
+				F66573972AA52F7E0043B0C6 /* UrlParsedModel.swift in Sources */,
 				F6A4EB9B2301E78E00439562 /* DNSResolver.swift in Sources */,
 				F65FDA6527AB03BC0024521B /* WhoisXmlReputationSectionModel.swift in Sources */,
 				F65FDA6727AB06920024521B /* WhoisXmlReputationRecord.swift in Sources */,
@@ -1282,6 +1297,7 @@
 				F6A6410E2844246100E00F7F /* HostViewSectionFocusView.swift in Sources */,
 				F6397FF725EF045200914B3F /* PurchaseCellView.swift in Sources */,
 				F63B9226279BBA87007E845F /* HostDataGroup.swift in Sources */,
+				F66573952AA515440043B0C6 /* UrlParsedFeed.swift in Sources */,
 				F6FBB86723677FA700E023F2 /* DeviceController.swift in Sources */,
 				AAC727C52843AD2A00482D73 /* Utility.swift in Sources */,
 				F6659F26287A74BA00038ECA /* RunestoneDefaultTheme.swift in Sources */,
@@ -1457,7 +1473,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -1466,7 +1482,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.9.1;
+				MARKETING_VERSION = 2.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1485,7 +1501,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -1494,7 +1510,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.9.1;
+				MARKETING_VERSION = 2.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twodayslate.ec3730;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
