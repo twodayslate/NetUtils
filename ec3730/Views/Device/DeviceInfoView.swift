@@ -5,30 +5,30 @@ struct DeviceInfoView: View {
     @StateObject var fingerprint = FingerPrintModel(
         URL(staticString: "https://fingerprint.netutils.workers.dev/"),
         onFinish: { model, webView in
-            webView.evaluateJavaScript("document.documentElement.innerText.toString()") { text, _ in
-                guard let htmlString = text as? String else {
+            Task(priority: .background) {
+                let htmlString = try await webView.evaluateJavaScript("document.documentElement.innerText.toString()")
+                guard let htmlString = htmlString as? String else {
                     return
                 }
-
-                Task { @MainActor in
-                    model.update(fingerprint: htmlString)
-                }
+                await model.update(fingerprint: htmlString)
             }
         }
     )
     @StateObject var fingerprintTwo = FingerPrintModel(
         URL(staticString: "https://fingerprint2.netutils.workers.dev/"),
         onFinish: { model, webView in
-            webView.evaluateJavaScript("document.documentElement.innerText.toString()") { json, _ in
+            Task(priority: .background) {
+                let json = try await webView.evaluateJavaScript("document.documentElement.innerText.toString()")
                 guard let json = json as? String, let jsonData = json.data(using: .utf8) else {
                     return
                 }
                 guard let d = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] else {
                     return
                 }
-                if let htmlString = d["hash"] as? String {
-                    model.update(fingerprint: htmlString)
+                guard let htmlString = d["hash"] as? String else {
+                    return
                 }
+                await model.update(fingerprint: htmlString)
             }
         }
     )
@@ -66,20 +66,19 @@ struct DeviceInfoView: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
-                    withAnimation {
+                    Task {
                         date = .now
-                        model.reload()
+                        await model.reload()
                     }
                 } label: {
                     Label("Reload", systemImage: "arrow.clockwise")
                 }
             }
         }
-        .onAppear {
-            Task {
-                model.attachFingerprint(model: fingerprint)
-                model.attachFingerprint(model: fingerprintTwo)
-            }
+        .task {
+            await model.attachFingerprint(model: fingerprint)
+            await model.attachFingerprint(model: fingerprintTwo)
+            await model.reload()
         }
     }
 }

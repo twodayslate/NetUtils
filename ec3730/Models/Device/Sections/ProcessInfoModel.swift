@@ -24,13 +24,9 @@ class ProcessInfoModel: DeviceInfoSectionModel {
     override init() {
         super.init()
         title = "Process Information"
-
-        Task { @MainActor in
-            reload()
-        }
     }
 
-    @MainActor override func reload() {
+    @MainActor override func reload() async {
         enabled = true
         rows.removeAll()
 

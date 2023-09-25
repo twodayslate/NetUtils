@@ -6,10 +6,6 @@ class MemoryInfoModel: DeviceInfoSectionModel {
     override init() {
         super.init()
         title = "Memory Information"
-
-        Task { @MainActor in
-            reload()
-        }
     }
 
     func memoryFootprint() -> Float? {
@@ -70,7 +66,7 @@ class MemoryInfoModel: DeviceInfoSectionModel {
 
     let tags = ["free", "active", "inactive", "wired", "zero_filled", "reactivations", "pageins", "pageouts", "faults", "cow", "lookups", "hits"]
 
-    @MainActor override func reload() {
+    @MainActor override func reload() async {
         enabled = true
         rows.removeAll()
 

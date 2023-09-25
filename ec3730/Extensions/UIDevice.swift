@@ -56,6 +56,17 @@ extension UIDevice {
         }
     }
 
+    var asyncImportantFreeDiskSpaceInBytes: Int64 {
+        get async {
+            await withCheckedContinuation { continuation in
+                DispatchQueue(label: "ImportantFreeDiskSpaceInBytes").sync {
+                    let bytes = self.importantFreeDiskSpaceInBytes
+                    continuation.resume(returning: bytes)
+                }
+            }
+        }
+    }
+
     var opportunisticFreeDiskSpaceInBytes: Int64 {
         let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
         do {
@@ -68,6 +79,17 @@ extension UIDevice {
         }
 
         return 0
+    }
+
+    var asyncOpportunisticFreeDiskSpaceInBytes: Int64 {
+        get async {
+            await withCheckedContinuation { continuation in
+                DispatchQueue(label: "OpportunisticFreeDiskSpaceInBytes").sync {
+                    let bytes = self.opportunisticFreeDiskSpaceInBytes
+                    continuation.resume(returning: bytes)
+                }
+            }
+        }
     }
 
     var realFreeDiskSpaceInBytes: Int {

@@ -1,12 +1,14 @@
 import Foundation
 import WebKit
 
+@MainActor
 class FingerPrintModel: ObservableObject {
     var url: URL
     var _onFinish: (FingerPrintModel, WKWebView) -> Void
     weak var parent: DeviceInfoModel?
 
     @Published var fingerprint: String?
+    @Published var didFinish = false
 
     init(_ url: URL, onFinish: @escaping (FingerPrintModel, WKWebView) -> Void) {
         self.url = url
@@ -19,14 +21,13 @@ class FingerPrintModel: ObservableObject {
     }
 
     func onFinish(_ model: FingerPrintModel, _ webview: WKWebView) {
+        didFinish = true
         _onFinish(model, webview)
     }
 
-    func update(fingerprint: String) {
-        Task { @MainActor in
-            self.fingerprint = fingerprint
-            self.parent?.reloadFingerprints()
-        }
+    func update(fingerprint: String) async {
+        self.fingerprint = fingerprint
+        await parent?.reloadFingerprints()
     }
 }
 

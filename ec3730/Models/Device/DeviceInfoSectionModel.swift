@@ -5,5 +5,5 @@ class DeviceInfoSectionModel: ObservableObject, Identifiable {
     @MainActor @Published var enabled: Bool = false
     @MainActor @Published var rows = [CopyCellType]()
 
-    @MainActor func reload() {}
+    @MainActor func reload() async {}
 }

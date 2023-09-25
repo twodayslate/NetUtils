@@ -12,13 +12,9 @@ class DataUsageInfoModel: DeviceInfoSectionModel {
     override init() {
         super.init()
         title = "Data Usage"
-
-        Task { @MainActor in
-            reload()
-        }
     }
 
-    @MainActor override func reload() {
+    @MainActor override func reload() async {
         enabled = true
         SystemDataUsage.reload()
         rows.removeAll()

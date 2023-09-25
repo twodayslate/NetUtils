@@ -10,10 +10,6 @@ class CarrierInfoModel: DeviceInfoSectionModel {
         super.init()
         title = "Cellular Providers"
 
-        Task {
-            await reload()
-        }
-
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: NSNotification.Name.CTServiceRadioAccessTechnologyDidChange, object: nil)
     }
 
@@ -31,7 +27,17 @@ class CarrierInfoModel: DeviceInfoSectionModel {
         }
     }
 
-    @MainActor private func setRows() {
+    func asyncSetEnabled() async {
+        await withCheckedContinuation { continuation in
+            Task {
+                await setEnabled {
+                    continuation.resume()
+                }
+            }
+        }
+    }
+
+    @MainActor private func setRows() async {
         rows.removeAll()
 
         guard enabled, let networkInfo = networkInfo, let providers = providers else {
@@ -66,9 +72,8 @@ class CarrierInfoModel: DeviceInfoSectionModel {
         }
     }
 
-    @objc @MainActor override func reload() {
-        setEnabled { [weak self] in
-            self?.setRows()
-        }
+    @objc @MainActor override func reload() async {
+        await asyncSetEnabled()
+        await setRows()
     }
 }

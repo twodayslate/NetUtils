@@ -138,8 +138,13 @@ struct PurchaseCellView: View {
             }
         })
         .task(id: product) {
-            supportsIntroOffer = false
-            supportsIntroOffer = await product?.subscription?.isEligibleForIntroOffer ?? false
+            withAnimation {
+                supportsIntroOffer = false
+            }
+            let value = await product?.subscription?.isEligibleForIntroOffer ?? false
+            withAnimation {
+                supportsIntroOffer = value
+            }
         }
     }
 

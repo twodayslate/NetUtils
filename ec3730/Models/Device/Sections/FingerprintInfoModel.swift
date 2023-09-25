@@ -3,25 +3,21 @@ import DeviceKit
 import SwiftUI
 
 class FingerprintInfoModel: DeviceInfoSectionModel {
-    var models = [FingerPrintModel]()
+    @MainActor var models = [FingerPrintModel]()
 
     override init() {
         super.init()
         title = "Fingerprints"
-
-        Task { @MainActor in
-            reload()
-        }
     }
 
-    @MainActor func attachModel(model: FingerPrintModel) {
+    @MainActor func attachModel(model: FingerPrintModel) async {
         if !models.contains(model) {
             models.append(model)
-            reload()
+            await reload()
         }
     }
 
-    @MainActor override func reload() {
+    @MainActor override func reload() async {
         enabled = models.count > 0
         rows.removeAll()
 

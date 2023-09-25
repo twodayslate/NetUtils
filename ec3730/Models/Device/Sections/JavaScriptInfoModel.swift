@@ -6,13 +6,9 @@ class JavaScriptInfoModel: DeviceInfoSectionModel {
     override init() {
         super.init()
         title = "JavaScriptCore Information"
-
-        Task { @MainActor in
-            reload()
-        }
     }
 
-    @MainActor override func reload() {
+    @MainActor override func reload() async {
         enabled = true
         rows.removeAll()
 

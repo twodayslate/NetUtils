@@ -9,49 +9,41 @@ import Foundation
      return "Cellular Providers"
  */
 
+@MainActor
 class DeviceInfoModel: ObservableObject {
-    @Published var sections = [DeviceInfoSectionModel]()
+    @Published var sections: [DeviceInfoSectionModel] = [
+        UIDeviceInfoModel(),
+        ProcessInfoModel(),
+        MemoryInfoModel(),
+        JavaScriptInfoModel(),
+        CarrierInfoModel(),
+        FingerprintInfoModel(),
+        DataUsageInfoModel(),
+    ]
 
-    init() {
-        Task { @MainActor in
-            sections.append(UIDeviceInfoModel())
-            sections.append(ProcessInfoModel())
-            sections.append(MemoryInfoModel())
-            sections.append(JavaScriptInfoModel())
-            sections.append(CarrierInfoModel())
-            sections.append(FingerprintInfoModel())
-            sections.append(DataUsageInfoModel())
-            self.reload()
-        }
-    }
-
-    @MainActor func reload() {
+    func reload() async {
         objectWillChange.send()
-        sections.forEach { section in
+        for section in sections {
             section.objectWillChange.send()
-            section.reload()
+            await section.reload()
         }
     }
 
-    @MainActor func reloadFingerprints() {
+    func reloadFingerprints() async {
         guard let finger = sections.first(where: { $0 as? FingerprintInfoModel != nil }) as? FingerprintInfoModel else {
             return
         }
         objectWillChange.send()
         finger.objectWillChange.send()
-        finger.reload()
+        await finger.reload()
     }
 
-    @MainActor func attachFingerprint(model: FingerPrintModel) {
+    func attachFingerprint(model: FingerPrintModel) async {
         guard let finger = sections.first(where: { $0 as? FingerprintInfoModel != nil }) as? FingerprintInfoModel else {
             return
         }
         objectWillChange.send()
         model.parent = self
-        finger.attachModel(model: model)
-        Task { @MainActor in
-            try await Task.sleep(nanoseconds: 1000)
-            reload()
-        }
+        await finger.attachModel(model: model)
     }
 }

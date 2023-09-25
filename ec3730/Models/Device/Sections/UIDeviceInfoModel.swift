@@ -7,13 +7,9 @@ class UIDeviceInfoModel: DeviceInfoSectionModel {
     override init() {
         super.init()
         title = "Device Information"
-
-        Task { @MainActor in
-            reload()
-        }
     }
 
-    @MainActor override func reload() {
+    @MainActor override func reload() async {
         enabled = true
         rows.removeAll()
 
@@ -30,24 +26,28 @@ class UIDeviceInfoModel: DeviceInfoSectionModel {
         // "kB", "MB", "GB", "TB", "PB", "EB", "ZB", and "YB" for SI units (base 1000).
         // "kiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", and "YiB" for binary units (base 1024).
 
+        let importantFreeDiskSpaceInBytes = await UIDevice.current.asyncImportantFreeDiskSpaceInBytes
+        let opportunisticFreeDiskSpaceInBytes = await UIDevice.current.asyncOpportunisticFreeDiskSpaceInBytes
+        let realFreeDiskSpaceInBytes = UIDevice.current.realFreeDiskSpaceInBytes
+
         rows.append(.multiple(title: "Disk Space Available", contents: [
             .toggleableRow(title: "Important", contents: [
-                "\(UIDevice.current.importantFreeDiskSpaceInBytes) bytes",
-                "\(String(format: "%0.2f", Double(UIDevice.current.importantFreeDiskSpaceInBytes) / 1000.0)) kB",
-                "\(String(format: "%0.2f", Double(UIDevice.current.importantFreeDiskSpaceInBytes) / 1000.0 / 1000.0)) MB",
-                "\(String(format: "%0.2f", Double(UIDevice.current.importantFreeDiskSpaceInBytes) / 1000.0 / 1000.0 / 1000.0)) GB",
+                "\(importantFreeDiskSpaceInBytes) bytes",
+                "\(String(format: "%0.2f", Double(importantFreeDiskSpaceInBytes) / 1000.0)) kB",
+                "\(String(format: "%0.2f", Double(importantFreeDiskSpaceInBytes) / 1000.0 / 1000.0)) MB",
+                "\(String(format: "%0.2f", Double(importantFreeDiskSpaceInBytes) / 1000.0 / 1000.0 / 1000.0)) GB",
             ], style: .expandable),
             .toggleableRow(title: "Opportunistic", contents: [
-                "\(UIDevice.current.opportunisticFreeDiskSpaceInBytes) bytes",
-                "\(String(format: "%0.2f", Double(UIDevice.current.opportunisticFreeDiskSpaceInBytes) / 1000.0)) kB",
-                "\(String(format: "%0.2f", Double(UIDevice.current.opportunisticFreeDiskSpaceInBytes) / 1000.0 / 1000.0)) MB",
-                "\(String(format: "%0.2f", Double(UIDevice.current.opportunisticFreeDiskSpaceInBytes) / 1000.0 / 1000.0 / 1000.0)) GB",
+                "\(opportunisticFreeDiskSpaceInBytes) bytes",
+                "\(String(format: "%0.2f", Double(opportunisticFreeDiskSpaceInBytes) / 1000.0)) kB",
+                "\(String(format: "%0.2f", Double(opportunisticFreeDiskSpaceInBytes) / 1000.0 / 1000.0)) MB",
+                "\(String(format: "%0.2f", Double(opportunisticFreeDiskSpaceInBytes) / 1000.0 / 1000.0 / 1000.0)) GB",
             ], style: .expandable),
             .toggleableRow(title: "Real", contents: [
                 "\(UIDevice.current.realFreeDiskSpaceInBytes) bytes",
-                "\(String(format: "%0.2f", Double(UIDevice.current.realFreeDiskSpaceInBytes) / 1000.0)) kB",
-                "\(String(format: "%0.2f", Double(UIDevice.current.realFreeDiskSpaceInBytes) / 1000.0 / 1000.0)) MB",
-                "\(String(format: "%0.2f", Double(UIDevice.current.realFreeDiskSpaceInBytes) / 1000.0 / 1000.0 / 1000.0)) GB",
+                "\(String(format: "%0.2f", Double(realFreeDiskSpaceInBytes) / 1000.0)) kB",
+                "\(String(format: "%0.2f", Double(realFreeDiskSpaceInBytes) / 1000.0 / 1000.0)) MB",
+                "\(String(format: "%0.2f", Double(realFreeDiskSpaceInBytes) / 1000.0 / 1000.0 / 1000.0)) GB",
             ], style: .expandable),
         ]))
 
