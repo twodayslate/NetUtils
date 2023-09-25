@@ -49,6 +49,7 @@ struct ContentView: View {
                 model.objectWillChange.send()
             }
             .environmentObject(HostViewModel.shared)
+            .environmentObject(model)
             .environment(\.simpleAppIconModel, iconModel)
             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }

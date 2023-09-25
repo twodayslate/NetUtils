@@ -1,3 +1,4 @@
+import NavigationSplitTab
 import StoreKit
 import SwiftUI
 
@@ -7,9 +8,11 @@ struct PurchaseCellView: View {
     @ObservedObject var sectionModel: HostSectionModel
 
     @EnvironmentObject var demoSheet: DemoSheet
+    @EnvironmentObject var navigation: NavigationSplitTabModel<ScreenId>
 
     @State var isRestoring: Bool = false
     @State var showDemoData: Bool = false
+    @State var subscriptionPeriod = Int.random(in: 0 ..< 100) > 50 ? Product.SubscriptionPeriod.Unit.month : .year
 
     var heading: String {
         sectionModel.dataFeed.name
@@ -60,11 +63,11 @@ struct PurchaseCellView: View {
 
             if !isOneTimePurchase {
                 // we don't know what kind of product this is so let's just assume it is a trial so Apple doesn't yell at us
-                let promoUnitType = self.model.defaultProduct?.subscription?.introductoryOffer?.period.unit ?? Product.SubscriptionPeriod.Unit.day
+                let promoUnitType = product?.subscription?.introductoryOffer?.period.unit ?? Product.SubscriptionPeriod.Unit.day
 
-                let unitType = self.model.defaultProduct?.subscription?.subscriptionPeriod.unit ?? .month
+                let unitType = product?.subscription?.subscriptionPeriod.unit ?? .month
 
-                (Text("Start your free \(self.model.defaultProduct?.subscription?.introductoryOffer?.period.value ?? 3)-\(promoUnitType.debugDescription.lowercased()) trial").bold() + Text(" then all \(self.heading) Data is available for \(self.model.defaultProduct?.displayPrice ?? "-")/\(unitType.debugDescription.lowercased()) automatically"))
+                (Text("Start your free \(product?.subscription?.introductoryOffer?.period.value ?? 3)-\(promoUnitType.debugDescription.lowercased()) trial").bold() + Text(" then all \(self.heading) Data is available for \(product?.displayPrice ?? "-")/\(unitType.debugDescription.lowercased()) automatically"))
                     .font(.footnote)
                     .foregroundColor(Color(uiColor: UIColor.secondaryLabel))
                     .multilineTextAlignment(.leading)
@@ -86,6 +89,16 @@ struct PurchaseCellView: View {
                     buyButton()
                 }
                 .padding(.vertical, 4)
+                if !isOneTimePurchase {
+                    Button {
+                        navigation.selectedScreen = .settings
+                    } label: {
+                        Text("More Subscription Options in Settings")
+                            .font(.caption)
+                            .opacity(0.7)
+                    }
+                    .padding(.bottom, 4)
+                }
             }
 
             purchaseTerms()
@@ -93,14 +106,48 @@ struct PurchaseCellView: View {
         .padding()
         .background(Color(UIColor.systemBackground))
         .contextMenu(menuItems: {
-            Button(action: {
+            Button {
+                Task {
+                    await buy()
+                }
+            } label: {
+                Label(isOneTimePurchase ? "Buy" : "Subscribe", systemImage: "lock")
+            }
+            Button {
                 Task {
                     await self.restore()
                 }
-            }, label: {
+            } label: {
                 Label("Restore", systemImage: "arrow.clockwise")
-            })
+            }
+            if !isOneTimePurchase {
+                Button {
+                    if subscriptionPeriod == .month {
+                        subscriptionPeriod = .year
+                    } else {
+                        subscriptionPeriod = .month
+                    }
+                } label: {
+                    Label("Change subscription period", systemImage: "calendar")
+                }
+            }
+            Divider()
+            Button {
+                demoSheet.model = sectionModel
+            } label: {
+                Label("Show example query", systemImage: "doc.text")
+            }
         })
+    }
+
+    var product: Product? {
+        if isOneTimePurchase {
+            return model.defaultProduct
+        }
+
+        return model.products?.filter {
+            $0.subscription?.subscriptionPeriod.unit == subscriptionPeriod
+        }.first ?? model.defaultProduct
     }
 
     private func buyButton() -> some View {
@@ -110,9 +157,9 @@ struct PurchaseCellView: View {
             }
         }, label: {
             if isOneTimePurchase {
-                Text("Buy Now for only \(self.model.defaultProduct?.displayPrice ?? "-")")
+                Text("Buy Now for only \(product?.displayPrice ?? "-")")
             } else {
-                Text("Subscibe Now for only \(self.model.defaultProduct?.displayPrice ?? "-")").bold()
+                Text("Subscibe Now for only \(product?.displayPrice ?? "-")").bold()
             }
         })
         .padding()
@@ -154,7 +201,7 @@ struct PurchaseCellView: View {
 
     func buy() async {
         // TODO: generalize block
-        guard let product = model.defaultProduct else {
+        guard let product else {
             return
         }
         isRestoring = true
@@ -167,11 +214,13 @@ struct PurchaseCellView: View {
 struct LockedCellView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PurchaseCellView(model: StoreKitModel.whois, sectionModel: WhoisXmlDnsSectionModel())
-        }
+            Group {
+                PurchaseCellView(model: StoreKitModel.whois, sectionModel: WhoisXmlDnsSectionModel())
+            }
 
-        Group {
-            PurchaseCellView(model: StoreKitModel.whois, sectionModel: WhoisXmlDnsSectionModel())
-        }.preferredColorScheme(.dark)
+            Group {
+                PurchaseCellView(model: StoreKitModel.whois, sectionModel: WhoisXmlDnsSectionModel())
+            }.preferredColorScheme(.dark)
+        }.environmentObject(NavigationSplitTabModel(root: ScreenId.host, screens: [.host, .settings]))
     }
 }
