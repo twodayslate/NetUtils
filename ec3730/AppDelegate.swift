@@ -6,6 +6,7 @@
 //  Copyright © 2018 Zachary Gorak. All rights reserved.
 //
 
+import SimpleCommon
 import SKVersion
 import SwiftyStoreKit
 import UIKit
@@ -31,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             handleUITests()
         #endif
+
+        SimpleAppIcon.allIcons.insert(.dark)
+        SimpleAppIcon.allIcons.insert(.light)
+        SimpleAppIcon.allIcons.insert(.legacy)
 
         UIDevice.current.isBatteryMonitoringEnabled = true
 

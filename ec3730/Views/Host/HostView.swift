@@ -3,6 +3,10 @@ import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
 
+class DemoSheet: ObservableObject {
+    @Published var model: HostSectionModel?
+}
+
 @available(iOS 15.0, *)
 struct HostView: View {
     @EnvironmentObject var model: HostViewModel
@@ -15,6 +19,8 @@ struct HostView: View {
 
     @State var showErrors = false
     @State var errors: [Error]?
+
+    @StateObject var demoSheetModel = DemoSheet()
 
     @FetchRequest(fetchRequest: HostDataGroup.fetchAllRequest(limit: 1)) var entries: FetchedResults<HostDataGroup>
 
@@ -41,6 +47,7 @@ struct HostView: View {
             // Fix for the content going above the navigation
             // See !92 for more information
             .padding(.top, 0.15)
+            .environmentObject(demoSheetModel)
 
             SourceUrlBarView(
                 text: $text,
@@ -78,7 +85,9 @@ struct HostView: View {
                 .disabled(entries.isEmpty)
             })
         }
-
+        .sheet(item: $demoSheetModel.model) { model in
+            HostViewSectionFocusView(model: model.demoModel, url: model.demoUrl, date: model.demoDate)
+        }
         .alert("Error", isPresented: $showErrors, presenting: self.errors, actions: { _ in
             Button("Okay", role: .cancel) {}
         }, message: { errors in

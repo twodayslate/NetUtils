@@ -1,4 +1,5 @@
 import NavigationSplitTab
+import SimpleCommon
 import SwiftUI
 
 struct ContentView: View {
@@ -6,6 +7,7 @@ struct ContentView: View {
     @AppStorage("theme") var theme: Int = 0
 
     @StateObject var reachability = ReachabilityModel()
+    @Environment(\.simpleAppIconModel) var iconModel
 
     init() {
         var root = ScreenId.host
@@ -47,6 +49,7 @@ struct ContentView: View {
                 model.objectWillChange.send()
             }
             .environmentObject(HostViewModel.shared)
+            .environment(\.simpleAppIconModel, iconModel)
             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
 

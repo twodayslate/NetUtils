@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/devicekit/DeviceKit",
         "state": {
           "branch": null,
-          "revision": "d37e70cb2646666dcf276d7d3d4a9760a41ff8a6",
-          "version": "4.9.0"
+          "revision": "66837ecf1516e41fd4251bbb684dc4b1997f08ab",
+          "version": "5.1.0"
         }
       },
       {
@@ -35,33 +35,6 @@
           "branch": null,
           "revision": "ff809780f4a34fd609ccd34b7611157c9e043763",
           "version": "1.0.3"
-        }
-      },
-      {
-        "package": "Gzip",
-        "repositoryURL": "https://github.com/1024jp/GzipSwift.git",
-        "state": {
-          "branch": null,
-          "revision": "7a7f17761c76a932662ab77028a4329f67d645a4",
-          "version": "5.2.0"
-        }
-      },
-      {
-        "package": "HighlightJS",
-        "repositoryURL": "https://github.com/SwiftWebResources/HighlightJS-Swift.git",
-        "state": {
-          "branch": null,
-          "revision": "392c6dbd569817864ff7112a11e41db477468309",
-          "version": "9.18.1"
-        }
-      },
-      {
-        "package": "Highlightr",
-        "repositoryURL": "https://github.com/helje5/Highlightr",
-        "state": {
-          "branch": null,
-          "revision": "c2ecdec085f78cdbc0323ec4d44d297e5e6a0379",
-          "version": "3.0.0"
         }
       },
       {
@@ -96,8 +69,17 @@
         "repositoryURL": "https://github.com/simonbs/Runestone",
         "state": {
           "branch": null,
-          "revision": "1d0e79051a18d79f12882e9fad0b130e47d4a06b",
-          "version": "0.3.0"
+          "revision": "00dee9fbc9c93b709f6b1b052bce84cb971e493a",
+          "version": "0.3.2"
+        }
+      },
+      {
+        "package": "SimpleCommon",
+        "repositoryURL": "https://github.com/twodayslate/SimpleCommon",
+        "state": {
+          "branch": "main",
+          "revision": "142de0d60508660b33e44f6b97fe8d503a47398c",
+          "version": null
         }
       },
       {
@@ -143,6 +125,15 @@
           "branch": null,
           "revision": "9ce911639680113dac9b554d6243e406a9758ebe",
           "version": "0.16.4"
+        }
+      },
+      {
+        "package": "TreeSitter",
+        "repositoryURL": "https://github.com/simonbs/tree-sitter",
+        "state": {
+          "branch": null,
+          "revision": "f88ae4ebe351d8aa99c31a17111607017d805118",
+          "version": "0.20.9-beta-1"
         }
       },
       {

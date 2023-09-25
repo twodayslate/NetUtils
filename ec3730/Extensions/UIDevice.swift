@@ -148,6 +148,8 @@ extension UIUserInterfaceIdiom {
             return "Phone"
         case .tv:
             return "TV"
+        case .vision:
+            return "Vision"
         case .unspecified:
             return "Unspecified"
         @unknown default:

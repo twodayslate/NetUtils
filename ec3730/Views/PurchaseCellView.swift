@@ -6,6 +6,8 @@ struct PurchaseCellView: View {
     @ObservedObject var model: StoreKitModel
     @ObservedObject var sectionModel: HostSectionModel
 
+    @EnvironmentObject var demoSheet: DemoSheet
+
     @State var isRestoring: Bool = false
     @State var showDemoData: Bool = false
 
@@ -47,7 +49,7 @@ struct PurchaseCellView: View {
             }
 
             Button(action: {
-                showDemoData.toggle()
+                demoSheet.model = sectionModel
             }, label: {
                 Text("See an example query result!")
                     .multilineTextAlignment(.center)
@@ -98,9 +100,6 @@ struct PurchaseCellView: View {
             }, label: {
                 Label("Restore", systemImage: "arrow.clockwise")
             })
-        })
-        .sheet(isPresented: $showDemoData, content: {
-            HostViewSectionFocusView(model: sectionModel.demoModel, url: sectionModel.demoUrl, date: sectionModel.demoDate)
         })
     }
 

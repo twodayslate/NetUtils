@@ -24,7 +24,7 @@ enum ScreenId: ScreenIdentifierProtocol, Codable {
         case .device:
             DeviceInfoView()
         case .settings:
-            UIViewControllerView(SettingsTableViewController(style: .grouped))
+            Settings()
         case .showMore:
             ShowMoreView()
         }
