@@ -259,7 +259,6 @@
 		F619760622FCA33B00CE39A0 /* WhoisXmlCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlCells.swift; sourceTree = "<group>"; };
 		F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisLockedTableViewCell.swift; sourceTree = "<group>"; };
 		F619760A22FCA76200CE39A0 /* WhoisRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisRecord.swift; sourceTree = "<group>"; };
-		F6242CC1260185180051320F /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		F625EAC12ABECDA5006F94F3 /* AppIconSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconSelection.swift; sourceTree = "<group>"; };
 		F63102742130C99D00F34E42 /* PingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingViewController.swift; sourceTree = "<group>"; };
 		F63540D4213DEBDD00605ABE /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -352,6 +351,7 @@
 		F6A6410B2844235D00E00F7F /* HostBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostBarView.swift; sourceTree = "<group>"; };
 		F6A6410D2844246100E00F7F /* HostViewSectionFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewSectionFocusView.swift; sourceTree = "<group>"; };
 		F6A6B5DF2AC0F67F001795A8 /* SimpleAppIcons+NetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SimpleAppIcons+NetUtils.swift"; sourceTree = "<group>"; };
+		F6A6B5FB2AC17DE2001795A8 /* Store.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Store.storekit; sourceTree = "<group>"; };
 		F6AF9575295E9C01000F09D2 /* CopyCellDetailStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellDetailStyle.swift; sourceTree = "<group>"; };
 		F6AF9577295E9C22000F09D2 /* CopyCellStyleConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellStyleConfig.swift; sourceTree = "<group>"; };
 		F6AF9579295E9C40000F09D2 /* CopyCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyCellType.swift; sourceTree = "<group>"; };
@@ -813,7 +813,7 @@
 			children = (
 				AAC727B92843AD2A00482D73 /* DemoData */,
 				F6A4EB9E2301F31100439562 /* ec3730.entitlements */,
-				F6242CC1260185180051320F /* Configuration.storekit */,
+				F6A6B5FB2AC17DE2001795A8 /* Store.storekit */,
 				F6C8D8A4212E5AE900309373 /* AppDelegate.swift */,
 				F6E53FB7286FB03F0041A3DA /* ContentView.swift */,
 				F6E53FB9286FB09F0041A3DA /* ScreenId.swift */,
@@ -1482,7 +1482,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
@@ -1511,7 +1511,7 @@
 				CODE_SIGN_ENTITLEMENTS = ec3730/ec3730.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = C6L3992RFB;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = ec3730/Info.plist;
