@@ -46,17 +46,27 @@
         }
       ],
       "productID" : "whois.onetime",
-      "referenceName" : "Whois XML API One-Time Purchase ",
+      "referenceName" : "WhoisXML API One-Time Purchase ",
       "type" : "NonConsumable"
     }
   ],
   "settings" : {
+    "_askToBuyEnabled" : true,
+    "_billingGracePeriodEnabled" : true,
+    "_billingIssuesEnabled" : true,
+    "_compatibilityTimeRate" : {
+      "3" : 5
+    },
     "_failTransactionsEnabled" : false,
     "_locale" : "en_US",
+    "_renewalBillingIssuesEnabled" : true,
     "_storefront" : "USA",
     "_storeKitErrors" : [
       {
-        "current" : null,
+        "current" : {
+          "index" : 2,
+          "type" : "generic"
+        },
         "enabled" : false,
         "name" : "Load Products"
       },
@@ -100,7 +110,8 @@
         "enabled" : false,
         "name" : "Offer Code Redeem Sheet"
       }
-    ]
+    ],
+    "_timeRate" : 1000
   },
   "subscriptionGroups" : [
     {
@@ -185,9 +196,10 @@
           "groupNumber" : 1,
           "internalID" : "57A4F298",
           "introductoryOffer" : {
+            "displayPrice" : "0.99",
             "internalID" : "41957EBC",
             "paymentMode" : "free",
-            "subscriptionPeriod" : "P1W"
+            "subscriptionPeriod" : "P3D"
           },
           "localizations" : [
             {
@@ -198,7 +210,7 @@
           ],
           "productID" : "whois.monthly.auto",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Whois XML API Monthly Subscription (Auto-Renewable)",
+          "referenceName" : "WhoisXML API Monthly Subscription (Auto-Renewable)",
           "subscriptionGroupID" : "6FA4E8C1",
           "type" : "RecurringSubscription"
         },
@@ -227,7 +239,7 @@
           ],
           "productID" : "whois.yearly.auto",
           "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "Whois XML API Yearly Subscription (Auto-Renewable) ",
+          "referenceName" : "WhoisXML API Yearly Subscription (Auto-Renewable) ",
           "subscriptionGroupID" : "6FA4E8C1",
           "type" : "RecurringSubscription"
         }

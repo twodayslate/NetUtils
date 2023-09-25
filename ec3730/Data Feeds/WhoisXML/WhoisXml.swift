@@ -13,7 +13,7 @@ import SwiftyStoreKit
 
 /// API wrapper for https://whoisxmlapi.com/
 final class WhoisXml: DataFeedSingleton, DataFeedOneTimePurchase {
-    public let name: String = "Whois XML API"
+    public let name: String = "WhoisXML API"
 
     public var webpage: URL { URL(string: "https://www.whoisxmlapi.com/")! }
 

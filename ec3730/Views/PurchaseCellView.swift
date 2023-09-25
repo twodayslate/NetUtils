@@ -33,6 +33,8 @@ struct PurchaseCellView: View {
         model.defaultProduct?.type == .nonConsumable
     }
 
+    @State var supportsIntroOffer = false
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
@@ -61,8 +63,7 @@ struct PurchaseCellView: View {
             .frame(maxWidth: .infinity)
             .padding(.bottom)
 
-            if !isOneTimePurchase {
-                // we don't know what kind of product this is so let's just assume it is a trial so Apple doesn't yell at us
+            if !isOneTimePurchase, supportsIntroOffer {
                 let promoUnitType = product?.subscription?.introductoryOffer?.period.unit ?? Product.SubscriptionPeriod.Unit.day
 
                 let unitType = product?.subscription?.subscriptionPeriod.unit ?? .month
@@ -138,6 +139,10 @@ struct PurchaseCellView: View {
                 Label("Show example query", systemImage: "doc.text")
             }
         })
+        .task(id: product) {
+            supportsIntroOffer = false
+            supportsIntroOffer = await product?.subscription?.isEligibleForIntroOffer ?? false
+        }
     }
 
     var product: Product? {

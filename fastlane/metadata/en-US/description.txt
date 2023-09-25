@@ -6,12 +6,12 @@ The all-in-one Network Utility application!
    • VPN information
 • Host information
 • Google Web Risk Information*
-• WHOIS information from Whois XML API*
-• DNS information from Whois XML API*
-• Domain and IP reputation information from Whois XML API*
-• Website contact information from Whois XML API*
-• Website categorization information from Whois XML API*
-• IP geolocation information from Whois XML API*
+• WHOIS information from WhoisXML API*
+• DNS information from WhoisXML API*
+• Domain and IP reputation information from WhoisXML API*
+• Website contact information from WhoisXML API*
+• Website categorization information from WhoisXML API*
+• IP geolocation information from WhoisXML API*
 • Ping utility
 • Device information
 • View page source
