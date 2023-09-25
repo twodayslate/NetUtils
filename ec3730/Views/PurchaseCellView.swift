@@ -214,7 +214,6 @@ struct PurchaseCellView: View {
     func restore() async {
         isRestoring = true
         do {
-            try await Task.sleep(nanoseconds: 5_000_000_000)
             try await model.restore()
         } catch {}
         isRestoring = false
