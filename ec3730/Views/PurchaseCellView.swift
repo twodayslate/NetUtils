@@ -76,17 +76,15 @@ struct PurchaseCellView: View {
 
             VStack {
                 HStack {
-                    if self.isRestoring {
-                        ProgressView().progressViewStyle(CircularProgressViewStyle())
-                    } else {
-                        Button(action: {
-                            Task {
-                                await self.restore()
-                            }
-                        }, label: {
-                            Text("Restore")
-                        })
-                    }
+                    Button(action: {
+                        Task {
+                            await self.restore()
+                        }
+                    }, label: {
+                        Text("Restore")
+                    })
+                    .disabled(isRestoring)
+
                     buyButton()
                 }
                 .padding(.vertical, 4)
@@ -161,17 +159,33 @@ struct PurchaseCellView: View {
                 await self.buy()
             }
         }, label: {
-            if isOneTimePurchase {
-                Text("Buy Now for only \(product?.displayPrice ?? "-")")
-            } else {
-                Text("Subscibe Now for only \(product?.displayPrice ?? "-")").bold()
+            Group {
+                if isOneTimePurchase {
+                    Text("Buy Now for only \(product?.displayPrice ?? "-")").bold()
+                } else {
+                    Text("Subscibe Now for only \(product?.displayPrice ?? "-")").bold()
+                }
             }
+            .opacity(isRestoring ? 0.1 : 1.0)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.accentColor)
+            .foregroundColor(.white)
+            .cornerRadius(Style.buyButtonCornerRadius)
         })
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color.accentColor)
-        .foregroundColor(.white)
-        .cornerRadius(Style.buyButtonCornerRadius)
+        .disabled(isRestoring)
+        .overlay {
+            RoundedRectangle(cornerRadius: Style.buyButtonCornerRadius)
+                .strokeBorder(Color.accentColor, lineWidth: 2)
+                .opacity(isRestoring ? 1.0 : 0.0)
+        }
+        .overlay {
+            if isRestoring {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .tint(.accentColor)
+            }
+        }
     }
 
     private func purchaseTerms() -> some View {
@@ -199,9 +213,11 @@ struct PurchaseCellView: View {
 
     func restore() async {
         isRestoring = true
-        try? await model.restore(completion: {
-            self.isRestoring = false
-        })
+        do {
+            try await Task.sleep(nanoseconds: 5_000_000_000)
+            try await model.restore()
+        } catch {}
+        isRestoring = false
     }
 
     func buy() async {
@@ -210,7 +226,9 @@ struct PurchaseCellView: View {
             return
         }
         isRestoring = true
-        _ = try? await model.purchase(product)
+        do {
+            _ = try await model.purchase(product)
+        } catch {}
         isRestoring = false
     }
 }
