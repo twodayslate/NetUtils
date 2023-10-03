@@ -1,10 +1,21 @@
 import SwiftUI
 
+import AddressURL
+
 struct HostHistoryList: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State var mode: EditMode = .inactive
     @FetchRequest(fetchRequest: HostDataGroup.fetchAllRequest()) var entries: FetchedResults<HostDataGroup>
     @State var isPresentigDeleteConfirm = false
+
+    func heading(_ url: URL) -> String {
+        if url.isEmail {
+            return "\(url.emailAddress ?? "Unknown address")"
+        }
+
+        return "\(url.host ?? "Unknown host")"
+    }
+
     var body: some View {
         VStack {
             List {
@@ -15,11 +26,11 @@ struct HostHistoryList: View {
                             HStack {
                                 VStack {
                                     HStack {
-                                        Text("\(entry.url.host ?? "Unknown host")").bold()
+                                        Text(heading(entry.url)).bold()
                                         Spacer()
                                     }
                                     HStack {
-                                        Text("\(entry.date.ISO8601Format())")
+                                        Text("\(entry.date.formatted())")
                                         Spacer()
                                     }
                                 }

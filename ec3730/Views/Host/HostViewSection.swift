@@ -39,6 +39,10 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
         _isExpanded = AppStorage(wrappedValue: true, "\(Self.self).isExpanded." + sectionModel.service.name)
     }
 
+    var shouldDisable: Bool {
+        sectionModel.content.isEmpty && canQuery
+    }
+
     var body: some View {
         FSDisclosureGroup(isExpanded: $isExpanded,
                           content: {
@@ -51,6 +55,7 @@ struct HostViewSection: View, Equatable, Identifiable, Hashable {
                                   Spacer()
                               }
                           })
+                          .disabled(shouldDisable)
                           .onAppear {
                               // update purchase state
                               Task {

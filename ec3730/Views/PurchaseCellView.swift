@@ -22,7 +22,8 @@ struct PurchaseCellView: View {
         sectionModel.service.description
     }
 
-    @State var imageSize: CGFloat = 64.0
+    let imageSize: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 48.0 : 64.0
+    @State var showTerms = false
 
     enum Style {
         static let termsOpacity: CGFloat = 0.7
@@ -37,7 +38,7 @@ struct PurchaseCellView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(alignment: .center) {
+            HStack(alignment: .top) {
                 Image(systemName: "lock.shield.fill")
                     .renderingMode(.template)
                     .resizable()
@@ -57,11 +58,12 @@ struct PurchaseCellView: View {
                 demoSheet.model = sectionModel
             }, label: {
                 Text("See an example query result!")
+                    .font(.subheadline)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.accentColor)
             })
             .frame(maxWidth: .infinity)
-            .padding(.bottom)
+            .padding(.bottom, 6)
 
             if !isOneTimePurchase, supportsIntroOffer {
                 let promoUnitType = product?.subscription?.introductoryOffer?.period.unit ?? Product.SubscriptionPeriod.Unit.day
@@ -74,33 +76,45 @@ struct PurchaseCellView: View {
                     .multilineTextAlignment(.leading)
             }
 
-            VStack {
-                HStack {
-                    Button(action: {
-                        Task {
-                            await self.restore()
+            VStack(alignment: .center) {
+                buyButton()
+                    .padding(.vertical, 4)
+
+                DisclosureGroup(
+                    isExpanded: $showTerms,
+                    content: {
+                        VStack {
+                            HStack {
+                                Button(action: {
+                                    Task {
+                                        await self.restore()
+                                    }
+                                }, label: {
+                                    Label("Restore", systemImage: "arrow.clockwise.circle")
+                                })
+                                .disabled(isRestoring)
+                                Spacer()
+
+                                Button {
+                                    navigation.selectedScreen = .settings
+                                } label: {
+                                    Label(isOneTimePurchase ? "Full Purchase Information in Settings" : "More Subscription Options in Settings", systemImage: "gear.circle")
+                                }
+                            }
+                            .font(.footnote)
+                            .padding()
+                            .labelStyle(.titleOnly)
+
+                            purchaseTerms()
                         }
-                    }, label: {
-                        Text("Restore")
-                    })
-                    .disabled(isRestoring)
-
-                    buyButton()
-                }
-                .padding(.vertical, 4)
-                if !isOneTimePurchase {
-                    Button {
-                        navigation.selectedScreen = .settings
-                    } label: {
-                        Text("More Subscription Options in Settings")
+                    },
+                    label: {
+                        Label("Purchase Information, Terms of Use, & Privacy Policy", systemImage: "info.circle")
                             .font(.caption)
-                            .opacity(0.7)
+                            .opacity(showTerms ? 1.0 : 0.7)
                     }
-                    .padding(.bottom, 4)
-                }
+                )
             }
-
-            purchaseTerms()
         }
         .padding()
         .background(Color(UIColor.systemBackground))
@@ -135,6 +149,11 @@ struct PurchaseCellView: View {
                 demoSheet.model = sectionModel
             } label: {
                 Label("Show example query", systemImage: "doc.text")
+            }
+            Button {
+                navigation.selectedScreen = .settings
+            } label: {
+                Label("Go to Settings", systemImage: "gear")
             }
         })
         .task(id: product) {
@@ -171,13 +190,14 @@ struct PurchaseCellView: View {
                     Text("Subscibe Now for only \(product?.displayPrice ?? "-")").bold()
                 }
             }
-            .opacity(isRestoring ? 0.1 : 1.0)
+            .opacity(isRestoring ? 0.5 : 1.0)
             .padding()
             .frame(maxWidth: .infinity)
             .background(Color.accentColor)
             .foregroundColor(.white)
             .cornerRadius(Style.buyButtonCornerRadius)
         })
+        .opacity(isRestoring ? 0.5 : 1.0)
         .disabled(isRestoring)
         .overlay {
             RoundedRectangle(cornerRadius: Style.buyButtonCornerRadius)
@@ -244,7 +264,9 @@ struct LockedCellView_Previews: PreviewProvider {
             Group {
                 PurchaseCellView(model: StoreKitModel.whois, sectionModel: WhoisXmlDnsSectionModel())
             }
-
+            Group {
+                PurchaseCellView(model: StoreKitModel.webrisk, sectionModel: GoogleWebRiskSectionModel())
+            }
             Group {
                 PurchaseCellView(model: StoreKitModel.whois, sectionModel: WhoisXmlDnsSectionModel())
             }.preferredColorScheme(.dark)

@@ -36,7 +36,7 @@ struct SourceUrlBarView: View {
                         Button(
                             action: { text = "" },
                             label: {
-                                Image(systemName: "delete.left")
+                                Image(systemName: "xmark.circle")
                                     .foregroundColor(Color(UIColor.opaqueSeparator))
                             }
                         )
@@ -50,17 +50,17 @@ struct SourceUrlBarView: View {
                 )
                 .background(Color(uiColor: .systemBackground).cornerRadius(6))
 
-                if isQuerying {
-                    Button {
-                        cancel?()
-                    } label: {
-                        Text("Querying")
-                    }
-                } else {
-                    Button {
-                        go()
-                    } label: {
-                        Text(goText)
+                Button {
+                    go()
+                } label: {
+                    Text(goText)
+                }
+                .disabled(isQuerying)
+                .overlay {
+                    if isQuerying {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .tint(.accentColor)
                     }
                 }
             }
@@ -78,7 +78,10 @@ struct SourceUrlBarView: View {
     struct SourceUrlBarViewPreview: PreviewProvider {
         static var previews: some View {
             Group {
-                SourceUrlBarView(text: .constant(""), refresh: {}, go: {}, isQuerying: .constant(false))
+                var isQuerying = false
+                SourceUrlBarView(text: .constant(""), refresh: {}, go: {
+                    sleep(1)
+                }, isQuerying: .init(get: { isQuerying }, set: { isQuerying = $0 }))
             }
         }
     }

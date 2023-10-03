@@ -56,8 +56,8 @@ struct HostView: View {
                     Task {
                         await self.query { errors in
                             guard errors.count <= 0 else {
-                                self.showErrors = true
                                 self.errors = errors
+                                self.showErrors = true
                                 return
                             }
                         }
@@ -89,9 +89,11 @@ struct HostView: View {
             HostViewSectionFocusView(model: model.demoModel, url: model.demoUrl, date: model.demoDate)
         }
         .alert("Error", isPresented: $showErrors, presenting: self.errors, actions: { _ in
-            Button("Okay", role: .cancel) {}
+            // Button("Okay", role: .cancel) {}
         }, message: { errors in
-            Text("\(errors.debugDescription)")
+            let description = Array(Set(errors.map(\.localizedDescription))).joined(separator: "\n")
+
+            Text(description)
         })
     }
 
@@ -99,8 +101,8 @@ struct HostView: View {
     func lookup() async {
         await query { errors in
             guard errors.count <= 0 else {
-                self.showErrors = true
                 self.errors = errors
+                self.showErrors = true
                 return
             }
         }
@@ -129,8 +131,9 @@ struct HostView: View {
             urlString = "https://" + urlString
         }
 
-        guard let url = URL(string: urlString)?.standardized, UIApplication.shared.canOpenURL(url), let _ = url.host else {
-            // display error
+        guard let url = URL(string: urlString)?.standardized, let _ = url.host else {
+            errors = [URLError(.badURL)]
+            showErrors = true
             return
         }
 

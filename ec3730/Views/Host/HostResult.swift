@@ -12,8 +12,6 @@ struct HostResult: View {
         self.group = group
     }
 
-    @State var text = ""
-
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ScrollView {

@@ -111,8 +111,16 @@ struct SourceCardView: View {
                 webView.reload()
             }, go: query, isQuerying: .constant(false))
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("View Source")
+        .navigationBarTitle("View Source", displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    webView.reload()
+                } label: {
+                    Label("Refresh", systemImage: "arrow.clockwise")
+                }
+            }
+        }
         .padding(.top, 0.5)
         .background(Color(UIColor.systemGroupedBackground))
         .onChange(of: url) { _ in
