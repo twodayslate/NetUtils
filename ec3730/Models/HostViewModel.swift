@@ -46,6 +46,7 @@ class HostViewModel: ObservableObject {
 
     private func generateVisibleSections() {
         var all_sections = [
+            WhoisDnsModel(),
             LocalDnsModel(),
             WhoisXmlWhoisSectionModel(),
             WhoisXmlDnsSectionModel(),
