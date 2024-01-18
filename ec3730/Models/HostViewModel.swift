@@ -46,8 +46,8 @@ class HostViewModel: ObservableObject {
 
     private func generateVisibleSections() {
         var all_sections = [
-            WhoisDnsModel(),
             LocalDnsModel(),
+            FreeSwiftWhoisModel(),
             WhoisXmlWhoisSectionModel(),
             WhoisXmlDnsSectionModel(),
             WhoisXmlReputationSectionModel(),
@@ -55,6 +55,7 @@ class HostViewModel: ObservableObject {
             WhoIsXmlGeoLocationSectionModel(),
             WhoIsXmlCategorizationSectionModel(),
             GoogleWebRiskSectionModel(),
+           
             UrlParsedModel(),
         ]
         all_sections.removeAll(where: { self.hidden.contains($0.service.name) })

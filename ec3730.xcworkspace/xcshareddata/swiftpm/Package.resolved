@@ -110,6 +110,15 @@
         }
       },
       {
+        "package": "SwiftWhois",
+        "repositoryURL": "https://github.com/isaced/SwiftWhois.git",
+        "state": {
+          "branch": null,
+          "revision": "3d1a55a20fcd39d98773520e4a72dd202f062eea",
+          "version": "0.0.2"
+        }
+      },
+      {
         "package": "SwiftyPing",
         "repositoryURL": "https://github.com/samiyr/SwiftyPing.git",
         "state": {

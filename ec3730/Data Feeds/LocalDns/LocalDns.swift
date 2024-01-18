@@ -5,6 +5,7 @@ import Foundation
 import KeychainAccess
 import StoreKit
 import SwiftyStoreKit
+import SwiftWhois
 
 final class LocalDns: DataFeedSingleton {
     var name: String = "Simple IP Lookup"
@@ -45,6 +46,9 @@ extension LocalDns: DataFeedService {
                 return
             }
 
+            do {
+               
+            }
             DNSResolver.resolve(host: host) { error, addresses in
                 guard error == nil else {
                     block?(error, nil)

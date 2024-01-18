@@ -62,8 +62,9 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
     @MainActor
     class func configure(with result: HostData, group: HostDataGroup) -> HostSectionModel? {
         let available_services = [
-            WhoisDnsModel(),
+            
             LocalDnsModel(),
+            FreeSwiftWhoisModel(),
             WhoisXmlWhoisSectionModel(),
             WhoisXmlDnsSectionModel(),
             WhoisXmlReputationSectionModel(),
