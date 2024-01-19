@@ -30,7 +30,7 @@ final class FreeSwiftWhois: DataFeedSingleton {
     var services: [Service] = {
         [FreeSwiftWhois.lookupService]
     }()
-    var modelData : WhoisDataModel?
+    
 }
 
 extension FreeSwiftWhois: DataFeedService {
@@ -83,8 +83,8 @@ extension FreeSwiftWhois: DataFeedService {
                             return
                         }
                        
-                        let  modelDatfa = WhoisDataModel(from: swiftWhoisData)
-                        continuation.resume(returning: modelDatfa as! T)
+                        let  dataModel = FreeSwiftWhoisDataModel(from: swiftWhoisData)
+                        continuation.resume(returning: dataModel as! T)
                     } catch {
                         continuation.resume(throwing: error)
                     }
