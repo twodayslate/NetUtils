@@ -11,7 +11,6 @@
 		2E07167528FEB055009C3844 /* WhoIsXmlContactsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07167428FEB055009C3844 /* WhoIsXmlContactsResult.swift */; };
 		2E07167F28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */; };
 		2E07168128FEC3F3009C3844 /* WhoisXmlContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */; };
-		8460952C296FD50D0066F637 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460952B296FD50D0066F637 /* ApiKeys.swift */; };
 		846CDA83291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */; };
 		846CDA87291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */; };
 		846CDA89291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */; };
@@ -29,6 +28,11 @@
 		AAC727C32843AD2A00482D73 /* GoogleWebRiskSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = AAC727BD2843AD2A00482D73 /* GoogleWebRiskSectionModel.json */; };
 		AAC727C42843AD2A00482D73 /* WhoisXmlReputationSectionModel.json in Resources */ = {isa = PBXBuildFile; fileRef = AAC727BE2843AD2A00482D73 /* WhoisXmlReputationSectionModel.json */; };
 		AAC727C52843AD2A00482D73 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC727BF2843AD2A00482D73 /* Utility.swift */; };
+		AF3D260A2B585D0400D3AE15 /* SwiftWhoisModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D26092B585D0400D3AE15 /* SwiftWhoisModel.swift */; };
+		AF3D260D2B585D2A00D3AE15 /* FreeSwiftWhois.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D260C2B585D2A00D3AE15 /* FreeSwiftWhois.swift */; };
+		AF70B7EB2B5AE28800EE4D7D /* FreeSwiftWhoisDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70B7EA2B5AE28800EE4D7D /* FreeSwiftWhoisDataModel.swift */; };
+		AF738C392B5991F300A39B63 /* SwiftWhois in Frameworks */ = {isa = PBXBuildFile; productRef = AF738C382B5991F300A39B63 /* SwiftWhois */; };
+		AFA4608D2B58DBD600055B39 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA4608C2B58DBD600055B39 /* ApiKeys.swift */; };
 		F60506742134B23F00DDF8A4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60506732134B23F00DDF8A4 /* UIViewController.swift */; };
 		F60FD36025E0607C00BCEF86 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F60FD35E25E0607C00BCEF86 /* DataModel.xcdatamodeld */; };
 		F60FD36525E060A800BCEF86 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60FD36425E060A800BCEF86 /* Persistence.swift */; };
@@ -235,7 +239,6 @@
 		2E07167428FEB055009C3844 /* WhoIsXmlContactsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlContactsResult.swift; sourceTree = "<group>"; };
 		2E07167E28FEB837009C3844 /* WhoIsXmlContactsSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlContactsSectionModel.json; sourceTree = "<group>"; };
 		2E07168028FEC3F3009C3844 /* WhoisXmlContactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisXmlContactsService.swift; sourceTree = "<group>"; };
-		8460952B296FD50D0066F637 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		846CDA82291CF52C00DDB5AA /* WhoIsXmlGeoLocationSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoIsXmlGeoLocationSectionModel.json; sourceTree = "<group>"; };
 		846CDA86291CF84400DDB5AA /* WhoIsXmlGeoLocationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLocationSectionModel.swift; sourceTree = "<group>"; };
 		846CDA88291CF87300DDB5AA /* WhoIsXmlGeoLoactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsXmlGeoLoactionService.swift; sourceTree = "<group>"; };
@@ -252,6 +255,10 @@
 		AAC727BD2843AD2A00482D73 /* GoogleWebRiskSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GoogleWebRiskSectionModel.json; sourceTree = "<group>"; };
 		AAC727BE2843AD2A00482D73 /* WhoisXmlReputationSectionModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WhoisXmlReputationSectionModel.json; sourceTree = "<group>"; };
 		AAC727BF2843AD2A00482D73 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		AF3D26092B585D0400D3AE15 /* SwiftWhoisModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftWhoisModel.swift; sourceTree = "<group>"; };
+		AF3D260C2B585D2A00D3AE15 /* FreeSwiftWhois.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeSwiftWhois.swift; sourceTree = "<group>"; };
+		AF70B7EA2B5AE28800EE4D7D /* FreeSwiftWhoisDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeSwiftWhoisDataModel.swift; sourceTree = "<group>"; };
+		AFA4608C2B58DBD600055B39 /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		F60506732134B23F00DDF8A4 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		F60FD35F25E0607C00BCEF86 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		F60FD36425E060A800BCEF86 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -431,6 +438,7 @@
 				F67EDA072411EA7700021F6C /* SKVersion in Frameworks */,
 				F6659EE9287A33BA00038ECA /* TreeSitterHTMLRunestone in Frameworks */,
 				F6659EFD287A33BA00038ECA /* TreeSitterPHPRunestone in Frameworks */,
+				AF738C392B5991F300A39B63 /* SwiftWhois in Frameworks */,
 				F6659EDB287A33BA00038ECA /* TreeSitterCRunestone in Frameworks */,
 				F6659F2F287A8C7F00038ECA /* RunestoneTomorrowTheme in Frameworks */,
 				F67ED9FE2411A0D400021F6C /* KeychainAccess in Frameworks */,
@@ -505,6 +513,14 @@
 			path = DemoData;
 			sourceTree = "<group>";
 		};
+		AF3D260B2B585D2A00D3AE15 /* FreeSwiftWhois */ = {
+			isa = PBXGroup;
+			children = (
+				AF3D260C2B585D2A00D3AE15 /* FreeSwiftWhois.swift */,
+			);
+			path = FreeSwiftWhois;
+			sourceTree = "<group>";
+		};
 		F60FD36E25E060DC00BCEF86 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -556,6 +572,7 @@
 		F644A0FB279283220061C98B /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				AF3D26092B585D0400D3AE15 /* SwiftWhoisModel.swift */,
 				F644A0FC2792832F0061C98B /* LocalDnsModel.swift */,
 				F644A0FE279283640061C98B /* WhoisXmlWhoisSectionModel.swift */,
 				F644A102279284EE0061C98B /* GoogleWebRiskSectionModel.swift */,
@@ -670,6 +687,7 @@
 				F66643B626F030D5000F17BC /* HostSectionModel.swift */,
 				F644A0FB279283220061C98B /* Sections */,
 				AA1595D428B24D2A003819A1 /* DataUsageModel.swift */,
+				AF70B7EA2B5AE28800EE4D7D /* FreeSwiftWhoisDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -691,6 +709,7 @@
 				F650F746233CECD900BAA609 /* DataFeedCell.swift */,
 				F668EB4223563D2C00EEB379 /* DataFeedSubscriptionCellManager.swift */,
 				F68CE56523031DA20068D104 /* DataFeedErrors.swift */,
+				AF3D260B2B585D2A00D3AE15 /* FreeSwiftWhois */,
 				F64418E3271CA11900E40F2C /* LocalDns */,
 				F6D4BB0823583E4800FDAFF7 /* Google */,
 				F69E3646235804C10017296E /* WhoisXML */,
@@ -837,8 +856,8 @@
 				F6A4EB932301C5CB00439562 /* Protocols */,
 				F619760822FCA39F00CE39A0 /* WhoisLockedTableViewCell.swift */,
 				F6C8D8AD212E5AEA00309373 /* Assets.xcassets */,
+				AFA4608C2B58DBD600055B39 /* ApiKeys.swift */,
 				F6C8D8AF212E5AEA00309373 /* LaunchScreen.storyboard */,
-				8460952B296FD50D0066F637 /* ApiKeys.swift */,
 				F60FD36E25E060DC00BCEF86 /* Persistence */,
 				F6C8D8B2212E5AEA00309373 /* Info.plist */,
 				F6A4EB952301C5EF00439562 /* Extensions */,
@@ -960,6 +979,7 @@
 				F6659F2E287A8C7F00038ECA /* RunestoneTomorrowTheme */,
 				84A16C1C290A9FC800A7EBF4 /* Runestone */,
 				F6599CC52ABEBEA6000D2B84 /* SimpleCommon */,
+				AF738C382B5991F300A39B63 /* SwiftWhois */,
 			);
 			productName = ec3730;
 			productReference = F6C8D8A1212E5AE900309373 /* ec3730.app */;
@@ -1058,6 +1078,7 @@
 				F6659ED5287A33BA00038ECA /* XCRemoteSwiftPackageReference "treesitterlanguages" */,
 				84A16C1B290A9FC800A7EBF4 /* XCRemoteSwiftPackageReference "Runestone" */,
 				F6599CC42ABEBEA6000D2B84 /* XCRemoteSwiftPackageReference "SimpleCommon" */,
+				AF738C372B5991F300A39B63 /* XCRemoteSwiftPackageReference "SwiftWhois" */,
 			);
 			productRefGroup = F6C8D8A2212E5AE900309373 /* Products */;
 			projectDirPath = "";
@@ -1121,7 +1142,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SDKROOT=(xcrun --sdk macosx --show-sdk-path)\nCMD=$SRCROOT/BuildTools/.build/release/swiftlint\nif ! command -v ${CMD} &> /dev/null\nthen\n    cd BuildTools\n    CMD=\"swift run -c release swiftlint\"\nfi\n\n${CMD} --config \"$SRCROOT/.swiftlint.yml\" \"$SRCROOT\" --fix #&& swift run -c release swiftlint --config \"$SRCROOT/.swiftlint.yml\" \"$SRCROOT\"\n";
+			shellScript = "
+";
 		};
 		AA821A7B2836D664000B9954 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1140,7 +1162,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SDKROOT=(xcrun --sdk macosx --show-sdk-path)\nCMD=$SRCROOT/BuildTools/.build/release/swiftformat\nif ! command -v ${CMD} &> /dev/null\nthen\n    cd BuildTools\n    CMD=\"swift run -c release swiftformat\"\nfi\n${CMD} --config \"$SRCROOT/.swiftformat\" \"$SRCROOT\"\n";
+			shellScript = "
+";
 		};
 		F69A2396283ACD6300645051 /* Update BuildTools */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1188,6 +1211,7 @@
 				F6AF9578295E9C22000F09D2 /* CopyCellStyleConfig.swift in Sources */,
 				F6A6B5E02AC0F67F001795A8 /* SimpleAppIcons+NetUtils.swift in Sources */,
 				F660FDD82868E9A20027C759 /* DeviceInfoModel.swift in Sources */,
+				AF70B7EB2B5AE28800EE4D7D /* FreeSwiftWhoisDataModel.swift in Sources */,
 				F69E365423580A7D0017296E /* DataFeedSubscription.swift in Sources */,
 				F69E3652235808DF0017296E /* DFOneTimePurchase.swift in Sources */,
 				F660FDE8286903DC0027C759 /* JavaScriptInfoModel.swift in Sources */,
@@ -1239,6 +1263,7 @@
 				F660FDDE2868EAAC0027C759 /* CarrierInfoModel.swift in Sources */,
 				F644A103279284EE0061C98B /* GoogleWebRiskSectionModel.swift in Sources */,
 				F6E53FC0287009270041A3DA /* UIViewControllerView.swift in Sources */,
+				AF3D260D2B585D2A00D3AE15 /* FreeSwiftWhois.swift in Sources */,
 				F660FDE2286900000027C759 /* ProcessInfoModel.swift in Sources */,
 				F650F745233CEB4B00BAA609 /* DataFeedCells.swift in Sources */,
 				F63B922A279C8EE5007E845F /* HostResultSection.swift in Sources */,
@@ -1262,6 +1287,7 @@
 				AA1595D528B24D2A003819A1 /* DataUsageModel.swift in Sources */,
 				AA8FBAB9283AA6A000280377 /* HostViewSectionContent.swift in Sources */,
 				F668EB4523563F2500EEB379 /* DataFeedSubscriptionDataViewController.swift in Sources */,
+				AF3D260A2B585D0400D3AE15 /* SwiftWhoisModel.swift in Sources */,
 				F6C8D8A5212E5AE900309373 /* AppDelegate.swift in Sources */,
 				F6FDDFDC230B2BB900FBF75E /* WhoisDnsResults.swift in Sources */,
 				F644A101279283E30061C98B /* WhoisXmlDnsSectionModel.swift in Sources */,
@@ -1270,6 +1296,7 @@
 				F6AF9580295E9E9E000F09D2 /* Encodable+dictionary.swift in Sources */,
 				F63540D5213DEBDD00605ABE /* Reachability.swift in Sources */,
 				F668EB3F2355807100EEB379 /* SKProductSubscriptionPeriod.swift in Sources */,
+				AFA4608D2B58DBD600055B39 /* ApiKeys.swift in Sources */,
 				F69E364E235808560017296E /* DFSubscription.swift in Sources */,
 				F6E53FC2287015530041A3DA /* ReachabilityModel.swift in Sources */,
 				F6D0B77E235A6A43009E493B /* NetUtilsCoreData.xcdatamodeld in Sources */,
@@ -1300,7 +1327,6 @@
 				F660FDDB2868EA8C0027C759 /* DeviceInfoSectionModel.swift in Sources */,
 				F6FDDFE0230C4C7400FBF75E /* CellManager.swift in Sources */,
 				F6AF9576295E9C01000F09D2 /* CopyCellDetailStyle.swift in Sources */,
-				8460952C296FD50D0066F637 /* ApiKeys.swift in Sources */,
 				F6AF9584295F8627000F09D2 /* CopyCellChevronView.swift in Sources */,
 				F6A6410E2844246100E00F7F /* HostViewSectionFocusView.swift in Sources */,
 				F6397FF725EF045200914B3F /* PurchaseCellView.swift in Sources */,
@@ -1664,6 +1690,14 @@
 				minimumVersion = 0.2.7;
 			};
 		};
+		AF738C372B5991F300A39B63 /* XCRemoteSwiftPackageReference "SwiftWhois" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/isaced/SwiftWhois.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
 		F63B922D279C985B007E845F /* XCRemoteSwiftPackageReference "Cache" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hyperoslo/Cache";
@@ -1775,6 +1809,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 84A16C1B290A9FC800A7EBF4 /* XCRemoteSwiftPackageReference "Runestone" */;
 			productName = Runestone;
+		};
+		AF738C382B5991F300A39B63 /* SwiftWhois */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF738C372B5991F300A39B63 /* XCRemoteSwiftPackageReference "SwiftWhois" */;
+			productName = SwiftWhois;
 		};
 		F63B922E279C985B007E845F /* Cache */ = {
 			isa = XCSwiftPackageProductDependency;
