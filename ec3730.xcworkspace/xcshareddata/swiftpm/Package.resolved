@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/hyperoslo/Cache",
         "state": {
           "branch": null,
-          "revision": "c7f4d633049c3bd649a353bad36f6c17e9df085f",
-          "version": "6.0.0"
+          "revision": "d048bf404a5c8362c6cf840c2096d5777975cd27",
+          "version": "6.1.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/devicekit/DeviceKit",
         "state": {
           "branch": null,
-          "revision": "66837ecf1516e41fd4251bbb684dc4b1997f08ab",
-          "version": "5.1.0"
+          "revision": "fe41d18eccd92a115cffaa35dfff03018c67e635",
+          "version": "5.2.2"
         }
       },
       {
@@ -42,7 +42,7 @@
         "repositoryURL": "https://github.com/twodayslate/gateway-swift",
         "state": {
           "branch": "main",
-          "revision": "d2502c1e7f1f31deb103cfff23179f813f8e72cb",
+          "revision": "41461f4fc9370a7d7f1066767b0f44f0c489c844",
           "version": null
         }
       },
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
         "state": {
           "branch": null,
-          "revision": "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
-          "version": "5.1.0"
+          "revision": "c01127cb51f591045696128effe43c16840d08bf",
+          "version": "5.2.0"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/simonbs/Runestone",
         "state": {
           "branch": null,
-          "revision": "00dee9fbc9c93b709f6b1b052bce84cb971e493a",
-          "version": "0.3.2"
+          "revision": "554038749f4a4aa4241c5ecc8f03cce30e37ec07",
+          "version": "0.4.3"
         }
       },
       {
@@ -87,7 +87,7 @@
         "repositoryURL": "https://github.com/twodayslate/SimpleCommon",
         "state": {
           "branch": "main",
-          "revision": "75a6404fae5df90858c44074a87844c08d8cdaa8",
+          "revision": "b8dbf50df461d4d92923a5bcef981866597fa639",
           "version": null
         }
       },
@@ -138,11 +138,11 @@
       },
       {
         "package": "TreeSitter",
-        "repositoryURL": "https://github.com/simonbs/tree-sitter",
+        "repositoryURL": "https://github.com/tree-sitter/tree-sitter",
         "state": {
           "branch": null,
-          "revision": "f88ae4ebe351d8aa99c31a17111607017d805118",
-          "version": "0.20.9-beta-1"
+          "revision": "98be227227af10cc7a269cb3ffb23686c0610b17",
+          "version": "0.20.9"
         }
       },
       {
@@ -150,8 +150,8 @@
         "repositoryURL": "https://github.com/simonbs/treesitterlanguages",
         "state": {
           "branch": null,
-          "revision": "a15ab30453d14097355d7d78ec7c0feb008cfbba",
-          "version": "0.1.7"
+          "revision": "15cf3a9ec3ab95e0d058b7df9f35619123c9e02d",
+          "version": "0.1.10"
         }
       },
       {

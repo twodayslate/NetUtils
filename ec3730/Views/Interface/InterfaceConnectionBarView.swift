@@ -34,8 +34,6 @@ struct InterfaceConnectionBarView: View {
             }
         case .unavailable:
             Text("Network is unavailable")
-        case .none:
-            Text("No network available")
         }
     }
 }
