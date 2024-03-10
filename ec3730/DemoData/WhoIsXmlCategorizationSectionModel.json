@@ -1,49 +1,10 @@
 {
-    "categories": [{
-        "tier1": {
-            "confidence": 0.9750956680990432,
-            "id": "IAB-596",
-            "name": "Technology & Computing"
-        },
-        "tier2": {
-            "confidence": 0.9242695836674197,
-            "id": "IAB-619",
-            "name": "Internet"
-        }
-    }, {
-        "tier1": {
-            "confidence": 0.9750956680990432,
-            "id": "IAB-52",
-            "name": "Business and Finance"
-        },
-        "tier2": {
-            "confidence": 0.9242695836674197,
-            "id": "IAB-99",
-            "name": "Information Services Industry"
-        }
-    }, {
-        "tier1": {
-            "confidence": 0.9750956680990432,
-            "id": "IAB-52",
-            "name": "Business and Finance"
-        },
-        "tier2": {
-            "confidence": 0.9242695836674197,
-            "id": "IAB-115",
-            "name": "Technology Industry"
-        }
-    }, {
-        "tier1": {
-            "confidence": 0.9750956680990432,
-            "id": "IAB-52",
-            "name": "Business and Finance"
-        },
-        "tier2": {
-            "confidence": 0.9242695836674197,
-            "id": "IAB-116",
-            "name": "Telecommunications Industry"
-        }
-    }],
-    "domainName": "google.com",
-    "websiteResponded": true
+    "as":
+    {"asn":15169,"domain":"https://about.google/intl/en/","name":"GOOGLE","route":"2607:f8b0::/32","type":"Content"},
+    "domainName":"google.com",
+    "categories":[
+        {"confidence":1,"id":50,"name":"Search Engines"}
+    ],
+    "createdDate":"1997-09-15T07:00:00+00:00",
+    "websiteResponded":true
 }

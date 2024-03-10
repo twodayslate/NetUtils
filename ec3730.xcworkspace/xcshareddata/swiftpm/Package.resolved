@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "SwiftGateway",
+        "repositoryURL": "https://github.com/twodayslate/gateway-swift",
+        "state": {
+          "branch": "main",
+          "revision": "d2502c1e7f1f31deb103cfff23179f813f8e72cb",
+          "version": null
+        }
+      },
+      {
         "package": "KeychainAccess",
         "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess",
         "state": {
@@ -78,7 +87,7 @@
         "repositoryURL": "https://github.com/twodayslate/SimpleCommon",
         "state": {
           "branch": "main",
-          "revision": "142de0d60508660b33e44f6b97fe8d503a47398c",
+          "revision": "75a6404fae5df90858c44074a87844c08d8cdaa8",
           "version": null
         }
       },

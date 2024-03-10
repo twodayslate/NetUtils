@@ -2,15 +2,38 @@ import Foundation
 
 // MARK: - ActivityModelClass
 
-struct WhoIsXmlCategorizationResult: Codable {
+struct WhoIsXmlCategorizationResultV3: Codable {
+    let categories: [TierV3]?
+    let domainName: String?
+    let websiteResponded: Bool?
+    let autonomousSystem: CategorizationAutonomousSystem?
+
+    enum CodingKeys: String, CodingKey {
+        case categories
+        case domainName
+        case websiteResponded
+        case autonomousSystem = "as"
+    }
+}
+
+/// Autonomous System (AS)
+struct CategorizationAutonomousSystem: Codable {
+    let asn: Int?
+    let domain: String?
+    let name: String?
+    let route: String?
+    let type: String?
+}
+
+struct WhoIsXmlCategorizationResultV2: Codable {
     let categories: [CategoryResult]?
     let domainName: String?
     let websiteResponded: Bool?
 }
 
-extension WhoIsXmlCategorizationResult {
+extension WhoIsXmlCategorizationResultV2 {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(WhoIsXmlCategorizationResult.self, from: data)
+        self = try newJSONDecoder().decode(Self.self, from: data)
     }
 
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -26,10 +49,10 @@ extension WhoIsXmlCategorizationResult {
 
     func with(categories: [CategoryResult]? = nil,
               domainName: String? = nil,
-              websiteResponded: Bool? = nil) -> WhoIsXmlCategorizationResult {
-        WhoIsXmlCategorizationResult(categories: categories ?? self.categories,
-                                     domainName: domainName ?? self.domainName,
-                                     websiteResponded: websiteResponded ?? self.websiteResponded)
+              websiteResponded: Bool? = nil) -> Self {
+        Self(categories: categories ?? self.categories,
+             domainName: domainName ?? self.domainName,
+             websiteResponded: websiteResponded ?? self.websiteResponded)
     }
 
     func jsonData() throws -> Data {
@@ -44,8 +67,8 @@ extension WhoIsXmlCategorizationResult {
 // MARK: - CategoryResult
 
 struct CategoryResult: Codable {
-    let tier1: Tier?
-    let tier2: Tier?
+    let tier1: TierV2?
+    let tier2: TierV2?
 }
 
 extension CategoryResult {
@@ -64,8 +87,8 @@ extension CategoryResult {
         try self.init(data: try Data(contentsOf: url))
     }
 
-    func with(tier1: Tier? = nil,
-              tier2: Tier? = nil) -> CategoryResult {
+    func with(tier1: TierV2? = nil,
+              tier2: TierV2? = nil) -> CategoryResult {
         CategoryResult(tier1: tier1 ?? self.tier1, tier2: tier2 ?? self.tier2)
     }
 
@@ -80,7 +103,13 @@ extension CategoryResult {
 
 // MARK: - Tier
 
-struct Tier: Codable {
+struct TierV2: Codable {
     let confidence: Double?
     let id, name: String?
+}
+
+struct TierV3: Codable {
+    let confidence: Double?
+    let id: Int?
+    let name: String?
 }

@@ -150,6 +150,7 @@
 		F68CE5682303291A0068D104 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE5672303291A0068D104 /* Error.swift */; };
 		F68CE56A230463A50068D104 /* InterfaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68CE569230463A50068D104 /* InterfaceTableViewController.swift */; };
 		F691B09A2147449200BDE0F4 /* WhoisXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = F691B0992147449200BDE0F4 /* WhoisXml.swift */; };
+		F69269F12B3BBCDC002FEC99 /* SwiftGateway in Frameworks */ = {isa = PBXBuildFile; productRef = F69269F02B3BBCDC002FEC99 /* SwiftGateway */; };
 		F69E3648235805180017296E /* GoogleWebRisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E3647235805180017296E /* GoogleWebRisk.swift */; };
 		F69E364A235806370017296E /* WhoisXMLDnsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E3649235806370017296E /* WhoisXMLDnsService.swift */; };
 		F69E364C235806720017296E /* WhoisXMLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69E364B235806720017296E /* WhoisXMLService.swift */; };
@@ -435,6 +436,7 @@
 				F6659F2F287A8C7F00038ECA /* RunestoneTomorrowTheme in Frameworks */,
 				F67ED9FE2411A0D400021F6C /* KeychainAccess in Frameworks */,
 				F6659EDF287A33BA00038ECA /* TreeSitterCSharpRunestone in Frameworks */,
+				F69269F12B3BBCDC002FEC99 /* SwiftGateway in Frameworks */,
 				F67ED9F82411A09000021F6C /* NetUtils in Frameworks */,
 				F63B922F279C985B007E845F /* Cache in Frameworks */,
 				F6659EEB287A33BA00038ECA /* TreeSitterJSDocRunestone in Frameworks */,
@@ -960,6 +962,7 @@
 				F6659F2E287A8C7F00038ECA /* RunestoneTomorrowTheme */,
 				84A16C1C290A9FC800A7EBF4 /* Runestone */,
 				F6599CC52ABEBEA6000D2B84 /* SimpleCommon */,
+				F69269F02B3BBCDC002FEC99 /* SwiftGateway */,
 			);
 			productName = ec3730;
 			productReference = F6C8D8A1212E5AE900309373 /* ec3730.app */;
@@ -1058,6 +1061,7 @@
 				F6659ED5287A33BA00038ECA /* XCRemoteSwiftPackageReference "treesitterlanguages" */,
 				84A16C1B290A9FC800A7EBF4 /* XCRemoteSwiftPackageReference "Runestone" */,
 				F6599CC42ABEBEA6000D2B84 /* XCRemoteSwiftPackageReference "SimpleCommon" */,
+				F69269EF2B3BBCDC002FEC99 /* XCRemoteSwiftPackageReference "gateway-swift" */,
 			);
 			productRefGroup = F6C8D8A2212E5AE900309373 /* Products */;
 			projectDirPath = "";
@@ -1752,6 +1756,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		F69269EF2B3BBCDC002FEC99 /* XCRemoteSwiftPackageReference "gateway-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twodayslate/gateway-swift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		F6E53FB4286FB0210041A3DA /* XCRemoteSwiftPackageReference "NavigationSplitTab" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twodayslate/NavigationSplitTab";
@@ -1994,6 +2006,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F67EDA052411EA7700021F6C /* XCRemoteSwiftPackageReference "SKVersion" */;
 			productName = SKVersion;
+		};
+		F69269F02B3BBCDC002FEC99 /* SwiftGateway */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F69269EF2B3BBCDC002FEC99 /* XCRemoteSwiftPackageReference "gateway-swift" */;
+			productName = SwiftGateway;
 		};
 		F6E53FB5286FB0210041A3DA /* NavigationSplitTab */ = {
 			isa = XCSwiftPackageProductDependency;
