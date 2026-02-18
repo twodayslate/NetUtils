@@ -29,8 +29,7 @@ struct ContentView: View {
                     .viewSource,
                     .settings,
                 ]
-            )
-        )
+            ))
     }
 
     var body: some View {
@@ -68,7 +67,7 @@ struct ContentView: View {
         UIApplication.shared.connectedScenes
             // Get its associated windows
             .compactMap { $0 as? UIWindowScene }.forEach { scene in
-                scene.windows.forEach { window in
+                for window in scene.windows {
                     switch value {
                     case 1:
                         window.rootViewController?.overrideUserInterfaceStyle = .light

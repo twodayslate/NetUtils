@@ -32,7 +32,6 @@ struct WebWrapperView: UIViewRepresentable {
 
         private func setJavascript(completion block: (() -> Void)? = nil) {
             webView?.evaluateJavaScript("document.documentElement.outerHTML", completionHandler: { [self] source, error in
-
                 guard error == nil else {
                     block?()
                     return

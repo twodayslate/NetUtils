@@ -1,6 +1,5 @@
 import SwiftUI
 
-@available(iOS 15.0, *)
 struct HostSectionOrganizerView: View {
     @EnvironmentObject var model: HostViewModel
 
@@ -9,30 +8,29 @@ struct HostSectionOrganizerView: View {
     var body: some View {
         List {
             Section(header:
-                Text("Visible")
-            ) {
-                ForEach(model.sections) { section in
-                    Text("\(section.sectionModel.service.name)")
-                }.onMove { indexSet, offset in
-                    print(indexSet, indexSet.first ?? "", offset)
-                    withAnimation {
-                        self.model.objectWillChange.send()
-                        self.model.sections.move(fromOffsets: indexSet, toOffset: offset)
-                    }
-                }
-                // would be great if instead of delete it said hide
-                .onDelete { indexSet in
-                    print(indexSet, indexSet.first ?? "")
-                    if let index = indexSet.first {
-                        let section = model.sections[index]
+                Text("Visible")) {
+                    ForEach(model.sections) { section in
+                        Text("\(section.sectionModel.service.name)")
+                    }.onMove { indexSet, offset in
+                        print(indexSet, indexSet.first ?? "", offset)
                         withAnimation {
-                            self.model.hidden.append(section.sectionModel.service.name)
+                            model.objectWillChange.send()
+                            model.sections.move(fromOffsets: indexSet, toOffset: offset)
+                        }
+                    }
+                    // would be great if instead of delete it said hide
+                    .onDelete { indexSet in
+                        print(indexSet, indexSet.first ?? "")
+                        if let index = indexSet.first {
+                            let section = model.sections[index]
+                            withAnimation {
+                                model.hidden.append(section.sectionModel.service.name)
+                            }
                         }
                     }
                 }
-            }
 
-            if self.mode?.wrappedValue.isEditing ?? true || !model.hidden.isEmpty {
+            if mode?.wrappedValue.isEditing ?? true || !model.hidden.isEmpty {
                 Section(header: Text("Hidden")) {
                     ForEach(model.hidden, id: \.self) { section in
                         Text(section)
@@ -43,7 +41,7 @@ struct HostSectionOrganizerView: View {
                         if let index = indexSet.first {
                             let section = model.hidden[index]
                             withAnimation {
-                                self.model.hidden.removeAll(where: { $0 == section })
+                                model.hidden.removeAll(where: { $0 == section })
                             }
                         }
                     }
@@ -56,7 +54,6 @@ struct HostSectionOrganizerView: View {
     }
 }
 
-@available(iOS 15.0, *)
 struct HostSectionOrganizerView_Previews: PreviewProvider {
     static var previews: some View {
         Group {

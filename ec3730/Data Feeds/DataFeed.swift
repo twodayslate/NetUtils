@@ -8,7 +8,6 @@
 
 import Foundation
 import StoreKit
-import SwiftyStoreKit
 
 protocol DataFeedSingleton: DataFeed {
     static var current: Self { get }

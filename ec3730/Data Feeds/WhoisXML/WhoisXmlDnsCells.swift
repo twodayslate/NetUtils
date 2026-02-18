@@ -1,5 +1,4 @@
 import Foundation
-import SwiftyStoreKit
 import UIKit
 
 class WhoisXmlDnsCellManager: CellManager {
@@ -11,7 +10,7 @@ class WhoisXmlDnsCellManager: CellManager {
         }
     }
 
-    public var currentRecords: [DNSRecords]?
+    var currentRecords: [DNSRecords]?
     func configure(_ records: [DNSRecords]?) {
         stopLoading()
         guard let records = records else {

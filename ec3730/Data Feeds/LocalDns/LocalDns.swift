@@ -4,22 +4,19 @@ import CoreData
 import Foundation
 import KeychainAccess
 import StoreKit
-import SwiftyStoreKit
 
 final class LocalDns: DataFeedSingleton {
     var name: String = "Simple IP Lookup"
 
     var webpage: URL = .init(string: "https://zac.gorak.us/")!
 
-    public var userKey: String?
+    var userKey: String?
 
-    public static var current: LocalDns = .init()
+    static var current: LocalDns = .init()
 
     static var session = URLSession.shared
 
-    var services: [Service] = {
-        [LocalDns.lookupService]
-    }()
+    var services: [Service] = [LocalDns.lookupService]
 }
 
 extension LocalDns: DataFeedService {
@@ -27,7 +24,7 @@ extension LocalDns: DataFeedService {
         services.reduce(0) { $0 + $1.usage }
     }
 
-    public static var lookupService: IPLookupService = .init()
+    static var lookupService: IPLookupService = .init()
 
     class IPLookupService: Service {
         var name: String = "Simple IP Lookup"

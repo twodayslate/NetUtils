@@ -5,7 +5,7 @@ struct CopyCellSingleItemRowView: View {
     var content: String
     let style: CopyCellStyleConfig
 
-    var body: some View {
+    private var rowContent: some View {
         HStack(alignment: .center) {
             Text(title)
             Spacer()
@@ -14,6 +14,16 @@ struct CopyCellSingleItemRowView: View {
                 CopyCellChevronView()
             }
         }
-        .modifier(PaddingListModifier(padding: style.padding))
+    }
+
+    var body: some View {
+        switch style.paddingStyle {
+        case .standard:
+            rowContent.padding()
+        case let .horizontalWithTop(topPadding):
+            rowContent
+                .padding(.horizontal)
+                .padding(.top, topPadding)
+        }
     }
 }

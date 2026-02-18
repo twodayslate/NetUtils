@@ -16,7 +16,7 @@ struct HostResult: View {
         VStack(alignment: .leading, spacing: 0) {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 0) {
-                    ForEach(Array(self.group.results.sorted(by: { $0.date < $1.date })), id: \.self) { result in
+                    ForEach(Array(group.results.sorted(by: { $0.date < $1.date })), id: \.self) { result in
                         if let data = HostSectionModel.configure(with: result, group: group) {
                             HostResultSection(data: data)
                         } else {
@@ -33,6 +33,6 @@ struct HostResult: View {
         }
         .background(Color(UIColor.systemGroupedBackground))
         .padding(.top, 0.15)
-        .navigationTitle(self.group.url.host ?? "Unknown Host")
+        .navigationTitle(group.url.host ?? "Unknown Host")
     }
 }

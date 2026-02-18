@@ -1,5 +1,5 @@
 //
-//  UISwitch.swift
+//  DefaultsSwitch.swift
 //  acft
 //
 //  Created by Zachary Gorak on 5/30/19.
@@ -12,7 +12,7 @@ import UIKit
 class DefaultsSwitch: UISwitch {
     private var defaultKey: String
 
-    public init(forKey key: String) {
+    init(forKey key: String) {
         defaultKey = key
         super.init(frame: CGRect.zero)
 

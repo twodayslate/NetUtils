@@ -44,7 +44,7 @@ extension Coordinate {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -61,7 +61,7 @@ extension Coordinate {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -125,7 +125,7 @@ extension WhoisRecord {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
 //    func with(
@@ -209,7 +209,7 @@ extension WhoisRecord {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -258,7 +258,7 @@ extension WhoisRecordAdministrativeContact {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -308,7 +308,7 @@ extension WhoisRecordAdministrativeContact {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -343,7 +343,7 @@ extension WhoisRecordAudit {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -361,7 +361,7 @@ extension WhoisRecordAudit {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -410,7 +410,7 @@ extension WhoisRecordBillingContact {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -460,7 +460,7 @@ extension WhoisRecordBillingContact {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -497,7 +497,7 @@ extension WhoisRecordNameServers {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -517,7 +517,7 @@ extension WhoisRecordNameServers {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -566,7 +566,7 @@ extension Registrant {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -616,7 +616,7 @@ extension Registrant {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -670,7 +670,7 @@ extension RegistryData {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
 //    func with(
@@ -743,7 +743,7 @@ extension RegistryData {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -792,7 +792,7 @@ extension RegistryDataAdministrativeContact {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -842,7 +842,7 @@ extension RegistryDataAdministrativeContact {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -877,7 +877,7 @@ extension RegistryDataAudit {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -895,7 +895,7 @@ extension RegistryDataAudit {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -944,7 +944,7 @@ extension RegistryDataBillingContact {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -994,7 +994,7 @@ extension RegistryDataBillingContact {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -1031,7 +1031,7 @@ extension RegistryDataNameServers {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -1051,7 +1051,7 @@ extension RegistryDataNameServers {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -1090,7 +1090,7 @@ extension Regustrant {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -1126,7 +1126,7 @@ extension Regustrant {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -1175,7 +1175,7 @@ extension RegistryDataTechnicalContact {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -1225,7 +1225,7 @@ extension RegistryDataTechnicalContact {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -1274,7 +1274,7 @@ extension RegistryDataZoneContact {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -1324,7 +1324,7 @@ extension RegistryDataZoneContact {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -1373,7 +1373,7 @@ extension WhoisRecordTechnicalContact {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -1423,7 +1423,7 @@ extension WhoisRecordTechnicalContact {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -1472,7 +1472,7 @@ extension WhoisRecordZoneContact {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(
@@ -1522,7 +1522,7 @@ extension WhoisRecordZoneContact {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 
@@ -1565,28 +1565,28 @@ extension URLSession {
 // MARK: - Encode/decode helpers
 
 class JSONNull: Codable, Hashable {
-    public static func == (_: JSONNull, _: JSONNull) -> Bool {
+    static func == (_: JSONNull, _: JSONNull) -> Bool {
         true
     }
 
-    public var hashValue: Int {
+    var hashValue: Int {
         0
     }
 
-    public func hash(into _: inout Hasher) {
+    func hash(into _: inout Hasher) {
         // No-op
     }
 
-    public init() {}
+    init() {}
 
-    public required init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if !container.decodeNil() {
             throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encodeNil()
     }
@@ -1781,7 +1781,7 @@ class JSONAny: Codable {
         }
     }
 
-    public required init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         if var arrayContainer = try? decoder.unkeyedContainer() {
             value = try JSONAny.decodeArray(from: &arrayContainer)
         } else if var container = try? decoder.container(keyedBy: JSONCodingKey.self) {
@@ -1792,7 +1792,7 @@ class JSONAny: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    func encode(to encoder: Encoder) throws {
         if let arr = value as? [Any] {
             var container = encoder.unkeyedContainer()
             try JSONAny.encode(to: &container, array: arr)

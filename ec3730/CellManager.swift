@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftyStoreKit
+import StoreKit
 import UIKit
 
 open class CellManager {
@@ -16,7 +16,7 @@ open class CellManager {
 
     var isCollapsed: Bool = false
 
-    internal var privateIsLoading: Bool = false
+    var privateIsLoading: Bool = false
     public var isLoading: Bool {
         privateIsLoading
     }
@@ -30,8 +30,11 @@ open class CellManager {
         cells.append(LoadingCell())
 
         if let prod = feed as? DataFeedPurchaseProtocol {
-            prod.verify { error in
-                self.didUpdateInAppPurchase(self.dataFeed, error: error, purchaseResult: nil, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+            Task {
+                await prod.verify()
+                await MainActor.run {
+                    self.didUpdateInAppPurchase(self.dataFeed, error: nil, transaction: nil)
+                }
             }
         }
     }
@@ -74,7 +77,7 @@ open class CellManager {
 }
 
 extension CellManager: DataFeedInAppPurchaseUpdateDelegate {
-    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults: RestoreResults?, verifySubscriptionResult: VerifySubscriptionResult?, verifyPurchaseResult: VerifyPurchaseResult?, retrieveResults: RetrieveResults?) {
+    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, transaction: Transaction?) {
         if let paid = dataFeed as? DataFeedPurchaseProtocol {
             if paid.owned {
                 cells.removeAll()
@@ -83,7 +86,6 @@ extension CellManager: DataFeedInAppPurchaseUpdateDelegate {
             }
         }
 
-        // swiftlint:disable:next line_length
-        iapDelegate?.didUpdateInAppPurchase(feed, error: error, purchaseResult: purchaseResult, restoreResults: restoreResults, verifySubscriptionResult: verifySubscriptionResult, verifyPurchaseResult: verifyPurchaseResult, retrieveResults: retrieveResults)
+        iapDelegate?.didUpdateInAppPurchase(feed, error: error, transaction: transaction)
     }
 }

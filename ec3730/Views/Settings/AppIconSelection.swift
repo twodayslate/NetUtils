@@ -18,7 +18,7 @@ struct AppIconChooser: View {
                         } catch {
                             showAlert = true
                         }
-                        self.presentationMode.wrappedValue.dismiss()
+                        presentationMode.wrappedValue.dismiss()
                     }
                 }, label: {
                     AppIconView(icon: .dark, name: "Dark", subtitle: "@akhmadmaulidi")
@@ -31,7 +31,7 @@ struct AppIconChooser: View {
                         } catch {
                             showAlert = true
                         }
-                        self.presentationMode.wrappedValue.dismiss()
+                        presentationMode.wrappedValue.dismiss()
                     }
                 }, label: {
                     AppIconView(icon: .light, name: "Light", subtitle: "@akhmadmaulidi")
@@ -45,7 +45,7 @@ struct AppIconChooser: View {
                         } catch {
                             showAlert = true
                         }
-                        self.presentationMode.wrappedValue.dismiss()
+                        presentationMode.wrappedValue.dismiss()
                     }
                 }, label: {
                     AppIconView(icon: .legacy, name: "Legacy", subtitle: nil)

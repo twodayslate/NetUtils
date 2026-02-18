@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyStoreKit
+import StoreKit
 
 protocol DataFeedInAppPurchaseUpdateDelegate {
-    func didUpdateInAppPurchase(_ for: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults: RestoreResults?, verifySubscriptionResult: VerifySubscriptionResult?, verifyPurchaseResult: VerifyPurchaseResult?, retrieveResults: RetrieveResults?)
+    func didUpdateInAppPurchase(_ for: DataFeed, error: Error?, transaction: Transaction?)
 }

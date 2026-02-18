@@ -11,14 +11,13 @@ import CoreData
 import Foundation
 import KeychainAccess
 import StoreKit
-import SwiftyStoreKit
 
 final class GoogleWebRisk: DataFeedSingleton, DataFeedOneTimePurchase {
     var name: String = "Google Web Risk API"
 
     var webpage: URL = .init(string: "https://cloud.google.com/web-risk/")!
 
-    public var userKey: String? {
+    var userKey: String? {
         didSet {
             let keychian = Keychain().synchronizable(true)
             if let key = userKey {
@@ -29,7 +28,7 @@ final class GoogleWebRisk: DataFeedSingleton, DataFeedOneTimePurchase {
         }
     }
 
-    public static var current: GoogleWebRisk = {
+    static var current: GoogleWebRisk = {
         let retVal = GoogleWebRisk()
         let keychian = Keychain().synchronizable(true)
         if let key = try? keychian.get(UserDefaults.NetUtils.Keys.keyFor(dataFeed: retVal)) {
@@ -42,9 +41,7 @@ final class GoogleWebRisk: DataFeedSingleton, DataFeedOneTimePurchase {
 
     var oneTime: OneTimePurchase = .init("googlewebrisk.onetime")
 
-    var services: [Service] = {
-        [GoogleWebRisk.lookupService]
-    }()
+    var services: [Service] = [GoogleWebRisk.lookupService]
 }
 
 // MARK: - Endpoints
@@ -110,7 +107,7 @@ extension GoogleWebRisk: DataFeedService {
         services.reduce(0) { $0 + $1.usage }
     }
 
-    public static var lookupService: GoogleWebRiskLookupService = .init()
+    static var lookupService: GoogleWebRiskLookupService = .init()
 
     class GoogleWebRiskLookupService: Service {
         var name: String = "Google Web Risk Lookup API"
@@ -206,7 +203,7 @@ extension GoogleWebRisk: DataFeedService {
             }.resume()
         }
 
-        func query<T>(_ userData: [String: Any?]?) async throws -> T where T: Decodable, T: Encodable {
+        func query<T: Decodable & Encodable>(_ userData: [String: Any?]?) async throws -> T {
             guard let endpoint = endpoint(userData), let endpointURL = endpoint.url else {
                 throw DataFeedError.invalidUrl
             }

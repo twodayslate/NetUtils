@@ -199,7 +199,7 @@ class WhoisXMLService: Service {
         }.resume()
     }
 
-    func query<T>(_ userData: [String: Any?]?) async throws -> T where T: Decodable, T: Encodable {
+    func query<T: Decodable & Encodable>(_ userData: [String: Any?]?) async throws -> T {
         guard let endpoint = endpoint(userData), let endpointURL = endpoint.url else {
             throw DataFeedError.invalidUrl
         }

@@ -38,11 +38,7 @@ struct DeviceInfoView: View {
         ScrollView {
             LazyVStack(spacing: 0) {
                 ForEach(model.sections) { section in
-                    Group {
-                        if section.enabled {
-                            DeviceInfoSectionView(section: section)
-                        }
-                    }
+                    DeviceInfoSectionView(section: section)
                 }
                 Divider()
                 Text("Last Updated \(date.ISO8601Format(.iso8601))")

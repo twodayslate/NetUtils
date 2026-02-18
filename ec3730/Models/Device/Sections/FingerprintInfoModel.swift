@@ -11,14 +11,14 @@ class FingerprintInfoModel: DeviceInfoSectionModel {
     }
 
     @MainActor func attachModel(model: FingerPrintModel) async {
-        if !models.contains(model) {
+        if !models.contains(where: { $0.url == model.url }) {
             models.append(model)
             await reload()
         }
     }
 
     @MainActor override func reload() async {
-        enabled = models.count > 0
+        enabled = !models.isEmpty
         rows.removeAll()
 
         for (i, model) in models.enumerated() {

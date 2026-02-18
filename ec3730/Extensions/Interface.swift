@@ -1,6 +1,6 @@
 import NetUtils
 
-extension Interface: Identifiable {
+extension Interface: @retroactive Identifiable {
     public var id: Int {
         "\(name)\(address ?? "")\(debugDescription)".hashValue
     }

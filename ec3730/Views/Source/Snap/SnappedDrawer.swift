@@ -41,10 +41,10 @@ struct SnapDrawer<StateType: SnapState, Background: View, Content: View>: View {
         maxDrag = calculator.results.last?.offset ?? 0
     }
 
-    public var body: some View {
+    var body: some View {
         if let state = state, currentResult.state != state.wrappedValue {
             DispatchQueue.main.async {
-                self.currentResult = self.calculator(state: state.wrappedValue)
+                currentResult = calculator(state: state.wrappedValue)
             }
         }
 
@@ -56,7 +56,7 @@ struct SnapDrawer<StateType: SnapState, Background: View, Content: View>: View {
 
         // let offset = min(maxDrag + 8, max(minDrag - 8, self.currentResult.offset + self.dragState.translation.height))
 
-        let offset = min(maxDrag + 8, max(minDrag - 8, self.currentResult.offset + self.dragState.translation.height))
+        let offset = min(maxDrag + 8, max(minDrag - 8, currentResult.offset + dragState.translation.height))
         // let offset = min(maxDrag + 8, self.dragState.translation.height) + spacerSize
         return ZStack {
             currentResult.state.visible.map { background($0).edgesIgnoringSafeArea(.all) }

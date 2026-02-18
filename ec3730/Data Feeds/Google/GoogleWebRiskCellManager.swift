@@ -20,7 +20,7 @@ class GoogleWebRiskCellManager: CellManager {
         }
     }
 
-    public var currentRecord: GoogleWebRiskRecordWrapper?
+    var currentRecord: GoogleWebRiskRecordWrapper?
     func configure(_ record: GoogleWebRiskRecordWrapper?) {
         stopLoading()
         guard let record = record else {

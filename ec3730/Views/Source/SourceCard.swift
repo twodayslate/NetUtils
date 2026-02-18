@@ -1,4 +1,5 @@
 import Runestone
+import RunestoneTomorrowTheme
 import SwiftUI
 import TreeSitterCSSRunestone
 import TreeSitterHTMLRunestone
@@ -9,9 +10,7 @@ import TreeSitterJSONRunestone
 import TreeSitterMarkdownRunestone
 import WebKit
 
-import RunestoneTomorrowTheme
-
-extension TreeSitterLanguage: Hashable {
+extension TreeSitterLanguage: @retroactive Hashable {
     public static func == (lhs: TreeSitterLanguage, rhs: TreeSitterLanguage) -> Bool {
         lhs.hashValue == rhs.hashValue
     }

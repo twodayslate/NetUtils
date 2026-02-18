@@ -29,7 +29,7 @@ extension WhoIsXmlGeoLocationResult {
     }
 
     init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
+        try self.init(data: Data(contentsOf: url))
     }
 
     func with(ip: String? = nil,
@@ -51,7 +51,7 @@ extension WhoIsXmlGeoLocationResult {
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        String(data: try jsonData(), encoding: encoding)
+        try String(data: jsonData(), encoding: encoding)
     }
 }
 

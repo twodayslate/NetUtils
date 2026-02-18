@@ -1,6 +1,5 @@
-import SwiftUI
-
 import AddressURL
+import SwiftUI
 
 struct HostHistoryList: View {
     @Environment(\.managedObjectContext) private var viewContext

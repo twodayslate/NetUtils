@@ -8,11 +8,10 @@
 
 import Foundation
 import StoreKit
-import SwiftyStoreKit
 
 open class OneTimePurchase {
     var identifier: String
-    var product: SKProduct?
+    var product: Product?
 
     private var privatePurchased: Bool = false
     var purchased: Bool {
@@ -21,93 +20,87 @@ open class OneTimePurchase {
 
     init(_ identifier: String) {
         self.identifier = identifier
-        retrieveProduct()
-        verifyPurchase()
-    }
-
-    func purchase(completion block: ((PurchaseResult) -> Void)? = nil) {
-        SwiftyStoreKit.purchaseProduct(identifier) { result in
-            switch result {
-            case let .success(details):
-                if details.needsFinishTransaction {
-                    SwiftyStoreKit.finishTransaction(details.transaction)
-                    self.verifyPurchase()
-                    block?(result)
-                    return
-                }
-                self.verifyPurchase { _ in
-                    block?(result)
-                }
-            default:
-                block?(result)
-            }
+        Task {
+            await retrieveProduct()
+            await verifyPurchase()
         }
     }
 
-    public func verifyPurchase(completion block: ((Error?) -> Void)? = nil) {
-        guard SwiftyStoreKit.localReceiptData != nil else {
-            block?(nil)
+    func purchase() async throws -> Transaction? {
+        let product = try await resolveProduct()
+        let result = try await product.purchase()
+
+        switch result {
+        case let .success(verification):
+            let transaction = try checkVerified(verification)
+            await updatePurchaseStatus(transaction)
+            await transaction.finish()
+            return transaction
+        case .userCancelled, .pending:
+            return nil
+        @unknown default:
+            return nil
+        }
+    }
+
+    public func verifyPurchase() async {
+        guard let product = await loadProductIfNeeded() else { return }
+        guard let transaction = await product.latestTransaction else {
+            privatePurchased = false
             return
         }
 
-        let validator = AppleReceiptValidator(service: .production, sharedSecret: ApiKey.inApp.key)
-
-        SwiftyStoreKit.verifyReceipt(using: validator) { result in
-            switch result {
-            case let .success(receipt):
-                // Verify the purchase of a Subscription
-                let purchaseResult =
-                    SwiftyStoreKit.verifyPurchase(productId: self.identifier, inReceipt: receipt)
-                switch purchaseResult {
-                case .purchased:
-                    self.privatePurchased = true
-                default:
-                    break
-                }
-            default:
-                break
-            }
-            block?(nil)
+        do {
+            let verified = try checkVerified(transaction)
+            await updatePurchaseStatus(verified)
+        } catch {
+            privatePurchased = false
         }
     }
 
-    /// - parameters:
-    ///   - block: completion block containing possible errors and/or the
-    ///            localized price of the `subscription`
-    public func retrieveProduct(completion block: ((Error?) -> Void)? = nil) {
-        if product != nil {
-            block?(nil)
-            return
-        }
+    public func retrieveProduct() async {
+        _ = try? await resolveProduct()
+    }
 
-        SwiftyStoreKit.retrieveProductsInfo([identifier]) { result in
-            guard result.error == nil else {
-                block?(result.error)
-                return
-            }
-            if let product = result.retrievedProducts.first {
-                self.product = product
-                block?(nil)
-            } else if let invalidProductId = result.invalidProductIDs.first {
-                block?(DataFeedError.invalidProduct(id: invalidProductId))
-            }
+    public func restore() async throws {
+        try await AppStore.sync()
+        await verifyPurchase()
+    }
+
+    private func loadProductIfNeeded() async -> Product? {
+        if let product {
+            return product
+        }
+        await retrieveProduct()
+        return product
+    }
+
+    private func resolveProduct() async throws -> Product {
+        if let product {
+            return product
+        }
+        let products = try await Product.products(for: [identifier])
+        guard let product = products.first else {
+            throw DataFeedError.invalidProduct(id: identifier)
+        }
+        self.product = product
+        return product
+    }
+
+    private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
+        switch result {
+        case .unverified:
+            throw SKError(.clientInvalid)
+        case let .verified(safe):
+            return safe
         }
     }
 
-    public func restore(completion block: ((RestoreResults) -> Void)? = nil) {
-        SwiftyStoreKit.restorePurchases(atomically: true) { results in
-            if !results.restoreFailedPurchases.isEmpty {
-                print("Restore Failed: \(results.restoreFailedPurchases)")
-            } else if !results.restoredPurchases.isEmpty {
-                print("Restore Success: \(results.restoredPurchases)")
-            } else {
-                print("Nothing to Restore")
-            }
-
-            // Update isSubscribed cache
-            self.verifyPurchase { _ in
-                block?(results)
-            }
+    private func updatePurchaseStatus(_ transaction: Transaction) async {
+        if transaction.revocationDate == nil {
+            privatePurchased = true
+        } else {
+            privatePurchased = false
         }
     }
 }
@@ -125,27 +118,26 @@ extension DataFeedOneTimePurchase {
         if userKey != nil {
             return true
         }
-
         return paid
     }
 
-    var defaultProduct: SKProduct? {
+    var defaultProduct: Product? {
         guard let product = oneTime.product else {
-            retrieve()
+            Task { await retrieve() }
             return nil
         }
         return product
     }
 
-    func restore(completion block: ((RestoreResults) -> Void)? = nil) {
-        oneTime.restore(completion: block)
+    func restore() async throws {
+        try await oneTime.restore()
     }
 
-    func verify(completion block: ((Error?) -> Void)? = nil) {
-        oneTime.verifyPurchase(completion: block)
+    func verify() async {
+        await oneTime.verifyPurchase()
     }
 
-    func retrieve(completion block: ((Error?) -> Void)? = nil) {
-        oneTime.retrieveProduct(completion: block)
+    func retrieve() async {
+        await oneTime.retrieveProduct()
     }
 }

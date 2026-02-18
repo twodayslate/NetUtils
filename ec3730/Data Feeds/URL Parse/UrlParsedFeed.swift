@@ -4,22 +4,19 @@ import CoreData
 import Foundation
 import KeychainAccess
 import StoreKit
-import SwiftyStoreKit
 
 final class URLParsedFeed: DataFeedSingleton {
     var name: String = "Parse URL"
 
     var webpage: URL = .init(string: "https://zac.gorak.us/")!
 
-    public var userKey: String?
+    var userKey: String?
 
-    public static var current: URLParsedFeed = .init()
+    static var current: URLParsedFeed = .init()
 
     static var session = URLSession.shared
 
-    var services: [Service] = {
-        [URLParsedFeed.lookupService]
-    }()
+    var services: [Service] = [URLParsedFeed.lookupService]
 }
 
 extension URLParsedFeed: DataFeedService {
@@ -27,7 +24,7 @@ extension URLParsedFeed: DataFeedService {
         services.reduce(0) { $0 + $1.usage }
     }
 
-    public static var lookupService: URLLookupService = .init()
+    static var lookupService: URLLookupService = .init()
 
     class URLLookupService: Service {
         var name: String = "Parse URL"

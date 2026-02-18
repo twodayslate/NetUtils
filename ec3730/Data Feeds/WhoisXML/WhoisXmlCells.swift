@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyStoreKit
 import UIKit
 
 class ContactCellRow: UIStackView {

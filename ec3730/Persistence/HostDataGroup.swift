@@ -3,7 +3,7 @@ import CoreData
 public class HostDataGroup: NSManagedObject, Identifiable {
     @NSManaged public var date: Date
     @NSManaged public var url: URL
-    // would be great if this was an ordered set but obj-c and nsmanaged doesn't like that
+    /// would be great if this was an ordered set but obj-c and nsmanaged doesn't like that
     @NSManaged public var results: Set<HostData>
 
     convenience init(context: NSManagedObjectContext, url: URL, data: Set<HostData> = Set<HostData>()) {
@@ -19,7 +19,7 @@ public class HostDataGroup: NSManagedObject, Identifiable {
 }
 
 extension HostDataGroup {
-    // ❇️ The @FetchRequest property wrapper in the ContentView will call this function
+    /// ❇️ The @FetchRequest property wrapper in the ContentView will call this function
     static func fetchAllRequest(limit: Int? = nil) -> NSFetchRequest<HostDataGroup> {
         let request: NSFetchRequest<HostDataGroup> = HostDataGroup.fetchRequest() as! NSFetchRequest<HostDataGroup>
         if let limit {
