@@ -8,15 +8,14 @@
 
 import Foundation
 import StoreKit
-import SwiftyStoreKit
 
 protocol DataFeedPurchaseProtocol: DataFeed {
     var paid: Bool { get }
     var owned: Bool { get }
 
-    var defaultProduct: SKProduct? { get }
+    var defaultProduct: Product? { get }
 
-    func restore(completion block: ((RestoreResults) -> Void)?)
-    func verify(completion block: ((Error?) -> Void)?)
-    func retrieve(completion block: ((Error?) -> Void)?)
+    func restore() async throws
+    func verify() async
+    func retrieve() async
 }

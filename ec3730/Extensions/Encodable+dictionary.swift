@@ -1,5 +1,5 @@
 //
-//  Encodable.swift
+//  Encodable+dictionary.swift
 //  ec3730
 //
 //  Created by Zachary Gorak on 12/29/22.

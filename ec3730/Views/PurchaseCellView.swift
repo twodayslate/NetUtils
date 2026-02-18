@@ -2,7 +2,6 @@ import NavigationSplitTab
 import StoreKit
 import SwiftUI
 
-@available(iOS 15.0.0, *)
 struct PurchaseCellView: View {
     @ObservedObject var model: StoreKitModel
     @ObservedObject var sectionModel: HostSectionModel
@@ -46,9 +45,9 @@ struct PurchaseCellView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: imageSize)
                 VStack(alignment: .leading) {
-                    Text(self.heading)
+                    Text(heading)
                         .font(.headline)
-                    Text(self.subheading)
+                    Text(subheading)
                         .font(.subheadline)
                 }
                 .foregroundColor(Color(uiColor: UIColor.label))
@@ -70,7 +69,7 @@ struct PurchaseCellView: View {
 
                 let unitType = product?.subscription?.subscriptionPeriod.unit ?? .month
 
-                (Text("Start your free \(product?.subscription?.introductoryOffer?.period.value ?? 3)-\(promoUnitType.debugDescription.lowercased()) trial").bold() + Text(" then all \(self.heading) Data is available for \(product?.displayPrice ?? "-")/\(unitType.debugDescription.lowercased()) automatically"))
+                (Text("Start your free \(product?.subscription?.introductoryOffer?.period.value ?? 3)-\(promoUnitType.debugDescription.lowercased()) trial").bold() + Text(" then all \(heading) Data is available for \(product?.displayPrice ?? "-")/\(unitType.debugDescription.lowercased()) automatically"))
                     .font(.footnote)
                     .foregroundColor(Color(uiColor: UIColor.secondaryLabel))
                     .multilineTextAlignment(.leading)
@@ -87,7 +86,7 @@ struct PurchaseCellView: View {
                             HStack {
                                 Button(action: {
                                     Task {
-                                        await self.restore()
+                                        await restore()
                                     }
                                 }, label: {
                                     Label("Restore", systemImage: "arrow.clockwise.circle")
@@ -128,7 +127,7 @@ struct PurchaseCellView: View {
             }
             Button {
                 Task {
-                    await self.restore()
+                    await restore()
                 }
             } label: {
                 Label("Restore", systemImage: "arrow.clockwise")
@@ -180,7 +179,7 @@ struct PurchaseCellView: View {
     private func buyButton() -> some View {
         Button(action: {
             Task {
-                await self.buy()
+                await buy()
             }
         }, label: {
             Group {
@@ -240,6 +239,7 @@ struct PurchaseCellView: View {
         isRestoring = true
         do {
             try await model.restore()
+            await syncDataFeedPurchaseState()
         } catch {}
         isRestoring = false
     }
@@ -252,12 +252,20 @@ struct PurchaseCellView: View {
         isRestoring = true
         do {
             _ = try await model.purchase(product)
+            await syncDataFeedPurchaseState()
         } catch {}
         isRestoring = false
     }
+
+    private func syncDataFeedPurchaseState() async {
+        guard let purchase = sectionModel.dataFeed as? DataFeedPurchaseProtocol else {
+            return
+        }
+        await purchase.retrieve()
+        await purchase.verify()
+    }
 }
 
-@available(iOS 15.0, *)
 struct LockedCellView_Previews: PreviewProvider {
     static var previews: some View {
         Group {

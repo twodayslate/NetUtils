@@ -5,9 +5,9 @@ struct CopyCellToggleableItemRowView: View {
     var contents: [String]
     let style: CopyCellStyleConfig
 
-    var body: some View {
+    private var rowContent: some View {
         HStack(alignment: .center) {
-            Text(self.title)
+            Text(title)
             Spacer()
             TappedText(content: contents)
                 .foregroundColor(style.detailStyle.color)
@@ -16,6 +16,16 @@ struct CopyCellToggleableItemRowView: View {
                 CopyCellChevronView()
             }
         }
-        .modifier(PaddingListModifier(padding: style.padding))
+    }
+
+    var body: some View {
+        switch style.paddingStyle {
+        case .standard:
+            rowContent.padding()
+        case let .horizontalWithTop(topPadding):
+            rowContent
+                .padding(.horizontal)
+                .padding(.top, topPadding)
+        }
     }
 }

@@ -3,7 +3,7 @@ import DeviceKit
 import MachO
 import SwiftUI
 
-extension ProcessInfo.ThermalState: CustomStringConvertible {
+extension ProcessInfo.ThermalState: @retroactive CustomStringConvertible {
     public var description: String {
         switch self {
         case .critical:

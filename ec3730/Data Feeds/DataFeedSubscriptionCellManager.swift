@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import StoreKit
 import UIKit
 
 class DataFeedSubscriptionCell: UITableViewCell {
@@ -15,8 +16,8 @@ class DataFeedSubscriptionCell: UITableViewCell {
         self.subscription = subscription
         super.init(style: .value1, reuseIdentifier: subscription.identifier)
 
-        textLabel?.text = self.subscription.product?.subscriptionPeriod?.unit.localizedAdjectiveDescription
-        detailTextLabel?.text = self.subscription.product?.localizedPrice
+        textLabel?.text = self.subscription.product?.subscription?.subscriptionPeriod.unit.localizedAdjectiveDescription
+        detailTextLabel?.text = self.subscription.product?.displayPrice
 
         if subscription.isSubscribed {
             accessoryType = .checkmark
@@ -36,7 +37,7 @@ class DataFeedOneTimeCell: UITableViewCell {
         super.init(style: .value1, reuseIdentifier: product.identifier)
 
         textLabel?.text = "One-Time Purchase"
-        detailTextLabel?.text = self.product.product?.localizedPrice
+        detailTextLabel?.text = self.product.product?.displayPrice
     }
 
     @available(*, unavailable)

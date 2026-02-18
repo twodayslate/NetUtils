@@ -8,7 +8,6 @@
 
 import Foundation
 import StoreKit
-import SwiftyStoreKit
 import UIKit
 
 private var cachedPrice: String?
@@ -30,16 +29,24 @@ class WhoisLockedTableViewCell: UITableViewCell {
 
     var restoringActivity = UIActivityIndicatorView()
 
-    internal let smallText = UITextView()
+    let smallText = UITextView()
 
     @objc
     func restore(_: UIButton) {
         isRestoring = true
-
-        dataFeed.restore { results in
-            self.isRestoring = false
-            // swiftlint:disable:next line_length
-            self.didUpdateInAppPurchase(self.dataFeed, error: nil, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+        Task {
+            do {
+                try await dataFeed.restore()
+                await MainActor.run {
+                    self.isRestoring = false
+                    self.didUpdateInAppPurchase(self.dataFeed, error: nil, transaction: nil)
+                }
+            } catch {
+                await MainActor.run {
+                    self.isRestoring = false
+                    self.didUpdateInAppPurchase(self.dataFeed, error: error, transaction: nil)
+                }
+            }
         }
     }
 
@@ -49,25 +56,45 @@ class WhoisLockedTableViewCell: UITableViewCell {
         // TODO: generalize block
 
         if let sub = (dataFeed as? DataFeedSubscription), let defaultSub = sub.subscriptions.first {
-            defaultSub.buy { result in
-                self.isRestoring = false
-                // swiftlint:disable:next line_length
-                self.iapDelegate?.didUpdateInAppPurchase(self.dataFeed, error: nil, purchaseResult: result, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+            Task {
+                do {
+                    let transaction = try await defaultSub.buy()
+                    await sub.verifySubscriptions()
+                    await MainActor.run {
+                        self.isRestoring = false
+                        self.iapDelegate?.didUpdateInAppPurchase(self.dataFeed, error: nil, transaction: transaction)
+                    }
+                } catch {
+                    await MainActor.run {
+                        self.isRestoring = false
+                        self.iapDelegate?.didUpdateInAppPurchase(self.dataFeed, error: error, transaction: nil)
+                    }
+                }
             }
             return
         }
 
         if let one = (dataFeed as? DataFeedOneTimePurchase) {
-            one.oneTime.purchase { result in
-                self.isRestoring = false
-                // swiftlint:disable:next line_length
-                self.iapDelegate?.didUpdateInAppPurchase(self.dataFeed, error: nil, purchaseResult: result, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+            Task {
+                do {
+                    let transaction = try await one.oneTime.purchase()
+                    await one.verify()
+                    await MainActor.run {
+                        self.isRestoring = false
+                        self.iapDelegate?.didUpdateInAppPurchase(self.dataFeed, error: nil, transaction: transaction)
+                    }
+                } catch {
+                    await MainActor.run {
+                        self.isRestoring = false
+                        self.iapDelegate?.didUpdateInAppPurchase(self.dataFeed, error: error, transaction: nil)
+                    }
+                }
             }
         }
     }
 
-    /// This fixes a bug
-    /// https://stackoverflow.com/questions/16868117/uitextview-that-expands-to-text-using-auto-layout
+    // This fixes a bug
+    // https://stackoverflow.com/questions/16868117/uitextview-that-expands-to-text-using-auto-layout
 //    override func didMoveToSuperview() {
 //        super.didMoveToSuperview()
 //
@@ -94,16 +121,20 @@ class WhoisLockedTableViewCell: UITableViewCell {
         if !self.dataFeed.owned {
             let prod = (self.dataFeed as? DataFeedSubscription)?.subscriptions.first?.product
             if prod == nil {
-                (self.dataFeed as? DataFeedSubscription)?.subscriptions[0].retrieveProduct { error in
-                    // swiftlint:disable:next line_length
-                    self.didUpdateInAppPurchase(self.dataFeed, error: error, purchaseResult: nil, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+                Task {
+                    await (self.dataFeed as? DataFeedSubscription)?.subscriptions[0].retrieveProduct()
+                    await MainActor.run {
+                        self.didUpdateInAppPurchase(self.dataFeed, error: nil, transaction: nil)
+                    }
                 }
             }
 
             if !(self.dataFeed is DataFeedSubscription) {
-                (self.dataFeed as? DataFeedOneTimePurchase)?.retrieve { error in
-                    // swiftlint:disable:next line_length
-                    self.didUpdateInAppPurchase(self.dataFeed, error: error, purchaseResult: nil, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+                Task {
+                    await (self.dataFeed as? DataFeedOneTimePurchase)?.retrieve()
+                    await MainActor.run {
+                        self.didUpdateInAppPurchase(self.dataFeed, error: nil, transaction: nil)
+                    }
                 }
             }
         }
@@ -223,7 +254,7 @@ class WhoisLockedTableViewCell: UITableViewCell {
         buy.tintColor = UIColor.white
 
         if let subscription = self.dataFeed as? DataFeedSubscription {
-            if let price = subscription.defaultProduct?.localizedPrice {
+            if let price = subscription.defaultProduct?.displayPrice {
                 let attString = NSMutableAttributedString(string: "Subscribe Now for \(price)")
                 buy.setAttributedTitle(attString, for: .normal)
             } else {
@@ -287,8 +318,7 @@ extension WhoisLockedTableViewCell: UITextViewDelegate {
 }
 
 extension WhoisLockedTableViewCell: DataFeedInAppPurchaseUpdateDelegate {
-    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults: RestoreResults?, verifySubscriptionResult: VerifySubscriptionResult?, verifyPurchaseResult: VerifyPurchaseResult?, retrieveResults: RetrieveResults?) {
-        // swiftlint:disable:next line_length
-        iapDelegate?.didUpdateInAppPurchase(feed, error: error, purchaseResult: purchaseResult, restoreResults: restoreResults, verifySubscriptionResult: verifySubscriptionResult, verifyPurchaseResult: verifyPurchaseResult, retrieveResults: retrieveResults)
+    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, transaction: Transaction?) {
+        iapDelegate?.didUpdateInAppPurchase(feed, error: error, transaction: transaction)
     }
 }

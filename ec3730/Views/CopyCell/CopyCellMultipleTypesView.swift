@@ -8,7 +8,7 @@ struct CopyCellMultipleTypesView: View {
 
     var body: some View {
         DisclosureGroup(isExpanded: $expanded, content: {
-            ForEach(contents) { content in
+            ForEach(Array(contents.enumerated()), id: \.offset) { _, content in
                 content
             }
         }, label: {

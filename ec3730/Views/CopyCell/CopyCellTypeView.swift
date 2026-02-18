@@ -53,7 +53,7 @@ struct CopyCellTypeView: View {
                     })
                 }
                 Button(action: {
-                    self.shouldShare.toggle()
+                    shouldShare.toggle()
 
                 }, label: {
                     Label("Share", systemImage: "square.and.arrow.up")

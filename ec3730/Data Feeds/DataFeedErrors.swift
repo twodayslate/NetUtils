@@ -1,5 +1,5 @@
 //
-//  WhoisErrors.swift
+//  DataFeedErrors.swift
 //  ec3730
 //
 //  Created by Zachary Gorak on 8/13/19.

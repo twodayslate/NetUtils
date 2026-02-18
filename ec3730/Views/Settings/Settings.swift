@@ -1,8 +1,7 @@
 import MessageUI
 import SimpleCommon
-import SwiftUI
-
 import StoreKit
+import SwiftUI
 
 enum AppTheme: Int {
     case system = 0
@@ -159,7 +158,6 @@ struct Settings: View {
 
     func rate() {
         UIApplication.shared.open(URL(string: "https://itunes.apple.com/gb/app/id1434360325?action=write-review&mt=8")!, options: [:], completionHandler: { _ in
-
         })
     }
 
@@ -167,7 +165,6 @@ struct Settings: View {
         SimpleIconLabel(iconBackgroundColor: colorScheme == .dark ? .white : .gray.opacity(0.3), iconColor: .red, systemImage: "at", text: "Contact")
     }
 
-    @ViewBuilder
     var twitterRow: some View {
         SimpleIconLabel(iconBackgroundColor: .black, text: "X (formerly Twitter)", iconScale: 1.0) {
             Text("𝕏")

@@ -1,15 +1,13 @@
 import StoreKit
 import SwiftUI
-import SwiftyStoreKit
 
 enum MoreStoreKitError: Error {
     case NotPurchased
 }
 
-@available(iOS 15.0.0, *)
 class StoreKitModel: ObservableObject {
-    public var defaultPurchaseIdentifier: String
-    public var purchaseIdentifiers: [String]
+    var defaultPurchaseIdentifier: String
+    var purchaseIdentifiers: [String]
 
     private var productSet: Set<String> {
         var ans = [String]()
@@ -18,8 +16,8 @@ class StoreKitModel: ObservableObject {
         return Set(ans)
     }
 
-    @Published public private(set) var products: [Product]?
-    @Published public private(set) var defaultProduct: Product?
+    @Published private(set) var products: [Product]?
+    @Published private(set) var defaultProduct: Product?
 
     @Published private(set) var purchasedIdentifiers = Set<String>()
     var updateListenerTask: Task<Void, Error>?
@@ -71,8 +69,8 @@ class StoreKitModel: ObservableObject {
         block?()
     }
 
-    @MainActor
     /// Update the products and update purchase identifiers
+    @MainActor
     func update() async throws {
         let products = try await Product.products(for: productSet)
         self.products = products
@@ -163,11 +161,8 @@ class StoreKitModel: ObservableObject {
     }
 }
 
-@available(iOS 15.0.0, *)
 extension StoreKitModel {
-    static var whois: StoreKitModel = {
-        StoreKitModel(defaultId: "whois.monthly.auto", ids: ["whois.yearly.auto", "whois.onetime"])
-    }()
+    static var whois: StoreKitModel = .init(defaultId: "whois.monthly.auto", ids: ["whois.yearly.auto", "whois.onetime"])
 
     static var dns: StoreKitModel = .whois
 
@@ -179,11 +174,7 @@ extension StoreKitModel {
 
     static var categorization: StoreKitModel = .whois
 
-    static var monapi: StoreKitModel = {
-        StoreKitModel(defaultId: "monapi.monthly.auto", ids: ["monapi.yearly.auto", "monapi.onetime"])
-    }()
+    static var monapi: StoreKitModel = .init(defaultId: "monapi.monthly.auto", ids: ["monapi.yearly.auto", "monapi.onetime"])
 
-    static var webrisk: StoreKitModel = {
-        StoreKitModel(defaultId: "googlewebrisk.onetime", ids: [])
-    }()
+    static var webrisk: StoreKitModel = .init(defaultId: "googlewebrisk.onetime", ids: [])
 }

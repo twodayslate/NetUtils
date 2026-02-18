@@ -24,7 +24,7 @@ class WhoIsXmlCategorizationSectionModel: HostSectionModel {
         }
     }
 
-    // we heavily use optional to avoid bad parsing since stuff from whosixml isn't consistent so we check somethings that will be optional on v3 that v2 doesn't have
+    /// we heavily use optional to avoid bad parsing since stuff from whosixml isn't consistent so we check somethings that will be optional on v3 that v2 doesn't have
     func shouldCheckV2(_ value: WhoIsXmlCategorizationResultV3) -> Bool {
         value.autonomousSystem?.asn == nil && value.categories?.first?.name == nil
     }

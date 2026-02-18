@@ -1,5 +1,5 @@
 //
-//  DataFeedsTableView.swift
+//  DataFeedSubscriptionDataViewController.swift
 //  ec3730
 //
 //  Created by Zachary Gorak on 10/10/19.
@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftyStoreKit
+import StoreKit
 import UIKit
 
 class DataFeedSubscriptionTableViewController: UITableViewController {
@@ -38,10 +38,20 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
     }
 
     @objc func restore(_: Any?) {
-        if let purchase = subscriber as? DataFeedPurchaseProtocol {
-            purchase.restore { results in
-                // swiftlint:disable:next line_length
-                self.didUpdateInAppPurchase(self.subscriber, error: nil, purchaseResult: nil, restoreResults: results, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+        guard let purchase = subscriber as? DataFeedPurchaseProtocol else {
+            return
+        }
+
+        Task {
+            do {
+                try await purchase.restore()
+                await MainActor.run {
+                    self.didUpdateInAppPurchase(self.subscriber, error: nil, transaction: nil)
+                }
+            } catch {
+                await MainActor.run {
+                    self.didUpdateInAppPurchase(self.subscriber, error: error, transaction: nil)
+                }
             }
         }
     }
@@ -99,7 +109,7 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
         if indexPath.section == subscriptionIndex {
             let cell = manager.subscriptionCells[indexPath.row]
 
-            // hide price if the user alerady paid for this product
+            // hide price if the user already paid for this product
             if (subscriber as? DataFeedPurchaseProtocol)?.paid ?? false {
                 cell.detailTextLabel?.text = nil
             }
@@ -163,6 +173,7 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        tableView.reloadData()
     }
 
     override func tableView(_: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -207,7 +218,7 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
         if indexPath.section == tableView.numberOfSections - 1 {
             let controller = DataFeedUserApiKeyController(subscriber: subscriber)
             controller.userApiDelegate = self
-            navigationController?.present(controller, animated: true, completion: nil)
+            navigationController?.present(controller, animated: true)
             return
         }
 
@@ -218,24 +229,46 @@ class DataFeedSubscriptionTableViewController: UITableViewController {
                     self.tableView.reloadData()
                 }
             }
+            return
         }
 
-        if !((subscriber as? DataFeedPurchaseProtocol)?.paid ?? true) {
-            if let cell = tableView.cellForRow(at: indexPath) as? DataFeedSubscriptionCell {
-                // TODO: show loading indicator
-                cell.subscription.buy { result in
-                    // swiftlint:disable:next line_length
-                    self.didUpdateInAppPurchase(self.subscriber, error: nil, purchaseResult: result, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
-                    // TODO: hide loading indicator
+        guard !((subscriber as? DataFeedPurchaseProtocol)?.paid ?? true) else {
+            return
+        }
+
+        if let cell = tableView.cellForRow(at: indexPath) as? DataFeedSubscriptionCell {
+            Task {
+                do {
+                    let transaction = try await cell.subscription.buy()
+                    if let dataFeedSubscription = self.subscriber as? DataFeedSubscription {
+                        await dataFeedSubscription.verifySubscriptions()
+                    }
+                    await MainActor.run {
+                        self.didUpdateInAppPurchase(self.subscriber, error: nil, transaction: transaction)
+                    }
+                } catch {
+                    await MainActor.run {
+                        self.didUpdateInAppPurchase(self.subscriber, error: error, transaction: nil)
+                    }
                 }
             }
+        }
 
-            if let cell = tableView.cellForRow(at: indexPath) as? DataFeedOneTimeCell {
-                cell.product.purchase { result in
-                    // swiftlint:disable:next line_length
-                    self.didUpdateInAppPurchase(self.subscriber, error: nil, purchaseResult: result, restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+        if let cell = tableView.cellForRow(at: indexPath) as? DataFeedOneTimeCell {
+            Task {
+                do {
+                    let transaction = try await cell.product.purchase()
+                    if let oneTime = self.subscriber as? DataFeedOneTimePurchase {
+                        await oneTime.verify()
+                    }
+                    await MainActor.run {
+                        self.didUpdateInAppPurchase(self.subscriber, error: nil, transaction: transaction)
+                    }
+                } catch {
+                    await MainActor.run {
+                        self.didUpdateInAppPurchase(self.subscriber, error: error, transaction: nil)
+                    }
                 }
-                // TODO: show loading indicator
             }
         }
     }
@@ -260,12 +293,14 @@ extension DataFeedSubscriptionTableViewController: DataFeedUserApiKeyDelegate {
 }
 
 extension DataFeedSubscriptionTableViewController: DataFeedInAppPurchaseUpdateDelegate {
-    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, purchaseResult: PurchaseResult?, restoreResults: RestoreResults?, verifySubscriptionResult: VerifySubscriptionResult?, verifyPurchaseResult: VerifyPurchaseResult?, retrieveResults: RetrieveResults?) {
-        // swiftlint:disable:next line_length
-        iapDelegate?.didUpdateInAppPurchase(feed, error: error, purchaseResult: purchaseResult, restoreResults: restoreResults, verifySubscriptionResult: verifySubscriptionResult, verifyPurchaseResult: verifyPurchaseResult, retrieveResults: retrieveResults)
+    func didUpdateInAppPurchase(_ feed: DataFeed, error: Error?, transaction: Transaction?) {
+        iapDelegate?.didUpdateInAppPurchase(feed, error: error, transaction: transaction)
 
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            if let error {
+                self.alert(with: error)
+            }
         }
     }
 }

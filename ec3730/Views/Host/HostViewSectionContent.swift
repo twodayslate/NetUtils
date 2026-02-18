@@ -14,17 +14,17 @@ struct HostViewSectionContent: View {
 
     var body: some View {
         LazyVStack(alignment: .leading, spacing: 0) {
-            if let storeModel = self.sectionModel.storeModel {
-                if self.canQuery {
+            if let storeModel = sectionModel.storeModel {
+                if canQuery {
                     // Need se-0309
-                    ForEach(self.sectionModel.content) { row in
+                    ForEach(sectionModel.content) { row in
                         row
                     }
                 } else {
                     PurchaseCellView(model: storeModel, sectionModel: sectionModel)
                 }
             } else {
-                ForEach(self.sectionModel.content) { row in
+                ForEach(sectionModel.content) { row in
                     row
                 }
             }

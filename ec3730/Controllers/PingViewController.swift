@@ -6,13 +6,11 @@
 //  Copyright © 2018 Zachary Gorak. All rights reserved.
 //
 
-import Foundation
-
 import AddressURL
+import Foundation
+import SwiftUI
 import SwiftyPing
 import UIKit
-
-import SwiftUI
 
 @available(iOS 14.0, *)
 struct PingNumberSettings: View {
@@ -31,12 +29,12 @@ struct PingNumberSettings: View {
             Section {
                 Toggle("Indefinitely", isOn: $indefinitely)
             }
-            if !self.indefinitely {
+            if !indefinitely {
                 Section {
                     Stepper(value: $numberOfPings, in: ClosedRange(1 ..< 1000)) {
                         HStack {
                             Text("Number")
-                            TextField("\(self.numberOfPings)", value: $numberOfPings, formatter: self.numberFormatter).foregroundColor(.gray)
+                            TextField("\(numberOfPings)", value: $numberOfPings, formatter: numberFormatter).foregroundColor(.gray)
                         }
                     }
 
@@ -98,10 +96,10 @@ struct PingSettings: View {
                     HStack {
                         Text("Ping Count")
                         Spacer()
-                        if self.pingIndefinitly {
+                        if pingIndefinitly {
                             Text("Indefinitely").foregroundColor(.gray)
                         } else {
-                            Text("\(self.pingCount)").foregroundColor(.gray)
+                            Text("\(pingCount)").foregroundColor(.gray)
                         }
                     }
                 }
@@ -110,15 +108,15 @@ struct PingSettings: View {
                 Stepper(value: $interval, in: 0 ... 10.0, step: 0.1) {
                     HStack {
                         Text("Interval")
-                        let str: LocalizedStringKey = "\(self.interval, specifier: "%.02f")"
-                        TextField(str, value: $interval, formatter: self.numberFormatter).foregroundColor(.gray)
+                        let str: LocalizedStringKey = "\(interval, specifier: "%.02f")"
+                        TextField(str, value: $interval, formatter: numberFormatter).foregroundColor(.gray)
                     }
                 }
                 Stepper(value: $timeout, in: 0 ... 10, step: 0.5) {
                     HStack {
                         Text("Timeout")
-                        let str: LocalizedStringKey = "\(self.timeout, specifier: "%.2f")"
-                        TextField(str, value: $timeout, formatter: self.numberFormatter).foregroundColor(.gray)
+                        let str: LocalizedStringKey = "\(timeout, specifier: "%.2f")"
+                        TextField(str, value: $timeout, formatter: numberFormatter).foregroundColor(.gray)
                     }
                 }
             }
@@ -126,19 +124,19 @@ struct PingSettings: View {
                 Stepper(value: $payloadSize, in: 44 ... 4096, step: 1) {
                     HStack {
                         Text("Payload Size")
-                        let str: LocalizedStringKey = "\(self.payloadSize, specifier: "%d")"
-                        TextField(str, value: $payloadSize, formatter: self.payloadSizeNumberFormatter).foregroundColor(.gray)
+                        let str: LocalizedStringKey = "\(payloadSize, specifier: "%d")"
+                        TextField(str, value: $payloadSize, formatter: payloadSizeNumberFormatter).foregroundColor(.gray)
                     }
                 }
             }
             Section {
                 Toggle("Use TTL", isOn: $enableTTL)
-                if self.enableTTL {
+                if enableTTL {
                     Stepper(value: $ttl, in: 1 ... 255, step: 1) {
                         HStack {
                             Text("TTL")
-                            let str: LocalizedStringKey = "\(self.ttl, specifier: "%d")"
-                            TextField(str, value: $ttl, formatter: self.ttlNumberFormatter).foregroundColor(.gray)
+                            let str: LocalizedStringKey = "\(ttl, specifier: "%d")"
+                            TextField(str, value: $ttl, formatter: ttlNumberFormatter).foregroundColor(.gray)
                         }
                     }
                 }
@@ -147,14 +145,14 @@ struct PingSettings: View {
                 Toggle("Save Pings", isOn: $savePings)
             }
             Button(action: {
-                self.enableTTL = false
-                self.ttl = 64
-                self.payloadSize = 44
-                self.interval = 0.5
-                self.timeout = 5.0
-                self.pingCount = 5
-                self.pingIndefinitly = false
-                self.savePings = true
+                enableTTL = false
+                ttl = 64
+                payloadSize = 44
+                interval = 0.5
+                timeout = 5.0
+                pingCount = 5
+                pingIndefinitly = false
+                savePings = true
             }, label: {
                 HStack {
                     Spacer()
@@ -169,8 +167,13 @@ struct PingSettings: View {
 
 struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?
-    func makeUIView(context _: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
-    func updateUIView(_ uiView: UIVisualEffectView, context _: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+    func makeUIView(context _: UIViewRepresentableContext<Self>) -> UIVisualEffectView {
+        UIVisualEffectView()
+    }
+
+    func updateUIView(_ uiView: UIVisualEffectView, context _: UIViewRepresentableContext<Self>) {
+        uiView.effect = effect
+    }
 }
 
 @available(iOS 14.0, *)
@@ -178,7 +181,7 @@ struct PingSetView: View {
     var ping: PingSet
 
     var body: some View {
-        if ping.pings.count <= 0 {
+        if ping.pings.isEmpty {
             Text("No pings recorded")
         } else {
             List {
@@ -361,10 +364,10 @@ struct PingSwiftUIViewController: View {
                 PingSettings(interval: $pingInterval, timeout: $pingTimeout, pingIndefinitly: $pingIndefinity, pingCount: $pingCount, savePings: $pingSave, payloadSize: $pingPayloadSize, enableTTL: $pingUseTTL, ttl: $pingTTL)
             }
         }).alert(isPresented: $showAlert, content: {
-            Alert(title: Text("Error"), message: Text("\(self.alertMessage ?? "")"), dismissButton: .none)
+            Alert(title: Text("Error"), message: Text("\(alertMessage ?? "")"), dismissButton: .none)
         }) // GeometryReader
         .onDisappear(perform: {
-            self.pinger?.stopPinging()
+            pinger?.stopPinging()
         })
         .background(Color(UIColor.systemGroupedBackground))
         .navigationViewStyle(StackNavigationViewStyle())
@@ -447,7 +450,7 @@ struct PingSwiftUIViewController: View {
 
                 if let error = response.error {
                     errorCount += 1
-                    self.entries.append(error.localizedDescription)
+                    entries.append(error.localizedDescription)
                 } else {
                     let duration = response.duration
                     let latency = duration * 1000
@@ -458,25 +461,25 @@ struct PingSwiftUIViewController: View {
                     if latency < minLatency {
                         minLatency = latency
                     }
-                    self.entries.append("\(response.byteCount ?? 0) bytes from \(response.ipAddress ?? "") icmp_seq=\(response.sequenceNumber) time=\(latency) ms")
+                    entries.append("\(response.byteCount ?? 0) bytes from \(response.ipAddress ?? "") icmp_seq=\(response.sequenceNumber) time=\(latency) ms")
                 }
 
-                if !self.pingIndefinity, count >= self.pingCount {
-                    self.pinger?.stopPinging()
-                    self.isPinging = false
+                if !pingIndefinity, count >= pingCount {
+                    pinger?.stopPinging()
+                    isPinging = false
 
-                    self.entries.append("--- \(host) ping statistics ---")
+                    entries.append("--- \(host) ping statistics ---")
 
                     // 5 packets transmitted, 5 packets received, 0.0% packet loss
-                    self.entries.append("\(count) packets transmitted, ")
+                    entries.append("\(count) packets transmitted, ")
                     let received = count - errorCount
-                    self.entries.append("\(count - errorCount) received, ")
+                    entries.append("\(count - errorCount) received, ")
                     if count == received {
-                        self.entries.append("0.0% packet loss")
+                        entries.append("0.0% packet loss")
                     } else if received == 0 {
-                        self.entries.append("100% packet loss")
+                        entries.append("100% packet loss")
                     } else {
-                        self.entries.append(String(format: "%0.1f%% packet loss", Double(received) / Double(count) * 100.0))
+                        entries.append(String(format: "%0.1f%% packet loss", Double(received) / Double(count) * 100.0))
                     }
 
                     // round-trip min/avg/max/stddev = 14.063/21.031/28.887/4.718 ms
@@ -487,7 +490,7 @@ struct PingSwiftUIViewController: View {
                         let avg = latencySum / Double(count)
                         stats += String(format: "%0.3f/%0.3f/%0.4f ms", minLatency, avg, maxLatency)
                     }
-                    self.entries.append("\(stats)\n")
+                    entries.append("\(stats)\n")
                 }
                 count += 1
             }

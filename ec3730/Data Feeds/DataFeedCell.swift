@@ -60,7 +60,7 @@ class DataFeedCell: UITableViewCell {
 
             if !purchase.paid {
                 if let subscriber = self.subscriber as? DataFeedSubscription {
-                    bigSubButton.setTitle("Subscribe Now for \(subscriber.subscriptions.first?.product?.localizedPrice ?? "-")", for: .normal)
+                    bigSubButton.setTitle("Subscribe Now for \(subscriber.subscriptions.first?.product?.displayPrice ?? "-")", for: .normal)
                 } else {
                     bigSubButton.setTitle("Purchase", for: .normal)
                 }
@@ -116,19 +116,33 @@ class DataFeedCell: UITableViewCell {
         }
 
         if let subscriptions = subscriber as? DataFeedSubscription, let defaultSub = subscriptions.subscriptions.first {
-            defaultSub.buy {
-                result in
-
-                subscriptions.verifySubscriptions { error in
-                    self.iapDelegate?.didUpdateInAppPurchase(self.subscriber, error: error, purchaseResult: result,
-                                                             restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+            Task {
+                do {
+                    let transaction = try await defaultSub.buy()
+                    await subscriptions.verifySubscriptions()
+                    await MainActor.run {
+                        self.iapDelegate?.didUpdateInAppPurchase(self.subscriber, error: nil, transaction: transaction)
+                    }
+                } catch {
+                    await MainActor.run {
+                        self.iapDelegate?.didUpdateInAppPurchase(self.subscriber, error: error, transaction: nil)
+                    }
                 }
             }
         } else {
             if let one = subscriber as? DataFeedOneTimePurchase {
-                one.oneTime.purchase { result in
-                    self.iapDelegate?.didUpdateInAppPurchase(self.subscriber, error: nil, purchaseResult: result,
-                                                             restoreResults: nil, verifySubscriptionResult: nil, verifyPurchaseResult: nil, retrieveResults: nil)
+                Task {
+                    do {
+                        let transaction = try await one.oneTime.purchase()
+                        await one.verify()
+                        await MainActor.run {
+                            self.iapDelegate?.didUpdateInAppPurchase(self.subscriber, error: nil, transaction: transaction)
+                        }
+                    } catch {
+                        await MainActor.run {
+                            self.iapDelegate?.didUpdateInAppPurchase(self.subscriber, error: error, transaction: nil)
+                        }
+                    }
                 }
             }
         }

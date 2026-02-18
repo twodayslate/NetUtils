@@ -25,15 +25,13 @@ class MemoryInfoModel: DeviceInfoSectionModel {
             count >= TASK_VM_INFO_REV1_COUNT
         else { return nil }
 
-        let usedBytes = Float(info.phys_footprint)
-        return usedBytes
+        return Float(info.phys_footprint)
     }
 
     func formattedMemoryFootprint() -> String {
         let usedBytes: UInt64? = UInt64(memoryFootprint() ?? 0)
         let usedMB = Double(usedBytes ?? 0) / 1024 / 1024
-        let usedMBAsString = String(format: "%0.02f MiB", usedMB)
-        return usedMBAsString
+        return String(format: "%0.02f MiB", usedMB)
     }
 
     /// https://github.com/PerfectlySoft/Perfect-SysInfo/blob/master/Sources/PerfectSysInfo/PerfectSysInfo.swift#L359

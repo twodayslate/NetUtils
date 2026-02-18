@@ -9,18 +9,17 @@
 import Foundation
 import KeychainAccess
 import StoreKit
-import SwiftyStoreKit
 
 /// API wrapper for https://whoisxmlapi.com/
 final class WhoisXml: DataFeedSingleton, DataFeedOneTimePurchase {
-    public let name: String = "WhoisXML API"
+    let name: String = "WhoisXML API"
 
-    public var webpage: URL { URL(string: "https://www.whoisxmlapi.com/")! }
+    var webpage: URL {
+        URL(string: "https://www.whoisxmlapi.com/")!
+    }
 
-    public var userKey: String? {
+    var userKey: String? {
         didSet {
-            // Save the key to the keychain
-
             let keychian = Keychain().synchronizable(true)
             if let key = userKey {
                 try? keychian.set(key, key: UserDefaults.NetUtils.Keys.keyFor(dataFeed: self))
@@ -30,7 +29,7 @@ final class WhoisXml: DataFeedSingleton, DataFeedOneTimePurchase {
         }
     }
 
-    public static var current: WhoisXml = {
+    static var current: WhoisXml = {
         let retVal = WhoisXml()
 
         let keychian = Keychain().synchronizable(true)
@@ -40,16 +39,11 @@ final class WhoisXml: DataFeedSingleton, DataFeedOneTimePurchase {
         return retVal
     }()
 
-    /// Session used to create tasks
-    ///
-    /// - Callout(Default):
-    /// `URLSession.shared`
     static var session = URLSession.shared
 
-    public var subscriptions: [Subscription] = {
+    var subscriptions: [Subscription] = {
         let monthly = Subscription("whois.monthly.auto")
         let yearly = Subscription("whois.yearly.auto")
-
         return [monthly, yearly]
     }()
 
@@ -129,20 +123,13 @@ extension WhoisXml: DataFeedService {
 // MARK: - DataFeedSubscription
 
 extension WhoisXml: DataFeedSubscription {
-    /// IF the user has access to the API feed
-    ///
-    /// We assume access if a user key is set
     var owned: Bool {
         if userKey != nil {
             return true
         }
-
         return paid
     }
 
-    /// If the current user has subscribed to the WHOIS API
-    /// - Important:
-    /// This will give you the cached version, use `verifySubscription` to get the asyncronous version
     var paid: Bool {
         #if DEBUG
             if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
@@ -157,61 +144,30 @@ extension WhoisXml: DataFeedSubscription {
         return oneTime.purchased
     }
 
-    var defaultProduct: SKProduct? {
+    var defaultProduct: Product? {
         guard let product = subscriptions[0].product else {
-            retrieve()
+            Task { await retrieve() }
             return nil
         }
         return product
     }
 
-    func restore(completion block: ((RestoreResults) -> Void)? = nil) {
-        SwiftyStoreKit.restorePurchases(atomically: true) { results in
-            self.subscriptions[0].restore { _ in
-                self.subscriptions[1].restore { _ in
-                    self.oneTime.restore { _ in
-                        block?(results)
-                    }
-                }
-            }
-        }
+    func restore() async throws {
+        try await AppStore.sync()
+        await subscriptions[0].verifySubscription()
+        await subscriptions[1].verifySubscription()
+        await oneTime.verifyPurchase()
     }
 
-    func verify(completion block: ((Error?) -> Void)? = nil) {
-        subscriptions[0].verifySubscription { error in
-            guard error == nil else {
-                block?(error)
-                return
-            }
-            self.subscriptions[1].verifySubscription { errorTwo in
-                guard errorTwo == nil else {
-                    block?(errorTwo)
-                    return
-                }
-                self.oneTime.verifyPurchase { errorThree in
-                    block?(errorThree)
-                }
-            }
-        }
+    func verify() async {
+        await subscriptions[0].verifySubscription()
+        await subscriptions[1].verifySubscription()
+        await oneTime.verifyPurchase()
     }
 
-    func retrieve(completion block: ((Error?) -> Void)? = nil) {
-        subscriptions[0].retrieveProduct { error in
-            guard error == nil else {
-                block?(error)
-                return
-            }
-
-            self.subscriptions[1].retrieveProduct { errorTwo in
-                guard errorTwo == nil else {
-                    block?(errorTwo)
-                    return
-                }
-
-                self.oneTime.retrieveProduct { errorThree in
-                    block?(errorThree)
-                }
-            }
-        }
+    func retrieve() async {
+        await subscriptions[0].retrieveProduct()
+        await subscriptions[1].retrieveProduct()
+        await oneTime.retrieveProduct()
     }
 }

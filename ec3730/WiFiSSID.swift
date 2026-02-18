@@ -35,7 +35,7 @@ open class WiFi {
         return nil
     }
 
-    // completion block wrapper for ssidInfo
+    /// completion block wrapper for ssidInfo
     public class func ssid(completion block: ((String?, String?, [String: Any?]?) -> Void)? = nil) -> String? {
         if let (interface, ssid, info) = WiFi.ssidInfo() {
             block?(interface, ssid, info)

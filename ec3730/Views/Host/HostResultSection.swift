@@ -2,7 +2,6 @@ import Combine
 import Foundation
 import SwiftUI
 
-@available(iOS 15.0, *)
 /// this is very similiar to \ref ``HostViewSection``
 /// it doesn't have move up/down or hide since these are saved in core data and no point in hiding
 struct HostResultSection: View, Equatable, Identifiable, Hashable {
@@ -29,7 +28,7 @@ struct HostResultSection: View, Equatable, Identifiable, Hashable {
         FSDisclosureGroup(isExpanded: $isExpanded,
                           content: {
                               LazyVStack(alignment: .leading, spacing: 0) {
-                                  ForEach(self.sectionModel.content) { row in
+                                  ForEach(sectionModel.content) { row in
                                       row
                                   }
                               }.listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
@@ -38,7 +37,7 @@ struct HostResultSection: View, Equatable, Identifiable, Hashable {
                           },
                           label: {
                               HStack(alignment: .center) {
-                                  Text(self.sectionModel.service.name).font(.headline).padding()
+                                  Text(sectionModel.service.name).font(.headline).padding()
                                   Spacer()
                               }
                           })
@@ -46,16 +45,16 @@ struct HostResultSection: View, Equatable, Identifiable, Hashable {
                           .contextMenu(menuItems: {
                               Button(action: {
                                   withAnimation {
-                                      self.isExpanded.toggle()
+                                      isExpanded.toggle()
                                   }
                               }, label: {
-                                  Label(self.isExpanded ? "Collapse" : "Expand", systemImage: self.isExpanded ? "rectangle.compress.vertical" : "rectangle.expand.vertical")
+                                  Label(isExpanded ? "Collapse" : "Expand", systemImage: isExpanded ? "rectangle.compress.vertical" : "rectangle.expand.vertical")
                               })
 
                               if !sectionModel.content.isEmpty {
                                   Button(action: {
                                       withAnimation {
-                                          self.focused.toggle()
+                                          focused.toggle()
                                       }
                                   }, label: {
                                       Label("Focus", systemImage: "rectangle.and.text.magnifyingglass")
@@ -64,16 +63,16 @@ struct HostResultSection: View, Equatable, Identifiable, Hashable {
 
                               Divider()
                               Button(action: {
-                                  UIPasteboard.general.string = self.sectionModel.dataToCopy
+                                  UIPasteboard.general.string = sectionModel.dataToCopy
                               }, label: {
                                   Label("Copy", systemImage: "doc.on.doc")
-                              }).disabled(self.sectionModel.dataToCopy == nil)
-                              Button(action: { self.shouldShare.toggle() }, label: {
+                              }).disabled(sectionModel.dataToCopy == nil)
+                              Button(action: { shouldShare.toggle() }, label: {
                                   Label("Share", systemImage: "square.and.arrow.up")
-                              }).disabled(self.sectionModel.dataToCopy == nil)
+                              }).disabled(sectionModel.dataToCopy == nil)
                           })
                           .sheet(isPresented: $shouldShare, content: {
-                              ShareSheetView(activityItems: [self.sectionModel.dataToCopy ?? "Error"])
+                              ShareSheetView(activityItems: [sectionModel.dataToCopy ?? "Error"])
                           })
                           .sheet(isPresented: $focused, content: {
                               if let latestQueriedUrl = sectionModel.latestQueriedUrl, let latestDate = sectionModel.latestQueryDate {

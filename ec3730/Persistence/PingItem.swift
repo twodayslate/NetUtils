@@ -71,7 +71,7 @@ public class PingSet: NSManagedObject, Identifiable {
 }
 
 extension PingSet {
-    // ❇️ The @FetchRequest property wrapper in the ContentView will call this function
+    /// ❇️ The @FetchRequest property wrapper in the ContentView will call this function
     static func fetchAllRequest(limit: Int? = nil) -> NSFetchRequest<PingSet> {
         let request: NSFetchRequest<PingSet> = PingSet.fetchRequest() as! NSFetchRequest<PingSet>
         if let limit {
@@ -85,7 +85,7 @@ extension PingSet {
 }
 
 extension PingItem {
-    // ❇️ The @FetchRequest property wrapper in the ContentView will call this function
+    /// ❇️ The @FetchRequest property wrapper in the ContentView will call this function
     static func fetchAllRequest() -> NSFetchRequest<PingSet> {
         let request: NSFetchRequest<PingSet> = PingSet.fetchRequest() as! NSFetchRequest<PingSet>
 
@@ -130,7 +130,7 @@ public class PingItem: NSManagedObject, Identifiable {
 }
 
 extension PingItem {
-    // ❇️ The @FetchRequest property wrapper in the ContentView will call this function
+    /// ❇️ The @FetchRequest property wrapper in the ContentView will call this function
     static func fetchAllRequest() -> NSFetchRequest<PingItem> {
         let request: NSFetchRequest<PingItem> = PingItem.fetchRequest() as! NSFetchRequest<PingItem>
 

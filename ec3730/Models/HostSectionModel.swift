@@ -2,7 +2,6 @@ import Combine
 import Foundation
 import SwiftUI
 
-@available(iOS 15.0, *)
 class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
     @MainActor
     @Published var content = [CopyCellType]()
@@ -106,9 +105,9 @@ class HostSectionModel: ObservableObject, Equatable, Identifiable, Hashable {
         hasher.combine(service.name)
     }
 
-    // this must be called in the main queue
+    /// this must be called in the main queue
     @MainActor
-    internal func reset() {
+    func reset() {
         dataToCopy = nil
         content.removeAll()
         latestData = nil

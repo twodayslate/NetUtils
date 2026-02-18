@@ -19,9 +19,7 @@ class UserApiKeyFooterView: UITableViewHeaderFooterView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.center
 
-        let link = NSMutableAttributedString(string: "Manage your API key from \(subscriber.name)", attributes: [NSAttributedString.Key.link: subscriber.webpage.absoluteString, NSAttributedString.Key.paragraphStyle: paragraphStyle])
-
-        return link
+        return NSMutableAttributedString(string: "Manage your API key from \(subscriber.name)", attributes: [NSAttributedString.Key.link: subscriber.webpage.absoluteString, NSAttributedString.Key.paragraphStyle: paragraphStyle])
     }
 
     init(subscriber: DataFeed) {
@@ -32,7 +30,6 @@ class UserApiKeyFooterView: UITableViewHeaderFooterView {
         label.isScrollEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        // label.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         label.backgroundColor = .clear
 
         let stack = UIStackView()
@@ -123,7 +120,7 @@ class DataFeedUserApiKeyTableViewController: UITableViewController {
     }
 
     @objc func save(_: Any?) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 
     override func numberOfSections(in _: UITableView) -> Int {
@@ -161,10 +158,6 @@ class DataFeedUserApiKeyTableViewController: UITableViewController {
         let footer = UserApiKeyFooterView(subscriber: subscriber)
         footer.label.delegate = self
         return footer
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
 }
 

@@ -11,6 +11,7 @@ public extension Decodable where Self: UIImage {
         let data = try container.decode(Data.self)
         if let image = Self(data: data) {
             self = image
+            return
         }
         throw UIImageDecodingError.unableToCreateImage
     }
@@ -21,11 +22,13 @@ public extension Encodable where Self: UIImage {
         var container = encoder.singleValueContainer()
         if let data = pngData() {
             try container.encode(data)
+            return
         } else if let data = jpegData(compressionQuality: 1.0) {
             try container.encode(data)
+            return
         }
         throw UIImageDecodingError.unableToGetImageData
     }
 }
 
-extension UIImage: Codable {}
+extension UIImage: @retroactive Codable {}

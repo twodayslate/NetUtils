@@ -124,7 +124,7 @@ import SafariServices
 
 // MARK: - SFSafariViewControllerDelegate
 
-extension UIViewController: SFSafariViewControllerDelegate {
+extension UIViewController: @retroactive SFSafariViewControllerDelegate {
     public func open(_ url: URL, title: String, completion block: ((Bool) -> Void)? = nil) {
         switch UserDefaults.standard.integer(forKey: "open_browser") {
         case 1:

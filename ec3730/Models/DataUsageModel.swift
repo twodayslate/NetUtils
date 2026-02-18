@@ -63,8 +63,8 @@ extension SystemDataUsage {
 }
 
 class SystemDataUsage {
-    public static let wwanInterfacePrefix = "pdp_ip"
-    public static let wifiInterfacePrefix = "en"
+    static let wwanInterfacePrefix = "pdp_ip"
+    static let wifiInterfacePrefix = "en"
 
     class func getDataUsage() -> DataUsageInfo {
         var ifaddr: UnsafeMutablePointer<ifaddrs>?

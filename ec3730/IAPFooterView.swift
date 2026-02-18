@@ -1,5 +1,5 @@
 //
-//  IAPFootView.swift
+//  IAPFooterView.swift
 //  ec3730
 //
 //  Created by Zachary Gorak on 10/15/19.

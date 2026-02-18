@@ -30,7 +30,7 @@ class DeviceInfoModel: ObservableObject {
     }
 
     func reloadFingerprints() async {
-        guard let finger = sections.first(where: { $0 as? FingerprintInfoModel != nil }) as? FingerprintInfoModel else {
+        guard let finger = sections.first(where: { $0 is FingerprintInfoModel }) as? FingerprintInfoModel else {
             return
         }
         objectWillChange.send()
@@ -39,7 +39,7 @@ class DeviceInfoModel: ObservableObject {
     }
 
     func attachFingerprint(model: FingerPrintModel) async {
-        guard let finger = sections.first(where: { $0 as? FingerprintInfoModel != nil }) as? FingerprintInfoModel else {
+        guard let finger = sections.first(where: { $0 is FingerprintInfoModel }) as? FingerprintInfoModel else {
             return
         }
         objectWillChange.send()

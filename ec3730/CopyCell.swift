@@ -1,5 +1,5 @@
 //
-//  CopyDetailCell.swift
+//  CopyCell.swift
 //  ec3730
 //
 //  Created by Zachary Gorak on 8/12/19.

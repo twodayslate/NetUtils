@@ -30,9 +30,3 @@ class FingerPrintModel: ObservableObject {
         await parent?.reloadFingerprints()
     }
 }
-
-extension FingerPrintModel: Equatable {
-    static func == (lhs: FingerPrintModel, rhs: FingerPrintModel) -> Bool {
-        lhs.url == rhs.url
-    }
-}
